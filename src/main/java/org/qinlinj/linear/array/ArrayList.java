@@ -45,19 +45,36 @@ public class ArrayList<E> {
      * @param e New element
      */
     public void add(int index, E e) {
-        
+        // check parameter validity
+        if (index > size || index < 0) {
+            throw new IllegalArgumentException("add failed, require index >= 0 && index <= size");
+        }
+        // capacity expansion
+        if (size == data.length) {
+            resize(size * 2);
+        }
+        for (int i = size - 1; i >= index; i--) {
+            data[i + 1] = data[i];
+        }
+        data[index] = e;
+        size++;
     }
 
     public void addFirst(E e) {
-
+        add(0, e);
     }
 
     public void addLast(E e) {
-
+        add(size, e);
     }
 
     public void resize(int newCapacity) {
-
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < data.length; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+        capacity = newCapacity;
     }
 
     /**** Update ****/
