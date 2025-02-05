@@ -45,13 +45,68 @@ public class ArrayList<E> {
      * @param e New element
      */
     public void add(int index, E e) {
+        
+    }
+
+    public void addFirst(E e) {
+
+    }
+
+    public void addLast(E e) {
+
+    }
+
+    public void resize(int newCapacity) {
 
     }
 
     /**** Update ****/
+    public void set(int index, E e) {
+
+    }
 
     /**** Retrieve ****/
+    public E get(int index) {
+        return null;
+    }
+
+    public E getFirst() {
+        return null;
+    }
+
+    public E getLast() {
+        return null;
+    }
+
+    public boolean contains(E e) {
+        return false;
+    }
+
+    public int find(E e) {
+        return -1;
+    }
 
     /**** Delete ****/
+    public E remove(int index) {
+        return null;
+    }
+
+    public E removeFirst() {
+        return null;
+    }
+
+    public E removeLast() {
+        return null;
+    }
+
+    public void removeElement(E e) {
+
+    }
+
+    @Override
+    public String toString() {
+        return "";
+    }
+
 
 }
