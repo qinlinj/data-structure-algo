@@ -118,12 +118,12 @@ public class ArrayList<E> {
     /**
      * Finds whether the array has element e, and returns false if the element e does not exist
      *
-     * @param target Assigned array element
+     * @param e Assigned array element
      * @return Whether the result of element e exists in the array
      */
-    public boolean contains(E target) {
+    public boolean contains(E e) {
         for (int i = 0; i < size; i++) {
-            if (target.equals(i)) {
+            if (e.equals(i)) {
                 return true;
             }
         }
