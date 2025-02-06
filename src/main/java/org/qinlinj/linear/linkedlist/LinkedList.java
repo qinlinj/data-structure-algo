@@ -21,11 +21,14 @@ public class LinkedList<E> {
 
     /**** Create ****/
     public void add(int index, E e) {
-        Node prev = dummyHead.next;
+        if (index < 0 || index > size)
+            throw new IllegalArgumentException("add failed, index must >= 0 and <= size");
+
+        Node prev = dummyHead;
         for (int i = 0; i < index - 1; i++) {
             prev = prev.next;
         }
-        prev.next = new Node(e, prev);
+        prev.next = new Node(e, prev.next);
         size++;
     }
 
@@ -34,7 +37,7 @@ public class LinkedList<E> {
     }
 
     public void addLast(E e) {
-        add(size - 1, e);
+        add(size, e);
     }
 
     /**** Delete ****/
