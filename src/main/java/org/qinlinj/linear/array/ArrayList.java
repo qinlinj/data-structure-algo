@@ -14,9 +14,7 @@ public class ArrayList<E> {
 
     public ArrayList(E[] arr) {
         this.data = (E[]) new Object[capacity];
-        for (int i = 0; i < arr.length; i++) {
-            data[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, data, 0, arr.length);
         size = arr.length;
         this.capacity = arr.length;
     }
@@ -41,8 +39,9 @@ public class ArrayList<E> {
 
     /**
      * Adding a new element to the specified index location
+     *
      * @param index Specified index
-     * @param e New element
+     * @param e     New element
      */
     public void add(int index, E e) {
         // check parameter validity
@@ -68,61 +67,135 @@ public class ArrayList<E> {
         add(size, e);
     }
 
+    /**
+     * Modify array capacity
+     *
+     * @param newCapacity New capacity
+     */
     public void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
-        for (int i = 0; i < data.length; i++) {
-            newData[i] = data[i];
-        }
+        System.arraycopy(data, 0, newData, 0, data.length);
         data = newData;
         capacity = newCapacity;
     }
 
     /**** Update ****/
+    /**
+     * Change the element at the index location to a new element e
+     *
+     * @param index Index position to be modified
+     * @param e     The newly set element value
+     */
     public void set(int index, E e) {
-
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("set failed, require index >= 0 && index < size");
+        }
+        data[index] = e;
     }
 
     /**** Retrieve ****/
+    /**
+     * Gets the element of the index location
+     *
+     * @param index Assigned index
+     * @return the element value corresponding to the specified index
+     */
     public E get(int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("get failed, require index >= 0 && index < size");
+        }
+        return data[index];
     }
 
     public E getFirst() {
-        return null;
+        return get(0);
     }
 
     public E getLast() {
-        return null;
+        return get(size - 1);
     }
 
-    public boolean contains(E e) {
+    /**
+     * Finds whether the array has element e, and returns false if the element e does not exist
+     *
+     * @param target Assigned array element
+     * @return Whether the result of element e exists in the array
+     */
+    public boolean contains(E target) {
+        for (int i = 0; i < size; i++) {
+            if (target.equals(i)) {
+                return true;
+            }
+        }
         return false;
     }
 
+    /**
+     * Finds the index of the array element e, and returns -1 if the element e does not exist
+     *
+     * @param e Assigned array element
+     * @return The index of the specified element e
+     */
     public int find(E e) {
+        for (int i = 0; i < size; i++) {
+            if (e.equals(i)) {
+                return i;
+            }
+        }
         return -1;
     }
 
     /**** Delete ****/
+    /**
+     * Deletes the element at the specified index position
+     *
+     * @param index Assigned index
+     * @return The deleted element
+     */
     public E remove(int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("remove failed, require index >= 0 && index < size");
+        }
+        E res = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+        data[size] = null;
+        if (size == data.length / 4 && data.length / 2 != 0) {
+            resize(data.length / 2);
+        }
+        return res;
     }
 
-    public E removeFirst() {
-        return null;
+    public void removeFirst() {
+        remove(0);
     }
 
-    public E removeLast() {
-        return null;
+    public void removeLast() {
+        remove(size - 1);
     }
 
     public void removeElement(E e) {
-
+        int index = find(e);
+        if (index != -1) {
+            remove(index);
+        }
     }
 
     @Override
     public String toString() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Array: size = %d, capacity = %d\n", size, data.length));
+        sb.append("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(data[i]);
+            if (i != size - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
 
