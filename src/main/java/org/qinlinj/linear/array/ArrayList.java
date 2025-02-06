@@ -74,7 +74,7 @@ public class ArrayList<E> {
      */
     public void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
-        System.arraycopy(data, 0, newData, 0, data.length);
+        System.arraycopy(data, 0, newData, 0, size);
         data = newData;
         capacity = newCapacity;
     }
@@ -197,6 +197,5 @@ public class ArrayList<E> {
         sb.append("]");
         return sb.toString();
     }
-
 
 }
