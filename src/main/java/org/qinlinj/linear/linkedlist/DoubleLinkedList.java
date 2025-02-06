@@ -3,11 +3,8 @@ package org.qinlinj.linear.linkedlist;
 import java.util.NoSuchElementException;
 
 public class DoubleLinkedList<E> {
-    // Dummy head node
     private Node first;
-
     private Node last;
-
     private int size;
 
     public DoubleLinkedList() {
@@ -58,7 +55,6 @@ public class DoubleLinkedList<E> {
             Node newNode = new Node(prev, e, oldNode);
 
             oldNode.prev = newNode;
-
             prev.next = newNode;
 
             size++;
@@ -153,7 +149,24 @@ public class DoubleLinkedList<E> {
     }
 
     public void removeElement(E e) {
-
+        Node curr = first;
+        while (curr != null) {
+            if (e.equals(curr.e)) {
+                if (curr == first) {
+                    removeFirst();
+                } else if (curr == last) {
+                    removeLast();
+                } else {
+                    curr.prev.next = curr.next;
+                    curr.next.prev = curr.prev;
+                    curr.next = null;
+                    curr.prev = null;
+                    size--;
+                }
+                return;
+            }
+            curr = curr.next;
+        }
     }
 
     /**** Retrieve ****/
@@ -174,24 +187,51 @@ public class DoubleLinkedList<E> {
     }
 
     public boolean contains(E e) {
-
+        Node curr = first;
+        while (curr != null) {
+            if (e.equals(curr.e)) {
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
     }
 
     public int find(E e) {
-
+        Node curr = first;
+        for (int i = 0; i < size; i++) {
+            if (e.equals(curr.e)) {
+                return i;
+            }
+            curr = curr.next;
+        }
+        return -1;
     }
 
     /**** Update ****/
     public void set(int index, E e) {
-
+        Node node = node(index);
+        if (node == null) {
+            throw new IllegalArgumentException("set failed, index must >= 0 and < size");
+        }
+        node.e = e;
     }
 
-    // toSting
+    @Override
     public String toString() {
-
+        StringBuilder sb = new StringBuilder();
+        Node curr = first;
+        while (curr != null) {
+            sb.append(curr);
+            if (curr.next != null) {
+                sb.append("->");
+            }
+            curr = curr.next;
+        }
+        sb.append("->null");
+        return sb.toString();
     }
 
-    // Nested Class
     private class Node {
         E e;
         Node next;
@@ -212,5 +252,4 @@ public class DoubleLinkedList<E> {
             return e.toString();
         }
     }
-
 }
