@@ -4,7 +4,7 @@ public class LinkedList<E> {
     // Dummy head node
     private final Node dummyHead;
 
-    private final int size;
+    private int size;
 
     public LinkedList() {
         dummyHead = new Node();
@@ -21,20 +21,37 @@ public class LinkedList<E> {
 
     /**** Create ****/
     public void add(int index, E e) {
-
+        Node prev = dummyHead.next;
+        for (int i = 0; i < index - 1; i++) {
+            prev = prev.next;
+        }
+        prev.next = new Node(e, prev);
+        size++;
     }
 
-    public void addFirst() {
-
+    public void addFirst(E e) {
+        add(0, e);
     }
 
-    public void addLast() {
-
+    public void addLast(E e) {
+        add(size - 1, e);
     }
 
     /**** Delete ****/
     public E remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("remove failed, index must >= 0 and < size");
+        }
+        Node prev = dummyHead.next;
+        for (int i = 0; i < index - 1; i++) {
+            prev = prev.next;
+        }
+        Node delNode = prev.next;
+        prev.next = delNode.next;
+        delNode.next = null;
 
+        size--;
+        return delNode.e;
     }
 
     public void removeFirst() {
@@ -45,14 +62,28 @@ public class LinkedList<E> {
         remove(size - 1);
     }
 
-    public int removeElement(E e) {
-
+    public void removeElement(E e) {
+        if (dummyHead.next == null)
+            throw new IllegalArgumentException("removeElement failed, LinkedList is Empty");
+        Node prev = dummyHead;
+        Node curr = dummyHead.next;
+        while (curr.next != null) {
+            if (e.equals(curr.e)) {
+                break;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
+        if (curr != null) {
+            prev.next = curr.next;
+            curr.next = null;
+        }
     }
 
     /**** Retrieve ****/
     public E get(int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException("get failed, index must >= 0 and < size")
+            throw new IllegalArgumentException("get failed, index must >= 0 and < size");
         }
         Node curr = dummyHead.next;
         for (int i = 0; i < index; i++) {
@@ -70,11 +101,25 @@ public class LinkedList<E> {
     }
 
     public boolean contains(E e) {
-
+        Node curr = dummyHead.next;
+        for (int i = 0; i < size; i++) {
+            if (curr.e == e) {
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
     }
 
     public int find(E e) {
-
+        Node curr = dummyHead.next;
+        for (int i = 0; i < size; i++) {
+            if (curr.e == e) {
+                return i;
+            }
+            curr = curr.next;
+        }
+        return -1;
     }
 
     /**** Update ****/
