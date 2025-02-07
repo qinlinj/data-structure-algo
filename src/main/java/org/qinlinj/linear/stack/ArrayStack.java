@@ -47,4 +47,18 @@ public class ArrayStack<E> implements Stack<E> {
         }
         return data[size - 1];
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Stack: [");
+        for (int i = 0; i < size; i++) {
+            sb.append(data[i]);
+            if (i != size - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("] top");
+        return sb.toString();
+    }
 }
