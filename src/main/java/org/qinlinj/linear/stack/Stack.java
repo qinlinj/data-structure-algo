@@ -1,9 +1,9 @@
 package org.qinlinj.linear.stack;
 
 public interface Stack<E> {
-    int getsize();
+    int getSize();
 
-    boolean isempty();
+    boolean isEmpty();
 
     void push(E e);
 
