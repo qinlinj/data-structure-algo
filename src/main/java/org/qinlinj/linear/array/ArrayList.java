@@ -168,12 +168,12 @@ public class ArrayList<E> {
         return res;
     }
 
-    public void removeFirst() {
-        remove(0);
+    public E removeFirst() {
+        return remove(0);
     }
 
-    public void removeLast() {
-        remove(size - 1);
+    public E removeLast() {
+        return remove(size - 1);
     }
 
     public void removeElement(E e) {
