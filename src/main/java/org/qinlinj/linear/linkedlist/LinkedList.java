@@ -57,12 +57,12 @@ public class LinkedList<E> {
         return delNode.e;
     }
 
-    public void removeFirst() {
-        remove(0);
+    public E removeFirst() {
+        return remove(0);
     }
 
-    public void removeLast() {
-        remove(size - 1);
+    public E removeLast() {
+        return remove(size - 1);
     }
 
     public void removeElement(E e) {
@@ -95,12 +95,12 @@ public class LinkedList<E> {
         return curr.e;
     }
 
-    public void getFirst() {
-        get(0);
+    public E getFirst() {
+        return get(0);
     }
 
-    public void getLast() {
-        get(size - 1);
+    public E getLast() {
+        return get(size - 1);
     }
 
     public boolean contains(E e) {
