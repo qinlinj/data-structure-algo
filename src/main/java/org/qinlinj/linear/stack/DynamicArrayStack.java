@@ -30,7 +30,7 @@ public class DynamicArrayStack<E> implements Stack<E> {
     }
 
     @Override
-    public E peak() {
+    public E peek() {
         return data.getLast();
     }
 

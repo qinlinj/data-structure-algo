@@ -9,5 +9,5 @@ public interface Stack<E> {
 
     E pop();
 
-    E peak();
+    E peek();
 }

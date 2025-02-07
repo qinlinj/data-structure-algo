@@ -26,25 +26,24 @@ public class LinkedListStack<E> implements Stack<E> {
 
     @Override
     public E pop() {
-        return data.getFirst();
-    }
-
-    @Override
-    public E peak() {
         return data.removeFirst();
     }
 
+    @Override
+    public E peek() {
+        return data.getFirst();
+    }
+
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append("Stack：[");
-        int size = data.getSize();
-        for (int i = 0; i < size - 1; i++) {
-            res.append(data.get(i));
-            if (i != size - 2) {
-                res.append(",");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Stack: [");
+        for (int i = data.getSize() - 1; i >= 0; i--) {
+            sb.append(data.get(i));
+            if (i != 0) {
+                sb.append(",");
             }
         }
-        res.append("] top");
-        return res.toString();
+        sb.append("] top");
+        return sb.toString();
     }
 }
