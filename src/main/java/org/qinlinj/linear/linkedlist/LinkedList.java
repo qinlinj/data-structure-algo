@@ -45,8 +45,8 @@ public class LinkedList<E> {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("remove failed, index must >= 0 and < size");
         }
-        Node prev = dummyHead.next;
-        for (int i = 0; i < index - 1; i++) {
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
             prev = prev.next;
         }
         Node delNode = prev.next;
