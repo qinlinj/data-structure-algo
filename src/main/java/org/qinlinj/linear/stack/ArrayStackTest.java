@@ -1,10 +1,13 @@
 package org.qinlinj.linear.stack;
 
+import java.util.Stack;
+
 public class ArrayStackTest {
     public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
         // Stack<Integer> stack = new ArrayStack<>(15);
         // Stack<Integer> stack = new DynamicArrayStack<>(15);
-        Stack<Integer> stack = new LinkedListStack<>();
+        // Stack<Integer> stack = new LinkedListStack<>();
 
         // Deque<Integer> stack = new ArrayDeque<>();
 
