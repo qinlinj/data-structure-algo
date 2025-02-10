@@ -12,6 +12,10 @@ public class ArrayQueue<E> implements Queue<E> {
         head = tail = 0;
     }
 
+    public ArrayQueue() {
+        new ArrayQueue(15);
+    }
+
     public static void main(String[] args) {
         ArrayQueue<Integer> queue1 = new ArrayQueue<>(5);
         queue1.enqueue(10);
