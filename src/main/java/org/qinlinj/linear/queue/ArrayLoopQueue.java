@@ -11,6 +11,10 @@ public class ArrayLoopQueue<E> implements Queue<E> {
         head = tail = size = 0;
     }
 
+    public ArrayLoopQueue() {
+        this(15);
+    }
+
     @Override
     public int getSize() {
         return size;
