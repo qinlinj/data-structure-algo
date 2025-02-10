@@ -2,7 +2,7 @@ package org.qinlinj.linear.queue;
 
 public class QueueTest {
     public static void main(String[] args) {
-        ArrayLoopQueue<Integer> queue = new ArrayLoopQueue<>(15);
+        LinkedListQueue<Integer> queue = new LinkedListQueue<>();
 
         queue.enqueue(10);
         System.out.println(queue);

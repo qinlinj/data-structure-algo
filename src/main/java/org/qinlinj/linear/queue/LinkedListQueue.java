@@ -6,9 +6,9 @@ public class LinkedListQueue<E> implements Queue<E> {
     private int size;
 
     public LinkedListQueue() {
-        head = null;
-        tail = null;
-        size = 0;
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class LinkedListQueue<E> implements Queue<E> {
     @Override
     public E dequeue() {
         if (isEmpty()) {
-            throw new RuntimeException("dequeue error, no element");
+            throw new RuntimeException("dequeue error, the queue is empty");
         }
         Node delNode = head;
         head = head.next;
@@ -46,35 +46,33 @@ public class LinkedListQueue<E> implements Queue<E> {
         if (head == null) {
             tail = null;
         }
-
         size--;
         return delNode.e;
     }
 
     @Override
     public E getFront() {
-        if (isEmpty()) {
-            throw new RuntimeException("getFront error, no element");
-        }
+        if (isEmpty()) throw new RuntimeException("getFront error, no element");
         return head.e;
     }
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append("Queue：head [");
+        StringBuilder sb = new StringBuilder();
+        sb.append("LinkedListQueue: \ntail <- | ");
         Node curr = head;
         while (curr != null) {
-            res.append(curr + "->");
+            sb.append(curr.e + " <- ");
             curr = curr.next;
         }
-        res.append("null]");
-        return res.toString();
+        sb.append("null");
+        sb.append(" | <- top");
+        return sb.toString();
     }
 
-    private class Node {
-        E e;
-        Node next;
+    class Node {
+        private E e;
+        private Node next;
 
         public Node(E e, Node next) {
             this.e = e;
@@ -94,5 +92,4 @@ public class LinkedListQueue<E> implements Queue<E> {
             return e.toString();
         }
     }
-
 }
