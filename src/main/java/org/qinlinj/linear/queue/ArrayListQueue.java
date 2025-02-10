@@ -2,10 +2,10 @@ package org.qinlinj.linear.queue;
 
 import org.qinlinj.linear.array.ArrayList;
 
-public class ArrayQueue<E> implements Queue<E> {
+public class ArrayListQueue<E> implements Queue<E> {
     private ArrayList<E> data;
 
-    public ArrayQueue() {
+    public ArrayListQueue() {
         this.data = new ArrayList<>();
     }
 
