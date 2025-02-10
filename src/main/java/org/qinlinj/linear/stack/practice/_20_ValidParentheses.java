@@ -10,7 +10,6 @@ public class _20_ValidParentheses {
         for (char c : s.toCharArray()) {
             if (c == ' ') continue;
             if (c == '(' || c == '{' || c == '[') {
-                // 如果是左括号，则直接入栈
                 stack.push(c);
             } else {
                 if (stack.isEmpty()) {
