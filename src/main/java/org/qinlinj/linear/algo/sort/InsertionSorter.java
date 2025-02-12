@@ -11,9 +11,8 @@ public class InsertionSorter extends Sorter {
 
     public void sort(int[] data) {
         if (data == null || data.length <= 1) return;
-        int tmp;
         for (int i = 1; i < data.length; i++) {
-            tmp = data[i];
+            int tmp = data[i];
             int j;
             for (j = i; j > 0 && tmp < data[j - 1]; j--) {
                 data[j] = data[j - 1];
@@ -34,6 +33,19 @@ public class InsertionSorter extends Sorter {
                     break;
                 }
                 data[j - 1] = tmp;
+            }
+        }
+    }
+
+    public void sort_swap(int[] data) {
+        if (data == null || data.length <= 1) return;
+        for (int i = 1; i < data.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (data[j] < data[j - 1]) {
+                    swap(data, j, j - 1);
+                } else {
+                    break;
+                }
             }
         }
     }
