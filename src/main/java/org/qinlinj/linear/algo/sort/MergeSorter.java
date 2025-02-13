@@ -5,52 +5,64 @@ import java.util.Arrays;
 public class MergeSorter extends Sorter {
     public static void main(String[] args) {
         int[] data = new int[]{12, 23, 36, 9, 24, 42, 1, 4, 100, 99, 34};
-        new MergeSorter().sort_ql(data);
+        new MergeSorter().sort(data);
         System.out.println(Arrays.toString(data));
     }
 
     public void sort(int[] data) {
-        sort(data, 0, data.length - 1);
+        if (data == null || data.length < 2) {
+            return;
+        }
+        int[] tmp = new int[data.length];
+        sort(data, 0, data.length - 1, tmp);
     }
 
-    public void sort(int[] data, int start, int end) {
+    public void sort(int[] data, int start, int end, int[] tmp) {
         if (start >= end) {
             return;
         }
 
         int mid = start + (end - start) / 2;
-        sort(data, start, mid);
-        sort(data, mid + 1, end);
+        sort(data, start, mid, tmp);
+        sort(data, mid + 1, end, tmp);
 
-        mergeArray(data, start, mid, end);
+        mergeArray(data, start, mid, end, tmp);
     }
 
     // initial temp array
-    private void mergeArray(int[] data, int start, int mid, int end) {
-        int tmp[] = new int[end - start + 1];
+    private void mergeArray(int[] data, int start, int mid, int end, int[] tmp) {
         int i = start;
         int j = mid + 1;
-        int k = 0;
+        int tmpPos = start;
 
         while (i <= mid && j <= end) {
             if (data[i] > data[j]) {
-                tmp[k++] = data[j++];
+                tmp[tmpPos++] = data[j++];
             } else {
-                tmp[k++] = data[i++];
+                tmp[tmpPos++] = data[i++];
             }
         }
 
         while (i <= mid) {
-            tmp[k++] = data[i++];
+            tmp[tmpPos++] = data[i++];
         }
         while (j <= end) {
-            tmp[k++] = data[j++];
+            tmp[tmpPos++] = data[j++];
         }
-
-        System.arraycopy(tmp, 0, data, start, tmp.length);
+        for (tmpPos = start; tmpPos <= end; tmpPos++) {
+            data[start++] = tmp[tmpPos];
+        }
+//        StringBuilder sb = new StringBuilder();
+//        for (int datum : tmp) {
+//            sb.append(datum);
+//        }
+//        System.out.println(sb);
     }
 
     public void sort_ql(int[] data) {
+        if (data == null || data.length < 2) {
+            return;
+        }
         sort_ql(data, 0, data.length - 1);
     }
 
