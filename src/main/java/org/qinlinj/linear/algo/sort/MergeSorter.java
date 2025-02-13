@@ -26,7 +26,7 @@ public class MergeSorter extends Sorter {
         sort(data, start, mid, tmp);
         sort(data, mid + 1, end, tmp);
 
-        mergeArray(data, start, mid, end, tmp);
+        merge_ori2tmp(data, start, mid, end, tmp);
     }
 
     // initial temp array
@@ -89,4 +89,25 @@ public class MergeSorter extends Sorter {
             data[j] = tmp;
         }
     }
+
+    private void merge_ori2tmp(int[] data, int left, int mid, int right, int[] tmp) {
+        if (right + 1 - left >= 0) System.arraycopy(data, left, tmp, left, right + 1 - left);
+
+        int i = left;
+        int j = mid + 1;
+        for (int k = left; k <= right; k++) {
+            if (i == mid + 1) {
+                data[k] = tmp[j++];
+            } else if (j == right + 1) {
+                data[k] = tmp[i++];
+            } else if (tmp[i] <= tmp[j]) {
+                data[k] = tmp[i++];
+            } else {
+                // 注意：这里使用 data 和 tmp 都是一样的
+                // 原因：在合并的时候是从左往右去修改 data 的，所以 data 的没有修改的后半部分和 tmp 的后半部分是一样的
+                data[k] = tmp[j++];
+            }
+        }
+    }
+
 }
