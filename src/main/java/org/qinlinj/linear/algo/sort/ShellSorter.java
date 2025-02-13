@@ -11,45 +11,41 @@ public class ShellSorter extends Sorter {
     }
 
     public void sort(int[] data) {
-        int k = 1;
+        int h = 1;
         int n = data.length;
-        while (k < n / 3) {
-            k = k * 3 + 1;
+        while (h < n / 3) {
+            h = h * 3 + 1;
         }
-        while (k >= 1) {
-            for (int i = 1; i < n / k; i++) {
-                int tmp = data[i * k];
+        while (h >= 1) {
+            for (int i = 1; i < n / h; i++) {
+                int tmp = data[i * h];
                 int j;
-                for (j = i * k; j - k >= 0 && data[j - k] > tmp && j < n; j = j + k) {
-                    data[j] = data[j - k];
+                for (j = i * h; j - h >= 0 && data[j - h] > tmp && j < n; j = j - h) {
+                    data[j] = data[j - h];
                 }
                 data[j] = tmp;
             }
-            k = k / 3;
+            h = h / 3;
         }
     }
 
     public void sort_swap(int[] data) {
         if (data == null || data.length <= 1) return;
 
-        // 1. 计算递增序列
         int n = data.length;
         ArrayList<Integer> list = new ArrayList<>();
         int k = 1;
         int h;
         do {
             h = ((int) Math.pow(3, k) - 1) / 2;
-            // bug 修复：需要考虑 n < 3 的场景，
-            // 当 n < 3 的时候，不应该 break，而应该将 h 添加到 list 中
+
             if (h > n / 3 && n >= 3) break;
-            list.add(h); // 1, 4, 13, 40, 121......
+            list.add(h);
             k++;
         } while (h <= n / 3);
 
-        // 2. 希尔排序
-        for (k = list.size() - 1; k >= 0; k--) { // 倒序遍历
+        for (k = list.size() - 1; k >= 0; k--) {
             h = list.get(k);
-            // 将数组变为 h 有序
             for (int i = h; i < n; i++) {
                 for (int j = i; j >= h; j = j - h) {
                     if (data[j] < data[j - h]) {
