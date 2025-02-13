@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class ShellSorter extends Sorter {
     public static void main(String[] args) {
         int[] data = new int[]{12, 23, 36, 9, 24, 42, 1, 4, 100, 99, 34};
-        new ShellSorter().sort_ql(data);
+        new ShellSorter().sort(data);
         System.out.println(Arrays.toString(data));
     }
 
@@ -21,25 +21,6 @@ public class ShellSorter extends Sorter {
                 int tmp = data[i];
                 int j;
                 for (j = i; j >= h && data[j - h] > tmp; j -= h) {
-                    data[j] = data[j - h];
-                }
-                data[j] = tmp;
-            }
-            h = h / 3;
-        }
-    }
-
-    public void sort_ql(int[] data) {
-        int h = 1;
-        int n = data.length;
-        while (h < n / 3) {
-            h = h * 3 + 1;
-        }
-        while (h >= 1) {
-            for (int i = 1; i < n / h; i++) {
-                int tmp = data[i * h];
-                int j;
-                for (j = i * h; j - h >= 0 && data[j - h] > tmp; j = j - h) {
                     data[j] = data[j - h];
                 }
                 data[j] = tmp;
