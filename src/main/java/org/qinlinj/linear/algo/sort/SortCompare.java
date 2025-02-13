@@ -23,6 +23,8 @@ public class SortCompare {
         else if (sortType.equals("insertion_swap")) new InsertionSorter().sort_swap(data);
         else if (sortType.equals("shell")) new ShellSorter().sort(data);
         else if (sortType.equals("shell_swap")) new ShellSorter().sort_swap(data);
+        else if (sortType.equals("merge")) new MergeSorter().sort(data);
+        else if (sortType.equals("merge_ql")) new MergeSorter().sort_ql(data);
 
 //        else if (sortType.equals("shell")) new ShellSorter().sort(data);
 
@@ -43,8 +45,10 @@ public class SortCompare {
 //        double t3 = manyTimesSort("insertion_swap", 20000, 100);
         double t2 = manyTimesSort("insertion", 20000, 100);
 //        double t5 = manyTimesSort("insertion_ql", 20000, 100);
-        double t3 = manyTimesSort("shell", 20000, 100);
-        double t5 = manyTimesSort("shell_swap", 20000, 100);
+//        double t3 = manyTimesSort("shell", 20000, 100);
+//        double t5 = manyTimesSort("shell_swap", 20000, 100);
+        double t3 = manyTimesSort("merge", 20000, 100);
+        double t5 = manyTimesSort("merge_ql", 20000, 100);
 
 //        double t5 = manyTimesSort("shell", 1000, 100);
 //        System.out.println(t1 / t2); // t1 > t2
