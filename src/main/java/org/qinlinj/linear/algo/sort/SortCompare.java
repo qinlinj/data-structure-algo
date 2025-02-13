@@ -21,6 +21,10 @@ public class SortCompare {
         else if (sortType.equals("insertion")) new InsertionSorter().sort(data);
         else if (sortType.equals("insertion_ql")) new InsertionSorter().sort_ql(data);
         else if (sortType.equals("insertion_swap")) new InsertionSorter().sort_swap(data);
+        else if (sortType.equals("shell")) new ShellSorter().sort(data);
+        else if (sortType.equals("shell_ql")) new ShellSorter().sort_ql(data);
+        else if (sortType.equals("shell_swap")) new ShellSorter().sort_swap(data);
+
 //        else if (sortType.equals("shell")) new ShellSorter().sort(data);
 
         return System.currentTimeMillis() - start;
@@ -37,13 +41,17 @@ public class SortCompare {
     public static void main(String[] args) {
 //        double t1 = manyTimesSort("bubble", 20000, 100);
 //        double t2 = manyTimesSort("selection", 1000, 100);
-        double t3 = manyTimesSort("insertion_swap", 20000, 100);
-        double t4 = manyTimesSort("insertion", 20000, 100);
-        double t5 = manyTimesSort("insertion_ql", 20000, 100);
+//        double t3 = manyTimesSort("insertion_swap", 20000, 100);
+        double t2 = manyTimesSort("insertion", 20000, 100);
+//        double t5 = manyTimesSort("insertion_ql", 20000, 100);
+        double t3 = manyTimesSort("shell", 20000, 100);
+        double t4 = manyTimesSort("shell_ql", 20000, 100);
+        double t5 = manyTimesSort("shell_swap", 20000, 100);
 
 //        double t5 = manyTimesSort("shell", 1000, 100);
 //        System.out.println(t1 / t2); // t1 > t2
 //        System.out.println(t2 / t3); // t2 > t3
+        System.out.println(t2);
         System.out.println(t3);
         System.out.println(t4);
         System.out.println(t5);
