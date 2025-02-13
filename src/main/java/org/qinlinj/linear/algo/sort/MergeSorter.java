@@ -71,7 +71,7 @@ public class MergeSorter extends Sorter {
         for (int i = mid + 1; i <= end; i++) {
             int tmp = data[i];
             int j;
-            for (j = i; j > start && data[j - 1] > tmp; j--) {
+            for (j = i; j > mid && data[j - 1] > tmp; j--) {
                 data[j] = data[j - 1];
             }
             data[j] = tmp;
