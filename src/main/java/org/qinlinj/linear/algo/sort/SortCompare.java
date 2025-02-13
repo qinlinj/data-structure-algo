@@ -37,12 +37,16 @@ public class SortCompare {
     public static void main(String[] args) {
 //        double t1 = manyTimesSort("bubble", 20000, 100);
 //        double t2 = manyTimesSort("selection", 1000, 100);
-        double t3 = manyTimesSort("insertion1", 20000, 100);
+        double t3 = manyTimesSort("insertion_swap", 20000, 100);
         double t4 = manyTimesSort("insertion", 20000, 100);
+        double t5 = manyTimesSort("insertion_ql", 20000, 100);
+
 //        double t5 = manyTimesSort("shell", 1000, 100);
 //        System.out.println(t1 / t2); // t1 > t2
 //        System.out.println(t2 / t3); // t2 > t3
-        System.out.println(t3 / t4); // t3 > t4
+        System.out.println(t3);
+        System.out.println(t4);
+        System.out.println(t5);
 //        System.out.println(t3 / t5); // t3 > t5
     }
 }
