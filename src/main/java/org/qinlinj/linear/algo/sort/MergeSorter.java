@@ -49,4 +49,32 @@ public class MergeSorter extends Sorter {
 
         System.arraycopy(tmp, 0, data, start, tmp.length);
     }
+
+    public void sort_ql(int[] data) {
+        sort_ql(data, 0, data.length - 1);
+    }
+
+    public void sort_ql(int[] data, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+
+        int mid = start + (end - start) / 2;
+        sort_ql(data, start, mid);
+        sort_ql(data, mid + 1, end);
+
+        mergeArray_ql(data, start, mid, end);
+    }
+
+    // insertion sort
+    private void mergeArray_ql(int[] data, int start, int mid, int end) {
+        for (int i = mid + 1; i <= end; i++) {
+            int tmp = data[i];
+            int j;
+            for (j = i; j > start && data[j - 1] > tmp; j--) {
+                data[j] = data[j - 1];
+            }
+            data[j] = tmp;
+        }
+    }
 }
