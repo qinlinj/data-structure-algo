@@ -9,19 +9,19 @@ public class ThreeWayQuickSorter extends Sorter {
         System.out.println(Arrays.toString(data));
     }
 
-    public void sort(int[] data) {
+    public void sort_ql(int[] data) {
         if (data == null || data.length < 2) return;
 
-        sort(data, 0, data.length - 1);
+        sort_ql(data, 0, data.length - 1);
     }
 
-    public void sort(int[] data, int start, int end) {
+    public void sort_ql(int[] data, int start, int end) {
         if (start >= end) return;
 
         int[] partition = partition(data, start, end);
 
-        sort(data, start, partition[0] - 1);
-        sort(data, partition[1] + 1, end);
+        sort_ql(data, start, partition[0] - 1);
+        sort_ql(data, partition[1] + 1, end);
     }
 
     private int[] partition(int[] data, int start, int end) {
@@ -29,24 +29,24 @@ public class ThreeWayQuickSorter extends Sorter {
 
         int less = start;
         int great = end;
-        int i = start;
+        int i = less;
 
         int pivot = data[end];
 
         while (i <= great) {
             if (data[i] < pivot) {
+                swap(data, i, less);
+                less++;
+                i++;
+            } else if (data[i] > pivot) {
                 swap(data, i, great);
                 great--;
-            } else if (data[i] > pivot) {
-                swap(data, i, less);
-                i++;
-                less++;
             } else {
                 i++;
             }
         }
-        partition[0] = less - 1;
-        partition[1] = great + 1;
+        partition[0] = less;
+        partition[1] = great;
         return partition;
     }
 }
