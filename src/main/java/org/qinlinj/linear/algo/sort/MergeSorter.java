@@ -29,6 +29,19 @@ public class MergeSorter extends Sorter {
         merge_ori2tmp(data, start, mid, end, tmp);
     }
 
+    public void sortBU(int[] data) {
+        if (data == null || data.length <= 1) return;
+        int len = data.length;
+        int[] tmp = new int[len];
+        for (int size = 1; size < len; size += size) { // size 表示子数组的长度，1,2,4,8
+            for (int left = 0; left < len - size; left += 2 * size) {
+                int mid = left + size - 1;
+                int right = Math.min(left + 2 * size - 1, len - 1);
+                mergeArray(data, left, mid, right, tmp);
+            }
+        }
+    }
+
     // initial temp array
     private void mergeArray(int[] data, int start, int mid, int end, int[] tmp) {
         int i = start;
