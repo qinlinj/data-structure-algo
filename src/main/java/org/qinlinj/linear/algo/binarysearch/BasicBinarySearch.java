@@ -14,6 +14,8 @@ public class BasicBinarySearch {
         int mid;
         while (right >= left) {
             mid = left + (right - left) / 2;
+            // >>> 无符号右移
+            // int mid = (left + right) >>> 1;
             if (nums[mid] == target) {
                 return true;
             } else if (nums[mid] < target) {
