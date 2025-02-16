@@ -15,6 +15,7 @@ public class BacketSorter extends Sorter {
         if (data == null || data.length < 2) {
             return;
         }
+
         // initial buckets
         int bucketNum = 10;
         // get max
@@ -34,18 +35,18 @@ public class BacketSorter extends Sorter {
             }
             buckets[bucketIndex].add(datum);
         }
+
         IntegerArrayQuickSorter sorter = new IntegerArrayQuickSorter();
         // sort each bucket
         for (ArrayList<Integer> bucket : buckets) {
             sorter.sort(bucket);
         }
         int curr = 0;
-        // splice each bucket
 
-        for (int j = 0; j < bucketNum && buckets[j] != null; j++) {
-            for (int i = 0; i < buckets[j].size() - 1; i++) {
-                data[curr] = buckets[j].get(i);
-                curr++;
+        // splice each bucket
+        for (int i = 0; i < bucketNum && buckets[i] != null; i++) {
+            for (int j = 0; j < buckets[i].size() - 1; j++) {
+                data[curr++] = buckets[i].get(j);
             }
         }
     }
