@@ -23,4 +23,22 @@ public class _35_SearchInsertPosition {
         }
         return right;
     }
+
+    public int searchInsert_dm(int[] nums, int target) {
+        if (nums == null) {
+            return -1;
+        }
+        if (nums.length == 0) {
+            return 0;
+        }
+        int left = 0;
+        int right = nums.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else right = mid;
+        }
+        return left;
+    }
 }
