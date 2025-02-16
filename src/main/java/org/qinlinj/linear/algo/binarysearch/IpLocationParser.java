@@ -4,11 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class IpLocationParser {
-    private static ArrayList<IpLocation> sortedIpLocationList = new ArrayList<>();
+    private static final ArrayList<IpLocation> sortedIpLocationList = new ArrayList<>();
 
     static {
         try {
@@ -27,7 +26,7 @@ public class IpLocationParser {
         }
 
         // sort IpLocationList
-        Collections.sort(sortedIpLocationList, new Comparator<IpLocation>() {
+        sortedIpLocationList.sort(new Comparator<IpLocation>() {
             @Override
             public int compare(IpLocation o1, IpLocation o2) {
                 if (o1.startIp < o2.startIp) return -1;
