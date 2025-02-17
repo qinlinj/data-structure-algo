@@ -8,7 +8,7 @@ public class SortCompare {
     private static int[] genData(int n) {
         int[] data = new int[n];
         for (int i = 0; i < n; i++) {
-            data[i] = random.nextInt();
+            data[i] = random.nextInt(1000000);
 //            data[i] = random.nextInt(100000) - 10000;
         }
         return data;
@@ -30,6 +30,7 @@ public class SortCompare {
         else if (sortType.equals("quick_dm")) new QuickSorter().sort_dm(data);
 //        else if (sortType.equals("shell")) new ShellSorter().sort(data);
         else if (sortType.equals("counting")) new CountingSorter().sort(data);
+        else if (sortType.equals("radix")) new RadixSorter().sort(data);
 
         return System.currentTimeMillis() - start;
     }
@@ -53,7 +54,7 @@ public class SortCompare {
 //        double t8 = manyTimesSort("merge", 100000, 100);
 //        double t9 = manyTimesSort("merge_ql", 20000, 100);
 //        double t10 = manyTimesSort("quick", 100000, 100);
-        double t11 = manyTimesSort("counting", 1000, 100);
+        double t11 = manyTimesSort("radix", 10, 10);
 
 //        double t5 = manyTimesSort("shell", 1000, 100);
 //        System.out.println(t1 / t2); // t1 > t2
