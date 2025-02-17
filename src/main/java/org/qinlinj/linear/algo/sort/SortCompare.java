@@ -9,6 +9,7 @@ public class SortCompare {
         int[] data = new int[n];
         for (int i = 0; i < n; i++) {
             data[i] = random.nextInt();
+//            data[i] = random.nextInt(100000) - 10000;
         }
         return data;
     }
@@ -28,6 +29,7 @@ public class SortCompare {
         else if (sortType.equals("quick")) new QuickSorter().sort(data);
         else if (sortType.equals("quick_dm")) new QuickSorter().sort_dm(data);
 //        else if (sortType.equals("shell")) new ShellSorter().sort(data);
+        else if (sortType.equals("counting")) new CountingSorter().sort(data);
 
         return System.currentTimeMillis() - start;
     }
@@ -48,16 +50,16 @@ public class SortCompare {
 //        double t5 = manyTimesSort("insertion_ql", 20000, 100);
 //        double t6 = manyTimesSort("shell", 20000, 100);
 //        double t7 = manyTimesSort("shell_swap", 20000, 100);
-        double t8 = manyTimesSort("merge", 100000, 100);
+//        double t8 = manyTimesSort("merge", 100000, 100);
 //        double t9 = manyTimesSort("merge_ql", 20000, 100);
-        double t10 = manyTimesSort("quick", 100000, 100);
-        double t11 = manyTimesSort("quick_dm", 100000, 100);
+//        double t10 = manyTimesSort("quick", 100000, 100);
+        double t11 = manyTimesSort("counting", 1000, 100);
 
 //        double t5 = manyTimesSort("shell", 1000, 100);
 //        System.out.println(t1 / t2); // t1 > t2
 //        System.out.println(t2 / t3); // t2 > t3
-        System.out.println(t8);
-        System.out.println(t10);
+//        System.out.println(t8);
+//        System.out.println(t10);
         System.out.println(t11);
 //        System.out.println(t3 / t5); // t3 > t5
     }
