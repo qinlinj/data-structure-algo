@@ -59,5 +59,59 @@ public class _JZ_51_493_ReversePairs {
 
     //----------------------------------------------------
     // recursion
+    class Solution2 {
+        public int reversePairs(int[] nums) {
+            if (nums == null || nums.length < 2) {
+                return 0;
+            }
+            int tmp[] = new int[nums.length];
 
+            return reversePairsRecursion(nums, 0, nums.length - 1, tmp);
+        }
+
+        public int reversePairsRecursion(int[] nums, int left, int right, int[] tmp) {
+            // return condition, min situation
+            if (left >= right) {
+                return 0;
+            }
+            int mid = left + (right - left) / 2;
+            // recursion rule
+            int leftNumOfPairs = reversePairsRecursion(nums, left, mid, tmp);
+            int rightNumOfPairs = reversePairsRecursion(nums, mid + 1, right, tmp);
+            int margedNumOfPairs = mergeAndCountReversePairs(nums, left, mid, right, tmp);
+
+            return leftNumOfPairs + rightNumOfPairs + margedNumOfPairs;
+
+        }
+
+        public int mergeAndCountReversePairs(int[] nums, int left, int mid, int right, int[] tmp) {
+            int count = 0;
+
+            int j = mid + 1;
+            for (int i = left; i <= mid; i++) {
+                while (j <= right && (long) nums[i] > (long) nums[j] * 2) {
+                    j++;
+                }
+                count += j - mid - 1;
+            }
+            int k = left;
+            int m = mid + 1;
+            int curr = left;
+            while (k <= mid && m <= right) {
+                if (nums[k] <= nums[m]) {
+                    tmp[curr++] = nums[k++];
+                } else {
+                    tmp[curr++] = nums[m++];
+                }
+            }
+            while (k <= mid) {
+                tmp[curr++] = nums[k++];
+            }
+            while (m <= right) {
+                tmp[curr++] = nums[m++];
+            }
+            System.arraycopy(tmp, left, nums, left, right - left + 1);
+            return count;
+        }
+    }
 }
