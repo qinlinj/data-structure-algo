@@ -11,6 +11,10 @@ public class _876_MiddleOfTheLinkedList {
             length++;
             curr = curr.next;
         }
+        for (int i = 0; i < length / 2; i++) { // O(n/2)
+            head = head.next;
+        }
+
         return head;
     }
 
