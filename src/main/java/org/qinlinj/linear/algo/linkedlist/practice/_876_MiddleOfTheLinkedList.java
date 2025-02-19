@@ -7,6 +7,7 @@ public class _876_MiddleOfTheLinkedList {
         if (head == null || head.next == null) return head;
         ListNode curr = head;
         while (curr != null) { // O(n)
+            length++;
             curr = curr.next;
         }
         return head;
