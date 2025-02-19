@@ -32,4 +32,23 @@ public class LinkedListCounter {
         }
         return cnt;
     }
+
+    /**
+     * Calculates the number of nodes in the linked list equal to the target value
+     *
+     * @param head
+     * @param target
+     * @return
+     */
+    public int countTarget(ListNode head, int target) {
+        if (head == null) return 0;
+        int cnt = 0;
+        ListNode curr = head;
+        // 使用 while 循环，遍历整个链表
+        while (curr != null) {
+            if (curr.val == target) cnt++;
+            curr = curr.next;
+        }
+        return cnt;
+    }
 }
