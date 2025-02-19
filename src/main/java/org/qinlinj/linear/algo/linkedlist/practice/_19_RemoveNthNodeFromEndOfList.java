@@ -37,4 +37,17 @@ public class _19_RemoveNthNodeFromEndOfList {
         }
     }
 
+    static class Solution2 {
+        int curr = 0;
+
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if (head == null) return null;
+
+            head.next = removeNthFromEnd(head.next, n);
+
+            curr++;
+            if (curr == n) return head.next;
+            return head;
+        }
+    }
 }
