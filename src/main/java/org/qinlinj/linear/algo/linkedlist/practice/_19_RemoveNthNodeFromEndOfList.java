@@ -8,7 +8,7 @@ public class _19_RemoveNthNodeFromEndOfList {
         ListNode subNode = new ListNode(2);
         head.next = subNode;
         _19_RemoveNthNodeFromEndOfList solution = new _19_RemoveNthNodeFromEndOfList();
-        System.out.println(solution.removeNthFromEnd(head, 1).toString());
+        System.out.println(solution.removeNthFromEnd(head, 2).toString());
     }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -34,6 +34,6 @@ public class _19_RemoveNthNodeFromEndOfList {
         prev.next = slow.next;
         slow = null;
 
-        return head;
+        return dummyHead.next;
     }
 }

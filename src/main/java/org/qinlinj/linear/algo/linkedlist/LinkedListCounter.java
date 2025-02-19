@@ -44,7 +44,6 @@ public class LinkedListCounter {
         if (head == null) return 0;
         int cnt = 0;
         ListNode curr = head;
-        // 使用 while 循环，遍历整个链表
         while (curr != null) {
             if (curr.val == target) cnt++;
             curr = curr.next;
