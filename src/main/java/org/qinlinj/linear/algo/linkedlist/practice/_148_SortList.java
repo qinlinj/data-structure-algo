@@ -3,6 +3,7 @@ package org.qinlinj.linear.algo.linkedlist.practice;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 public class _148_SortList {
+    // recursion
     class Solution1 {
         public ListNode sortList(ListNode head) {
             if (head == null || head.next == null) {
@@ -52,6 +53,7 @@ public class _148_SortList {
         }
     }
 
+    // BU iteration
     class Solution2 {
         // 自底朝上实现归并排序
         public ListNode sortList(ListNode head) {
