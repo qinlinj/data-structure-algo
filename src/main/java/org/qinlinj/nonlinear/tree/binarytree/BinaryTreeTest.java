@@ -1,6 +1,7 @@
 package org.qinlinj.nonlinear.tree.binarytree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -23,7 +24,7 @@ public class BinaryTreeTest {
         node2.left = node6;
         node2.right = node7;
 
-        System.out.println(inOrder(root));
+        System.out.println(postOrder(root));
     }
 
     private static List<Integer> preOrder(TreeNode<Integer> root) {
@@ -64,5 +65,20 @@ public class BinaryTreeTest {
         return res;
     }
 
+    public static List<Integer> postOrder(TreeNode<Integer> root) {
+        LinkedList<Integer> res = new LinkedList<>();
+        if (root == null) return res;
+
+        Stack<TreeNode<Integer>> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode<Integer> curr = stack.pop();
+            res.addFirst(curr.data);
+            if (curr.left != null) stack.push(curr.left);
+            if (curr.right != null) stack.push(curr.right);
+        }
+        return res;
+    }
 
 }
