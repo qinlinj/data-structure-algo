@@ -21,7 +21,7 @@ public class BinaryTreeTest {
         node2.left = node6;
         node2.right = node7;
 
-        System.out.println(levelorder2(root));
+        System.out.println(inOrderR(root));
     }
 
     // ----------------------- using iterator
@@ -117,6 +117,28 @@ public class BinaryTreeTest {
     }
 
     // ------------------- using recursion
+    private static List<Integer> preOrderR(TreeNode<Integer> root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<Integer> res = new ArrayList<>();
+        preOrder(root, res);
+        return res;
+    }
 
+    private static void preOrder(TreeNode<Integer> node, List<Integer> res) {
+        if (node == null) {
+            return;
+        }
+        res.add(node.data);
+        preOrder(node.left, res);
+        preOrder(node.right, res);
+    }
+    
+//
+//    private static List<Integer> postOrderR(TreeNode<Integer> root) {
+//
+//    }
 
 }
+
