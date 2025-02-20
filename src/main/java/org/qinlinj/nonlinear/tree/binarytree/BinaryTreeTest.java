@@ -1,6 +1,5 @@
 package org.qinlinj.nonlinear.tree.binarytree;
 
-
 import java.util.*;
 
 public class BinaryTreeTest {
@@ -22,7 +21,7 @@ public class BinaryTreeTest {
         node2.left = node6;
         node2.right = node7;
 
-        System.out.println(levelOrder1(root));
+        System.out.println(levelorder2(root));
     }
 
     // ----------------------- using iterator
@@ -98,9 +97,24 @@ public class BinaryTreeTest {
         return res;
     }
 
-//    public static List<List<Integer>> levelorder2(TreeNode<Integer> root) {
-//
-//    }
+    public static List<List<Integer>> levelorder2(TreeNode<Integer> root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        Queue<TreeNode<Integer>> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode<Integer> curr = queue.poll();
+                list.add(curr.data);
+                if (curr.left != null) queue.offer(curr.left);
+                if (curr.right != null) queue.offer(curr.right);
+            }
+            res.add(list);
+        }
+        return res;
+    }
 
     // ------------------- using recursion
 
