@@ -135,13 +135,12 @@ public class BinaryTreeTest {
         preOrder(node.right, res);
     }
 
-
     private static List<Integer> inOrderR(TreeNode<Integer> root) {
         if (root == null) {
             return new ArrayList<>();
         }
         List<Integer> res = new ArrayList<>();
-        preOrder(root, res);
+        inOrder(root, res);
         return res;
     }
 
@@ -149,14 +148,28 @@ public class BinaryTreeTest {
         if (node == null) {
             return;
         }
-        preOrder(node.left, res);
+        inOrder(node.left, res);
         res.add(node.data);
-        preOrder(node.right, res);
+        inOrder(node.right, res);
     }
-//
-//    private static List<Integer> postOrderR(TreeNode<Integer> root) {
-//
-//    }
 
+    private static List<Integer> postOrderR(TreeNode<Integer> root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<Integer> res = new ArrayList<>();
+        postOrder(root, res);
+        return res;
+    }
+
+
+    private static void postOrder(TreeNode<Integer> node, List<Integer> res) {
+        if (node == null) {
+            return;
+        }
+        postOrder(node.left, res);
+        postOrder(node.right, res);
+        res.add(node.data);
+    }
 }
 
