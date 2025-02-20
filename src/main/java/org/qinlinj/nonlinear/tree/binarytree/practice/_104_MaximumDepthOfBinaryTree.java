@@ -83,10 +83,7 @@ public class _104_MaximumDepthOfBinaryTree {
             TreeNode node;
             int depth;
 
-            public Node(TreeNode node, int depth) {
-                this.node = node;
-                this.depth = depth;
-            }
+
         }
     }
 }
