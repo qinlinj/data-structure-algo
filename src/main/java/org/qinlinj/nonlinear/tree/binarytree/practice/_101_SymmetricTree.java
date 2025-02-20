@@ -29,6 +29,8 @@ public class _101_SymmetricTree {
         }
     }
 
+    //---------------------------------
+    // BFS
     class Solution2 {
         public boolean isSymmetric(TreeNode root) {
             if (root == null) {
