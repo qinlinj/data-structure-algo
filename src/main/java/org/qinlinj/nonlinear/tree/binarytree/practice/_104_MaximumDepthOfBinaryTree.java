@@ -21,5 +21,15 @@ public class _104_MaximumDepthOfBinaryTree {
             return Math.max(getDepth(node.left, maxCount), getDepth(node.right, maxCount));
         }
     }
-    
+
+    // recursion version 2
+    class Solution2 {
+        public int maxDepth1(TreeNode root) {
+            if (root == null) return 0;
+            int leftMaxDepth = maxDepth1(root.left);
+            int rightMaxDepth = maxDepth1(root.right);
+            int maxDepth = Math.max(leftMaxDepth, rightMaxDepth) + 1;
+            return maxDepth;
+        }
+    }
 }
