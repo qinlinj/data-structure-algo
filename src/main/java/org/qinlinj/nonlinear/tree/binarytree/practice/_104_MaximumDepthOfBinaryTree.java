@@ -1,7 +1,5 @@
 package org.qinlinj.nonlinear.tree.binarytree.practice;
 
-import org.qinlinj.nonlinear.tree.binarytree.TreeNode;
-
 import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
