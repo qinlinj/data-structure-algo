@@ -23,7 +23,7 @@ public class BinaryTreeTest {
         node2.left = node6;
         node2.right = node7;
 
-        System.out.println(preOrder(root));
+        System.out.println(inOrder(root));
     }
 
     private static List<Integer> preOrder(TreeNode<Integer> root) {
@@ -43,5 +43,26 @@ public class BinaryTreeTest {
         }
         return res;
     }
+
+    private static List<Integer> inOrder(TreeNode<Integer> root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null) return res;
+
+        Stack<TreeNode<Integer>> stack = new Stack<>();
+        TreeNode<Integer> curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+
+            TreeNode<Integer> node = stack.pop();
+            res.add(node.data);
+
+            curr = node.right;
+        }
+        return res;
+    }
+
 
 }
