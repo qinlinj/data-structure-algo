@@ -1,9 +1,9 @@
 package org.qinlinj.nonlinear.tree.binarytree;
 
 public class TreeNode<E> {
+    public TreeNode<E> left;
+    public TreeNode<E> right;
     E data;
-    TreeNode<E> left;
-    TreeNode<E> right;
 
     TreeNode(E data) {
         this.data = data;
