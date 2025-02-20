@@ -56,7 +56,7 @@ public class _104_MaximumDepthOfBinaryTree {
             return maxDepth;
         }
     }
-    
+
     class Solution4 {
         // preOrder
         public int maxDepth2(TreeNode root) {
@@ -83,10 +83,7 @@ public class _104_MaximumDepthOfBinaryTree {
             TreeNode node;
             int depth;
 
-            public Node(TreeNode node, int depth) {
-                this.node = node;
-                this.depth = depth;
-            }
+
         }
     }
 }
