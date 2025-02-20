@@ -38,4 +38,25 @@ public class _112_PathSum {
             }
         }
     }
+
+    class Solution2 {
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            if (root == null) {
+                return false;
+            }
+            int sum = 0;
+            return pathSum(root, targetSum, sum);
+        }
+
+        public boolean pathSum(TreeNode node, int targetSum, int sum) {
+            if (node == null) {
+                return false;
+            }
+            sum = sum + node.val;
+            if (sum == targetSum && node.left == null && node.right == null) {
+                return true;
+            }
+            return pathSum(node.left, targetSum, sum) || pathSum(node.right, targetSum, sum);
+        }
+    }
 }
