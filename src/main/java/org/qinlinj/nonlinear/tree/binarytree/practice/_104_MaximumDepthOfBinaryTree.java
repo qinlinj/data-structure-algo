@@ -2,7 +2,6 @@ package org.qinlinj.nonlinear.tree.binarytree.practice;
 
 import org.qinlinj.nonlinear.tree.binarytree.TreeNode;
 
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -57,36 +56,4 @@ public class _104_MaximumDepthOfBinaryTree {
         }
     }
     
-    class Solution4 {
-        // preOrder
-        public int maxDepth2(TreeNode root) {
-            if (root == null) return 0;
-            int maxDepth = 0;
-            ArrayDeque<Node> stack = new ArrayDeque<>();
-            stack.push(new Node(root, 1));
-            while (!stack.isEmpty()) {
-                Node currNode = stack.pop();
-                TreeNode node = currNode.node;
-                int currDepth = currNode.depth;
-                maxDepth = Math.max(maxDepth, currDepth);
-                if (node.right != null) {
-                    stack.push(new Node(node.right, currDepth + 1));
-                }
-                if (node.left != null) {
-                    stack.push(new Node(node.left, currDepth + 1));
-                }
-            }
-            return maxDepth;
-        }
-
-        private class Node {
-            TreeNode node;
-            int depth;
-
-            public Node(TreeNode node, int depth) {
-                this.node = node;
-                this.depth = depth;
-            }
-        }
-    }
 }
