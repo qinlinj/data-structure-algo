@@ -191,11 +191,43 @@ public class BinarySearchTree<E extends Comparable<E>> {
     /************************* Delete *******************************/
     // delete
     public E removeMin() {
-
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        TreeNode curr = root;
+        TreeNode prev = null;
+        while (curr.left != null) {
+            prev = curr;
+            curr = curr.left;
+        }
+        if (prev == null) {
+            root = root.right;
+        } else {
+            prev.left = curr.right;
+        }
+        curr.right = null;
+        size--;
+        return curr.data;
     }
 
     public E removeMax() {
-
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        TreeNode curr = root;
+        TreeNode prev = null;
+        while (curr.right != null) {
+            prev = curr;
+            curr = curr.right;
+        }
+        if (prev == null) {
+            root = root.left;
+        } else {
+            prev.left = curr.left;
+        }
+        curr.left = null;
+        size--;
+        return curr.data;
     }
 
     public void remove(E e) {
