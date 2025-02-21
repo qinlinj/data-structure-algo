@@ -22,17 +22,55 @@ public class BinarySearchTree<E extends Comparable<E>> {
     /************************* Create *******************************/
     // create
     public void add(E e) {
+        if (root == null) {
+            root = new TreeNode(e);
+        }
+        TreeNode curr = root;
+        while (curr != null) {
+            if (curr.data.compareTo(e) == 0) {
+                return;
+            } else if (curr.left == null && curr.data.compareTo(e) > 0) {
+                curr.left = new TreeNode(e);
+                size++;
+                return;
+            } else if (curr.right == null && curr.data.compareTo(e) < 0) {
+                curr.right = new TreeNode(e);
+                size++;
+                return;
+            }
 
+            if (curr.data.compareTo(e) > 0) {
+                curr = curr.left;
+            } else {
+                curr = curr.right;
+            }
+        }
     }
 
     /************************* Retrieve *******************************/
     // retrieve
     public boolean contains(E target) {
-
+        if (root == null) {
+            return false;
+        }
+        return find(target) != null;
     }
 
     public TreeNode find(E target) {
-
+        if (root == null) {
+            return null;
+        }
+        TreeNode curr = root;
+        while (curr != null) {
+            if (curr.data.compareTo(target) == 0) {
+                return curr;
+            } else if (curr.data.compareTo(target) > 0) {
+                curr = curr.left;
+            } else {
+                curr = curr.right;
+            }
+        }
+        return null;
     }
 
     // order
