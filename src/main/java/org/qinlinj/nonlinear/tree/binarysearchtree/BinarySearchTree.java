@@ -1,9 +1,6 @@
 package org.qinlinj.nonlinear.tree.binarysearchtree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class BinarySearchTree<E extends Comparable<E>> {
     TreeNode root;
@@ -101,7 +98,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // inorder
     public List<E> inOrder() {
-        ArrayList<E> list = new ArrayList<>();
+        List<E> list = new ArrayList<>();
         if (root == null) return list;
 
         Stack<TreeNode> stack = new Stack<>();
@@ -141,7 +138,30 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // level order
     public List<List<E>> levelOrder() {
+        List<List<E>> list = new ArrayList<>();
 
+        if (root == null) return list;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<E> stageList = new LinkedList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                stageList.add(node.data);
+
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            list.add(stageList);
+        }
+        return list;
     }
 
     // min value
