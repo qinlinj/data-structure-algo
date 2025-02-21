@@ -114,6 +114,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
             list.add(node.data);
             curr = node.right;
         }
+        return list;
     }
 
     // postorder
