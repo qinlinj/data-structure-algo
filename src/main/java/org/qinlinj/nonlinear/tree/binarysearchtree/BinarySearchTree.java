@@ -166,12 +166,26 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // min value
     public E minValue() {
-
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        TreeNode curr = root;
+        while (curr.left != null) {
+            curr = curr.left;
+        }
+        return curr.data;
     }
 
     // max value
     public E maxValue() {
-
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        TreeNode curr = root;
+        while (curr.right != null) {
+            curr = curr.right;
+        }
+        return curr.data;
     }
 
     /************************* Delete *******************************/
