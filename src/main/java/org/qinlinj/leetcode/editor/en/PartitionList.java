@@ -7,11 +7,11 @@ public class PartitionList {
     public static void main(String[] args) {
         Solution solution = new PartitionList().new Solution();
         ListNode head = new ListNode(1);
-        ListNode node1 = new ListNode(1);
-        ListNode node2 = new ListNode(1);
-        ListNode node3 = new ListNode(1);
-        ListNode node4 = new ListNode(1);
-        ListNode node5 = new ListNode(1);
+        ListNode node1 = new ListNode(4);
+        ListNode node2 = new ListNode(3);
+        ListNode node3 = new ListNode(2);
+        ListNode node4 = new ListNode(5);
+        ListNode node5 = new ListNode(2);
         head.next = node1;
         node1.next = node2;
         node2.next = node3;
@@ -39,12 +39,26 @@ public class PartitionList {
             }
             ListNode dummyHead = new ListNode(-1);
             dummyHead.next = head;
+
+            return dummyHead.next;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    class Solution1 {
+        // operating in only one linked list
+        public ListNode partition(ListNode head, int x) {
+            if (head == null) {
+                return null;
+            }
+            ListNode dummyHead = new ListNode(-1);
+            dummyHead.next = head;
             ListNode fast = dummyHead;
             while (fast != null && fast.next != null) {
                 ListNode nextNode = fast.next;
                 if (nextNode != null && nextNode.val < x) {
                     ListNode slow = dummyHead;
-                    while (slow.next != nextNode || slow.next.val < x) {
+                    while (slow.next != nextNode && slow.next.val < x) {
                         slow = slow.next;
                     }
                     if (slow.next != nextNode) {
@@ -59,6 +73,4 @@ public class PartitionList {
             return dummyHead.next;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
