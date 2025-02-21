@@ -1,6 +1,8 @@
 package org.qinlinj.nonlinear.tree.binarysearchtree;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class BinarySearchTree<E extends Comparable<E>> {
     TreeNode root;
@@ -77,12 +79,41 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // preorder
     public List<E> preOrder() {
-
+        List<E> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.pop();
+            list.add(curr.data);
+            if (curr.right != null) {
+                stack.push(curr.right);
+            }
+            if (curr.left != null) {
+                stack.push(curr.left);
+            }
+        }
+        return list;
     }
 
     // inorder
     public List<E> inOrder() {
+        ArrayList<E> list = new ArrayList<>();
+        if (root == null) return list;
 
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            TreeNode node = stack.pop();
+            list.add(node.data);
+            curr = node.right;
+        }
     }
 
     // postorder
