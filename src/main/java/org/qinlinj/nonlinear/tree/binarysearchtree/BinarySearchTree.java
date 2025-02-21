@@ -1,6 +1,7 @@
 package org.qinlinj.nonlinear.tree.binarysearchtree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -119,7 +120,23 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // postorder
     public List<E> postOrder() {
-
+        LinkedList<E> list = new LinkedList<>();
+        if (root == null) {
+            return list;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.pop();
+            list.addFirst(curr.data);
+            if (curr.left != null) {
+                stack.push(curr.left);
+            }
+            if (curr.right != null) {
+                stack.push(curr.right);
+            }
+        }
+        return list;
     }
 
     // level order
