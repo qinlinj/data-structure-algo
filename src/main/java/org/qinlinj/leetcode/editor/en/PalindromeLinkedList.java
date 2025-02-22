@@ -29,7 +29,42 @@ public class PalindromeLinkedList{
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        ListNode mid = fineMidNode(head);
+        mid = reverseList(mid);
+        return compareTwoLists(head, mid);
+    }
 
+    private ListNode fineMidNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    public boolean compareTwoLists (ListNode list1, ListNode list2) {
+        if (list1.val == list2.val && list1.next != null && list2.next != null) {
+            return compareTwoLists(list1.next, list2.next);
+        } else return list1.val == list2.val && list1.next == null && list2.next == null;
+    }
+
+    public ListNode reverseList (ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode curr = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return curr;
+    }
+}
 //leetcode submit region end(Prohibit modification and deletion)
     // simple solution
     class Solution2 {
