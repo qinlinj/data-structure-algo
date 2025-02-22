@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ebfc7c9-af22-4385-b628-e7798de6feec" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/labuladong/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/labuladong/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/labuladong/statistics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/labuladong/statistics.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/saveactions_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/qinlinj/nonlinear/tree/binarysearchtree/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/qinlinj/nonlinear/tree/binarysearchtree/BinarySearchTree.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2tLVDPB8r20uLoJaOgM2kNrNv2b" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DoubleLinkedListTest.executor": "Run",
+    "Application.PalindromeLinkedList (1).executor": "Run",
+    "Application.PalindromeLinkedList (2).executor": "Run",
+    "Application.PalindromeLinkedList (3).executor": "Run",
+    "Application.PalindromeLinkedList (4).executor": "Run",
+    "Application.PalindromeLinkedList (5).executor": "Run",
+    "Application.PalindromeLinkedList.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/macbook/IdeaProjects/data-structure",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "Debugger_Data_Views_Java",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.PalindromeLinkedList (1)">
+    <configuration name="PalindromeLinkedList (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+      <module name="data-structure-algo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PalindromeLinkedList (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+      <module name="data-structure-algo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PalindromeLinkedList (4)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+      <module name="data-structure-algo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PalindromeLinkedList (5)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+      <module name="data-structure-algo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PalindromeLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+      <module name="data-structure-algo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="data-structure" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="data-structure" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PalindromeLinkedList (1)" />
+        <item itemvalue="Application.PalindromeLinkedList" />
+        <item itemvalue="Application.PalindromeLinkedList (5)" />
+        <item itemvalue="Application.PalindromeLinkedList (4)" />
+        <item itemvalue="Application.PalindromeLinkedList (3)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ebfc7c9-af22-4385-b628-e7798de6feec" name="Changes" comment="" />
+      <created>1740131221417</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1740131221417</updated>
+      <workItem from="1740131222493" duration="84000" />
+      <workItem from="1740131311345" duration="75000" />
+      <workItem from="1740131390456" duration="432000" />
+      <workItem from="1740131835699" duration="7615000" />
+      <workItem from="1740174626280" duration="5145000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
