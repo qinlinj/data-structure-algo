@@ -167,6 +167,26 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
         return node;
     }
 
+    public E removeMax() {
+        E res = maxValue();
+        root = removeMax(root);
+        return res;
+    }
+
+    private TreeNode removeMax(TreeNode node) {
+        if (node.right == null) {
+            TreeNode leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+
+        TreeNode rightRoot = removeMax(node.right);
+        node.right = rightRoot;
+
+        return node;
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
