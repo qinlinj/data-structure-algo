@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ebfc7c9-af22-4385-b628-e7798de6feec" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/qinlinj/nonlinear/tree/binarysearchtree/BinarySearchTreeRecursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/qinlinj/nonlinear/tree/binarysearchtree/BinarySearchTreeRecursion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/qinlinj/nonlinear/tree/binarysearchtree/BinarySearchTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/qinlinj/nonlinear/tree/binarysearchtree/BinarySearchTreeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +174,7 @@
       <workItem from="1740131390456" duration="432000" />
       <workItem from="1740131835699" duration="7615000" />
       <workItem from="1740174626280" duration="5145000" />
-      <workItem from="1740182829359" duration="18737000" />
+      <workItem from="1740182829359" duration="18974000" />
     </task>
     <servers />
   </component>
