@@ -14,6 +14,28 @@ public class SquaresOfASortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] sortedSquares(int[] nums) {
+            int left = 0;
+            int right = nums.length - 1;
+            int[] res = new int[nums.length];
+            int i = nums.length - 1;
+            while (left <= right) {
+                if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                    res[i] = nums[left] * nums[left];
+                    left++;
+                } else {
+                    res[i] = nums[right] * nums[right];
+                    right--;
+                }
+                i--;
+            }
+            return res;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    // redundant solution
+    class Solution1 {
+        public int[] sortedSquares(int[] nums) {
             if (nums.length == 1) {
                 nums[0] *= nums[0];
                 return nums;
@@ -42,6 +64,4 @@ public class SquaresOfASortedArray {
             return nums;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
