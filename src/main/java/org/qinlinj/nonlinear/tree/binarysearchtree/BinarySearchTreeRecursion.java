@@ -83,6 +83,24 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
         preOrder(node.right, res);
     }
 
+    public List<E> inOrder() {
+        List<E> res = new ArrayList<>();
+
+        inOrder(root, res);
+
+        return res;
+    }
+
+    private void inOrder(TreeNode node, List<E> res) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.left, res);
+        res.add(node.data);
+        inOrder(node.right, res);
+    }
+
 
     private class TreeNode {
         E data;
