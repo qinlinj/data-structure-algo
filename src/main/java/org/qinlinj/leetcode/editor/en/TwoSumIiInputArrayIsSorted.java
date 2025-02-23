@@ -7,7 +7,30 @@ public class TwoSumIiInputArrayIsSorted {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    // more concise version
     class Solution {
+        public int[] twoSum(int[] numbers, int target) {
+            if (numbers == null || numbers.length < 2) {
+                return new int[]{};
+            }
+            int slow = 0;
+            int fast = numbers.length - 1;
+            while (slow < fast) {
+                int sum = numbers[slow] + numbers[fast];
+                if (sum < target) {
+                    slow++;
+                } else if (sum > target) {
+                    fast--;
+                }
+            }
+            return new int[]{};
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    // redundant version
+    class Solution1 {
         public int[] twoSum(int[] numbers, int target) {
             if (numbers == null || numbers.length < 2) {
                 return null;
@@ -35,6 +58,4 @@ public class TwoSumIiInputArrayIsSorted {
             return null;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }

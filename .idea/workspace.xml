@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ebfc7c9-af22-4385-b628-e7798de6feec" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/TwoSumIiInputArrayIsSorted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/TwoSumIiInputArrayIsSorted.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.general",
+    "settings.editor.selected.configurable": "labuladong.id",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -176,23 +177,12 @@
       <workItem from="1740131390456" duration="432000" />
       <workItem from="1740131835699" duration="7615000" />
       <workItem from="1740174626280" duration="5145000" />
-      <workItem from="1740182829359" duration="20935000" />
+      <workItem from="1740182829359" duration="22106000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/TwoSumIiInputArrayIsSorted.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
