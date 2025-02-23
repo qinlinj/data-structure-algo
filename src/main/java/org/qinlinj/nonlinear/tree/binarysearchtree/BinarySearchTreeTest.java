@@ -2,7 +2,7 @@ package org.qinlinj.nonlinear.tree.binarysearchtree;
 
 public class BinarySearchTreeTest {
     public static void main(String[] args) {
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        BinarySearchTreeRecursion<Integer> bst = new BinarySearchTreeRecursion<>();
         bst.add(33);
         bst.add(22);
         bst.add(66);

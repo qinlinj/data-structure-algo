@@ -66,13 +66,13 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.PalindromeLinkedList (1)">
-    <configuration name="PalindromeLinkedList (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+  <component name="RunManager" selected="Application.BinarySearchTreeTest">
+    <configuration name="BinarySearchTreeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.nonlinear.tree.binarysearchtree.BinarySearchTreeTest" />
       <module name="data-structure-algo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="PATTERN" value="org.qinlinj.nonlinear.tree.binarysearchtree.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -80,7 +80,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PalindromeLinkedList (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="PalindromeLinkedList (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
       <module name="data-structure-algo" />
       <extension name="coverage">
@@ -145,11 +145,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BinarySearchTreeTest" />
         <item itemvalue="Application.PalindromeLinkedList (1)" />
         <item itemvalue="Application.PalindromeLinkedList" />
         <item itemvalue="Application.PalindromeLinkedList (5)" />
         <item itemvalue="Application.PalindromeLinkedList (4)" />
-        <item itemvalue="Application.PalindromeLinkedList (3)" />
       </list>
     </recent_temporary>
   </component>
