@@ -39,6 +39,24 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
         return node;
     }
 
+    /************************* Retrieve *******************************/
+
+    public TreeNode find(E target) {
+        return find(root, target);
+    }
+
+    private TreeNode find(TreeNode node, E target) {
+        if (node == null) return null;
+
+        if (target.compareTo(node.data) == 0) {
+            return node;
+        } else if (target.compareTo(node.data) < 0) {
+            return find(node.left, target);
+        } else {
+            return find(node.right, target);
+        }
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
@@ -48,4 +66,5 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
             this.data = data;
         }
     }
+
 }
