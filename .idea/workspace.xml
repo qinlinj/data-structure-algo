@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ebfc7c9-af22-4385-b628-e7798de6feec" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/labuladong/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/labuladong/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/SquaresOfASortedArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/SquaresOfASortedArray.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,12 @@
     "Application.PalindromeLinkedList (4).executor": "Run",
     "Application.PalindromeLinkedList (5).executor": "Run",
     "Application.PalindromeLinkedList.executor": "Run",
+    "Application.SquaresOfASortedArray (1).executor": "Run",
+    "Application.SquaresOfASortedArray (2).executor": "Run",
+    "Application.SquaresOfASortedArray (3).executor": "Run",
+    "Application.SquaresOfASortedArray (4).executor": "Run",
+    "Application.SquaresOfASortedArray (5).executor": "Run",
+    "Application.SquaresOfASortedArray.executor": "Run",
     "Application.TwoSumIiInputArrayIsSorted.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -69,22 +75,9 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.TwoSumIiInputArrayIsSorted">
-    <configuration name="BinarySearchTreeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.nonlinear.tree.binarysearchtree.BinarySearchTreeTest" />
-      <module name="data-structure-algo" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.qinlinj.nonlinear.tree.binarysearchtree.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PalindromeLinkedList (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+  <component name="RunManager" selected="Application.SquaresOfASortedArray (2)">
+    <configuration name="SquaresOfASortedArray (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />
       <module name="data-structure-algo" />
       <extension name="coverage">
         <pattern>
@@ -96,8 +89,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PalindromeLinkedList (5)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+    <configuration name="SquaresOfASortedArray (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />
       <module name="data-structure-algo" />
       <extension name="coverage">
         <pattern>
@@ -109,8 +102,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PalindromeLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.PalindromeLinkedList" />
+    <configuration name="SquaresOfASortedArray (4)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />
       <module name="data-structure-algo" />
       <extension name="coverage">
         <pattern>
@@ -122,8 +115,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TwoSumIiInputArrayIsSorted" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.TwoSumIiInputArrayIsSorted" />
+    <configuration name="SquaresOfASortedArray (5)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />
+      <module name="data-structure-algo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SquaresOfASortedArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />
       <module name="data-structure-algo" />
       <extension name="coverage">
         <pattern>
@@ -148,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TwoSumIiInputArrayIsSorted" />
-        <item itemvalue="Application.BinarySearchTreeTest" />
-        <item itemvalue="Application.PalindromeLinkedList (1)" />
-        <item itemvalue="Application.PalindromeLinkedList" />
-        <item itemvalue="Application.PalindromeLinkedList (5)" />
+        <item itemvalue="Application.SquaresOfASortedArray (2)" />
+        <item itemvalue="Application.SquaresOfASortedArray (1)" />
+        <item itemvalue="Application.SquaresOfASortedArray (5)" />
+        <item itemvalue="Application.SquaresOfASortedArray (4)" />
+        <item itemvalue="Application.SquaresOfASortedArray" />
       </list>
     </recent_temporary>
   </component>
@@ -177,7 +183,7 @@
       <workItem from="1740131390456" duration="432000" />
       <workItem from="1740131835699" duration="7615000" />
       <workItem from="1740174626280" duration="5145000" />
-      <workItem from="1740182829359" duration="27881000" />
+      <workItem from="1740182829359" duration="29869000" />
     </task>
     <servers />
   </component>
