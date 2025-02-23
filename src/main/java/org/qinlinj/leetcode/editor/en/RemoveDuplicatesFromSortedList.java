@@ -25,6 +25,26 @@ public class RemoveDuplicatesFromSortedList {
                 return head;
             }
 
+            ListNode cur = head;
+            while (cur != null && cur.next != null) {
+                if (cur.val == cur.next.val) {
+                    cur.next = cur.next.next;
+                } else {
+                    cur = cur.next;
+                }
+            }
+            return head;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    // redundant version
+    class Solution1 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+
             ListNode slow = head;
             ListNode fast = head.next;
 
@@ -41,6 +61,5 @@ public class RemoveDuplicatesFromSortedList {
             return head;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
 }
