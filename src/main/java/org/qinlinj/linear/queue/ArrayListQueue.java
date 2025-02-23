@@ -1,6 +1,6 @@
 package org.qinlinj.linear.queue;
 
-import org.qinlinj.linear.array.ArrayList;
+import org.qinlinj.linear.arraylist.ArrayList;
 
 public class ArrayListQueue<E> implements Queue<E> {
     private ArrayList<E> data;

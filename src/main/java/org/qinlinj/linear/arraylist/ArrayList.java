@@ -1,4 +1,4 @@
-package org.qinlinj.linear.array;
+package org.qinlinj.linear.arraylist;
 
 
 public class ArrayList<E> {

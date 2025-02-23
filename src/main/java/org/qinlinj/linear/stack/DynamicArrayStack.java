@@ -1,6 +1,6 @@
 package org.qinlinj.linear.stack;
 
-import org.qinlinj.linear.array.ArrayList;
+import org.qinlinj.linear.arraylist.ArrayList;
 
 public class DynamicArrayStack<E> implements Stack<E> {
     private ArrayList<E> data;
