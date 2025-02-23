@@ -40,6 +40,11 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
     }
 
     /************************* Retrieve *******************************/
+    public boolean contains(E target) {
+        TreeNode node = find(target);
+        if (node == null) return false;
+        return true;
+    }
 
     public TreeNode find(E target) {
         return find(root, target);
