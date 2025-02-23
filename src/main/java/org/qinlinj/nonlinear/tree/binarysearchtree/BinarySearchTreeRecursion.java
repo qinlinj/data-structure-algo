@@ -1,5 +1,8 @@
 package org.qinlinj.nonlinear.tree.binarysearchtree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTreeRecursion<E extends Comparable<E>> {
     private TreeNode root;
     private int size;
@@ -61,6 +64,25 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
             return find(node.right, target);
         }
     }
+
+    public List<E> preOrder() {
+        List<E> res = new ArrayList<>();
+
+        preOrder(root, res);
+
+        return res;
+    }
+
+    private void preOrder(TreeNode node, List<E> res) {
+        if (node == null) {
+            return;
+        }
+
+        res.add(node.data);
+        preOrder(node.left, res);
+        preOrder(node.right, res);
+    }
+
 
     private class TreeNode {
         E data;
