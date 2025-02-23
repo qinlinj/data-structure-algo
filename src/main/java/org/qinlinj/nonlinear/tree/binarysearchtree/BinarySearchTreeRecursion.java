@@ -120,6 +120,32 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
         res.add(node.data);
     }
 
+    // O(logn)
+    public E minValue() {
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        return minValue(root).data;
+    }
+
+    private TreeNode minValue(TreeNode node) {
+        if (node.left == null) return node;
+        return minValue(node.left);
+    }
+
+    // O(logn)
+    public E maxValue() {
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        return maxValue(root).data;
+    }
+
+    private TreeNode maxValue(TreeNode node) {
+        if (node.right == null) return node;
+        return maxValue(node.right);
+    }
+
 
     private class TreeNode {
         E data;
