@@ -187,6 +187,46 @@ public class BinarySearchTreeRecursion<E extends Comparable<E>> {
         return node;
     }
 
+    public void remove(E e) {
+        root = remove(root, e);
+    }
+
+    private TreeNode remove(TreeNode node, E e) {
+        if (node == null) return null;
+
+        if (e.compareTo(node.data) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.data) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+            if (node.left == null) {
+                TreeNode rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+
+            if (node.right == null) {
+                TreeNode leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+            TreeNode successor = minValue(node.right);
+
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+
+            node.left = null;
+            node.right = null;
+
+            return successor;
+        }
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
