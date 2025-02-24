@@ -3,6 +3,17 @@
   <component name="LeetcodeEditorlabuladong">
     <option name="projectConfig">
       <map>
+        <entry key="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/CountPrimes.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/doc/content/CountPrimes.md" />
+              <option name="frontendQuestionId" value="leetcode.com204" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/CountPrimes.java" />
+              <option name="titleSlug" value="count-primes" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/qinlinj/leetcode/editor/en/IntersectionOfTwoLinkedLists.java">
           <value>
             <LeetcodeEditor>
