@@ -120,6 +120,113 @@ public class AVLTree<E extends Comparable<E>> {
         res.add(node.data);
     }
 
+    // O(logn)
+    public E minValue() {
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        return minValue(root).data;
+    }
+
+    private TreeNode minValue(TreeNode node) {
+        if (node.left == null) return node;
+        return minValue(node.left);
+    }
+
+    // O(logn)
+    public E maxValue() {
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        return maxValue(root).data;
+    }
+
+    private TreeNode maxValue(TreeNode node) {
+        if (node.right == null) return node;
+        return maxValue(node.right);
+    }
+
+    /************************* Delete *******************************/
+    public E removeMin() {
+        E res = minValue();
+        root = removeMin(root);
+        return res;
+    }
+
+    private TreeNode removeMin(TreeNode node) {
+        if (node.left == null) {
+            TreeNode rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        TreeNode leftRoot = removeMin(node.left);
+        node.left = leftRoot;
+
+        return node;
+    }
+
+    public E removeMax() {
+        E res = maxValue();
+        root = removeMax(root);
+        return res;
+    }
+
+    private TreeNode removeMax(TreeNode node) {
+        if (node.right == null) {
+            TreeNode leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+
+        TreeNode rightRoot = removeMax(node.right);
+        node.right = rightRoot;
+
+        return node;
+    }
+
+    public void remove(E e) {
+        root = remove(root, e);
+    }
+
+    private TreeNode remove(TreeNode node, E e) {
+        if (node == null) return null;
+
+        if (e.compareTo(node.data) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.data) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+            if (node.left == null) {
+                TreeNode rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+
+            if (node.right == null) {
+                TreeNode leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+            TreeNode successor = minValue(node.right);
+
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+
+            node.left = null;
+            node.right = null;
+
+            return successor;
+        }
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
