@@ -74,6 +74,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.qinlinj.nonlinear.tree.avltree" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.SquaresOfASortedArray (5)">
     <configuration name="SquaresOfASortedArray (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />

@@ -73,7 +73,10 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     private TreeNode leftRotate(TreeNode y) {
+        TreeNode x = y.right;
+        TreeNode t3 = x.left;
 
+        return x;
     }
 
     /************************* Insert *******************************/
