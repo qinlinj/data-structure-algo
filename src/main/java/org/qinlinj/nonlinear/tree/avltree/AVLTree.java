@@ -21,6 +21,11 @@ public class AVLTree<E extends Comparable<E>> {
         return size == 0;
     }
 
+    private int getHeight(TreeNode node) {
+        if (node == null) return 0;
+        return node.height;
+    }
+
     /************************* Insert *******************************/
     // O(logn)
     public void add(E e) {
@@ -231,6 +236,7 @@ public class AVLTree<E extends Comparable<E>> {
         E data;
         TreeNode left;
         TreeNode right;
+        int height = 1;
 
         public TreeNode(E data) {
             this.data = data;
