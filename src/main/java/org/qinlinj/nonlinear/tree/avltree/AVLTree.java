@@ -46,7 +46,18 @@ public class AVLTree<E extends Comparable<E>> {
 
         return true;
     }
-    
+
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(TreeNode node) {
+        if (node == null) return true;
+        int balanceFactor = getBalanceFactor(node);
+        if (Math.abs(balanceFactor) > 1) return false;
+        return isBalanced(node.left) && isBalanced(node.right);
+    }
+
     /************************* Insert *******************************/
     // O(logn)
     public void add(E e) {
