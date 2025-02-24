@@ -227,22 +227,8 @@ public class AVLTree<E extends Comparable<E>> {
     /************************* Delete *******************************/
     public E removeMin() {
         E res = minValue();
-        root = removeMin(root);
+        root = remove(root, res);
         return res;
-    }
-
-    private TreeNode removeMin(TreeNode node) {
-        if (node.left == null) {
-            TreeNode rightNode = node.right;
-            node.right = null;
-            size--;
-            return rightNode;
-        }
-
-        TreeNode leftRoot = removeMin(node.left);
-        node.left = leftRoot;
-
-        return node;
     }
 
     public E removeMax() {
