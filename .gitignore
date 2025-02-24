@@ -5,6 +5,7 @@ target/
 src/main/java/org/qinlinj/leetcode/editor/en/doc/*
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/*
 .idea/modules.xml
 .idea/jarRepositories.xml
