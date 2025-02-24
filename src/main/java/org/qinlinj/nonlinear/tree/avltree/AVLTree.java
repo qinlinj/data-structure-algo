@@ -276,6 +276,30 @@ public class AVLTree<E extends Comparable<E>> {
             }
         }
 
+        if (retNode == null) return null;
+
+        retNode.height = Math.max(getHeight(retNode.left),
+                getHeight(retNode.right)) + 1;
+        int balanceFactor = getBalanceFactor(retNode);
+        // LL
+        if (balanceFactor > 1 && getBalanceFactor(retNode.left) >= 0) {
+            return rightRotate(retNode);
+        }
+        // RR
+        if (balanceFactor < -1 && getBalanceFactor(retNode.right) <= 0) {
+            return leftRotate(retNode);
+        }
+        // LR
+        if (balanceFactor > 1 && getBalanceFactor(retNode.left) < 0) {
+            retNode.left = leftRotate(retNode.left);
+            return rightRotate(retNode);
+        }
+        // RL
+        if (balanceFactor < -1 && getBalanceFactor(retNode.right) > 0) {
+            retNode.right = rightRotate(retNode.right);
+            return leftRotate(retNode);
+        }
+        return retNode;
     }
 
     private class TreeNode {
