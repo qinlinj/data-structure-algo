@@ -79,13 +79,13 @@
       <recent name="org.qinlinj.nonlinear.tree.avltree" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SquaresOfASortedArray (5)">
-    <configuration name="SquaresOfASortedArray (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.qinlinj.leetcode.editor.en.SquaresOfASortedArray" />
+  <component name="RunManager" selected="Application.AVLTreeTest">
+    <configuration name="AVLTreeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.qinlinj.nonlinear.tree.avltree.AVLTreeTest" />
       <module name="data-structure-algo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.qinlinj.leetcode.editor.en.*" />
+          <option name="PATTERN" value="org.qinlinj.nonlinear.tree.avltree.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -158,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AVLTreeTest" />
         <item itemvalue="Application.SquaresOfASortedArray (5)" />
         <item itemvalue="Application.SquaresOfASortedArray (4)" />
         <item itemvalue="Application.SquaresOfASortedArray" />
         <item itemvalue="Application.SquaresOfASortedArray (3)" />
-        <item itemvalue="Application.SquaresOfASortedArray (2)" />
       </list>
     </recent_temporary>
   </component>
