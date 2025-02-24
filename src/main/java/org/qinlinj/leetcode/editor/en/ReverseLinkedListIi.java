@@ -20,12 +20,14 @@ public class ReverseLinkedListIi {
      * }
      */
     class Solution {
+        ListNode successor = null;
+
         public ListNode reverseBetween(ListNode head, int left, int right) {
             if (head == null || head.next == null || left == right) {
                 return head;
             }
             if (left == 1) {
-                return reverseK(head, right);
+                return reverseKR(head, right);
             }
             head.next = reverseBetween(head.next, left - 1, right - 1);
             return head;
@@ -46,6 +48,19 @@ public class ReverseLinkedListIi {
             }
             tail.next = curr;
             return prev;
+        }
+
+        // using recursion
+        public ListNode reverseKR(ListNode head, int k) {
+            if (k == 1) {
+                successor = head.next;
+                return head;
+            }
+
+            ListNode p = reverseKR(head.next, k - 1);
+            head.next.next = head;
+            head.next = successor;
+            return p;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
