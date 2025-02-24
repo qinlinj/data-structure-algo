@@ -61,7 +61,7 @@ public class AVLTree<E extends Comparable<E>> {
     private TreeNode rightRotate(TreeNode y) {
         TreeNode x = y.left;
         TreeNode t3 = x.right;
-        
+
         // left rotate
         x.right = y;
         y.left = t3;
@@ -70,6 +70,10 @@ public class AVLTree<E extends Comparable<E>> {
         x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
 
         return x;
+    }
+
+    private TreeNode leftRotate(TreeNode y) {
+
     }
 
     /************************* Insert *******************************/
