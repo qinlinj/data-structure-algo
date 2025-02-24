@@ -243,38 +243,39 @@ public class AVLTree<E extends Comparable<E>> {
 
     private TreeNode remove(TreeNode node, E e) {
         if (node == null) return null;
+        TreeNode retNode;
 
         if (e.compareTo(node.data) < 0) {
             node.left = remove(node.left, e);
-            return node;
+            retNode = node;
         } else if (e.compareTo(node.data) > 0) {
             node.right = remove(node.right, e);
-            return node;
+            retNode = node;
         } else {
             if (node.left == null) {
                 TreeNode rightNode = node.right;
                 node.right = null;
                 size--;
-                return rightNode;
-            }
-
-            if (node.right == null) {
+                retNode = rightNode;
+            } else if (node.right == null) {
                 TreeNode leftNode = node.left;
                 node.left = null;
                 size--;
-                return leftNode;
+                retNode = leftNode;
+            } else {
+                TreeNode successor = minValue(node.right);
+
+                successor.right = remove(node.right, successor.data);
+                successor.left = node.left;
+
+                node.left = null;
+                node.right = null;
+
+                retNode = successor;
+                ;
             }
-
-            TreeNode successor = minValue(node.right);
-
-            successor.right = removeMin(node.right);
-            successor.left = node.left;
-
-            node.left = null;
-            node.right = null;
-
-            return successor;
         }
+
     }
 
     private class TreeNode {
