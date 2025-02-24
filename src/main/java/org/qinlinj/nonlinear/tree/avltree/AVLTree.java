@@ -76,6 +76,12 @@ public class AVLTree<E extends Comparable<E>> {
         TreeNode x = y.right;
         TreeNode t3 = x.left;
 
+        x.left = y;
+        y.right = t3;
+
+        y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
+        x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
+
         return x;
     }
 
