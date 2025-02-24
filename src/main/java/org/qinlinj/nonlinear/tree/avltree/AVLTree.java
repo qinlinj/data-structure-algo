@@ -1,6 +1,6 @@
 package org.qinlinj.nonlinear.tree.avltree;
 
-public class AVLTree {
+public class AVLTree<E extends Comparable<E>> {
     private TreeNode root;
     private int size;
 
@@ -17,22 +17,10 @@ public class AVLTree {
         return size == 0;
     }
 
-    private int getHeight(TreeNode node) {
-        if (node == null) return 0;
-        return node.height;
-    }
-
-    private int getBalanceFactor(TreeNode node) {
-        if (node == null) return 0;
-        return getHeight(node.left) - getHeight(node.right);
-    }
-
-    
-    private class TreeNode<E extends Comparable<E>> {
+    private class TreeNode {
         E data;
         TreeNode left;
         TreeNode right;
-        int height = 1;
 
         public TreeNode(E data) {
             this.data = data;
