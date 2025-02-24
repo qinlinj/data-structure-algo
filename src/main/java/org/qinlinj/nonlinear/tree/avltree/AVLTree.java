@@ -233,22 +233,8 @@ public class AVLTree<E extends Comparable<E>> {
 
     public E removeMax() {
         E res = maxValue();
-        root = removeMax(root);
+        root = remove(root, res);
         return res;
-    }
-
-    private TreeNode removeMax(TreeNode node) {
-        if (node.right == null) {
-            TreeNode leftNode = node.left;
-            node.left = null;
-            size--;
-            return leftNode;
-        }
-
-        TreeNode rightRoot = removeMax(node.right);
-        node.right = rightRoot;
-
-        return node;
     }
 
     public void remove(E e) {
