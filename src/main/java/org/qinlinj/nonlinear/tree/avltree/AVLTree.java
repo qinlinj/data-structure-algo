@@ -58,6 +58,13 @@ public class AVLTree<E extends Comparable<E>> {
         return isBalanced(node.left) && isBalanced(node.right);
     }
 
+    //        y                                    x
+    //       / \                                 /   \
+    //      x   T4                             z       y
+    //     / \          --------------->      / \     / \
+    //    z   T3                            T1   T2 T3   T4
+    //   / \
+    // T1   T2
     private TreeNode rightRotate(TreeNode y) {
         TreeNode x = y.left;
         TreeNode t3 = x.right;
