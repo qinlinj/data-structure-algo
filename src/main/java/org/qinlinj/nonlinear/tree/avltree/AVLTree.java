@@ -22,6 +22,12 @@ public class AVLTree {
         return node.height;
     }
 
+    private int getBalanceFactor(TreeNode node) {
+        if (node == null) return 0;
+        return getHeight(node.left) - getHeight(node.right);
+    }
+
+    
     private class TreeNode<E extends Comparable<E>> {
         E data;
         TreeNode left;
