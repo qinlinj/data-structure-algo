@@ -31,6 +31,22 @@ public class AVLTree<E extends Comparable<E>> {
         return getHeight(node.left) - getHeight(node.right);
     }
 
+    public boolean isBinarySearchTree() {
+        List<E> res = inOrder();
+        int len = res.size();
+        if (len <= 1) {
+            return true;
+        }
+
+        for (int i = 1; i < len; i++) {
+            if (res.get(i).compareTo(res.get(i - 1)) < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
     /************************* Insert *******************************/
     // O(logn)
     public void add(E e) {
