@@ -219,6 +219,34 @@ public class RBTree<E extends Comparable<E>> {
 
     }
 
+    private TreeNode remove(TreeNode node, E e) {
+        if (node == null) return null;
+
+        if (e.compareTo(node.data) < 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (e.compareTo(node.data) > 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+
+            if (node.left == null) {
+                TreeNode rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+
+            if (node.right == null) {
+                TreeNode leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+        }
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
