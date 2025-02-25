@@ -216,7 +216,7 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public void remove(E e) {
-
+        root = remove(root, e);
     }
 
     private TreeNode remove(TreeNode node, E e) {
