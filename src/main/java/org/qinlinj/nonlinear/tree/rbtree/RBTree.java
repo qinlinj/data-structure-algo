@@ -154,6 +154,10 @@ public class RBTree<E extends Comparable<E>> {
 
     }
 
+    public E maxValue() {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
