@@ -176,7 +176,9 @@ public class RBTree<E extends Comparable<E>> {
 
     /************************* Delete *******************************/
     public E removeMin() {
-
+        E res = minValue();
+        root = removeMin(root);
+        return res;
     }
 
     private TreeNode removeMin(TreeNode node) {
