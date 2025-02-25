@@ -19,6 +19,13 @@ public class RBTree<E extends Comparable<E>> {
         return size == 0;
     }
 
+    private boolean isRED(TreeNode node) {
+        if (node == null) {
+            return BLACK;
+        }
+        return node.color;
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
