@@ -71,6 +71,14 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public void add(E e) {
+
+    }
+
+    private TreeNode add(TreeNode node, E e) {
+        if (node == null) {
+            size++;
+            return new TreeNode(e);
+        }
     }
 
     /************************* retrieve *******************************/
