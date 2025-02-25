@@ -45,7 +45,9 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     private void flipColors(TreeNode node) {
-
+        node.color = RED;
+        node.left.color = BLACK;
+        node.right.color = BLACK;
     }
 
     private class TreeNode {
