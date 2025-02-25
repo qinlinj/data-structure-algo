@@ -26,6 +26,16 @@ public class RBTree<E extends Comparable<E>> {
         return node.color;
     }
 
+    /************************* Insert *******************************/
+    //    node                    x
+    //    /  \                  /   \
+    //   T1   x     ------->  node  T3
+    //       / \              /  \
+    //      T2 T3            T1  T2
+    private TreeNode leftRotate(TreeNode node) {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
