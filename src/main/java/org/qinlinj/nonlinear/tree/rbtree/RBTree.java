@@ -71,11 +71,13 @@ public class RBTree<E extends Comparable<E>> {
 
     /************************* retrieve *******************************/
     public boolean contains(E target) {
-
+        TreeNode node = find(target);
+        if (node == null) return false;
+        return true;
     }
 
     public TreeNode find(E target) {
-
+        return find(root, target);
     }
 
     private TreeNode find(TreeNode node, E target) {
