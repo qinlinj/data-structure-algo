@@ -79,6 +79,14 @@ public class RBTree<E extends Comparable<E>> {
             size++;
             return new TreeNode(e);
         }
+
+        if (e.compareTo(node.data) < 0) {
+            node.left = add(node.left, e);
+        } else if (e.compareTo(node.data) > 0) {
+            node.right = add(node.right, e);
+        } else {
+            return node;
+        }
     }
 
     /************************* retrieve *******************************/
