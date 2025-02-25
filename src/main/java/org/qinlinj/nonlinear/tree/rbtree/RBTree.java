@@ -44,6 +44,10 @@ public class RBTree<E extends Comparable<E>> {
         return x;
     }
 
+    private void flipColors(TreeNode node) {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
