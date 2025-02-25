@@ -71,7 +71,8 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public void add(E e) {
-
+        root = add(root, e);
+        root.color = BLACK;
     }
 
     private TreeNode add(TreeNode node, E e) {
