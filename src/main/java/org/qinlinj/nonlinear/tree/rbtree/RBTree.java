@@ -1,5 +1,7 @@
 package org.qinlinj.nonlinear.tree.rbtree;
 
+import java.util.List;
+
 public class RBTree<E extends Comparable<E>> {
     private static boolean RED = true;
     private static boolean BLACK = false;
@@ -90,6 +92,10 @@ public class RBTree<E extends Comparable<E>> {
         } else {
             return find(node.right, target);
         }
+    }
+
+    public List<E> preOrder() {
+
     }
 
     private class TreeNode {
