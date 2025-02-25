@@ -183,6 +183,10 @@ public class RBTree<E extends Comparable<E>> {
 
     }
 
+    public void remove(E e) {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
