@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.tree.rbtree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RBTree<E extends Comparable<E>> {
@@ -95,7 +96,21 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public List<E> preOrder() {
+        List<E> res = new ArrayList<>();
 
+        preOrder(root, res);
+
+        return res;
+    }
+
+    private void preOrder(TreeNode node, List<E> res) {
+        if (node == null) {
+            return;
+        }
+
+        res.add(node.data);
+        preOrder(node.left, res);
+        preOrder(node.right, res);
     }
 
     public List<E> inOrder() {
