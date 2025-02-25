@@ -179,6 +179,20 @@ public class RBTree<E extends Comparable<E>> {
 
     }
 
+    private TreeNode removeMin(TreeNode node) {
+        if (node.left == null) {
+            TreeNode rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        TreeNode leftRoot = removeMin(node.left);
+        node.left = leftRoot;
+
+        return node;
+    }
+
     public E removeMax() {
 
     }
