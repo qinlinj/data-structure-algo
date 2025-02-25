@@ -163,7 +163,15 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public E maxValue() {
+        if (root == null) {
+            throw new RuntimeException("tree is null");
+        }
+        return maxValue(root).data;
+    }
 
+    private TreeNode maxValue(TreeNode node) {
+        if (node.right == null) return node;
+        return maxValue(node.right);
     }
 
     private class TreeNode {
