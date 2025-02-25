@@ -50,6 +50,18 @@ public class RBTree<E extends Comparable<E>> {
         node.right.color = BLACK;
     }
 
+    //    node                    x
+    //    /  \                  /   \
+    //   x   T2     ------->   y   node
+    //  / \                        /  \
+    // y  T1                      T1  T2
+    private TreeNode rightRotate(TreeNode node) {
+        TreeNode x = node.left;
+
+
+        return x;
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
