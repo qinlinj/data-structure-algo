@@ -9,8 +9,19 @@ public class KthSmallestElementInASortedMatrix {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int kthSmallest(int[][] matrix, int k) {
-
-            return 0;
+            if (k == 1) {
+                return matrix[0][0];
+            }
+            int size = matrix[0].length;
+            int columnNum = k / size;
+            int rowNum;
+            if (k % size == 0) {
+                columnNum = columnNum - 1;
+                rowNum = size - 1;
+            } else {
+                rowNum = k % size - 1;
+            }
+            return matrix[rowNum][columnNum];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
