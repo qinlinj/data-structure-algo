@@ -69,6 +69,15 @@ public class RBTree<E extends Comparable<E>> {
     public void add(E e) {
     }
 
+    /************************* retrieve *******************************/
+    public boolean contains(E target) {
+
+    }
+
+    public TreeNode find(E target) {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
