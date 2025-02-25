@@ -98,6 +98,14 @@ public class RBTree<E extends Comparable<E>> {
 
     }
 
+    public List<E> inOrder() {
+
+    }
+
+    public List<E> postOrder() {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
