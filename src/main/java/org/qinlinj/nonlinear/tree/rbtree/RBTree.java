@@ -66,6 +66,9 @@ public class RBTree<E extends Comparable<E>> {
         return x;
     }
 
+    public void add(E e) {
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
