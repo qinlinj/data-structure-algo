@@ -33,7 +33,15 @@ public class RBTree<E extends Comparable<E>> {
     //       / \              /  \
     //      T2 T3            T1  T2
     private TreeNode leftRotate(TreeNode node) {
+        TreeNode x = node.right;
 
+        node.right = x.left;
+        x.left = node;
+
+        x.color = node.color;
+        node.color = RED;
+
+        return x;
     }
 
     private class TreeNode {
