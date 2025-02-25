@@ -114,7 +114,21 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public List<E> inOrder() {
+        List<E> res = new ArrayList<>();
 
+        inOrder(root, res);
+
+        return res;
+    }
+
+    private void inOrder(TreeNode node, List<E> res) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.left, res);
+        res.add(node.data);
+        inOrder(node.right, res);
     }
 
     public List<E> postOrder() {
