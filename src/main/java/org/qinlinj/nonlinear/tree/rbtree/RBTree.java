@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RBTree<E extends Comparable<E>> {
-    private static boolean RED = true;
-    private static boolean BLACK = false;
+    private static final boolean RED = true;
+    private static final boolean BLACK = false;
     private TreeNode root;
     private int size;
 
@@ -164,7 +164,7 @@ public class RBTree<E extends Comparable<E>> {
     }
 
     public List<E> postOrder() {
-        LinkedList res = new LinkedList<>();
+        LinkedList res = new LinkedList<E>();
 
         postOrder(root, res);
 
