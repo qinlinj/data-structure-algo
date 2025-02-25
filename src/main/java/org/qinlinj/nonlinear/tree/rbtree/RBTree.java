@@ -195,6 +195,12 @@ public class RBTree<E extends Comparable<E>> {
         return node;
     }
 
+    public E removeMax() {
+        E res = maxValue();
+        root = removeMax(root);
+        return res;
+    }
+
     private TreeNode removeMax(TreeNode node) {
         if (node.right == null) {
             TreeNode leftNode = node.left;
