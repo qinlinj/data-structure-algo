@@ -150,6 +150,10 @@ public class RBTree<E extends Comparable<E>> {
         res.add(node.data);
     }
 
+    public E minValue() {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
