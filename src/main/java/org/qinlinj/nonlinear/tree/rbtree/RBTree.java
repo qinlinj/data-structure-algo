@@ -179,6 +179,10 @@ public class RBTree<E extends Comparable<E>> {
 
     }
 
+    public E removeMax() {
+
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
