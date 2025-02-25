@@ -244,6 +244,15 @@ public class RBTree<E extends Comparable<E>> {
                 return leftNode;
             }
 
+            TreeNode successor = minValue(node.right);
+
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+
+            node.left = null;
+            node.right = null;
+            size--;
+            return successor;
         }
     }
 
