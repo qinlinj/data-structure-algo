@@ -1,31 +1,50 @@
 package org.qinlinj.leetcode.editor.en;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 // [933] Number of Recent Calls
 public class NumberOfRecentCalls {
-    public static void main(String[] args) {
-        Solution solution = new NumberOfRecentCalls().new Solution();
-    }
+//    public static void main(String[] args) {
+//        Solution solution = new NumberOfRecentCalls().new Solution();
+//    }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class RecentCounter {
+        Queue<Integer> queue;
+        int t;
 
         public RecentCounter() {
-
+            this.queue = new LinkedList<>();
+            this.t = 0;
         }
 
         public int ping(int t) {
-
-            return 0;
+            if (queue.isEmpty()) {
+                queue.offer(t);
+                this.t++;
+                return this.t;
+            }
+            while (!queue.isEmpty() && (t - queue.peek()) > 3000) {
+                queue.poll();
+                this.t--;
+            }
+            queue.offer(t);
+            this.t++;
+            return this.t;
         }
     }
 
-/**
- * Your RecentCounter object will be instantiated and called as such:
- * RecentCounter obj = new RecentCounter();
- * int param_1 = obj.ping(t);
- */
-//leetcode submit region end(Prohibit modification and deletion)
 
+    /**
+     * Your RecentCounter object will be instantiated and called as such:
+     * RecentCounter obj = new RecentCounter();
+     * int param_1 = obj.ping(t);
+     */
+//leetcode submit region end(Prohibit modification and deletion)
+    class solution0 {
+
+    }
 }
 
 
