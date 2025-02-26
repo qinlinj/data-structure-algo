@@ -102,16 +102,25 @@ public class RBTree<E extends Comparable<E>> {
         node.right.color = BLACK;
     }
 
-    //    node                    x
-    //    /  \                  /   \
-    //   x   T2     ------->   y   node
-    //  / \                        /  \
-    // y  T1                      T1  T2
+    /**
+     * Right rotation operation
+     * node                    x
+     * /  \                  /   \
+     * x   T2     ------->   y   node
+     * / \                        /  \
+     * y  T1                      T1  T2
+     *
+     * @param node The center node of rotation
+     * @return The new root node after rotation
+     */
     private TreeNode rightRotate(TreeNode node) {
         TreeNode x = node.left;
+
+        // Perform rotation
         node.left = x.right;
         x.right = node;
 
+        // Adjust colors
         x.color = node.color;
         node.color = RED;
 
