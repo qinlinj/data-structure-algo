@@ -417,18 +417,37 @@ public class RBTree<E extends Comparable<E>> {
         return res;
     }
 
+    /**
+     * Recursively remove the maximum node from the specified subtree
+     *
+     * @param node The root of the current subtree
+     * @return The root of the subtree after removing the maximum node
+     */
     private TreeNode removeMax(TreeNode node) {
+        // If the left child is red, perform right rotation
+        if (isRED(node.left)) {
+            node = rightRotate(node);
+        }
+
+        // Found the maximum node (no right child)
         if (node.right == null) {
+            // Free the node and update count
             TreeNode leftNode = node.left;
             node.left = null;
             size--;
             return leftNode;
         }
 
-        TreeNode rightRoot = removeMax(node.right);
-        node.right = rightRoot;
+        // Ensure that the current node's right child or right grandchild is red
+        if (!isRED(node.right) && !isRED(node.right.left)) {
+            node = moveRedRight(node);
+        }
 
-        return node;
+        // Continue finding and removing the maximum node in the right subtree
+        node.right = removeMax(node.right);
+
+        // Restore Red-Black tree properties
+        return balance(node);
     }
 
     public void remove(E e) {
