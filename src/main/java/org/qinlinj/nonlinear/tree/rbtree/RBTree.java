@@ -280,22 +280,31 @@ public class RBTree<E extends Comparable<E>> {
         inOrder(node.right, res); // Finally traverse right subtree
     }
 
+    /**
+     * Post-order traversal: Left-Right-Root
+     *
+     * @return List containing the post-order traversal result
+     */
     public List<E> postOrder() {
-        LinkedList res = new LinkedList<E>();
-
+        LinkedList<E> res = new LinkedList<>();
         postOrder(root, res);
-
         return res;
     }
 
+    /**
+     * Recursively perform post-order traversal
+     *
+     * @param node The current node
+     * @param res  The list to store the traversal result
+     */
     private void postOrder(TreeNode node, List<E> res) {
         if (node == null) {
             return;
         }
 
-        postOrder(node.left, res);
-        postOrder(node.right, res);
-        res.add(node.data);
+        postOrder(node.left, res); // Traverse left subtree first
+        postOrder(node.right, res); // Then traverse right subtree
+        res.add(node.data); // Finally visit root node
     }
 
     public E minValue() {
