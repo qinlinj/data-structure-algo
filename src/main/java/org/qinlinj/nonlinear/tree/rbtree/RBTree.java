@@ -320,6 +320,13 @@ public class RBTree<E extends Comparable<E>> {
         return minValue(root).data;
     }
 
+    /**
+     * Find the node with minimum value in the specified subtree
+     * The minimum value is always at the leftmost node
+     *
+     * @param node The root of the current subtree
+     * @return The node containing the minimum value
+     */
     private TreeNode minValue(TreeNode node) {
         if (node.left == null) return node;
         return minValue(node.left);
