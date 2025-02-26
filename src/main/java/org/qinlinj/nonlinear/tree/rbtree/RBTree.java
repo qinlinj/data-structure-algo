@@ -139,28 +139,43 @@ public class RBTree<E extends Comparable<E>> {
     }
 
 
+    /**
+     * Recursively add an element to a specified subtree
+     *
+     * @param node The root of the current subtree
+     * @param e    The element to add
+     * @return The root of the subtree after adding the element
+     */
     private TreeNode add(TreeNode node, E e) {
+        // Create a new node (new nodes are red by default)
         if (node == null) {
             size++;
             return new TreeNode(e);
         }
 
+        // Recursively add to left or right subtree
         if (e.compareTo(node.data) < 0) {
             node.left = add(node.left, e);
         } else if (e.compareTo(node.data) > 0) {
             node.right = add(node.right, e);
         } else {
+            // Element already exists, no operation
             return node;
         }
 
+        // Maintain Red-Black tree properties
+
+        // Case 1: Right child is red, left child is black, perform left rotation
         if (isRED(node.right) && !isRED(node.left)) {
             node = leftRotate(node);
         }
 
+        // Case 2: Left child and left-left grandchild are both red, perform right rotation
         if (isRED(node.left) && isRED(node.left.left)) {
             node = rightRotate(node);
         }
 
+        // Case 3: Both left and right children are red, perform color flip
         if (isRED(node.left) && isRED(node.right)) {
             flipColors(node);
         }
