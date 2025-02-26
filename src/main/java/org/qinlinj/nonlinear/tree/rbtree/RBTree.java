@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Red-Black Tree Implementation
+ * A Red-Black tree is a self-balancing binary search tree that maintains balance using node colors
+ * Red-Black trees have the following properties:
+ * 1. Each node is either red or black
+ * 2. The root node is always black
+ * 3. Every leaf node (NIL/null) is black
+ * 4. If a node is red, then both its children are black (no consecutive red nodes)
+ * 5. For each node, all paths from the node to its descendant leaves contain the same number of black nodes
+ */
 public class RBTree<E extends Comparable<E>> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
