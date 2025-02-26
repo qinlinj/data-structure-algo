@@ -307,6 +307,12 @@ public class RBTree<E extends Comparable<E>> {
         res.add(node.data); // Finally visit root node
     }
 
+    /**
+     * Get the minimum value in the Red-Black tree
+     *
+     * @return The minimum element
+     * @throws RuntimeException If the tree is empty
+     */
     public E minValue() {
         if (root == null) {
             throw new RuntimeException("tree is null");
