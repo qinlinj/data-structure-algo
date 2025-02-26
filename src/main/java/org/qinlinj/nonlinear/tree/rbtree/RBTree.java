@@ -15,24 +15,47 @@ import java.util.List;
  * 5. For each node, all paths from the node to its descendant leaves contain the same number of black nodes
  */
 public class RBTree<E extends Comparable<E>> {
+    // Color constants
     private static final boolean RED = true;
     private static final boolean BLACK = false;
+
+    // Root node and tree size
     private TreeNode root;
     private int size;
 
+    /**
+     * Constructor: Initialize an empty Red-Black tree
+     */
     public RBTree() {
         this.root = null;
         this.size = 0;
     }
 
+    /**
+     * Get the number of nodes in the tree
+     *
+     * @return Number of nodes
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Check if the tree is empty
+     *
+     * @return true if the tree is empty, false otherwise
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Check if a node is red
+     * In Red-Black trees, null nodes are considered black
+     *
+     * @param node The node to check
+     * @return true if the node is red, false otherwise
+     */
     private boolean isRED(TreeNode node) {
         if (node == null) {
             return BLACK;
