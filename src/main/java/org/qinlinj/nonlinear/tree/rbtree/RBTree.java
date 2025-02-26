@@ -457,6 +457,27 @@ public class RBTree<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * Make the left red child black, and make the left-left grandchild red
+     * This operation ensures we can safely delete a node
+     *
+     * @param node The node to process
+     * @return The processed node
+     */
+    private TreeNode moveRedLeft(TreeNode node) {
+        // Flip colors, borrow a red node
+        flipColors(node);
+
+        // If right child's left child is red, perform double rotation
+        if (isRED(node.right.left)) {
+            node.right = rightRotate(node.right);
+            node = leftRotate(node);
+            flipColors(node);
+        }
+
+        return node;
+    }
+    
     private class TreeNode {
         E data;
         TreeNode left;
