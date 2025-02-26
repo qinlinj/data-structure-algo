@@ -127,10 +127,17 @@ public class RBTree<E extends Comparable<E>> {
         return x;
     }
 
+    /**
+     * Add an element to the Red-Black tree
+     *
+     * @param e The element to add
+     */
     public void add(E e) {
         root = add(root, e);
+        // Maintain the root as black (property 2)
         root.color = BLACK;
     }
+
 
     private TreeNode add(TreeNode node, E e) {
         if (node == null) {
