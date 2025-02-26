@@ -498,6 +498,33 @@ public class RBTree<E extends Comparable<E>> {
         return node;
     }
 
+    /**
+     * Balance operation to restore Red-Black tree properties
+     *
+     * @param node The node to balance
+     * @return The balanced node
+     */
+    private TreeNode balance(TreeNode node) {
+        if (node == null) return null;
+
+        // If right child is red but left child is not, perform left rotation
+        if (isRED(node.right) && !isRED(node.left)) {
+            node = leftRotate(node);
+        }
+
+        // If left child and left-left grandchild are both red, perform right rotation
+        if (isRED(node.left) && isRED(node.left.left)) {
+            node = rightRotate(node);
+        }
+
+        // If both children are red, perform color flip
+        if (isRED(node.left) && isRED(node.right)) {
+            flipColors(node);
+        }
+
+        return node;
+    }
+
     private class TreeNode {
         E data;
         TreeNode left;
