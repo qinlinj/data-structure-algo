@@ -9,8 +9,35 @@ public class SplitArrayLargestSum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int splitArray(int[] nums, int k) {
+            int left = 0;
+            int right = 0;
+            for (int num : nums) {
+                left = Math.max(left, num);
+                right += num;
+            }
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (getSum(nums, k, mid)) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return left;
+        }
 
-            return 0;
+        private boolean getSum(int[] nums, int k, int mid) {
+            int count = 1;
+            int res = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (res + nums[i] > mid) {
+                    res = nums[i];
+                    count++;
+                } else {
+                    res += nums[i];
+                }
+            }
+            return count <= k;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
