@@ -10,31 +10,28 @@ public class NumberOfRecentCalls {
 //    }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
     class RecentCounter {
         Queue<Integer> queue;
-        int t;
 
         public RecentCounter() {
             this.queue = new LinkedList<>();
-            this.t = 0;
         }
 
         public int ping(int t) {
-            if (queue.isEmpty()) {
-                queue.offer(t);
-                this.t++;
-                return this.t;
-            }
-            while (!queue.isEmpty() && (t - queue.peek()) > 3000) {
-                queue.poll();
-                this.t--;
-            }
+            // Add the current timestamp
             queue.offer(t);
-            this.t++;
-            return this.t;
+
+            // Remove all timestamps that are outside the 3000ms window
+            while (!queue.isEmpty() && queue.peek() < t - 3000) {
+                queue.poll();
+            }
+
+            // Return the size of the queue, which represents the count of
+            // requests in the last 3000ms
+            return queue.size();
         }
     }
-
 
     /**
      * Your RecentCounter object will be instantiated and called as such:
@@ -43,7 +40,30 @@ public class NumberOfRecentCalls {
      */
 //leetcode submit region end(Prohibit modification and deletion)
     class solution0 {
+        class RecentCounter {
+            Queue<Integer> queue;
+            int t;
 
+            public RecentCounter() {
+                this.queue = new LinkedList<>();
+                this.t = 0;
+            }
+
+            public int ping(int t) {
+                if (queue.isEmpty()) {
+                    queue.offer(t);
+                    this.t++;
+                    return this.t;
+                }
+                while (!queue.isEmpty() && (t - queue.peek()) > 3000) {
+                    queue.poll();
+                    this.t--;
+                }
+                queue.offer(t);
+                this.t++;
+                return this.t;
+            }
+        }
     }
 }
 
