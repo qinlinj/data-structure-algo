@@ -345,6 +345,13 @@ public class RBTree<E extends Comparable<E>> {
         return maxValue(root).data;
     }
 
+    /**
+     * Find the node with maximum value in the specified subtree
+     * The maximum value is always at the rightmost node
+     *
+     * @param node The root of the current subtree
+     * @return The node containing the maximum value
+     */
     private TreeNode maxValue(TreeNode node) {
         if (node.right == null) return node;
         return maxValue(node.right);
