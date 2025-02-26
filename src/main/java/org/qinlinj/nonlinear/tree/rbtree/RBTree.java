@@ -90,6 +90,12 @@ public class RBTree<E extends Comparable<E>> {
         return x;
     }
 
+    /**
+     * Color flip operation
+     * When both children of a node are red, make the node red and children black
+     *
+     * @param node The node to flip colors
+     */
     private void flipColors(TreeNode node) {
         node.color = RED;
         node.left.color = BLACK;
