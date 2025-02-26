@@ -411,9 +411,26 @@ public class RBTree<E extends Comparable<E>> {
         return balance(node);
     }
 
+    /**
+     * Remove the maximum element from the Red-Black tree
+     *
+     * @return The removed maximum element
+     */
     public E removeMax() {
         E res = maxValue();
+
+        // If the root is a 2-node, make it a 3-node or 4-node
+        if (!isRED(root.left) && !isRED(root.right)) {
+            root.color = RED;
+        }
+
         root = removeMax(root);
+
+        // Maintain the root as black
+        if (root != null) {
+            root.color = BLACK;
+        }
+
         return res;
     }
 
