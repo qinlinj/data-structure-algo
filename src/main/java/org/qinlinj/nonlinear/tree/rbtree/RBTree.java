@@ -196,6 +196,12 @@ public class RBTree<E extends Comparable<E>> {
         return node != null;
     }
 
+    /**
+     * Find the node containing the target element
+     *
+     * @param target The target element
+     * @return The node containing the target element, or null if not found
+     */
     public TreeNode find(E target) {
         return find(root, target);
     }
