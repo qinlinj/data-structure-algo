@@ -382,18 +382,33 @@ public class RBTree<E extends Comparable<E>> {
         return res;
     }
 
+    /**
+     * Recursively remove the minimum node from the specified subtree
+     *
+     * @param node The root of the current subtree
+     * @return The root of the subtree after removing the minimum node
+     */
     private TreeNode removeMin(TreeNode node) {
+        // Found the minimum node (no left child)
         if (node.left == null) {
+            // Free the node and update count
             TreeNode rightNode = node.right;
             node.right = null;
             size--;
             return rightNode;
         }
 
-        TreeNode leftRoot = removeMin(node.left);
-        node.left = leftRoot;
+        // Ensure that the current node's left child or left grandchild is red
+        // This ensures we don't delete a black node that would break Red-Black properties
+        if (!isRED(node.left) && !isRED(node.left.left)) {
+            node = moveRedLeft(node);
+        }
 
-        return node;
+        // Continue finding and removing the minimum node in the left subtree
+        node.left = removeMin(node.left);
+
+        // Restore Red-Black tree properties
+        return balance(node);
     }
 
     public E removeMax() {
