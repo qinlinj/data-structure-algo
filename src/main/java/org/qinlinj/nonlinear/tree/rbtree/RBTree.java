@@ -467,8 +467,27 @@ public class RBTree<E extends Comparable<E>> {
         return balance(node);
     }
 
+    /**
+     * Remove a specific element from the Red-Black tree
+     *
+     * @param e The element to remove
+     */
     public void remove(E e) {
+        if (!contains(e)) {
+            return;  // If the element doesn't exist, return directly
+        }
+
+        // If the root is a 2-node, make it a 3-node or 4-node
+        if (!isRED(root.left) && !isRED(root.right)) {
+            root.color = RED;
+        }
+
         root = remove(root, e);
+
+        // Maintain the root as black
+        if (root != null) {
+            root.color = BLACK;
+        }
     }
 
     /**
