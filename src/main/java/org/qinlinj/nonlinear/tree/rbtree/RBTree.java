@@ -332,6 +332,12 @@ public class RBTree<E extends Comparable<E>> {
         return minValue(node.left);
     }
 
+    /**
+     * Get the maximum value in the Red-Black tree
+     *
+     * @return The maximum element
+     * @throws RuntimeException If the tree is empty
+     */
     public E maxValue() {
         if (root == null) {
             throw new RuntimeException("tree is null");
