@@ -1,32 +1,47 @@
 package org.qinlinj.leetcode.editor.en;
-// [225] Implement Stack using Queues
-public class ImplementStackUsingQueues{
-    public static void main(String[] args) {
-        Solution solution = new ImplementStackUsingQueues().new Solution();
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
-class MyStack {
 
-    public MyStack() {
-        
+import java.util.LinkedList;
+import java.util.Queue;
+
+// [225] Implement Stack using Queues
+public class ImplementStackUsingQueues {
+    //    public static void main(String[] args) {
+//        Solution solution = new ImplementStackUsingQueues().new Solution();
+//    }
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class MyStack {
+        Queue<Integer> queue;
+        int topElem;
+
+        public MyStack() {
+            this.queue = new LinkedList<>();
+            this.topElem = 0;
+        }
+
+        public void push(int x) {
+            queue.offer(x);
+            topElem = x;
+        }
+
+        public int pop() {
+            int size = queue.size();
+            while (size > 2) {
+                queue.offer(queue.poll());
+                size--;
+            }
+            topElem = queue.peek();
+            queue.offer(queue.poll());
+            return queue.poll();
+        }
+
+        public int top() {
+            return topElem;
+        }
+
+        public boolean empty() {
+            return queue.isEmpty();
+        }
     }
-    
-    public void push(int x) {
-        
-    }
-    
-    public int pop() {
-        
-    }
-    
-    public int top() {
-        
-    }
-    
-    public boolean empty() {
-        
-    }
-}
 
 /**
  * Your MyStack object will be instantiated and called as such:
@@ -41,15 +56,7 @@ class MyStack {
 }
 
 
-
-
-
-
-
-
-
-
-//Implement a last-in-first-out (LIFO) stack using only two queues. The 
+//Implement a last-in-first-out (LIFO) stack using only two queues. The
 //implemented stack should support all the functions of a normal stack (push, top, pop, 
 //and empty). 
 //
