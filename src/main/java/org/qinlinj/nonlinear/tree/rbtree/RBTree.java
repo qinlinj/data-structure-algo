@@ -183,11 +183,17 @@ public class RBTree<E extends Comparable<E>> {
         return node;
     }
 
-    /************************* retrieve *******************************/
+    /************************* Retrieval Operations *******************************/
+
+    /**
+     * Check if the Red-Black tree contains the target element
+     *
+     * @param target The target element
+     * @return true if the element exists, false otherwise
+     */
     public boolean contains(E target) {
         TreeNode node = find(target);
-        if (node == null) return false;
-        return true;
+        return node != null;
     }
 
     public TreeNode find(E target) {
