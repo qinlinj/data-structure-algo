@@ -63,18 +63,27 @@ public class RBTree<E extends Comparable<E>> {
         return node.color;
     }
 
-    /************************* Insert *******************************/
-    //    node                    x
-    //    /  \                  /   \
-    //   T1   x     ------->  node  T3
-    //       / \              /  \
-    //      T2 T3            T1  T2
+    /************************* Insertion Operations *******************************/
+
+    /**
+     * Left rotation operation
+     * node                    x
+     * /  \                  /   \
+     * T1   x     ------->  node  T3
+     * / \              /  \
+     * T2 T3            T1  T2
+     *
+     * @param node The center node of rotation
+     * @return The new root node after rotation
+     */
     private TreeNode leftRotate(TreeNode node) {
         TreeNode x = node.right;
 
+        // Perform rotation
         node.right = x.left;
         x.left = node;
 
+        // Adjust colors
         x.color = node.color;
         node.color = RED;
 
