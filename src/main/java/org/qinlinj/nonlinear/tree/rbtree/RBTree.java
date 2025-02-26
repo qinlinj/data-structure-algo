@@ -252,22 +252,32 @@ public class RBTree<E extends Comparable<E>> {
         preOrder(node.right, res); // Finally traverse right subtree
     }
 
+    /**
+     * In-order traversal: Left-Root-Right
+     * The result of in-order traversal is sorted
+     *
+     * @return List containing the in-order traversal result
+     */
     public List<E> inOrder() {
         List<E> res = new ArrayList<>();
-
         inOrder(root, res);
-
         return res;
     }
 
+    /**
+     * Recursively perform in-order traversal
+     *
+     * @param node The current node
+     * @param res  The list to store the traversal result
+     */
     private void inOrder(TreeNode node, List<E> res) {
         if (node == null) {
             return;
         }
 
-        inOrder(node.left, res);
-        res.add(node.data);
-        inOrder(node.right, res);
+        inOrder(node.left, res); // Traverse left subtree first
+        res.add(node.data); // Then visit root node
+        inOrder(node.right, res); // Finally traverse right subtree
     }
 
     public List<E> postOrder() {
