@@ -525,16 +525,24 @@ public class RBTree<E extends Comparable<E>> {
         return node;
     }
 
+    /**
+     * Red-Black Tree Node inner class
+     */
     private class TreeNode {
-        E data;
-        TreeNode left;
-        TreeNode right;
-        boolean color;
+        E data;              // Data stored in the node
+        TreeNode left;       // Left child
+        TreeNode right;      // Right child
+        boolean color;       // Node color
 
+        /**
+         * Constructor: Create a new node
+         * New nodes are red by default (satisfies property 5, doesn't increase black height)
+         *
+         * @param data Node data
+         */
         public TreeNode(E data) {
             this.data = data;
             this.color = RED;
         }
     }
-
 }
