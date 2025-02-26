@@ -471,41 +471,65 @@ public class RBTree<E extends Comparable<E>> {
         root = remove(root, e);
     }
 
+    /**
+     * Recursively remove a specific element from the specified subtree
+     *
+     * @param node The root of the current subtree
+     * @param e    The element to remove
+     * @return The root of the subtree after removing the element
+     */
     private TreeNode remove(TreeNode node, E e) {
         if (node == null) return null;
 
+        // Target element is less than current node, continue in left subtree
         if (e.compareTo(node.data) < 0) {
+            // Ensure left child or its child is red, for safe deletion
+            if (!isRED(node.left) && !isRED(node.left.left)) {
+                node = moveRedLeft(node);
+            }
             node.left = remove(node.left, e);
-            return node;
-        } else if (e.compareTo(node.data) > 0) {
-            node.right = remove(node.right, e);
-            return node;
-        } else {
-
-            if (node.left == null) {
-                TreeNode rightNode = node.right;
-                node.right = null;
-                size--;
-                return rightNode;
+        }
+        // Target element is greater than or equal to current node
+        else {
+            // If left child is red, perform right rotation
+            if (isRED(node.left)) {
+                node = rightRotate(node);
             }
 
-            if (node.right == null) {
+            // If found target element and it's a leaf node, delete directly
+            if (e.compareTo(node.data) == 0 && node.right == null) {
                 TreeNode leftNode = node.left;
                 node.left = null;
                 size--;
                 return leftNode;
             }
 
-            TreeNode successor = minValue(node.right);
+            // If target element is greater than current node, or need to find successor in right subtree
+            if (e.compareTo(node.data) > 0 ||
+                    (e.compareTo(node.data) == 0 && node.right != null)) {
 
-            successor.right = removeMin(node.right);
-            successor.left = node.left;
+                // Ensure right child or its child is red, for safe deletion
+                if (!isRED(node.right) && !isRED(node.right.left)) {
+                    node = moveRedRight(node);
+                }
 
-            node.left = null;
-            node.right = null;
-            size--;
-            return successor;
+                // If found target element
+                if (e.compareTo(node.data) == 0) {
+                    // Find successor node (minimum node in right subtree)
+                    TreeNode successor = minValue(node.right);
+                    // Replace current node's value with successor's value
+                    node.data = successor.data;
+                    // Delete successor node
+                    node.right = removeMin(node.right);
+                } else {
+                    // Continue searching in right subtree
+                    node.right = remove(node.right, e);
+                }
+            }
         }
+
+        // Restore Red-Black tree properties
+        return balance(node);
     }
 
     /**
