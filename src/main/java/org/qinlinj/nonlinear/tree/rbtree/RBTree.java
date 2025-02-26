@@ -181,6 +181,7 @@ public class RBTree<E extends Comparable<E>> {
         }
 
         return node;
+//        return balance(node);
     }
 
     /************************* Retrieval Operations *******************************/
