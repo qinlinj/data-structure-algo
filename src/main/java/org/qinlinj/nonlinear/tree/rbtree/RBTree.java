@@ -206,6 +206,13 @@ public class RBTree<E extends Comparable<E>> {
         return find(root, target);
     }
 
+    /**
+     * Recursively find the target element in the specified subtree
+     *
+     * @param node   The root of the current subtree
+     * @param target The target element
+     * @return The node containing the target element, or null if not found
+     */
     private TreeNode find(TreeNode node, E target) {
         if (node == null) return null;
 
