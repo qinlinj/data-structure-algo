@@ -52,10 +52,18 @@ public class MaxHeap<E extends Comparable<E>> {
         return data.isEmpty();
     }
 
+    /**
+     * Calculates the index of the left child for a node at the given index
+     * For a node at index i, its left child is at 2i + 1
+     */
     private int leftChild(int index) {
         return index * 2 + 1;
     }
 
+    /**
+     * Calculates the index of the right child for a node at the given index
+     * For a node at index i, its right child is at 2i + 2
+     */
     private int rightChild(int index) {
         return index * 2 + 2;
     }
