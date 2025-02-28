@@ -153,22 +153,35 @@ public class MaxHeap<E extends Comparable<E>> {
         return max;
     }
 
+    /**
+     * Moves an element down the heap until it reaches its correct position
+     * Used after removing the max element or during heapify
+     */
     private void siftDown(int index) {
+        // Save the element to be sifted down
         E e = data.get(index);
+        // Continue until reaching a leaf node
         while (leftChild(index) < data.getSize()) {
+            // Initially assume left child is larger
             int maxNodeIndex = leftChild(index);
+            // Check if right child exists and is larger than left child
             if (rightChild(index) < data.getSize()) {
                 if (data.get(rightChild(index)).compareTo(data.get(leftChild(index))) > 0) {
+                    // If right child is larger, update maxNodeIndex
                     maxNodeIndex = rightChild(index);
                 }
             }
 
+            // If element is not smaller than largest child, we've found its position
             if (e.compareTo(data.get(maxNodeIndex)) >= 0) break;
 
+            // Move larger child up
             data.set(index, data.get(maxNodeIndex));
 
+            // Move down to larger child's position
             index = maxNodeIndex;
         }
+        // Place element at its final position
         data.set(index, e);
     }
 }
