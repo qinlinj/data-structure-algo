@@ -97,18 +97,29 @@ public class MaxHeap<E extends Comparable<E>> {
         siftUp(data.getSize() - 1);
     }
 
+    /**
+     * Moves an element up the heap until it's in the correct position
+     * This ensures the max-heap property where parent > children
+     */
     private void siftUp(int index) {
+        // Save the element to be sifted up
         E e = data.get(index);
 
+        // Continue until reaching root or finding correct position
         while (index > 0) {
+            // Get parent element
             E parentNode = data.get(parent(index));
 
+            // If element is not greater than parent, we've found its position
             if (e.compareTo(parentNode) <= 0) break;
 
+            // Move parent down to current position
             data.set(index, parentNode);
 
+            // Move up to parent position
             index = parent(index);
         }
+        // Place element at its final position
         data.set(index, e);
     }
 
