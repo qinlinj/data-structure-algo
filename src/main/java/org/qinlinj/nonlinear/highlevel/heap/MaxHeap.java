@@ -79,6 +79,10 @@ public class MaxHeap<E extends Comparable<E>> {
         return (index - 1) / 2;
     }
 
+    /**
+     * Returns the index of the last non-leaf node in the heap
+     * This is the parent of the last element in the array
+     */
     private int lastNonLeafIndex() {
         int lastLeafIndex = data.getSize() - 1;
         return parent(lastLeafIndex);
