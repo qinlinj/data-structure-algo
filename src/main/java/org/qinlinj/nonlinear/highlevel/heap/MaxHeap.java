@@ -35,4 +35,9 @@ public class MaxHeap<E extends Comparable<E>> {
         }
         return (index - 1) / 2;
     }
+
+    private int lastNonLeafIndex() {
+        int lastLeafIndex = data.getSize() - 1;
+        return parent(lastLeafIndex);
+    }
 }
