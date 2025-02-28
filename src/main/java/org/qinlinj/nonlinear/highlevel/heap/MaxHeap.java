@@ -66,4 +66,23 @@ public class MaxHeap<E extends Comparable<E>> {
             throw new RuntimeException("Heap is Empty");
         return data.getFirst();
     }
+
+    private void siftDown(int index) {
+        E e = data.get(index);
+        while (leftChild(index) < data.getSize()) {
+            int maxNodeIndex = leftChild(index);
+            if (rightChild(index) < data.getSize()) {
+                if (data.get(rightChild(index)).compareTo(data.get(leftChild(index))) > 0) {
+                    maxNodeIndex = rightChild(index);
+                }
+            }
+
+            if (e.compareTo(data.get(maxNodeIndex)) >= 0) break;
+
+            data.set(index, data.get(maxNodeIndex));
+
+            index = maxNodeIndex;
+        }
+        data.set(index, e);
+    }
 }
