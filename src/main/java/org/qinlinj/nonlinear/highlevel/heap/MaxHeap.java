@@ -123,6 +123,9 @@ public class MaxHeap<E extends Comparable<E>> {
         data.set(index, e);
     }
 
+    /**
+     * Returns the maximum element in the heap (the root) without removing it
+     */
     public E findMax() {
         if (data.getSize() == 0)
             throw new RuntimeException("Heap is Empty");
