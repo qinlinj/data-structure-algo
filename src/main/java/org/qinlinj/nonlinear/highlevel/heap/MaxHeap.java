@@ -9,12 +9,19 @@ import org.qinlinj.linear.arraylist.ArrayList;
  * @param <E> The type of elements stored in the heap, must be comparable
  */
 public class MaxHeap<E extends Comparable<E>> {
+    // The underlying data structure to store heap elements
     private ArrayList<E> data;
 
+    /**
+     * Constructs a max heap with specified initial capacity
+     */
     public MaxHeap(int capacity) {
         this.data = new ArrayList<>(capacity);
     }
 
+    /**
+     * Constructs an empty max heap with default capacity
+     */
     public MaxHeap() {
         this.data = new ArrayList<>();
     }
