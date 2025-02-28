@@ -1,6 +1,6 @@
 package org.qinlinj.nonlinear.highlevel.heap;
 
-import java.util.ArrayList;
+import org.qinlinj.linear.arraylist.ArrayList;
 
 public class MaxHeap<E extends Comparable<E>> {
     private ArrayList<E> data;
@@ -11,5 +11,13 @@ public class MaxHeap<E extends Comparable<E>> {
 
     public MaxHeap() {
         this.data = new ArrayList<>();
+    }
+
+    public int size() {
+        return data.getSize();
+    }
+
+    public boolean isEmpty() {
+        return data.isEmpty();
     }
 }
