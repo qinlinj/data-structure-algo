@@ -38,10 +38,16 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * Returns the number of elements in the heap
+     */
     public int size() {
         return data.getSize();
     }
 
+    /**
+     * Checks if the heap is empty
+     */
     public boolean isEmpty() {
         return data.isEmpty();
     }
