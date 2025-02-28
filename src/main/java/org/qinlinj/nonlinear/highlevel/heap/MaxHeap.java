@@ -60,4 +60,10 @@ public class MaxHeap<E extends Comparable<E>> {
         }
         data.set(index, e);
     }
+
+    public E findMax() {
+        if (data.getSize() == 0)
+            throw new RuntimeException("Heap is Empty");
+        return data.getFirst();
+    }
 }
