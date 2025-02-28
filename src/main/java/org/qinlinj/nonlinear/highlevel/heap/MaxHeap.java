@@ -41,6 +41,11 @@ public class MaxHeap<E extends Comparable<E>> {
         return parent(lastLeafIndex);
     }
 
+    public void add(E e) {
+        data.addLast(e);
+        siftUp(data.getSize() - 1);
+    }
+
     private void siftUp(int index) {
         E e = data.get(index);
 
@@ -50,7 +55,7 @@ public class MaxHeap<E extends Comparable<E>> {
             if (e.compareTo(parentNode) <= 0) break;
 
             data.set(index, parentNode);
-            
+
             index = parent(index);
         }
         data.set(index, e);
