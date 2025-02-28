@@ -2,6 +2,12 @@ package org.qinlinj.nonlinear.highlevel.heap;
 
 import org.qinlinj.linear.arraylist.ArrayList;
 
+/**
+ * A generic Max Heap implementation where each parent node is greater than or equal to its children.
+ * This heap is implemented using an ArrayList as the underlying data structure.
+ *
+ * @param <E> The type of elements stored in the heap, must be comparable
+ */
 public class MaxHeap<E extends Comparable<E>> {
     private ArrayList<E> data;
 
