@@ -40,4 +40,19 @@ public class MaxHeap<E extends Comparable<E>> {
         int lastLeafIndex = data.getSize() - 1;
         return parent(lastLeafIndex);
     }
+
+    private void siftUp(int index) {
+        E e = data.get(index);
+
+        while (index > 0) {
+            E parentNode = data.get(parent(index));
+
+            if (e.compareTo(parentNode) <= 0) break;
+
+            data.set(index, parentNode);
+            
+            index = parent(index);
+        }
+        data.set(index, e);
+    }
 }
