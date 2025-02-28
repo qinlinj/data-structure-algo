@@ -8,4 +8,8 @@ public class MaxHeap<E extends Comparable<E>> {
     public MaxHeap(int capacity) {
         this.data = new ArrayList<>(capacity);
     }
+
+    public MaxHeap() {
+        this.data = new ArrayList<>();
+    }
 }
