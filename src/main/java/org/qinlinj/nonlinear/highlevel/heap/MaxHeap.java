@@ -67,6 +67,18 @@ public class MaxHeap<E extends Comparable<E>> {
         return data.getFirst();
     }
 
+    public E removeMax() {
+        E max = findMax();
+        E last = data.getLast();
+        data.set(0, last);
+
+        data.removeLast();
+
+        if (!data.isEmpty()) siftDown(0);
+
+        return max;
+    }
+
     private void siftDown(int index) {
         E e = data.get(index);
         while (leftChild(index) < data.getSize()) {
