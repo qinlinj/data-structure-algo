@@ -13,6 +13,14 @@ public class MaxHeap<E extends Comparable<E>> {
         this.data = new ArrayList<>();
     }
 
+    public MaxHeap(E[] arr) {
+        this.data = new ArrayList<>(arr);
+        // O(n)
+        for (int i = lastNonLeafIndex(); i >= 0; i--) { // O(n)
+            siftDown(i); // O(logn)
+        }
+    }
+
     public int size() {
         return data.getSize();
     }
