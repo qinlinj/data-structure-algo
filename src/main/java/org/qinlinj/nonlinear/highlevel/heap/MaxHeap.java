@@ -132,13 +132,22 @@ public class MaxHeap<E extends Comparable<E>> {
         return data.getFirst();
     }
 
+    /**
+     * Removes and returns the maximum element from the heap
+     * The last element is moved to the root, then sifted down to maintain heap property
+     */
     public E removeMax() {
+        // Get the maximum element (root)
         E max = findMax();
+        // Get the last element
         E last = data.getLast();
+        // Replace root with last element
         data.set(0, last);
 
+        // Remove the last element (now duplicated at root)
         data.removeLast();
 
+        // If heap isn't empty, restore heap property by sifting down the new root
         if (!data.isEmpty()) siftDown(0);
 
         return max;
