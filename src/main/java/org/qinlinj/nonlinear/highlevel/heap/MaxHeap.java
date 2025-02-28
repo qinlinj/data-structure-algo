@@ -26,9 +26,13 @@ public class MaxHeap<E extends Comparable<E>> {
         this.data = new ArrayList<>();
     }
 
+    /**
+     * Constructs a max heap from an array using heapify process
+     * Time complexity: O(n) - more efficient than adding elements one by one O(n log n)
+     */
     public MaxHeap(E[] arr) {
         this.data = new ArrayList<>(arr);
-        // O(n)
+        // Heapify process - start from the last non-leaf node and sift down each node
         for (int i = lastNonLeafIndex(); i >= 0; i--) { // O(n)
             siftDown(i); // O(logn)
         }
