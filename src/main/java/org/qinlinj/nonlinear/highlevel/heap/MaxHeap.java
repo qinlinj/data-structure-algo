@@ -88,6 +88,10 @@ public class MaxHeap<E extends Comparable<E>> {
         return parent(lastLeafIndex);
     }
 
+    /**
+     * Adds a new element to the heap
+     * The element is first added to the end, then sifted up to maintain the heap property
+     */
     public void add(E e) {
         data.addLast(e);
         siftUp(data.getSize() - 1);
