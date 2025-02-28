@@ -28,4 +28,11 @@ public class MaxHeap<E extends Comparable<E>> {
     private int rightChild(int index) {
         return index * 2 + 2;
     }
+
+    private int parent(int index) {
+        if (index == 0) {
+            throw new IllegalArgumentException("index-0 does not have parent");
+        }
+        return (index - 1) / 2;
+    }
 }
