@@ -48,8 +48,28 @@ public class CountCompleteTreeNodes {
             return countNodes(root.left) + countNodes(root.right) + 1;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
+    //leetcode submit region end(Prohibit modification and deletion)
+    class Solution1 {
+        public int countNodes(TreeNode root) {
+            TreeNode lc = root;
+            TreeNode rc = root;
+            int left = 0;
+            int right = 0;
+            while (lc != null) {
+                lc = lc.left;
+                left++;
+            }
+            while (rc != null) {
+                rc = rc.right;
+                right++;
+            }
+            if (left == right) {
+                return (int) (Math.pow(2, left)) - 1;
+            }
+            return countNodes(root.left) + countNodes(root.right) + 1;
+        }
+    }
 }
 
 
