@@ -68,6 +68,10 @@ public class MaxHeap<E extends Comparable<E>> {
         return index * 2 + 2;
     }
 
+    /**
+     * Calculates the index of the parent for a node at the given index
+     * For a node at index i, its parent is at (i-1)/2
+     */
     private int parent(int index) {
         if (index == 0) {
             throw new IllegalArgumentException("index-0 does not have parent");
