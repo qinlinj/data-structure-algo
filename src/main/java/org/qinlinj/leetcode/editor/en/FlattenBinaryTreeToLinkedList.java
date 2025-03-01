@@ -1,5 +1,7 @@
 package org.qinlinj.leetcode.editor.en;
 
+import org.qinlinj.nonlinear.tree.binarysearchtree.TreeNode;
+
 // [114] Flatten Binary Tree to Linked List
 public class FlattenBinaryTreeToLinkedList {
     public static void main(String[] args) {
@@ -24,7 +26,26 @@ public class FlattenBinaryTreeToLinkedList {
      */
     class Solution {
         public void flatten(TreeNode root) {
+            childrenFlatten(root);
+        }
 
+        public void childrenFlatten(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+
+            childrenFlatten(root.left);
+            childrenFlatten(root.right);
+            TreeNode left = root.left;
+            TreeNode right = root.right;
+            root.left = null;
+            root.right = left;
+
+            TreeNode p = root;
+            while (p.right != null) {
+                p = p.right;
+            }
+            p.right = right;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
