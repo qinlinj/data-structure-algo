@@ -6,9 +6,6 @@ public class LinkedListSet<E> implements Set<E> {
     private LinkedList<E> data;
 
     public LinkedListSet() {
-    }
-
-    public LinkedListSet() {
         this.data = new LinkedList<>();
     }
 
@@ -37,5 +34,12 @@ public class LinkedListSet<E> implements Set<E> {
     @Override
     public boolean contains(E e) { // O(n)
         return data.contains(e);
+    }
+
+    @Override
+    public String toString() {
+        return "LinkedListSet{" +
+                "data=" + data.toString() +
+                '}';
     }
 }
