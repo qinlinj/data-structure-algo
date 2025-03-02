@@ -1,7 +1,12 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
-public class BSTSet implements Set {
+import org.qinlinj.nonlinear.tree.binarysearchtree.BinarySearchTree;
+
+public class BSTSet<E extends Comparable<E>> implements Set<E> {
+    private BinarySearchTree<E> bst;
+
     public BSTSet() {
+        this.bst = new BinarySearchTree<>();
     }
 
     @Override
