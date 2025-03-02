@@ -1,6 +1,9 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
 public class BSTSet implements Set {
+    public BSTSet() {
+    }
+
     @Override
     public int size() {
         return 0;
