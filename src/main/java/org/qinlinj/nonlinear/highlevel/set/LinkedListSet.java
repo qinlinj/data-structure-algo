@@ -8,28 +8,34 @@ public class LinkedListSet<E> implements Set<E> {
     public LinkedListSet() {
     }
 
+    public LinkedListSet() {
+        this.data = new LinkedList<>();
+    }
+
     @Override
     public int size() {
-        return 0;
+        return data.getSize();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return data.isEmpty();
     }
 
     @Override
-    public void add(Object o) {
-
+    public void add(E e) { // O(n)
+        if (!data.contains(e)) {
+            data.addFirst(e);
+        }
     }
 
     @Override
-    public void remove(Object o) {
-
+    public void remove(E e) { // O(n)
+        data.removeElement(e);
     }
 
     @Override
-    public boolean contains(Object o) {
-        return false;
+    public boolean contains(E e) { // O(n)
+        return data.contains(e);
     }
 }
