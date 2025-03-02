@@ -1,6 +1,10 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
-public class LinkedListSet implements Set {
+import org.qinlinj.linear.linkedlist.LinkedList;
+
+public class LinkedListSet<E> implements Set<E> {
+    private LinkedList<E> data;
+
     public LinkedListSet() {
     }
 
