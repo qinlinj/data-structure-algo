@@ -11,6 +11,16 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
         this.bst = new BinarySearchTree<>();
     }
 
+    public static void main(String[] args) {
+        BSTSet<Integer> set = new BSTSet<>();
+        set.add(2);
+        set.add(1);
+        set.add(9);
+        set.add(5);
+        set.add(2);
+        System.out.println(set.getAllElements());
+    }
+
     @Override
     public int size() {
         return bst.getSize();
