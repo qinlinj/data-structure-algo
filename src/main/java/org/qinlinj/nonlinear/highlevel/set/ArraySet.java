@@ -35,4 +35,11 @@ public class ArraySet<E> implements Set<E> {
     public boolean contains(E e) { // O(n)
         return data.contains(e);
     }
+
+    @Override
+    public String toString() {
+        return "ArraySet{" +
+                "data=" + data.toString() +
+                '}';
+    }
 }
