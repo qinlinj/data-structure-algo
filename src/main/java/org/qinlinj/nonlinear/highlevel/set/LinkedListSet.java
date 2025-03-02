@@ -9,6 +9,23 @@ public class LinkedListSet<E> implements Set<E> {
         this.data = new LinkedList<>();
     }
 
+    public static void main(String[] args) {
+        Set<Integer> set = new LinkedListSet<>();
+        set.add(2);
+        set.add(4);
+        set.add(1);
+
+        System.out.println(set);
+
+        set.add(2);
+        System.out.println(set);
+
+        System.out.println(set.contains(4));
+
+        set.remove(1);
+        System.out.println(set);
+    }
+
     @Override
     public int size() {
         return data.getSize();
