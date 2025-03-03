@@ -19,28 +19,33 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
         return size == 0;
     }
 
-    public int hash(E e) {
-        return Math.abs(e.hashCode());
+    public int hash(E e, int length) {
+        return Math.abs(e.hashCode()) % length;
     }
 
     @Override
     public void add(E e) {
-        int index = e.hashCode();
-        while (items[index] != null && !items[index].isDeleted) {
-            if (items[index].data.equals(e)) {
-                return;
-            }
-            index = (index + 1) % items.length;
+        int index = hash(e, items.length);
+        while (items[index] != null) {
+            if (!items[index].isDeleted && e.equals(items[index].data)) return;
+            index++;
+            index = index % items.length;
         }
-        while (items[index] != null || !items[index].isDeleted) {
-            items[index].data = e;
-        }
-
+        items[index] = new Item(e);
+        size++;
     }
 
     @Override
     public void remove(E e) {
-
+        int index = hash(e, items.length);
+        while (items[index] != null && (!e.equals(items[index].data) || !items[index].isDeleted)) {
+            index++;
+            index = index % items.length;
+        }
+        if (items[index] != null && !items[index].isDeleted) {
+            items[index].isDeleted = true;
+            size--;
+        }
     }
 
     @Override
