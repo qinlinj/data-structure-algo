@@ -48,8 +48,12 @@ public class HashSetSimple<E> implements Set<E> {
     }
 
     @Override
-    public void remove(E e) {
-
+    public void remove(E e) { // O(1)
+        int index = hash(e, data.length);
+        if (data[index] != null) {
+            data[index] = null;
+            size--;
+        }
     }
 
     @Override
