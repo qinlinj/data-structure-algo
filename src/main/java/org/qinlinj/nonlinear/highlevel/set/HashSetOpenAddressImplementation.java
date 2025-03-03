@@ -1,12 +1,20 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
 public class HashSetOpenAddressImplementation<E> implements Set<E> {
-    Item[] items;
-    int size;
+    private Item<E>[] items;
+    private int size;
+    private int deleteCount;
+    private double loadFactor = 0.75;
 
     public HashSetOpenAddressImplementation() {
         this.items = new Item[10];
         this.size = 0;
+        this.deleteCount = 0;
+    }
+
+    public HashSetOpenAddressImplementation(int loadFactor) {
+        this();
+        this.loadFactor = loadFactor;
     }
 
     @Override
