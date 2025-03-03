@@ -8,7 +8,7 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         this.size = 0;
         this.items = new Node[10];
     }
-    
+
     @Override
     public int size() {
         return size;
@@ -40,12 +40,21 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         return false;
     }
 
-    class Node<E> {
-        E data;
+    private class Node<E> {
+        E e;
         Node next;
 
-        public Node(E data) {
-            this.data = data;
+        public Node(E e, Node next) {
+            this.e = e;
+            this.next = next;
+        }
+
+        public Node(E e) {
+            this(e, null);
+        }
+
+        public Node() {
+            this(null, null);
         }
     }
 }
