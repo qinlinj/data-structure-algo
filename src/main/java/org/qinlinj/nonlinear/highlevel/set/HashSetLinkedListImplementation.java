@@ -196,10 +196,21 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         }
     }
 
+    /**
+     * Checks if an element exists in the set.
+     *
+     * @param e element to search for
+     * @return true if element is in the set, false otherwise
+     */
     @Override
     public boolean contains(E e) {
+        // Calculate hash index
         int index = hash(e, data.length);
+
+        // If no elements at this index, return false
         if (data[index] == null) return false;
+
+        // Traverse the linked list
         Node<E> curr = data[index];
         while (curr != null) {
             if (e.equals(curr.e)) {
@@ -207,6 +218,7 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
             }
             curr = curr.next;
         }
+
         return false;
     }
 
