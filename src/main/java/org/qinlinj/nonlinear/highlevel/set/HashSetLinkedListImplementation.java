@@ -3,10 +3,16 @@ package org.qinlinj.nonlinear.highlevel.set;
 public class HashSetLinkedListImplementation<E> implements Set<E> {
     private Node<E>[] data;
     private int size;
+    private double loadFactor = 0.75;
 
     public HashSetLinkedListImplementation() {
         this.size = 0;
         this.data = new Node[10];
+    }
+
+    public HashSetLinkedListImplementation(int loadFactor) {
+        this();
+        this.loadFactor = loadFactor;
     }
 
     @Override
@@ -27,7 +33,6 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
 
     @Override
     public void add(E e) {
-        int index = hash(e, data.length);
         int index = hash(e, data.length);
         if (data[index] == null) {
             data[index] = new Node(e);
