@@ -1,5 +1,15 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
+/**
+ * Hash Set implementation using Separate Chaining (Linked List).
+ * <p>
+ * Key Characteristics:
+ * - Uses an array of linked lists to handle hash collisions
+ * - Supports dynamic resizing based on load factor
+ * - Provides efficient insertion, deletion, and lookup operations
+ *
+ * @param <E> the type of elements in the set
+ */
 public class HashSetLinkedListImplementation<E> implements Set<E> {
     private Node<E>[] data;
     private int size;
