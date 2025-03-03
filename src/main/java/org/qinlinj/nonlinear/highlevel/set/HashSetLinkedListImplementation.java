@@ -11,15 +11,29 @@ package org.qinlinj.nonlinear.highlevel.set;
  * @param <E> the type of elements in the set
  */
 public class HashSetLinkedListImplementation<E> implements Set<E> {
+    // Array of linked list nodes to store elements
     private Node<E>[] data;
+
+    // Number of elements in the set
     private int size;
+
+    // Threshold for resizing the hash set
     private double loadFactor = 0.75;
 
+    /**
+     * Default constructor initializes the hash set with a default capacity.
+     */
     public HashSetLinkedListImplementation() {
+        // Initial capacity of 10, can grow dynamically
         this.size = 0;
         this.data = new Node[10];
     }
 
+    /**
+     * Constructor that allows custom load factor.
+     *
+     * @param loadFactor threshold for resizing the hash set
+     */
     public HashSetLinkedListImplementation(int loadFactor) {
         this();
         this.loadFactor = loadFactor;
