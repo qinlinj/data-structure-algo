@@ -47,7 +47,26 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
 
     @Override
     public void remove(E e) {
-
+        int index = hash(e, data.length);
+        if (data[index] == null) {
+            return;
+        }
+        Node<E> prev = null;
+        Node<E> curr = data[index];
+        while (curr != null) {
+            if (e.equals(curr.e)) {
+                if (prev == null) {
+                    data[index] = curr.next;
+                } else {
+                    prev.next = curr.next;
+                }
+                curr.next = null;
+                size--;
+                break;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
     }
 
     @Override
