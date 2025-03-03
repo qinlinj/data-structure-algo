@@ -70,7 +70,7 @@ public class SetLinkedListImplementation<E> implements Set<E> {
     @Override
     public String toString() {
         return "SetLinkedListImplementation{" +
-                "data=" + data.toString() +
+                "items=" + data.toString() +
                 '}';
     }
 }

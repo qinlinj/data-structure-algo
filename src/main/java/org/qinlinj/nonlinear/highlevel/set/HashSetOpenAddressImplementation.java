@@ -1,10 +1,11 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
 public class HashSetOpenAddressImplementation<E> implements Set<E> {
-    Item[] data;
+    Item[] items;
     int size;
+
     public HashSetOpenAddressImplementation() {
-        this.data = new Item[10];
+        this.items = new Item[10];
         this.size = 0;
     }
 
@@ -25,9 +26,16 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
     @Override
     public void add(E e) {
         int index = e.hashCode();
-        while (data[index] != null) {
-
+        while (items[index] != null && !items[index].isDeleted) {
+            if (items[index].data.equals(e)) {
+                return;
+            }
+            index = (index + 1) % items.length;
         }
+        while (items[index] != null || !items[index].isDeleted) {
+            items[index].data = e;
+        }
+
     }
 
     @Override
