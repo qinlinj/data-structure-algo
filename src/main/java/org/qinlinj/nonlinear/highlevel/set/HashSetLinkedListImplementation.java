@@ -83,7 +83,7 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
      *
      * @param e element to add
      */
-    
+
     @Override
     public void add(E e) {
         // Calculate hash index
@@ -118,21 +118,39 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         }
     }
 
+
+    /**
+     * Resizes the internal array and rehashes all elements.
+     *
+     * @param newCapacity new size of the internal array
+     */
     private void resize(int newCapacity) {
+        // Create new array with increased capacity
         Node[] newData = new Node[newCapacity];
+
+        // Rehash all existing elements
         for (int i = 0; i < data.length; i++) {
             Node<E> curr = data[i];
+
+            // Traverse each linked list
             while (curr != null) {
                 E e = curr.e;
+
+                // Recalculate hash for new array size
                 int newIndex = hash(e, newCapacity);
+
+                // Prepend to new linked list
                 Node head = newData[newIndex];
                 newData[newIndex] = new Node(e);
                 if (head != null) {
                     newData[newIndex].next = head;
                 }
+
                 curr = curr.next;
             }
         }
+
+        // Update internal array
         data = newData;
     }
 
