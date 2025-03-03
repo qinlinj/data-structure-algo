@@ -83,7 +83,6 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
      *
      * @param e element to add
      */
-
     @Override
     public void add(E e) {
         // Calculate hash index
@@ -154,21 +153,40 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         data = newData;
     }
 
+    /**
+     * Removes an element from the set.
+     * <p>
+     * Handles removal by:
+     * - Finding the correct linked list
+     * - Removing the element from the list
+     *
+     * @param e element to remove
+     */
     @Override
     public void remove(E e) {
+        // Calculate hash index
         int index = hash(e, data.length);
+
+        // If no elements at this index, return
         if (data[index] == null) {
             return;
         }
+
+        // Traverse the linked list
         Node<E> prev = null;
         Node<E> curr = data[index];
+
         while (curr != null) {
             if (e.equals(curr.e)) {
+                // Remove from head of list
                 if (prev == null) {
                     data[index] = curr.next;
                 } else {
+                    // Remove from middle/end of list
                     prev.next = curr.next;
                 }
+
+                // Help garbage collection
                 curr.next = null;
                 size--;
                 break;
