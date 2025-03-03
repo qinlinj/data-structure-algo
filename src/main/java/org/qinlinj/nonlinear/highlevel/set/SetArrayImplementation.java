@@ -2,19 +2,19 @@ package org.qinlinj.nonlinear.highlevel.set;
 
 import org.qinlinj.linear.arraylist.ArrayList;
 
-public class ArraySet<E> implements Set<E> {
+public class SetArrayImplementation<E> implements Set<E> {
     // Internal ArrayList to store unique elements
     private ArrayList<E> data;
 
     // Constructor: Initialize empty ArrayList
-    public ArraySet() {
+    public SetArrayImplementation() {
         this.data = new ArrayList<>();
     }
 
-    // Main method to demonstrate ArraySet functionality
+    // Main method to demonstrate SetArrayImplementation functionality
     public static void main(String[] args) {
         // Create a new set and test its basic operations
-        Set<Integer> set = new ArraySet<>();
+        Set<Integer> set = new SetArrayImplementation<>();
         set.add(2);
         set.add(4);
         set.add(1);
@@ -69,7 +69,7 @@ public class ArraySet<E> implements Set<E> {
     // Custom toString method for set representation
     @Override
     public String toString() {
-        return "ArraySet{" +
+        return "SetArrayImplementation{" +
                 "data=" + data.toString() +
                 '}';
     }

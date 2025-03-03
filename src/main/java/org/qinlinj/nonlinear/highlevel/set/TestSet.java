@@ -26,15 +26,15 @@ public class TestSet {
         // Read words from a file
         List<String> words = TestFileReader.readFile("data/test-data.txt");
 
-        // Create an ArraySet and measure its performance
-        Set<String> arrSet = new ArraySet<>();
+        // Create an SetArrayImplementation and measure its performance
+        Set<String> arrSet = new SetArrayImplementation<>();
         double time1 = testSet(arrSet, words);
-        System.out.println("ArraySet: " + time1);
+        System.out.println("SetArrayImplementation: " + time1);
 
-        // Create a LinkedListSet and measure its performance
-        Set<String> linkedListSet = new LinkedListSet<>();
+        // Create a SetLinkedListImplementation and measure its performance
+        Set<String> linkedListSet = new SetLinkedListImplementation<>();
         double time2 = testSet(linkedListSet, words);
-        System.out.println("LinkedListSet: " + time2);
+        System.out.println("SetLinkedListImplementation: " + time2);
 
         // Performance Explanation:
         // Arrays are stored in a continuous block of memory

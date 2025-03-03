@@ -2,19 +2,19 @@ package org.qinlinj.nonlinear.highlevel.set;
 
 import org.qinlinj.linear.linkedlist.LinkedList;
 
-public class LinkedListSet<E> implements Set<E> {
+public class SetLinkedListImplementation<E> implements Set<E> {
     // Internal LinkedList to store unique elements
     private LinkedList<E> data;
 
     // Constructor: Initialize empty LinkedList
-    public LinkedListSet() {
+    public SetLinkedListImplementation() {
         this.data = new LinkedList<>();
     }
 
-    // Main method to demonstrate LinkedListSet functionality
+    // Main method to demonstrate SetLinkedListImplementation functionality
     public static void main(String[] args) {
         // Create a new set and test its basic operations
-        Set<Integer> set = new LinkedListSet<>();
+        Set<Integer> set = new SetLinkedListImplementation<>();
         set.add(2);
         set.add(4);
         set.add(1);
@@ -69,7 +69,7 @@ public class LinkedListSet<E> implements Set<E> {
     // Custom toString method for set representation
     @Override
     public String toString() {
-        return "LinkedListSet{" +
+        return "SetLinkedListImplementation{" +
                 "data=" + data.toString() +
                 '}';
     }

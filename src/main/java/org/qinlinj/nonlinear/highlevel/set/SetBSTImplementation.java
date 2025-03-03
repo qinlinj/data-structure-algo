@@ -4,19 +4,19 @@ import org.qinlinj.nonlinear.tree.binarysearchtree.BinarySearchTree;
 
 import java.util.List;
 
-public class BSTSet<E extends Comparable<E>> implements Set<E> {
+public class SetBSTImplementation<E extends Comparable<E>> implements Set<E> {
     // Internal Binary Search Tree to store unique elements
     private BinarySearchTree<E> bst;
 
     // Constructor: Initialize empty Binary Search Tree
-    public BSTSet() {
+    public SetBSTImplementation() {
         this.bst = new BinarySearchTree<>();
     }
 
-    // Main method to demonstrate BSTSet functionality
+    // Main method to demonstrate SetBSTImplementation functionality
     public static void main(String[] args) {
         // Create a new set and test its operations
-        BSTSet<Integer> set = new BSTSet<>();
+        SetBSTImplementation<Integer> set = new SetBSTImplementation<>();
         set.add(2);
         set.add(1);
         set.add(9);
