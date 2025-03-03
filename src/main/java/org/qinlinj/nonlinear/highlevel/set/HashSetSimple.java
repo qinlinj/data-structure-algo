@@ -57,7 +57,8 @@ public class HashSetSimple<E> implements Set<E> {
     }
 
     @Override
-    public boolean contains(E e) {
-        return false;
+    public boolean contains(E e) { // O(1)
+        int index = hash(e, data.length);
+        return data[index] != null;
     }
 }
