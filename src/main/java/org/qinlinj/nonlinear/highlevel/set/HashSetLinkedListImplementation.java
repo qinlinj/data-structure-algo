@@ -50,6 +50,24 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         }
     }
 
+    private void resize(int newCapacity) {
+        Node[] newData = new Node[newCapacity];
+        for (int i = 0; i < data.length; i++) {
+            Node<E> curr = data[i];
+            while (curr != null) {
+                E e = curr.e;
+                int newIndex = hash(e, newCapacity);
+                Node head = newData[newIndex];
+                newData[newIndex] = new Node(e);
+                if (head != null) {
+                    newData[newIndex].next = head;
+                }
+                curr = curr.next;
+            }
+        }
+        data = newData;
+    }
+
     @Override
     public void remove(E e) {
         int index = hash(e, data.length);
