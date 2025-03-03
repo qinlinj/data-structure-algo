@@ -71,6 +71,15 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
 
     @Override
     public boolean contains(E e) {
+        int index = hash(e, data.length);
+        if (data[index] == null) return false;
+        Node<E> curr = data[index];
+        while (curr != null) {
+            if (e.equals(curr.e)) {
+                return true;
+            }
+            curr = curr.next;
+        }
         return false;
     }
 
