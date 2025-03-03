@@ -24,7 +24,7 @@ public class TestSet {
 
     public static void main(String[] args) {
         // Read words from a file
-        List<String> words = TestFileReader.readFile("items/test-items.txt");
+        List<String> words = TestFileReader.readFile("data/test-data.txt");
 
         // Create an SetArrayImplementation and measure its performance
         Set<String> arrSet = new SetArrayImplementation<>();

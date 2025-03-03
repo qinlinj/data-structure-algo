@@ -70,7 +70,7 @@ public class SetArrayImplementation<E> implements Set<E> {
     @Override
     public String toString() {
         return "SetArrayImplementation{" +
-                "items=" + data.toString() +
+                "data=" + data.toString() +
                 '}';
     }
 }
