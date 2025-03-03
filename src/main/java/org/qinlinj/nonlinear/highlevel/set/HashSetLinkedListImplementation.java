@@ -39,16 +39,33 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         this.loadFactor = loadFactor;
     }
 
+    /**
+     * Returns the number of elements in the set.
+     *
+     * @return current size of the set
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Checks if the set is empty.
+     *
+     * @return true if set contains no elements, false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Generates a hash index for an element.
+     *
+     * @param e      element to hash
+     * @param length current array length
+     * @return hash index within array bounds
+     */
     public int hash(E e, int length) {
         // Use absolute value to handle negative hash codes
         // Ensure index is within array bounds
