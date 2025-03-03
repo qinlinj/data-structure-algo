@@ -72,23 +72,46 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         return Math.abs(e.hashCode()) % length;
     }
 
+    /**
+     * Adds an element to the set.
+     * <p>
+     * Uses separate chaining to handle collisions:
+     * - If no collision, create a new head node
+     * - If collision, traverse the linked list
+     * - If element exists, do nothing
+     * - If element doesn't exist, append to the end
+     *
+     * @param e element to add
+     */
+    
     @Override
     public void add(E e) {
+        // Calculate hash index
         int index = hash(e, data.length);
+
+        // If no elements at this index, create new node
         if (data[index] == null) {
             data[index] = new Node(e);
         } else {
+            // Handle collision using linked list
             Node<E> prev = null;
             Node<E> curr = data[index];
+
+            // Traverse the linked list
             while (curr != null) {
+                // If element already exists, skip
                 if (e.equals(curr.e)) {
                     return;
                 }
                 prev = curr;
                 curr = curr.next;
             }
+
+            // Append new element at the end of the list
             prev.next = new Node(e);
         }
+
+        // Increment size and resize if needed
         size++;
         if (size >= data.length * loadFactor) {
             resize(2 * data.length);
