@@ -53,6 +53,23 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
 
         items[index] = new Item(e);
         size++;
+
+        if (size >= items.length * loadFactor) {
+            resize(2 * items.length);
+        }
+    }
+
+    private void resize(int newCapacity) {
+        Item<E>[] newData = new Item[newCapacity];
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && !items[i].isDeleted) {
+                int newIndex = hash(items[i].data, newCapacity);
+                newData[newIndex] = items[i];
+            }
+        }
+
+        deleteCount = 0;
+        items = newData;
     }
 
     @Override
@@ -69,10 +86,14 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
             deleteCount++;
             size--;
         }
+
+        if (deleteCount + size >= items.length * loadFactor) {
+            resize(items.length);
+        }
     }
 
     @Override
-    public boolean contains(E e) { // 最好：O(1)，最坏：O(n)
+    public boolean contains(E e) {
         int index = hash(e, items.length);
 
         while (items[index] != null &&
