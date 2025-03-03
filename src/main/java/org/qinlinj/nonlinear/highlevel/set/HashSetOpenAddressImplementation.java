@@ -17,6 +17,16 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
         this.loadFactor = loadFactor;
     }
 
+    public static void main(String[] args) {
+        Set<Integer> set = new HashSetOpenAddressImplementation<>();
+        set.add(11);
+        set.add(21);
+
+        System.out.println(set.contains(21));
+        System.out.println(set.contains(11));
+
+    }
+
     @Override
     public int size() {
         return size;
@@ -34,11 +44,13 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
     @Override
     public void add(E e) {
         int index = hash(e, items.length);
+
         while (items[index] != null) {
             if (!items[index].isDeleted && e.equals(items[index].data)) return;
             index++;
             index = index % items.length;
         }
+
         items[index] = new Item(e);
         size++;
     }
@@ -46,19 +58,30 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
     @Override
     public void remove(E e) {
         int index = hash(e, items.length);
+
         while (items[index] != null && (!e.equals(items[index].data) || !items[index].isDeleted)) {
             index++;
             index = index % items.length;
         }
+
         if (items[index] != null && !items[index].isDeleted) {
             items[index].isDeleted = true;
+            deleteCount++;
             size--;
         }
     }
 
     @Override
-    public boolean contains(E e) {
-        return false;
+    public boolean contains(E e) { // 最好：O(1)，最坏：O(n)
+        int index = hash(e, items.length);
+
+        while (items[index] != null &&
+                (!e.equals(items[index].data) || items[index].isDeleted)) {
+            index++;
+            index = index % items.length;
+        }
+
+        return items[index] != null && !items[index].isDeleted;
     }
 
     private class Item<E> {
