@@ -26,6 +26,7 @@ public interface Stack<E> {
      * Removes and returns the element at the top of the stack.
      *
      * @return the element removed from the top of the stack
+     * //     * @throws EmptyStackException if the stack is empty
      */
     E pop();
 
@@ -33,6 +34,7 @@ public interface Stack<E> {
      * Returns the element at the top of the stack without removing it.
      *
      * @return the element at the top of the stack
+     * //     * @throws EmptyStackException if the stack is empty
      */
     E peek();
 }
