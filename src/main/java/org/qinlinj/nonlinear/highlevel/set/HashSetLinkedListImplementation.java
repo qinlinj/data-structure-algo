@@ -48,6 +48,10 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
             }
             prev.next = new Node(e);
         }
+        size++;
+        if (size >= data.length * loadFactor) {
+            resize(2 * data.length);
+        }
     }
 
     private void resize(int newCapacity) {
