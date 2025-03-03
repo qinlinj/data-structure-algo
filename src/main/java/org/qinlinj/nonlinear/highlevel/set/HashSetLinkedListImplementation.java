@@ -210,19 +210,43 @@ public class HashSetLinkedListImplementation<E> implements Set<E> {
         return false;
     }
 
+    /**
+     * Internal Node class for linked list implementation.
+     * <p>
+     * Supports creating nodes with:
+     * - Element and next node
+     * - Only element (next is null)
+     * - Empty node
+     */
     private class Node<E> {
+        // Stored element
         E e;
+        // Reference to next node
         Node next;
 
+        /**
+         * Full constructor with element and next node.
+         *
+         * @param e    element to store
+         * @param next next node in the list
+         */
         public Node(E e, Node next) {
             this.e = e;
             this.next = next;
         }
 
+        /**
+         * Constructor with only element.
+         *
+         * @param e element to store
+         */
         public Node(E e) {
             this(e, null);
         }
 
+        /**
+         * Default constructor creates an empty node.
+         */
         public Node() {
             this(null, null);
         }
