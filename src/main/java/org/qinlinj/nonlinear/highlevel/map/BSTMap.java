@@ -86,7 +86,20 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
-        return null;
+        TreeNode node = get(root, key);
+        return node == null ? null : node.value;
+    }
+
+    private TreeNode get(TreeNode node, K key) {
+        if (node == null) return null;
+
+        if (key.compareTo(node.key) == 0) {
+            return node;
+        } else if (key.compareTo(node.key) < 0) {
+            return get(node.left, key);
+        } else {
+            return get(node.right, key);
+        }
     }
 
     /**
