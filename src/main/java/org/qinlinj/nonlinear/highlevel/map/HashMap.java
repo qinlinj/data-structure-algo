@@ -106,6 +106,26 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public V remove(K key) {
+        int index = hash(key, data.length);
+        if (data[index] == null) {
+            return null;
+        }
+        Node<K, V> prev = null;
+        Node<K, V> curr = data[index];
+        while (curr != null) {
+            if (key.equals(curr.key)) {
+                if (prev == null) {
+                    data[index] = curr.next;
+                } else {
+                    prev.next = curr.next;
+                }
+                curr.next = null;
+                size--;
+                return curr.value;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
         return null;
     }
 
