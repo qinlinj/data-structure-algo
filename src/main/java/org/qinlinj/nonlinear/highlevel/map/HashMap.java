@@ -155,7 +155,9 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public V get(K key) {
-        return null;
+        int index = hash(key, data.length);
+        Node<K, V> node = getNode(key, index);
+        return node == null ? null : node.value;
     }
 
     /**
