@@ -56,7 +56,17 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public void add(K key, V value) {
-
+        int index = hash(key, data.length);
+        Node<K, V> curr = getNode(key, index);
+        if (curr == null) {
+            data[index] = new Node(key, value, data[index]);
+            size++;
+            if (size >= data.length * loadFactor) {
+                resize(2 * data.length);
+            }
+        } else {
+            curr.value = value;
+        }
     }
 
     private Node<K, V> getNode(K key, int index) {
