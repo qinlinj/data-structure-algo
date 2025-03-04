@@ -1,5 +1,7 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
+import java.util.NoSuchElementException;
+
 public class HashMap<K, V> implements Map<K, V> {
     private Node<K, V>[] data;
     private int size;
@@ -137,7 +139,12 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public void set(K key, V newValue) {
-
+        int index = hash(key, data.length);
+        Node<K, V> node = getNode(key, index);
+        if (node == null) {
+            throw new NoSuchElementException("There is no corresponding key: " + key);
+        }
+        node.value = newValue;
     }
 
     /**
