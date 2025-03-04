@@ -1,5 +1,7 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
+import java.util.NoSuchElementException;
+
 public class LinkedListMap<K, V> implements Map<K, V> {
 
     private Node dummyHead;
@@ -93,8 +95,11 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      * @param newValue the new value to be associated with the key
      */
     @Override
-    public void set(K key, V newValue) {
+    public void set(K key, V newValue) { // O(n)
+        Node curr = getNode(key);
 
+        if (curr != null) curr.value = newValue;
+        else throw new NoSuchElementException("no such key ：" + key);
     }
 
     /**
@@ -104,8 +109,9 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      * @return the value associated with the key, or null if the key is not found
      */
     @Override
-    public V get(K key) {
-        return null;
+    public V get(K key) { // O(n)
+        Node node = getNode(key);
+        return node == null ? null : node.value;
     }
 
     /**
@@ -115,8 +121,9 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      * @return true if the key exists in the map, false otherwise
      */
     @Override
-    public boolean containsKey(K key) {
-        return false;
+    public boolean containsKey(K key) { // O(n)
+        Node node = getNode(key);
+        return node != null;
     }
 
     private class Node {
