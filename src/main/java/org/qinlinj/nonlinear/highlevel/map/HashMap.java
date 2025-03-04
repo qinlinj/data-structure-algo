@@ -59,6 +59,24 @@ public class HashMap<K, V> implements Map<K, V> {
 
     }
 
+    private void resize(int newCapacity) {
+        Node[] newData = new Node[newCapacity];
+        for (int i = 0; i < data.length; i++) {
+            Node<K, V> curr = data[i];
+            while (curr != null) {
+                K key = curr.key;
+                int newIndex = hash(key, newCapacity);
+                Node head = newData[newIndex];
+                newData[newIndex] = new Node(key, curr.value);
+                if (head != null) {
+                    newData[newIndex].next = head;
+                }
+                curr = curr.next;
+            }
+        }
+        data = newData;
+    }
+
     /**
      * Remove the key-value pair associated with the specified key.
      *
