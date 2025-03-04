@@ -168,7 +168,9 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean containsKey(K key) {
-        return false;
+        int index = hash(key, data.length);
+        Node<K, V> node = getNode(key, index);
+        return node != null;
     }
 
     private class Node<K, V> {

@@ -137,7 +137,7 @@ public class LinkedListMap<K, V> implements Map<K, V> {
         Node curr = getNode(key);
 
         if (curr != null) curr.value = newValue;
-        else throw new NoSuchElementException("no such key ：" + key);
+        else throw new NoSuchElementException("no such corresponding key" + key);
     }
 
     /**
