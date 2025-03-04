@@ -17,7 +17,7 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     /**
@@ -27,7 +27,7 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     /**
@@ -38,8 +38,25 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      * @param value the value associated with the key
      */
     @Override
-    public void add(K key, V value) {
+    public void add(K key, V value) { // O(n)
+        Node curr = getNode(key);
+        if (curr == null) {
+            dummyHead.next = new Node(key, value, dummyHead.next);
+            size++;
+        } else {
+            curr.value = value;
+        }
+    }
 
+    private Node getNode(K key) { // O(n)
+        Node curr = dummyHead.next;
+        while (curr != null) {
+            if (key.equals(curr.key)) {
+                break;
+            }
+            curr = curr.next;
+        }
+        return curr;
     }
 
     /**
