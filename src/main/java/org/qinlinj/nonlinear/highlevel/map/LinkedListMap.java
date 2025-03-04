@@ -2,7 +2,12 @@ package org.qinlinj.nonlinear.highlevel.map;
 
 public class LinkedListMap<K, V> implements Map<K, V> {
 
+    private Node dummyHead;
+    private int size;
+
     public LinkedListMap() {
+        this.dummyHead = new Node();
+        this.size = 0;
     }
 
     /**
