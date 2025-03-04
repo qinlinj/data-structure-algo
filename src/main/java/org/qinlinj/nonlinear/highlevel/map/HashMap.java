@@ -1,8 +1,16 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
 public class HashMap<K, V> implements Map<K, V> {
-    public HashMap() {
+    private Node<K, V>[] data;
+    private int size;
+    private double loadFactor;
+
+    public HashMap(int initCapacity, double loadFactor) {
+        this.data = new Node[initCapacity];
+        this.size = 0;
+        this.loadFactor = loadFactor;
     }
+
 
     /**
      * Get the number of key-value pairs stored in the map.
