@@ -110,7 +110,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
      */
     @Override
     public boolean containsKey(K key) {
-        return false;
+        TreeNode node = get(root, key);
+        return node != null;
     }
 
     private class TreeNode {
