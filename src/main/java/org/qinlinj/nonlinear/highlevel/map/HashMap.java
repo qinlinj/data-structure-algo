@@ -79,4 +79,29 @@ public class HashMap<K, V> implements Map<K, V> {
     public boolean containsKey(K key) {
         return false;
     }
+
+    private class Node<K, V> {
+        K key;
+        V value;
+        Node<K, V> next;
+
+        public Node(K key, V value, Node next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        public Node(K key, V value) {
+            this(key, value, null);
+        }
+
+        public Node() {
+            this(null, null, null);
+        }
+
+        @Override
+        public String toString() {
+            return key.toString() + "->" + value.toString();
+        }
+    }
 }
