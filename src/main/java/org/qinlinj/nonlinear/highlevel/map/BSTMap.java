@@ -96,6 +96,24 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
     }
 
+    private void removeMin() {
+        root = removeMin(root);
+    }
+
+    private TreeNode removeMin(TreeNode node) {
+        if (node.left == null) {
+            TreeNode rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        TreeNode leftRoot = removeMin(node.left);
+        node.left = leftRoot;
+
+        return node;
+    }
+
     /**
      * Update the value associated with the specified key.
      *
