@@ -59,6 +59,17 @@ public class HashMap<K, V> implements Map<K, V> {
 
     }
 
+    private Node<K, V> getNode(K key, int index) {
+        Node<K, V> curr = data[index];
+        while (curr != null) {
+            if (curr.key.equals(key)) {
+                break;
+            }
+            curr = curr.next;
+        }
+        return curr;
+    }
+
     private void resize(int newCapacity) {
         Node[] newData = new Node[newCapacity];
         for (int i = 0; i < data.length; i++) {
