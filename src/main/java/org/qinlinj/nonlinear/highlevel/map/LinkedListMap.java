@@ -66,7 +66,23 @@ public class LinkedListMap<K, V> implements Map<K, V> {
      * @return the value previously associated with the key, or null if not found
      */
     @Override
-    public V remove(K key) {
+    public V remove(K key) { // O(n)
+        Node prev = dummyHead;
+        Node curr = dummyHead.next;
+        while (curr != null) {
+            if (curr.key.equals(key)) {
+                break;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
+
+        if (curr != null) {
+            prev.next = curr.next;
+            curr.next = null;
+            size--;
+            return curr.value;
+        }
         return null;
     }
 
