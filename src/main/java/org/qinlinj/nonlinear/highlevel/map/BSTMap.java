@@ -36,13 +36,17 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
      * @param key   the key to be added
      * @param value the value associated with the key
      */
-    public void add(TreeNode node, K key, V value) {
+    @Override
+    public void add(K key, V value) {
+        root = add(root, key, value);
+    }
+
+    public TreeNode add(TreeNode node, K key, V value) {
         if (node == null) {
             size++;
             return new TreeNode(key, value);
         }
 
-        // 2. 递归调用
         if (key.compareTo(node.key) < 0) {
             node.left = add(node.left, key, value);
         } else {
