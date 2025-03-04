@@ -11,7 +11,18 @@ public class HashMap<K, V> implements Map<K, V> {
         this.loadFactor = loadFactor;
     }
 
+    public HashMap(int initCapacity) {
+        this(initCapacity, 0.75);
+    }
 
+    public HashMap(double loadFactor) {
+        this(10, loadFactor);
+    }
+
+    public HashMap() {
+        this(10, 0.75);
+    }
+    
     /**
      * Get the number of key-value pairs stored in the map.
      *
