@@ -1,7 +1,12 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
 public class BSTMap<K, V> implements Map<K, V> {
+    private TreeNode root;
+    private int size;
+
     public BSTMap() {
+        this.root = null;
+        this.size = 0;
     }
 
     /**
