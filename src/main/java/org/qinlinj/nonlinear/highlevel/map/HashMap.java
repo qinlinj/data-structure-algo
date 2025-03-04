@@ -22,7 +22,11 @@ public class HashMap<K, V> implements Map<K, V> {
     public HashMap() {
         this(10, 0.75);
     }
-    
+
+    private int hash(K key, int length) {
+        return Math.abs(key.hashCode()) % length;
+    }
+
     /**
      * Get the number of key-value pairs stored in the map.
      *
@@ -30,7 +34,7 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     /**
@@ -40,7 +44,7 @@ public class HashMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     /**
