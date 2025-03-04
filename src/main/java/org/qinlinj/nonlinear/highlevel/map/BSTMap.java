@@ -79,7 +79,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
             node.right = remove(node.right, key);
             return node;
         } else {
-            // 要删除的节点就是 node
             if (node.left == null) {
                 TreeNode rightNode = node.right;
                 node.right = null;
@@ -93,7 +92,21 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
                 size--;
                 return leftNode;
             }
+            TreeNode successor = minValue(node.right);
+
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+
+            node.left = null;
+            node.right = null;
+            //size--;
+            return successor;
         }
+    }
+
+    private TreeNode minValue(TreeNode node) {
+        if (node.left == null) return node;
+        return minValue(node.left);
     }
 
     private void removeMin() {
