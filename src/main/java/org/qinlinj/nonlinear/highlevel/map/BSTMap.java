@@ -69,6 +69,33 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         return null;
     }
 
+    private TreeNode remove(TreeNode node, K key) {
+        if (node == null) return null;
+
+        if (key.compareTo(node.key) < 0) {
+            node.left = remove(node.left, key);
+            return node;
+        } else if (key.compareTo(node.key) > 0) {
+            node.right = remove(node.right, key);
+            return node;
+        } else {
+            // 要删除的节点就是 node
+            if (node.left == null) {
+                TreeNode rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+
+            if (node.right == null) {
+                TreeNode leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+        }
+    }
+
     /**
      * Update the value associated with the specified key.
      *
