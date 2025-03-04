@@ -1,5 +1,7 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
+import java.util.NoSuchElementException;
+
 public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     private TreeNode root;
     private int size;
@@ -75,7 +77,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
      */
     @Override
     public void set(K key, V newValue) {
-
+        TreeNode node = get(root, key);
+        if (node == null) {
+            throw new NoSuchElementException("There is no corresponding key ：" + key);
+        }
+        node.value = newValue;
     }
 
     /**
