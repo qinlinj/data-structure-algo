@@ -1,6 +1,6 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
-public class BSTMap<K, V> implements Map<K, V> {
+public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     private TreeNode root;
     private int size;
 
@@ -16,7 +16,7 @@ public class BSTMap<K, V> implements Map<K, V> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     /**
@@ -26,7 +26,7 @@ public class BSTMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     /**
@@ -36,9 +36,20 @@ public class BSTMap<K, V> implements Map<K, V> {
      * @param key   the key to be added
      * @param value the value associated with the key
      */
-    @Override
-    public void add(K key, V value) {
+    public void add(TreeNode node, K key, V value) {
+        if (node == null) {
+            size++;
+            return new TreeNode(key, value);
+        }
 
+        // 2. 递归调用
+        if (key.compareTo(node.key) < 0) {
+            node.left = add(node.left, key, value);
+        } else {
+            node.right = add(node.right, key, value);
+        }
+
+        return node;
     }
 
     /**
