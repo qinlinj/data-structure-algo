@@ -2,7 +2,7 @@ package org.qinlinj.nonlinear.highlevel.skiplist;
 
 import java.util.Random;
 
-public class SkipList {
+public class SkipList<E extends Comparable<E>> {
     private static final int MAX_LEVEL = 16;
 
     private int levelCount;
@@ -20,7 +20,7 @@ public class SkipList {
 
     public Node get(E e) {
         Node curr = dummyHead;
-        
+
         for (int i = levelCount - 1; i >= 0; i--) {
             while (curr.nextNodes[i] != null
                     && curr.nextNodes[i].data.compareTo(e) < 0) {
