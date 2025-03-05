@@ -36,6 +36,34 @@ public class SkipList<E extends Comparable<E>> {
         return null;
     }
 
+    public void add(E e) {
+//        int level = dummyHead.nextNodes[0] == null ? 1 : randomLevel();
+        Node[] prevNodes = new Node[level];
+        for (int i = 0; i < level; i++) {
+            prevNodes[i] = dummyHead;
+        }
+
+        Node prev = dummyHead;
+        for (int i = levelCount - 1; i >= 0; i--) {
+            while (prev.nextNodes[i] != null
+                    && prev.nextNodes[i].data.compareTo(e) < 0) {
+                prev = prev.nextNodes[i];
+            }
+
+            if (i < level)
+                prevNodes[i] = prev;
+        }
+
+        Node newNode = new Node(e);
+        newNode.maxIndexLevel = level;
+        for (int i = 0; i < level; i++) {
+            newNode.nextNodes[i] = prevNodes[i].nextNodes[i];
+            prevNodes[i].nextNodes[i] = newNode;
+        }
+
+        if (levelCount < level) levelCount = level;
+    }
+
 
     private class Node<E extends Comparable<E>> {
         E data;
