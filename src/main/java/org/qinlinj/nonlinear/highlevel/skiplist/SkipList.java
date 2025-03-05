@@ -18,6 +18,25 @@ public class SkipList {
         return get(e) != null;
     }
 
+    public Node get(E e) {
+        Node curr = dummyHead;
+        
+        for (int i = levelCount - 1; i >= 0; i--) {
+            while (curr.nextNodes[i] != null
+                    && curr.nextNodes[i].data.compareTo(e) < 0) {
+                curr = curr.nextNodes[i];
+            }
+        }
+
+        if (curr.nextNodes[0] != null
+                && curr.nextNodes[0].data.compareTo(e) == 0) {
+            return curr.nextNodes[0];
+        }
+
+        return null;
+    }
+
+
     private class Node<E extends Comparable<E>> {
         E data;
 
