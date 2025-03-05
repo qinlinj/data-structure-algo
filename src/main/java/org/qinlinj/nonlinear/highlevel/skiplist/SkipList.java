@@ -9,6 +9,15 @@ public class SkipList {
     private Node dummyHead;
     private Random random = new Random();
 
+    public SkipList() {
+        this.levelCount = 1;
+        this.dummyHead = new Node(-1);
+    }
+
+    public boolean contains(E e) {
+        return get(e) != null;
+    }
+
     private class Node<E extends Comparable<E>> {
         E data;
 
