@@ -49,8 +49,10 @@ public class AdjList implements Graph {
         }
     }
 
-    private void validateVertex(int a) {
-
+    private void validateVertex(int v) {
+        if (v < 0 || v >= V) {
+            throw new IllegalArgumentException(String.format("%d", v));
+        }
     }
 
     /**
