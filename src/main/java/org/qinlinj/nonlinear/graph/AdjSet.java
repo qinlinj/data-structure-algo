@@ -2,8 +2,13 @@ package org.qinlinj.nonlinear.graph;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 
 public class AdjSet implements Graph {
+    private int V;
+    private int E;
+    private TreeSet<Integer>[] adj;
+
     public AdjSet() {
     }
 
