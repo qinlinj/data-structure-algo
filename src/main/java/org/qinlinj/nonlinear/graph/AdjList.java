@@ -48,6 +48,11 @@ public class AdjList implements Graph {
         }
     }
 
+    public static void main(String[] args) {
+        AdjList adjList = new AdjList("data/graph.txt");
+        System.out.println(adjList);
+    }
+
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("%d", v));
