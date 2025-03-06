@@ -52,6 +52,11 @@ public class AdjMatrix implements Graph {
     }
 
     @Override
+    public int degree(int v) {
+        return adj(v).size();
+    }
+
+    @Override
     public int getV() {
         return V;
     }
