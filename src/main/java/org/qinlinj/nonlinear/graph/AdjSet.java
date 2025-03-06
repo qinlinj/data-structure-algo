@@ -24,10 +24,25 @@ import java.util.TreeSet;
  * Space Complexity: O(V + E) where V is number of vertices and E is number of edges
  */
 public class AdjSet implements Graph {
-    private int V;
-    private int E;
-    private TreeSet<Integer>[] adj;
+    private int V; // Number of vertices
+    private int E; // Number of edges
+    private TreeSet<Integer>[] adj; // Adjacency sets (using TreeSet for O(log V) operations)
 
+    /**
+     * Constructs a graph by reading from a file
+     * <p>
+     * Example file format:
+     * 4 5    (4 vertices, 5 edges)
+     * 0 1    (edge between vertex 0 and 1)
+     * 0 2    (edge between vertex 0 and 2)
+     * ...
+     * <p>
+     * Time Complexity: O(E log V) where:
+     * - E is the number of edges to process
+     * - Each edge insertion takes O(log V) time with TreeSet
+     *
+     * @param fileName path to the file containing graph data
+     */
     public AdjSet(String fileName) {
         try {
             BufferedReader reader
@@ -37,10 +52,14 @@ public class AdjSet implements Graph {
             this.V = Integer.valueOf(arr[0]);
             this.E = Integer.valueOf(arr[1]);
 
+            // Initialize the adjacency sets for each vertex
             this.adj = new TreeSet[V];
             for (int i = 0; i < V; i++) {
                 adj[i] = new TreeSet<>();
             }
+
+            // Read each edge and add to the adjacency sets
+            // Time Complexity: O(E) iterations * O(log V) per operation = O(E log V)
             while ((line = reader.readLine()) != null) { // O(E)
                 arr = line.split(" ");
                 int a = Integer.valueOf(arr[0]);
@@ -48,15 +67,22 @@ public class AdjSet implements Graph {
                 int b = Integer.valueOf(arr[1]);
                 validateVertex(b);
 
+                // Check for self-loops (edges connecting a vertex to itself)
+                // Self-loop example: (a)---(a)
                 if (a == b) {
-                    throw new RuntimeException("");
+                    throw new RuntimeException("Self-loop detected, which is not allowed");
                 }
 
-                if (adj[a].contains(b)) { // O(logV)
-                    throw new RuntimeException("");
+                // Check for parallel edges (multiple edges between same vertices)
+                // Parallel edges example: (a)====(b) (two or more edges between a and b)
+                // Time Complexity: O(log V) for contains operation in TreeSet
+                if (adj[a].contains(b)) { // O(log V)
+                    throw new RuntimeException("Parallel edge detected, which is not allowed");
                 }
-                adj[a].add(b);
-                adj[b].add(a);
+
+                // Add the edge to the adjacency sets (for both vertices as this is an undirected graph)
+                adj[a].add(b); // O(log V)
+                adj[b].add(a); // O(log V)
             }
 
         } catch (IOException e) {
