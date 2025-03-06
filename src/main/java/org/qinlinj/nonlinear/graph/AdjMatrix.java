@@ -3,6 +3,7 @@ package org.qinlinj.nonlinear.graph;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -76,6 +77,14 @@ public class AdjMatrix implements Graph {
      */
     @Override
     public Collection<Integer> adj(int v) {
-        return List.of();
+        validateVertex(v);
+
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            if (adj[v][i] == 1) {
+                res.add(i);
+            }
+        }
+        return res;
     }
 }
