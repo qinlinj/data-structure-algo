@@ -6,6 +6,23 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.TreeSet;
 
+/**
+ * Graph implementation using Adjacency Set representation (TreeSet)
+ * <p>
+ * This class represents an undirected graph using TreeSets for each vertex's adjacency list.
+ * Using TreeSet instead of LinkedList or ArrayList provides O(log V) lookup time for edge existence.
+ * <p>
+ * Adjacency Set Visualization:
+ * <p>
+ * For a graph with vertices 0, 1, 2, 3 and edges (0,1), (0,2), (1,2), (2,3):
+ * <p>
+ * 0: {1, 2}      [TreeSet provides ordered elements]
+ * 1: {0, 2}
+ * 2: {0, 1, 3}
+ * 3: {2}
+ * <p>
+ * Space Complexity: O(V + E) where V is number of vertices and E is number of edges
+ */
 public class AdjSet implements Graph {
     private int V;
     private int E;
