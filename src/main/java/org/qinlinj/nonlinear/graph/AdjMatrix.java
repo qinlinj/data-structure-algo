@@ -50,15 +50,22 @@ public class AdjMatrix implements Graph {
         }
     }
 
-    /**
-     * Get the degree of the specified vertex
-     *
-     * @param v the vertex
-     * @return the degree of the vertex
-     */
     @Override
-    public int degree(int v) {
-        return 0;
+    public int getV() {
+        return V;
+    }
+
+    @Override
+    public int getE() {
+        return E;
+    }
+
+    @Override
+    public boolean hasEdge(int v, int w) {
+        validateVertex(v);
+        validateVertex(w);
+
+        return adj[v][w] == 1;
     }
 
     /**
@@ -70,37 +77,5 @@ public class AdjMatrix implements Graph {
     @Override
     public Collection<Integer> adj(int v) {
         return List.of();
-    }
-
-    /**
-     * Determine if there is an edge between two specified vertices
-     *
-     * @param v first vertex
-     * @param w second vertex
-     * @return true if an edge exists, false otherwise
-     */
-    @Override
-    public boolean hasEdge(int v, int w) {
-        return false;
-    }
-
-    /**
-     * Get the number of vertices in the graph
-     *
-     * @return the number of vertices
-     */
-    @Override
-    public int getV() {
-        return 0;
-    }
-
-    /**
-     * Get the number of edges in the graph
-     *
-     * @return the number of edges
-     */
-    @Override
-    public int getE() {
-        return 0;
     }
 }
