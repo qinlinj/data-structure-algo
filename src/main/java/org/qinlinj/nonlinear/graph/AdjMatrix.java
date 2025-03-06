@@ -7,6 +7,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Graph implementation using Adjacency Matrix representation
+ * <p>
+ * This class represents an undirected graph using an adjacency matrix.
+ * <p>
+ * Adjacency Matrix Visualization:
+ * <p>
+ * For a graph with vertices 0, 1, 2, 3 and edges (0,1), (0,2), (1,2), (2,3):
+ * <p>
+ * | 0 1 2 3
+ * ---+--------
+ * 0 | 0 1 1 0
+ * 1 | 1 0 1 0
+ * 2 | 1 1 0 1
+ * 3 | 0 0 1 0
+ * <p>
+ * Where 1 indicates an edge between vertices and 0 indicates no edge.
+ * <p>
+ * Space Complexity: O(V²) - wastes space for sparse graphs
+ */
 public class AdjMatrix implements Graph {
     private int V;
     private int E;
