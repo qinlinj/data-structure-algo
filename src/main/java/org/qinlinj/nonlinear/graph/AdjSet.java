@@ -61,7 +61,7 @@ public class AdjSet implements Graph {
      */
     @Override
     public int degree(int v) {
-        return 0;
+        return adj(v).size();
     }
 
     /**
