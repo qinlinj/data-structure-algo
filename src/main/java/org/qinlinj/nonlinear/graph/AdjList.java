@@ -110,6 +110,20 @@ public class AdjList implements Graph {
      */
     @Override
     public int degree(int v) {
-        return 0;
+        return adj(v).size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Node = %d，Edge = %d \n", V, E));
+        for (int v = 0; v < V; v++) {
+            sb.append(v + ": ");
+            for (int w : adj[v]) {
+                sb.append(w + " ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
