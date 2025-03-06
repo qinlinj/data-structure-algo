@@ -62,7 +62,7 @@ public class AdjList implements Graph {
      */
     @Override
     public int getE() {
-        return 0;
+        return V;
     }
 
     /**
@@ -72,7 +72,7 @@ public class AdjList implements Graph {
      */
     @Override
     public int getV() {
-        return 0;
+        return E;
     }
 
     /**
@@ -84,7 +84,10 @@ public class AdjList implements Graph {
      */
     @Override
     public boolean hasEdge(int v, int w) {
-        return false;
+        validateVertex(v);
+        validateVertex(w);
+
+        return adj[v].contains(w);
     }
 
     /**
