@@ -103,6 +103,33 @@ public class AdjSet implements Graph {
     }
 
     /**
+     * Validates if the vertex is within the valid range
+     *
+     * @param v vertex to validate
+     * @throws IllegalArgumentException if the vertex is outside the valid range
+     */
+    private void validateVertex(int v) {
+        if (v < 0 || v >= V) {
+            throw new IllegalArgumentException(String.format("Vertex %d is invalid", v));
+        }
+    }
+
+    /**
+     * Get the degree of the specified vertex
+     * (Number of edges connected to the vertex)
+     * <p>
+     * Example: For vertex v=2 with edges to vertices 0, 1, and 3
+     * degree(2) returns 3
+     *
+     * @param v the vertex
+     * @return the degree of the vertex
+     */
+    @Override
+    public int degree(int v) {
+        return adj(v).size();
+    }
+
+    /**
      * Get all adjacent vertices of the specified vertex
      * <p>
      * Example: For vertex v=2 with edges to vertices 0, 1, and 3
@@ -161,10 +188,23 @@ public class AdjSet implements Graph {
         return E;
     }
 
+    /**
+     * Returns a string representation of the graph
+     * Shows the number of vertices, edges, and the adjacency structure
+     * <p>
+     * Example output:
+     * Vertices = 4, Edges = 4
+     * 0: 1 2
+     * 1: 0 2
+     * 2: 0 1 3
+     * 3: 2
+     *
+     * @return string representation of the graph
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%d，%d \n", V, E));
+        sb.append(String.format("Vertices = %d, Edges = %d \n", V, E));
         for (int v = 0; v < V; v++) {
             sb.append(v + ": ");
             for (int w : adj[v]) {
