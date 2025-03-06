@@ -102,4 +102,18 @@ public class AdjSet implements Graph {
     public int getE() {
         return E;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%d，%d \n", V, E));
+        for (int v = 0; v < V; v++) {
+            sb.append(v + ": ");
+            for (int w : adj[v]) {
+                sb.append(w + " ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
