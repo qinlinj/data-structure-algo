@@ -90,14 +90,27 @@ public class AdjSet implements Graph {
         }
     }
 
+    /**
+     * Main method to demonstrate graph creation and display
+     * <p>
+     * It reads a graph from "data/graph.txt" and prints its representation
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         AdjSet adjList = new AdjSet("data/graph.txt");
         System.out.println(adjList);
     }
 
+    /**
+     * Validates if the vertex is within the valid range
+     *
+     * @param v vertex to validate
+     * @throws IllegalArgumentException if the vertex is outside the valid range
+     */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
-            throw new IllegalArgumentException(String.format("%d", v));
+            throw new IllegalArgumentException(String.format("Vertex %d is invalid", v));
         }
     }
 
