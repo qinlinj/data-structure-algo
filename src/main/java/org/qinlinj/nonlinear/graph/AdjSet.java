@@ -1,5 +1,8 @@
 package org.qinlinj.nonlinear.graph;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
@@ -9,7 +12,44 @@ public class AdjSet implements Graph {
     private int E;
     private TreeSet<Integer>[] adj;
 
-    public AdjSet() {
+    public AdjSet(String fileName) {
+        try {
+            BufferedReader reader
+                    = new BufferedReader(new FileReader(fileName));
+            String line = reader.readLine();
+            String[] arr = line.split(" ");
+            this.V = Integer.valueOf(arr[0]);
+            this.E = Integer.valueOf(arr[1]);
+
+            this.adj = new TreeSet[V];
+            for (int i = 0; i < V; i++) {
+                adj[i] = new TreeSet<>();
+            }
+            while ((line = reader.readLine()) != null) { // O(E)
+                arr = line.split(" ");
+                int a = Integer.valueOf(arr[0]);
+                validateVertex(a);
+                int b = Integer.valueOf(arr[1]);
+                validateVertex(b);
+
+                if (a == b) {
+                    throw new RuntimeException("");
+                }
+
+                if (adj[a].contains(b)) { // O(logV)
+                    throw new RuntimeException("");
+                }
+                adj[a].add(b);
+                adj[b].add(a);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void validateVertex(int a) {
+
     }
 
     /**
