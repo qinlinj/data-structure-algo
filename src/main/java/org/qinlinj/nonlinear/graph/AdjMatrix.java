@@ -45,6 +45,11 @@ public class AdjMatrix implements Graph {
         }
     }
 
+    public static void main(String[] args) {
+        AdjMatrix adjMatrix = new AdjMatrix("data/graph.txt");
+        System.out.println(adjMatrix);
+    }
+
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("%d", v));
@@ -54,6 +59,19 @@ public class AdjMatrix implements Graph {
     @Override
     public int degree(int v) {
         return adj(v).size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(" = %d， = %d \n", V, E));
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                sb.append(adj[i][j] + " ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     @Override
