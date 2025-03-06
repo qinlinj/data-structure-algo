@@ -103,30 +103,12 @@ public class AdjSet implements Graph {
     }
 
     /**
-     * Validates if the vertex is within the valid range
-     *
-     * @param v vertex to validate
-     * @throws IllegalArgumentException if the vertex is outside the valid range
-     */
-    private void validateVertex(int v) {
-        if (v < 0 || v >= V) {
-            throw new IllegalArgumentException(String.format("Vertex %d is invalid", v));
-        }
-    }
-
-    /**
-     * Get the degree of the specified vertex
-     *
-     * @param v the vertex
-     * @return the degree of the vertex
-     */
-    @Override
-    public int degree(int v) {
-        return adj(v).size();
-    }
-
-    /**
      * Get all adjacent vertices of the specified vertex
+     * <p>
+     * Example: For vertex v=2 with edges to vertices 0, 1, and 3
+     * adj(2) returns TreeSet{0, 1, 3}
+     * <p>
+     * Time Complexity: O(1) - just returning the set reference
      *
      * @param v the vertex
      * @return a collection of adjacent vertices
@@ -140,6 +122,12 @@ public class AdjSet implements Graph {
 
     /**
      * Determine if there is an edge between two specified vertices
+     * <p>
+     * Example:
+     * For vertices v=0 and w=1, checks if edge 0-1 exists
+     * <p>
+     * Time Complexity: O(log V) due to the contains operation in TreeSet
+     * This is faster than using LinkedList (O(V)) for large graphs
      *
      * @param v first vertex
      * @param w second vertex
@@ -153,11 +141,21 @@ public class AdjSet implements Graph {
         return adj[v].contains(w);
     }
 
+    /**
+     * Gets the number of vertices in the graph
+     *
+     * @return the number of vertices
+     */
     @Override
     public int getV() {
         return V;
     }
 
+    /**
+     * Gets the number of edges in the graph
+     *
+     * @return the number of edges
+     */
     @Override
     public int getE() {
         return E;
