@@ -1,9 +1,14 @@
 package org.qinlinj.nonlinear.graph;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AdjList implements Graph {
+
+    private int V;
+    private int E;
+    private LinkedList<Integer>[] adj;
 
     /**
      * Get the number of edges in the graph
