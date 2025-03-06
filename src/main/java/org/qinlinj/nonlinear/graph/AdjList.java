@@ -3,7 +3,6 @@ package org.qinlinj.nonlinear.graph;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,8 +96,10 @@ public class AdjList implements Graph {
      * @return a collection of adjacent vertices
      */
     @Override
-    public Collection<Integer> adj(int v) {
-        return List.of();
+    public List<Integer> adj(int v) {
+        validateVertex(v);
+
+        return adj[v];
     }
 
     /**
