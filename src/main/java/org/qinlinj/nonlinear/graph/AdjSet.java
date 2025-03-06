@@ -47,6 +47,11 @@ public class AdjSet implements Graph {
         }
     }
 
+    public static void main(String[] args) {
+        AdjSet adjList = new AdjSet("data/graph.txt");
+        System.out.println(adjList);
+    }
+
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("%d", v));
@@ -91,7 +96,6 @@ public class AdjSet implements Graph {
 
         return adj[v].contains(w);
     }
-
 
     @Override
     public int getV() {
