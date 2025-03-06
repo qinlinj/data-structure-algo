@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.TreeSet;
 
 public class AdjSet implements Graph {
@@ -73,7 +72,9 @@ public class AdjSet implements Graph {
      */
     @Override
     public Collection<Integer> adj(int v) {
-        return List.of();
+        validateVertex(v);
+
+        return adj[v];
     }
 
     /**
