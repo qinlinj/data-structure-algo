@@ -28,10 +28,23 @@ import java.util.List;
  * Space Complexity: O(V²) - wastes space for sparse graphs
  */
 public class AdjMatrix implements Graph {
-    private int V;
-    private int E;
-    private int[][] adj;
+    private int V; // Number of vertices
+    private int E; // Number of edges
+    private int[][] adj; // Adjacency matrix
 
+    /**
+     * Constructs a graph by reading from a file
+     * <p>
+     * Example file format:
+     * 4 5    (4 vertices, 5 edges)
+     * 0 1    (edge between vertex 0 and 1)
+     * 0 2    (edge between vertex 0 and 2)
+     * ...
+     * <p>
+     * Time Complexity: O(E) where E is number of edges
+     *
+     * @param fileName path to the file containing graph data
+     */
     public AdjMatrix(String fileName) {
         try {
             BufferedReader reader
@@ -41,7 +54,10 @@ public class AdjMatrix implements Graph {
             this.V = Integer.valueOf(arr[0]);
             this.E = Integer.valueOf(arr[1]);
 
+            // Initialize the adjacency matrix with zeros
             this.adj = new int[V][V];
+
+            // Read each edge and mark it in the adjacency matrix
             while ((line = reader.readLine()) != null) {
                 arr = line.split(" ");
                 int a = Integer.valueOf(arr[0]);
@@ -49,13 +65,19 @@ public class AdjMatrix implements Graph {
                 int b = Integer.valueOf(arr[1]);
                 validateVertex(b);
 
+                // Check for self-loops (edges connecting a vertex to itself)
+                // Self-loop example: (a)---(a)
                 if (a == b) {
-                    throw new RuntimeException("");
+                    throw new RuntimeException("Self-loop detected, which is not allowed");
                 }
 
+                // Check for parallel edges (multiple edges between same vertices)
+                // Parallel edges example: (a)====(b) (two or more edges between a and b)
                 if (adj[a][b] == 1) {
-                    throw new RuntimeException("");
+                    throw new RuntimeException("Parallel edge detected, which is not allowed");
                 }
+
+                // Add the edge to the adjacency matrix (for both vertices as this is an undirected graph)
                 adj[a][b] = 1;
                 adj[b][a] = 1;
             }
@@ -63,11 +85,6 @@ public class AdjMatrix implements Graph {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        AdjMatrix adjMatrix = new AdjMatrix("data/graph.txt");
-        System.out.println(adjMatrix);
     }
 
     private void validateVertex(int v) {
