@@ -2,11 +2,27 @@ package org.qinlinj.linear.stack;
 
 import java.util.NoSuchElementException;
 
+/**
+ * An array-based implementation of the Stack interface.
+ * This stack has a fixed capacity and supports basic stack operations.
+ *
+ * @param <E> the type of elements stored in the stack
+ */
 public class ArrayStack<E> implements Stack<E> {
+    // Internal array to store stack elements
     private E[] data;
+
+    // Current number of elements in the stack
     private int size;
 
+    /**
+     * Constructor to create a new ArrayStack with a specified capacity.
+     *
+     * @param capacity the maximum number of elements the stack can hold
+     */
     public ArrayStack(int capacity) {
+        // Create a new array of Objects and cast to generic array
+        // This is the standard way to create a generic array in Java
         data = (E[]) new Object[capacity];
         this.size = 0;
     }
