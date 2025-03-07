@@ -10,6 +10,24 @@ import java.util.Arrays;
  * into a number of buckets, then sorting these buckets individually and finally
  * merging them to produce the sorted array.
  * <p>
+ * Example:
+ * For array [2, 3, 6, 1, 34, 11, 53, 6, 22, 12] with 10 buckets:
+ * 1. Find max value: 53
+ * 2. Calculate bucket range: 53/10 + 1 = 6 (each bucket covers 6 values)
+ * 3. Distribute elements:
+ * - Bucket 0 (values 0-5): [2, 3, 1]
+ * - Bucket 1 (values 6-11): [6, 11, 6]
+ * - Bucket 2 (values 12-17): [12]
+ * - Bucket 3 (values 18-23): [22]
+ * - Bucket 4 (values 24-29): [] (empty)
+ * - Bucket 5 (values 30-35): [34]
+ * - Bucket 6 (values 36-41): [] (empty)
+ * - Bucket 7 (values 42-47): [] (empty)
+ * - Bucket 8 (values 48-53): [53]
+ * - Bucket 9 (values 54-59): [] (empty)
+ * 4. Sort each bucket
+ * 5. Merge buckets to get final sorted array
+ * <p>
  * Time Complexity:
  * - Average case: O(n + k) where n is the number of elements and k is the number of buckets
  * - Worst case: O(n²) when all elements are placed in a single bucket
@@ -63,9 +81,13 @@ public class BacketSorter extends Sorter {
         ArrayList<Integer>[] buckets = new ArrayList[bucketNum];
 
         // Distribute all elements into their respective buckets
+        // For our example array [2, 3, 6, 1, 34, 11, 53, 6, 22, 12]
         for (int datum : data) {
             // Calculate which bucket the current element belongs to
-            // Example: For value 34, bucketIndex = 34/6 = 5
+            // Examples:
+            //   - For value 2: bucketIndex = 2/6 = 0
+            //   - For value 34: bucketIndex = 34/6 = 5
+            //   - For value 53: bucketIndex = 53/6 = 8
             int bucketIndex = datum / bucketGap;
 
             // Initialize the bucket if it doesn't exist yet
@@ -74,20 +96,42 @@ public class BacketSorter extends Sorter {
             }
 
             // Add the element to its corresponding bucket
-            // Example: 34 goes to bucket 5
             buckets[bucketIndex].add(datum);
         }
+
+        // At this point, the buckets contain:
+        // Bucket 0: [2, 3, 1] (values 0-5)
+        // Bucket 1: [6, 11, 6] (values 6-11)
+        // Bucket 2: [12] (values 12-17)
+        // Bucket 3: [22] (values 18-23)
+        // Bucket 4: [] (empty)
+        // Bucket 5: [34] (values 30-35)
+        // Bucket 6: [] (empty)
+        // Bucket 7: [] (empty)
+        // Bucket 8: [53] (values 48-53)
+        // Bucket 9: [] (empty)
 
         // Create a sorter for sorting individual buckets
         IntegerArrayQuickSorter sorter = new IntegerArrayQuickSorter();
 
         // Sort each bucket individually
-        // Example: Bucket 1 might contain [6, 11, 6], which gets sorted to [6, 6, 11]
         for (ArrayList<Integer> bucket : buckets) {
             if (bucket != null) {
                 sorter.sort(bucket);
             }
         }
+
+        // After sorting, the buckets contain:
+        // Bucket 0: [1, 2, 3]
+        // Bucket 1: [6, 6, 11]
+        // Bucket 2: [12]
+        // Bucket 3: [22]
+        // Bucket 4: [] (empty)
+        // Bucket 5: [34]
+        // Bucket 6: [] (empty)
+        // Bucket 7: [] (empty)
+        // Bucket 8: [53]
+        // Bucket 9: [] (empty)
 
         // Index to track the position in the original array
         int curr = 0;
@@ -98,10 +142,22 @@ public class BacketSorter extends Sorter {
             if (buckets[i] != null) {
                 for (int j = 0; j < buckets[i].size(); j++) {
                     // Copy elements from buckets back to original array in order
-                    // Example: data[0] = first element from first non-empty bucket
                     data[curr++] = buckets[i].get(j);
                 }
             }
         }
+
+        // Step-by-step merging process:
+        // 1. Take all elements from bucket 0: data = [1, 2, 3, ...]
+        // 2. Take all elements from bucket 1: data = [1, 2, 3, 6, 6, 11, ...]
+        // 3. Take all elements from bucket 2: data = [1, 2, 3, 6, 6, 11, 12, ...]
+        // 4. Take all elements from bucket 3: data = [1, 2, 3, 6, 6, 11, 12, 22, ...]
+        // 5. Skip bucket 4 (empty)
+        // 6. Take all elements from bucket 5: data = [1, 2, 3, 6, 6, 11, 12, 22, 34, ...]
+        // 7. Skip buckets 6 and 7 (empty)
+        // 8. Take all elements from bucket 8: data = [1, 2, 3, 6, 6, 11, 12, 22, 34, 53]
+        // 9. Skip bucket 9 (empty)
+
+        // Final sorted array: [1, 2, 3, 6, 6, 11, 12, 22, 34, 53]
     }
 }
