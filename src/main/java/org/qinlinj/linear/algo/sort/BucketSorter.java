@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Bucket Sort Implementation
+ * Bucket Sort Algorithm Principle:
  * <p>
  * Bucket sort is a distribution sort algorithm that works by distributing elements
  * into a number of buckets, then sorting these buckets individually and finally
  * merging them to produce the sorted array.
+ * <p>
+ * The algorithm works as follows:
+ * 1. Create n empty buckets (or lists)
+ * 2. Distribute the elements into buckets based on their values
+ * 3. Sort each non-empty bucket (using any sorting algorithm or recursively with bucket sort)
+ * 4. Gather all elements from the buckets in order to produce the final sorted array
  * <p>
  * Example:
  * For array [2, 3, 6, 1, 34, 11, 53, 6, 22, 12] with 10 buckets:
@@ -26,15 +32,25 @@ import java.util.Arrays;
  * - Bucket 8 (values 48-53): [53]
  * - Bucket 9 (values 54-59): [] (empty)
  * 4. Sort each bucket
- * 5. Merge buckets to get final sorted array
+ * 5. Merge buckets to get final sorted array: [1, 2, 3, 6, 6, 11, 12, 22, 34, 53]
  * <p>
  * Time Complexity:
  * - Average case: O(n + k) where n is the number of elements and k is the number of buckets
  * - Worst case: O(n²) when all elements are placed in a single bucket
  * <p>
  * Space Complexity: O(n + k) for storing elements in buckets
+ * <p>
+ * Advantages:
+ * - Efficient when input is uniformly distributed
+ * - Can be used in external sorting where data doesn't fit into memory
+ * - Easy to parallelize
+ * <p>
+ * Limitations:
+ * - Not efficient when data distribution is skewed
+ * - Requires overhead for managing buckets
+ * - Requires another sorting algorithm for sorting individual buckets
  */
-public class BacketSorter extends Sorter {
+public class BucketSorter extends Sorter {
 
     /**
      * Main method to demonstrate the bucket sort algorithm
@@ -45,7 +61,7 @@ public class BacketSorter extends Sorter {
      */
     public static void main(String[] args) {
         int[] data = new int[]{2, 3, 6, 1, 34, 11, 53, 6, 22, 12};
-        BacketSorter sorter = new BacketSorter();
+        BucketSorter sorter = new BucketSorter();
         sorter.sort(data);
         System.out.println(Arrays.toString(data));
     }
