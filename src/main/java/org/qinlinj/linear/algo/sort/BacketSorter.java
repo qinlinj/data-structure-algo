@@ -146,6 +146,18 @@ public class BacketSorter extends Sorter {
                 }
             }
         }
-        
+
+        // Step-by-step merging process:
+        // 1. Take all elements from bucket 0: data = [1, 2, 3, ...]
+        // 2. Take all elements from bucket 1: data = [1, 2, 3, 6, 6, 11, ...]
+        // 3. Take all elements from bucket 2: data = [1, 2, 3, 6, 6, 11, 12, ...]
+        // 4. Take all elements from bucket 3: data = [1, 2, 3, 6, 6, 11, 12, 22, ...]
+        // 5. Skip bucket 4 (empty)
+        // 6. Take all elements from bucket 5: data = [1, 2, 3, 6, 6, 11, 12, 22, 34, ...]
+        // 7. Skip buckets 6 and 7 (empty)
+        // 8. Take all elements from bucket 8: data = [1, 2, 3, 6, 6, 11, 12, 22, 34, 53]
+        // 9. Skip bucket 9 (empty)
+
+        // Final sorted array: [1, 2, 3, 6, 6, 11, 12, 22, 34, 53]
     }
 }
