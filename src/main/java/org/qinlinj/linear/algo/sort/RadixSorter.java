@@ -164,6 +164,115 @@ public class RadixSorter extends Sorter {
     // Support for negative numbers
 
     /**
+     * Sorts an array of phone numbers using the radix sort algorithm
+     * <p>
+     * Example: Initial phone numbers array
+     * [1382675591, 1382675540, 1382675519, 1382675568, 1382675527]
+     *
+     * @param phoneNumbers the array of phone numbers to be sorted
+     */
+    public void sortPhoneNumbers(long[] phoneNumbers) {
+        // Return early if array is null or empty
+        if (phoneNumbers == null || phoneNumbers.length == 0) {
+            return;
+        }
+
+        // Find the maximum value to determine the number of digits
+        long max = phoneNumbers[0];
+        for (int i = 1; i < phoneNumbers.length; i++) {
+            max = Math.max(max, phoneNumbers[i]);
+        }
+        // Example: max = 1382675591
+
+        // Calculate how many digits the maximum number has
+        int times = 0;
+        while (max >= 1) {
+            max = max / 10;
+            times++;
+        }
+        // Example: times = 10 (all phone numbers have 10 digits)
+
+        // Process each digit position, starting from the least significant digit (ones)
+        for (int i = 0; i < times; i++) {
+            // Create a count array for each digit (0-9)
+            int[] countArray = new int[10];
+
+            // Count occurrences of each digit at the current position
+            for (int m = 0; m < phoneNumbers.length; m++) {
+                // Calculate the digit at position i for the current number
+                int pos = (int) ((phoneNumbers[m] / Math.pow(10, i)) % 10);
+                countArray[pos]++;
+            }
+
+            // Example for first iteration (i=0, ones digit):
+            // phoneNumbers = [1382675591, 1382675540, 1382675519, 1382675568, 1382675527]
+            // countArray = [0, 1, 0, 0, 0, 0, 0, 1, 1, 2]
+            // meaning:
+            // 0 numbers with '0' in ones place
+            // 1 number with '1' in ones place (1382675591)
+            // 0 numbers with '2' in ones place
+            // ...
+            // 1 number with '7' in ones place (1382675527)
+            // 1 number with '8' in ones place (1382675568)
+            // 2 numbers with '9' in ones place (1382675519, 1382675519)
+
+            // Calculate cumulative counts to determine positions in output array
+            for (int j = 1; j < countArray.length; j++) {
+                countArray[j] += countArray[j - 1];
+            }
+
+            // Example after cumulative calculation:
+            // countArray = [0, 1, 1, 1, 1, 1, 1, 2, 3, 5]
+
+            // Create a temporary array for the sorted result
+            long[] tmp = new long[phoneNumbers.length];
+
+            // Build the sorted array based on the current digit
+            // Process from right to left to maintain stability
+            for (int k = phoneNumbers.length - 1; k >= 0; k--) {
+                // Get the digit at position i
+                int digit = (int) ((phoneNumbers[k] / Math.pow(10, i)) % 10);
+                // Place the number in its correct position and decrement the count
+                tmp[--countArray[digit]] = phoneNumbers[k];
+            }
+
+            // Example after sorting by ones digit:
+            // tmp = [1382675591, 1382675527, 1382675568, 1382675519, 1382675540]
+
+            // Copy the sorted array back to the original array
+            System.arraycopy(tmp, 0, phoneNumbers, 0, phoneNumbers.length);
+
+            // Example iterations (focusing on last 4 digits):
+            // Initial: [xxx5591, xxx5540, xxx5519, xxx5568, xxx5527]
+            //
+            // After sorting by 1st digit (ones):
+            // [xxx5591, xxx5540, xxx5519, xxx5568, xxx5527]
+            // => [xxx5591, xxx5527, xxx5568, xxx5519, xxx5540]
+            //
+            // After sorting by 2nd digit (tens):
+            // [xxx5591, xxx5527, xxx5568, xxx5519, xxx5540]
+            // => [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
+            //
+            // After sorting by 3rd digit (hundreds):
+            // [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
+            // => [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
+            //
+            // After sorting by 4th digit (thousands):
+            // [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
+            // => [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
+            //
+            // Continue for remaining digits...
+            // Final sorted phone numbers:
+            // [1382675519, 1382675527, 1382675540, 1382675568, 1382675591]
+            //
+            // Notice how this demonstrates the efficiency of radix sort for closely related
+            // phone numbers that differ only in their last few digits
+        }
+
+        // Final sorted array: [1382675519, 1382675527, 1382675540, 1382675568, 1382675591]
+    }
+
+    /**
      * Extension of RadixSorter that can handle negative numbers
      * It works by shifting all numbers to make them non-negative,
      * applying radix sort, and then shifting back
@@ -226,115 +335,6 @@ public class RadixSorter extends Sorter {
             // Example after shifting back:
             // data = [-53, -5, -1, 2, 6, 6, 11, 12, 22, 34]
             // This is the final sorted array
-        }
-
-        /**
-         * Sorts an array of phone numbers using the radix sort algorithm
-         * <p>
-         * Example: Initial phone numbers array
-         * [1382675591, 1382675540, 1382675519, 1382675568, 1382675527]
-         *
-         * @param phoneNumbers the array of phone numbers to be sorted
-         */
-        public void sortPhoneNumbers(long[] phoneNumbers) {
-            // Return early if array is null or empty
-            if (phoneNumbers == null || phoneNumbers.length == 0) {
-                return;
-            }
-
-            // Find the maximum value to determine the number of digits
-            long max = phoneNumbers[0];
-            for (int i = 1; i < phoneNumbers.length; i++) {
-                max = Math.max(max, phoneNumbers[i]);
-            }
-            // Example: max = 1382675591
-
-            // Calculate how many digits the maximum number has
-            int times = 0;
-            while (max >= 1) {
-                max = max / 10;
-                times++;
-            }
-            // Example: times = 10 (all phone numbers have 10 digits)
-
-            // Process each digit position, starting from the least significant digit (ones)
-            for (int i = 0; i < times; i++) {
-                // Create a count array for each digit (0-9)
-                int[] countArray = new int[10];
-
-                // Count occurrences of each digit at the current position
-                for (int m = 0; m < phoneNumbers.length; m++) {
-                    // Calculate the digit at position i for the current number
-                    int pos = (int) ((phoneNumbers[m] / Math.pow(10, i)) % 10);
-                    countArray[pos]++;
-                }
-
-                // Example for first iteration (i=0, ones digit):
-                // phoneNumbers = [1382675591, 1382675540, 1382675519, 1382675568, 1382675527]
-                // countArray = [0, 1, 0, 0, 0, 0, 0, 1, 1, 2]
-                // meaning:
-                // 0 numbers with '0' in ones place
-                // 1 number with '1' in ones place (1382675591)
-                // 0 numbers with '2' in ones place
-                // ...
-                // 1 number with '7' in ones place (1382675527)
-                // 1 number with '8' in ones place (1382675568)
-                // 2 numbers with '9' in ones place (1382675519, 1382675519)
-
-                // Calculate cumulative counts to determine positions in output array
-                for (int j = 1; j < countArray.length; j++) {
-                    countArray[j] += countArray[j - 1];
-                }
-
-                // Example after cumulative calculation:
-                // countArray = [0, 1, 1, 1, 1, 1, 1, 2, 3, 5]
-
-                // Create a temporary array for the sorted result
-                long[] tmp = new long[phoneNumbers.length];
-
-                // Build the sorted array based on the current digit
-                // Process from right to left to maintain stability
-                for (int k = phoneNumbers.length - 1; k >= 0; k--) {
-                    // Get the digit at position i
-                    int digit = (int) ((phoneNumbers[k] / Math.pow(10, i)) % 10);
-                    // Place the number in its correct position and decrement the count
-                    tmp[--countArray[digit]] = phoneNumbers[k];
-                }
-
-                // Example after sorting by ones digit:
-                // tmp = [1382675591, 1382675527, 1382675568, 1382675519, 1382675540]
-
-                // Copy the sorted array back to the original array
-                System.arraycopy(tmp, 0, phoneNumbers, 0, phoneNumbers.length);
-
-                // Example iterations (focusing on last 4 digits):
-                // Initial: [xxx5591, xxx5540, xxx5519, xxx5568, xxx5527]
-                //
-                // After sorting by 1st digit (ones):
-                // [xxx5591, xxx5540, xxx5519, xxx5568, xxx5527]
-                // => [xxx5591, xxx5527, xxx5568, xxx5519, xxx5540]
-                //
-                // After sorting by 2nd digit (tens):
-                // [xxx5591, xxx5527, xxx5568, xxx5519, xxx5540]
-                // => [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
-                //
-                // After sorting by 3rd digit (hundreds):
-                // [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
-                // => [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
-                //
-                // After sorting by 4th digit (thousands):
-                // [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
-                // => [xxx5519, xxx5527, xxx5540, xxx5568, xxx5591]
-                //
-                // Continue for remaining digits...
-                // Final sorted phone numbers:
-                // [1382675519, 1382675527, 1382675540, 1382675568, 1382675591]
-                //
-                // Notice how this demonstrates the efficiency of radix sort for closely related
-                // phone numbers that differ only in their last few digits
-            }
-
-            // Final sorted array: [1382675519, 1382675527, 1382675540, 1382675568, 1382675591]
         }
 
         /**
