@@ -2,10 +2,10 @@ package org.qinlinj.nonlinear.tree.tree23;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// @formatter:off
 /**
  * 2-3 Tree Implementation
- * <p>
+ *
  * CONCEPT AND PRINCIPLES:
  * A 2-3 tree is a self-balancing search tree where:
  * 1. Each internal node has either 2 or 3 children (hence the name "2-3 tree")
@@ -13,33 +13,31 @@ import java.util.List;
  * 3. A 3-node contains 2 keys and has 3 children
  * 4. All leaf nodes are at the same level (perfect height balance)
  * 5. Keys within a node are ordered
- * <p>
- * Node structure examples:
- * <p>
+ *
+ * Visual representation of node types:
+ *
  * 2-node:         3-node:
- * (B)           (A,C)
- * /   \         /  |  \
- * A     C       *   B   D
- * <p>
+ *     (B)           (A,C)
+ *    /   \         /  |  \
+ *   A     C       *   B   D
+ *
  * ADVANTAGES:
  * 1. Perfect Balance: All operations maintain perfect height balance automatically,
- * ensuring O(log n) time complexity for basic operations.
+ *    ensuring O(log n) time complexity for basic operations.
  * 2. Efficient Search: The balanced nature ensures consistent search performance.
  * 3. Flexibility: Can adapt to varying data distribution patterns.
- * 4. No Worst Case: Unlike some trees (like AVL or Red-Black), the worst case
- * height is still logarithmic.
+ * 4. No Worst Case: Unlike some trees (like AVL), the worst-case height is still logarithmic.
  * 5. Basis for B-trees: The concept extends to B-trees used in databases and
- * file systems, making it important in system implementations.
- * <p>
+ *    file systems, making it important in system implementations.
+ *
  * PRINCIPLES OF OPERATION:
  * - When inserting into a full 3-node, we split it into two 2-nodes and
- * propagate the middle key up to the parent.
+ *   propagate the middle key up to the parent.
  * - When removing from a 2-node, we either borrow a key from a sibling or
- * merge with a sibling, restructuring as needed.
+ *   merge with a sibling, restructuring as needed.
  * - All operations maintain the perfect height balance property.
- * <p>
- * Note: This implementation handles generic comparable elements.
  */
+// @formatter:off
 public class Tree23<E extends Comparable<E>> {
     private Node root;
     private int size;
@@ -76,15 +74,20 @@ public class Tree23<E extends Comparable<E>> {
     /**
      * Searches for a specific element in the tree.
      * Time Complexity: O(log n) - Height of the tree is logarithmic
-     * <p>
-     * Example: Searching for 5 in tree with elements [3, 5, 7, 9]
-     * <p>
-     * (5)
-     * /   \
-     * (3)   (7,9)
-     * <p>
-     * 1. Start at root (5)
-     * 2. Compare 5 with 5 -> Found!
+     *
+     * EXAMPLE: Searching for 5 in the following tree:
+     *
+     *        (7)
+     *      /     \
+     *    (3,5)   (9,11)
+     *   /  |  \  /  |  \
+     *  (1)(4)(6)(8)(10)(12)
+     *
+     * Steps:
+     * 1. Start at root (7)
+     * 2. 5 < 7, so go to left child (3,5)
+     * 3. 3 < 5 < 5, so check middle value: 5 == 5
+     * 4. Element found!
      *
      * @param element the element to search for
      * @return true if the element is found, false otherwise
@@ -98,7 +101,7 @@ public class Tree23<E extends Comparable<E>> {
      * Recursive helper for searching an element.
      * Time Complexity: O(log n)
      *
-     * @param node    the current node being checked
+     * @param node the current node being checked
      * @param element the element to search for
      * @return true if the element is found, false otherwise
      */
@@ -131,14 +134,46 @@ public class Tree23<E extends Comparable<E>> {
 
     /**
      * Inserts an element into the tree.
-     * Time Complexity: O(log n) for the search + O(log n) for potential splits
-     * <p>
-     * Example: Inserting 4 into tree with elements [3, 5, 7]
-     * <p>
-     * Before:        After:
-     * (5)           (5)
-     * /   \         /   \
-     * (3)  (7)      (3,4) (7)
+     * Time Complexity: O(log n)
+     *
+     * EXAMPLE: Building a tree by inserting elements in order: 3, 5, 7, 9, 1, 2, 4
+     *
+     * Initial tree (empty): null
+     *
+     * After inserting 3:
+     *    (3)
+     *
+     * After inserting 5:
+     *    (3,5)
+     *
+     * After inserting 7:
+     *      (5)
+     *     /   \
+     *   (3)   (7)
+     *
+     * After inserting 9:
+     *      (5)
+     *     /   \
+     *   (3)   (7,9)
+     *
+     * After inserting 1:
+     *      (5)
+     *     /   \
+     *   (1,3) (7,9)
+     *
+     * After inserting 2:
+     *         (5)
+     *       /     \
+     *     (2)     (7,9)
+     *    /   \
+     *  (1)   (3)
+     *
+     * After inserting 4:
+     *         (5)
+     *       /     \
+     *     (2)     (7,9)
+     *    /   \
+     *  (1)   (3,4)
      *
      * @param element the element to insert
      */
@@ -170,7 +205,29 @@ public class Tree23<E extends Comparable<E>> {
      * Recursive helper for insertion that handles node splitting.
      * Time Complexity: O(log n)
      *
-     * @param node    the current node
+     * EXAMPLE: Inserting 6 into the following tree:
+     *      (5)
+     *     /   \
+     *   (3)   (7,9)
+     *
+     * Step 1: We determine 5 < 6 < 7, so we would insert into the right child (7,9)
+     *
+     * Step 2: The right child already has 2 keys, so inserting would make it overfull
+     *      (5)
+     *     /   \
+     *   (3)   (6,7,9) // Temporarily overfull
+     *
+     * Step 3: Split the overfull node
+     * - Left child: (6)
+     * - Promoted key: 7
+     * - Right child: (9)
+     *
+     * Step 4: Promote the middle key (7) to the parent, making it a 3-node
+     *      (5,7)
+     *     /  |  \
+     *   (3) (6) (9)
+     *
+     * @param node the current node
      * @param element the element to insert
      * @return NodeReturn object containing split information if a split occurred
      */
@@ -227,6 +284,26 @@ public class Tree23<E extends Comparable<E>> {
 
         // If child node was split, integrate its median key into this node
         if (result.pKey != null) {
+            // EXAMPLE: After inserting 8 into a child of node (5,7), child (9) splits
+            // and promotes 8 to this node
+            //
+            // Before:
+            //      (5,7)
+            //     /  |  \
+            //   (3) (6) (9)
+            //
+            // After child split:
+            //      (5,7)
+            //     /  |  \
+            //   (3) (6) (split: 8 promoted, with children null)
+            //
+            // After adding promoted key:
+            //      (5,7,8)  // Temporarily overfull
+            //     /  |  | \
+            //   (3) (6)(L)(R)
+            //
+            // If this node becomes overfull, it will be split in the next step
+
             int i = 0;
             while (i < node.keys.size() && result.pKey.compareTo(node.keys.get(i)) > 0) {
                 i++;
@@ -253,15 +330,21 @@ public class Tree23<E extends Comparable<E>> {
     /**
      * Splits an overfull node (3+ keys) into two nodes.
      * Time Complexity: O(1) - constant time operations
-     * <p>
-     * Example of a node split:
-     * <p>
-     * Before (overfull node): (3,5,7)
-     * <p>
+     *
+     * EXAMPLE: Splitting an overfull node with keys (3,5,7)
+     *
+     * Before (overfull node):
+     *        (3,5,7)
+     *       /  |  | \
+     *      A   B  C  D
+     *
      * After split:
-     * - Left node: (3)
+     * - Left node: (3) with children A, B
      * - Promoted key: 5
-     * - Right node: (7)
+     * - Right node: (7) with children C, D
+     *
+     * The parent of this node will then insert the promoted key 5
+     * and update its children to include the new left and right nodes.
      *
      * @param node the overfull node to split
      * @return NodeReturn object with the promoted key and new nodes
@@ -294,7 +377,26 @@ public class Tree23<E extends Comparable<E>> {
 
     /**
      * Removes an element from the tree if it exists.
-     * Time Complexity: O(log n), but with more complex rebalancing operations
+     * Time Complexity: O(log n)
+     *
+     * EXAMPLE: Removing 5 from the following tree:
+     *         (5)
+     *       /     \
+     *     (2)     (7,9)
+     *    /   \   /  |  \
+     *  (1)   (3)(6)(8)(10)
+     *
+     * Step 1: Find the node containing 5 (the root)
+     *
+     * Step 2: Since it's an internal node, replace it with its predecessor (3)
+     *         (3)
+     *       /     \
+     *     (2)     (7,9)
+     *    /       /  |  \
+     *  (1)     (6)(8)(10)
+     *
+     * Step 3: Remove 3 from its original position
+     * The resulting tree maintains its 2-3 tree properties
      *
      * @param element the element to remove
      * @return true if element was removed, false if not found
@@ -317,9 +419,9 @@ public class Tree23<E extends Comparable<E>> {
      * Recursive helper for removing an element.
      * Time Complexity: O(log n)
      *
-     * @param node       current node
-     * @param element    element to remove
-     * @param parent     parent of current node
+     * @param node current node
+     * @param element element to remove
+     * @param parent parent of current node
      * @param childIndex index of current node in parent's children
      * @return true if element was found and removed
      */
@@ -337,6 +439,11 @@ public class Tree23<E extends Comparable<E>> {
         if (keyIndex != -1) {
             // Element found in this node
             if (node.isLeaf()) {
+                // EXAMPLE: Removing 3 from a leaf node (2,3,4)
+                //
+                // Before:      After:
+                //   (2,3,4)      (2,4)
+
                 // If leaf, simply remove it
                 node.keys.remove(keyIndex);
 
@@ -347,7 +454,16 @@ public class Tree23<E extends Comparable<E>> {
 
                 return true;
             } else {
-                // If internal node, replace with predecessor or successor
+                // EXAMPLE: Removing 5 from an internal node
+                //
+                //     (5,8)                (3,8)
+                //    /  |  \              /  |  \
+                //  (3) (7) (9)          (2) (7) (9)
+                //  / \                  /
+                // (1)(2)               (1)
+                //
+                // First we replace 5 with its predecessor 3,
+                // then we recursively remove 3 from the left subtree
 
                 // Get the predecessor (rightmost element in left subtree)
                 Node predecessorNode = node.children.get(keyIndex);
@@ -391,8 +507,56 @@ public class Tree23<E extends Comparable<E>> {
      * Handles the case when a node has underflowed (has no keys).
      * Time Complexity: O(1) - constant time operations
      *
-     * @param node       the underflowing node
-     * @param parent     the parent of the underflowing node
+     * EXAMPLE 1: Borrowing from left sibling
+     *
+     * Before:
+     *        (7)
+     *      /     \
+     *    (3,5)   ()  // Empty node due to removal
+     *   /  |  \     /
+     *  (1)(4)(6)   (8)
+     *
+     * After (borrow from left):
+     *        (5)
+     *      /     \
+     *    (3)     (7)
+     *   /  \    /  \
+     *  (1)(4)  (6) (8)
+     *
+     * EXAMPLE 2: Borrowing from right sibling
+     *
+     * Before:
+     *        (5)
+     *      /     \
+     *    ()      (7,9)  // Left node empty due to removal
+     *   /       /  |  \
+     *  (3)     (6)(8)(10)
+     *
+     * After (borrow from right):
+     *        (7)
+     *      /     \
+     *    (5)     (9)
+     *   /  \    /  \
+     *  (3) (6) (8)(10)
+     *
+     * EXAMPLE 3: Merging with sibling
+     *
+     * Before:
+     *        (5)
+     *      /     \
+     *    (3)     ()  // Right node empty due to removal
+     *   /  \    /
+     *  (1) (4) (6)
+     *
+     * After (merge with right):
+     *        (3)
+     *      /     \
+     *    (1)     (5,6)
+     *            /  |  \
+     *           (4)()  ()
+     *
+     * @param node the underflowing node
+     * @param parent the parent of the underflowing node
      * @param childIndex the index of the underflowing node in parent's children
      */
     private void handleUnderflow(Node node, Node parent, int childIndex) {
@@ -465,6 +629,15 @@ public class Tree23<E extends Comparable<E>> {
      * Returns a list of all elements in the tree in ascending order.
      * Time Complexity: O(n) - must visit all nodes
      *
+     * EXAMPLE: In-order traversal of the following tree:
+     *       (5)
+     *     /     \
+     *   (2)     (7,9)
+     *  /  \    /  |  \
+     * (1) (3) (6)(8)(10)
+     *
+     * Result: [1, 2, 3, 5, 6, 7, 8, 9, 10]
+     *
      * @return list of all elements in ascending order
      */
     public List<E> inOrderTraversal() {
@@ -479,7 +652,7 @@ public class Tree23<E extends Comparable<E>> {
      * Recursive helper for in-order traversal.
      * Time Complexity: O(n)
      *
-     * @param node   current node
+     * @param node current node
      * @param result list to add elements to
      */
     private void inOrderTraversal(Node node, List<E> result) {
@@ -538,7 +711,6 @@ public class Tree23<E extends Comparable<E>> {
     }
 
     /**
-     * ToString method for debugging purposes.
      * Returns a string representation of the tree.
      *
      * @return a string representation of the tree
@@ -555,8 +727,8 @@ public class Tree23<E extends Comparable<E>> {
     /**
      * Recursive helper for toString method.
      *
-     * @param node  the current node
-     * @param sb    the StringBuilder to append to
+     * @param node the current node
+     * @param sb the StringBuilder to append to
      * @param level the current level in the tree (for indentation)
      */
     private void toString(Node node, StringBuilder sb, int level) {
