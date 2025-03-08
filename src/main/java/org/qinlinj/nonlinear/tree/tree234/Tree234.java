@@ -121,7 +121,7 @@ public class Tree234<E extends Comparable<E>> {
         int childIndex = findChildIndex(node, element);
 
         // If we're at a leaf node, element is not in the tree
-        if (childIndex >= node.children.size()) {
+        if (node.children.isEmpty() || childIndex >= node.children.size()) {
             return false;
         }
 
@@ -208,45 +208,36 @@ public class Tree234<E extends Comparable<E>> {
 
         // Handle the case where we might need to split the root
         if (root.keyCount == 3) {
-            // Ensure keyCount matches actual size
-            root.keyCount = Math.min(root.keyCount, root.keys.size());
-            if (root.keyCount < 3) {
-                // If root is not actually full, do normal insertion
-                insert(root, element);
-                size++;
-                return;
-            }
-
             // Split the root into two nodes
             Node newRoot = new Node();
             Node rightChild = new Node();
 
-            // Move the right two keys to the new right child
-            rightChild.keys.add(root.keys.get(1));
+            // Move the right key to the new right child
             rightChild.keys.add(root.keys.get(2));
-            rightChild.keyCount = 2;
+            rightChild.keyCount = 1;
+
+            // Middle key goes up to new root
+            newRoot.keys.add(root.keys.get(1));
+            newRoot.keyCount = 1;
 
             // If root had children, distribute them appropriately
             if (!root.children.isEmpty()) {
-                if (root.children.size() >= 4) {
-                    rightChild.children.add(root.children.get(2));
-                    rightChild.children.add(root.children.get(3));
-
-                    // Remove the moved children from the old root
-                    root.children.remove(3);
-                    root.children.remove(2);
-                }
+                rightChild.children.add(root.children.get(2));
+                rightChild.children.add(root.children.get(3));
             }
 
             // Update the old root (now left child)
-            E middleKey = root.keys.get(1);
             root.keys.remove(2);
             root.keys.remove(1);
             root.keyCount = 1;
 
-            // Setup the new root
-            newRoot.keys.add(middleKey);
-            newRoot.keyCount = 1;
+            if (!root.children.isEmpty()) {
+                while (root.children.size() > 2) {
+                    root.children.remove(root.children.size() - 1);
+                }
+            }
+
+            // Setup the new root's children
             newRoot.children.add(root);
             newRoot.children.add(rightChild);
 
@@ -279,29 +270,8 @@ public class Tree234<E extends Comparable<E>> {
         // Check if the child node we're about to traverse is full (has 3 keys)
         Node childNode = node.children.get(childIndex);
 
-        // First, make sure the keys list is properly synchronized with keyCount
-        childNode.keyCount = Math.min(childNode.keyCount, childNode.keys.size());
-
         if (childNode.keyCount == 3) {
             // Split the child before going down
-
-            // EXAMPLE: Splitting a full child node
-            // Before:
-            //        (20,40)
-            //       /   |   \
-            //    (10)  (30) (50,60,70) <- This node is full and needs splitting
-            //
-            // After split:
-            //        (20,40,60)
-            //       /   |   |   \
-            //    (10)  (30) (50) (70)
-
-            // Make sure we have exactly 3 keys as expected for a full node
-            if (childNode.keys.size() != 3) {
-                // If not a full node after adjustment, proceed with normal insertion
-                insert(childNode, element);
-                return;
-            }
 
             // Extract middle key and promote to parent
             E middleKey = childNode.keys.get(1);
@@ -314,23 +284,19 @@ public class Tree234<E extends Comparable<E>> {
 
             // If the child had children, distribute them appropriately
             if (!childNode.children.isEmpty()) {
-                // Make sure we have enough children
-                if (childNode.children.size() >= 4) {
-                    rightChild.children.add(childNode.children.get(2));
-                    rightChild.children.add(childNode.children.get(3));
+                rightChild.children.add(childNode.children.get(2));
+                rightChild.children.add(childNode.children.get(3));
 
-                    // Remove the moved children from the original child - from end to avoid shifting
-                    while (childNode.children.size() > 2) {
-                        childNode.children.remove(childNode.children.size() - 1);
-                    }
+                // Remove the moved children from the original child
+                while (childNode.children.size() > 2) {
+                    childNode.children.remove(childNode.children.size() - 1);
                 }
             }
 
             // Update the original child node (now left child)
             // Remove keys from end to avoid index shifting
-            while (childNode.keys.size() > 1) {
-                childNode.keys.remove(childNode.keys.size() - 1);
-            }
+            childNode.keys.remove(2);
+            childNode.keys.remove(1);
             childNode.keyCount = 1;
 
             // Add the new right child to the parent's children
@@ -339,16 +305,15 @@ public class Tree234<E extends Comparable<E>> {
             // Determine which of the two children should get the new element
             if (element.compareTo(middleKey) < 0) {
                 // Go to left child
-                childNode = node.children.get(childIndex);
+                insert(childNode, element);
             } else {
                 // Go to right child
-                childNode = node.children.get(childIndex + 1);
-                childIndex++; // Update childIndex to the new target
+                insert(rightChild, element);
             }
+        } else {
+            // Continue insertion recursively
+            insert(childNode, element);
         }
-
-        // Continue insertion recursively
-        insert(childNode, element);
     }
 
     /**
@@ -360,22 +325,12 @@ public class Tree234<E extends Comparable<E>> {
      * @param index the position to insert at
      */
     private void insertIntoNode(Node node, E element, int index) {
-        // Shift elements to make room
-        for (int i = node.keyCount; i > index; i--) {
-            if (i < node.keys.size()) {
-                node.keys.set(i, node.keys.get(i - 1));
-            } else {
-                node.keys.add(node.keys.get(i - 1));
-            }
+        // Ensure the index is valid
+        if (index > node.keyCount) {
+            index = node.keyCount;
         }
 
-        // Insert the new element
-        if (index < node.keys.size()) {
-            node.keys.set(index, element);
-        } else {
-            node.keys.add(element);
-        }
-
+        node.keys.add(index, element);
         node.keyCount++;
     }
 
@@ -410,7 +365,7 @@ public class Tree234<E extends Comparable<E>> {
     public boolean remove(E element) {
         if (isEmpty()) return false;
 
-        boolean result = remove(root, element);
+        boolean result = remove(root, element, null, -1);
 
         // If root has no keys after removal, make its only child the new root
         if (result && root.keyCount == 0 && !root.children.isEmpty()) {
@@ -427,9 +382,11 @@ public class Tree234<E extends Comparable<E>> {
      *
      * @param node current node
      * @param element element to remove
+     * @param parent parent of current node (null for root)
+     * @param nodeIndex index of current node in parent's children
      * @return true if element was found and removed
      */
-    private boolean remove(Node node, E element) {
+    private boolean remove(Node node, E element, Node parent, int nodeIndex) {
         if (node == null) return false;
 
         // Check if element is in this node
@@ -444,27 +401,19 @@ public class Tree234<E extends Comparable<E>> {
         if (keyIndex != -1) {
             // Element found in this node
             if (node.children.isEmpty()) {
-                // EXAMPLE: Removing key from a leaf node
-                // Before:         After:
-                //    (10,20,30)      (10,30)
-                //
-                // Remove the key (20) from the node
-
                 // If it's a leaf node, simply remove the key
                 node.keys.remove(keyIndex);
                 node.keyCount--;
+
+                // Handle the case where a node becomes empty
+                if (node.keyCount == 0 && parent != null) {
+                    handleEmptyNode(parent, nodeIndex);
+                }
+
                 return true;
             } else {
-                // EXAMPLE: Removing key from an internal node
-                // Before:
-                //      (20,40)
-                //     /   |   \
-                //   (10) (30) (50,60)
-                //
-                // To remove 40, find its predecessor (30)
-                // Replace 40 with 30, then remove 30 from its leaf node
-
                 // If it's an internal node, replace with predecessor and delete predecessor
+                // Find the rightmost element in the left subtree
                 Node predecessorNode = node.children.get(keyIndex);
                 while (!predecessorNode.children.isEmpty()) {
                     predecessorNode = predecessorNode.children.get(predecessorNode.keyCount);
@@ -475,7 +424,7 @@ public class Tree234<E extends Comparable<E>> {
                 node.keys.set(keyIndex, predecessor);
 
                 // Now remove the predecessor from its original position
-                return remove(node.children.get(keyIndex), predecessor);
+                return remove(node.children.get(keyIndex), predecessor, node, keyIndex);
             }
         }
 
@@ -486,10 +435,26 @@ public class Tree234<E extends Comparable<E>> {
         }
 
         // Ensure the child node has at least 2 keys before going down
-        ensureChildHasAtLeastTwoKeys(node, childIndex);
+        if (node.children.get(childIndex).keyCount < 2) {
+            ensureChildHasAtLeastTwoKeys(node, childIndex);
+        }
 
         // Recursively remove from the appropriate child
-        return remove(node.children.get(childIndex), element);
+        return remove(node.children.get(childIndex), element, node, childIndex);
+    }
+
+    /**
+     * Handle the case where a node becomes empty after removal
+     */
+    private void handleEmptyNode(Node parent, int emptyNodeIndex) {
+        // Remove the empty node
+        parent.children.remove(emptyNodeIndex);
+
+        // Adjust parent's keys if necessary
+        if (emptyNodeIndex > 0 && emptyNodeIndex <= parent.keyCount) {
+            parent.keys.remove(emptyNodeIndex - 1);
+            parent.keyCount--;
+        }
     }
 
     /**
@@ -506,24 +471,10 @@ public class Tree234<E extends Comparable<E>> {
         // If child already has at least 2 keys, nothing to do
         if (child.keyCount >= 2) return;
 
-        // EXAMPLE: Child has only 1 key and needs reinforcement
-        // Before:
-        //        (20,40,60)
-        //       /   |   |   \
-        //    (10)  (30) (50) (70)  <- We're about to go to node (30)
-        //
-        // We need to give this child more keys before proceeding
-
         // Try to borrow from left sibling
         if (childIndex > 0) {
             Node leftSibling = parent.children.get(childIndex - 1);
             if (leftSibling.keyCount > 1) {
-                // EXAMPLE: Borrowing from left sibling
-                // Before:              After:
-                //        (20,40,60)             (30,40,60)
-                //       /   |   |   \          /   |   |   \
-                //   (10,15) (30) (50) (70)   (10) (15,30) (50) (70)
-
                 // Borrow rightmost key from left sibling
                 E parentKey = parent.keys.get(childIndex - 1);
                 E siblingKey = leftSibling.keys.get(leftSibling.keyCount - 1);
@@ -550,15 +501,9 @@ public class Tree234<E extends Comparable<E>> {
         }
 
         // Try to borrow from right sibling
-        if (childIndex < parent.keyCount) {
+        if (childIndex < parent.children.size() - 1) {
             Node rightSibling = parent.children.get(childIndex + 1);
             if (rightSibling.keyCount > 1) {
-                // EXAMPLE: Borrowing from right sibling
-                // Before:              After:
-                //        (20,40,60)             (20,30,60)
-                //       /   |   |   \          /   |   |   \
-                //    (10)  (30) (45,50) (70)  (10) (30,40) (50) (70)
-
                 // Borrow leftmost key from right sibling
                 E parentKey = parent.keys.get(childIndex);
                 E siblingKey = rightSibling.keys.get(0);
@@ -588,12 +533,6 @@ public class Tree234<E extends Comparable<E>> {
 
         // Merge with left sibling if possible
         if (childIndex > 0) {
-            // EXAMPLE: Merging with left sibling
-            // Before:              After:
-            //        (20,40,60)             (40,60)
-            //       /   |   |   \          /   |   \
-            //    (10)  (30) (50) (70)   (10,20,30) (50) (70)
-
             Node leftSibling = parent.children.get(childIndex - 1);
 
             // Add parent key to left sibling
@@ -601,14 +540,12 @@ public class Tree234<E extends Comparable<E>> {
             leftSibling.keys.add(parentKey);
 
             // Add all keys from child to left sibling
-            for (int i = 0; i < child.keyCount; i++) {
-                leftSibling.keys.add(child.keys.get(i));
-            }
+            leftSibling.keys.addAll(child.keys);
             leftSibling.keyCount = leftSibling.keys.size();
 
             // Add all children from child to left sibling
-            for (int i = 0; i < child.children.size(); i++) {
-                leftSibling.children.add(child.children.get(i));
+            if (!child.children.isEmpty()) {
+                leftSibling.children.addAll(child.children);
             }
 
             // Remove the parent key and child pointer
@@ -620,13 +557,7 @@ public class Tree234<E extends Comparable<E>> {
         }
 
         // Merge with right sibling
-        if (childIndex < parent.keyCount) {
-            // EXAMPLE: Merging with right sibling
-            // Before:              After:
-            //        (20,40,60)             (20,60)
-            //       /   |   |   \          /   |   \
-            //    (10)  (30) (50) (70)   (10) (30,40,50) (70)
-
+        if (childIndex < parent.children.size() - 1) {
             Node rightSibling = parent.children.get(childIndex + 1);
 
             // Add parent key to child
@@ -634,14 +565,12 @@ public class Tree234<E extends Comparable<E>> {
             child.keys.add(parentKey);
 
             // Add all keys from right sibling to child
-            for (int i = 0; i < rightSibling.keyCount; i++) {
-                child.keys.add(rightSibling.keys.get(i));
-            }
+            child.keys.addAll(rightSibling.keys);
             child.keyCount = child.keys.size();
 
             // Add all children from right sibling to child
-            for (int i = 0; i < rightSibling.children.size(); i++) {
-                child.children.add(rightSibling.children.get(i));
+            if (!rightSibling.children.isEmpty()) {
+                child.children.addAll(rightSibling.children);
             }
 
             // Remove the parent key and right sibling pointer
