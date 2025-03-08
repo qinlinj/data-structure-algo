@@ -426,6 +426,8 @@ public class Tree23<E extends Comparable<E>> {
      * @return true if element was found and removed
      */
     private boolean remove(Node node, E element, Node parent, int childIndex) {
+        if (node == null) return false;
+
         int keyIndex = -1;
 
         // Check if the element is in this node
@@ -466,9 +468,15 @@ public class Tree23<E extends Comparable<E>> {
                 // then we recursively remove 3 from the left subtree
 
                 // Get the predecessor (rightmost element in left subtree)
-                Node predecessorNode = node.children.get(keyIndex);
-                while (!predecessorNode.children.isEmpty()) {
+                int predecessorChildIndex = Math.min(keyIndex, node.children.size() - 1);
+                Node predecessorNode = node.children.get(predecessorChildIndex);
+                while (!predecessorNode.children.isEmpty() && !predecessorNode.children.isEmpty()) {
                     predecessorNode = predecessorNode.children.get(predecessorNode.children.size() - 1);
+                }
+
+                // Make sure predecessor node has keys
+                if (predecessorNode.keys.isEmpty()) {
+                    return false;  // This should not happen in a valid 2-3 tree
                 }
 
                 // Replace the key with its predecessor
@@ -476,7 +484,7 @@ public class Tree23<E extends Comparable<E>> {
                 node.keys.set(keyIndex, predecessor);
 
                 // Now remove the predecessor
-                return remove(node.children.get(keyIndex), predecessor, node, keyIndex);
+                return remove(node.children.get(predecessorChildIndex), predecessor, node, predecessorChildIndex);
             }
         } else {
             // Element not in this node, continue search in appropriate child
@@ -487,6 +495,7 @@ public class Tree23<E extends Comparable<E>> {
                 nextChild++;
             }
 
+            // Check if we have a valid child index
             if (nextChild >= node.children.size()) {
                 return false; // Element not in tree
             }
@@ -495,7 +504,9 @@ public class Tree23<E extends Comparable<E>> {
             boolean result = remove(node.children.get(nextChild), element, node, nextChild);
 
             // Check if node needs rebalancing after removal
-            if (result && node.children.get(nextChild).keys.isEmpty()) {
+            if (result && node.children.size() > nextChild &&
+                    node.children.get(nextChild) != null &&
+                    node.children.get(nextChild).keys.isEmpty()) {
                 handleUnderflow(node.children.get(nextChild), node, nextChild);
             }
 
