@@ -287,23 +287,42 @@ public class Tree234<E extends Comparable<E>> {
 
             // Create a new node for the right half
             Node rightChild = new Node();
-            rightChild.keys.add(childNode.keys.get(2));
-            rightChild.keyCount = 1;
+
+            // Make sure we have at least 3 keys before trying to access the third one
+            if (childNode.keys.size() > 2) {
+                rightChild.keys.add(childNode.keys.get(2));
+                rightChild.keyCount = 1;
+            }
 
             // If the child had children, distribute them appropriately
             if (!childNode.children.isEmpty()) {
-                rightChild.children.add(childNode.children.get(2));
-                rightChild.children.add(childNode.children.get(3));
+                // Make sure we have enough children before removing them
+                if (childNode.children.size() > 2) {
+                    rightChild.children.add(childNode.children.get(2));
 
-                // Remove the moved children from the original child
-                childNode.children.remove(3);
-                childNode.children.remove(2);
+                    if (childNode.children.size() > 3) {
+                        rightChild.children.add(childNode.children.get(3));
+
+                        // Remove the moved children from the original child
+                        // Remove from the end to avoid index shifting
+                        childNode.children.remove(3);
+                    }
+
+                    childNode.children.remove(2);
+                }
             }
 
             // Update the original child node (now left child)
-            childNode.keys.remove(2);
-            childNode.keys.remove(1);
-            childNode.keyCount = 1;
+            // Make sure we're not trying to remove indexes that don't exist
+            if (childNode.keys.size() > 2) {
+                childNode.keys.remove(2);
+            }
+
+            if (childNode.keys.size() > 1) {
+                childNode.keys.remove(1);
+            }
+
+            childNode.keyCount = childNode.keys.size();
 
             // Add the new right child to the parent's children
             node.children.add(childIndex + 1, rightChild);
