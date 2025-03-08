@@ -54,7 +54,7 @@ import java.util.List;
  * Time Complexity: All operations (search, insert, delete) have O(log n) time complexity
  * Space Complexity: O(n) for the tree structure, O(log n) for recursive call stack
  */
-public class RBTree<E extends Comparable<E>> {
+public class LLRBTree<E extends Comparable<E>> {
     // Color constants
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -67,7 +67,7 @@ public class RBTree<E extends Comparable<E>> {
      * Constructor: Initialize an empty Red-Black tree
      * Time Complexity: O(1)
      */
-    public RBTree() {
+    public LLRBTree() {
         this.root = null;
         this.size = 0;
     }
@@ -80,7 +80,7 @@ public class RBTree<E extends Comparable<E>> {
      */
     public static void main(String[] args) {
         // Create a new Red-Black tree
-        RBTree<Integer> rbTree = new RBTree<>();
+        LLRBTree<Integer> rbTree = new LLRBTree<>();
 
         // Test insertion with visualization
         System.out.println("TESTING INSERTION:");
@@ -145,7 +145,7 @@ public class RBTree<E extends Comparable<E>> {
         System.out.println("\nTESTING WITH LARGER DATASET:");
         System.out.println("===========================");
 
-        RBTree<Integer> largeTree = new RBTree<>();
+        LLRBTree<Integer> largeTree = new LLRBTree<>();
         for (int i = 1; i <= 100; i++) {
             largeTree.add(i);
         }
