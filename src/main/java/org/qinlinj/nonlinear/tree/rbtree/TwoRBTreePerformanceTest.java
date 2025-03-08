@@ -6,7 +6,7 @@ import org.qinlinj.nonlinear.tree.binarysearchtree.BinarySearchTree;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LLRBTreeTest {
+public class TwoRBTreePerformanceTest {
     private static Random random = new Random();
 
     public static void main(String[] args) {
@@ -36,5 +36,12 @@ public class LLRBTreeTest {
         endTime = System.nanoTime();
         time = (endTime - startTime) / 1000000000.0;
         System.out.println("LLRB：" + time + " s");
+
+        startTime = System.nanoTime();
+        RBTree<Integer> rbTree = new RBTree<>();
+        for (Integer i : list) rbTree.add(i);
+        endTime = System.nanoTime();
+        time = (endTime - startTime) / 1000000000.0;
+        System.out.println("RB：" + time + " s");
     }
 }
