@@ -4,19 +4,20 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+// @formatter:off
 /**
  * AVL Tree Implementation
- * <p>
+ *
  * An AVL tree is a self-balancing binary search tree where the heights of the
  * two child subtrees of any node differ by at most one.
- * <p>
+ *
  * For example, a balanced AVL tree might look like:
- * 4
- * / \
- * 2   6
- * / \ / \
- * 1  3 5  7
- * <p>
+ *        4
+ *       / \
+ *      2   6
+ *     / \ / \
+ *    1  3 5  7
+ *
  * Each node stores its height, which is used to calculate the balance factor.
  */
 public class AVLTree<E extends Comparable<E>> {
@@ -121,15 +122,15 @@ public class AVLTree<E extends Comparable<E>> {
 
     /**
      * Right Rotation
-     * <p>
+     *
      * Before:          After:
-     * y             x
-     * / \           / \
-     * x   T4        z   y
-     * / \      ->   / \ / \
-     * z   T3        T1 T2 T3 T4
+     *      y             x
+     *     / \           / \
+     *    x   T4        z   y
+     *   / \      ->   / \ / \
+     *  z   T3        T1 T2 T3 T4
      * / \
-     * T1 T2
+     *T1 T2
      *
      * @param y the root of the subtree to rotate
      * @return the new root after rotation
@@ -151,15 +152,15 @@ public class AVLTree<E extends Comparable<E>> {
 
     /**
      * Left Rotation
-     * <p>
+     *
      * Before:        After:
-     * y             x
-     * / \           / \
-     * T4  x         y   z
-     * / \   ->  / \ / \
-     * T3  z     T4 T3 T1 T2
-     * / \
-     * T1 T2
+     *    y             x
+     *   / \           / \
+     *  T4  x         y   z
+     *     / \   ->  / \ / \
+     *    T3  z     T4 T3 T1 T2
+     *       / \
+     *      T1 T2
      *
      * @param y the root of the subtree to rotate
      * @return the new root after rotation
@@ -183,14 +184,14 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      * Adds an element to the AVL tree
      * Time Complexity: O(log n)
-     * <p>
+     *
      * Example: Adding 5 to tree [3, 2, 4]
      * Before:       After:
-     * 3            3
-     * / \          / \
-     * 2   4        2   4
-     * \
-     * 5
+     *     3            3
+     *    / \          / \
+     *   2   4        2   4
+     *                     \
+     *                      5
      *
      * @param e the element to add
      */
@@ -202,7 +203,7 @@ public class AVLTree<E extends Comparable<E>> {
      * Recursive helper method to add an element to a subtree
      *
      * @param node the root of the subtree
-     * @param e    the element to add
+     * @param e the element to add
      * @return the root of the modified subtree
      */
     private TreeNode add(TreeNode node, E e) {
@@ -304,7 +305,7 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      * Recursive helper method to find a node containing the target element
      *
-     * @param node   the root of the subtree to search
+     * @param node the root of the subtree to search
      * @param target the element to search for
      * @return the node containing the element, or null if not found
      */
@@ -323,12 +324,12 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      * Returns a list of elements in pre-order traversal
      * (Root, Left, Right)
-     * <p>
+     *
      * Example for tree:
-     * 4
-     * / \
-     * 2   6
-     * <p>
+     *     4
+     *    / \
+     *   2   6
+     *
      * Pre-order: [4, 2, 6]
      *
      * @return list of elements in pre-order
@@ -355,12 +356,12 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      * Returns a list of elements in in-order traversal
      * (Left, Root, Right)
-     * <p>
+     *
      * Example for tree:
-     * 4
-     * / \
-     * 2   6
-     * <p>
+     *     4
+     *    / \
+     *   2   6
+     *
      * In-order: [2, 4, 6]
      *
      * @return list of elements in in-order (sorted order)
@@ -387,12 +388,12 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      * Returns a list of elements in post-order traversal
      * (Left, Right, Root)
-     * <p>
+     *
      * Example for tree:
-     * 4
-     * / \
-     * 2   6
-     * <p>
+     *     4
+     *    / \
+     *   2   6
+     *
      * Post-order: [2, 6, 4]
      *
      * @return list of elements in post-order
@@ -502,17 +503,17 @@ public class AVLTree<E extends Comparable<E>> {
 
     /**
      * Recursive helper to remove an element from a subtree
-     * <p>
+     *
      * Example: Removing 3 from tree [2, 1, 3, 4]
      * Before:         After:
-     * 2               2
-     * / \             / \
-     * 1   3           1   4
-     * \
-     * 4
+     *      2               2
+     *     / \             / \
+     *    1   3           1   4
+     *         \
+     *          4
      *
      * @param node the root of the subtree
-     * @param e    the element to remove
+     * @param e the element to remove
      * @return the root of the modified subtree
      */
     private TreeNode remove(TreeNode node, E e) {
