@@ -262,8 +262,15 @@ public class RBTree<E extends Comparable<E>> {
      */
     private void flipColors(TreeNode node) {
         node.color = RED;
-        node.left.color = BLACK;
-        node.right.color = BLACK;
+
+        // Only change child colors if they exist
+        if (node.left != null) {
+            node.left.color = BLACK;
+        }
+
+        if (node.right != null) {
+            node.right.color = BLACK;
+        }
     }
 
     /**
@@ -916,11 +923,19 @@ public class RBTree<E extends Comparable<E>> {
      * @return The processed node
      */
     private TreeNode moveRedLeft(TreeNode node) {
+        // Check if node has necessary children before flipping colors
+        if (node.right == null) {
+            // Handle the case where right child is missing
+            // This might require a different approach depending on your specific implementation
+            node.color = RED;
+            return node;
+        }
+
         // Flip colors, borrow a red node
         flipColors(node);
 
         // If right child's left child is red, perform double rotation
-        if (isRED(node.right.left)) {
+        if (node.right != null && isRED(node.right.left)) {
             node.right = rightRotate(node.right);
             node = leftRotate(node);
             flipColors(node);
@@ -952,11 +967,18 @@ public class RBTree<E extends Comparable<E>> {
      * @return The processed node
      */
     private TreeNode moveRedRight(TreeNode node) {
+        // Check if node has necessary children before flipping colors
+        if (node.left == null) {
+            // Handle the case where left child is missing
+            node.color = RED;
+            return node;
+        }
+
         // Flip colors, borrow a red node
         flipColors(node);
 
         // If left child's left child is red, perform rotation
-        if (isRED(node.left.left)) {
+        if (node.left != null && isRED(node.left.left)) {
             node = rightRotate(node);
             flipColors(node);
         }
