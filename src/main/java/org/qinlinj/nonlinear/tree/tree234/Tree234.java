@@ -208,6 +208,15 @@ public class Tree234<E extends Comparable<E>> {
 
         // Handle the case where we might need to split the root
         if (root.keyCount == 3) {
+            // Ensure keyCount matches actual size
+            root.keyCount = Math.min(root.keyCount, root.keys.size());
+            if (root.keyCount < 3) {
+                // If root is not actually full, do normal insertion
+                insert(root, element);
+                size++;
+                return;
+            }
+
             // Split the root into two nodes
             Node newRoot = new Node();
             Node rightChild = new Node();
@@ -219,12 +228,14 @@ public class Tree234<E extends Comparable<E>> {
 
             // If root had children, distribute them appropriately
             if (!root.children.isEmpty()) {
-                rightChild.children.add(root.children.get(2));
-                rightChild.children.add(root.children.get(3));
+                if (root.children.size() >= 4) {
+                    rightChild.children.add(root.children.get(2));
+                    rightChild.children.add(root.children.get(3));
 
-                // Remove the moved children from the old root
-                root.children.remove(3);
-                root.children.remove(2);
+                    // Remove the moved children from the old root
+                    root.children.remove(3);
+                    root.children.remove(2);
+                }
             }
 
             // Update the old root (now left child)
@@ -267,6 +278,10 @@ public class Tree234<E extends Comparable<E>> {
 
         // Check if the child node we're about to traverse is full (has 3 keys)
         Node childNode = node.children.get(childIndex);
+
+        // First, make sure the keys list is properly synchronized with keyCount
+        childNode.keyCount = Math.min(childNode.keyCount, childNode.keys.size());
+
         if (childNode.keyCount == 3) {
             // Split the child before going down
 
@@ -281,48 +296,42 @@ public class Tree234<E extends Comparable<E>> {
             //       /   |   |   \
             //    (10)  (30) (50) (70)
 
+            // Make sure we have exactly 3 keys as expected for a full node
+            if (childNode.keys.size() != 3) {
+                // If not a full node after adjustment, proceed with normal insertion
+                insert(childNode, element);
+                return;
+            }
+
             // Extract middle key and promote to parent
             E middleKey = childNode.keys.get(1);
             insertIntoNode(node, middleKey, childIndex);
 
             // Create a new node for the right half
             Node rightChild = new Node();
-
-            // Make sure we have at least 3 keys before trying to access the third one
-            if (childNode.keys.size() > 2) {
-                rightChild.keys.add(childNode.keys.get(2));
-                rightChild.keyCount = 1;
-            }
+            rightChild.keys.add(childNode.keys.get(2));
+            rightChild.keyCount = 1;
 
             // If the child had children, distribute them appropriately
             if (!childNode.children.isEmpty()) {
-                // Make sure we have enough children before removing them
-                if (childNode.children.size() > 2) {
+                // Make sure we have enough children
+                if (childNode.children.size() >= 4) {
                     rightChild.children.add(childNode.children.get(2));
+                    rightChild.children.add(childNode.children.get(3));
 
-                    if (childNode.children.size() > 3) {
-                        rightChild.children.add(childNode.children.get(3));
-
-                        // Remove the moved children from the original child
-                        // Remove from the end to avoid index shifting
-                        childNode.children.remove(3);
+                    // Remove the moved children from the original child - from end to avoid shifting
+                    while (childNode.children.size() > 2) {
+                        childNode.children.remove(childNode.children.size() - 1);
                     }
-
-                    childNode.children.remove(2);
                 }
             }
 
             // Update the original child node (now left child)
-            // Make sure we're not trying to remove indexes that don't exist
-            if (childNode.keys.size() > 2) {
-                childNode.keys.remove(2);
+            // Remove keys from end to avoid index shifting
+            while (childNode.keys.size() > 1) {
+                childNode.keys.remove(childNode.keys.size() - 1);
             }
-
-            if (childNode.keys.size() > 1) {
-                childNode.keys.remove(1);
-            }
-
-            childNode.keyCount = childNode.keys.size();
+            childNode.keyCount = 1;
 
             // Add the new right child to the parent's children
             node.children.add(childIndex + 1, rightChild);
