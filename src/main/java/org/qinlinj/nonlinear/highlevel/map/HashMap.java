@@ -544,6 +544,81 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     /**
+     * Returns a string representation of the HashMap.
+     * Displays the map contents in the format {key1=value1, key2=value2, ...}
+     * and also shows the internal structure with buckets and chains.
+     *
+     * Time Complexity: O(n) where n is the number of key-value pairs
+     *
+     * EXAMPLE:
+     * For a HashMap containing:
+     * [0]: (K="apple",V=25) -> null
+     * [1]: (K="elderberry",V=8) -> null
+     * [2]: null
+     * [3]: (K="cherry",V=20) -> null
+     * [4]: (K="date",V=15) -> null
+     *
+     * The output would be:
+     * HashMap{size=4, capacity=5, loadFactor=0.75}
+     * {apple=25, elderberry=8, cherry=20, date=15}
+     * Internal Structure:
+     * [0]: apple->25
+     * [1]: elderberry->8
+     * [2]:
+     * [3]: cherry->20
+     * [4]: date->15
+     *
+     * @return a string representation of the map
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("HashMap{size=").append(size)
+                .append(", capacity=").append(data.length)
+                .append(", loadFactor=").append(loadFactor)
+                .append("}\n");
+
+        // Append contents in standard map format {k1=v1, k2=v2, ...}
+        sb.append("{");
+        boolean first = true;
+        for (int i = 0; i < data.length; i++) {
+            Node<K, V> curr = data[i];
+            while (curr != null) {
+                if (!first) {
+                    sb.append(", ");
+                } else {
+                    first = false;
+                }
+                sb.append(curr.key).append("=").append(curr.value);
+                curr = curr.next;
+            }
+        }
+        sb.append("}\n");
+
+        // Append internal structure visualization
+        sb.append("Internal Structure:\n");
+        for (int i = 0; i < data.length; i++) {
+            sb.append("[").append(i).append("]: ");
+            Node<K, V> curr = data[i];
+            if (curr == null) {
+                sb.append("\n");
+                continue;
+            }
+
+            while (curr != null) {
+                sb.append(curr);
+                if (curr.next != null) {
+                    sb.append(" -> ");
+                }
+                curr = curr.next;
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    /**
      * Inner class representing a node in the hash map's linked lists.
      * Each node contains a key-value pair and a reference to the next node in the chain.
      *
