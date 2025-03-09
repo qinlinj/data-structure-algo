@@ -4,7 +4,6 @@ import java.util.Queue;
 import java.util.*;
 import java.util.concurrent.*;
 
-
 // @formatter:off
 /**
  * A comprehensive test class that demonstrates the usage, inheritance relationships,
