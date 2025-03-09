@@ -62,43 +62,6 @@ public class SegmentTree {
     }
 
     /**
-     * Example usage of Segment Tree
-     */
-    public static void main(String[] args) {
-        // Example array
-        int[] arr = {1, 3, 5, 7, 9, 11};
-        System.out.println("Original Array: [1, 3, 5, 7, 9, 11]");
-
-        // Build segment tree
-        SegmentTree segTree = new SegmentTree(arr);
-        System.out.println("\nAfter building the segment tree:");
-        segTree.printTree();
-
-        // Query example
-        int l1 = 1, r1 = 3;
-        System.out.println("\nSum of range [" + l1 + ", " + r1 + "]: " + segTree.queryRange(l1, r1));
-
-        // Update range example
-        int l2 = 1, r2 = 3, val = 2;
-        System.out.println("\nUpdating range [" + l2 + ", " + r2 + "] by adding " + val + " to each element");
-        segTree.updateRange(l2, r2, val);
-        segTree.printTree();
-
-        // Query after update
-        System.out.println("\nSum of range [" + l1 + ", " + r1 + "] after update: " + segTree.queryRange(l1, r1));
-
-        // Update single element
-        int idx = 4, newVal = 12;
-        System.out.println("\nUpdating element at index " + idx + " to " + newVal);
-        segTree.update(idx, newVal);
-        segTree.printTree();
-
-        // Final query
-        int l3 = 2, r3 = 5;
-        System.out.println("\nFinal sum of range [" + l3 + ", " + r3 + "]: " + segTree.queryRange(l3, r3));
-    }
-
-    /**
      * A recursive function that builds the segment tree
      * Time Complexity: O(n) where n is the size of the input array
      *
