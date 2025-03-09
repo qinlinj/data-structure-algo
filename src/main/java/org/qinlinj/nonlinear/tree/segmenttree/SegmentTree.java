@@ -233,4 +233,74 @@ public class SegmentTree {
         // Re-compute value for this node after children updates
         tree[node] = tree[leftChild] + tree[rightChild];
     }
+
+    /**
+     * Queries the sum in a given range
+     * Time Complexity: O(log n)
+     *
+     * @param l left bound of the query range
+     * @param r right bound of the query range
+     * @return sum of elements in range [l, r]
+     */
+    public int queryRange(int l, int r) {
+        return queryRange(0, 0, n - 1, l, r);
+    }
+
+    /**
+     * Helper method to query the sum in a given range
+     * Time Complexity: O(log n)
+     *
+     * @param node current node index in the segment tree
+     * @param start start index of the segment represented by current node
+     * @param end end index of the segment represented by current node
+     * @param l left bound of the query range
+     * @param r right bound of the query range
+     * @return sum of elements in range [l, r]
+     *
+     * Example: For array [1, 3, 5, 7, 9, 11], querying range [2-4]
+     * Initial call: queryRange(0, 0, 5, 2, 4)
+     *
+     * Let's assume we've done the update from previous example, so tree is:
+     *                  [0-5]:42
+     *                 /       \
+     *         [0-2]:13        [3-5]:29
+     *         /     \         /     \
+     *    [0-1]:6   [2]:7  [3-4]:18  [5]:11
+     *    /    \           /    \
+     * [0]:1  [1]:5     [3]:9  [4]:9
+     *
+     * Query process:
+     * 1. Check node 0 [0-5]: Partial overlap, recurse to children
+     * 2. Check node 1 [0-2]: Partial overlap, recurse to children
+     * 3. Check node 3 [0-1]: No overlap, return 0
+     * 4. Check node 4 [2]: Full overlap, return 7
+     * 5. Check node 2 [3-5]: Partial overlap, recurse to children
+     * 6. Check node 5 [3-4]: Full overlap, return 18
+     * 7. Check node 6 [5]: No overlap, return 0
+     * 8. Sum results: 0 + 7 + 18 + 0 = 25
+     */
+    private int queryRange(int node, int start, int end, int l, int r) {
+        // First, push any pending lazy updates
+        pushDown(node, start, end);
+
+        // If current segment is outside the query range, return 0
+        if (start > r || end < l) {
+            return 0;
+        }
+
+        // If current segment is fully within the query range
+        if (start >= l && end <= r) {
+            return tree[node];
+        }
+
+        // If current segment is partially overlapped, recurse to children
+        int mid = (start + end) / 2;
+        int leftChild = 2 * node + 1;
+        int rightChild = 2 * node + 2;
+
+        int leftSum = queryRange(leftChild, start, mid, l, r);
+        int rightSum = queryRange(rightChild, mid + 1, end, l, r);
+
+        return leftSum + rightSum;
+    }
 }
