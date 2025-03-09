@@ -3,7 +3,9 @@ package org.qinlinj.nonlinear.graph.bfs;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class GraphBFS {
     private Graph g;
@@ -20,5 +22,26 @@ public class GraphBFS {
             if (!visited[v]) bfs(v);
         }
     }
+
+    private void bfs(int v) {
+        if (g == null) return;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        visited[v] = true;
+
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            res.add(curr);
+
+            for (int w : g.adj(curr)) {
+                if (!visited[w]) {
+                    queue.add(w);
+                    visited[w] = true;
+                }
+            }
+        }
+    }
+
+
 }
 
