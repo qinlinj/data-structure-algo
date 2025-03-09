@@ -88,55 +88,56 @@ public class BPlusTree<K extends Comparable<K>, V> {
         return root.search(key);
     }
 
-    /**
-     * Inserts a key-value pair into the B+ tree.
-     *
-     * Time Complexity: O(log n) where n is the total number of keys in the tree
-     *
-     * EXAMPLE:
-     * Inserting (12, "value") into this B+ tree:
-     *                  [10, 20]
-     *                 /    |    \
-     *         [3, 7]     [15]    [25, 30]
-     *           |         |        |
-     * [3, 7] <-> [10, 15] <-> [20, 25, 30]
-     *
-     * Step 1: Start at root and traverse to leaf node containing [10, 15]
-     * Step 2: Insert key 12 into leaf node, now [10, 12, 15]
-     * Step 3: No split needed, tree remains unchanged structurally
-     *
-     * @param key the key to insert
-     * @param value the value to associate with the key
-     */
-    public void insert(K key, V value) {
-        Node newNode = root.insert(key, value);
+/**
+ * Inserts a key-value pair into the B+ tree.
+ *
+ * Time Complexity: O(log n) where n is the total number of keys in the tree
+ *
+ * EXAMPLE:
+ * Inserting (12, "value") into this B+ tree:
+ *                  [10, 20]
+ *                 /    |    \
+ *         [3, 7]     [15]    [25, 30]
+ *           |         |        |
+ * [3, 7] <-> [10, 15] <-> [20, 25, 30]
+ *
+ * Step 1: Start at root and traverse to leaf node containing [10, 15]
+ * Step 2: Insert key 12 into leaf node, now [10, 12, 15]
+ * Step 3: No split needed, tree remains unchanged structurally
+ *
+ * @param key the key to insert
+ * @param value the value to associate with the key
+ */
+public void insert(K key, V value) {
+    Node newNode = root.insert(key, value);
 
-        // If root was split, create new root
-        if (newNode != null) {
-            InternalNode newRoot = new InternalNode();
+    // If root was split, create new root
+    if (newNode != null) {
+        InternalNode newRoot = new InternalNode();
 
-            // First routing key
-            K firstKey;
-            if (newNode instanceof LeafNode) {
-                firstKey = ((LeafNode) newNode).keys.get(0);
-            } else {
-                firstKey = ((InternalNode) newNode).keys.get(0);
-                ((InternalNode) newNode).keys.remove(0);
-            }
-
-            newRoot.keys.add(firstKey);
-            newRoot.children.add(root);
-            newRoot.children.add(newNode);
-
-            root = newRoot;
-            height++;
+        // First routing key
+        K firstKey;
+        if (newNode instanceof LeafNode) {
+            firstKey = ((LeafNode) newNode).keys.get(0);
+        } else {
+            firstKey = ((InternalNode) newNode).keys.get(0);
+            ((InternalNode) newNode).keys.remove(0);
         }
 
-        // Update firstLeaf pointer if needed
-        if (firstLeaf.keys.isEmpty() && firstLeaf.next != null) {
-            firstLeaf = firstLeaf.next;
-        }
+        newRoot.keys.add(firstKey);
+        newRoot.children.add(root);
+        newRoot.children.add(newNode);
+
+        root = newRoot;
+        height++;
     }
+
+    // Update firstLeaf pointer if needed
+    if (firstLeaf.keys.isEmpty() && firstLeaf.next != null) {
+        firstLeaf = firstLeaf.next;
+        firstLeaf.prev = null;
+    }
+}
 
     /**
      * Deletes a key from the B+ tree.
@@ -317,25 +318,30 @@ public class BPlusTree<K extends Comparable<K>, V> {
      * @param sb the StringBuilder to append to
      */
     private void toString(Node node, int level, StringBuilder sb) {
-        // Add indentation based on level
-        for (int i = 0; i < level; i++) {
-            sb.append("  ");
+        // Add line for current level
+        sb.append(String.format("Level %d: ", level));
+
+        // Print keys for this node
+        sb.append("[");
+        for (int i = 0; i < node.keys.size(); i++) {
+            sb.append(node.keys.get(i));
+            if (i < node.keys.size() - 1) {
+                sb.append(", ");
+            }
         }
+        sb.append("]");
 
-        // Print keys
-        sb.append(node.keys);
-
-        // For leaf nodes, also print values
+        // Print an indicator if this is a leaf
         if (node instanceof LeafNode) {
-            sb.append(" -> ").append(((LeafNode) node).values);
+            sb.append(" (leaf)");
         }
         sb.append("\n");
 
-        // Recursively print children for internal nodes
+        // Print children for internal nodes
         if (node instanceof InternalNode) {
             InternalNode internalNode = (InternalNode) node;
-            for (Node child : internalNode.children) {
-                toString(child, level + 1, sb);
+            for (int i = 0; i < internalNode.children.size(); i++) {
+                toString(internalNode.children.get(i), level + 1, sb);
             }
         }
     }
@@ -405,6 +411,10 @@ public class BPlusTree<K extends Comparable<K>, V> {
     private int computeHeight(Node node) {
         int h = 1;
         while (node instanceof InternalNode) {
+            // Make sure the node has children before traversing down
+            if (((InternalNode) node).children.isEmpty()) {
+                break;
+            }
             node = ((InternalNode) node).children.get(0);
             h++;
         }
@@ -424,8 +434,13 @@ public class BPlusTree<K extends Comparable<K>, V> {
      * @return true if the subtree is valid, false otherwise
      */
     private boolean isValidNode(Node node, K lowerBound, K upperBound, int expectedLeafLevel, int currentLevel) {
-        // Check if node has the right number of keys
-        if (node != root && (node.keys.size() < (t + 1) / 2 - 1 || node.keys.size() >= t)) {
+        // Skip validation for empty nodes
+        if (node.keys.isEmpty() && !(node instanceof LeafNode && node == firstLeaf)) {
+            return false;
+        }
+
+        // Check if node has the right number of keys (except root)
+        if (node != root && node.keys.size() < (t + 1) / 2 - 1) {
             return false;
         }
 
@@ -451,6 +466,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
 
         // For internal nodes, recursively check children
         InternalNode internalNode = (InternalNode) node;
+
+        // Skip validation for internal nodes with no children
+        if (internalNode.children.isEmpty()) {
+            return false;
+        }
 
         // Check if number of children is correct
         if (internalNode.children.size() != internalNode.keys.size() + 1) {
@@ -713,20 +733,37 @@ public class BPlusTree<K extends Comparable<K>, V> {
             int mid = keys.size() / 2;
             InternalNode newNode = new InternalNode();
 
-            // Copy the right half of keys to the new node
-            newNode.keys = new ArrayList<>(keys.subList(mid + 1, keys.size()));
+            // Copy the right half of keys to the new node (excluding the middle key)
+            if (mid + 1 < keys.size()) {
+                newNode.keys = new ArrayList<>(keys.subList(mid + 1, keys.size()));
+            } else {
+                newNode.keys = new ArrayList<>();
+            }
 
             // Copy the right half of children to the new node
-            newNode.children = new ArrayList<>(children.subList(mid + 1, children.size()));
+            if (mid + 1 < children.size()) {
+                newNode.children = new ArrayList<>(children.subList(mid + 1, children.size()));
+            } else {
+                newNode.children = new ArrayList<>();
+            }
+
+            // Add the middle key as the first key of the new node (it will move up to the parent)
+            if (mid < keys.size()) {
+                K middleKey = keys.get(mid);
+                newNode.keys.add(0, middleKey);
+            }
 
             // Keep left half of keys in this node
-            keys = new ArrayList<>(keys.subList(0, mid));
+            if (mid > 0) {
+                keys = new ArrayList<>(keys.subList(0, mid));
+            } else {
+                keys.clear();
+            }
 
-            // Keep left half of children plus the middle child in this node
-            children = new ArrayList<>(children.subList(0, mid + 1));
-
-            // The middle key is to be inserted in the parent (will be the first key of new node)
-            newNode.keys.add(0, keys.get(mid));
+            // Keep left half of children in this node
+            if (mid + 1 < children.size()) {
+                children = new ArrayList<>(children.subList(0, mid + 1));
+            }
 
             return newNode;
         }
@@ -752,6 +789,12 @@ public class BPlusTree<K extends Comparable<K>, V> {
         @Override
         public boolean delete(K key) {
             int childIndex = getChildIndex(key);
+
+            // Make sure childIndex is within bounds
+            if (childIndex >= children.size()) {
+                return false;
+            }
+
             Node childNode = children.get(childIndex);
             boolean deleted = childNode.delete(key);
 
@@ -766,7 +809,10 @@ public class BPlusTree<K extends Comparable<K>, V> {
             }
 
             // Update routing keys if necessary
-            if (childIndex > 0 && childNode instanceof LeafNode && !((LeafNode) childNode).keys.isEmpty()) {
+            // Only update if childIndex > 0 (has a key before it), the child is a leaf node,
+            // and the child has at least one key
+            if (childIndex > 0 && childIndex - 1 < keys.size() &&
+                    childNode instanceof LeafNode && !((LeafNode) childNode).keys.isEmpty()) {
                 keys.set(childIndex - 1, ((LeafNode) childNode).keys.get(0));
             }
 
@@ -805,7 +851,7 @@ public class BPlusTree<K extends Comparable<K>, V> {
             if (childIndex > 0) {
                 // Merge with left sibling
                 mergeWithLeftSibling(childIndex);
-            } else {
+            } else if (childIndex < children.size() - 1) {
                 // Merge with right sibling
                 mergeWithRightSibling(childIndex);
             }
@@ -826,6 +872,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
                 InternalNode internalChild = (InternalNode) child;
                 InternalNode internalLeftSibling = (InternalNode) leftSibling;
 
+                // Make sure left sibling has keys and children
+                if (internalLeftSibling.keys.isEmpty() || internalLeftSibling.children.isEmpty()) {
+                    return;
+                }
+
                 // Move parent key down to child
                 internalChild.keys.add(0, keys.get(childIndex - 1));
 
@@ -837,6 +888,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
             } else {
                 LeafNode leafChild = (LeafNode) child;
                 LeafNode leafLeftSibling = (LeafNode) leftSibling;
+
+                // Make sure left sibling has keys and values
+                if (leafLeftSibling.keys.isEmpty() || leafLeftSibling.values.isEmpty()) {
+                    return;
+                }
 
                 // Move last key-value pair from left sibling to child
                 K lastKey = leafLeftSibling.keys.remove(leafLeftSibling.keys.size() - 1);
@@ -865,6 +921,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
                 InternalNode internalChild = (InternalNode) child;
                 InternalNode internalRightSibling = (InternalNode) rightSibling;
 
+                // Make sure right sibling has keys and children
+                if (internalRightSibling.keys.isEmpty() || internalRightSibling.children.isEmpty()) {
+                    return;
+                }
+
                 // Move parent key down to child
                 internalChild.keys.add(keys.get(childIndex));
 
@@ -876,6 +937,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
             } else {
                 LeafNode leafChild = (LeafNode) child;
                 LeafNode leafRightSibling = (LeafNode) rightSibling;
+
+                // Make sure right sibling has keys and values
+                if (leafRightSibling.keys.isEmpty() || leafRightSibling.values.isEmpty()) {
+                    return;
+                }
 
                 // Move first key-value pair from right sibling to child
                 K firstKey = leafRightSibling.keys.remove(0);
@@ -908,6 +974,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
          * @param childIndex the index of the child to merge
          */
         private void mergeWithLeftSibling(int childIndex) {
+            // Make sure indices are within bounds
+            if (childIndex <= 0 || childIndex >= children.size() || childIndex - 1 >= keys.size()) {
+                return;
+            }
+
             Node child = children.get(childIndex);
             Node leftSibling = children.get(childIndex - 1);
             K parentKey = keys.remove(childIndex - 1);
@@ -949,6 +1020,11 @@ public class BPlusTree<K extends Comparable<K>, V> {
          * @param childIndex the index of the child to merge
          */
         private void mergeWithRightSibling(int childIndex) {
+            // Make sure indices are within bounds
+            if (childIndex >= children.size() - 1 || childIndex >= keys.size()) {
+                return;
+            }
+
             Node child = children.get(childIndex);
             Node rightSibling = children.get(childIndex + 1);
             K parentKey = keys.remove(childIndex);
@@ -1120,12 +1196,19 @@ public class BPlusTree<K extends Comparable<K>, V> {
             LeafNode newNode = new LeafNode();
 
             // Copy the right half of keys and values to the new node
-            newNode.keys = new ArrayList<>(keys.subList(mid, keys.size()));
-            newNode.values = new ArrayList<>(values.subList(mid, values.size()));
+            if (mid < keys.size()) {
+                newNode.keys = new ArrayList<>(keys.subList(mid, keys.size()));
+                newNode.values = new ArrayList<>(values.subList(mid, values.size()));
+            } else {
+                newNode.keys = new ArrayList<>();
+                newNode.values = new ArrayList<>();
+            }
 
             // Keep the left half of keys and values in this node
-            keys = new ArrayList<>(keys.subList(0, mid));
-            values = new ArrayList<>(values.subList(0, mid));
+            if (mid > 0) {
+                keys = new ArrayList<>(keys.subList(0, mid));
+                values = new ArrayList<>(values.subList(0, mid));
+            }
 
             // Update leaf node links
             newNode.next = this.next;
