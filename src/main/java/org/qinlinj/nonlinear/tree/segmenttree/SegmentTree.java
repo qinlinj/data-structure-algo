@@ -363,12 +363,113 @@ public class SegmentTree {
      * Utility method to print the segment tree
      * Useful for debugging
      */
-    public void printTree() {
+    public void printTreeSimple() {
         System.out.println("Segment Tree Structure:");
         for (int i = 0; i < tree.length; i++) {
             if (tree[i] != 0) {
                 System.out.println("Node " + i + ": " + tree[i] + (lazy[i] != 0 ? " (Lazy: " + lazy[i] + ")" : ""));
             }
+        }
+    }
+
+    /**
+     * Utility method to print the segment tree in a visual tree-like structure
+     * Makes it easier to understand the shape and values of the tree
+     */
+    public void printTree() {
+        System.out.println("Segment Tree Visual Structure:");
+
+        // Get the height of the tree
+        int height = (int) (Math.ceil(Math.log(n) / Math.log(2)));
+        int maxHeight = height + 1; // Include leaf level
+
+        // Create a 2D character array to represent the tree
+        int maxWidth = 80; // Fixed width for better alignment
+        String[][] treeArray = new String[maxHeight * 2][maxWidth];
+
+        // Initialize the array with spaces
+        for (int i = 0; i < treeArray.length; i++) {
+            treeArray[i] = new String[maxWidth];
+            for (int j = 0; j < maxWidth; j++) {
+                treeArray[i][j] = " ";
+            }
+        }
+
+        // Fill the array with the tree structure
+        fillTreeArray(0, 0, n - 1, 0, 0, maxWidth - 1, treeArray);
+
+        // Print the array
+        for (String[] row : treeArray) {
+            boolean nonEmpty = false;
+            for (String cell : row) {
+                if (!cell.equals(" ")) {
+                    nonEmpty = true;
+                    break;
+                }
+            }
+
+            if (nonEmpty) {
+                StringBuilder rowStr = new StringBuilder();
+                for (String cell : row) {
+                    rowStr.append(cell);
+                }
+                System.out.println(rowStr.toString().replaceAll("\\s+$", ""));
+            }
+        }
+    }
+
+    /**
+     * Helper method to fill the 2D array with the tree structure
+     *
+     * @param node current node index in the segment tree
+     * @param start start index of the segment represented by current node
+     * @param end end index of the segment represented by current node
+     * @param level current level in the tree
+     * @param left left boundary of the current node's position
+     * @param right right boundary of the current node's position
+     * @param treeArray the 2D array to fill
+     */
+    private void fillTreeArray(int node, int start, int end, int level, int left, int right, String[][] treeArray) {
+        if (node >= tree.length || left > right) {
+            return;
+        }
+
+        int mid = (left + right) / 2;
+
+        // Create node string with range and value
+        String nodeStr;
+        if (lazy[node] != 0) {
+            nodeStr = String.format("[%d-%d]:%d(+%d)", start, end, tree[node], lazy[node]);
+        } else {
+            nodeStr = String.format("[%d-%d]:%d", start, end, tree[node]);
+        }
+
+        // Calculate position to place the node string
+        int pos = mid - nodeStr.length() / 2;
+        for (int i = 0; i < nodeStr.length(); i++) {
+            if (pos + i < treeArray[level].length) {
+                treeArray[level][pos + i] = String.valueOf(nodeStr.charAt(i));
+            }
+        }
+
+        // If not a leaf node, add connecting lines and process children
+        if (start != end) {
+            int segMid = (start + end) / 2;
+            int leftChild = 2 * node + 1;
+            int rightChild = 2 * node + 2;
+
+            // Calculate branch positions with better spacing
+            int leftBranchPos = (left + mid - nodeStr.length()/4) / 2;
+            int rightBranchPos = (mid + nodeStr.length()/4 + right) / 2;
+
+            // Add connecting characters
+            treeArray[level + 1][leftBranchPos] = "/";
+            treeArray[level + 1][rightBranchPos] = "\\";
+
+            // Process children with adjusted spacing
+            int childWidth = (right - left) / 2;
+            fillTreeArray(leftChild, start, segMid, level + 2, left, mid - 1, treeArray);
+            fillTreeArray(rightChild, segMid + 1, end, level + 2, mid + 1, right, treeArray);
         }
     }
 }
