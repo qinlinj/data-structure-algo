@@ -114,4 +114,123 @@ public class SegmentTree {
          * ... and so on
          */
     }
+
+    /**
+     * Pushes lazy updates from current node to its children
+     * Time Complexity: O(1)
+     *
+     * @param node current node index in the segment tree
+     * @param start start index of the segment represented by current node
+     * @param end end index of the segment represented by current node
+     *
+     * Example: If we had a lazy update of +2 at node 1 (representing range [0-2])
+     * Before propagation:
+     *         [0-2]:9(+2)    <-- node with pending lazy update
+     *         /     \
+     *    [0-1]:4   [2]:5     <-- children don't have the update yet
+     *
+     * After propagation:
+     *         [0-2]:15       <-- node updated (9 + 2*3 = 15)
+     *         /     \
+     *    [0-1]:4(+2) [2]:5(+2) <-- lazy update pushed to children
+     */
+    private void pushDown(int node, int start, int end) {
+        if (lazy[node] != 0) {
+            // Update current node with lazy value
+            // Note: multiply by (end-start+1) as this is the number of elements in this range
+            tree[node] += lazy[node] * (end - start + 1);
+
+            // If not leaf node, propagate lazy update to children
+            if (start != end) {
+                int leftChild = 2 * node + 1;
+                int rightChild = 2 * node + 2;
+
+                lazy[leftChild] += lazy[node];
+                lazy[rightChild] += lazy[node];
+            }
+
+            // Reset lazy value for current node
+            lazy[node] = 0;
+        }
+    }
+
+    /**
+     * Updates a range of elements in the segment tree
+     * Time Complexity: O(log n)
+     *
+     * @param l left bound of the range to update
+     * @param r right bound of the range to update
+     * @param val value to add to each element in the range
+     */
+    public void updateRange(int l, int r, int val) {
+        updateRange(0, 0, n - 1, l, r, val);
+    }
+
+    /**
+     * Helper method to update a range of elements in the segment tree
+     * Time Complexity: O(log n)
+     *
+     * @param node current node index in the segment tree
+     * @param start start index of the segment represented by current node
+     * @param end end index of the segment represented by current node
+     * @param l left bound of the update range
+     * @param r right bound of the update range
+     * @param val value to add to each element in the range
+     *
+     * Example: For array [1, 3, 5, 7, 9, 11], updating range [1-3] with +2
+     * Initial call: updateRange(0, 0, 5, 1, 3, 2)
+     *
+     * Before update:
+     *                  [0-5]:36
+     *                 /       \
+     *         [0-2]:9         [3-5]:27
+     *         /     \         /     \
+     *    [0-1]:4   [2]:5  [3-4]:16  [5]:11
+     *    /    \           /    \
+     * [0]:1  [1]:3     [3]:7  [4]:9
+     *
+     * After update:
+     *                  [0-5]:42 (+6)
+     *                 /       \
+     *         [0-2]:13 (+4)    [3-5]:29 (+2)
+     *         /     \          /     \
+     *    [0-1]:6 (+2) [2]:7 (+2) [3-4]:18 (+2) [5]:11
+     *    /    \               /    \
+     * [0]:1  [1]:5 (+2)     [3]:9 (+2) [4]:9
+     *
+     * Note: The nodes that fully contain [1-3] are updated with lazy propagation
+     */
+    private void updateRange(int node, int start, int end, int l, int r, int val) {
+        // First, push any pending lazy updates
+        pushDown(node, start, end);
+
+        // If current segment is outside the update range, return
+        if (start > r || end < l) {
+            return;
+        }
+
+        // If current segment is fully within the update range
+        if (start >= l && end <= r) {
+            // Update this node and mark children for lazy update
+            tree[node] += val * (end - start + 1);
+
+            // If not leaf node, set lazy values for children
+            if (start != end) {
+                lazy[2 * node + 1] += val;
+                lazy[2 * node + 2] += val;
+            }
+            return;
+        }
+
+        // If current segment is partially overlapped, recurse to children
+        int mid = (start + end) / 2;
+        int leftChild = 2 * node + 1;
+        int rightChild = 2 * node + 2;
+
+        updateRange(leftChild, start, mid, l, r, val);
+        updateRange(rightChild, mid + 1, end, l, r, val);
+
+        // Re-compute value for this node after children updates
+        tree[node] = tree[leftChild] + tree[rightChild];
+    }
 }
