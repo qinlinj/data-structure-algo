@@ -11,7 +11,7 @@ package org.qinlinj.nonlinear.highlevel.set;
  *
  * @param <E> the type of elements in the set
  */
-public class HashSetOpenAddressImplementation<E> implements Set<E> {
+public class HashSetOpenAddressingImplementation<E> implements Set<E> {
     // Internal array to store hash set items
     private Item<E>[] items;
 
@@ -27,7 +27,7 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
     /**
      * Default constructor initializes the hash set with a default capacity.
      */
-    public HashSetOpenAddressImplementation() {
+    public HashSetOpenAddressingImplementation() {
         // Initial capacity of 10, can grow dynamically
         this.items = new Item[10];
         this.size = 0;
@@ -39,7 +39,7 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
      *
      * @param loadFactor threshold for resizing the hash set
      */
-    public HashSetOpenAddressImplementation(int loadFactor) {
+    public HashSetOpenAddressingImplementation(int loadFactor) {
         this();
         this.loadFactor = loadFactor;
     }
@@ -49,7 +49,7 @@ public class HashSetOpenAddressImplementation<E> implements Set<E> {
      */
     public static void main(String[] args) {
         // Create a new set and test its functionality
-        Set<Integer> set = new HashSetOpenAddressImplementation<>();
+        Set<Integer> set = new HashSetOpenAddressingImplementation<>();
         set.add(11);
         set.add(21);
 
