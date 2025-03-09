@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.bfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.ArrayList;
@@ -21,6 +22,12 @@ public class GraphBFS {
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) bfs(v);
         }
+    }
+
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        GraphBFS graphBFS = new GraphBFS(g);
+        System.out.println(graphBFS.getRes());
     }
 
     private void bfs(int v) {
@@ -45,7 +52,5 @@ public class GraphBFS {
     public List<Integer> getRes() {
         return res;
     }
-
-
 }
 
