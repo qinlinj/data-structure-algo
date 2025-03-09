@@ -11,8 +11,8 @@ public class SkipListTest {
      * <p>
      * Example visualization of a SkipList with 3 levels and elements 3, 6, 9:
      * <p>
-     * Level 2:  head --------------------------> 9 -------> null
-     * Level 1:  head ------------> 6 ---------> 9 -------> null
+     * Level 2:  head ------------------------> 9 -------> null
+     * Level 1:  head -----------> 6 --------> 9 -------> null
      * Level 0:  head --> 3 -----> 6 ---------> 9 -------> null
      *
      * @param list The SkipList to visualize
@@ -153,9 +153,9 @@ public class SkipListTest {
         /* Expected final structure (levels will vary due to randomness):
          *
          * Level 3:  head ---------------------------------------------> 9 -------> null
-         * Level 2:  head --------------------------> 7 --------------> 9 -------> null
-         * Level 1:  head ----------> 4 ------------> 7 --------------> 9 -------> null
-         * Level 0:  head --> 1 -> 2 -> 3 -> 4 ----> 6 -> 7 ---------> 9 -------> null
+         * Level 2:  head ------------------------------> 7 -----------> 9 -------> null
+         * Level 1:  head -----------------> 4 ---------> 7 -----------> 9 -------> null
+         * Level 0:  head --> 1 -> 2 -> 3 -> 4 ----> 6 -> 7 -----------> 9 -------> null
          */
 
         // Search for elements
@@ -184,10 +184,10 @@ public class SkipListTest {
 
         /* Expected structure after removing 4:
          *
-         * Level 3:  head ---------------------------------------------> 9 -------> null
-         * Level 2:  head --------------------------> 7 --------------> 9 -------> null
-         * Level 1:  head --------------------------> 7 --------------> 9 -------> null
-         * Level 0:  head --> 1 -> 2 -> 3 ---------> 6 -> 7 ---------> 9 -------> null
+         * Level 3:  head ------------------------------------------> 9 -------> null
+         * Level 2:  head -----------------------------> 7 ---------> 9 -------> null
+         * Level 1:  head -----------------------------> 7 ---------> 9 -------> null
+         * Level 0:  head --> 1 -> 2 -> 3 --------> 6 -> 7 ---------> 9 -------> null
          */
 
         skipList.remove(1);
@@ -196,10 +196,10 @@ public class SkipListTest {
 
         /* Expected structure after removing 1:
          *
-         * Level 3:  head ---------------------------------------------> 9 -------> null
-         * Level 2:  head --------------------------> 7 --------------> 9 -------> null
-         * Level 1:  head --------------------------> 7 --------------> 9 -------> null
-         * Level 0:  head -----> 2 -> 3 -------------> 6 -> 7 ---------> 9 -------> null
+         * Level 3:  head ---------------------------------------> 9 -------> null
+         * Level 2:  head --------------------------> 7 ---------> 9 -------> null
+         * Level 1:  head --------------------------> 7 ---------> 9 -------> null
+         * Level 0:  head -----> 2 -> 3 -------> 6 -> 7 ---------> 9 -------> null
          */
 
         // Test removing a non-existent element

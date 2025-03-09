@@ -2,12 +2,45 @@ package org.qinlinj.nonlinear.highlevel.skiplist;
 
 import java.util.Random;
 
+// @formatter:off
 /**
- * SkipList implementation for efficient search, insertion and deletion operations.
- * A skip list is a probabilistic data structure that allows O(log n) search complexity
- * as well as O(log n) insertion and deletion complexity within an ordered sequence.
- * <p>
- * This implementation uses a maximum of 16 levels, including the base level (original linked list).
+ * SkipList Implementation
+ * =======================
+ *
+ * CONCEPT AND PRINCIPLES:
+ * A skip list is a probabilistic data structure that enhances a linked list with additional "express lanes" to
+ * enable fast search, insertion and deletion operations. It's designed to achieve O(log n) time complexity for these
+ * operations, similar to balanced trees, but with simpler implementation and less overhead.
+ *
+ * STRUCTURE:
+ * 1. The base level (level 0) is a regular sorted linked-list containing all elements.
+ * 2. Higher levels act as "express lanes" with progressively fewer elements.
+ * 3. Each node may appear in multiple levels, with decreasing probability at higher levels.
+ * 4. Each node at level i appears at level i+1 with probability p (typically 0.5).
+ *
+ * VISUAL REPRESENTATION:
+ * Consider a skip list with elements [1, 3, 6, 9, 12, 17, 19, 21, 25]:
+ *
+ * Level 3: head --------------------------------------------------------> 19 -------> null
+ * Level 2: head --------------------> 9 ----------------> 19 --------> 25 ----------> null
+ * Level 1: head --------> 3 --------> 9 --------> 17 ----> 19 --------> 25 ---------> null
+ * Level 0: head -> 1 -> 3 -> 6 -> 9 -> 12 -> 17 -> 19 -> 21 -> 25 -> null
+ *
+ * ADVANTAGES:
+ * 1. Simpler implementation than balanced trees (AVL, Red-Black)
+ * 2. Almost as efficient as balanced trees for search, insert, delete (O(log n) expected time)
+ * 3. Natural support for range queries
+ * 4. More memory efficient than many tree implementations for certain workloads
+ * 5. Good cache locality due to sequential access patterns
+ * 6. Self-adjusting structure without expensive rebalancing operations
+ * 7. Excellent for concurrent access with proper implementation
+ *
+ * APPLICATIONS:
+ * - Database indexing
+ * - Priority queues
+ * - Implementing sorted sets and maps
+ * - In-memory caches
+ * - Sparse arrays
  *
  * @param <E> Type of elements stored in the skip list, must implement Comparable interface
  */
@@ -25,6 +58,11 @@ public class SkipList<E extends Comparable<E>> {
      * Constructs a new empty SkipList.
      * Initializes the level count to 1 (just the base level)
      * and creates a dummy head node with a sentinel value.
+     *
+     * Time Complexity: O(1)
+     *
+     * INITIAL STATE:
+     * Level 0: head -> null
      */
     public SkipList() {
         this.levelCount = 1;
@@ -33,6 +71,9 @@ public class SkipList<E extends Comparable<E>> {
 
     /**
      * Checks if the skip list contains a specified element.
+     * Simply delegates to the get method and checks if a non-null result is returned.
+     *
+     * Time Complexity: O(log n) expected, O(n) worst case
      *
      * @param e The element to search for
      * @return true if the element is found, false otherwise
@@ -45,6 +86,23 @@ public class SkipList<E extends Comparable<E>> {
      * Searches for a node containing the specified element.
      * The search begins at the highest level of the skip list and works down,
      * taking advantage of the skip list structure for efficient search.
+     *
+     * Time Complexity: O(log n) expected, O(n) worst case
+     *
+     * EXAMPLE:
+     * Consider searching for element 17 in this skip list:
+     *
+     * Level 2: head --------------------> 9 ----------------> 19 ---------> null
+     * Level 1: head --------> 3 --------> 9 --------> 17 ----> 19 --------> null
+     * Level 0: head --> 1 --> 3 --> 6 --> 9 --> 12 -> 17 ----> 19 --------> null
+     *
+     * Search steps:
+     * 1. Start at head, level 2
+     * 2. At level 2: head -> 9 (can advance since 9 < 17)
+     * 3. At level 2: 9 -> 19 (stop since 19 > 17)
+     * 4. Drop to level 1 at node 9
+     * 5. At level 1: 9 -> 17 (found exact match)
+     * 6. Return node containing 17
      *
      * @param e The element to search for
      * @return The node containing the element, or null if not found
@@ -75,6 +133,14 @@ public class SkipList<E extends Comparable<E>> {
      * Each level has a 50% chance of being included (determined by random odd/even results).
      * This helps maintain the skip list's balanced structure probabilistically.
      *
+     * Time Complexity: O(1) because MAX_LEVEL is a constant
+     *
+     * The level generation is crucial for maintaining the skip list's logarithmic properties:
+     * - Approximately 50% of nodes appear at level 1 (beyond base level 0)
+     * - Approximately 25% of nodes appear at level 2
+     * - Approximately 12.5% of nodes appear at level 3
+     * - And so on...
+     *
      * @return A random level between 1 and MAX_LEVEL
      */
     private int randomLevel() {
@@ -90,6 +156,33 @@ public class SkipList<E extends Comparable<E>> {
     /**
      * Adds a new element to the skip list.
      * The element is added at multiple levels according to the randomly generated level.
+     *
+     * Time Complexity: O(log n) expected, O(n) worst case
+     *
+     * EXAMPLE:
+     * Consider adding element 15 to this skip list:
+     *
+     * Before insertion:
+     * Level 2: head --------------------> 9 ----------------> 19 ---------> null
+     * Level 1: head --------> 3 --------> 9 --------> 17 ----> 19 --------> null
+     * Level 0: head --> 1 --> 3 --> 6 --> 9 --> 12 -> 17 ----> 19 --------> null
+     *
+     * Step 1: Generate random level for new node (let's say level = 2)
+     *
+     * Step 2: Find predecessor nodes at each level:
+     * - At level 2: predecessor is head (since 9 > 15)
+     * - At level 1: predecessor is 9 (since 9 < 15 < 17)
+     * - At level 0: predecessor is 12 (since 12 < 15 < 17)
+     *
+     * Step 3: Insert node at each level:
+     * Level 2: head ---------> 15 -------> 9 ----------------> 19 ----------> null
+     * Level 1: head --------> 3 --------> 9 --------> 15 -> 17 ----> 19 ----> null
+     * Level 0: head --> 1 --> 3 --> 6 --> 9 -> 12 --> 15 -> 17 ----> 19 ----> null
+     *
+     * Step 4: Fix inconsistency at level 2 (insertion order should maintain sorted order):
+     * Level 2: head --------------------> 9 ---------> 15 -----> 19 --------> null
+     * Level 1: head --------> 3 --------> 9 --------> 15 -> 17 ----> 19 ----> null
+     * Level 0: head --> 1 --> 3 --> 6 --> 9 --> 12 -> 15 -> 17 ----> 19 ----> null
      *
      * @param e The element to add to the skip list
      */
@@ -137,6 +230,26 @@ public class SkipList<E extends Comparable<E>> {
      * Removes an element from the skip list if it exists.
      * The element is removed from all levels it appears in.
      *
+     * Time Complexity: O(log n) expected, O(n) worst case
+     *
+     * EXAMPLE:
+     * Consider removing element 9 from this skip list:
+     *
+     * Before removal:
+     * Level 2: head --------------------> 9 ----------------> 19 ---------> null
+     * Level 1: head --------> 3 --------> 9 --------> 17 ----> 19 --------> null
+     * Level 0: head --> 1 --> 3 --> 6 --> 9 --> 12 -> 17 ----> 19 --------> null
+     *
+     * Step 1: Find predecessor nodes at each level:
+     * - At level 2: predecessor is head
+     * - At level 1: predecessor is 3
+     * - At level 0: predecessor is 6
+     *
+     * Step 2: Remove node 9 from each level:
+     * Level 2: head -------------------------------> 19 --------> null
+     * Level 1: head --------> 3 ----------------> 17 ----> 19 ----> null
+     * Level 0: head --> 1 --> 3 --> 6 --> 12 ---> 17 ----> 19 ----> null
+     *
      * @param e The element to remove from the skip list
      */
     public void remove(E e) {
@@ -173,6 +286,18 @@ public class SkipList<E extends Comparable<E>> {
      * Node class for the SkipList. Each node contains the data element and
      * an array of references to the next nodes at each level.
      *
+     * VISUAL REPRESENTATION:
+     * For a node with element 17 at levels 0 and 1 in this skip list:
+     *
+     * Level 1: ... -> node(9) --------> node(17) ----> node(19) -> ...
+     * Level 0: ... -> node(12) -------> node(17) ----> node(19) -> ...
+     *
+     * The node for element 17 has:
+     * - data = 17
+     * - nextNodes[0] = node(19)  (reference at base level)
+     * - nextNodes[1] = node(19)  (reference at level 1)
+     * - maxIndexLevel = 2 (appears in 2 levels: 0 and 1)
+     *
      * @param <E> Type of data stored in the node, must implement Comparable interface
      */
     private class Node<E extends Comparable<E>> {
@@ -198,6 +323,8 @@ public class SkipList<E extends Comparable<E>> {
          * Constructor for creating a new node with the given data.
          * Initializes the nextNodes array with the maximum possible levels.
          *
+         * Time Complexity: O(1)
+         *
          * @param data The element to be stored in this node
          */
         Node(E data) {
@@ -207,6 +334,8 @@ public class SkipList<E extends Comparable<E>> {
 
         /**
          * Returns a string representation of this node, including its data and level information.
+         *
+         * Time Complexity: O(1)
          *
          * @return String representation of the node
          */
