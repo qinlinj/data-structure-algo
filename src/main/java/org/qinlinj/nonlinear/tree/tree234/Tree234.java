@@ -82,7 +82,7 @@ public class Tree234<E extends Comparable<E>> {
      *
      * EXAMPLE: Searching for 40 in this tree:
      *
-     *           (30,50,70)
+     *            (30, 50, 70)
      *          /    |    \    \
      *        (10,20) (40) (60) (80,90)
      *

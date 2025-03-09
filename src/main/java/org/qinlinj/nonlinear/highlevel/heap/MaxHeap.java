@@ -1,8 +1,8 @@
 package org.qinlinj.nonlinear.highlevel.heap;
 
 import org.qinlinj.linear.arraylist.ArrayList;
-// @formatter:off
 
+// @formatter:off
 /**
  * MaxHeap Implementation
  * ==============================
