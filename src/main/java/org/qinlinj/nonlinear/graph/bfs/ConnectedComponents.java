@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.bfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -79,6 +80,31 @@ public class ConnectedComponents {
          *
          * Final ccCount = 2 (two connected components found)
          */
+    }
+
+    /**
+     * Example usage of Connected Components
+     */
+    public static void main(String[] args) {
+        // Example graph from file
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        ConnectedComponents cc = new ConnectedComponents(g);
+        System.out.println("Number of connected components: " + cc.getComponentCount());
+
+        // Display all components
+        List<Integer>[] components = cc.components();
+        for (int i = 0; i < components.length; i++) {
+            System.out.print("Component " + (i + 1) + ": ");
+            for (int v : components[i]) {
+                System.out.print(v + " ");
+            }
+            System.out.println();
+        }
+
+        // Check if vertices are connected
+        int v1 = 0, v2 = 3, v3 = 4;
+        System.out.println("Is " + v1 + " connected to " + v2 + "? " + cc.isConnected(v1, v2));
+        System.out.println("Is " + v1 + " connected to " + v3 + "? " + cc.isConnected(v1, v3));
     }
 
     /**
