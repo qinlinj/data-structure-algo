@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.bfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -21,6 +22,12 @@ public class CC {
                 bfs(v, ccCount);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        CC graphBFS = new CC(g);
+        System.out.println(graphBFS.getCcCount());
     }
 
     private void bfs(int v, int ccId) {
