@@ -5,6 +5,32 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+
+/**
+ * Connected Components (CC) Implementation
+ * <p>
+ * CONCEPT AND PRINCIPLES:
+ * A connected component is a subgraph in which any two vertices are connected by paths.
+ * This class finds all connected components in an undirected graph using Breadth-First Search (BFS).
+ * <p>
+ * Key features:
+ * 1. Identifies separate connected components in a graph
+ * 2. Maintains component information for each vertex
+ * 3. Provides query methods to check if vertices are connected
+ * 4. Returns all vertices grouped by their component
+ * <p>
+ * Example graph representation:
+ * <p>
+ * 0 -- 1    4 -- 5
+ * |    |    |
+ * 2 -- 3    6
+ * |
+ * 7
+ * <p>
+ * In this example, there are 2 connected components:
+ * - Component 1: Vertices 0, 1, 2, 3, 7
+ * - Component 2: Vertices 4, 5, 6
+ */
 public class CC {
     private Graph g;
     private int[] visited;
