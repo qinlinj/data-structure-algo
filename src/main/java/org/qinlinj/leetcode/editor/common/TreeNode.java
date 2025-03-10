@@ -1,4 +1,4 @@
-package leetcode.editor.common;
+package org.qinlinj.leetcode.editor.common;
 
 public class TreeNode {
     public int val;

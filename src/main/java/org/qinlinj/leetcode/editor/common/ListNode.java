@@ -1,4 +1,5 @@
-package leetcode.editor.common;
+package org.qinlinj.leetcode.editor.common;
+
 
 public class ListNode {
     public int val;
