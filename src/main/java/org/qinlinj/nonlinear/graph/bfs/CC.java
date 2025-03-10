@@ -85,6 +85,34 @@ public class CC {
                 }
             }
         }
+        /*
+         * BFS Example:
+         * For the graph (starting BFS from vertex 0):
+         *    0 -- 1    4 -- 5
+         *    |    |    |
+         *    2 -- 3    6
+         *         |
+         *         7
+         *
+         * Initial state: queue = [0], visited = [-1, -1, -1, -1, -1, -1, -1, -1]
+         *
+         * Step 1: Dequeue 0, visited = [1, -1, -1, -1, -1, -1, -1, -1]
+         *         Enqueue neighbors 1, 2. queue = [1, 2]
+         *
+         * Step 2: Dequeue 1, visited = [1, 1, -1, -1, -1, -1, -1, -1]
+         *         Enqueue neighbor 3. queue = [2, 3]
+         *
+         * Step 3: Dequeue 2, visited = [1, 1, 1, -1, -1, -1, -1, -1]
+         *         Enqueue neighbor 3 (already in queue, skip)
+         *
+         * Step 4: Dequeue 3, visited = [1, 1, 1, 1, -1, -1, -1, -1]
+         *         Enqueue neighbor 7. queue = [7]
+         *
+         * Step 5: Dequeue 7, visited = [1, 1, 1, 1, -1, -1, -1, 1]
+         *         No unvisited neighbors.
+         *
+         * Final state: queue is empty, and component 1 is fully identified.
+         */
     }
 
     public int getCcCount() {
