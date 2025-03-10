@@ -62,6 +62,13 @@ public class CC {
         System.out.println(graphBFS.getCcCount());
     }
 
+    /**
+     * Performs BFS traversal to mark all vertices in a connected component
+     * Time Complexity: O(V + E) for vertices and edges in the component
+     *
+     * @param v    starting vertex for BFS
+     * @param ccId the id to assign to this connected component
+     */
     private void bfs(int v, int ccId) {
         if (g == null) return;
         Queue<Integer> queue = new LinkedList<>();
