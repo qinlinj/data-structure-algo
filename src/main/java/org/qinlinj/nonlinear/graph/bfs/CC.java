@@ -33,9 +33,15 @@ import java.util.*;
  */
 public class CC {
     private Graph g;
-    private int[] visited;
-    private int ccCount;
+    private int[] visited;  // Stores component id for each vertex
+    private int ccCount;    // Number of connected components
 
+    /**
+     * Constructor that finds all connected components in the graph
+     * Time Complexity: O(V + E) where V is the number of vertices and E is the number of edges
+     *
+     * @param g the input graph
+     */
     public CC(Graph g) {
         this.g = g;
 
