@@ -2,9 +2,7 @@ package org.qinlinj.nonlinear.graph.bfs;
 
 import org.qinlinj.nonlinear.graph.Graph;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class CC {
     private Graph g;
@@ -43,5 +41,22 @@ public class CC {
         }
     }
 
+    public int getCcCount() {
+        return ccCount;
+    }
+
+    public List<Integer>[] components() {
+        List<Integer>[] res = new ArrayList[ccCount];
+
+        for (int i = 0; i < ccCount; i++) {
+            res[i] = new ArrayList<>();
+        }
+        for (int v = 0; v < g.getV(); v++) {
+            int cc = visited[v];
+            res[cc - 1].add(v);
+        }
+
+        return res;
+    }
 
 }
