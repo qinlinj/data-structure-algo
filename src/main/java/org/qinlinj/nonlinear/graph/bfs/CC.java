@@ -58,5 +58,11 @@ public class CC {
 
         return res;
     }
+    
+    public boolean isConnected(int v, int w) {
+        validateVertex(v);
+        validateVertex(w);
 
+        return visited[v] == visited[w];
+    }
 }
