@@ -68,6 +68,35 @@ public class SingleSourceShortestPath {
         System.out.println(graphBFS.distance(6));
     }
 
+    /**
+     * Breadth-First Search implementation to find shortest paths
+     * <p>
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     * <p>
+     * Visual Example for BFS on a graph with source=0:
+     * <p>
+     * Initial state:
+     * - visited = [F,F,F,F,F,F,F]
+     * - prevs = [-1,-1,-1,-1,-1,-1,-1]
+     * - distance = [-1,-1,-1,-1,-1,-1,-1]
+     * - queue = [0]
+     * <p>
+     * After processing vertex 0:
+     * - visited = [T,F,F,F,F,F,F]
+     * - prevs = [0,-1,-1,-1,-1,-1,-1]
+     * - distance = [0,-1,-1,-1,-1,-1,-1]
+     * - queue = [1,2]  (neighbors of 0)
+     * <p>
+     * After processing vertex 1:
+     * - visited = [T,T,F,F,F,F,F]
+     * - prevs = [0,0,-1,-1,-1,-1,-1]
+     * - distance = [0,1,-1,-1,-1,-1,-1]
+     * - queue = [2,3,4]  (added neighbors of 1)
+     * <p>
+     * And so on until all reachable vertices are visited
+     *
+     * @param v The source vertex to start BFS from
+     */
     private void bfs(int v) {
 
     }
