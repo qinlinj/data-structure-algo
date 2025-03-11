@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.bfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -21,6 +22,12 @@ public class SingleSourcePath {
         bfs(source);
     }
 
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        SingleSourcePath graphBFS = new SingleSourcePath(g, 0);
+        System.out.println(graphBFS.path(6));
+    }
+
     private void bfs(int source) {
     }
 
@@ -33,6 +40,24 @@ public class SingleSourcePath {
         if (v < 0 && v >= g.getV()) {
             throw new IllegalArgumentException("illegal vertex，out of scope");
         }
+    }
+
+    public List<Integer> path(int target) {
+        List<Integer> res = new ArrayList<>();
+
+        if (!isConnected(target)) {
+            return res;
+        }
+
+        while (target != source) {
+            res.add(target);
+            target = prevs[target];
+        }
+        res.add(source);
+
+        Collections.reverse(res);
+
+        return res;
     }
 }
 
