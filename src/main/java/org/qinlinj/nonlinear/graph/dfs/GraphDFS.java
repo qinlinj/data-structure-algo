@@ -26,5 +26,21 @@ public class GraphDFS {
     }
 
     private void dfs(int v) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(v);
+
+        visited[v] = true;
+
+        while (!stack.isEmpty()) {
+            int curr = stack.pop();
+            res.add(curr);
+
+            for (int w : g.adj(curr)) { // 升序排列
+                if (!visited[w]) {
+                    stack.push(w);
+                    visited[w] = true;
+                }
+            }
+        }
     }
 }
