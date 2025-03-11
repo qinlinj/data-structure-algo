@@ -57,4 +57,9 @@ public class SingleSourceShortestPath {
         return res;
     }
 
+    public int distance(int target) {
+        validateVertex(target);
+        return distance[target];
+    }
+
 }
