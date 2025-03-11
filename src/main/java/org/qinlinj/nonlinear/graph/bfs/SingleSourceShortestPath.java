@@ -33,7 +33,6 @@ import java.util.*;
  * <p>
  * The shortest path from 0 to 6 would be: 0 -> 1 -> 3 -> 6 or 0 -> 2 -> 4 -> 6 (both with distance 3)
  */
-
 public class SingleSourceShortestPath {
     private Graph g;               // The graph to be traversed
     private boolean[] visited;     // Track visited vertices
@@ -61,6 +60,13 @@ public class SingleSourceShortestPath {
         bfs(source);  // Run BFS from the source vertex
     }
 
+    /**
+     * Main method to demonstrate the algorithm
+     * <p>
+     * Example output:
+     * - path(6) might output [0, 1, 3, 6] showing the shortest path from 0 to 6
+     * - distance(6) would output 3, indicating the path length is 3 edges
+     */
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-bfs.txt");
         SingleSourceShortestPath graphBFS = new SingleSourceShortestPath(g, 0);
@@ -207,5 +213,4 @@ public class SingleSourceShortestPath {
         validateVertex(target);
         return distance[target];
     }
-
 }
