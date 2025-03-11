@@ -129,35 +129,80 @@ public class SingleSourceShortestPath {
         }
     }
 
+    /**
+     * Checks if there is a path from the source to the target vertex
+     * <p>
+     * Time Complexity: O(1) - constant time lookup
+     *
+     * @param target The vertex to check connectivity to
+     * @return true if target is reachable from source, false otherwise
+     */
     public boolean isConnected(int target) {
         validateVertex(target);
         return visited[target];
     }
 
+    /**
+     * Validates that a vertex is within the graph's bounds
+     * <p>
+     * Time Complexity: O(1) - constant time operation
+     *
+     * @param v The vertex to validate
+     * @throws IllegalArgumentException if vertex is out of bounds
+     */
     private void validateVertex(int v) {
-        if (v < 0 && v >= g.getV()) {
-            throw new IllegalArgumentException("illegal vertex");
+        if (v < 0 || v >= g.getV()) {  // Fixed the condition from && to ||
+            throw new IllegalArgumentException("Vertex is invalid, out of range");
         }
     }
 
+    /**
+     * Finds the shortest path from source to target
+     * <p>
+     * Time Complexity: O(V) in worst case (path could include all vertices)
+     * <p>
+     * Visual Example:
+     * For a path from 0 to 6 in our example graph:
+     * - Start with target = 6
+     * - prevs[6] might be 3, so add 6 to path and set target = 3
+     * - prevs[3] might be 1, so add 3 to path and set target = 1
+     * - prevs[1] = 0, so add 1 to path and set target = 0
+     * - target == source, so add 0 to path
+     * - After reversing: path = [0,1,3,6]
+     *
+     * @param target The destination vertex
+     * @return List of vertices forming the shortest path from source to target
+     */
     public List<Integer> path(int target) {
         List<Integer> res = new ArrayList<>();
-
+        // 1. If there's no path from source to target, return empty list
         if (!isConnected(target)) {
             return res;
         }
-
+        // 2. Reconstruct the path by following prevs backward from target
         while (target != source) {
             res.add(target);
             target = prevs[target];
         }
         res.add(source);
 
+        // 3. Reverse the path to get correct order from source to target
         Collections.reverse(res);
 
         return res;
     }
 
+    /**
+     * Returns the shortest distance from source to target
+     * <p>
+     * Time Complexity: O(1) - constant time lookup in the distance array
+     * <p>
+     * Example:
+     * - distance[6] = 3 means the shortest path from vertex 0 to vertex 6 has 3 edges
+     *
+     * @param target The destination vertex
+     * @return The length of the shortest path, or -1 if unreachable
+     */
     public int distance(int target) {
         validateVertex(target);
         return distance[target];
