@@ -5,13 +5,13 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
-public class BipartitionDetection {
+public class BipartiteGraphDetection {
     private Graph g;
     private boolean[] visited;
     private int[] colors;
     private boolean isBipartition = true;
 
-    public BipartitionDetection(Graph g) {
+    public BipartiteGraphDetection(Graph g) {
         this.g = g;
 
         this.visited = new boolean[g.getV()];
@@ -30,7 +30,7 @@ public class BipartitionDetection {
 
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-bfs.txt");
-        BipartitionDetection graphBFS = new BipartitionDetection(g);
+        BipartiteGraphDetection graphBFS = new BipartiteGraphDetection(g);
         System.out.println(graphBFS.isBipartition());
     }
 
