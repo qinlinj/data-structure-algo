@@ -5,6 +5,7 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * Connected Components (CC) Implementation
  * <p>
@@ -20,11 +21,11 @@ import java.util.*;
  * <p>
  * Example graph representation:
  * <p>
- * 0 -- 1    4 -- 5
- * |    |    |
- * 2 -- 3    6
- * |
- * 7
+ *    0 -- 1    4 -- 5
+ *    |    |    |
+ *    2 -- 3    6
+ *    |
+ *    7
  * <p>
  * In this example, there are 2 connected components:
  * - Component 1: Vertices 0, 1, 2, 3, 7

@@ -5,41 +5,42 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * BipartiteGraphDetection - An implementation to determine if a graph is bipartite using BFS
- * <p>
+ *
  * Concept and Principles:
  * - A bipartite graph is a graph whose vertices can be divided into two disjoint sets (colors)
- * such that every edge connects vertices from different sets
+ *   such that every edge connects vertices from different sets
  * - This algorithm uses a coloring approach with BFS to verify if the graph is bipartite
  * - If we can color all vertices using only two colors, with no adjacent vertices having the same color,
- * then the graph is bipartite
+ *   then the graph is bipartite
  * - For disconnected graphs, we need to verify each connected component separately
- * <p>
+ *
  * Advantages:
  * - Time Complexity: O(V + E) where V is the number of vertices and E is the number of edges
  * - Can process disconnected graphs by checking each component
  * - Early termination: Stops as soon as a bipartite violation is detected
  * - Applications: Useful in matching problems, scheduling, and many other real-world scenarios
- * <p>
+ *
  * Visual Example:
  * Bipartite graph example:
- * a --- b
- * |     |
- * c --- d
- * <p>
+ *    a --- b
+ *    |     |
+ *    c --- d
+ *
  * Can be colored as:
- * a(R) --- b(B)
- * |         |
- * c(B) --- d(R)
- * <p>
+ *    a(R) --- b(B)
+ *    |         |
+ *    c(B) --- d(R)
+ *
  * Non-bipartite graph example (odd-length cycle):
- * a --- b
- * |     |
- * c --- d
- * |
- * e
- * <p>
+ *    a --- b
+ *    |     |
+ *    c --- d
+ *    |
+ *    e
+ *
  * If we try to color this, vertices a, c, and e would need to have different colors,
  * which is impossible with only two colors.
  */

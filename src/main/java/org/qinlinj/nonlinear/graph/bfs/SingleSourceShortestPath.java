@@ -5,6 +5,7 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * SingleSourceShortestPath - An implementation of the single-source shortest path algorithm using BFS
  * <p>
@@ -21,9 +22,9 @@ import java.util.*;
  * <p>
  * Visual Example:
  * Consider a graph with 7 vertices (0-6) connected as follows:
- * 0 -- 1 -- 3 -- 5
- * |    |    |
- * 2 -- 4 -- 6
+ *    0 -- 1 -- 3 -- 5
+ *    |    |    |
+ *    2 -- 4 -- 6
  * <p>
  * Running BFS from source=0:
  * - Level 0: Visit vertex 0, distance[0]=0

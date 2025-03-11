@@ -5,6 +5,7 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * SingleSourcePath - An implementation to find a path from a source vertex to any other vertex in a graph using BFS
  * <p>
@@ -21,9 +22,9 @@ import java.util.*;
  * <p>
  * Visual Example:
  * Consider a graph with 7 vertices (0-6) connected as follows:
- * 0 -- 1 -- 3 -- 5
- * |    |    |
- * 2 -- 4 -- 6
+ *    0 -- 1 -- 3 -- 5
+ *    |    |    |
+ *    2 -- 4 -- 6
  * <p>
  * Running BFS from source=0:
  * - First visit vertex 0

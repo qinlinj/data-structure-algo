@@ -5,6 +5,7 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * TargetedSingleSourcePath - An optimized implementation to find a path between specific source and target vertices
  * <p>
@@ -26,9 +27,9 @@ import java.util.*;
  * <p>
  * Visual Example:
  * Consider a graph with 7 vertices (0-6) connected as follows:
- * 0 -- 1 -- 3 -- 5
- * |    |    |
- * 2 -- 4 -- 6
+ *    0 -- 1 -- 3 -- 5
+ *    |    |    |
+ *    2 -- 4 -- 6
  * <p>
  * Running targeted BFS from source=0 to target=6:
  * - First visit vertex 0

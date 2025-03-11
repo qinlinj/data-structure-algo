@@ -5,6 +5,7 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * CycleDetection - An implementation to detect cycles in an undirected graph using BFS
  * <p>
@@ -22,9 +23,9 @@ import java.util.*;
  * <p>
  * Visual Example:
  * Consider a graph with cycle:
- * a --- b
- * |     |
- * c --- d
+ *    a --- b
+ *    |     |
+ *    c --- d
  * <p>
  * BFS traversal starting from 'a' would detect the cycle because when exploring neighbors of 'd',
  * we would discover 'a' has already been visited and is not the direct parent of 'd'.
@@ -79,9 +80,9 @@ public class CycleDetection {
      * <p>
      * Visual Example for cycle detection using BFS:
      * Consider this small graph:
-     * a --- b
-     * \   /
-     * c
+     *    a --- b
+     *     \   /
+     *       c
      * <p>
      * Initial state (starting BFS from vertex 'a'):
      * - visited = [T,F,F] (assuming a=0, b=1, c=2)
