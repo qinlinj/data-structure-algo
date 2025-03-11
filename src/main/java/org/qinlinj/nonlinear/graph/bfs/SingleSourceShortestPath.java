@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.bfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -22,6 +23,13 @@ public class SingleSourceShortestPath {
         Arrays.fill(this.distance, -1);
 
         bfs(source);
+    }
+
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        SingleSourceShortestPath graphBFS = new SingleSourceShortestPath(g, 0);
+        System.out.println(graphBFS.path(6));
+        System.out.println(graphBFS.distance(6));
     }
 
     private void bfs(int v) {
