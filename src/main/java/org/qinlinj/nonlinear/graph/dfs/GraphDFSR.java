@@ -5,6 +5,47 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
+/**
+ * GraphDFSR - An implementation of recursive Depth-First Search for graph traversal
+ *
+ * Concept and Principles:
+ * - Depth-First Search (DFS) is an algorithm for traversing or searching tree or graph data structures
+ * - It explores as far as possible along each branch before backtracking
+ * - This implementation uses recursion, which naturally implements the DFS stack through the call stack
+ * - For disconnected graphs, the algorithm ensures all vertices are visited by initiating DFS from each unvisited vertex
+ *
+ * Advantages:
+ * - Time Complexity: O(V + E) where V is the number of vertices and E is the number of edges
+ * - Space Complexity: O(V) for storing visited status and the implicit recursion stack
+ * - Elegant implementation: Recursive approach is more concise and elegant
+ * - Complete: Guaranteed to visit all vertices reachable from the starting vertices
+ *
+ * Visual Example:
+ * Consider a graph:
+ *    1 --- 2 --- 3
+ *    |     |
+ *    4 --- 5     6
+ *
+ * Recursive DFS traversal starting from vertex 1 might proceed as:
+ * - Visit 1, mark as visited, add to result
+ * - Recursively visit neighbor 2
+ *   - Visit 2, mark as visited, add to result
+ *   - Recursively visit neighbor 3
+ *     - Visit 3, mark as visited, add to result
+ *     - No unvisited neighbors, return from recursion
+ *   - Return to vertex 2, no more unvisited neighbors, return from recursion
+ * - Return to vertex 1, recursively visit neighbor 4
+ *   - Visit 4, mark as visited, add to result
+ *   - Recursively visit neighbor 5
+ *     - Visit 5, mark as visited, add to result
+ *     - No unvisited neighbors, return from recursion
+ *   - Return to vertex 4, no more unvisited neighbors, return from recursion
+ * - Return to vertex 1, no more unvisited neighbors, return from recursion
+ * - Since vertex 6 is unvisited and disconnected, start a new DFS from 6
+ *
+ * Result: [1, 2, 3, 4, 5, 6]
+ */
 public class GraphDFSR {
     private Graph g;
     private List<Integer> res;
