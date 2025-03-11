@@ -29,18 +29,26 @@ import java.util.*;
  * we would discover 'a' has already been visited and is not the direct parent of 'd'.
  */
 public class CycleDetection {
-    private Graph g;
-    private boolean[] visited;
-    private int[] prevs;
+    private Graph g;               // The graph to be analyzed
+    private boolean[] visited;     // Track visited vertices
+    private int[] prevs;           // Store the previous vertex for each vertex
 
-    private boolean hasCycle = false;
+    private boolean hasCycle = false;  // Flag indicating if cycle was detected
 
+    /**
+     * Constructor runs the cycle detection algorithm on the graph
+     * <p>
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     *
+     * @param g The graph to analyze for cycles
+     */
     public CycleDetection(Graph g) {
         this.g = g;
         this.visited = new boolean[g.getV()];
         this.prevs = new int[g.getV()];
-        Arrays.fill(this.prevs, -1);
+        Arrays.fill(this.prevs, -1);  // Initialize prevs with -1 (no predecessor)
 
+        // For disconnected graphs, run BFS from each unvisited vertex
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) {
                 if (bfs(v)) {
