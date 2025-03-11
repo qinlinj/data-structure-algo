@@ -126,17 +126,44 @@ public class BipartiteGraphDetection {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(v);
         visited[v] = true;
-        colors[v] = 0;
+        colors[v] = 0;  // Color the starting vertex as red (0)
 
         while (!queue.isEmpty()) {
             int curr = queue.poll();
 
             for (int w : g.adj(curr)) {
+                // If w is not yet visited, color it with the opposite color of curr
                 if (!visited[w]) {
                     queue.add(w);
                     visited[w] = true;
+                    // Color vertex w with the opposite color of curr
+                    // If curr is red (0), w is blue (1), and vice versa
                     colors[w] = 1 - colors[curr];
+
+                    /* Visual example of coloring:
+                     * If curr = a with color 0 (red) and w = b:
+                     * - colors[b] = 1 - colors[a] = 1 - 0 = 1 (blue)
+                     *
+                     * If curr = b with color 1 (blue) and w = d:
+                     * - colors[d] = 1 - colors[b] = 1 - 1 = 0 (red)
+                     */
                 } else if (colors[w] == colors[curr]) {
+                    // If w has already been visited and has the same color as curr,
+                    // then the graph is not bipartite
+                    /* Visual example of bipartite violation:
+                     * Consider an odd cycle:
+                     *    a --- b
+                     *    |     |
+                     *    c --- d
+                     *    |
+                     *    e --- a
+                     *
+                     * If we've colored a=0, c=1, e=0,
+                     * When we process edge e-a, we'll find a conflict:
+                     * - curr = e with color 0
+                     * - w = a also with color 0
+                     * - This is a violation, so return false
+                     */
                     return false;
                 }
             }
