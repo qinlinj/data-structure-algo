@@ -49,4 +49,8 @@ public class BipartitionDetection {
         }
         return true;
     }
+
+    public boolean isBipartition() {
+        return isBipartition;
+    }
 }
