@@ -78,6 +78,39 @@ public class GraphDFSR {
         System.out.println(graphDFS.getRes());
     }
 
+    /**
+     * Recursive implementation of DFS
+     *
+     * Time Complexity: O(V + E) for the component
+     * Space Complexity: O(V) for the recursion stack in worst case
+     *
+     * Visual Example of recursive DFS execution:
+     * For a small graph with vertices [0,1,2,3] where 0 connects to 1 and 2, and 2 connects to 3:
+     *
+     * Call stack and operations:
+     * 1. dfs(0)
+     *    - Add 0 to result: res = [0]
+     *    - Mark 0 as visited: visited = [T,F,F,F]
+     *    - For neighbors 1,2 of vertex 0:
+     *      - Call dfs(1)
+     *        - Add 1 to result: res = [0,1]
+     *        - Mark 1 as visited: visited = [T,T,F,F]
+     *        - No unvisited neighbors, return to dfs(0)
+     *      - Call dfs(2)
+     *        - Add 2 to result: res = [0,1,2]
+     *        - Mark 2 as visited: visited = [T,T,T,F]
+     *        - For neighbor 3 of vertex 2:
+     *          - Call dfs(3)
+     *            - Add 3 to result: res = [0,1,2,3]
+     *            - Mark 3 as visited: visited = [T,T,T,T]
+     *            - No unvisited neighbors, return to dfs(2)
+     *        - No more unvisited neighbors, return to dfs(0)
+     *    - No more unvisited neighbors, return
+     *
+     * Final result: [0,1,2,3]
+     *
+     * @param v The current vertex being visited
+     */
     private void dfs(int v) {
         res.add(v);
         visited[v] = true;
