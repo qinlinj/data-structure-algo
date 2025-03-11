@@ -28,5 +28,25 @@ public class BipartitionDetection {
     }
 
     private boolean bfs(int v) {
+        if (g == null) return true;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        visited[v] = true;
+        colors[v] = 0;
+
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+
+            for (int w : g.adj(curr)) {
+                if (!visited[w]) {
+                    queue.add(w);
+                    visited[w] = true;
+                    colors[w] = 1 - colors[curr];
+                } else if (colors[w] == colors[curr]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
