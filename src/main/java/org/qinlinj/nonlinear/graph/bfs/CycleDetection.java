@@ -4,6 +4,30 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+/**
+ * CycleDetection - An implementation to detect cycles in an undirected graph using BFS
+ * <p>
+ * Concept and Principles:
+ * - A cycle in a graph is a path that starts and ends at the same vertex
+ * - This algorithm uses Breadth-First Search to traverse the graph and identify cycles
+ * - If during BFS traversal, we encounter an already visited vertex that is not the parent of the current vertex, a cycle exists
+ * - For disconnected graphs, we need to run BFS from each unvisited vertex to ensure complete coverage
+ * <p>
+ * Advantages:
+ * - Time Complexity: O(V + E) where V is the number of vertices and E is the number of edges
+ * - Handles disconnected graphs: Runs BFS from each unvisited vertex
+ * - Early termination: Stops as soon as a cycle is detected
+ * - Simple implementation: Uses standard BFS with minor modifications
+ * <p>
+ * Visual Example:
+ * Consider a graph with cycle:
+ * a --- b
+ * |     |
+ * c --- d
+ * <p>
+ * BFS traversal starting from 'a' would detect the cycle because when exploring neighbors of 'd',
+ * we would discover 'a' has already been visited and is not the direct parent of 'd'.
+ */
 public class CycleDetection {
     private Graph g;
     private boolean[] visited;
@@ -33,7 +57,7 @@ public class CycleDetection {
         queue.add(v);
         visited[v] = true;
         prevs[v] = v;
-        
+
         while (!queue.isEmpty()) {
             int curr = queue.poll();
 
