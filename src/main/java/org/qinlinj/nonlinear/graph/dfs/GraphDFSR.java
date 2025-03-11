@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -23,6 +24,12 @@ public class GraphDFSR {
         }
     }
 
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-dfs.txt");
+        GraphDFSR graphDFS = new GraphDFSR(g);
+        System.out.println(graphDFS.getRes());
+    }
+
     private void dfs(int v) {
         res.add(v);
         visited[v] = true;
@@ -31,5 +38,9 @@ public class GraphDFSR {
                 dfs(w);
             }
         }
+    }
+
+    public List<Integer> getRes() {
+        return res;
     }
 }
