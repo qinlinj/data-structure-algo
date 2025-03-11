@@ -124,6 +124,13 @@ public class GraphDFS {
         }
     }
 
+    /**
+     * Returns vertices in DFS traversal order
+     *
+     * Time Complexity: O(1) - constant time return of pre-computed result
+     *
+     * @return List of vertices in DFS traversal order
+     */
     public List<Integer> getRes() {
         return res;
     }
