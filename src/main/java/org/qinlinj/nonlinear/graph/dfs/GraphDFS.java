@@ -65,6 +65,46 @@ public class GraphDFS {
         System.out.println(graphDFS.getRes());
     }
 
+    /**
+     * Iterative implementation of DFS using a stack
+     *
+     * Time Complexity: O(V + E) for the component
+     * Space Complexity: O(V) for the stack in worst case
+     *
+     * Visual Example of DFS execution:
+     * For a graph with vertices [0,1,2,3,4,5] and starting vertex 0:
+     *
+     * Initial state:
+     * - visited = [F,F,F,F,F,F]
+     * - stack = [0]
+     * - res = []
+     *
+     * Steps:
+     * 1. Pop 0 from stack, mark visited, add to result
+     *    - visited = [T,F,F,F,F,F]
+     *    - stack = []
+     *    - res = [0]
+     *    - Push unvisited neighbors of 0 (e.g., 1,2) to stack
+     *    - stack = [2,1]
+     *
+     * 2. Pop 1 from stack, mark visited, add to result
+     *    - visited = [T,T,F,F,F,F]
+     *    - stack = [2]
+     *    - res = [0,1]
+     *    - Push unvisited neighbors of 1 (e.g., 3) to stack
+     *    - stack = [2,3]
+     *
+     * 3. Pop 3 from stack, mark visited, add to result
+     *    - visited = [T,T,F,T,F,F]
+     *    - stack = [2]
+     *    - res = [0,1,3]
+     *    - Push unvisited neighbors of 3 (e.g., 4) to stack
+     *    - stack = [2,4]
+     *
+     * ... and so on
+     *
+     * @param v The starting vertex for DFS
+     */
     private void dfs(int v) {
         Stack<Integer> stack = new Stack<>();
         stack.push(v);
