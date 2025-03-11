@@ -28,6 +28,28 @@ public class CycleDetection {
     }
 
     private boolean bfs(int v) {
+        if (g == null) return false;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        visited[v] = true;
+        prevs[v] = v;
+        
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+
+            for (int w : g.adj(curr)) {
+                if (!visited[w]) {
+                    queue.add(w);
+                    visited[w] = true;
+                    prevs[w] = curr;
+                } else {
+                    if (w != prevs[curr]) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public boolean hasCycle() {
