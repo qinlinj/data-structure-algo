@@ -39,4 +39,22 @@ public class SingleSourceShortestPath {
         }
     }
 
+    public List<Integer> path(int target) {
+        List<Integer> res = new ArrayList<>();
+
+        if (!isConnected(target)) {
+            return res;
+        }
+
+        while (target != source) {
+            res.add(target);
+            target = prevs[target];
+        }
+        res.add(source);
+
+        Collections.reverse(res);
+
+        return res;
+    }
+
 }
