@@ -98,7 +98,35 @@ public class SingleSourceShortestPath {
      * @param v The source vertex to start BFS from
      */
     private void bfs(int v) {
+        if (g == null) return;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        visited[v] = true;
+        // Initialize the source vertex
+        prevs[v] = v;    // Source is its own predecessor for convenience
+        distance[v] = 0; // Distance from source to itself is 0
 
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+
+            for (int w : g.adj(curr)) {
+                if (!visited[w]) {
+                    queue.add(w);
+                    visited[w] = true;
+                    // Record the previous vertex in the shortest path
+                    prevs[w] = curr;
+                    // Set distance to w as distance to current vertex + 1
+                    distance[w] = distance[curr] + 1;
+
+                    /* Visual Example of BFS Step:
+                     * If curr = 1 and w = 3:
+                     * - Mark 3 as visited
+                     * - Set prevs[3] = 1 (showing the path from source to 3 goes through 1)
+                     * - Set distance[3] = distance[1] + 1 = 2 (indicating 3 is at distance 2 from source)
+                     */
+                }
+            }
+        }
     }
 
     public boolean isConnected(int target) {
