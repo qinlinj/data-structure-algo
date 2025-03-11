@@ -39,26 +39,39 @@ import java.util.*;
  * Result: [1, 4, 5, 2, 3, 6]
  */
 public class GraphDFS {
-    private Graph g;
+    private Graph g;               // The graph to be traversed
+    private List<Integer> res;     // Stores the DFS traversal result
+    private boolean[] visited;     // Tracks visited vertices to prevent cycles
 
-    private List<Integer> res;
-    private boolean[] visited;
-
+    /**
+     * Constructor performs DFS traversal on the entire graph
+     *
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     *
+     * @param g The graph to traverse
+     */
     public GraphDFS(Graph g) {
         this.g = g;
         if (g == null) return;
 
         this.res = new ArrayList<>();
         this.visited = new boolean[g.getV()];
-        // 遍历图中每个顶点
+
+        // Iterate through all vertices to handle disconnected components
         for (int v = 0; v < g.getV(); v++) {
-            // 先判断，没有遍历的顶点才能进行深度优先遍历
+            // Only initiate DFS from unvisited vertices
             if (!visited[v]) {
                 dfs(v);
             }
         }
     }
 
+    /**
+     * Main method to demonstrate DFS traversal
+     *
+     * Example output:
+     * - getRes() might return [0, 1, 3, 5, 2, 4, 6] depending on the graph structure
+     */
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-dfs.txt");
         GraphDFS graphDFS = new GraphDFS(g);
@@ -108,17 +121,26 @@ public class GraphDFS {
     private void dfs(int v) {
         Stack<Integer> stack = new Stack<>();
         stack.push(v);
-
-        visited[v] = true;
+        visited[v] = true;  // Mark vertex as visited when pushing to stack
 
         while (!stack.isEmpty()) {
             int curr = stack.pop();
-            res.add(curr);
+            res.add(curr);  // Add to result when popping from stack
 
-            for (int w : g.adj(curr)) { // 升序排列
+            for (int w : g.adj(curr)) {  // Process neighbors (typically in ascending order)
+                // Skip already visited vertices to avoid cycles
                 if (!visited[w]) {
                     stack.push(w);
-                    visited[w] = true;
+                    visited[w] = true;  // Mark as visited when pushing to stack
+
+                    /* Visual example of DFS step:
+                     * If curr = 2 with neighbors [0,1,3]:
+                     * - 0 and 1 are already visited, so skip
+                     * - For neighbor 3, push to stack, mark visited
+                     * - stack now contains 3
+                     * - On next iteration, we'll process 3 (deeper in the graph)
+                     *   before processing any remaining vertices at the same level as 2
+                     */
                 }
             }
         }
