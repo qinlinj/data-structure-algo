@@ -27,4 +27,16 @@ public class SingleSourceShortestPath {
     private void bfs(int v) {
 
     }
+
+    public boolean isConnected(int target) {
+        validateVertex(target);
+        return visited[target];
+    }
+
+    private void validateVertex(int v) {
+        if (v < 0 && v >= g.getV()) {
+            throw new IllegalArgumentException("illegal vertex");
+        }
+    }
+
 }
