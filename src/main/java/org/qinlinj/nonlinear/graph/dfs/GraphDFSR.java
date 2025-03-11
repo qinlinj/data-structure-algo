@@ -65,13 +65,22 @@ public class GraphDFSR {
 
         this.res = new ArrayList<>();
         this.visited = new boolean[g.getV()];
+
+        // Iterate through all vertices to handle disconnected components
         for (int v = 0; v < g.getV(); v++) {
+            // Only initiate DFS from unvisited vertices
             if (!visited[v]) {
                 dfs(v);
             }
         }
     }
 
+    /**
+     * Main method to demonstrate recursive DFS traversal
+     *
+     * Example output:
+     * - getRes() might return [0, 1, 3, 5, 2, 4, 6] depending on the graph structure
+     */
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-dfs.txt");
         GraphDFSR graphDFS = new GraphDFSR(g);
@@ -112,15 +121,36 @@ public class GraphDFSR {
      * @param v The current vertex being visited
      */
     private void dfs(int v) {
+        // Add the current vertex to result and mark as visited
         res.add(v);
         visited[v] = true;
+
+        // Recursively visit all unvisited neighbors
         for (int w : g.adj(v)) {
             if (!visited[w]) {
                 dfs(w);
+
+                /* Visual representation of recursive calls:
+                 * If v = 2 with neighbors [0,3]:
+                 * - 0 is already visited, so skip
+                 * - For neighbor 3, make recursive call dfs(3)
+                 * - This pushes the current state onto the call stack
+                 * - After dfs(3) completes, execution returns here
+                 */
             }
         }
+
+        // When we reach this point, all neighbors have been visited,
+        // and we implicitly backtrack by returning to the previous call frame
     }
 
+    /**
+     * Returns vertices in DFS traversal order
+     *
+     * Time Complexity: O(1) - constant time return of pre-computed result
+     *
+     * @return List of vertices in DFS traversal order
+     */
     public List<Integer> getRes() {
         return res;
     }
