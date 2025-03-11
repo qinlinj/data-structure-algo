@@ -59,6 +59,36 @@ public class CycleDetection {
         }
     }
 
+    /**
+     * Modified BFS implementation that detects cycles
+     * <p>
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     * <p>
+     * Visual Example for cycle detection using BFS:
+     * Consider this small graph:
+     * a --- b
+     * \   /
+     * c
+     * <p>
+     * Initial state (starting BFS from vertex 'a'):
+     * - visited = [T,F,F] (assuming a=0, b=1, c=2)
+     * - prevs = [0,-1,-1] (a is its own predecessor)
+     * - queue = [a]
+     * <p>
+     * After processing vertex 'a':
+     * - Neighbors 'b' and 'c' are added to queue
+     * - visited = [T,T,T]
+     * - prevs = [0,0,0] (both b and c have a as predecessor)
+     * - queue = [b,c]
+     * <p>
+     * Processing vertex 'b':
+     * - Looking at neighbor 'a': already visited but it's prevs[b], so no cycle
+     * - Looking at neighbor 'c': already visited and NOT prevs[b], so cycle detected!
+     * This is because we've found a path a->b->c and also a->c
+     *
+     * @param v The source vertex to start BFS from
+     * @return true if a cycle is detected, false otherwise
+     */
     private boolean bfs(int v) {
         if (g == null) return false;
         Queue<Integer> queue = new LinkedList<>();
