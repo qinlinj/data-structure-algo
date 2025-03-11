@@ -45,11 +45,18 @@ import java.util.*;
  * which is impossible with only two colors.
  */
 public class BipartiteGraphDetection {
-    private Graph g;
-    private boolean[] visited;
-    private int[] colors;
-    private boolean isBipartition = true;
+    private Graph g;               // The graph to be analyzed
+    private boolean[] visited;     // Track visited vertices
+    private int[] colors;          // Store the color of each vertex (-1: no color, 0: red, 1: blue)
+    private boolean isBipartite = true;  // Flag indicating if graph is bipartite
 
+    /**
+     * Constructor runs the bipartite detection algorithm on the graph
+     *
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     *
+     * @param g The graph to analyze for bipartiteness
+     */
     public BipartiteGraphDetection(Graph g) {
         this.g = g;
 
@@ -60,7 +67,7 @@ public class BipartiteGraphDetection {
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) {
                 if (!bfs(v)) {
-                    isBipartition = false;
+                    isBipartite = false;
                     break;
                 }
             }
@@ -97,6 +104,6 @@ public class BipartiteGraphDetection {
     }
 
     public boolean isBipartition() {
-        return isBipartition;
+        return isBipartite;
     }
 }
