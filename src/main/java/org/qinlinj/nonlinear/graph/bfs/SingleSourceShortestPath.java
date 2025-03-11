@@ -70,8 +70,8 @@ public class SingleSourceShortestPath {
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-bfs.txt");
         SingleSourceShortestPath graphBFS = new SingleSourceShortestPath(g, 0);
-        System.out.println(graphBFS.path(6));
-        System.out.println(graphBFS.distance(6));
+        System.out.println(graphBFS.path(2));
+        System.out.println(graphBFS.distance(2));
     }
 
     /**
