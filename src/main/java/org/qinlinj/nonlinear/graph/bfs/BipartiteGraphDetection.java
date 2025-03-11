@@ -80,6 +80,47 @@ public class BipartiteGraphDetection {
         System.out.println(graphBFS.isBipartition());
     }
 
+    /**
+     * Modified BFS implementation that colors vertices and detects bipartite violations
+     *
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     *
+     * Visual Example for bipartite detection using BFS:
+     * Consider this small graph:
+     *    a --- b
+     *    |     |
+     *    c --- d
+     *
+     * Initial state (starting BFS from vertex 'a'):
+     * - visited = [T,F,F,F] (assuming a=0, b=1, c=2, d=3)
+     * - colors = [0,-1,-1,-1] (a is colored red (0))
+     * - queue = [a]
+     *
+     * After processing vertex 'a':
+     * - Neighbors 'b' and 'c' are added to queue
+     * - visited = [T,T,T,F]
+     * - colors = [0,1,1,-1] (b and c are colored blue (1))
+     * - queue = [b,c]
+     *
+     * After processing vertex 'b':
+     * - Neighbor 'd' is added to queue
+     * - visited = [T,T,T,T]
+     * - colors = [0,1,1,0] (d is colored red (0), opposite of b's color)
+     * - queue = [c,d]
+     *
+     * Processing vertex 'c':
+     * - Looking at neighbor 'a': already visited and has different color (good)
+     * - Looking at neighbor 'd': already visited and has different color (good)
+     *
+     * Processing vertex 'd':
+     * - Looking at neighbor 'b': already visited and has different color (good)
+     * - Looking at neighbor 'c': already visited and has different color (good)
+     *
+     * All vertices can be properly colored, so the graph is bipartite.
+     *
+     * @param v The source vertex to start BFS from
+     * @return true if the component containing v is bipartite, false otherwise
+     */
     private boolean bfs(int v) {
         if (g == null) return true;
         Queue<Integer> queue = new LinkedList<>();
