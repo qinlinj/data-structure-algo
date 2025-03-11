@@ -35,23 +35,30 @@ import java.util.*;
  */
 
 public class SingleSourceShortestPath {
-    private Graph g;
-    private boolean[] visited;
-    private int[] prevs;
-    private int[] distance;
+    private Graph g;               // The graph to be traversed
+    private boolean[] visited;     // Track visited vertices
+    private int[] prevs;           // Store the previous vertex in the shortest path
+    private int[] distance;        // Store the distance from source to each vertex
+    private int source;            // Source vertex for the shortest path
 
-    private int source;
-
+    /**
+     * Constructor initializes the algorithm and runs BFS
+     * <p>
+     * Time Complexity: O(V + E) - dominated by the BFS algorithm
+     *
+     * @param g      The graph to traverse
+     * @param source The source vertex for finding shortest paths
+     */
     public SingleSourceShortestPath(Graph g, int source) {
         this.g = g;
         this.source = source;
         this.visited = new boolean[g.getV()];
         this.prevs = new int[g.getV()];
         this.distance = new int[g.getV()];
-        Arrays.fill(this.prevs, -1);
-        Arrays.fill(this.distance, -1);
+        Arrays.fill(this.prevs, -1);      // Initialize prevs with -1 (no predecessor)
+        Arrays.fill(this.distance, -1);   // Initialize distances with -1 (unreachable)
 
-        bfs(source);
+        bfs(source);  // Run BFS from the source vertex
     }
 
     public static void main(String[] args) {
