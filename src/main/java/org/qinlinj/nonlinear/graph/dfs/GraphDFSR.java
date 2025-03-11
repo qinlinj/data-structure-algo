@@ -47,10 +47,17 @@ import java.util.*;
  * Result: [1, 2, 3, 4, 5, 6]
  */
 public class GraphDFSR {
-    private Graph g;
-    private List<Integer> res;
-    private boolean[] visited;
+    private Graph g;               // The graph to be traversed
+    private List<Integer> res;     // Stores the DFS traversal result
+    private boolean[] visited;     // Tracks visited vertices to prevent cycles
 
+    /**
+     * Constructor performs DFS traversal on the entire graph
+     *
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     *
+     * @param g The graph to traverse
+     */
     public GraphDFSR(Graph g) {
         this.g = g;
 
