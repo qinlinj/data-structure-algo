@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.bfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -60,6 +61,18 @@ public class CycleDetection {
     }
 
     /**
+     * Main method to demonstrate the cycle detection algorithm
+     * <p>
+     * Example output:
+     * - hasCycle() might output true if the graph contains a cycle
+     */
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        CycleDetection graphBFS = new CycleDetection(g);
+        System.out.println(graphBFS.hasCycle());
+    }
+
+    /**
      * Modified BFS implementation that detects cycles
      * <p>
      * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
@@ -94,6 +107,7 @@ public class CycleDetection {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(v);
         visited[v] = true;
+        // Set the starting vertex as its own predecessor
         prevs[v] = v;
 
         while (!queue.isEmpty()) {
@@ -101,10 +115,36 @@ public class CycleDetection {
 
             for (int w : g.adj(curr)) {
                 if (!visited[w]) {
+                    // Standard BFS processing for unvisited vertices
                     queue.add(w);
                     visited[w] = true;
+                    // Record the previous vertex
                     prevs[w] = curr;
                 } else {
+                    // Cycle detection logic: if we reach a visited vertex that is not the parent
+                    // of the current vertex, we have found a cycle
+                    /**
+                     * Visual explanation of cycle detection:
+                     *
+                     *    a --- b
+                     *     \   /
+                     *       c
+                     *
+                     * Assume we first visit vertex 'a' (setting visited[a] = true),
+                     * then neighbors 'b' and 'c' are both added to the queue
+                     * and we set prevs[b] = a and prevs[c] = a, with visited[b] = true and visited[c] = true
+                     *
+                     * Later, when we process vertex 'b', its neighbors are 'a' and 'c':
+                     *   - For neighbor 'a': curr = b, w = a, and visited[w] = true, but w = prevs[curr]
+                     *     This is our parent, so we ignore it (not a cycle)
+                     *   - For neighbor 'c': curr = b, w = c, and visited[w] = true, but w != prevs[curr]
+                     *     This means we've found a vertex that was already visited through another path
+                     *     This indicates a cycle!
+                     *
+                     * The key insight: in BFS, if we can reach the same vertex through two different paths,
+                     * then there must be a cycle in the graph.
+                     * In this case, vertex 'c' can be reached both via a->c and via a->b->c
+                     */
                     if (w != prevs[curr]) {
                         return true;
                     }
@@ -114,6 +154,13 @@ public class CycleDetection {
         return false;
     }
 
+    /**
+     * Returns whether the graph contains a cycle
+     * <p>
+     * Time Complexity: O(1) - constant time lookup of pre-computed result
+     *
+     * @return true if the graph contains at least one cycle, false otherwise
+     */
     public boolean hasCycle() {
         return hasCycle;
     }
