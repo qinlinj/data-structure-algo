@@ -62,8 +62,9 @@ public class BipartiteGraphDetection {
 
         this.visited = new boolean[g.getV()];
         this.colors = new int[g.getV()];
-        Arrays.fill(this.colors, -1);
+        Arrays.fill(this.colors, -1);  // Initialize all vertices with no color (-1)
 
+        // For disconnected graphs, check each component
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) {
                 if (!bfs(v)) {
@@ -74,10 +75,16 @@ public class BipartiteGraphDetection {
         }
     }
 
+    /**
+     * Main method to demonstrate the bipartite detection algorithm
+     *
+     * Example output:
+     * - isBipartite() will output true if the graph is bipartite, false otherwise
+     */
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-bfs.txt");
-        BipartiteGraphDetection graphBFS = new BipartiteGraphDetection(g);
-        System.out.println(graphBFS.isBipartition());
+        BipartiteGraphDetection detector = new BipartiteGraphDetection(g);
+        System.out.println(detector.isBipartite());
     }
 
     /**
@@ -171,7 +178,14 @@ public class BipartiteGraphDetection {
         return true;
     }
 
-    public boolean isBipartition() {
+    /**
+     * Returns whether the graph is bipartite
+     *
+     * Time Complexity: O(1) - constant time lookup of pre-computed result
+     *
+     * @return true if the graph is bipartite, false otherwise
+     */
+    public boolean isBipartite() {
         return isBipartite;
     }
 }
