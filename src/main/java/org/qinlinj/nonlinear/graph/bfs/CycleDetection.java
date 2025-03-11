@@ -29,4 +29,8 @@ public class CycleDetection {
 
     private boolean bfs(int v) {
     }
+
+    public boolean hasCycle() {
+        return hasCycle;
+    }
 }
