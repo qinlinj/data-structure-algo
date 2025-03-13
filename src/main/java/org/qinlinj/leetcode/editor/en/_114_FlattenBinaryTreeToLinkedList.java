@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.nonlinear.tree.binarysearchtree.TreeNode;
 
 // [114] Flatten Binary Tree to Linked List
-public class FlattenBinaryTreeToLinkedList {
+public class _114_FlattenBinaryTreeToLinkedList {
     public static void main(String[] args) {
-        Solution solution = new FlattenBinaryTreeToLinkedList().new Solution();
+        Solution solution = new _114_FlattenBinaryTreeToLinkedList().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
