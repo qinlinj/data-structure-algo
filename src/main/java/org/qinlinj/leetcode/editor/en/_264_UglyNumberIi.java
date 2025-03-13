@@ -1,11 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.Arrays;
-
 // [264] Ugly Number II
-public class UglyNumberIi {
+public class _264_UglyNumberIi {
     public static void main(String[] args) {
-        Solution solution = new UglyNumberIi().new Solution();
+        Solution solution = new _264_UglyNumberIi().new Solution();
         int n = 10;
         System.out.println(solution.nthUglyNumber(n));
     }
