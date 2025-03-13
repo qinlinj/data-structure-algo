@@ -1,10 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 // [225] Implement Stack using Queues
-public class ImplementStackUsingQueues {
+public class _225_ImplementStackUsingQueues {
     //    public static void main(String[] args) {
 //        Solution solution = new ImplementStackUsingQueues().new Solution();
 //    }
