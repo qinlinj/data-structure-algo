@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [141] Linked List Cycle
-public class LinkedListCycle {
+public class _141_LinkedListCycle {
     public static void main(String[] args) {
-        Solution solution = new LinkedListCycle().new Solution();
+        Solution solution = new _141_LinkedListCycle().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
