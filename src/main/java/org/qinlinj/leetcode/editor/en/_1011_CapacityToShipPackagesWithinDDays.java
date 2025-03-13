@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [1011] Capacity To Ship Packages Within D Days
-public class CapacityToShipPackagesWithinDDays {
+public class _1011_CapacityToShipPackagesWithinDDays {
     public static void main(String[] args) {
-        Solution solution = new CapacityToShipPackagesWithinDDays().new Solution();
+        Solution solution = new _1011_CapacityToShipPackagesWithinDDays().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)

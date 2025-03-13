@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.nonlinear.tree.binarytree.TreeNode;
 
 // [222] Count Complete Tree Nodes
-public class CountCompleteTreeNodes {
+public class _222_CountCompleteTreeNodes {
     public static void main(String[] args) {
-        Solution solution = new CountCompleteTreeNodes().new Solution();
+        Solution solution = new _222_CountCompleteTreeNodes().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
