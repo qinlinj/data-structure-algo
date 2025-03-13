@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [5] Longest Palindromic Substring
-public class LongestPalindromicSubstring {
+public class _5_LongestPalindromicSubstring {
     public static void main(String[] args) {
-        Solution solution = new LongestPalindromicSubstring().new Solution();
+        Solution solution = new _5_LongestPalindromicSubstring().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
