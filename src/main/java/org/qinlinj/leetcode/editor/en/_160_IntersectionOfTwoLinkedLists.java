@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [160] Intersection of Two Linked Lists
-public class IntersectionOfTwoLinkedLists {
+public class _160_IntersectionOfTwoLinkedLists {
     public static void main(String[] args) {
-        Solution solution = new IntersectionOfTwoLinkedLists().new Solution();
+        Solution solution = new _160_IntersectionOfTwoLinkedLists().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
