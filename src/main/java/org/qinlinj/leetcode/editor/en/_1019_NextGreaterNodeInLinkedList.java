@@ -51,7 +51,24 @@ public class _1019_NextGreaterNodeInLinkedList {
     }
     //leetcode submit region end(Prohibit modification and deletion)
 
-
+    class Solution1 {
+        public int[] nextLargerNodes(ListNode head) {
+            ArrayList<Integer> nums = new ArrayList<>();
+            for (ListNode p = head; p != null; p = p.next) {
+                nums.add(p.val);
+            }
+            int[] res = new int[nums.size()];
+            Stack<Integer> stk = new Stack<>();
+            for (int i = nums.size() - 1; i >= 0; i--) {
+                while (!stk.isEmpty() && stk.peek() <= nums.get(i)) {
+                    stk.pop();
+                }
+                res[i] = stk.isEmpty() ? 0 : stk.peek();
+                stk.push(nums.get(i));
+            }
+            return res;
+        }
+    }
 }
 
 
