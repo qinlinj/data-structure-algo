@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [167] Two Sum II - Input Array Is Sorted
-public class TwoSumIiInputArrayIsSorted {
+public class _167_TwoSumIiInputArrayIsSorted {
     public static void main(String[] args) {
-        Solution solution = new TwoSumIiInputArrayIsSorted().new Solution();
+        Solution solution = new _167_TwoSumIiInputArrayIsSorted().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
