@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [875] Koko Eating Bananas
-public class KokoEatingBananas {
+public class _875_KokoEatingBananas {
     public static void main(String[] args) {
-        Solution solution = new KokoEatingBananas().new Solution();
+        Solution solution = new _875_KokoEatingBananas().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
