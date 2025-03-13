@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [410] Split Array Largest Sum
-public class SplitArrayLargestSum {
+public class _410_SplitArrayLargestSum {
     public static void main(String[] args) {
-        Solution solution = new SplitArrayLargestSum().new Solution();
+        Solution solution = new _410_SplitArrayLargestSum().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
