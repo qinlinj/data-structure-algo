@@ -2,6 +2,8 @@ package org.qinlinj.leetcode.editor.en;
 
 import org.qinlinj.leetcode.editor.common.ListNode;
 
+import java.util.*;
+
 // [1019] Next Greater Node In Linked List
 public class _1019_NextGreaterNodeInLinkedList {
 
@@ -25,7 +27,26 @@ public class _1019_NextGreaterNodeInLinkedList {
      */
     class Solution {
         public int[] nextLargerNodes(ListNode head) {
-            return null;
+            Stack<Integer> stack = new Stack<>();
+            ArrayList<Integer> data = new ArrayList<>();
+            while (head != null) {
+                data.add(head.val);
+                head = head.next;
+            }
+            int[] nodesData = data.stream().mapToInt(Integer::intValue).toArray();
+            int[] res = new int[nodesData.length];
+            for (int i = nodesData.length - 1; i >= 0; i--) {
+                while (!stack.isEmpty() && stack.peek() <= nodesData[i]) {
+                    stack.pop();
+                }
+                if (!stack.isEmpty()) {
+                    res[i] = stack.peek();
+                } else {
+                    res[i] = 0;
+                }
+                stack.push(nodesData[i]);
+            }
+            return res;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)

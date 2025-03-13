@@ -1,20 +1,18 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
 // [1944] Number of Visible People in a Queue
 public class _1944_NumberOfVisiblePeopleInAQueue {
-    
+
     public static void main(String[] args) {
         Solution solution = new _1944_NumberOfVisiblePeopleInAQueue().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] canSeePersonsCount(int[] heights) {
-            
+            return null;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +21,7 @@ public class _1944_NumberOfVisiblePeopleInAQueue {
 }
 
 
-
-
-
-//There are n people standing in a queue, and they numbered from 0 to n - 1 in 
+//There are n people standing in a queue, and they numbered from 0 to n - 1 in
 //left to right order. You are given an array heights of distinct integers where 
 //heights[i] represents the height of the iᵗʰ person. 
 //
