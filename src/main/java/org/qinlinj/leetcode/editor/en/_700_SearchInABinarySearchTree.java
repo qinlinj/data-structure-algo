@@ -1,11 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
-import org.qinlinj.nonlinear.tree.binarytree.TreeNode;
-
 // [700] Search in a Binary Search Tree
-public class SearchInABinarySearchTree {
+public class _700_SearchInABinarySearchTree {
     public static void main(String[] args) {
-        Solution solution = new SearchInABinarySearchTree().new Solution();
+        Solution solution = new _700_SearchInABinarySearchTree().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -38,13 +36,20 @@ public class SearchInABinarySearchTree {
             }
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //leetcode submit region end(Prohibit modification and deletion)
     public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-        TreeNode() {}
-        TreeNode(int val) { this.val = val; }
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
         TreeNode(int val, TreeNode left, TreeNode right) {
             this.val = val;
             this.left = left;

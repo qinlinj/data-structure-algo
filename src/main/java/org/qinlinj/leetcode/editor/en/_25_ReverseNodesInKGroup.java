@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [25] Reverse Nodes in k-Group
-public class ReverseNodesInKGroup {
+public class _25_ReverseNodesInKGroup {
     public static void main(String[] args) {
-        Solution solution = new ReverseNodesInKGroup().new Solution();
+        Solution solution = new _25_ReverseNodesInKGroup().new Solution();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 

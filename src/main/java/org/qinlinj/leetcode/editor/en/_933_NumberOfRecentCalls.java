@@ -1,10 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 // [933] Number of Recent Calls
-public class NumberOfRecentCalls {
+public class _933_NumberOfRecentCalls {
 //    public static void main(String[] args) {
 //        Solution solution = new NumberOfRecentCalls().new Solution();
 //    }

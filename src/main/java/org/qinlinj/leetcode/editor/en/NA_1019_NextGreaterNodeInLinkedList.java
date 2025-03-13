@@ -3,10 +3,10 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.leetcode.editor.common.ListNode;
 
 // [1019] Next Greater Node In Linked List
-public class _1019_NextGreaterNodeInLinkedList {
+public class NA_1019_NextGreaterNodeInLinkedList {
 
     public static void main(String[] args) {
-        Solution solution = new _1019_NextGreaterNodeInLinkedList().new Solution();
+        Solution solution = new NA_1019_NextGreaterNodeInLinkedList().new Solution();
         // put your test code here
 
     }

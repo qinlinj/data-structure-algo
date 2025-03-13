@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [83] Remove Duplicates from Sorted List
-public class RemoveDuplicatesFromSortedList {
+public class _83_RemoveDuplicatesFromSortedList {
     public static void main(String[] args) {
-        Solution solution = new RemoveDuplicatesFromSortedList().new Solution();
+        Solution solution = new _83_RemoveDuplicatesFromSortedList().new Solution();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 

@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [92] Reverse Linked List II
-public class ReverseLinkedListIi {
+public class _92_ReverseLinkedListIi {
     public static void main(String[] args) {
-        Solution solution = new ReverseLinkedListIi().new Solution();
+        Solution solution = new _92_ReverseLinkedListIi().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 

@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [86] Partition List
-public class PartitionList {
+public class _86_PartitionList {
     public static void main(String[] args) {
-        Solution solution = new PartitionList().new Solution();
+        Solution solution = new _86_PartitionList().new Solution();
         ListNode head = new ListNode(1);
         ListNode node1 = new ListNode(4);
         ListNode node2 = new ListNode(3);

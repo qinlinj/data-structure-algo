@@ -1,12 +1,11 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 // [71] Simplify Path
-public class SimplifyPath {
+public class _71_SimplifyPath {
     public static void main(String[] args) {
-        Solution solution = new SimplifyPath().new Solution();
+        Solution solution = new _71_SimplifyPath().new Solution();
         String s = "/home/user/Documents/../Pictures";
         System.out.println(solution.simplifyPath(s));
     }
