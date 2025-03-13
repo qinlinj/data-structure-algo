@@ -3,9 +3,9 @@ package org.qinlinj.leetcode.editor.en;
 import org.qinlinj.linear.algo.linkedlist.ListNode;
 
 // [23] Merge k Sorted Lists
-public class MergeKSortedLists {
+public class _23_MergeKSortedLists {
     public static void main(String[] args) {
-        Solution solution = new MergeKSortedLists().new Solution();
+        Solution solution = new _23_MergeKSortedLists().new Solution();
     }
 //leetcode submit region begin(Prohibit modification and deletion)
 
