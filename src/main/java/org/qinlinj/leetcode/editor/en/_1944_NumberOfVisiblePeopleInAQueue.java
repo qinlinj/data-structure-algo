@@ -1,5 +1,7 @@
 package org.qinlinj.leetcode.editor.en;
 
+import java.util.*;
+
 // [1944] Number of Visible People in a Queue
 public class _1944_NumberOfVisiblePeopleInAQueue {
 
@@ -12,12 +14,25 @@ public class _1944_NumberOfVisiblePeopleInAQueue {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] canSeePersonsCount(int[] heights) {
-            return null;
+            Stack<Integer> stack = new Stack<>();
+            int[] res = new int[heights.length];
+            for (int i = heights.length - 1; i >= 0; i--) {
+                int count = 0;
+                while (!stack.isEmpty() && stack.peek() <= heights[i]) {
+                    stack.pop();
+                    count++;
+                }
+                if (!stack.isEmpty()) {
+                    res[i] = count + 1;
+                } else {
+                    res[i] = count;
+                }
+                stack.push(heights[i]);
+            }
+            return res;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
-
 }
 
 
