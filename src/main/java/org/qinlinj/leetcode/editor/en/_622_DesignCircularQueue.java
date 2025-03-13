@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [622] Design Circular Queue
-public class DesignCircularQueue {
+public class _622_DesignCircularQueue {
     public static void main(String[] args) {
-        MyCircularQueue solution = new DesignCircularQueue().new MyCircularQueue(3);
+        MyCircularQueue solution = new _622_DesignCircularQueue().new MyCircularQueue(3);
         System.out.println(solution.enQueue(1));
         System.out.println(solution.enQueue(2));
         System.out.println(solution.enQueue(3));
@@ -33,7 +33,8 @@ public class DesignCircularQueue {
         public boolean enQueue(int value) {
             if (!isFull()) {
                 queue[end] = value;
-                end = (end + 1) % capacity;;
+                end = (end + 1) % capacity;
+                ;
                 size++;
                 return true;
             } else {
@@ -43,7 +44,8 @@ public class DesignCircularQueue {
 
         public boolean deQueue() {
             if (!isEmpty()) {
-                start = (start + 1) % capacity;;
+                start = (start + 1) % capacity;
+                ;
                 size--;
                 return true;
             } else {
