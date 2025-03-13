@@ -1,12 +1,12 @@
 package org.qinlinj.leetcode.editor.en;
 
 
-import java.util.Arrays;
+import java.util.*;
 
 // [1] Two Sum
-public class TwoSum {
+public class _1_TwoSum {
     public static void main(String[] args) {
-        Solution solution = new TwoSum().new Solution();
+        Solution solution = new _1_TwoSum().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
