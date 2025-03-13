@@ -32,29 +32,29 @@ public class _1944_NumberOfVisiblePeopleInAQueue {
             return res;
         }
     }
-    //leetcode submit region end(Prohibit modification and deletion)
-}
 
-class Solution1 {
-    public int[] canSeePersonsCount(int[] heights) {
-        int n = heights.length;
-        int[] res = new int[n];
-        // Stack to store heights in decreasing order
-        Stack<Integer> stk = new Stack<>();
-        for (int i = n - 1; i >= 0; i--) {
-            // Count of people with lower height that can be seen
-            int count = 0;
-            // Monotonic stack pattern: calculate next greater or equal element (height)
-            while (!stk.isEmpty() && heights[i] > stk.peek()) {
-                stk.pop();
-                count++;
+    //leetcode submit region end(Prohibit modification and deletion)
+    class Solution1 {
+        public int[] canSeePersonsCount(int[] heights) {
+            int n = heights.length;
+            int[] res = new int[n];
+            // Stack to store heights in decreasing order
+            Stack<Integer> stk = new Stack<>();
+            for (int i = n - 1; i >= 0; i--) {
+                // Count of people with lower height that can be seen
+                int count = 0;
+                // Monotonic stack pattern: calculate next greater or equal element (height)
+                while (!stk.isEmpty() && heights[i] > stk.peek()) {
+                    stk.pop();
+                    count++;
+                }
+                // Not only can we see people shorter than us, but if there's a taller person
+                // behind, we can also see that tall person
+                res[i] = stk.isEmpty() ? count : count + 1;
+                stk.push(heights[i]);
             }
-            // Not only can we see people shorter than us, but if there's a taller person
-            // behind, we can also see that tall person
-            res[i] = stk.isEmpty() ? count : count + 1;
-            stk.push(heights[i]);
+            return res;
         }
-        return res;
     }
 }
 
