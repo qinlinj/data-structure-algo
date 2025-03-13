@@ -1,11 +1,11 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.Arrays;
+import java.util.*;
 
 // [204] Count Primes
-public class CountPrimes {
+public class _204_CountPrimes {
     public static void main(String[] args) {
-        Solution solution = new CountPrimes().new Solution();
+        Solution solution = new _204_CountPrimes().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -33,7 +33,7 @@ public class CountPrimes {
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
-    
+
     class solution2 {
         public int countPrimes(int n) {
             boolean[] isPrime = new boolean[n];
