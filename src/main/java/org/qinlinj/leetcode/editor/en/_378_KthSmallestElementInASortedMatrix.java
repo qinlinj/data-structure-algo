@@ -1,9 +1,9 @@
 package org.qinlinj.leetcode.editor.en;
 
 // [378] Kth Smallest Element in a Sorted Matrix
-public class KthSmallestElementInASortedMatrix {
+public class _378_KthSmallestElementInASortedMatrix {
     public static void main(String[] args) {
-        Solution solution = new KthSmallestElementInASortedMatrix().new Solution();
+        Solution solution = new _378_KthSmallestElementInASortedMatrix().new Solution();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
