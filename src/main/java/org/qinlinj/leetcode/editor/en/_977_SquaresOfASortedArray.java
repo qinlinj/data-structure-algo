@@ -1,11 +1,11 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.Arrays;
+import java.util.*;
 
 // [977] Squares of a Sorted Array
-public class SquaresOfASortedArray {
+public class _977_SquaresOfASortedArray {
     public static void main(String[] args) {
-        Solution solution = new SquaresOfASortedArray().new Solution();
+        Solution solution = new _977_SquaresOfASortedArray().new Solution();
         int[] nums = new int[]{-10000, -9999, -7, -5, 0, 0, 10000};
         int[] res = solution.sortedSquares(nums);
         System.out.println(Arrays.toString(res));
