@@ -1,12 +1,12 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.Stack;
+import java.util.*;
 
 // [1475] Final Prices With a Special Discount in a Shop
-public class FinalPricesWithASpecialDiscountInAShop {
+public class _1475_FinalPricesWithASpecialDiscountInAShop {
 
     public static void main(String[] args) {
-        Solution solution = new FinalPricesWithASpecialDiscountInAShop().new Solution();
+        Solution solution = new _1475_FinalPricesWithASpecialDiscountInAShop().new Solution();
         // put your test code here
 
     }
