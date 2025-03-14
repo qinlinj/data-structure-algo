@@ -93,9 +93,19 @@ public class SingleSourcePath {
         dfs(source, source);
     }
 
+    /**
+     * Main method to demonstrate the SingleSourcePath algorithm.
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
+        // Create a graph from file
         Graph g = new AdjSet("data/graph-bfs.txt");
+
+        // Find paths from vertex 0
         SingleSourcePath graphDFS = new SingleSourcePath(g, 0);
+
+        // Output the path from vertex 0 to vertex 6
         System.out.println(graphDFS.path(6));
     }
 
@@ -149,28 +159,77 @@ public class SingleSourcePath {
         }
     }
 
+    /**
+     * Checks if there is a path from the source vertex to the target vertex.
+     *
+     * @param target The target vertex to check connectivity to
+     * @return true if there is a path from source to target, false otherwise
+     *
+     * Time Complexity: O(1) - constant time check of the visited array
+     * Space Complexity: O(1) - no additional space used
+     */
     public boolean isConnected(int target) {
         validateVertex(target);
         return visited[target];
     }
 
+    /**
+     * Validates if a vertex is within the valid range for the graph.
+     *
+     * @param v The vertex to validate
+     * @throws IllegalArgumentException if vertex is outside valid range
+     *
+     * Time Complexity: O(1) - constant time operation
+     * Space Complexity: O(1) - no additional space used
+     */
     private void validateVertex(int v) {
-        if (v < 0 && v >= g.getV()) {
-            throw new IllegalArgumentException("error");
+        if (v < 0 || v >= g.getV()) {  // Fixed logical condition from '&&' to '||'
+            throw new IllegalArgumentException("Vertex is invalid, out of range");
         }
     }
 
+    /**
+     * Finds and returns the path from the source vertex to the target vertex.
+     *
+     * Visual Example:
+     * For the graph shown earlier, with source = 0, finding path to target = 6:
+     *
+     * Step 1: Check if connected (visited[6] = true)
+     * Step 2: Reconstruct path by following parent pointers backward
+     *   - Start with target = 6
+     *   - Add 6 to path
+     *   - target = prevs[6] = 4
+     *   - Add 4 to path
+     *   - target = prevs[4] = 1
+     *   - Add 1 to path
+     *   - target = prevs[1] = 0
+     *   - Add 0 to path
+     *   - Now target == source, so stop
+     * Step 3: Reverse path (currently [6, 4, 1, 0]) to get [0, 1, 4, 6]
+     *
+     * @param target The target vertex to find path to
+     * @return List of vertices representing the path from source to target,
+     *         or an empty list if no path exists
+     *
+     * Time Complexity: O(V) in worst case (if path includes all vertices)
+     * Space Complexity: O(V) for storing the path
+     */
     public List<Integer> path(int target) {
         List<Integer> res = new ArrayList<>();
+
+        // 1. If there's no path from source to target, return empty list
         if (!isConnected(target)) {
             return res;
         }
+
+        // 2. Reconstruct path by following parent pointers backward from target
         while (target != source) {
             res.add(target);
-            target = prevs[target];
+            target = prevs[target];  // Move to the parent vertex
         }
-        res.add(source);
+        res.add(source);  // Add the source vertex
 
+        // 3. Reverse the path to get correct order (source to target)
         Collections.reverse(res);
 
         return res;
