@@ -50,10 +50,18 @@ import java.util.*;
  * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
  * Space Complexity: O(V) for the visited array, colors array, and recursion stack
  */
-public class BipartiteGraphDetection {
+public class BipartitionDetection {
+    // The graph to be analyzed
     private Graph g;
+
+    // Track visited vertices
     private boolean[] visited;
+
+    // Store the color of each vertex
+    // -1: no color, 0: red, 1: blue
     private int[] colors;
+
+    // Flag indicating if graph is bipartite
     private boolean isBipartition = true;
 
     /**
@@ -69,25 +77,39 @@ public class BipartiteGraphDetection {
      * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
      * Space Complexity: O(V) for the visited array, colors array, and recursion stack
      */
-    public BipartiteGraphDetection(Graph g) {
+    public BipartitionDetection(Graph g) {
         this.g = g;
 
         this.visited = new boolean[g.getV()];
         this.colors = new int[g.getV()];
-        Arrays.fill(colors, -1);
+        Arrays.fill(colors, -1);  // Initialize all vertices with no color (-1)
+
+        // For disconnected graphs, check each component
         for (int v = 0; v < g.getV(); v++) {
+            // Only process unvisited vertices
             if (!visited[v]) {
+                // Start DFS with color 0 (red)
                 if (!dfs(v, 0)) {
                     isBipartition = false;
-                    break;
+                    break;  // Early termination if bipartite property is violated
                 }
             }
         }
     }
 
+    /**
+     * Main method to demonstrate the bipartite detection algorithm
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
+        // Create a graph from file
         Graph g = new AdjSet("data/graph-dfs.txt");
-        BipartiteGraphDetection graphDFS = new BipartiteGraphDetection(g);
+
+        // Detect if the graph is bipartite
+        BipartitionDetection graphDFS = new BipartitionDetection(g);
+
+        // Output the result
         System.out.println(graphDFS.isBipartition());
     }
 
@@ -119,16 +141,23 @@ public class BipartiteGraphDetection {
      * Space Complexity: O(V) due to recursion stack in worst case
      */
     private boolean dfs(int v, int color) {
-        visited[v] = true;
-        colors[v] = color;
+        visited[v] = true;  // Mark vertex as visited
+        colors[v] = color;  // Assign the color
+
+        // Explore all adjacent vertices
         for (int w : g.adj(v)) {
             if (!visited[w]) {
+                // Assign the opposite color to neighbor
+                // If v's color is 0 (red), then w's color should be 1 (blue)
+                // If v's color is 1 (blue), then w's color should be 0 (red)
                 if (!dfs(w, 1 - color)) return false;
             } else if (colors[w] == colors[v]) {
+                // If neighbor is already visited and has the same color,
+                // this violates the bipartite property
                 return false;
             }
         }
-        return true;
+        return true;  // Component is bipartite so far
     }
 
     /**
