@@ -50,7 +50,7 @@ import java.util.*;
  * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
  * Space Complexity: O(V) for the visited array, colors array, and recursion stack
  */
-public class BipartitionDetection {
+public class BipartiteGraphDetection {
     // The graph to be analyzed
     private Graph g;
 
@@ -77,7 +77,7 @@ public class BipartitionDetection {
      * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
      * Space Complexity: O(V) for the visited array, colors array, and recursion stack
      */
-    public BipartitionDetection(Graph g) {
+    public BipartiteGraphDetection(Graph g) {
         this.g = g;
 
         this.visited = new boolean[g.getV()];
