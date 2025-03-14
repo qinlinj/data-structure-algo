@@ -35,10 +35,13 @@ import java.util.*;
  * Space Complexity: O(V) for the visited array, recursion stack, and component lists
  */
 public class ConnectedComponentsAnalyzer {
+    // The graph to be processed
     private Graph g;
 
+    // Array to track which component each vertex belongs to (-1 means unvisited)
     private int[] visited;
 
+    // Count of connected components
     private int ccCount = 0;
 
     /**
@@ -66,12 +69,16 @@ public class ConnectedComponentsAnalyzer {
 
         if (g == null) return;
 
+        // Initialize visited array with -1 (unvisited)
         this.visited = new int[g.getV()];
         Arrays.fill(visited, -1);
+
+        // Iterate through all vertices
         for (int v = 0; v < g.getV(); v++) {
+            // If vertex is not visited (component ID is -1), start a new DFS
             if (visited[v] == -1) {
-                ccCount++;
-                dfs(v, ccCount);
+                ccCount++;  // Increment connected component count
+                dfs(v, ccCount);  // Perform DFS to mark all vertices in this component
             }
         }
     }
@@ -85,10 +92,16 @@ public class ConnectedComponentsAnalyzer {
      *             Space Complexity: Depends on the size of the input graph
      */
     public static void main(String[] args) {
+        // Create a graph from file
         Graph g = new AdjSet("data/graph-dfs.txt");
+
+        // Find and analyze connected components
         ConnectedComponentsAnalyzer graphDFS = new ConnectedComponentsAnalyzer(g);
+
+        // Print all components
         System.out.println(Arrays.toString(graphDFS.components()));
 
+        // Check if two vertices are connected
         System.out.println(graphDFS.isConnected(0, 6));
     }
 
@@ -117,8 +130,11 @@ public class ConnectedComponentsAnalyzer {
      *             Space Complexity: O(V) - Due to recursion stack in worst case
      */
     private void dfs(int v, int ccId) {
-        visited[v] = ccId;
+        visited[v] = ccId;  // Mark current vertex as part of component ccId
+
+        // Explore all adjacent vertices
         for (int w : g.adj(v)) {
+            // If adjacent vertex is not visited, perform DFS on it
             if (visited[w] == -1) {
                 dfs(w, ccId);
             }
@@ -156,13 +172,18 @@ public class ConnectedComponentsAnalyzer {
      */
     public List<Integer>[] components() {
         List<Integer>[] res = new ArrayList[ccCount];
-        // Arrays.fill(res, new ArrayList<>());
+
+        // Initialize each component's list
+        // Note: Cannot use Arrays.fill(res, new ArrayList<>()) as it would
+        // use the same ArrayList object for all elements
         for (int i = 0; i < ccCount; i++) {
             res[i] = new ArrayList<>();
         }
+
+        // Add each vertex to its respective component's list
         for (int v = 0; v < g.getV(); v++) {
             int cc = visited[v];
-            res[cc - 1].add(v);
+            res[cc - 1].add(v);  // Adjust index because component IDs start from 1
         }
 
         return res;
@@ -195,8 +216,8 @@ public class ConnectedComponentsAnalyzer {
      *                                  Space Complexity: O(1) - No additional space used
      */
     private void validateVertex(int v) {
-        if (v < 0 && v >= g.getV()) {
-            throw new IllegalArgumentException("error");
+        if (v < 0 || v >= g.getV()) {  // Fixed logical condition from '&&' to '||'
+            throw new IllegalArgumentException("Vertex is invalid, out of range");
         }
     }
 }
