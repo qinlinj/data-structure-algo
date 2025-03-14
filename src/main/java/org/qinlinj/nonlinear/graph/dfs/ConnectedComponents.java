@@ -27,10 +27,13 @@ import org.qinlinj.nonlinear.graph.Graph;
  * Space Complexity: O(V) for the visited array and recursion stack
  */
 public class ConnectedComponents {
+    // The graph to be processed
     private Graph g;
 
+    // Array to track visited vertices
     private boolean[] visited;
 
+    // Count of connected components
     private int ccCount = 0;
 
     /**
@@ -60,10 +63,13 @@ public class ConnectedComponents {
         if (g == null) return;
 
         this.visited = new boolean[g.getV()];
+
+        // Iterate through all vertices
         for (int v = 0; v < g.getV(); v++) {
+            // If vertex is not visited, start a new DFS
             if (!visited[v]) {
-                ccCount++;
-                dfs(v);
+                ccCount++;  // Increment connected component count
+                dfs(v);     // Perform DFS to mark all vertices in this component
             }
         }
     }
@@ -77,8 +83,13 @@ public class ConnectedComponents {
      *             Space Complexity: Depends on the size of the input graph
      */
     public static void main(String[] args) {
+        // Create a graph from file
         Graph g = new AdjSet("data/graph-dfs.txt");
+
+        // Find connected components
         ConnectedComponents graphDFS = new ConnectedComponents(g);
+
+        // Output the number of connected components
         System.out.println(graphDFS.getCcCount());
     }
 
@@ -105,14 +116,25 @@ public class ConnectedComponents {
      *          Space Complexity: O(V) - Due to recursion stack in worst case (for a line graph)
      */
     private void dfs(int v) {
-        visited[v] = true;
+        visited[v] = true;  // Mark current vertex as visited
+
+        // Explore all adjacent vertices
         for (int w : g.adj(v)) {
+            // If adjacent vertex is not visited, perform DFS on it
             if (!visited[w]) {
                 dfs(w);
             }
         }
     }
 
+    /**
+     * Returns the count of connected components in the graph.
+     *
+     * @return The number of connected components
+     * <p>
+     * Time Complexity: O(1) - Constant time operation
+     * Space Complexity: O(1) - No additional space used
+     */
     public int getCcCount() {
         return ccCount;
     }
