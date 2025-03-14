@@ -39,4 +39,17 @@ public class ConnectedComponentsAnalyzer {
         return ccCount;
     }
 
+    public List<Integer>[] components() {
+        List<Integer>[] res = new ArrayList[ccCount];
+        // Arrays.fill(res, new ArrayList<>());
+        for (int i = 0; i < ccCount; i++) {
+            res[i] = new ArrayList<>();
+        }
+        for (int v = 0; v < g.getV(); v++) {
+            int cc = visited[v];
+            res[cc - 1].add(v);
+        }
+
+        return res;
+    }
 }
