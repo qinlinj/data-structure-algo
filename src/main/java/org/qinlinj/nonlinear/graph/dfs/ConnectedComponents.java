@@ -82,6 +82,28 @@ public class ConnectedComponents {
         System.out.println(graphDFS.getCcCount());
     }
 
+    /**
+     * Depth-First Search to mark all vertices in the same connected component.
+     * <p>
+     * Visual Example for dfs(0):
+     * Graph:
+     * 0 -- 1
+     * |
+     * 2
+     * <p>
+     * Steps:
+     * 1. Mark 0 as visited
+     * 2. For each neighbor of 0 (1 and 2):
+     * a. If not visited, call dfs on the neighbor
+     * b. dfs(1) marks 1 as visited
+     * c. dfs(2) marks 2 as visited
+     * 3. Now all vertices {0,1,2} in this component are marked as visited
+     *
+     * @param v The vertex to start DFS from
+     *          <p>
+     *          Time Complexity: O(V + E) - Each vertex and edge is processed once
+     *          Space Complexity: O(V) - Due to recursion stack in worst case (for a line graph)
+     */
     private void dfs(int v) {
         visited[v] = true;
         for (int w : g.adj(v)) {
