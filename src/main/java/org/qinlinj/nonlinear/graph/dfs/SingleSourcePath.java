@@ -1,6 +1,9 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
+
+import java.util.*;
 
 public class SingleSourcePath {
     private Graph g;
@@ -22,6 +25,12 @@ public class SingleSourcePath {
         dfs(source, source);
     }
 
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-bfs.txt");
+        SingleSourcePath graphDFS = new SingleSourcePath(g, 0);
+        System.out.println(graphDFS.path(6));
+    }
+
     private void dfs(int v, int prev) {
         visited[v] = true;
         prevs[v] = prev;
@@ -41,5 +50,21 @@ public class SingleSourcePath {
         if (v < 0 && v >= g.getV()) {
             throw new IllegalArgumentException("error");
         }
+    }
+
+    public List<Integer> path(int target) {
+        List<Integer> res = new ArrayList<>();
+        if (!isConnected(target)) {
+            return res;
+        }
+        while (target != source) {
+            res.add(target);
+            target = prevs[target];
+        }
+        res.add(source);
+
+        Collections.reverse(res);
+
+        return res;
     }
 }
