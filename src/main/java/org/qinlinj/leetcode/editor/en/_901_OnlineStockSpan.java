@@ -1,5 +1,7 @@
 package org.qinlinj.leetcode.editor.en;
 
+import java.util.*;
+
 // [901] Online Stock Span
 public class _901_OnlineStockSpan {
 
@@ -11,13 +13,20 @@ public class _901_OnlineStockSpan {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class StockSpanner {
+        Stack<int[]> stack;
 
         public StockSpanner() {
-
+            this.stack = new Stack<>();
         }
 
         public int next(int price) {
-            return 0;
+            int count = 1;
+            while (!stack.isEmpty() && price >= stack.peek()[0]) {
+                int[] prev = stack.pop();
+                count += prev[1];
+            }
+            stack.push(new int[]{price, count});
+            return count;
         }
     }
 
