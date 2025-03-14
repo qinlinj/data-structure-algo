@@ -40,6 +40,27 @@ public class TwoVertexPath {
 
     private List<Integer> res;
 
+    /**
+     * Constructor that initializes the two-vertex path finding algorithm and computes the path.
+     *
+     * Visual Example:
+     * Consider this graph with source=0 and target=6:
+     *    0 --- 1 --- 3
+     *    |     |     |
+     *    2 --- 4 --- 5
+     *           \
+     *            6
+     *
+     * DFS will proceed from 0 until it reaches 6, then stop.
+     * The path is computed once and stored in the res list.
+     *
+     * @param g The input graph
+     * @param source The source vertex to find path from
+     * @param target The target vertex to find path to
+     *
+     * Time Complexity: O(V + E) in worst case, but typically better due to early termination
+     * Space Complexity: O(V) for the visited and prevs arrays, plus recursion stack
+     */
     public TwoVertexPath(Graph g, int source, int target) {
         this.g = g;
         this.source = source;
