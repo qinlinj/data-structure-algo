@@ -57,7 +57,21 @@ public class TwoVertexPath {
         }
     }
 
-    private void path() {
+    private List<Integer> path() {
+        if (!isConnected()) {
+            return res;
+        }
+
+        int tmp = target;
+        while (tmp != source) {
+            res.add(tmp);
+            tmp = prevs[tmp];
+        }
+        res.add(source);
+
+        Collections.reverse(res);
+
+        return res;
     }
 
 
