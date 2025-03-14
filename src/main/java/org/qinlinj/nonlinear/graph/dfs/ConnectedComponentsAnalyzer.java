@@ -8,7 +8,6 @@ import java.util.*;
 /**
  * ConnectedComponentsAnalyzer - A class to identify and analyze connected components in an undirected graph using DFS.
  * <p>
- * What are Connected Components (CC)?
  * A connected component is a subgraph in which any two vertices are connected to each other by paths,
  * and which is connected to no additional vertices in the supergraph.
  * <p>
