@@ -24,6 +24,12 @@ public class ConnectedComponents {
     }
 
     private void dfs(int v) {
+        visited[v] = true;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                dfs(w);
+            }
+        }
     }
 
 
