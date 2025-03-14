@@ -117,6 +117,14 @@ public class ConnectedComponentsAnalyzer {
         }
     }
 
+    /**
+     * Returns the count of connected components in the graph.
+     *
+     * @return The number of connected components
+     * <p>
+     * Time Complexity: O(1) - Constant time operation
+     * Space Complexity: O(1) - No additional space used
+     */
     public int getCcCount() {
         return ccCount;
     }
