@@ -29,23 +29,69 @@ import org.qinlinj.nonlinear.graph.Graph;
  * Space Complexity: O(V) for the visited array and recursion stack
  */
 public class CycleDetection {
+    // The graph to be processed
     private Graph g;
+
+    // Array to track visited vertices
     private boolean[] visited;
+
+    // Flag to indicate whether the graph has a cycle
     private boolean hasCycle = false;
 
+    /**
+     * Constructor that initializes the cycle detection algorithm and computes the result.
+     * <p>
+     * Visual Example:
+     * Consider a graph with 4 vertices:
+     * 0 -- 1
+     * |    |
+     * 2 -- 3
+     * <p>
+     * This graph contains a cycle: 0-1-3-2-0
+     * <p>
+     * Algorithm steps:
+     * 1. Start DFS from vertex 0, marking it as visited, with previous as 0 (itself initially)
+     * 2. Visit neighbor 1, marking it as visited, with previous as 0
+     * 3. Visit neighbor 3, marking it as visited, with previous as 1
+     * 4. Visit neighbor 2, marking it as visited, with previous as 3
+     * 5. When at vertex 2, its neighbor 0 is already visited and is not the previous vertex (3)
+     * This indicates a cycle, so hasCycle is set to true
+     *
+     * @param g The input graph
+     *          <p>
+     *          Time Complexity: O(V + E) - We visit each vertex once and process all edges
+     *          Space Complexity: O(V) - For the visited array and recursion stack
+     */
     public CycleDetection(Graph g) {
         this.g = g;
+
         this.visited = new boolean[g.getV()];
+
+        // Iterate through all vertices
         for (int v = 0; v < g.getV(); v++) {
+            // Only start DFS from unvisited vertices
             if (!visited[v]) {
-                dfs(v, v);
+                dfs(v, v);  // Initially, previous vertex is set to the starting vertex itself
             }
         }
     }
 
+    /**
+     * Main method to demonstrate the CycleDetection usage.
+     *
+     * @param args Command line arguments (not used)
+     *             <p>
+     *             Time Complexity: Depends on the size of the input graph
+     *             Space Complexity: Depends on the size of the input graph
+     */
     public static void main(String[] args) {
+        // Create a graph from file
         Graph g = new AdjSet("data/graph-dfs.txt");
+
+        // Detect cycles in the graph
         CycleDetection graphDFS = new CycleDetection(g);
+
+        // Output whether the graph contains cycles
         System.out.println(graphDFS.hasCycle());
     }
 
@@ -83,12 +129,15 @@ public class CycleDetection {
      *             Space Complexity: O(V) - Due to recursion stack in worst case
      */
     private void dfs(int v, int prev) {
-        visited[v] = true;
+        visited[v] = true;  // Mark current vertex as visited
+
+        // Explore all adjacent vertices
         for (int w : g.adj(v)) {
             if (!visited[w]) {
+                // If neighbor is not visited, continue DFS with current vertex as previous
                 dfs(w, v);
-            } else {
-
+            } else {  // Neighbor is already visited
+                // If the visited neighbor is not the previous vertex, a cycle is detected
                 if (w != prev) {
                     hasCycle = true;
                 }
@@ -96,6 +145,14 @@ public class CycleDetection {
         }
     }
 
+    /**
+     * Returns whether the graph contains any cycles.
+     *
+     * @return true if the graph has at least one cycle, false otherwise
+     * <p>
+     * Time Complexity: O(1) - Constant time operation
+     * Space Complexity: O(1) - No additional space used
+     */
     public boolean hasCycle() {
         return hasCycle;
     }
