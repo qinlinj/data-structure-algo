@@ -5,6 +5,29 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+/**
+ * TwoVertexPath - A class to find a path between two specific vertices in a graph using DFS.
+ * <p>
+ * Concept and Principles:
+ * - This class finds a path between a specified source vertex and a target vertex
+ * - It uses a modified DFS approach that stops early once the target is found
+ * - For each visited vertex, we maintain information about its parent/previous vertex
+ * - After finding the target, we reconstruct the path using parent pointers
+ * <p>
+ * Advantages:
+ * - More efficient than single-source path when only one specific path is needed
+ * - Early termination once target is found, saving computation time
+ * - Avoids exploring unnecessary parts of the graph
+ * - Uses DFS with a boolean return value to signal when target is found
+ * <p>
+ * Key differences from SingleSourcePath:
+ * - Only explores the graph until target is found, then stops
+ * - Returns a boolean from DFS to indicate if target was found
+ * - Pre-computes and stores the path in constructor
+ * <p>
+ * Time Complexity: O(V + E) in worst case, but can be better if target is found early
+ * Space Complexity: O(V) for the visited array, prevs array, and recursion stack
+ */
 public class TwoVertexPath {
     private Graph g;
 
