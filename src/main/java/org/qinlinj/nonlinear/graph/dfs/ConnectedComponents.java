@@ -32,5 +32,7 @@ public class ConnectedComponents {
         }
     }
 
-
+    public int getCcCount() {
+        return ccCount;
+    }
 }
