@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -26,6 +27,12 @@ public class BipartiteGraphDetection {
         }
     }
 
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-dfs.txt");
+        BipartiteGraphDetection graphDFS = new BipartiteGraphDetection(g);
+        System.out.println(graphDFS.isBipartition());
+    }
+
     private boolean dfs(int v, int color) {
         visited[v] = true;
         colors[v] = color;
@@ -39,5 +46,7 @@ public class BipartiteGraphDetection {
         return true;
     }
 
-    
+    public boolean isBipartition() {
+        return isBipartition;
+    }
 }
