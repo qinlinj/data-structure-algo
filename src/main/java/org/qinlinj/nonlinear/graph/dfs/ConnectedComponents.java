@@ -33,6 +33,27 @@ public class ConnectedComponents {
 
     private int ccCount = 0;
 
+    /**
+     * Constructor that initializes the connected components algorithm and computes the result.
+     * <p>
+     * Visual Example:
+     * Consider a graph with 7 vertices:
+     * 0 -- 1    3 -- 4
+     * |         |
+     * 2         5 -- 6
+     * <p>
+     * Here we have 2 connected components: {0,1,2} and {3,4,5,6}
+     * <p>
+     * Algorithm steps:
+     * 1. Start with vertex 0, perform DFS and mark 0,1,2 as visited (ccCount = 1)
+     * 2. Find next unvisited vertex (3), perform DFS and mark 3,4,5,6 as visited (ccCount = 2)
+     * 3. All vertices are visited, so we have 2 connected components
+     *
+     * @param g The input graph
+     *          <p>
+     *          Time Complexity: O(V + E) - We visit each vertex once and process all edges
+     *          Space Complexity: O(V) - For the visited array and recursion stack
+     */
     public ConnectedComponents(Graph g) {
         this.g = g;
 
