@@ -26,6 +26,18 @@ public class BipartiteGraphDetection {
         }
     }
 
-    private boolean dfs(int v, int i) {
+    private boolean dfs(int v, int color) {
+        visited[v] = true;
+        colors[v] = color;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                if (!dfs(w, 1 - color)) return false;
+            } else if (colors[w] == colors[v]) {
+                return false;
+            }
+        }
+        return true;
     }
+
+    
 }
