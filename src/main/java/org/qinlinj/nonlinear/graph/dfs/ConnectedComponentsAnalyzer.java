@@ -41,6 +41,26 @@ public class ConnectedComponentsAnalyzer {
 
     private int ccCount = 0;
 
+    /**
+     * Constructor that initializes the connected components algorithm and computes the result.
+     * <p>
+     * Visual Example:
+     * Consider a graph with 7 vertices:
+     * 0 -- 1    3 -- 4
+     * |         |
+     * 2         5 -- 6
+     * <p>
+     * After processing:
+     * - visited array = [1, 1, 1, 2, 2, 2, 2]
+     * - ccCount = 2
+     * - Component 1: {0, 1, 2}
+     * - Component 2: {3, 4, 5, 6}
+     *
+     * @param g The input graph
+     *          <p>
+     *          Time Complexity: O(V + E) - We visit each vertex once and process all edges
+     *          Space Complexity: O(V) - For the visited array and recursion stack
+     */
     public ConnectedComponentsAnalyzer(Graph g) {
         this.g = g;
 
