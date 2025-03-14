@@ -160,6 +160,16 @@ public class ConnectedComponentsAnalyzer {
         return res;
     }
 
+    /**
+     * Checks if two vertices are connected (belong to the same component).
+     *
+     * @param v First vertex
+     * @param w Second vertex
+     * @return true if vertices are in the same connected component, false otherwise
+     * <p>
+     * Time Complexity: O(1) - Just array lookups
+     * Space Complexity: O(1) - No additional space used
+     */
     public boolean isConnected(int v, int w) {
         validateVertex(v);
         validateVertex(w);
