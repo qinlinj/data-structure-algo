@@ -84,6 +84,30 @@ public class ConnectedComponentsAnalyzer {
         System.out.println(graphDFS.isConnected(0, 6));
     }
 
+    /**
+     * Depth-First Search to mark all vertices in the same connected component.
+     * Unlike the basic implementation, this method assigns a component ID to each visited vertex.
+     * <p>
+     * Visual Example for dfs(0, 1):
+     * Graph:
+     * 0 -- 1
+     * |
+     * 2
+     * <p>
+     * Steps:
+     * 1. Mark vertex 0 as component 1: visited[0] = 1
+     * 2. For each neighbor of 0 (1 and 2):
+     * a. If not visited, call dfs on the neighbor
+     * b. dfs(1, 1) marks vertex 1 as component 1
+     * c. dfs(2, 1) marks vertex 2 as component 1
+     * 3. Now all vertices {0,1,2} are marked as belonging to component 1
+     *
+     * @param v    The vertex to start DFS from
+     * @param ccId The component ID to assign to all vertices in this component
+     *             <p>
+     *             Time Complexity: O(V + E) - Each vertex and edge is processed once
+     *             Space Complexity: O(V) - Due to recursion stack in worst case
+     */
     private void dfs(int v, int ccId) {
         visited[v] = ccId;
         for (int w : g.adj(v)) {
