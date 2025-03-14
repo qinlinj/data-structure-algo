@@ -91,6 +91,33 @@ public class BipartiteGraphDetection {
         System.out.println(graphDFS.isBipartition());
     }
 
+    /**
+     * Depth-First Search that colors vertices and detects bipartite violations
+     *
+     * Visual Example for DFS coloring:
+     * Consider this small graph:
+     *    0 --- 1
+     *    |     |
+     *    2 --- 3
+     *
+     * DFS traversal starting from vertex 0:
+     * 1. Color vertex 0 as red (0)
+     * 2. Visit neighbor 1:
+     *    - Color 1 as blue (1)
+     *    - Visit neighbor 3:
+     *       - Color 3 as red (0)
+     *       - Visit neighbor 2:
+     *          - Color 2 as blue (1)
+     *          - Visit neighbor 0:
+     *             - Already visited, check if colors are different (red vs blue - correct)
+     *
+     * @param v Current vertex to process
+     * @param color Color to assign to this vertex (0 for red, 1 for blue)
+     * @return true if the component containing v is bipartite so far, false otherwise
+     *
+     * Time Complexity: O(V + E) for the vertices and edges in the component
+     * Space Complexity: O(V) due to recursion stack in worst case
+     */
     private boolean dfs(int v, int color) {
         visited[v] = true;
         colors[v] = color;
