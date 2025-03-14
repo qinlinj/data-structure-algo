@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 public class ConnectedComponents {
@@ -21,6 +22,12 @@ public class ConnectedComponents {
                 dfs(v);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-dfs.txt");
+        ConnectedComponents graphDFS = new ConnectedComponents(g);
+        System.out.println(graphDFS.getCcCount());
     }
 
     private void dfs(int v) {
