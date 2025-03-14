@@ -177,6 +177,15 @@ public class ConnectedComponentsAnalyzer {
         return visited[v] == visited[w];
     }
 
+    /**
+     * Validates if a vertex is within the valid range for the graph.
+     *
+     * @param v The vertex to validate
+     * @throws IllegalArgumentException if vertex is outside valid range
+     *                                  <p>
+     *                                  Time Complexity: O(1) - Constant time operation
+     *                                  Space Complexity: O(1) - No additional space used
+     */
     private void validateVertex(int v) {
         if (v < 0 && v >= g.getV()) {
             throw new IllegalArgumentException("error");
