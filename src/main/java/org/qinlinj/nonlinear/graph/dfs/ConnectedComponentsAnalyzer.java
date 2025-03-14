@@ -129,6 +129,23 @@ public class ConnectedComponentsAnalyzer {
         return ccCount;
     }
 
+    /**
+     * Returns all vertices grouped by their connected components.
+     * <p>
+     * Visual Example:
+     * For a graph with following structure:
+     * 0 -- 1    3 -- 4
+     * |         |
+     * 2         5 -- 6
+     * <p>
+     * The result would be:
+     * [[0, 1, 2], [3, 4, 5, 6]]
+     *
+     * @return An array of lists where each list contains vertices in one connected component
+     * <p>
+     * Time Complexity: O(V) - We iterate through all vertices once
+     * Space Complexity: O(V) - To store all vertices in component lists
+     */
     public List<Integer>[] components() {
         List<Integer>[] res = new ArrayList[ccCount];
         // Arrays.fill(res, new ArrayList<>());
