@@ -8,4 +8,8 @@ public class ConnectedComponentsAnalyzer {
     private int[] visited;
 
     private int ccCount = 0;
+
+    public ConnectedComponentsAnalyzer(Graph g) {
+        this.g = g;
+    }
 }
