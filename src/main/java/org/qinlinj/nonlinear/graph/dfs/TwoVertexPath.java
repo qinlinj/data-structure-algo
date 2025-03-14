@@ -119,6 +119,32 @@ public class TwoVertexPath {
         }
     }
 
+    /**
+     * Computes the path from source to target using the parent pointers.
+     * This method is called once in the constructor and the result is stored.
+     *
+     * Visual Example:
+     * For source=0 and target=6, with prevs=[0,0,0,1,1,4,4]:
+     *
+     * Step 1: Check if connected (visited[6] = true)
+     * Step 2: Reconstruct path by following parent pointers backward
+     *   - Start with tmp = 6
+     *   - Add 6 to path
+     *   - tmp = prevs[6] = 4
+     *   - Add 4 to path
+     *   - tmp = prevs[4] = 1
+     *   - Add 1 to path
+     *   - tmp = prevs[1] = 0
+     *   - Add 0 to path
+     *   - Now tmp == source, so stop
+     * Step 3: Reverse path (currently [6, 4, 1, 0]) to get [0, 1, 4, 6]
+     *
+     * @return List of vertices representing the path from source to target,
+     *         or an empty list if no path exists
+     *
+     * Time Complexity: O(V) in worst case (if path includes all vertices)
+     * Space Complexity: O(V) for storing the path
+     */
     private List<Integer> path() {
         if (!isConnected()) {
             return res;
