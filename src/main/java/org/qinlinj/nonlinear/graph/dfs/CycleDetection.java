@@ -17,8 +17,17 @@ public class CycleDetection {
         }
     }
 
-    private void dfs(int v, int v1) {
+    private void dfs(int v, int prev) {
+        visited[v] = true;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                dfs(w, v);
+            } else {
+
+                if (w != prev) {
+                    hasCycle = true;
+                }
+            }
+        }
     }
-
-
 }
