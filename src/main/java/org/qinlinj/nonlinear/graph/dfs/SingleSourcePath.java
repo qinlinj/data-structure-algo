@@ -99,11 +99,51 @@ public class SingleSourcePath {
         System.out.println(graphDFS.path(6));
     }
 
+    /**
+     * Depth-First Search traversal to build the parent pointer tree.
+     *
+     * Visual Example for dfs(0, 0) with the graph:
+     *    0 --- 1 --- 3
+     *    |     |     |
+     *    2 --- 4 --- 5
+     *           \
+     *            6
+     *
+     * DFS execution:
+     * 1. Mark vertex 0 as visited, set prevs[0] = 0
+     * 2. Visit neighbors of 0 (1 and 2):
+     *    - For neighbor 1:
+     *      - Mark 1 as visited, set prevs[1] = 0
+     *      - Visit neighbors of 1 (0, 3, 4):
+     *        - 0 is already visited, skip it
+     *        - For neighbor 3:
+     *          - Mark 3 as visited, set prevs[3] = 1
+     *          - Visit neighbors of 3 (1, 5):
+     *            - 1 is already visited, skip it
+     *            - For neighbor 5: mark as visited, set prevs[5] = 3
+     *              - (... continues with 5's neighbors)
+     *        - For neighbor 4:
+     *          - Mark 4 as visited, set prevs[4] = 1
+     *          - (... continues with 4's neighbors)
+     *    - For neighbor 2:
+     *      - (... similarly process vertex 2)
+     *
+     * @param v Current vertex being processed
+     * @param prev Previous vertex (parent) in the DFS traversal
+     *
+     * Time Complexity: O(V + E) for vertices and edges in the traversal
+     * Space Complexity: O(V) due to recursion stack in worst case
+     */
     private void dfs(int v, int prev) {
         visited[v] = true;
+
+        // Set the parent/previous vertex for v
         prevs[v] = prev;
+
+        // Explore all neighbors of v
         for (int w : g.adj(v)) {
             if (!visited[w]) {
+                // For unvisited neighbors, continue DFS with v as their parent
                 dfs(w, v);
             }
         }
