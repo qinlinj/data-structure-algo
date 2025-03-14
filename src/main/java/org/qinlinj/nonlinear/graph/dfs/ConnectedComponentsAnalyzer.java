@@ -61,5 +61,8 @@ public class ConnectedComponentsAnalyzer {
     }
 
     private void validateVertex(int v) {
+        if (v < 0 && v >= g.getV()) {
+            throw new IllegalArgumentException("error");
+        }
     }
 }
