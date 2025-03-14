@@ -5,6 +5,7 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+// @formatter:off
 /**
  * TwoVertexPath - A class to find a path between two specific vertices in a graph using DFS.
  * <p>
@@ -64,6 +65,37 @@ public class TwoVertexPath {
         System.out.println(graphDFS.getRes());
     }
 
+    /**
+     * Modified Depth-First Search traversal that stops once the target is found.
+     *
+     * Visual Example for dfs(0, 0) with target=6:
+     *    0 --- 1 --- 3
+     *    |     |     |
+     *    2 --- 4 --- 5
+     *           \
+     *            6
+     *
+     * DFS execution:
+     * 1. Start at vertex 0, mark as visited, set prevs[0] = 0
+     * 2. Visit neighbor 1:
+     *    - Mark 1 as visited, set prevs[1] = 0
+     *    - Visit neighbor 4:
+     *      - Mark 4 as visited, set prevs[4] = 1
+     *      - Visit neighbor 6 (target):
+     *        - Mark 6 as visited, set prevs[6] = 4
+     *        - Since v == target, return true
+     *      - dfs(6, 4) returns true, so dfs(4, 1) returns true
+     *    - dfs(4, 1) returns true, so dfs(1, 0) returns true
+     * 3. dfs(1, 0) returns true, so dfs(0, 0) returns true
+     * 4. Early termination: no need to explore other paths
+     *
+     * @param v Current vertex being processed
+     * @param prev Previous vertex (parent) in the DFS traversal
+     * @return true if target is found in this branch, false otherwise
+     *
+     * Time Complexity: O(V + E) in worst case, but typically better
+     * Space Complexity: O(V) due to recursion stack in worst case
+     */
     private boolean dfs(int v, int prev) {
         visited[v] = true;
         prevs[v] = prev;
