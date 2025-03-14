@@ -26,6 +26,12 @@ public class ConnectedComponentsAnalyzer {
         }
     }
 
-    private void dfs(int v, int ccCount) {
+    private void dfs(int v, int ccId) {
+        visited[v] = ccId;
+        for (int w : g.adj(v)) {
+            if (visited[w] == -1) {
+                dfs(w, ccId);
+            }
+        }
     }
 }
