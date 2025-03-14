@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -32,6 +33,12 @@ public class TwoVertexPath {
         dfs(source, source);
 
         path();
+    }
+
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-dfs.txt");
+        TwoVertexPath graphDFS = new TwoVertexPath(g, 0, 6);
+        System.out.println(graphDFS.getRes());
     }
 
     private boolean dfs(int v, int prev) {
@@ -74,5 +81,7 @@ public class TwoVertexPath {
         return res;
     }
 
-
+    public List<Integer> getRes() {
+        return res;
+    }
 }
