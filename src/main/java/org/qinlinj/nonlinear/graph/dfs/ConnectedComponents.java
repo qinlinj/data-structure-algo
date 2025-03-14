@@ -68,6 +68,14 @@ public class ConnectedComponents {
         }
     }
 
+    /**
+     * Main method to demonstrate the ConnectedComponents usage.
+     *
+     * @param args Command line arguments (not used)
+     *             <p>
+     *             Time Complexity: Depends on the size of the input graph
+     *             Space Complexity: Depends on the size of the input graph
+     */
     public static void main(String[] args) {
         Graph g = new AdjSet("data/graph-dfs.txt");
         ConnectedComponents graphDFS = new ConnectedComponents(g);
