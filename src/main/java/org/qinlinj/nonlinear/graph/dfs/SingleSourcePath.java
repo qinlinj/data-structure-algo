@@ -22,6 +22,13 @@ public class SingleSourcePath {
         dfs(source, source);
     }
 
-    private void dfs(int source, int source1) {
+    private void dfs(int v, int prev) {
+        visited[v] = true;
+        prevs[v] = prev;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                dfs(w, v);
+            }
+        }
     }
 }
