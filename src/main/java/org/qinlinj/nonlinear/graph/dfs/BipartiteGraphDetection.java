@@ -56,6 +56,19 @@ public class BipartiteGraphDetection {
     private int[] colors;
     private boolean isBipartition = true;
 
+    /**
+     * Constructor runs the bipartite detection algorithm on the graph
+     *
+     * Algorithm steps:
+     * 1. Initialize visited array and colors array
+     * 2. For each unvisited vertex, run DFS
+     * 3. If any DFS call returns false, the graph is not bipartite
+     *
+     * @param g The graph to analyze for bipartiteness
+     *
+     * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+     * Space Complexity: O(V) for the visited array, colors array, and recursion stack
+     */
     public BipartiteGraphDetection(Graph g) {
         this.g = g;
 
