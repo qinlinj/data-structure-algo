@@ -107,7 +107,7 @@ public class BipartiteGraphDetection {
         Graph g = new AdjSet("data/graph-dfs.txt");
 
         // Detect if the graph is bipartite
-        BipartitionDetection graphDFS = new BipartitionDetection(g);
+        BipartiteGraphDetection graphDFS = new BipartiteGraphDetection(g);
 
         // Output the result
         System.out.println(graphDFS.isBipartition());
