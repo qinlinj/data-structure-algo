@@ -131,6 +131,14 @@ public class BipartiteGraphDetection {
         return true;
     }
 
+    /**
+     * Returns whether the graph is bipartite
+     *
+     * @return true if the graph is bipartite, false otherwise
+     *
+     * Time Complexity: O(1) - constant time lookup of pre-computed result
+     * Space Complexity: O(1) - no additional space used
+     */
     public boolean isBipartition() {
         return isBipartition;
     }
