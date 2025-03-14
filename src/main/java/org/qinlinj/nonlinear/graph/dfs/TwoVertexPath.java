@@ -46,6 +46,17 @@ public class TwoVertexPath {
         return false;
     }
 
+    public boolean isConnected() {
+        validateVertex(target);
+        return visited[target];
+    }
+
+    private void validateVertex(int v) {
+        if (v < 0 && v >= g.getV()) {
+            throw new IllegalArgumentException("error");
+        }
+    }
+
     private void path() {
     }
 
