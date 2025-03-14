@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 public class CycleDetection {
@@ -17,6 +18,12 @@ public class CycleDetection {
         }
     }
 
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-dfs.txt");
+        CycleDetection graphDFS = new CycleDetection(g);
+        System.out.println(graphDFS.hasCycle());
+    }
+
     private void dfs(int v, int prev) {
         visited[v] = true;
         for (int w : g.adj(v)) {
@@ -29,5 +36,9 @@ public class CycleDetection {
                 }
             }
         }
+    }
+
+    public boolean hasCycle() {
+        return hasCycle;
     }
 }
