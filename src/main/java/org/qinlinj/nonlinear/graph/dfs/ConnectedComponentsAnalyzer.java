@@ -52,4 +52,14 @@ public class ConnectedComponentsAnalyzer {
 
         return res;
     }
+
+    public boolean isConnected(int v, int w) {
+        validateVertex(v);
+        validateVertex(w);
+
+        return visited[v] == visited[w];
+    }
+
+    private void validateVertex(int v) {
+    }
 }
