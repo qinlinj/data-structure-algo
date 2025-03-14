@@ -34,4 +34,9 @@ public class ConnectedComponentsAnalyzer {
             }
         }
     }
+
+    public int getCcCount() {
+        return ccCount;
+    }
+
 }
