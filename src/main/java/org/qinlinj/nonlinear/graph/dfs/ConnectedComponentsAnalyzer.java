@@ -5,6 +5,35 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
 
+/**
+ * ConnectedComponentsAnalyzer - A class to identify and analyze connected components in an undirected graph using DFS.
+ * <p>
+ * What are Connected Components (CC)?
+ * A connected component is a subgraph in which any two vertices are connected to each other by paths,
+ * and which is connected to no additional vertices in the supergraph.
+ * <p>
+ * Advantages and Applications:
+ * 1. Network Analysis: Identify isolated networks or communities within a larger graph
+ * 2. Image Processing: Connected components are used to identify distinct objects in images
+ * 3. Social Network Analysis: Finding communities of connected individuals
+ * 4. Circuit Design: Identifying connected elements in electronic circuits
+ * <p>
+ * Principles and Concepts:
+ * - Uses DFS to identify all vertices in the same connected component
+ * - Each component is assigned a unique ID number (starting from 1)
+ * - The algorithm tracks not just whether a vertex is visited, but also which component it belongs to
+ * - This allows for more advanced queries like checking if two vertices are connected
+ * <p>
+ * Differences from basic CC implementation:
+ * 1. Uses integer array instead of boolean array to track components IDs, not just visited status
+ * 2. Provides additional utility methods to:
+ * - Retrieve all vertices in each component
+ * - Check if two vertices are in the same component (connected)
+ * 3. Includes validation for vertex parameters
+ * <p>
+ * Time Complexity: O(V + E) where V is number of vertices and E is number of edges
+ * Space Complexity: O(V) for the visited array, recursion stack, and component lists
+ */
 public class ConnectedComponentsAnalyzer {
     private Graph g;
 
