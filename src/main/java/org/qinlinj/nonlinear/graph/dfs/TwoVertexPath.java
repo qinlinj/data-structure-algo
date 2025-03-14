@@ -34,10 +34,20 @@ public class TwoVertexPath {
         path();
     }
 
+    private boolean dfs(int v, int prev) {
+        visited[v] = true;
+        prevs[v] = prev;
+        if (v == target) return true;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                if (dfs(w, v)) return true;
+            }
+        }
+        return false;
+    }
+
     private void path() {
     }
 
-    private void dfs(int source, int source1) {
 
-    }
 }
