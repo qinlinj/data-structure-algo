@@ -49,6 +49,39 @@ public class CycleDetection {
         System.out.println(graphDFS.hasCycle());
     }
 
+    /**
+     * Depth-First Search to detect cycles in the graph.
+     * <p>
+     * Visual Example for dfs(0, 0):
+     * Graph:
+     * 0 -- 1
+     * |    |
+     * 2 -- 3
+     * <p>
+     * Steps:
+     * 1. Mark vertex 0 as visited
+     * 2. For neighbors of 0 (1 and 2):
+     * a. If not visited, call dfs(neighbor, 0)
+     * b. For neighbor 1: dfs(1, 0)
+     * - Mark 1 as visited
+     * - For neighbors of 1 (0 and 3):
+     * * 0 is visited but it's the previous vertex (not a cycle)
+     * * 3 is not visited, call dfs(3, 1)
+     * ~ Mark 3 as visited
+     * ~ For neighbors of 3 (1 and 2):
+     * # 1 is visited but it's the previous vertex (not a cycle)
+     * # 2 is not visited, call dfs(2, 3)
+     * > Mark 2 as visited
+     * > For neighbors of 2 (0 and 3):
+     * + 0 is visited and NOT the previous vertex (cycle detected!)
+     * + hasCycle is set to true
+     *
+     * @param v    Current vertex being processed
+     * @param prev Previous vertex in the DFS traversal
+     *             <p>
+     *             Time Complexity: O(V + E) - Each vertex and edge is processed once
+     *             Space Complexity: O(V) - Due to recursion stack in worst case
+     */
     private void dfs(int v, int prev) {
         visited[v] = true;
         for (int w : g.adj(v)) {
