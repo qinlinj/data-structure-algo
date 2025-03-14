@@ -1,5 +1,6 @@
 package org.qinlinj.nonlinear.graph.dfs;
 
+import org.qinlinj.nonlinear.graph.AdjSet;
 import org.qinlinj.nonlinear.graph.Graph;
 
 import java.util.*;
@@ -24,6 +25,14 @@ public class ConnectedComponentsAnalyzer {
                 dfs(v, ccCount);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Graph g = new AdjSet("data/graph-dfs.txt");
+        ConnectedComponentsAnalyzer graphDFS = new ConnectedComponentsAnalyzer(g);
+        System.out.println(Arrays.toString(graphDFS.components()));
+
+        System.out.println(graphDFS.isConnected(0, 6));
     }
 
     private void dfs(int v, int ccId) {
