@@ -140,6 +140,14 @@ public class GraphImpl implements Graph {
         System.out.println(graph);
     }
 
+    /**
+     * Validates if a vertex index is within the valid range
+     *
+     * Time Complexity: O(1)
+     *
+     * @param v  The vertex index to validate
+     * @throws IllegalArgumentException if the vertex is invalid
+     */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("error"));
