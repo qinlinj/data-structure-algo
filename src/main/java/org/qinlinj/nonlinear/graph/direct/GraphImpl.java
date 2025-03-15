@@ -155,26 +155,52 @@ public class GraphImpl implements Graph {
     }
 
     /**
-     * Get the number of edges in the graph
+     * Checks if the graph is directed
      *
-     * @return the number of edges
+     * Time Complexity: O(1)
+     *
+     * @return true if the graph is directed, false otherwise
+     */
+    public boolean isDirected() {
+        return isDirected;
+    }
+
+    /**
+     * Gets the number of vertices in the graph
+     *
+     * Time Complexity: O(1)
+     *
+     * @return the number of vertices
      */
     @Override
     public int getV() {
         return V;
     }
 
+    /**
+     * Gets the number of edges in the graph
+     *
+     * Time Complexity: O(1)
+     *
+     * @return the number of edges
+     */
     @Override
     public int getE() {
         return E;
     }
 
     /**
-     * Determine if there is an edge between two specified vertices
+     * Checks if there is an edge between two specified vertices
      *
-     * @param v first vertex
-     * @param w second vertex
-     * @return true if an edge exists, false otherwise
+     * Time Complexity: O(log V) due to TreeSet's contains operation
+     *
+     * Example:
+     * For the sample graph, hasEdge(1, 2) returns true
+     * hasEdge(0, 2) returns false
+     *
+     * @param v  The source vertex
+     * @param w  The target vertex
+     * @return true if there is an edge from v to w, false otherwise
      */
     @Override
     public boolean hasEdge(int v, int w) {
