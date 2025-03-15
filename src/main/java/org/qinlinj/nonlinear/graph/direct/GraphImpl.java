@@ -31,6 +31,11 @@ public class GraphImpl implements Graph {
         }
         this.indegrees = new int[V];
         this.outdegrees = new int[V];
+
+        while ((line = reader.readLine()) != null) { // O(E)
+            arr = line.split(" ");
+            
+        }
     }
 
     /**
