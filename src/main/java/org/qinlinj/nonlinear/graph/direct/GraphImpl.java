@@ -45,6 +45,13 @@ public class GraphImpl implements Graph {
             if (adj[a].contains(b)) { // O(logV)
                 throw new RuntimeException("");
             }
+            adj[a].add(b); // a -> b
+            if (isDirected) {
+                outdegrees[a]++;
+                indegrees[b]++;
+            }
+            if (!isDirected)
+                adj[b].add(a);
         }
     }
 
