@@ -117,4 +117,20 @@ public class GraphImpl implements Graph {
         }
         return adj(v).size();
     }
+
+    public int indegree(int v) {
+        if (!isDirected) {
+            throw new RuntimeException("");
+        }
+        validateVertex(v);
+        return indegrees[v];
+    }
+
+    public int outdegree(int v) {
+        if (!isDirected) {
+            throw new RuntimeException("");
+        }
+        validateVertex(v);
+        return outdegrees[v];
+    }
 }
