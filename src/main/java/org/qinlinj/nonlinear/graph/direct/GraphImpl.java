@@ -2,6 +2,9 @@ package org.qinlinj.nonlinear.graph.direct;
 
 import org.qinlinj.nonlinear.graph.Graph;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class GraphImpl implements Graph {
@@ -14,8 +17,20 @@ public class GraphImpl implements Graph {
     private int[] indegrees;
     private int[] outdegrees;
 
-    public GraphImpl(int v) {
-        V = v;
+    public GraphImpl(String fileName, boolean isDirected) throws IOException {
+        BufferedReader reader
+                = new BufferedReader(new FileReader(fileName));
+        String line = reader.readLine();
+        String[] arr = line.split(" ");
+        this.V = Integer.valueOf(arr[0]);
+        this.E = Integer.valueOf(arr[1]);
+
+        this.adj = new TreeSet[V];
+        for (int i = 0; i < V; i++) {
+            adj[i] = new TreeSet<>();
+        }
+        this.indegrees = new int[V];
+        this.outdegrees = new int[V];
     }
 
     /**
