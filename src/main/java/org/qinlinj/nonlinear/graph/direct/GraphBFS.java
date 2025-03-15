@@ -21,5 +21,21 @@ public class GraphBFS {
     }
 
     private void bfs(int v) {
+        if (g == null) return;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        visited[v] = true;
+
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            res.add(curr);
+
+            for (int w : g.adj(curr)) {
+                if (!visited[w]) {
+                    queue.add(w);
+                    visited[w] = true;
+                }
+            }
+        }
     }
 }
