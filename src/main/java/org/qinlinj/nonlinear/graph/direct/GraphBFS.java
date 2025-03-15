@@ -2,7 +2,6 @@ package org.qinlinj.nonlinear.graph.direct;
 
 import org.qinlinj.nonlinear.graph.Graph;
 
-import java.io.IOException;
 import java.util.*;
 
 // @formatter:off
@@ -23,7 +22,7 @@ public class GraphBFS {
         }
     }
 
-    public static void main(String[] args)throws IOException {
+    public static void main(String[] args) {
         Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
         GraphBFS graphBFS = new GraphBFS(g);
         System.out.println(graphBFS.getRes());

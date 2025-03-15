@@ -48,14 +48,14 @@ import java.util.*;
  *          3 —
  */
 public class GraphImpl implements Graph {
-    private int V;
-    private int E;
-    private TreeSet<Integer>[] adj;
+    private int V; // Number of vertices
+    private int E; // Number of edges
+    private TreeSet<Integer>[] adj; // Adjacency lists using TreeSet for each vertex
 
-    private boolean isDirected;
+    private boolean isDirected; // Whether the graph is directed or undirected
 
-    private int[] indegrees;
-    private int[] outdegrees;
+    private int[] indegrees;  // Array to store in-degrees of vertices (for directed graphs)
+    private int[] outdegrees; // Array to store out-degrees of vertices (for directed graphs)
 
     /**
      * Constructs a graph by reading from a file
@@ -97,41 +97,62 @@ public class GraphImpl implements Graph {
      * @param fileName  The path to the file containing graph data
      * @param isDirected  Whether to create a directed graph
      */
-    public GraphImpl(String fileName, boolean isDirected) throws IOException {
-        BufferedReader reader
-                = new BufferedReader(new FileReader(fileName));
-        String line = reader.readLine();
-        String[] arr = line.split(" ");
-        this.V = Integer.valueOf(arr[0]);
-        this.E = Integer.valueOf(arr[1]);
+    public GraphImpl(String fileName, boolean isDirected) {
+        this.isDirected = isDirected;
+        try {
+            BufferedReader reader
+                    = new BufferedReader(new FileReader(fileName));
+            String line = reader.readLine();
+            String[] arr = line.split(" ");
+            this.V = Integer.valueOf(arr[0]);
+            this.E = Integer.valueOf(arr[1]);
 
-        this.adj = new TreeSet[V];
-        for (int i = 0; i < V; i++) {
-            adj[i] = new TreeSet<>();
-        }
-        this.indegrees = new int[V];
-        this.outdegrees = new int[V];
+            // Initialize adjacency lists for each vertex
+            this.adj = new TreeSet[V];
+            for (int i = 0; i < V; i++) {
+                adj[i] = new TreeSet<>();
+            }
 
-        while ((line = reader.readLine()) != null) { // O(E)
-            arr = line.split(" ");
-            int a = Integer.valueOf(arr[0]);
-            validateVertex(a);
-            int b = Integer.valueOf(arr[1]);
-            validateVertex(b);
+            // Initialize in-degrees and out-degrees arrays
+            this.indegrees = new int[V];
+            this.outdegrees = new int[V];
 
-            if (a == b) {
-                throw new RuntimeException("");
+            // Read and process each edge
+            // Time Complexity: O(E) iterations, with O(log V) operations inside
+            while ((line = reader.readLine()) != null) {
+                arr = line.split(" ");
+                int a = Integer.valueOf(arr[0]);
+                validateVertex(a);
+                int b = Integer.valueOf(arr[1]);
+                validateVertex(b);
+
+                // Check for self-loops
+                if (a == b) {
+                    throw new RuntimeException("Self-loop detected, which is not allowed");
+                }
+
+                // Check for parallel edges
+                // Time Complexity: O(log V) for TreeSet's contains operation
+                if (adj[a].contains(b)) {
+                    throw new RuntimeException("Parallel edge detected, which is not allowed");
+                }
+
+                // Add edge a -> b
+                adj[a].add(b);
+
+                // Update degree information for directed graphs
+                if (isDirected) {
+                    outdegrees[a]++;
+                    indegrees[b]++;
+                }
+
+                // For undirected graphs, also add edge b -> a
+                if (!isDirected)
+                    adj[b].add(a);
             }
-            if (adj[a].contains(b)) { // O(logV)
-                throw new RuntimeException("");
-            }
-            adj[a].add(b); // a -> b
-            if (isDirected) {
-                outdegrees[a]++;
-                indegrees[b]++;
-            }
-            if (!isDirected)
-                adj[b].add(a);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -157,7 +178,7 @@ public class GraphImpl implements Graph {
      */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
-            throw new IllegalArgumentException(String.format("error"));
+            throw new IllegalArgumentException(String.format("Vertex %d is invalid", v));
         }
     }
 
