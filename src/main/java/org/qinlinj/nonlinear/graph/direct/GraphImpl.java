@@ -85,7 +85,10 @@ public class GraphImpl implements Graph {
      */
     @Override
     public boolean hasEdge(int v, int w) {
-        return false;
+        validateVertex(v);
+        validateVertex(w);
+
+        return adj[v].contains(w);
     }
 
     /**
