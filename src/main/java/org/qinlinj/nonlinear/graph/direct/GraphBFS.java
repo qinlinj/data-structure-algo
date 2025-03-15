@@ -38,4 +38,8 @@ public class GraphBFS {
             }
         }
     }
+
+    public List<Integer> getRes() {
+        return res;
+    }
 }
