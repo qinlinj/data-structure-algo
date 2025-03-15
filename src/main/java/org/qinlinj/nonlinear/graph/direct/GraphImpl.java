@@ -42,6 +42,9 @@ public class GraphImpl implements Graph {
             if (a == b) {
                 throw new RuntimeException("");
             }
+            if (adj[a].contains(b)) { // O(logV)
+                throw new RuntimeException("");
+            }
         }
     }
 
