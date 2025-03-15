@@ -1,20 +1,18 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
 // [402] Remove K Digits
 public class _402_RemoveKDigits {
-    
+
     public static void main(String[] args) {
         Solution solution = new _402_RemoveKDigits().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String removeKdigits(String num, int k) {
-            
+            return null;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +21,7 @@ public class _402_RemoveKDigits {
 }
 
 
-
-
-
-//Given string num representing a non-negative integer num, and an integer k, 
+//Given string num representing a non-negative integer num, and an integer k,
 //return the smallest possible integer after removing k digits from num. 
 //
 // 
