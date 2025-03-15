@@ -24,6 +24,12 @@ public class GraphDFSR {
         }
     }
 
+    public static void main(String[] args) {
+        Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
+        GraphDFSR graphDFS = new GraphDFSR(g);
+        System.out.println(graphDFS.getRes());
+    }
+
     private void dfs(int v) {
         res.add(v);
         visited[v] = true;
@@ -34,4 +40,7 @@ public class GraphDFSR {
         }
     }
 
+    public List<Integer> getRes() {
+        return res;
+    }
 }
