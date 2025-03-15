@@ -250,21 +250,46 @@ public class GraphImpl implements Graph {
         return adj(v).size();
     }
 
+    /**
+     * Gets the in-degree of a specified vertex in a directed graph
+     *
+     * Time Complexity: O(1) - direct array access
+     *
+     * Example:
+     * For the sample directed graph, indegree(2) returns 2 (edges from 1 and 3)
+     *
+     * @param v  The vertex whose in-degree to get
+     * @return the in-degree of vertex v
+     * @throws RuntimeException if the graph is undirected
+     */
     public int indegree(int v) {
         if (!isDirected) {
-            throw new RuntimeException("");
+            throw new RuntimeException("Only directed graphs can calculate vertex in-degree");
         }
         validateVertex(v);
         return indegrees[v];
     }
 
+    /**
+     * Gets the out-degree of a specified vertex in a directed graph
+     *
+     * Time Complexity: O(1) - direct array access
+     *
+     * Example:
+     * For the sample directed graph, outdegree(1) returns 2 (edges to 2 and 3)
+     *
+     * @param v  The vertex whose out-degree to get
+     * @return the out-degree of vertex v
+     * @throws RuntimeException if the graph is undirected
+     */
     public int outdegree(int v) {
         if (!isDirected) {
-            throw new RuntimeException("");
+            throw new RuntimeException("Only directed graphs can calculate vertex out-degree");
         }
         validateVertex(v);
         return outdegrees[v];
     }
+
 
     @Override
     public String toString() {
