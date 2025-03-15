@@ -34,7 +34,10 @@ public class GraphImpl implements Graph {
 
         while ((line = reader.readLine()) != null) { // O(E)
             arr = line.split(" ");
-
+            int a = Integer.valueOf(arr[0]);
+            validateVertex(a);
+            int b = Integer.valueOf(arr[1]);
+            validateVertex(b);
         }
     }
 
