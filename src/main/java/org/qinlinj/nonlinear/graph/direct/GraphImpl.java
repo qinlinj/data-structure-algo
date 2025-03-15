@@ -99,7 +99,9 @@ public class GraphImpl implements Graph {
      */
     @Override
     public Collection<Integer> adj(int v) {
-        return List.of();
+        validateVertex(v);
+
+        return adj[v];
     }
 
     /**
