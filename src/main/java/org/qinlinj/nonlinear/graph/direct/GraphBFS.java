@@ -20,6 +20,12 @@ public class GraphBFS {
         }
     }
 
+    public static void main(String[] args) {
+        Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
+        GraphBFS graphBFS = new GraphBFS(g);
+        System.out.println(graphBFS.getRes());
+    }
+
     private void bfs(int v) {
         if (g == null) return;
         Queue<Integer> queue = new LinkedList<>();
