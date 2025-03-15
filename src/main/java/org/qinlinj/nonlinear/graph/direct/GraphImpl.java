@@ -57,6 +57,46 @@ public class GraphImpl implements Graph {
     private int[] indegrees;
     private int[] outdegrees;
 
+    /**
+     * Constructs a graph by reading from a file
+     *
+     * Time Complexity: O(E * log V) where E is the number of edges and V is the number of vertices
+     *
+     * The file format should be:
+     * - First line: "V E" (number of vertices and edges)
+     * - Following E lines: "a b" (an edge from vertex a to vertex b)
+     *
+     * Example:
+     * 5 5
+     * 0 1
+     * 1 2
+     * 1 3
+     * 2 4
+     * 3 2
+     *
+     * Visual representation of the graph construction process:
+     *
+     * 1. Initialize with V=5, E=5, and empty adjacency lists:
+     *    adj[0] = {}
+     *    adj[1] = {}
+     *    adj[2] = {}
+     *    adj[3] = {}
+     *    adj[4] = {}
+     *
+     * 2. Processing edge 0-1:
+     *    adj[0] = {1}
+     *    (If undirected: adj[1] = {0})
+     *
+     * 3. Processing edge 1-2:
+     *    adj[1] = {0,2} (for undirected)
+     *    adj[1] = {2} (for directed)
+     *    (If undirected: adj[2] = {1})
+     *
+     * 4. And so on for each edge...
+     *
+     * @param fileName  The path to the file containing graph data
+     * @param isDirected  Whether to create a directed graph
+     */
     public GraphImpl(String fileName, boolean isDirected) throws IOException {
         BufferedReader reader
                 = new BufferedReader(new FileReader(fileName));
