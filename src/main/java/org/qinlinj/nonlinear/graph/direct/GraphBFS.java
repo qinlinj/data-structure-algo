@@ -6,17 +6,26 @@ import java.util.*;
 
 // @formatter:off
 
+/**
+ * Implementation of Breadth-First Search for graph traversal
+ * Handles both connected and disconnected graphs
+ */
 public class GraphBFS {
-    private Graph g;
-    private boolean[] visited;
-    private List<Integer> res;
+    private Graph g;                 // Graph to traverse
+    private boolean[] visited;       // Tracks visited vertices
+    private List<Integer> res;       // Stores traversal result
 
+    /**
+     * Constructs a BFS traversal of the entire graph
+     * Time Complexity: O(V + E)
+     */
     public GraphBFS(Graph g) {
         this.g = g;
 
         this.visited = new boolean[g.getV()];
         this.res = new ArrayList<>();
 
+        // Iterate through all vertices to handle disconnected components
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) bfs(v);
         }
@@ -28,6 +37,10 @@ public class GraphBFS {
         System.out.println(graphBFS.getRes());
     }
 
+    /**
+     * BFS traversal from vertex v
+     * Time Complexity: O(V + E) for the component
+     */
     private void bfs(int v) {
         if (g == null) return;
         Queue<Integer> queue = new LinkedList<>();
@@ -38,6 +51,7 @@ public class GraphBFS {
             int curr = queue.poll();
             res.add(curr);
 
+            // Add all unvisited neighbors to queue
             for (int w : g.adj(curr)) {
                 if (!visited[w]) {
                     queue.add(w);
@@ -47,6 +61,9 @@ public class GraphBFS {
         }
     }
 
+    /**
+     * Returns vertices in BFS traversal order
+     */
     public List<Integer> getRes() {
         return res;
     }
