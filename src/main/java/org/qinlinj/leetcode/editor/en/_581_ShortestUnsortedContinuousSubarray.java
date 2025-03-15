@@ -1,20 +1,18 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
 // [581] Shortest Unsorted Continuous Subarray
 public class _581_ShortestUnsortedContinuousSubarray {
-    
+
     public static void main(String[] args) {
         Solution solution = new _581_ShortestUnsortedContinuousSubarray().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int findUnsortedSubarray(int[] nums) {
-            
+            return 0;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +21,7 @@ public class _581_ShortestUnsortedContinuousSubarray {
 }
 
 
-
-
-
-//Given an integer array nums, you need to find one continuous subarray such 
+//Given an integer array nums, you need to find one continuous subarray such
 //that if you only sort this subarray in non-decreasing order, then the whole array 
 //will be sorted in non-decreasing order. 
 //
