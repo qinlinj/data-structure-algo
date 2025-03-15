@@ -133,4 +133,18 @@ public class GraphImpl implements Graph {
         validateVertex(v);
         return outdegrees[v];
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("V nums = %d，E nums = %d，isDirected = %b \n", V, E, isDirected));
+        for (int v = 0; v < V; v++) {
+            sb.append(v + ": ");
+            for (int w : adj[v]) {
+                sb.append(w + " ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
