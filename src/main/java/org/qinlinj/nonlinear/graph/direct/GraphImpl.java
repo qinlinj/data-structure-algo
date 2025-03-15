@@ -211,10 +211,17 @@ public class GraphImpl implements Graph {
     }
 
     /**
-     * Get all adjacent vertices of the specified vertex
+     * Gets all adjacent vertices of a specified vertex
      *
-     * @param v the vertex
-     * @return a collection of adjacent vertices
+     * Time Complexity: O(1) to return the collection reference,
+     * but iterating through all adjacent vertices would be O(degree(v))
+     *
+     * Example:
+     * For the sample graph, adj(1) returns {2, 3} for directed
+     * For undirected, adj(1) returns {0, 2, 3}
+     *
+     * @param v  The vertex whose adjacent vertices to get
+     * @return a collection of vertices adjacent to v
      */
     @Override
     public Collection<Integer> adj(int v) {
@@ -224,15 +231,21 @@ public class GraphImpl implements Graph {
     }
 
     /**
-     * Get the degree of the specified vertex
+     * Gets the degree of a specified vertex in an undirected graph
      *
-     * @param v the vertex
-     * @return the degree of the vertex
+     * Time Complexity: O(1) - just returns the size of the adjacency list
+     *
+     * Example:
+     * For the sample undirected graph, degree(1) returns 3 (adjacent to 0, 2, and 3)
+     *
+     * @param v  The vertex whose degree to get
+     * @return the degree of vertex v
+     * @throws RuntimeException if the graph is directed
      */
     @Override
     public int degree(int v) {
         if (isDirected) {
-            throw new RuntimeException("");
+            throw new RuntimeException("Only undirected graphs can calculate vertex degree");
         }
         return adj(v).size();
     }
