@@ -67,18 +67,13 @@ public class GraphImpl implements Graph {
      * @return the number of edges
      */
     @Override
-    public int getE() {
-        return 0;
+    public int getV() {
+        return V;
     }
 
-    /**
-     * Get the number of vertices in the graph
-     *
-     * @return the number of vertices
-     */
     @Override
-    public int getV() {
-        return 0;
+    public int getE() {
+        return E;
     }
 
     /**
