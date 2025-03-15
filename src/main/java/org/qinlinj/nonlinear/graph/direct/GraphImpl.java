@@ -34,7 +34,13 @@ public class GraphImpl implements Graph {
 
         while ((line = reader.readLine()) != null) { // O(E)
             arr = line.split(" ");
-            
+
+        }
+    }
+
+    private void validateVertex(int v) {
+        if (v < 0 || v >= V) {
+            throw new IllegalArgumentException(String.format("error"));
         }
     }
 
