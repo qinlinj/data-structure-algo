@@ -55,6 +55,11 @@ public class GraphImpl implements Graph {
         }
     }
 
+    public static void main(String[] args) throws IOException {
+        GraphImpl graph = new GraphImpl("data/graph.txt", true);
+        System.out.println(graph);
+    }
+
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("error"));
