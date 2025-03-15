@@ -135,7 +135,14 @@ public class GraphImpl implements Graph {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Main method to test the graph implementation
+     *
+     * This method creates a directed graph from a file and prints its string representation
+     *
+     * @param args  Command-line arguments (not used)
+     */
+    public static void main(String[] args) {
         GraphImpl graph = new GraphImpl("data/graph.txt", true);
         System.out.println(graph);
     }
@@ -290,11 +297,31 @@ public class GraphImpl implements Graph {
         return outdegrees[v];
     }
 
-
+    /**
+     * Returns a string representation of the graph
+     *
+     * Time Complexity: O(V + E) to build the string
+     *
+     * The representation includes:
+     * - Number of vertices and edges
+     * - Whether the graph is directed
+     * - Adjacency list for each vertex
+     *
+     * Example output for the sample directed graph:
+     *
+     * Vertices = 5, Edges = 5, isDirected = true
+     * 0: 1
+     * 1: 2 3
+     * 2: 4
+     * 3: 2
+     * 4:
+     *
+     * @return a string representation of the graph
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("V nums = %d，E nums = %d，isDirected = %b \n", V, E, isDirected));
+        sb.append(String.format("Vertices = %d, Edges = %d, isDirected = %b \n", V, E, isDirected));
         for (int v = 0; v < V; v++) {
             sb.append(v + ": ");
             for (int w : adj[v]) {
