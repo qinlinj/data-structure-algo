@@ -7,17 +7,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+// @formatter:off
 /**
  * Graph Implementation
- * <p>
+ *
  * This class implements a graph data structure using adjacency lists.
- * <p>
+ *
  * Advantages of Adjacency List representation:
  * 1. Space Efficient: Only stores the edges that exist (O(V+E) space complexity)
  * 2. Fast iteration over all edges: Efficiently access all neighbors of a vertex
  * 3. Suitable for sparse graphs: When E << V², adjacency lists are much more space-efficient
  * 4. Flexible: Can easily handle both directed and undirected graphs
- * <p>
+ *
  * Concept and Principles:
  * A graph G = (V, E) consists of vertices V and edges E.
  * - In this implementation, each vertex is represented by an integer from 0 to V-1.
@@ -25,9 +26,9 @@ import java.util.*;
  * - For directed graphs, an edge (u, v) is stored only in the adjacency list of u.
  * - For undirected graphs, an edge (u, v) is stored in both adjacency lists of u and v.
  * - TreeSet is used for fast lookups (O(log V)) and to maintain sorted order of adjacent vertices.
- * <p>
+ *
  * Visual representation of a graph with the sample input:
- * <p>
+ *
  * Input:
  * 5 5
  * 0 1
@@ -35,16 +36,16 @@ import java.util.*;
  * 1 3
  * 2 4
  * 3 2
- * <p>
+ *
  * As a directed graph:
- * 0 → 1 → 2 → 4
- * ↓   ↑
- * 3 →
- * <p>
+ *      0 → 1 → 2 → 4
+ *          ↓   ↑
+ *          3 →
+ *
  * As an undirected graph:
- * 0 — 1 — 2 — 4
- * |   |
- * 3 —
+ *      0 — 1 — 2 — 4
+ *          |   |
+ *          3 —
  */
 public class GraphImpl implements Graph {
     private int V;
