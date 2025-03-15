@@ -38,6 +38,10 @@ public class GraphImpl implements Graph {
             validateVertex(a);
             int b = Integer.valueOf(arr[1]);
             validateVertex(b);
+
+            if (a == b) {
+                throw new RuntimeException("");
+            }
         }
     }
 
