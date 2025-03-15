@@ -25,5 +25,13 @@ public class GraphDFSR {
     }
 
     private void dfs(int v) {
+        res.add(v);
+        visited[v] = true;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                dfs(w);
+            }
+        }
     }
+
 }
