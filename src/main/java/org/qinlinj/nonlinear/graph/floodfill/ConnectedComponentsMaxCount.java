@@ -10,5 +10,17 @@ public class ConnectedComponentsMaxCount {
 
     public ConnectedComponentsMaxCount(Graph g) {
         this.g = g;
+
+        if (g == null) return;
+
+        this.visited = new boolean[g.getV()];
+        for (int v = 0; v < g.getV(); v++) {
+            if (!visited[v]) {
+                maxVertexNum = Math.max(dfs(v), maxVertexNum);
+            }
+        }
+    }
+
+    private int dfs(int v) {
     }
 }
