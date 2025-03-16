@@ -25,4 +25,21 @@ public class ArrayHelper {
         }
         return res;
     }
+
+    public static void printAdj(int[][] arr, int i, int j) {
+        int rows = arr.length;
+        int cols = arr[0].length;
+
+        int[][] directions = {
+                {-1, 0}, {1, 0}, {0, -1}, {0, 1},
+                {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
+        };
+        for (int[] dir : directions) {
+            int row = i + dir[0];
+            int col = j + dir[1];
+            if (row < rows && col < cols && row >= 0 && col >= 0) {
+                System.out.println(arr[row][col]);
+            }
+        }
+    }
 }
