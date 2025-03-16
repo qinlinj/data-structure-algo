@@ -38,6 +38,21 @@ public class ConnectedComponentsMaxCount {
     private boolean[] visited;
     private int maxVertexNum = 0;
 
+    /**
+     * Constructor that initializes the algorithm and computes the maximum component size.
+     * <p>
+     * Algorithm:
+     * 1. Create a visited array to keep track of processed vertices
+     * 2. For each unvisited vertex, start a DFS traversal to explore its component
+     * 3. Keep track of the maximum component size found
+     * <p>
+     * Time Complexity: O(V + E) where V is the number of vertices and E is the number of edges
+     * - We visit each vertex once and process each edge once during the DFS traversals
+     * <p>
+     * Space Complexity: O(V) for the visited array and recursion stack in worst case
+     *
+     * @param g The graph to analyze
+     */
     public ConnectedComponentsMaxCount(Graph g) {
         this.g = g;
 
