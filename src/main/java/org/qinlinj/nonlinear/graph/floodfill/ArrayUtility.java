@@ -67,7 +67,7 @@ public class ArrayUtility {
 
         return res;
     }
-    
+
     /**
      * Converts a 1D array back to a 2D array with specified dimensions.
      * <p>
@@ -114,6 +114,40 @@ public class ArrayUtility {
         return res;
     }
 
+    /**
+     * Prints all adjacent elements (including diagonals) to the element at position (i,j).
+     * <p>
+     * Algorithm:
+     * 1. Define all 8 possible directions (4 cardinal + 4 diagonal)
+     * 2. For each direction, calculate the adjacent position
+     * 3. Check if the adjacent position is within bounds
+     * 4. If valid, print the value at that position
+     * <p>
+     * Visual Example:
+     * For a 3x4 grid:
+     * [
+     * [4, 2, 5, 11],
+     * [3, 7, 1, 9],
+     * [32, 22, 13, 8]
+     * ]
+     * <p>
+     * Adjacent cells to position (1,1) which contains value 7:
+     * - North (1,1) + (-1,0) = (0,1) → 2
+     * - South (1,1) + (1,0) = (2,1) → 22
+     * - West (1,1) + (0,-1) = (1,0) → 3
+     * - East (1,1) + (0,1) = (1,2) → 1
+     * - Northwest (1,1) + (-1,-1) = (0,0) → 4
+     * - Northeast (1,1) + (-1,1) = (0,2) → 5
+     * - Southwest (1,1) + (1,-1) = (2,0) → 32
+     * - Southeast (1,1) + (1,1) = (2,2) → 13
+     * <p>
+     * Time Complexity: O(1) - constant number of directions (8) to check
+     * Space Complexity: O(1) - fixed-size directions array
+     *
+     * @param arr The 2D array to operate on
+     * @param i   The row index of the target element
+     * @param j   The column index of the target element
+     */
     public static void printAdj(int[][] arr, int i, int j) {
         int rows = arr.length;
         int cols = arr[0].length;
