@@ -67,8 +67,43 @@ public class ArrayUtility {
 
         return res;
     }
-
-
+    
+    /**
+     * Converts a 1D array back to a 2D array with specified dimensions.
+     * <p>
+     * Algorithm:
+     * 1. Create a new 2D array with given rows and columns
+     * 2. For each position in the 1D array:
+     * - Calculate the corresponding row: i = index / cols
+     * - Calculate the corresponding column: j = index % cols
+     * - Assign the value to the 2D array at position (i,j)
+     * <p>
+     * Visual Example:
+     * 1D array: [4, 2, 5, 3, 7, 1]
+     * With rows=2, cols=3
+     * <p>
+     * Converted to 2D array:
+     * [
+     * [4, 2, 5],
+     * [3, 7, 1]
+     * ]
+     * <p>
+     * Mapping:
+     * 0 → row=0/3=0, col=0%3=0 → (0,0) → 4
+     * 1 → row=1/3=0, col=1%3=1 → (0,1) → 2
+     * 2 → row=2/3=0, col=2%3=2 → (0,2) → 5
+     * 3 → row=3/3=1, col=3%3=0 → (1,0) → 3
+     * 4 → row=4/3=1, col=4%3=1 → (1,1) → 7
+     * 5 → row=5/3=1, col=5%3=2 → (1,2) → 1
+     * <p>
+     * Time Complexity: O(rows * cols) - must process every element once
+     * Space Complexity: O(rows * cols) - for the new 2D array
+     *
+     * @param arr  The input 1D array to be converted
+     * @param rows The number of rows for the resulting 2D array
+     * @param cols The number of columns for the resulting 2D array
+     * @return A 2D array with the specified dimensions
+     */
     public static int[][] oneDimConvertTwoDim(int[] arr, int rows, int cols) {
         int[][] res = new int[rows][cols];
         for (int index = 0; index < arr.length; index++) {
