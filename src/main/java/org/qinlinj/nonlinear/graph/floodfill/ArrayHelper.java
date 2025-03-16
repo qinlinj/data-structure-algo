@@ -42,4 +42,20 @@ public class ArrayHelper {
             }
         }
     }
+
+    public static void main(String[] args) {
+        int[][] data = {
+                {4, 2, 5, 11},
+                {3, 7, 1, 9},
+                {32, 22, 13, 8}
+        };
+        // System.out.println(Arrays.toString(twoDimConvertOneDim(data)));
+
+        /*int[] arr = {4, 2, 5, 11, 3, 7, 1, 9, 32, 22, 13, 8};
+        for (int[] a : oneDimConvertTwoDim(arr, 3, 4)) {
+            System.out.println(Arrays.toString(a));
+        }*/
+
+        printAdj(data, 0, 0);
+    }
 }
