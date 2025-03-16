@@ -22,5 +22,13 @@ public class ConnectedComponentsMaxCount {
     }
 
     private int dfs(int v) {
+        visited[v] = true;
+        int res = 1;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                res += dfs(w);
+            }
+        }
+        return res;
     }
 }
