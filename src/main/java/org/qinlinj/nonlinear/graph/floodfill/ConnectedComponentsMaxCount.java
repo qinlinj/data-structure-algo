@@ -72,6 +72,50 @@ public class ConnectedComponentsMaxCount {
         System.out.println(graphDFS.getMaxVertexNum());
     }
 
+    /**
+     * Performs depth-first search from vertex v and returns the size of its connected component.
+     * <p>
+     * The DFS algorithm:
+     * 1. Mark the current vertex as visited
+     * 2. Initialize component size to 1 (counting the current vertex)
+     * 3. Recursively visit all unvisited adjacent vertices
+     * 4. Add the sizes of connected subgraphs to the result
+     * 5. Return the total component size
+     * <p>
+     * Visual example:
+     * For the DFS starting at vertex 0 in our example graph:
+     * 0 -- 1    4 -- 5
+     * |    |    |
+     * 2 -- 3    6
+     * <p>
+     * DFS(0):
+     * - Mark 0 as visited, res = 1
+     * - Visit adjacent vertices 1 and 2
+     * DFS(1):
+     * - Mark 1 as visited, res = 1
+     * - Visit adjacent vertex 3
+     * DFS(3):
+     * - Mark 3 as visited, res = 1
+     * - Visit adjacent vertex 2
+     * DFS(2):
+     * - Mark 2 as visited, res = 1
+     * - No unvisited adjacent vertices
+     * - Return 1
+     * - res += 1 = 2
+     * - Return 2
+     * - res += 2 = 3
+     * - Return 3
+     * - res += 3 = 4
+     * - Return 4
+     * <p>
+     * Time Complexity: O(V + E) where V is the number of vertices and E is the number of edges
+     * - Each vertex and edge is processed exactly once in its component
+     * <p>
+     * Space Complexity: O(V) for the recursion stack in worst case (e.g., a line graph)
+     *
+     * @param v The starting vertex for DFS
+     * @return The size of the connected component containing vertex v
+     */
     private int dfs(int v) {
         visited[v] = true;
         int res = 1;
