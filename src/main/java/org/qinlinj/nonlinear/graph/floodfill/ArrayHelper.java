@@ -15,4 +15,14 @@ public class ArrayHelper {
 
         return res;
     }
+
+    public static int[][] oneDimConvertTwoDim(int[] arr, int rows, int cols) {
+        int[][] res = new int[rows][cols];
+        for (int index = 0; index < arr.length; index++) {
+            int i = index / cols;
+            int j = index % cols;
+            res[i][j] = arr[index];
+        }
+        return res;
+    }
 }
