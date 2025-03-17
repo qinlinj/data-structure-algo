@@ -29,7 +29,14 @@ public class WeightedGraphImpl {
         this.res = new int[g.getV()];
         int index = 0;
         while (!queue.isEmpty()) {
-
+            int v = queue.remove();
+            res[index++] = v;
+            for (int w : g.adj(v)) {
+                indegrees[w]--;
+                if (indegrees[w] == 0) {
+                    queue.add(w);
+                }
+            }
         }
         if (index != g.getV()) {
             hasCycle = true;
