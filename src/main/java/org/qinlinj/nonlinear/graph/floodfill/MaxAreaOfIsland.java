@@ -55,7 +55,14 @@ public class MaxAreaOfIsland {
             g[v] = new HashSet<>();
         }
 
+        for (int v = 0; v < g.length; v++) {
+            int row = v / cols;
+            int col = v % cols;
+            if (grid[row][col] == 1) {
 
+            }
+        }
+        
         return g;
     }
 }
