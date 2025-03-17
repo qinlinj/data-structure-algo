@@ -38,6 +38,14 @@ public class MaxAreaOfIsland3 {
         this.grid = grid;
 
         int res = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                
+            }
+        }
+
+        return res;
     }
 
 
