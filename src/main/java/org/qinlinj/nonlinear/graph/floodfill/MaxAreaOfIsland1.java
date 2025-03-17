@@ -27,7 +27,18 @@ public class MaxAreaOfIsland1 {
         System.out.println(maxAreaOfIsland.maxAreaOfIsland(grid));
     }
 
-    private boolean maxAreaOfIsland(int[][] grid) {
+    private int maxAreaOfIsland(int[][] grid) {
+        if (grid == null) return 0;
+
+        rows = grid.length;
+        if (rows == 0) return 0;
+
+        cols = grid[0].length;
+        if (cols == 0) return 0;
+
+        this.grid = grid;
+
+        int res = 0;
     }
 
     private boolean inArea(int row, int col) {
