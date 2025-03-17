@@ -38,6 +38,13 @@ public class WeightedGraphImpl implements Graph {
         return E;
     }
 
+    public int getWeight(int v, int w) {
+        if (hasEdge(v, w)) {
+            return adj[v].get(w);
+        }
+        return -1;
+    }
+
     /**
      * Get the degree of the specified vertex
      *
