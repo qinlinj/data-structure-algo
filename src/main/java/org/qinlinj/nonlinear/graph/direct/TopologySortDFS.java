@@ -2,6 +2,8 @@ package org.qinlinj.nonlinear.graph.direct;
 
 import org.qinlinj.nonlinear.graph.Graph;
 
+import java.util.*;
+
 public class TopologySortDFS {
     private Graph g;
     private boolean hasCycle = false;
@@ -30,6 +32,13 @@ public class TopologySortDFS {
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
+        TopologySortDFS graphDFS = new TopologySortDFS(g);
+        System.out.println(graphDFS.isHasCycle());
+        System.out.println(Arrays.toString(graphDFS.getRes()));
     }
 
     private boolean dfs(int v) {
