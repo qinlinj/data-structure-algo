@@ -48,6 +48,15 @@ public class WeightedGraphImpl implements Graph {
                     throw new RuntimeException("error");
                 }
 
+                int weight = Integer.valueOf(arr[2]);
+                adj[a].put(b, weight);
+
+                if (isDirected) {
+                    outdegrees[a]++;
+                    indegrees[b]++;
+                }
+                if (!isDirected) adj[b].put(a, weight);
+
             }
 
         } catch (IOException e) {
