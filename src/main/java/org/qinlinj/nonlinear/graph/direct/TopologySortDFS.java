@@ -33,6 +33,18 @@ public class TopologySortDFS {
     }
 
     private boolean dfs(int v) {
+        visited[v] = true;
+        isOnPath[v] = true;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                if (dfs(w)) return true;
+            } else {
+                if (isOnPath[w]) return true;
+            }
+        }
+        isOnPath[v] = false;
+        res[index--] = v;
+        return false;
     }
 
     public boolean isHasCycle() {
