@@ -83,4 +83,20 @@ public class WeightedGraphImpl implements Graph {
 
         return adj[v].containsKey(w);
     }
+
+    public int indegree(int v) {
+        if (!isDirected) {
+            throw new RuntimeException("error");
+        }
+        validateVertex(v);
+        return indegrees[v];
+    }
+
+    public int outdegree(int v) {
+        if (!isDirected) {
+            throw new RuntimeException("error");
+        }
+        validateVertex(v);
+        return outdegrees[v];
+    }
 }
