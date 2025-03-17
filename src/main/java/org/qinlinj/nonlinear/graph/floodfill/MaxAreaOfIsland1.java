@@ -39,6 +39,15 @@ public class MaxAreaOfIsland1 {
         this.grid = grid;
 
         int res = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (grid[row][col] == 1) {
+                    res = Math.max(dfs(row, col), res);
+                }
+            }
+        }
+        return res;
     }
 
     private boolean inArea(int row, int col) {
