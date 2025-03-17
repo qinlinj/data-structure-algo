@@ -56,12 +56,17 @@ public class WeightedGraphImpl implements Graph {
                     indegrees[b]++;
                 }
                 if (!isDirected) adj[b].put(a, weight);
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        WeightedGraphImpl adjList
+                = new WeightedGraphImpl("data/weighted-graph.txt", true);
+        System.out.println(adjList);
     }
 
     private void validateVertex(int v) {
