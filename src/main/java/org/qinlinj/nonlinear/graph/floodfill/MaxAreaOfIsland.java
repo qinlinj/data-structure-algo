@@ -59,10 +59,15 @@ public class MaxAreaOfIsland {
             int row = v / cols;
             int col = v % cols;
             if (grid[row][col] == 1) {
+                for (int[] dir : directions) {
+                    int nextRow = row + dir[0];
+                    int nextCol = col + dir[1];
+
+                }
 
             }
         }
-        
+
         return g;
     }
 }
