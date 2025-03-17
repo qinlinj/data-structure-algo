@@ -24,6 +24,24 @@ public class MaxAreaOfIsland {
 
         this.grid = grid;
 
-        return 0;
+        graph = constructGraph();
+
+        this.visited = new boolean[graph.length];
+        int res = 0;
+        for (int v = 0; v < graph.length; v++) {
+            int row = v / cols;
+            int col = v % cols;
+            if (!visited[v] && grid[row][col] == 1) {
+                res = Math.max(dfs(v), res);
+            }
+        }
+        return res;
+    }
+
+    private int dfs(int v) {
+    }
+
+    private Set<Integer>[] constructGraph() {
+        return null;
     }
 }
