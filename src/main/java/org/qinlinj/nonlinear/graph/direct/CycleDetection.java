@@ -9,4 +9,21 @@ public class CycleDetection {
     private boolean[] visited;
     private boolean[] isOnPath;
 
+    public CycleDetection(Graph g) {
+        this.g = g;
+    }
+
+    private boolean dfs(int v) {
+        visited[v] = true;
+        isOnPath[v] = true;
+        for (int w : g.adj(v)) {
+            if (!visited[w]) {
+                if (dfs(w)) return true;
+            } else {
+                if (isOnPath[w]) return true;
+            }
+        }
+        isOnPath[v] = false;
+        return false;
+    }
 }
