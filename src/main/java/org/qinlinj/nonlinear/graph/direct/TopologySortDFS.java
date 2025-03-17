@@ -24,8 +24,22 @@ public class TopologySortDFS {
 
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) {
-
+                if (dfs(v)) {
+                    hasCycle = true;
+                    break;
+                }
             }
         }
+    }
+
+    private boolean dfs(int v) {
+    }
+
+    public boolean isHasCycle() {
+        return hasCycle;
+    }
+
+    public int[] getRes() {
+        return res;
     }
 }
