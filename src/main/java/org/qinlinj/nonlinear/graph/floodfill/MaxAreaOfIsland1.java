@@ -50,6 +50,20 @@ public class MaxAreaOfIsland1 {
         return res;
     }
 
+    private int dfs(int row, int col) {
+        grid[row][col] = 0;
+        int res = 1;
+        for (int[] dir : directions) {
+            int nextRow = row + dir[0];
+            int nextCol = col + dir[1];
+            if (inArea(nextRow, nextCol)
+                    && grid[nextRow][nextCol] == 1) {
+                res += dfs(nextRow, nextCol);
+            }
+        }
+        return res;
+    }
+
     private boolean inArea(int row, int col) {
         return row >= 0 && row < rows && col >= 0 && col < cols;
     }
