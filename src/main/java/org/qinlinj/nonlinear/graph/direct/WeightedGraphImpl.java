@@ -99,4 +99,19 @@ public class WeightedGraphImpl implements Graph {
         validateVertex(v);
         return outdegrees[v];
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("V = %d，E = %d，isDirected = %b \n", V, E, isDirected));
+        for (int v = 0; v < V; v++) {
+            sb.append(v + ": ");
+            Map<Integer, Integer> adjMap = adj[v];
+            for (Map.Entry<Integer, Integer> entry : adjMap.entrySet()) {
+                sb.append("(" + entry.getKey() + ", " + entry.getValue() + ")");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
