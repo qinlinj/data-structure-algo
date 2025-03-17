@@ -51,7 +51,13 @@ public class MaxAreaOfIsland3 {
                         int currRow = curr[0], currCol = curr[1];
                         currOnes++;
                         for (int[] dir : directions) {
-
+                            int nextRow = currRow + dir[0];
+                            int nextCol = currCol + dir[1];
+                            if (inArea(nextRow, nextCol)
+                                    && grid[nextRow][nextCol] == 1) {
+                                queue.add(new int[]{nextRow, nextCol});
+                                grid[nextRow][nextCol] = 0;
+                            }
                         }
                     }
                     res = Math.max(res, currOnes);
