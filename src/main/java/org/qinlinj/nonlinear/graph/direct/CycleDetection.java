@@ -26,6 +26,12 @@ public class CycleDetection {
         }
     }
 
+    public static void main(String[] args) {
+        Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
+        CycleDetection graphDFS = new CycleDetection(g);
+        System.out.println(graphDFS.isHasCycle());
+    }
+
     private boolean dfs(int v) {
         visited[v] = true;
         isOnPath[v] = true;
@@ -38,5 +44,9 @@ public class CycleDetection {
         }
         isOnPath[v] = false;
         return false;
+    }
+
+    public boolean isHasCycle() {
+        return hasCycle;
     }
 }
