@@ -14,5 +14,18 @@ public class TopologySortDFS {
 
     public TopologySortDFS(Graph g) {
         this.g = g;
+
+        if (g == null) return;
+
+        this.visited = new boolean[g.getV()];
+        this.isOnPath = new boolean[g.getV()];
+        this.res = new int[g.getV()];
+        this.index = this.res.length - 1;
+
+        for (int v = 0; v < g.getV(); v++) {
+            if (!visited[v]) {
+
+            }
+        }
     }
 }
