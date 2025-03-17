@@ -25,6 +25,15 @@ public class WeightedGraphImpl {
                 queue.add(v);
             }
         }
+
+        this.res = new int[g.getV()];
+        int index = 0;
+        while (!queue.isEmpty()) {
+
+        }
+        if (index != g.getV()) {
+            hasCycle = true;
+        }
     }
 
     public boolean isHasCycle() {
