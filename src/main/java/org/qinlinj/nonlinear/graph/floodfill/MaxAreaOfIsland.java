@@ -13,6 +13,21 @@ public class MaxAreaOfIsland {
 
     private boolean[] visited;
 
+    public static void main(String[] args) {
+        int[][] grid = {
+                {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+        };
+        MaxAreaOfIsland maxAreaOfIsland = new MaxAreaOfIsland();
+        System.out.println(maxAreaOfIsland.maxAreaOfIsland(grid));
+    }
+
     public int maxAreaOfIsland(int[][] grid) {
         if (grid == null) return 0;
 
