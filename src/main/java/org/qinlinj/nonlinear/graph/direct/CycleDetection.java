@@ -11,6 +11,19 @@ public class CycleDetection {
 
     public CycleDetection(Graph g) {
         this.g = g;
+
+        if (g == null) return;
+
+        this.visited = new boolean[g.getV()];
+        this.isOnPath = new boolean[g.getV()];
+        for (int v = 0; v < g.getV(); v++) {
+            if (!visited[v]) {
+                if (dfs(v)) {
+                    hasCycle = true;
+                    break;
+                }
+            }
+        }
     }
 
     private boolean dfs(int v) {
