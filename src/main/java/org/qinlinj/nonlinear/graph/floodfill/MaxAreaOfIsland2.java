@@ -26,7 +26,7 @@ public class MaxAreaOfIsland2 {
         System.out.println(maxAreaOfIsland.maxAreaOfIsland(grid));
     }
 
-    public int MaxAreaOfIsland(int[][] grid) {
+    public int maxAreaOfIsland(int[][] grid) {
         if (grid == null) return 0;
 
         rows = grid.length;
@@ -46,12 +46,24 @@ public class MaxAreaOfIsland2 {
                     stack.push(new int[]{row, col});
                     grid[row][col] = 0;
                     while (!stack.isEmpty()) {
-
+                        int[] curr = stack.pop();
+                        int currRow = curr[0], currCol = curr[1];
+                        currOnes++;
+                        for (int[] dir : directions) {
+                            int nextRow = currRow + dir[0];
+                            int nextCol = currCol + dir[1];
+                            if (inArea(nextRow, nextCol)
+                                    && grid[nextRow][nextCol] == 1) {
+                                stack.push(new int[]{nextRow, nextCol});
+                                grid[nextRow][nextCol] = 0;
+                            }
+                        }
                     }
+                    res = Math.max(res, currOnes);
                 }
-                res = Math.max(res, currOnes);
             }
         }
+        return res;
     }
 
     private boolean inArea(int row, int col) {
