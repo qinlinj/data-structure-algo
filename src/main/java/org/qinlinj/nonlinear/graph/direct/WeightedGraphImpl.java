@@ -12,4 +12,7 @@ public class WeightedGraphImpl {
     private int[] indegrees;
     private int[] outdegrees;
 
+    public WeightedGraphImpl(TreeMap<Integer, Integer>[] adj) {
+        this.adj = adj;
+    }
 }
