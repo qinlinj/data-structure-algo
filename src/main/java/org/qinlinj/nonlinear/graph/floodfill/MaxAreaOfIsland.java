@@ -62,12 +62,20 @@ public class MaxAreaOfIsland {
                 for (int[] dir : directions) {
                     int nextRow = row + dir[0];
                     int nextCol = col + dir[1];
-
+                    if (inArea(nextRow, nextCol)
+                            && grid[nextRow][nextCol] == 1) {
+                        int w = nextRow * cols + nextCol;
+                        g[v].add(w);
+                        g[w].add(v);
+                    }
                 }
 
             }
         }
 
         return g;
+    }
+
+    private boolean inArea(int nextRow, int nextCol) {
     }
 }
