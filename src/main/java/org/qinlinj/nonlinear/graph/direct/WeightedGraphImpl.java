@@ -57,7 +57,9 @@ public class WeightedGraphImpl implements Graph {
      */
     @Override
     public Collection<Integer> adj(int v) {
-        return List.of();
+        validateVertex(v);
+
+        return adj[v].keySet();
     }
 
     /**
@@ -69,6 +71,9 @@ public class WeightedGraphImpl implements Graph {
      */
     @Override
     public boolean hasEdge(int v, int w) {
-        return false;
+        validateVertex(v);
+        validateVertex(w);
+
+        return adj[v].containsKey(w);
     }
 }
