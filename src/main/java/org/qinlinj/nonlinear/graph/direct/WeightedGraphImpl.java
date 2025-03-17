@@ -1,5 +1,7 @@
 package org.qinlinj.nonlinear.graph.direct;
 
+import java.util.*;
+
 public class WeightedGraphImpl {
     private GraphImpl g;
 
@@ -15,6 +17,13 @@ public class WeightedGraphImpl {
         int[] indegrees = new int[g.getV()];
         for (int v = 0; v < g.getV(); v++) {
             indegrees[v] = g.indegree(v);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int v = 0; v < g.getV(); v++) {
+            if (indegrees[v] == 0) {
+                queue.add(v);
+            }
         }
     }
 
