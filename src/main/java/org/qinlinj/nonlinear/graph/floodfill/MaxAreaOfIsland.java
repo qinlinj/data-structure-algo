@@ -76,6 +76,7 @@ public class MaxAreaOfIsland {
         return g;
     }
 
-    private boolean inArea(int nextRow, int nextCol) {
+    private boolean inArea(int row, int col) {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
     }
 }
