@@ -46,7 +46,14 @@ public class MaxAreaOfIsland3 {
                     Queue<int[]> queue = new LinkedList<>();
                     queue.add(new int[]{row, col});
                     grid[row][col] = 0;
+                    while (!queue.isEmpty()) {
+                        int[] curr = queue.remove();
+                        int currRow = curr[0], currCol = curr[1];
+                        currOnes++;
+                        for (int[] dir : directions) {
 
+                        }
+                    }
                     res = Math.max(res, currOnes);
                 }
             }
