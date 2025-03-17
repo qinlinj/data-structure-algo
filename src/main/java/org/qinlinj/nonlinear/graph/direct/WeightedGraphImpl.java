@@ -34,6 +34,19 @@ public class WeightedGraphImpl implements Graph {
             this.indegrees = new int[V];
             this.outdegrees = new int[V];
             while ((line = reader.readLine()) != null) { // O(E)
+                arr = line.split(" ");
+                int a = Integer.valueOf(arr[0]);
+                validateVertex(a);
+                int b = Integer.valueOf(arr[1]);
+                validateVertex(b);
+
+                if (a == b) {
+                    throw new RuntimeException("error");
+                }
+
+                if (adj[a].containsKey(b)) { // O(logV)
+                    throw new RuntimeException("error");
+                }
 
             }
 
