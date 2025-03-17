@@ -1,8 +1,10 @@
 package org.qinlinj.nonlinear.graph.direct;
 
+import org.qinlinj.nonlinear.graph.Graph;
+
 import java.util.*;
 
-public class WeightedGraphImpl {
+public class WeightedGraphImpl implements Graph {
     private int V; //
     private int E; //
     private TreeMap<Integer, Integer>[] adj;
@@ -21,4 +23,19 @@ public class WeightedGraphImpl {
             throw new IllegalArgumentException(String.format("V %d invalid", v));
         }
     }
+
+    public boolean isDirected() {
+        return isDirected;
+    }
+
+    @Override
+    public int getV() {
+        return V;
+    }
+
+    @Override
+    public int getE() {
+        return E;
+    }
+    
 }
