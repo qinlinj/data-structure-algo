@@ -39,6 +39,14 @@ public class MaxAreaOfIsland {
     }
 
     private int dfs(int v) {
+        visited[v] = true;
+        int res = 1;
+        for (int w : graph[v]) {
+            if (!visited[w]) {
+                res += dfs(w);
+            }
+        }
+        return res;
     }
 
     private Set<Integer>[] constructGraph() {
