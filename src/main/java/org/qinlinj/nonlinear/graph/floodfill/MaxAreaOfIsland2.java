@@ -39,7 +39,18 @@ public class MaxAreaOfIsland2 {
 
         int res = 0;
         for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (grid[row][col] == 1) {
+                    int currOnes = 0;
+                    ArrayDeque<int[]> stack = new ArrayDeque<>();
+                    stack.push(new int[]{row, col});
+                    grid[row][col] = 0;
+                    while (!stack.isEmpty()) {
 
+                    }
+                }
+                res = Math.max(res, currOnes);
+            }
         }
     }
 
