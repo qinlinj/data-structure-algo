@@ -2,6 +2,9 @@ package org.qinlinj.nonlinear.graph.direct;
 
 import org.qinlinj.nonlinear.graph.Graph;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class WeightedGraphImpl implements Graph {
@@ -14,8 +17,29 @@ public class WeightedGraphImpl implements Graph {
     private int[] indegrees;
     private int[] outdegrees;
 
-    public WeightedGraphImpl(TreeMap<Integer, Integer>[] adj) {
-        this.adj = adj;
+    public WeightedGraphImpl(String fileName, boolean isDirected) {
+        this.isDirected = isDirected;
+        try {
+            BufferedReader reader
+                    = new BufferedReader(new FileReader(fileName));
+            String line = reader.readLine();
+            String[] arr = line.split(" ");
+            this.V = Integer.valueOf(arr[0]);
+            this.E = Integer.valueOf(arr[1]);
+
+            this.adj = new TreeMap[V];
+            for (int i = 0; i < V; i++) {
+                adj[i] = new TreeMap<>();
+            }
+            this.indegrees = new int[V];
+            this.outdegrees = new int[V];
+            while ((line = reader.readLine()) != null) { // O(E)
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void validateVertex(int v) {
