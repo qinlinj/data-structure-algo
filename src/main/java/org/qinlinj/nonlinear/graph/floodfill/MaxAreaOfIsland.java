@@ -50,6 +50,12 @@ public class MaxAreaOfIsland {
     }
 
     private Set<Integer>[] constructGraph() {
-        return null;
+        Set<Integer>[] g = new HashSet[rows * cols];
+        for (int v = 0; v < g.length; v++) {
+            g[v] = new HashSet<>();
+        }
+
+
+        return g;
     }
 }
