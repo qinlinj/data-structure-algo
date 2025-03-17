@@ -15,4 +15,10 @@ public class WeightedGraphImpl {
     public WeightedGraphImpl(TreeMap<Integer, Integer>[] adj) {
         this.adj = adj;
     }
+
+    private void validateVertex(int v) {
+        if (v < 0 || v >= V) {
+            throw new IllegalArgumentException(String.format("V %d invalid", v));
+        }
+    }
 }
