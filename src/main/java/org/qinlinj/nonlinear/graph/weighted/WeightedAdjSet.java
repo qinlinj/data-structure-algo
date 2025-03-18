@@ -77,11 +77,13 @@ public class WeightedAdjSet implements Graph {
 
     @Override
     public Collection<Integer> adj(int v) {
-        return List.of();
+        validateVertex(v);
+
+        return adj[v].keySet();
     }
 
     @Override
     public int degree(int v) {
-        return 0;
+        return adj(v).size();
     }
 }
