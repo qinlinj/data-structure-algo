@@ -26,10 +26,17 @@ public class WeightedAdjSet implements Graph {
                 adj[i] = new TreeMap<>();
             }
 
+            while ((line = reader.readLine()) != null) { // O(E)
+
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void validateVertex(int b) {
     }
 
     @Override
