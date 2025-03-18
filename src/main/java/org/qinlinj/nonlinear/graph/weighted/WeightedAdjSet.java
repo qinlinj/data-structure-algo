@@ -51,7 +51,10 @@ public class WeightedAdjSet implements Graph {
         }
     }
 
-    private void validateVertex(int b) {
+    private void validateVertex(int v) {
+        if (v < 0 || v >= V) {
+            throw new IllegalArgumentException(String.format("V %d invalid", v));
+        }
     }
 
     @Override
