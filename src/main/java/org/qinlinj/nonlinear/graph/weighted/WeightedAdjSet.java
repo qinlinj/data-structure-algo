@@ -5,6 +5,14 @@ import org.qinlinj.nonlinear.graph.Graph;
 import java.util.*;
 
 public class WeightedAdjSet implements Graph {
+    private int V;
+    private int E;
+    private TreeMap<Integer, Integer>[] adj;
+
+    public WeightedAdjSet(TreeMap<Integer, Integer>[] adj) {
+        this.adj = adj;
+    }
+
     @Override
     public int getE() {
         return 0;
