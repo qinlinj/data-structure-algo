@@ -86,4 +86,19 @@ public class WeightedAdjSet implements Graph {
     public int degree(int v) {
         return adj(v).size();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("V nums = %d，E nums = %d \n", V, E));
+        for (int v = 0; v < V; v++) {
+            sb.append(v + ": ");
+            Map<Integer, Integer> adjMap = adj[v];
+            for (Map.Entry<Integer, Integer> entry : adjMap.entrySet()) {
+                sb.append("(" + entry.getKey() + ", " + entry.getValue() + ")");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
