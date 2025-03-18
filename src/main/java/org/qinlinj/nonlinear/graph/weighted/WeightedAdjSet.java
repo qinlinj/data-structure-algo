@@ -58,18 +58,21 @@ public class WeightedAdjSet implements Graph {
     }
 
     @Override
-    public int getE() {
-        return 0;
+    public int getV() {
+        return V;
     }
 
     @Override
-    public int getV() {
-        return 0;
+    public int getE() {
+        return E;
     }
 
     @Override
     public boolean hasEdge(int v, int w) {
-        return false;
+        validateVertex(v);
+        validateVertex(w);
+
+        return adj[v].containsKey(w);
     }
 
     @Override
