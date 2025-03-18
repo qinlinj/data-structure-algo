@@ -27,7 +27,22 @@ public class WeightedAdjSet implements Graph {
             }
 
             while ((line = reader.readLine()) != null) { // O(E)
+                arr = line.split(" ");
+                int a = Integer.valueOf(arr[0]);
+                validateVertex(a);
+                int b = Integer.valueOf(arr[1]);
+                validateVertex(b);
 
+                if (a == b) {
+                    throw new RuntimeException("There is a self-loop edge, error");
+                }
+
+                if (adj[a].containsKey(b)) { // O(logV)
+                    throw new RuntimeException("There's a parallel edge. Wrong");
+                }
+                int weight = Integer.valueOf(arr[2]);
+                adj[a].put(b, weight);
+                adj[b].put(a, weight);
             }
 
 
