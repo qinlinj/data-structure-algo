@@ -40,6 +40,16 @@ public class Prim {
         }
     }
 
+    public static void main(String[] args) {
+        WeightedAdjSet adjSet = new WeightedAdjSet("data/prim.txt");
+        Prim prim = new Prim(adjSet);
+
+        List<WeightedEdge> res = prim.getResult();
+        for (WeightedEdge edge : res) {
+            System.out.println(edge);
+        }
+    }
+
     public List<WeightedEdge> getResult() {
         return result;
     }
