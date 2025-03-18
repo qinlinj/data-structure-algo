@@ -80,6 +80,13 @@ public class WeightedAdjSet implements Graph {
         return adj[v].containsKey(w);
     }
 
+    public int getWeight(int v, int w) {
+        if (hasEdge(v, w)) {
+            return adj[v].get(w);
+        }
+        return -1;
+    }
+
     @Override
     public Collection<Integer> adj(int v) {
         validateVertex(v);

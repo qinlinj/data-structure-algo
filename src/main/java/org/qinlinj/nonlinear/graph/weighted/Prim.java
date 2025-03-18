@@ -23,7 +23,13 @@ public class Prim {
         for (int i = 0; i < g.getV() - 1; i++) { // O(V)
             WeightedEdge minEdge = new WeightedEdge(-1, -1, Integer.MAX_VALUE);
             for (int v = 0; v < g.getV(); v++) { // O(V)
-
+                if (visited[v]) {
+                    for (int w : g.adj(v)) { // O(E)
+                        if (!visited[w] && g.getWeight(v, w) < minEdge.getWeight()) {
+                            minEdge = new WeightedEdge(v, w, g.getWeight(v, w));
+                        }
+                    }
+                }
             }
             result.add(minEdge);
             
