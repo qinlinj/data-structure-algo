@@ -17,5 +17,16 @@ public class Prim {
 
         // Prim
         boolean[] visited = new boolean[g.getV()];
+
+        visited[0] = true;
+
+        for (int i = 0; i < g.getV() - 1; i++) { // O(V)
+            WeightedEdge minEdge = new WeightedEdge(-1, -1, Integer.MAX_VALUE);
+            for (int v = 0; v < g.getV(); v++) { // O(V)
+
+            }
+            result.add(minEdge);
+            
+        }
     }
 }
