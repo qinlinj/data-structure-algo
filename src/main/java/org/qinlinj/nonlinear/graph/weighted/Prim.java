@@ -33,6 +33,10 @@ public class Prim {
             }
             result.add(minEdge);
             
+            int v = minEdge.getV();
+            int w = minEdge.getW();
+            int newV = visited[v] ? w : v;
+            visited[newV] = true;
         }
     }
 }
