@@ -11,6 +11,14 @@ public class WeightedEdge implements Comparable<WeightedEdge> {
         this.weight = weight;
     }
 
+    public int getV() {
+        return v;
+    }
+
+    public int getW() {
+        return w;
+    }
+
     public int getWeight() {
         return weight;
     }
@@ -18,5 +26,14 @@ public class WeightedEdge implements Comparable<WeightedEdge> {
     @Override
     public int compareTo(WeightedEdge o) {
         return weight - o.getWeight();
+    }
+
+    @Override
+    public String toString() {
+        return "WeightedEdge{" +
+                "v=" + v +
+                ", w=" + w +
+                ", weight=" + weight +
+                '}';
     }
 }
