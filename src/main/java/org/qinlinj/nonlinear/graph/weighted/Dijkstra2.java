@@ -20,6 +20,8 @@ public class Dijkstra2 {
         distance[source] = 0;
 
         visited = new boolean[g.getV()];
+        prevs = new int[g.getV()];
+        Arrays.fill(prevs, -1);
 
         PriorityQueue<Pair> pq = new PriorityQueue<>();
 
@@ -36,6 +38,7 @@ public class Dijkstra2 {
                     if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
                         distance[w] = distance[curr] + g.getWeight(curr, w);
                         pq.add(new Pair(w, distance[w]));
+                        prevs[w] = curr;
                     }
                 }
             }
