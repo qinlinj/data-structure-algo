@@ -20,7 +20,14 @@ public class Dijkstra {
         visited = new boolean[g.getV()];
 
         while (true) {
-            
+            int curDis = Integer.MAX_VALUE;
+            int curr = -1;
+            for (int v = 0; v < g.getV(); v++) { // O(V)
+                if (!visited[v] && distance[v] < curDis) {
+                    curDis = distance[v];
+                    curr = v;
+                }
+            }
         }
     }
 
