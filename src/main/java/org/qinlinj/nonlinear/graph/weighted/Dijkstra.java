@@ -16,6 +16,12 @@ public class Dijkstra {
         distance = new int[g.getV()];
         Arrays.fill(distance, Integer.MAX_VALUE);
         distance[source] = 0;
+
+        visited = new boolean[g.getV()];
+
+        while (true) {
+            
+        }
     }
 
     public static void main(String[] args) {
