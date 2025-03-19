@@ -9,7 +9,7 @@ public class Dijkstra {
     private int[] distance;
     private boolean[] visited;
 
-    public Dijkstra(WeightedAdjSet g) {
+    public Dijkstra(WeightedAdjSet g, int source) {
         this.g = g;
         this.source = source;
 
@@ -43,6 +43,9 @@ public class Dijkstra {
     }
 
     public static void main(String[] args) {
+        WeightedAdjSet g = new WeightedAdjSet("data/dijkstra.txt");
+        Dijkstra dijkstra = new Dijkstra(g, 0);
+        System.out.println(dijkstra.minDistanceTo(1));
     }
 
     public int minDistanceTo(int v) {
