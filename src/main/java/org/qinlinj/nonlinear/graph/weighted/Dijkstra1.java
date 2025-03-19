@@ -19,27 +19,9 @@ public class Dijkstra1 {
 
         visited = new boolean[g.getV()];
 
-        while (true) {
-            int curDis = Integer.MAX_VALUE;
-            int curr = -1;
-            for (int v = 0; v < g.getV(); v++) { // O(V)
-                if (!visited[v] && distance[v] < curDis) {
-                    curDis = distance[v];
-                    curr = v;
-                }
-            }
-            if (curr == -1) break;
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
 
-            visited[curr] = true;
 
-            for (int w : g.adj(curr)) { // O(E)
-                if (!visited[w]) {
-                    if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
-                        distance[w] = distance[curr] + g.getWeight(curr, w);
-                    }
-                }
-            }
-        }
     }
 
     public static void main(String[] args) {
