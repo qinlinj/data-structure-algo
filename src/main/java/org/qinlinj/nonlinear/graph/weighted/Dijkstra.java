@@ -32,10 +32,13 @@ public class Dijkstra {
 
             visited[curr] = true;
 
-            for (int i : g.adj(curr)) {
-
+            for (int w : g.adj(curr)) { // O(E)
+                if (!visited[w]) {
+                    if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
+                        distance[w] = distance[curr] + g.getWeight(curr, w);
+                    }
+                }
             }
-
         }
     }
 
