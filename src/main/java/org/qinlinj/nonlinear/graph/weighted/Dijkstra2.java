@@ -9,6 +9,8 @@ public class Dijkstra2 {
     private int[] distance;
     private boolean[] visited;
 
+    private int[] prevs;
+
     public Dijkstra2(WeightedAdjSet g, int source) {
         this.g = g;
         this.source = source;
@@ -61,9 +63,21 @@ public class Dijkstra2 {
         validateVertex(v);
         return visited[v];
     }
-    
-    public Collection<Integer> path(int target) {
 
+    public Collection<Integer> path(int target) {
+        List<Integer> res = new ArrayList<>();
+        if (!isConnected(target)) {
+            return res;
+        }
+        while (target != source) {
+            res.add(target);
+            target = prevs[target];
+        }
+        res.add(source);
+
+        Collections.reverse(res);
+
+        return res;
     }
 
     private class Pair implements Comparable<Pair> {
