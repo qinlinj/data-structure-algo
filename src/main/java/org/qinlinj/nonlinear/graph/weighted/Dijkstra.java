@@ -1,5 +1,7 @@
 package org.qinlinj.nonlinear.graph.weighted;
 
+import java.util.*;
+
 public class Dijkstra {
     private WeightedAdjSet g;
     private int source;
@@ -9,6 +11,11 @@ public class Dijkstra {
 
     public Dijkstra(WeightedAdjSet g) {
         this.g = g;
+        this.source = source;
+
+        distance = new int[g.getV()];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+        distance[source] = 0;
     }
 
     public static void main(String[] args) {
