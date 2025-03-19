@@ -28,6 +28,14 @@ public class Dijkstra {
                     curr = v;
                 }
             }
+            if (curr == -1) break;
+
+            visited[curr] = true;
+
+            for (int i : g.adj(curr)) {
+
+            }
+
         }
     }
 
