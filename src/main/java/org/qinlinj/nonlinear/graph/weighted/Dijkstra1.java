@@ -58,4 +58,19 @@ public class Dijkstra1 {
             throw new IllegalArgumentException(String.format("Vertex %d invalid", v));
         }
     }
+
+    private class Pair implements Comparable<Pair> {
+        int v;
+        int dis;
+
+        public Pair(int v, int dis) {
+            this.v = v;
+            this.dis = dis;
+        }
+
+        @Override
+        public int compareTo(Pair o) {
+            return dis - o.dis;
+        }
+    }
 }
