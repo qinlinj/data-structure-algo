@@ -27,7 +27,19 @@ public class Prim1 {
         }
 
         while (!pq.isEmpty()) { // O(E)
-            
+            WeightedEdge minEdge = pq.poll(); // O(logE)
+            if (visited[minEdge.getV()] && visited[minEdge.getW()]) {
+                continue;
+            }
+
+            result.add(minEdge);
+
+            int newV = visited[minEdge.getV()] ? minEdge.getW() : minEdge.getV();
+            visited[newV] = true;
+
+            for (int w : g.adj(newV)) {
+
+            }
         }
 
     }
