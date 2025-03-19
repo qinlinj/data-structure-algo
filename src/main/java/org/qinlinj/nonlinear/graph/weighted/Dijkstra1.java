@@ -28,7 +28,15 @@ public class Dijkstra1 {
             if (visited[curr]) continue;
 
             visited[curr] = true;
-            
+
+            for (int w : g.adj(curr)) { // O(E)
+                if (!visited[w]) {
+                    if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
+                        distance[w] = distance[curr] + g.getWeight(curr, w);
+                        pq.add(new Pair(w, distance[w]));
+                    }
+                }
+            }
         }
     }
 
