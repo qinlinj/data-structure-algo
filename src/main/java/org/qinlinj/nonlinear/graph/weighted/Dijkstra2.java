@@ -49,6 +49,7 @@ public class Dijkstra2 {
         WeightedAdjSet g = new WeightedAdjSet("data/dijkstra.txt");
         Dijkstra2 dijkstra = new Dijkstra2(g, 0);
         System.out.println(dijkstra.minDistanceTo(1));
+        System.out.println(dijkstra.path(1));
     }
 
     public int minDistanceTo(int v) {
