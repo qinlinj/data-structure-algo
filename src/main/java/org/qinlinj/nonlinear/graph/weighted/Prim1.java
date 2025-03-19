@@ -21,6 +21,15 @@ public class Prim1 {
         visited[0] = true;
 
         PriorityQueue<WeightedEdge> pq = new PriorityQueue<>();
+
+        for (int w : g.adj(0)) {
+            pq.add(new WeightedEdge(0, w, g.getWeight(0, w)));
+        }
+
+        while (!pq.isEmpty()) { // O(E)
+            
+        }
+
     }
 
     public List<WeightedEdge> getResult() {
