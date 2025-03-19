@@ -57,6 +57,15 @@ public class Dijkstra2 {
         }
     }
 
+    public boolean isConnected(int v) {
+        validateVertex(v);
+        return visited[v];
+    }
+    
+    public Collection<Integer> path(int target) {
+
+    }
+
     private class Pair implements Comparable<Pair> {
         int v;
         int dis;
