@@ -38,10 +38,22 @@ public class Prim1 {
             visited[newV] = true;
 
             for (int w : g.adj(newV)) {
-
+                if (!visited[w]) {
+                    pq.add(new WeightedEdge(newV, w, g.getWeight(newV, w)));
+                }
             }
         }
 
+    }
+
+    public static void main(String[] args) {
+        WeightedAdjSet adjSet = new WeightedAdjSet("data/prim.txt");
+        Prim1 prim = new Prim1(adjSet);
+
+        List<WeightedEdge> res = prim.getResult();
+        for (WeightedEdge edge : res) {
+            System.out.println(edge);
+        }
     }
 
     public List<WeightedEdge> getResult() {
