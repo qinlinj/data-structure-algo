@@ -21,7 +21,15 @@ public class Dijkstra1 {
 
         PriorityQueue<Pair> pq = new PriorityQueue<>();
 
+        pq.add(new Pair(source, 0));
 
+        while (!pq.isEmpty()) { // O(V)
+            int curr = pq.poll().v; // O(logV)
+            if (visited[curr]) continue;
+
+            visited[curr] = true;
+            
+        }
     }
 
     public static void main(String[] args) {
