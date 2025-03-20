@@ -12,11 +12,14 @@ public class UndergroundSystem {
     }
 
     public void checkIn(int id, String stationName, int t) {
-
+        startInfo.put(id, new Start(stationName, t));
     }
 
     public void checkOut(int id, String stationName, int t) {
+        Start start = startInfo.get(id);
 
+        StartEnd key = new StartEnd(start.getStation(), stationName);
+        SumAmount sumAmount = table.getOrDefault(key, new SumAmount(0, 0));
     }
 
     public double getAverageTime(String startStation, String endStation) {
