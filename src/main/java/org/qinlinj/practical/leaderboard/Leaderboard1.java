@@ -3,7 +3,7 @@ package org.qinlinj.practical.leaderboard;
 import java.util.*;
 
 public class Leaderboard1 {
-    private Map<Integer, Integer> map;
+    private Map<Integer, Player> map;
     private TreeSet<Player> players;
 
     public Leaderboard1() {
@@ -39,11 +39,16 @@ public class Leaderboard1 {
     }
 
     public void addScore(int playerId, int score) {
+        Player player = null;
         if (map.containsKey(playerId)) {
-            map.put(playerId, map.get(playerId) + score);
+            player = map.get(playerId);
+            players.remove(player);
+            player.setScores(player.getScores() + score);
         } else {
-            map.put(playerId, score);
+            player = new Player(playerId, score);
+            map.put(playerId, player);
         }
+        players.add(player);
     }
 
     public int top(int k) {
