@@ -19,7 +19,8 @@ public class UndergroundSystem {
     }
 
     public double getAverageTime(String startStation, String endStation) {
-
+        // TODO
+        throw new UnsupportedOperationException("Method not implement yet");
     }
 
 }
