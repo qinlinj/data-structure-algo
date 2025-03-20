@@ -20,6 +20,10 @@ public class UndergroundSystem {
 
         StartEnd key = new StartEnd(start.getStation(), stationName);
         SumAmount sumAmount = table.getOrDefault(key, new SumAmount(0, 0));
+        sumAmount.setAmount(sumAmount.getAmount() + 1);
+        sumAmount.setSum(sumAmount.getSum() + (t - start.getStartTime()));
+
+        table.put(key, sumAmount);
     }
 
     public double getAverageTime(String startStation, String endStation) {
