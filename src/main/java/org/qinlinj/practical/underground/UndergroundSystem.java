@@ -1,6 +1,12 @@
 package org.qinlinj.practical.underground;
 
+import java.util.*;
+
 public class UndergroundSystem {
+    private Map<Integer, Start> startInfo;
+    private Map<StartEnd, SumAmount> table;
+
+
     public UndergroundSystem() {
     }
 
