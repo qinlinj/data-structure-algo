@@ -31,9 +31,8 @@ public class UndergroundSystem {
 
         SumAmount sumAmount = table.get(key);
         int sum = sumAmount.getSum();
-
-        // TODO
-        throw new UnsupportedOperationException("Method not implement yet");
+        int amount = sumAmount.getAmount();
+        return 1.0 * sum / amount;
     }
 
 }
