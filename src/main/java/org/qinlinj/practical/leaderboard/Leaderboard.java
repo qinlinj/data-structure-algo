@@ -23,6 +23,14 @@ public class Leaderboard {
 
     public int top(int k) {
         Integer[] scores = map.values().toArray(new Integer[map.values().size()]);
+        Arrays.sort(scores, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        int sum = 0;
+        return sum;
     }
 
     public void reset(int playerId) {
