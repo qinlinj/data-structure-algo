@@ -10,7 +10,23 @@ public class Leaderboard {
     }
 
     public static void main(String[] args) {
+        Leaderboard leaderboard = new Leaderboard();
+        leaderboard.addScore(1, 20);
+        leaderboard.addScore(2, 30);
+        leaderboard.addScore(3, 16);
+        leaderboard.addScore(4, 44);
 
+        System.out.println(leaderboard.top(2));
+
+        leaderboard.addScore(2, 34);
+        leaderboard.addScore(3, 23);
+
+        System.out.println(leaderboard.top(1));
+
+        leaderboard.reset(2);
+        leaderboard.reset(4);
+
+        System.out.println(leaderboard.top(1));
     }
 
     public void addScore(int playerId, int score) {
