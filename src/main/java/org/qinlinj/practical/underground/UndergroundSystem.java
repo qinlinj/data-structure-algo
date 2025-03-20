@@ -27,6 +27,11 @@ public class UndergroundSystem {
     }
 
     public double getAverageTime(String startStation, String endStation) {
+        StartEnd key = new StartEnd(startStation, endStation);
+
+        SumAmount sumAmount = table.get(key);
+        int sum = sumAmount.getSum();
+
         // TODO
         throw new UnsupportedOperationException("Method not implement yet");
     }
