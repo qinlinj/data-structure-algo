@@ -4,9 +4,18 @@ import java.util.*;
 
 public class Leaderboard1 {
     private Map<Integer, Integer> map;
+    private TreeSet<Player> players;
 
     public Leaderboard1() {
         this.map = new HashMap<>();
+        players = new TreeSet<>(new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return o1.getScores() == o2.getScores() ?
+                        o1.getId() - o2.getId() :
+                        o2.getScores() - o1.getScores();
+            }
+        });
     }
 
     public static void main(String[] args) {
