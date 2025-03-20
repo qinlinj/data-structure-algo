@@ -6,8 +6,9 @@ public class UndergroundSystem {
     private Map<Integer, Start> startInfo;
     private Map<StartEnd, SumAmount> table;
 
-
     public UndergroundSystem() {
+        startInfo = new HashMap<>();
+        table = new HashMap<>();
     }
 
     public void checkIn(int id, String stationName, int t) {
