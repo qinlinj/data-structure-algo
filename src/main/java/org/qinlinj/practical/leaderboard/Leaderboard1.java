@@ -62,8 +62,9 @@ public class Leaderboard1 {
         return sum;
     }
 
-    public void reset(int playerId) {
+    public void reset(int playerId) { // O(logn)
         if (map.containsKey(playerId)) {
+            players.remove(map.get(playerId));
             map.remove(playerId);
         }
     }
