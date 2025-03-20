@@ -27,4 +27,9 @@ public class StartEnd {
         return Objects.equals(start, startEnd.start) &&
                 Objects.equals(end, startEnd.end);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(start, end);
+    }
 }
