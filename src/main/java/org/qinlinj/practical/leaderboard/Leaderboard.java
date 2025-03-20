@@ -30,6 +30,9 @@ public class Leaderboard {
             }
         });
         int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += scores[i];
+        }
         return sum;
     }
 
