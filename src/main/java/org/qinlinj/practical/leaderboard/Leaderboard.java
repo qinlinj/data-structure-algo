@@ -22,10 +22,12 @@ public class Leaderboard {
     }
 
     public int top(int k) {
-
+        Integer[] scores = map.values().toArray(new Integer[map.values().size()]);
     }
 
     public void reset(int playerId) {
-
+        if (map.containsKey(playerId)) {
+            map.remove(playerId);
+        }
     }
 }
