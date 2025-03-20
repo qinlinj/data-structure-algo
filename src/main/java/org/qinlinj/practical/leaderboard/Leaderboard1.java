@@ -52,16 +52,12 @@ public class Leaderboard1 {
     }
 
     public int top(int k) {
-        Integer[] scores = map.values().toArray(new Integer[map.values().size()]);
-        Arrays.sort(scores, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+        Iterator<Player> it = players.iterator();
         int sum = 0;
-        for (int i = 0; i < k; i++) {
-            sum += scores[i];
+        // O(k)
+        while (it.hasNext() && k > 0) {
+            sum += it.next().getScores();
+            k--;
         }
         return sum;
     }
