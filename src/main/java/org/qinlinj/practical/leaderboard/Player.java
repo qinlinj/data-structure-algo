@@ -8,4 +8,16 @@ public class Player {
         this.id = id;
         this.scores = scores;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getScores() {
+        return scores;
+    }
+
+    public void setScores(int scores) {
+        this.scores = scores;
+    }
 }
