@@ -42,6 +42,9 @@ public class BM1 {
     }
 
     private Map<Character, Integer> genBadCharIndexMap(String pattern) {
+        char[] patternChars = pattern.toCharArray();
+        Map<Character, Integer> bc = new HashMap<>();
 
+        return bc;
     }
 }
