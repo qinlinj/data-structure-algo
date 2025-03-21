@@ -19,10 +19,14 @@ public class BM1 {
         int n = pattern.length();
         if (m < n) return -1;
 
+        Map<Character, Integer> bc = genBadCharIndexMap(pattern);
+        int i = 0;
+
+        
         return -1;
     }
 
     private Map<Character, Integer> genBadCharIndexMap(String pattern) {
-        
+
     }
 }
