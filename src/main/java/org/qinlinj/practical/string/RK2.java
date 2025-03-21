@@ -19,10 +19,10 @@ public class RK2 {
 
         int[] hashCodes = new int[m - n + 1];
         for (int i = 0; i < m - n + 1; i++) {
-            hashCodes[i] = calHashCode(mainStr.substring(i, i + n));
+            hashCodes[i] = calHashCode(mainStr, i, hashCodes, n);
         }
 
-        int hashCode = calHashCode(pattern);
+        int hashCode = calFirstSubStrHashCode(pattern);
 
         for (int i = 0; i < m - n + 1; i++) {
             int k = i;
@@ -35,6 +35,9 @@ public class RK2 {
         }
 
         return -1;
+    }
+
+    private int calFirstSubStrHashCode(String pattern) {
     }
 
     private int calHashCode(String mainStr, int i, int[] hashCodes, int n) {
