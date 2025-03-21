@@ -27,7 +27,11 @@ public class BF2 {
                 int j = 1;
                 if (j == n) return i;
                 for (; j < n && k < m; j++, k++) {
-
+                    if (mainStr.charAt(k) == pattern.charAt(j)) {
+                        if (j == n - 1) return i;
+                    } else {
+                        break;
+                    }
                 }
             }
         }
