@@ -42,7 +42,7 @@ public class RK3 {
 
         int hashCode = 0;
         for (int i = 0; i < n; i++) {
-            hashCode += (str.charAt(n - i - 1) - 'a');
+            hashCode += (int) Math.pow(26, i) * (str.charAt(n - i - 1) - 'a');
         }
 
         return hashCode;
