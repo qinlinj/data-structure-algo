@@ -25,8 +25,12 @@ public class RK2 {
         int hashCode = calHashCode(pattern);
 
         for (int i = 0; i < m - n + 1; i++) {
-            if (hashCode == hashCodes[i]) {
-                return i;
+            int k = i;
+            for (int j = 0; j < n && k < m; j++, k++) {
+                if (mainStr.charAt(k) != pattern.charAt(j)) {
+                    break;
+                }
+                if (j == n - 1) return i;
             }
         }
 
