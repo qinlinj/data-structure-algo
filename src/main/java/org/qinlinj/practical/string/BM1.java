@@ -22,7 +22,22 @@ public class BM1 {
         Map<Character, Integer> bc = genBadCharIndexMap(pattern);
         int i = 0;
 
-        
+        while (i <= m - n) {
+            int y;
+            for (y = n - 1; y >= 0; y--) {
+                if (mainStr.charAt(i + y) != pattern.charAt(y)) break;
+            }
+
+            if (y < 0) {
+                return i;
+            }
+
+            char badChar = mainStr.charAt(i + y);
+            int x = bc.getOrDefault(badChar, -1);
+
+            i = i + Math.max(1, (y - x));
+        }
+
         return -1;
     }
 
