@@ -37,7 +37,8 @@ public class RK2 {
         return -1;
     }
 
-    private int calHashCode(String str) {
-        return str.hashCode(); // O(n)
+    private int calHashCode(String mainStr, int i, int[] hashCodes, int n) {
+        return hashCodes[i - 1] - (mainStr.charAt(i - 1) - 'a')
+                + (mainStr.charAt(i + n - 1) - 'a');
     }
 }
