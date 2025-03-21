@@ -1,5 +1,7 @@
 package org.qinlinj.practical.string;
 
+import java.util.*;
+
 public class BM1 {
 
     public static void main(String[] args) {
@@ -16,7 +18,11 @@ public class BM1 {
         int m = mainStr.length();
         int n = pattern.length();
         if (m < n) return -1;
-        
+
         return -1;
+    }
+
+    private Map<Character, Integer> genBadCharIndexMap(String pattern) {
+        
     }
 }
