@@ -34,6 +34,6 @@ public class RK1 {
     }
 
     private int calHashCode(String str) {
-        return 0;
+        return str.hashCode(); // O(n)
     }
 }
