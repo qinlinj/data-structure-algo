@@ -37,7 +37,15 @@ public class RK2 {
         return -1;
     }
 
-    private int calFirstSubStrHashCode(String pattern) {
+    private int calFirstSubStrHashCode(String str) { // O(n)
+        int n = str.length();
+
+        int hashCode = 0;
+        for (int i = 0; i < n; i++) {
+            hashCode += (str.charAt(n - i - 1) - 'a');
+        }
+
+        return hashCode;
     }
 
     private int calHashCode(String mainStr, int i, int[] hashCodes, int n) {
