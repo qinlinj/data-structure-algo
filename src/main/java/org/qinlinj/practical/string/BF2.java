@@ -25,7 +25,10 @@ public class BF2 {
             if (i < m) {
                 int k = i + 1;
                 int j = 1;
-                
+                if (j == n) return i;
+                for (; j < n && k < m; j++, k++) {
+
+                }
             }
         }
 
