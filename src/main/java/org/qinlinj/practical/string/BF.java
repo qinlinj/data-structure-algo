@@ -19,7 +19,12 @@ public class BF1 {
         for (int i = 0; i < m; i++) {
             int k = i;
             for (int j = 0; j < n; j++) {
-
+                if (k < m && pattern.charAt(j) == mainStr.charAt(k)) {
+                    k++;
+                    if (j == n - 1) return i;
+                } else {
+                    break;
+                }
             }
         }
 
