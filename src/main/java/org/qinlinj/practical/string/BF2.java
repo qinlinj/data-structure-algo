@@ -15,17 +15,13 @@ public class BF2 {
         int m = mainStr.length();
         int n = pattern.length();
         if (m < n) return -1;
-        
+
+        char first = pattern.charAt(0);
         for (int i = 0; i < m; i++) {
-            int k = i;
-            for (int j = 0; j < n; j++) {
-                if (k < m && pattern.charAt(j) == mainStr.charAt(k)) {
-                    k++;
-                    if (j == n - 1) return i;
-                } else {
-                    break;
-                }
+            if (mainStr.charAt(i) != first) {
+                while (++i < m && mainStr.charAt(i) != first) ;
             }
+
         }
 
         return -1;
