@@ -18,19 +18,17 @@ public class RK2 {
         if (m < n) return -1;
 
         int[] hashCodes = new int[m - n + 1];
-        for (int i = 0; i < m - n + 1; i++) {
+        hashCodes[0] = calFirstSubStrHashCode(mainStr.substring(0, n));
+
+        for (int i = 1; i < m - n + 1; i++) {
             hashCodes[i] = calHashCode(mainStr, i, hashCodes, n);
         }
 
         int hashCode = calFirstSubStrHashCode(pattern);
 
         for (int i = 0; i < m - n + 1; i++) {
-            int k = i;
-            for (int j = 0; j < n && k < m; j++, k++) {
-                if (mainStr.charAt(k) != pattern.charAt(j)) {
-                    break;
-                }
-                if (j == n - 1) return i;
+            if (hashCode == hashCodes[i]) {
+                return i;
             }
         }
 
