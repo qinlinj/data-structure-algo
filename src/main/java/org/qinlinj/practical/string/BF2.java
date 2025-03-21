@@ -22,6 +22,11 @@ public class BF2 {
                 while (++i < m && mainStr.charAt(i) != first) ;
             }
 
+            if (i < m) {
+                int k = i + 1;
+                int j = 1;
+                
+            }
         }
 
         return -1;
