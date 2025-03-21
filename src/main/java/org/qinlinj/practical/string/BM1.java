@@ -45,6 +45,10 @@ public class BM1 {
         char[] patternChars = pattern.toCharArray();
         Map<Character, Integer> bc = new HashMap<>();
 
+        for (int i = 0; i < patternChars.length; i++) {
+            bc.put(patternChars[i], i);
+        }
+        
         return bc;
     }
 }
