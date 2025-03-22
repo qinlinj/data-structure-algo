@@ -1,5 +1,7 @@
 package org.qinlinj.practical.string;
 
+import java.util.*;
+
 public class KMP {
     public static void main(String[] args) {
 
@@ -16,6 +18,12 @@ public class KMP {
     }
 
     private int[] getNext(char[] pattern) { // O(n^3)
+        int n = pattern.length;
+        if (n == 1) return new int[0];
 
+        int[] next = new int[n - 1];
+        Arrays.fill(next, -1);
+
+        return next;
     }
 }
