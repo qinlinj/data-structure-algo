@@ -2,7 +2,7 @@ package org.qinlinj.practical.string;
 
 import java.util.*;
 
-public class KMP {
+public class KMP1 {
     public static void main(String[] args) {
 
     }
