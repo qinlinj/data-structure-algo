@@ -4,7 +4,11 @@ import java.util.*;
 
 public class KMP1 {
     public static void main(String[] args) {
+        KMP1 b = new KMP1();
+        String mainStr = "aaabaaa";
+        String patternStr = "baaa";
 
+        System.out.println(b.indexOf(mainStr, patternStr));
     }
 
     public int indexOf(String mainStr, String pattern) {
