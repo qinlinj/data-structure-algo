@@ -25,6 +25,11 @@ public class KMP1 {
             while (j > 0 && mainStr.charAt(i) != pattern.charAt(j)) {
                 j = next[j - 1] + 1;
             }
+
+            if (mainStr.charAt(i) == pattern.charAt(j)) {
+                j++;
+            }
+            
         }
         return -1;
     }
