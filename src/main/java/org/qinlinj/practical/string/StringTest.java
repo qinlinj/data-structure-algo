@@ -17,5 +17,10 @@ public class StringTest {
         int index2 = mainStr.indexOf(patternStr);
         int index3 = mainStr.indexOf(patternStr);
         int index4 = mainStr.indexOf(patternStr);
+
+        System.out.println("BF res: " + index1);
+        System.out.println("RK res: " + index2);
+        System.out.println("BM res: " + index3);
+        System.out.println("KMP res: " + index4);
     }
 }
