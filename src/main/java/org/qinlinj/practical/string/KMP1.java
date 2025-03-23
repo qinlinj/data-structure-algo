@@ -29,7 +29,7 @@ public class KMP1 {
             if (mainStr.charAt(i) == pattern.charAt(j)) {
                 j++;
             }
-            
+
             if (j == n) {
                 return i - n + 1;
             }
@@ -43,6 +43,10 @@ public class KMP1 {
 
         int[] next = new int[n - 1];
         Arrays.fill(next, -1);
+
+        for (int i = 1; i < n - 1; i++) {
+            String goodPrefix = new String(pattern, 0, i + 1);
+        }
 
         return next;
     }
