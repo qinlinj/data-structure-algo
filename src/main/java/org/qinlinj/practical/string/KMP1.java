@@ -30,6 +30,9 @@ public class KMP1 {
                 j++;
             }
             
+            if (j == n) {
+                return i - n + 1;
+            }
         }
         return -1;
     }
