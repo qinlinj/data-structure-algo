@@ -26,6 +26,11 @@ public class BM2 {
     }
 
     private void genGoodSuffixArr(char[] pattern, int[] suffix, boolean[] prefix) {
+        Arrays.fill(suffix, -1);
+        int n = pattern.length;
+        for (int i = 0; i < n - 1; i++) {
+
+        }
     }
 
     private Map<Character, Integer> genBadCharIndexMap(String pattern) {
