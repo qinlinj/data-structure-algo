@@ -48,7 +48,11 @@ public class KMP1 {
             String goodPrefix = new String(pattern, 0, i + 1);
 
             for (int j = i; j > 0; j--) {
-                
+                String suffix = goodPrefix.substring(j);
+                int k;
+                for (k = 0; k < suffix.length(); k++) {
+                    
+                }
             }
         }
 
