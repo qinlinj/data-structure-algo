@@ -51,7 +51,9 @@ public class KMP1 {
                 String suffix = goodPrefix.substring(j);
                 int k;
                 for (k = 0; k < suffix.length(); k++) {
-                    
+                    if (suffix.charAt(k) != goodPrefix.charAt(k)) {
+                        break;
+                    }
                 }
             }
         }
