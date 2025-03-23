@@ -22,7 +22,9 @@ public class BM2 {
     }
 
     private int calMoveSteps(int y, int n, int[] suffix, boolean[] prefix) {
-        return 0;
+        int k = n - y - 1;
+        
+        return n;
     }
 
     private void genGoodSuffixArr(char[] pattern, int[] suffix, boolean[] prefix) {
