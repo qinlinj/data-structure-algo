@@ -61,7 +61,6 @@ public class KMP1 {
                 }
             }
         }
-
         return next;
     }
 }
