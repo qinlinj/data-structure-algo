@@ -29,7 +29,12 @@ public class BM2 {
         Arrays.fill(suffix, -1);
         int n = pattern.length;
         for (int i = 0; i < n - 1; i++) {
+            int j = i;
+            int k = 0;
+            while (j >= 0 && pattern[j] == pattern[n - 1 - k]) {
 
+            }
+            if (j == -1) prefix[k] = true;
         }
     }
 
