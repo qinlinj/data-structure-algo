@@ -18,6 +18,9 @@ public class KMP1 {
         int n = pattern.length();
         if (m < n) return -1;
 
+        int[] next = getNext(pattern.toCharArray());
+
+
         return -1;
     }
 
