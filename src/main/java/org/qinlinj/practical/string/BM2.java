@@ -32,7 +32,9 @@ public class BM2 {
                 if (mainStr.charAt(i + y) != pattern.charAt(y)) break;
             }
 
-            
+            if (y < 0) {
+                return i;
+            }
         }
         return 0;
     }
