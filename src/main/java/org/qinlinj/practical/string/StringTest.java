@@ -6,6 +6,11 @@ public class StringTest {
         String patternStr = "your";
 
         int index = mainStr.indexOf(patternStr);
-        System.out.println(index);
+        System.out.println("Java indexOf res: " + index);
+        // BF、RK、BM、KMP
+        BF2 bf = new BF2();
+        RK3 rk = new RK3();
+        BM2 bm = new BM2();
+        KMP1 kmp = new KMP1();
     }
 }
