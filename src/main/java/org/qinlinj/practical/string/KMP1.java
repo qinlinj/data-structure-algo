@@ -46,6 +46,10 @@ public class KMP1 {
 
         for (int i = 1; i < n - 1; i++) {
             String goodPrefix = new String(pattern, 0, i + 1);
+
+            for (int j = i; j > 0; j--) {
+                
+            }
         }
 
         return next;
