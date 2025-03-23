@@ -23,7 +23,9 @@ public class BM2 {
 
     private int calMoveSteps(int y, int n, int[] suffix, boolean[] prefix) {
         int k = n - y - 1;
-        
+
+        if (suffix[k] != -1) return y - suffix[k] + 1;
+
         return n;
     }
 
