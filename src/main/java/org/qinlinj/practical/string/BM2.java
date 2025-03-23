@@ -25,7 +25,11 @@ public class BM2 {
         int k = n - y - 1;
 
         if (suffix[k] != -1) return y - suffix[k] + 1;
-
+        for (int i = y + 1; i < n; i++) {
+            if (prefix[n - i]) {
+                return i;
+            }
+        }
         return n;
     }
 
