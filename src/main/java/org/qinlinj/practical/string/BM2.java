@@ -24,6 +24,11 @@ public class BM2 {
         boolean[] prefix = new boolean[n];
         genGoodSuffixArr(pattern.toCharArray(), suffix, prefix);
 
+        int i = 0;
+
+        while (i <= m - n) {
+            
+        }
         return 0;
     }
 
