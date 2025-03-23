@@ -32,7 +32,9 @@ public class BM2 {
             int j = i;
             int k = 0;
             while (j >= 0 && pattern[j] == pattern[n - 1 - k]) {
-
+                k++;
+                suffix[k] = j;
+                j--;
             }
             if (j == -1) prefix[k] = true;
         }
