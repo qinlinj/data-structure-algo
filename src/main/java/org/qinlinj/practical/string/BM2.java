@@ -20,6 +20,10 @@ public class BM2 {
 
         Map<Character, Integer> bc = genBadCharIndexMap(pattern);
 
+        int[] suffix = new int[n];
+        boolean[] prefix = new boolean[n];
+        genGoodSuffixArr(pattern.toCharArray(), suffix, prefix);
+
         return 0;
     }
 
