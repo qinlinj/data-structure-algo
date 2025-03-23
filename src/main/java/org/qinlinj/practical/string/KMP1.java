@@ -20,7 +20,10 @@ public class KMP1 {
 
         int[] next = getNext(pattern.toCharArray());
 
-
+        int j = 0;
+        for (int i = 0; i < m; i++) {
+            
+        }
         return -1;
     }
 
