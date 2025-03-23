@@ -39,6 +39,11 @@ public class BM2 {
             char badChar = mainStr.charAt(i + y);
             int x = bc.getOrDefault(badChar, -1);
             int badCharMoveSteps = y - x;
+
+            int goodSuffixMoveSteps = 0;
+            if (y < n - 1) {
+                goodSuffixMoveSteps = calMoveSteps(y, n, suffix, prefix);
+            }
         }
         return 0;
     }
