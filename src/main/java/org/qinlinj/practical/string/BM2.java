@@ -44,8 +44,10 @@ public class BM2 {
             if (y < n - 1) {
                 goodSuffixMoveSteps = calMoveSteps(y, n, suffix, prefix);
             }
+
+            i = i + Math.max(badCharMoveSteps, goodSuffixMoveSteps);
         }
-        return 0;
+        return -1;
     }
 
     private int calMoveSteps(int y, int n, int[] suffix, boolean[] prefix) {
