@@ -35,6 +35,10 @@ public class BM2 {
             if (y < 0) {
                 return i;
             }
+
+            char badChar = mainStr.charAt(i + y);
+            int x = bc.getOrDefault(badChar, -1);
+            int badCharMoveSteps = y - x;
         }
         return 0;
     }
