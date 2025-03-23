@@ -27,6 +27,11 @@ public class BM2 {
         int i = 0;
 
         while (i <= m - n) {
+            int y;
+            for (y = n - 1; y >= 0; y--) {
+                if (mainStr.charAt(i + y) != pattern.charAt(y)) break;
+            }
+
             
         }
         return 0;
