@@ -55,6 +55,10 @@ public class KMP1 {
                         break;
                     }
                 }
+
+                if (k == suffix.length()) {
+                    next[i] = Math.max(k - 1, next[i]);
+                }
             }
         }
 
