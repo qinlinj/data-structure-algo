@@ -18,6 +18,8 @@ public class BM2 {
         int n = pattern.length();
         if (m < n) return -1;
 
+        Map<Character, Integer> bc = genBadCharIndexMap(pattern);
+
         return 0;
     }
 
