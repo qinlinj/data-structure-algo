@@ -34,6 +34,12 @@ public class KMP2 {
         if (n == 1) return new int[0];
         int[] next = new int[n - 1];
 
+        next[0] = -1;
+
+        for (int j = 1; j < n - 1; j++) {
+
+        }
+
         return next;
     }
 }
