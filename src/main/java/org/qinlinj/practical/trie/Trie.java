@@ -9,6 +9,17 @@ public class Trie {
         this.root = new Node();
     }
 
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+        trie.add("big");
+        trie.add("pat");
+        trie.add("bigger");
+        trie.add("dog");
+        trie.add("door");
+
+        System.out.println(trie.contains("dogddd"));
+    }
+
     public void add(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
