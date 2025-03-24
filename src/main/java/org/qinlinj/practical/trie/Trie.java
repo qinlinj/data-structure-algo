@@ -23,7 +23,10 @@ public class Trie {
     public boolean contains(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) { // O(n)
-
+            if (!curr.children.containsKey(c)) {
+                return false;
+            }
+            curr = curr.children.get(c);
         }
         return curr.isWord;
     }
