@@ -27,6 +27,14 @@ public class KMP3 {
         return -1;
     }
 
-    private int[] getNext(char[] charArray) {
+    private int[] getNext(char[] pattern) {
+        int n = pattern.length;
+        if (n == 1) return new int[0];
+
+        int[] next = new int[n - 1];
+
+        next[0] = -1;
+
+        return next;
     }
 }
