@@ -16,6 +16,13 @@ public class KMP3 {
                 j = next[j - 1] + 1;
             }
 
+            if (mainStr.charAt(i) == pattern.charAt(j)) {
+                j++;
+            }
+
+            if (j == n) {
+                return i - n + 1;
+            }
         }
         return -1;
     }
