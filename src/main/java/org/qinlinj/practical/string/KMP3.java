@@ -1,6 +1,14 @@
 package org.qinlinj.practical.string;
 
 public class KMP3 {
+    public static void main(String[] args) {
+        KMP3 b = new KMP3();
+        String mainStr = "aaabaaa";
+        String patternStr = "baaa";
+
+        System.out.println(b.indexOf(mainStr, patternStr));
+    }
+
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
