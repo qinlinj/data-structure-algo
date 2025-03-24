@@ -39,6 +39,9 @@ public class KMP2 {
         for (int j = 1; j < n - 1; j++) {
             if (pattern[next[j - 1] + 1] == pattern[j]) {
                 next[j] = next[j - 1] + 1;
+            } else {
+                int pre = next[j - 1];
+                
             }
         }
 
