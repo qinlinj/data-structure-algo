@@ -41,7 +41,10 @@ public class KMP2 {
                 next[j] = next[j - 1] + 1;
             } else {
                 int pre = next[j - 1];
-                
+
+                while (pre >= 0 && pattern[pre + 1] != pattern[j]) {
+                    pre = next[pre];
+                }
             }
         }
 
