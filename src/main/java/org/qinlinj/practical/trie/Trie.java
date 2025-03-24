@@ -9,6 +9,14 @@ public class Trie {
         this.root = new Node();
     }
 
+    public void add(String word) {
+
+    }
+
+    public boolean contains(String word) {
+        
+    }
+
     private class Node {
         Map<Character, Node> children;
         boolean isWord;
