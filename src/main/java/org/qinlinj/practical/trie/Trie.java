@@ -23,8 +23,9 @@ public class Trie {
     public boolean contains(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) { // O(n)
-            
+
         }
+        return curr.isWord;
     }
 
     private class Node {
