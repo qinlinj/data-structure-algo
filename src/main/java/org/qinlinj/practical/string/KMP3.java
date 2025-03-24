@@ -11,6 +11,12 @@ public class KMP3 {
         int[] next = getNext(pattern.toCharArray());
 
         int j = 0;
+        for (int i = 0; i < m; i++) {
+            while (j > 0 && mainStr.charAt(i) != pattern.charAt(j)) {
+                j = next[j - 1] + 1;
+            }
+
+        }
         return -1;
     }
 
