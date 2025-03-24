@@ -45,6 +45,12 @@ public class KMP2 {
                 while (pre >= 0 && pattern[pre + 1] != pattern[j]) {
                     pre = next[pre];
                 }
+
+                if (pattern[pre + 1] == pattern[j]) {
+                    next[j] = pre + 1;
+                } else {
+                    next[j] = pre;
+                }
             }
         }
 
