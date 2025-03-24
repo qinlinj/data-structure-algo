@@ -8,6 +8,12 @@ public class KMP3 {
         int n = pattern.length();
         if (m < n) return -1;
 
+        int[] next = getNext(pattern.toCharArray());
+
+        int j = 0;
         return -1;
+    }
+
+    private int[] getNext(char[] charArray) {
     }
 }
