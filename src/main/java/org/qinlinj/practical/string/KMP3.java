@@ -38,8 +38,12 @@ public class KMP3 {
         for (int j = 1; j < n - 1; j++) {
             int pre = next[j - 1];
             while (pre != -1 && pattern[pre + 1] != pattern[j]) {
-                
+                pre = next[pre];
             }
+            if (pattern[pre + 1] == pattern[j]) {
+                pre++;
+            }
+            next[j] = pre;
         }
 
         return next;
