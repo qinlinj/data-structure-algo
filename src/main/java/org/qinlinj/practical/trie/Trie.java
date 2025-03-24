@@ -10,11 +10,14 @@ public class Trie {
     }
 
     public void add(String word) {
+        Node curr = root;
+        for (Character c : word.toCharArray()) {
 
+        }
     }
 
     public boolean contains(String word) {
-        
+        Node curr = root;
     }
 
     private class Node {
