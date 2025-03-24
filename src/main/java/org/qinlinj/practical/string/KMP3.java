@@ -35,6 +35,11 @@ public class KMP3 {
 
         next[0] = -1;
 
+        for (int j = 1; j < n - 1; j++) {
+            int pre = next[j - 1];
+
+        }
+
         return next;
     }
 }
