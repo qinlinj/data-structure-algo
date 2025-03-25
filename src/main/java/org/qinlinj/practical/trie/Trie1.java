@@ -10,7 +10,14 @@ public class Trie1 {
     }
 
     public static void main(String[] args) {
+        Trie trie = new Trie();
+        trie.add("big");
+        trie.add("pat");
+        trie.add("bigger");
+        trie.add("dog");
+        trie.add("door");
 
+        System.out.println(trie.contains("biggere"));
     }
 
     public void add(String word) {
