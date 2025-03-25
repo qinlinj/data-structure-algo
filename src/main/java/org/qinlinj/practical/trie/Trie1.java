@@ -35,6 +35,7 @@ public class Trie1 {
     public boolean contains(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
+            int index = containsChar(curr.children, c);
 
         }
         return curr.isWord;
