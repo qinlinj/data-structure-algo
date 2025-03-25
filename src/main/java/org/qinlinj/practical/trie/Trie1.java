@@ -14,7 +14,8 @@ public class Trie1 {
         for (Character c : word.toCharArray()) {
             int index = containsChar(curr.children, c);
             if (index == -1) {
-
+                curr.children.add(new Node(c));
+                index = curr.children.size() - 1;
             }
             curr = curr.children.get(index);
         }
