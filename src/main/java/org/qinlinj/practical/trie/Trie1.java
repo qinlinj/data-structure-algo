@@ -12,7 +12,11 @@ public class Trie1 {
     public void add(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
+            int index = containsChar(curr.children, c);
+            if (index == -1) {
 
+            }
+            curr = curr.children.get(index);
         }
 
         curr.isWord = true;
