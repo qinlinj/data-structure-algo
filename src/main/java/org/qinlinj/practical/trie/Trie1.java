@@ -9,6 +9,10 @@ public class Trie1 {
         this.root = new Node('/');
     }
 
+    public static void main(String[] args) {
+
+    }
+
     public void add(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
