@@ -25,7 +25,9 @@ public class Trie1 {
 
     private int containsChar(List<Node> children, Character c) {
         for (int i = 0; i < children.size(); i++) {
-
+            if (children.get(i).c == c) {
+                return i;
+            }
         }
         return -1;
     }
