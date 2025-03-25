@@ -9,6 +9,18 @@ public class Trie1 {
         this.root = new Node('/');
     }
 
+    public void add(String word) {
+
+    }
+
+    private int containsChar(List<Node> children, Character c) {
+        return 0;
+    }
+
+    public boolean contains(String word) {
+        return false;
+    }
+
     private class Node {
         List<Node> children;
         boolean isWord;
