@@ -10,7 +10,12 @@ public class Trie1 {
     }
 
     public void add(String word) {
+        Node curr = root;
+        for (Character c : word.toCharArray()) {
 
+        }
+
+        curr.isWord = true;
     }
 
     private int containsChar(List<Node> children, Character c) {
