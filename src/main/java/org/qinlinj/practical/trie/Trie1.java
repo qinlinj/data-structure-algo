@@ -33,7 +33,11 @@ public class Trie1 {
     }
 
     public boolean contains(String word) {
-        return false;
+        Node curr = root;
+        for (Character c : word.toCharArray()) {
+
+        }
+        return curr.isWord;
     }
 
     private class Node {
