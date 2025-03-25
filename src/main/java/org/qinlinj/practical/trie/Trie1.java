@@ -7,6 +7,11 @@ public class Trie1 {
         List<Node> children;
         boolean isWord;
         private Character c;
-        
+
+        public Node(Character c) {
+            this.c = c;
+            this.children = new ArrayList<>();
+            this.isWord = false;
+        }
     }
 }
