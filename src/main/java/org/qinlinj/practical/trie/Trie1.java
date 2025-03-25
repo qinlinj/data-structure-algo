@@ -24,7 +24,10 @@ public class Trie1 {
     }
 
     private int containsChar(List<Node> children, Character c) {
-        return 0;
+        for (int i = 0; i < children.size(); i++) {
+
+        }
+        return -1;
     }
 
     public boolean contains(String word) {
