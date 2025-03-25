@@ -36,7 +36,10 @@ public class Trie1 {
         Node curr = root;
         for (Character c : word.toCharArray()) {
             int index = containsChar(curr.children, c);
-
+            if (index == -1) {
+                return false;
+            }
+            curr = curr.children.get(index);
         }
         return curr.isWord;
     }
