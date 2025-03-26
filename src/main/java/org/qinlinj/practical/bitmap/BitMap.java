@@ -17,6 +17,9 @@ public class BitMap {
     }
 
     public boolean contains(int target) {
-
+        if (target > nBits) return false;
+        int byteIndex = target / 8;
+        int bitIndex = target % 8;
+        return ((1 << bitIndex) & bytes[byteIndex]) != 0;
     }
 }
