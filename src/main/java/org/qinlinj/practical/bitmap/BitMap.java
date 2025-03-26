@@ -8,4 +8,12 @@ public class BitMap {
         this.nBits = nBits;
         this.bytes = new byte[nBits / 8 + 1];
     }
+
+    public void set(int num) {
+
+    }
+
+    public boolean contains(int target) {
+
+    }
 }
