@@ -25,6 +25,14 @@ public class BitMap1 {
     }
 
     public boolean contains(int target) {
+        /*
+            contains 4
+            00000001 << 4
+            00010000
+          & 10101100
+          = 00000000
+         */
+        // 10101100
         return ((1 << target) & b) != 0;
     }
 }
