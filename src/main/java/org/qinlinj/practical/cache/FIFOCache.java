@@ -8,13 +8,14 @@ public class FIFOCache<K, V> implements Cache<K, V> {
     private int capacity;
 
     public FIFOCache(int capacity) {
-
+        cache = new HashMap<>(capacity);
+        queue = new ArrayDeque<>(capacity);
         this.capacity = capacity;
     }
 
     @Override
     public V get(K key) {
-        return null;
+        return cache.get(key);
     }
 
     @Override
