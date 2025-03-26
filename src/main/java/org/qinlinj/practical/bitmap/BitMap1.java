@@ -6,4 +6,8 @@ public class BitMap1 {
     public BitMap1() {
         b = 0;
     }
+
+    public void set(int num) {
+        b |= (1 << num);
+    }
 }
