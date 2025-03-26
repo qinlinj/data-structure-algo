@@ -11,7 +11,7 @@ public class LocalCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key) {
-        return null;
+        return cache.get(key);
     }
 
     @Override
