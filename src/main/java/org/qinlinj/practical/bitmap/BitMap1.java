@@ -35,4 +35,11 @@ public class BitMap1 {
         // 10101100
         return ((1 << target) & b) != 0;
     }
+
+    @Override
+    public String toString() {
+        return "BitMap{" +
+                "b=" + Integer.toBinaryString(b).substring(24) +
+                '}';
+    }
 }
