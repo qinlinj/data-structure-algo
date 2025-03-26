@@ -12,7 +12,7 @@ public class BitMapTest {
         }
 
         int target = data[8888];
-    }
+
        /* // 1. HashMap
         Set<Integer> set = new HashSet<>(); // 10_000_000 * 4 / 0.75 = 51 MB
         for (int i = 0; i < data.length; i++) {
@@ -30,4 +30,14 @@ public class BitMapTest {
         if (arr[target]) { // O(1)
             System.out.println("" + target);
         }*/
+
+        // 20 MB --> BitMap
+        BitMap bitMap = new BitMap(100_000_000); // 100_000_000 bit = 12MB
+        for (int i = 0; i < data.length; i++) {
+            bitMap.set(data[i]);
+        }
+        if (bitMap.contains(target)) { // O(1)
+            System.out.println("" + target);
+        }
+    }
 }
