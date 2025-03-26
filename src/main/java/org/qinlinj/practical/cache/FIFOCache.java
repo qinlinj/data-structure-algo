@@ -22,7 +22,11 @@ public class FIFOCache<K, V> implements Cache<K, V> {
     public void put(K key, V value) {
         V oldValue = cache.get(key);
         if (oldValue == null) {
-
+            if (cache.size() == capacity) {
+                K oldKey = queue.poll();
+                cache.remove(oldKey);
+            }
+            queue.offer(key);
         }
         cache.put(key, value);
     }
