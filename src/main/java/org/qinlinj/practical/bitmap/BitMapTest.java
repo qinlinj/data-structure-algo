@@ -13,5 +13,21 @@ public class BitMapTest {
 
         int target = data[8888];
     }
+       /* // 1. HashMap
+        Set<Integer> set = new HashSet<>(); // 10_000_000 * 4 / 0.75 = 51 MB
+        for (int i = 0; i < data.length; i++) {
+            set.add(data[i]);
+        }
+        if (set.contains(target)) { // O(1)
+            System.out.println("" + target);
+        }
 
+        // 2. boolean Array
+        boolean[] arr = new boolean[100_000_000]; // 100_000_000 byte = 95 MB
+        for (int i = 0; i < data.length; i++) {
+            arr[data[i]] = true;
+        }
+        if (arr[target]) { // O(1)
+            System.out.println("" + target);
+        }*/
 }
