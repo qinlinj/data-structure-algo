@@ -1,4 +1,5 @@
 package org.qinlinj.practical.cache;
 
-public class Cache {
+public interface Cache<K, V> {
+
 }
