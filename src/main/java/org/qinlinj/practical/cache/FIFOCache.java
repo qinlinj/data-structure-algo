@@ -13,6 +13,10 @@ public class FIFOCache<K, V> implements Cache<K, V> {
         this.capacity = capacity;
     }
 
+    public static void main(String[] args) {
+        FIFOCache<Integer, Integer> cache = new FIFOCache<>(3);
+    }
+
     @Override
     public V get(K key) {
         return cache.get(key);
