@@ -9,6 +9,13 @@ public class BitMap {
         this.bytes = new byte[nBits / 8 + 1];
     }
 
+    public static void main(String[] args) {
+        int[] data = new int[]{2, 7, 2, 5, 3};
+        int target = 2;
+
+
+    }
+
     public void set(int num) {
         if (num > nBits) return;
         int byteIndex = num / 8;
