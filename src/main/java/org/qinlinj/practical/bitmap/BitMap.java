@@ -13,7 +13,16 @@ public class BitMap {
         int[] data = new int[]{2, 7, 2, 5, 3};
         int target = 2;
 
+        BitMap bitMap1 = new BitMap(8);
+        for (int i = 0; i < data.length; i++) {
+            bitMap1.set(data[i]);
+        }
 
+        System.out.println(bitMap1);
+
+        if (bitMap1.contains(target)) {
+            System.out.println("There is a target value: " + target);
+        }
     }
 
     public void set(int num) {
