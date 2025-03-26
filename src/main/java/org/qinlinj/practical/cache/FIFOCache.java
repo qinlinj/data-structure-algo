@@ -1,4 +1,13 @@
 package org.qinlinj.practical.cache;
 
-public class FIFOCache {
+public class FIFOCache<K, V> implements Cache<K, V> {
+    @Override
+    public V get(K key) {
+        return null;
+    }
+
+    @Override
+    public void put(K key, V value) {
+
+    }
 }
