@@ -23,4 +23,8 @@ public class BitMap1 {
          */
         b |= (1 << num);
     }
+
+    public boolean contains(int target) {
+        return ((1 << target) & b) != 0;
+    }
 }
