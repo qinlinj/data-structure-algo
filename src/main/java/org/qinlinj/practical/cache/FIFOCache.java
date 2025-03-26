@@ -20,6 +20,10 @@ public class FIFOCache<K, V> implements Cache<K, V> {
 
     @Override
     public void put(K key, V value) {
+        V oldValue = cache.get(key);
+        if (oldValue == null) {
 
+        }
+        cache.put(key, value);
     }
 }
