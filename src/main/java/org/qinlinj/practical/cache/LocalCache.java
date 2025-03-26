@@ -16,6 +16,6 @@ public class LocalCache<K, V> implements Cache<K, V> {
 
     @Override
     public void put(K key, V value) {
-
+        cache.put(key, value);
     }
 }
