@@ -15,6 +15,15 @@ public class FIFOCache<K, V> implements Cache<K, V> {
 
     public static void main(String[] args) {
         FIFOCache<Integer, Integer> cache = new FIFOCache<>(3);
+        cache.put(1, 1);
+        cache.put(2, 2);
+        cache.put(3, 3);
+        cache.put(4, 4);
+        System.out.println(cache.get(3));
+        cache.put(4, 5);
+        System.out.println(cache.get(4));
+        cache.put(5, 6);
+        System.out.println(cache.get(2));
     }
 
     @Override
