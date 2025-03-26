@@ -10,7 +10,10 @@ public class BitMap {
     }
 
     public void set(int num) {
-
+        if (num > nBits) return;
+        int byteIndex = num / 8;
+        int bitIndex = num % 8;
+        bytes[byteIndex] |= (1 << bitIndex);
     }
 
     public boolean contains(int target) {
