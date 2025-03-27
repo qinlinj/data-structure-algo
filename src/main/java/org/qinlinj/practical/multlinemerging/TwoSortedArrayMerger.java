@@ -6,7 +6,9 @@ public class TwoSortedArrayMerger {
         int[] res = new int[m + n];
         int i = 0, j = 0;
         int index = 0;
+        for (int k = 0; k < res.length; k++) {
 
+        }
         return res;
     }
 
