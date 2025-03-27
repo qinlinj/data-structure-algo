@@ -36,7 +36,7 @@ public class KSortedArrayMerger {
 
             if (valueIndex == data.get(whichArray).length) continue;
 
-
+            minHeap.add(new int[]{data.get(whichArray)[valueIndex], whichArray, valueIndex});
         }
         return res;
 
