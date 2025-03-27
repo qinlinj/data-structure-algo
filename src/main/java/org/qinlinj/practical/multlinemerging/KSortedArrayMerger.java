@@ -18,6 +18,11 @@ public class KSortedArrayMerger {
             }
         });
 
+        for (int i = 0; i < k; i++) {
+            if (data.get(i).length == 0) continue;
+            minHeap.add(new int[]{data.get(i)[0], i, 0});
+        }
+        
         return res;
 
     }
