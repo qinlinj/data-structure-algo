@@ -1,6 +1,15 @@
 package org.qinlinj.practical.multlinemerging;
 
+import java.util.*;
+
 public class TwoSortedArrayMerger {
+    public static void main(String[] args) {
+        int[] a = {1, 2, 6, 9, 10};
+        int[] b = {2, 3, 7, 11};
+        int[] res = new TwoSortedArrayMerger().mergeTwoSortedArray(a, b);
+        System.out.println(Arrays.toString(res));
+    }
+
     public int[] mergeTwoSortedArray(int[] a, int[] b) {
         int m = a.length, n = b.length;
         int[] res = new int[m + n];
@@ -19,5 +28,4 @@ public class TwoSortedArrayMerger {
         }
         return res;
     }
-
 }
