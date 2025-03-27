@@ -34,8 +34,12 @@ public class FileIOUtils {
     }
 
     public static void closeWriter(Writer writer) {
-
-
+        try {
+            if (writer != null) {
+                writer.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("IOException", e);
+        }
     }
-
 }
