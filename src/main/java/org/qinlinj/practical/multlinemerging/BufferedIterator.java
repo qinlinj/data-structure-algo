@@ -1,6 +1,7 @@
 package org.qinlinj.practical.multlinemerging;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public class BufferedIterator {
     private BufferedReader reader;
@@ -13,8 +14,17 @@ public class BufferedIterator {
     public String next() {
         return head;
     }
-    
+
     public void close() throws Exception {
         this.reader.close();
+    }
+
+    public boolean hasNext() {
+        try {
+            head = this.reader.readLine();
+        } catch (IOException e) {
+            ;
+        }
+        return head != null;
     }
 }
