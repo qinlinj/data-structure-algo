@@ -9,4 +9,8 @@ public class BufferedIterator {
     BufferedIterator(BufferedReader reader) {
         this.reader = reader;
     }
+
+    public String next() {
+        return head;
+    }
 }
