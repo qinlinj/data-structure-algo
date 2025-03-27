@@ -22,10 +22,13 @@ public class KSortedArrayMerger {
             if (data.get(i).length == 0) continue;
             minHeap.add(new int[]{data.get(i)[0], i, 0});
         }
-        
+
         int index = 0;
         while (!minHeap.isEmpty()) {
-
+            int[] record = minHeap.poll();
+            int value = record[0];
+            int whichArray = record[1];
+            int valueIndex = record[2];
         }
         return res;
 
