@@ -23,6 +23,10 @@ public class KSortedArrayMerger {
             minHeap.add(new int[]{data.get(i)[0], i, 0});
         }
         
+        int index = 0;
+        while (!minHeap.isEmpty()) {
+
+        }
         return res;
 
     }
