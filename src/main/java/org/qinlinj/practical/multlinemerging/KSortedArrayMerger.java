@@ -29,6 +29,11 @@ public class KSortedArrayMerger {
             int value = record[0];
             int whichArray = record[1];
             int valueIndex = record[2];
+
+            res[index++] = value;
+            
+            valueIndex++;
+
         }
         return res;
 
