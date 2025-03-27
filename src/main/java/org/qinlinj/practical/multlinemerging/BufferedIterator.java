@@ -13,4 +13,8 @@ public class BufferedIterator {
     public String next() {
         return head;
     }
+    
+    public void close() throws Exception {
+        this.reader.close();
+    }
 }
