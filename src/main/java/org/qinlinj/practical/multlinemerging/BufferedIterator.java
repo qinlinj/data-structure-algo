@@ -23,7 +23,8 @@ public class BufferedIterator {
         try {
             head = this.reader.readLine();
         } catch (IOException e) {
-            ;
+            e.printStackTrace();
+            head = null;
         }
         return head != null;
     }
