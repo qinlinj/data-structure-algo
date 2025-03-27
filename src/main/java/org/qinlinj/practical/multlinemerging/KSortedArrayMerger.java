@@ -8,6 +8,15 @@ public class KSortedArrayMerger {
         int[] b = {2, 3, 7, 11};
         int[] c = {4, 8, 9, 13};
         int[] d = {5};
+
+        List<int[]> data = new ArrayList<>();
+        data.add(a);
+        data.add(b);
+        data.add(c);
+        data.add(d);
+
+        int[] res = new KSortedArrayMerger().mergeKSortedArray(data, 4);
+        System.out.println(Arrays.toString(res));
     }
 
     public int[] mergeKSortedArray(List<int[]> data, int k) {
