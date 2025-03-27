@@ -8,5 +8,11 @@ public class KSortedArrayMerger {
         for (int i = 0; i < k; i++) {
             len += data.get(i).length;
         }
+
+        int[] res = new int[len];
+
+        
+        return res;
+
     }
 }
