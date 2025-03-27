@@ -14,7 +14,13 @@ public class FileIOUtils {
     }
 
     public static BufferedWriter getWriter(String name) {
-
+        try {
+            FileOutputStream outputStream = new FileOutputStream(name);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+            return bw;
+        } catch (IOException e) {
+            throw new RuntimeException("IOException", e);
+        }
     }
 
     public static void closeReader(Reader reader) {
