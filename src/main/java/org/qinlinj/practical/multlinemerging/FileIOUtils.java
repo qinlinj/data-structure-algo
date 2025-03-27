@@ -1,13 +1,16 @@
 package org.qinlinj.practical.multlinemerging;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 
 public class FileIOUtils {
     public static BufferedReader getReader(String name) {
-
+        try {
+            FileInputStream inputStream = new FileInputStream(name);
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            return br;
+        } catch (IOException e) {
+            throw new RuntimeException("IOException", e);
+        }
     }
 
     public static BufferedWriter getWriter(String name) {
