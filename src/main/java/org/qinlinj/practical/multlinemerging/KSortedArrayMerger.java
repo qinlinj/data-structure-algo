@@ -31,8 +31,11 @@ public class KSortedArrayMerger {
             int valueIndex = record[2];
 
             res[index++] = value;
-            
+
             valueIndex++;
+
+            if (valueIndex == data.get(whichArray).length) continue;
+
 
         }
         return res;
