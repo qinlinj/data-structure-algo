@@ -3,6 +3,13 @@ package org.qinlinj.practical.multlinemerging;
 import java.util.*;
 
 public class KSortedArrayMerger {
+    public static void main(String[] args) {
+        int[] a = {1, 2, 6, 9, 10};
+        int[] b = {2, 3, 7, 11};
+        int[] c = {4, 8, 9, 13};
+        int[] d = {5};
+    }
+
     public int[] mergeKSortedArray(List<int[]> data, int k) {
         int len = 0;
         for (int i = 0; i < k; i++) {
@@ -39,6 +46,5 @@ public class KSortedArrayMerger {
             minHeap.add(new int[]{data.get(whichArray)[valueIndex], whichArray, valueIndex});
         }
         return res;
-
     }
 }
