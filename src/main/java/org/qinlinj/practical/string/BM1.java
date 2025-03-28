@@ -67,6 +67,56 @@ public class BM1 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of a pattern in a main string using the Boyer-Moore algorithm
+     * with the Bad Character rule.
+     *
+     * Algorithm steps:
+     * 1. Generate a bad character map from the pattern
+     * 2. Align pattern at the beginning of the text
+     * 3. Compare characters from right to left
+     * 4. If mismatch occurs:
+     *    a. Look up the bad character in the map
+     *    b. Calculate shift distance using bad character rule
+     *    c. Shift pattern accordingly
+     * 5. If all characters match, return the current position
+     *
+     * Visualization for mainStr="aaabaaabaaabaaaa", pattern="aba":
+     *
+     * Bad Character Map: {'a': 0, 'b': 1}
+     *
+     * i=0: "aaabaaabaaabaaaa"
+     *       "aba"
+     *         ^ Start comparing from right
+     *     'a' in text matches 'a' in pattern ✓
+     *     'a' in text doesn't match 'b' in pattern ✗
+     *     Bad character is 'a', found at position 0 in pattern
+     *     Shift = max(1, (1-0)) = 1
+     *
+     * i=1: "aaabaaabaaabaaaa"
+     *        "aba"
+     *          ^ Start comparing from right
+     *     'b' in text doesn't match 'a' in pattern ✗
+     *     Bad character is 'b', found at position 1 in pattern
+     *     Shift = max(1, (2-1)) = 1
+     *
+     * i=2: "aaabaaabaaabaaaa"
+     *         "aba"
+     *           ^ Start comparing from right
+     *     'a' in text matches 'a' in pattern ✓
+     *     'b' in text matches 'b' in pattern ✓
+     *     'a' in text matches 'a' in pattern ✓
+     *     All characters match! Return i=2
+     *
+     * Time Complexity:
+     * - Worst case: O(m*n) when pattern consists of repeating characters
+     * - Average case: O(m/n) which is sublinear
+     * - Preprocessing: O(n) to build the bad character map
+     *
+     * @param mainStr The main string to search in
+     * @param pattern The pattern to search for
+     * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     private int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
