@@ -34,7 +34,15 @@ public class UndergroundSystem {
         startInfo.put(id, new Start(stationName, t));
     }
 
-
+    /**
+     * Records a passenger check-out event and updates travel statistics.
+     * Calculates the travel time between check-in and check-out stations and updates
+     * the cumulative statistics for this station pair.
+     *
+     * @param id          The passenger's unique identifier
+     * @param stationName The name of the station where check-out occurs
+     * @param t           The time when the check-out occurs
+     */
     public void checkOut(int id, String stationName, int t) {
         Start start = startInfo.get(id);
 
