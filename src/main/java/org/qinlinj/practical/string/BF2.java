@@ -63,6 +63,61 @@ public class BF2 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of a pattern in a main string using an Optimized Brute Force approach
+     *
+     * Algorithm steps:
+     * 1. Get the first character of the pattern
+     * 2. Scan the main string for this first character, skipping non-matching positions
+     * 3. When the first character is found, check if the remaining characters match
+     * 4. If all characters match, return the starting position
+     * 5. If not, continue scanning from the next position
+     *
+     * Visualization for mainStr="this is your code", pattern="your":
+     *
+     * First, we look for 'y' (first character of pattern):
+     * "this is your code"
+     *  ^ ^ ^ ^ ^ ^ ^ ^
+     * Checking... No 'y' until position 8
+     *
+     * At position 8:
+     * "this is your code"
+     *          ^
+     * "your"
+     *  ^
+     * 'y' == 'y' ✓, proceed to check remaining characters
+     *
+     * Check subsequent characters:
+     * "this is your code"
+     *           ^
+     * "your"
+     *   ^
+     * 'o' == 'o' ✓
+     *
+     * "this is your code"
+     *            ^
+     * "your"
+     *    ^
+     * 'u' == 'u' ✓
+     *
+     * "this is your code"
+     *             ^
+     * "your"
+     *     ^
+     * 'r' == 'r' ✓
+     *
+     * All characters match! Return i=8
+     *
+     * Time Complexity:
+     * - Worst case: O(m*n) when the pattern almost matches but fails at the last character,
+     *   or when all characters in the main string match the first character of the pattern
+     * - Average case: Better than standard BF due to skipping non-matching positions
+     * - Best case: O(m) when the first character of pattern rarely appears in the main string
+     *
+     * @param mainStr The main string to search in
+     * @param pattern The pattern to search for
+     * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
