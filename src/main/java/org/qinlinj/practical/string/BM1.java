@@ -1,6 +1,7 @@
 package org.qinlinj.practical.string;
 
 import java.util.*;
+
 // @formatter:off
 /**
  * Boyer-Moore String Matching Algorithm Implementation (Bad Character Rule)
@@ -59,6 +60,13 @@ import java.util.*;
  */
 public class BM1 {
 
+    /**
+     * Main method to demonstrate the Boyer-Moore string matching algorithm
+     *
+     * Time Complexity: Average case O(m/n) where m is the length of mainStr and n is the length of patternStr
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         BM1 b = new BM1();
         String mainStr = "aaabaaabaaabaaaa";
@@ -118,31 +126,48 @@ public class BM1 {
      * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
     private int indexOf(String mainStr, String pattern) {
+        // Check for null inputs
         if (mainStr == null || pattern == null) return -1;
 
         int m = mainStr.length();
         int n = pattern.length();
+
+        // Pattern can't be longer than the main string
         if (m < n) return -1;
 
+        // Generate the bad character index map for pattern
         Map<Character, Integer> bc = genBadCharIndexMap(pattern);
-        int i = 0;
+        int i = 0;  // Current position in the main string
 
+        // Continue searching until the end of potential matching positions
         while (i <= m - n) {
             int y;
+
+            // Compare characters from right to left
             for (y = n - 1; y >= 0; y--) {
                 if (mainStr.charAt(i + y) != pattern.charAt(y)) break;
             }
 
+            // If y < 0, all characters matched
             if (y < 0) {
-                return i;
+                return i;  // Match found at position i
             }
 
+            // Get the mismatched character (bad character) from the main string
             char badChar = mainStr.charAt(i + y);
+
+            // Look up the rightmost position of this character in the pattern
+            // If it doesn't exist in the pattern, use -1
             int x = bc.getOrDefault(badChar, -1);
 
+            // Calculate shift distance using bad character rule:
+            // Shift the pattern so that the bad character in the text aligns with
+            // its rightmost occurrence in the pattern (if it exists)
+            // Ensure we always move forward by at least 1 position
             i = i + Math.max(1, (y - x));
         }
 
+        // Pattern not found
         return -1;
     }
 
@@ -166,6 +191,8 @@ public class BM1 {
         char[] patternChars = pattern.toCharArray();
         Map<Character, Integer> bc = new HashMap<>();
 
+        // For each character in the pattern, store its position
+        // If a character appears multiple times, its last position will be stored
         for (int i = 0; i < patternChars.length; i++) {
             bc.put(patternChars[i], i);
         }
