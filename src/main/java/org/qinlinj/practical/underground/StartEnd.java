@@ -17,6 +17,12 @@ public class StartEnd {
      */
     private String end;
 
+    /**
+     * Constructs a new StartEnd object with specified starting and ending stations.
+     *
+     * @param start The name of the starting station
+     * @param end   The name of the ending station
+     */
     public StartEnd(String start, String end) {
         this.start = start;
         this.end = end;
