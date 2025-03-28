@@ -1,5 +1,9 @@
 package org.qinlinj.practical.underground;
 
+/**
+ * Represents a data structure that tracks both a sum and a count (amount).
+ * This class can be used for calculating averages or tracking cumulative values.
+ */
 public class SumAmount {
     private int sum;
     private int amount;
