@@ -59,7 +59,6 @@ public class UndergroundSystem {
      * - HashMap getOrDefault: O(1)
      * - Setting values and calculations: O(1)
      * - HashMap put: O(1)
-     * <p>
      * Time Complexity: O(1)
      *
      * @param id          The passenger's unique identifier
@@ -79,6 +78,12 @@ public class UndergroundSystem {
 
     /**
      * Calculates the average travel time between two stations.
+     * Calculates the average travel time.
+     * Operations:
+     * - Creating StartEnd object: O(1)
+     * - HashMap get: O(1)
+     * - Arithmetic operations: O(1)
+     * Time Complexity: O(1)
      *
      * @param startStation The name of the starting station
      * @param endStation   The name of the ending station
