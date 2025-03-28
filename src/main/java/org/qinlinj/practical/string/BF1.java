@@ -54,6 +54,13 @@ package org.qinlinj.practical.string;
  * 'r' == 'r' ➝ Match fourth character, pattern found at index 8
  */
 public class BF1 {
+    /**
+     * Main method to demonstrate the Brute Force string matching algorithm
+     *
+     * Time Complexity: O(m*n) where m is the length of mainStr and n is the length of patternStr
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         BF1 b = new BF1();
         String mainStr = "this is your code";
@@ -103,24 +110,35 @@ public class BF1 {
      * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
     public int indexOf(String mainStr, String pattern) {
+        // Check for null inputs
         if (mainStr == null || pattern == null) return -1;
 
         int m = mainStr.length();
         int n = pattern.length();
+
+        // Pattern can't be longer than the main string
         if (m < n) return -1;
 
+        // Outer loop: try each possible starting position in the main string
         for (int i = 0; i < m; i++) {
-            int k = i;
+            int k = i;  // Current position in main string
+
+            // Inner loop: check each character of the pattern
             for (int j = 0; j < n; j++) {
+                // If current characters match and we haven't reached the end of main string
                 if (k < m && pattern.charAt(j) == mainStr.charAt(k)) {
-                    k++;
+                    k++;  // Move to next character in main string
+
+                    // If we've matched all characters in the pattern
                     if (j == n - 1) return i;
                 } else {
+                    // Mismatch found, break inner loop and try next starting position
                     break;
                 }
             }
         }
 
+        // Pattern not found
         return -1;
     }
 }
