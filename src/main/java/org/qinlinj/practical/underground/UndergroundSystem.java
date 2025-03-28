@@ -23,9 +23,17 @@ public class UndergroundSystem {
         table = new HashMap<>();
     }
 
+    /**
+     * Records a passenger check-in event at a station.
+     *
+     * @param id          The passenger's unique identifier
+     * @param stationName The name of the station where check-in occurs
+     * @param t           The time when the check-in occurs
+     */
     public void checkIn(int id, String stationName, int t) {
         startInfo.put(id, new Start(stationName, t));
     }
+
 
     public void checkOut(int id, String stationName, int t) {
         Start start = startInfo.get(id);
