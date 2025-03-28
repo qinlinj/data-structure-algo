@@ -13,7 +13,7 @@ public class _208_ImplementTriePrefixTree {
     class Trie {
 
         public Trie() {
-            
+
         }
 
         public void insert(String word) {
@@ -21,11 +21,11 @@ public class _208_ImplementTriePrefixTree {
         }
 
         public boolean search(String word) {
-
+            return false;
         }
 
         public boolean startsWith(String prefix) {
-
+            return false;
         }
     }
 
