@@ -62,6 +62,46 @@ public class BF1 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of a pattern in a main string using Brute Force approach
+     *
+     * Algorithm steps:
+     * 1. For each position i in the main string:
+     *    a. Start comparing pattern with main string from position i
+     *    b. If all characters match, return position i
+     *    c. If any character doesn't match, move to next position
+     * 2. If no match found, return -1
+     *
+     * Visualization for mainStr="this is your code", pattern="your":
+     *
+     * i=0: "this is your code"
+     *       ^
+     *      "your" -> 't' != 'y', mismatch
+     *
+     * i=1: "this is your code"
+     *        ^
+     *      "your" -> 'h' != 'y', mismatch
+     *
+     * ... (skipping intermediate steps)
+     *
+     * i=8: "this is your code"
+     *               ^
+     *      "your" -> Compare all characters:
+     *               'y' == 'y' ✓
+     *               'o' == 'o' ✓
+     *               'u' == 'u' ✓
+     *               'r' == 'r' ✓
+     *      All characters match! Return i=8
+     *
+     * Time Complexity:
+     * - Worst case: O(m*n) when the pattern almost matches but fails at the last character,
+     *   or when many partial matches occur
+     * - Best case: O(m) when characters immediately mismatch at each position
+     *
+     * @param mainStr The main string to search in
+     * @param pattern The pattern to search for
+     * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
