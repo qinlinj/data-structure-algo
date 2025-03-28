@@ -55,6 +55,14 @@ package org.qinlinj.practical.string;
  * All characters match! Pattern found at index 8
  */
 public class BF2 {
+    /**
+     * Main method to demonstrate the Optimized Brute Force string matching algorithm
+     *
+     * Time Complexity: Depends on the input, but generally better than O(m*n)
+     * where m is the length of mainStr and n is the length of patternStr
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         BF2 b = new BF2();
         String mainStr = "this is your code";
@@ -119,32 +127,48 @@ public class BF2 {
      * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
     public int indexOf(String mainStr, String pattern) {
+        // Check for null inputs
         if (mainStr == null || pattern == null) return -1;
 
         int m = mainStr.length();
         int n = pattern.length();
+
+        // Pattern can't be longer than the main string
         if (m < n) return -1;
 
+        // Get the first character of the pattern for efficient filtering
         char first = pattern.charAt(0);
+
+        // Outer loop: scan through the main string
         for (int i = 0; i < m; i++) {
+            // If current character doesn't match the first character of pattern
             if (mainStr.charAt(i) != first) {
-                while (++i < m && mainStr.charAt(i) != first) ;
+                // Skip ahead to the next occurrence of the first character
+                while (++i < m && mainStr.charAt(i) != first);
             }
 
+            // If we found a potential match and haven't reached the end of the string
             if (i < m) {
-                int k = i + 1;
-                int j = 1;
+                int k = i + 1;  // Next position in main string
+                int j = 1;      // Next position in pattern (we already matched the first character)
+
+                // Special case: if pattern has only one character
                 if (j == n) return i;
+
+                // Compare the remaining characters
                 for (; j < n && k < m; j++, k++) {
                     if (mainStr.charAt(k) == pattern.charAt(j)) {
+                        // If we reached the end of the pattern, we found a match
                         if (j == n - 1) return i;
                     } else {
+                        // Mismatch found, break inner loop and try next position
                         break;
                     }
                 }
             }
         }
 
+        // Pattern not found
         return -1;
     }
 }
