@@ -2,8 +2,20 @@ package org.qinlinj.practical.underground;
 
 import java.util.*;
 
+/**
+ * A system for tracking and analyzing passenger journeys in an underground transport network.
+ * This class allows check-in and check-out operations and provides average travel time calculation
+ * between different stations.
+ */
 public class UndergroundSystem {
+    /**
+     * Maps passenger IDs to their check-in information (station and time)
+     */
     private Map<Integer, Start> startInfo;
+
+    /**
+     * Stores travel statistics (sum of travel times and count) for each station pair
+     */
     private Map<StartEnd, SumAmount> table;
 
     public UndergroundSystem() {
