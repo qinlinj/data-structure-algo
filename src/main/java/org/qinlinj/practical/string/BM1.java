@@ -146,6 +146,22 @@ public class BM1 {
         return -1;
     }
 
+    /**
+     * Generates a map of characters in the pattern to their rightmost positions.
+     * This map is used by the bad character rule to determine how far to shift the pattern.
+     *
+     * Time Complexity: O(n) where n is the length of the pattern
+     * Space Complexity: O(k) where k is the number of unique characters in the pattern
+     *
+     * Example:
+     * For pattern="aba":
+     * - 'a' appears at positions 0 and 2, but we store only the rightmost position 0
+     * - 'b' appears at position 1
+     * Result: {'a': 0, 'b': 1}
+     *
+     * @param pattern The pattern string
+     * @return A map of characters to their rightmost positions in the pattern
+     */
     private Map<Character, Integer> genBadCharIndexMap(String pattern) {
         char[] patternChars = pattern.toCharArray();
         Map<Character, Integer> bc = new HashMap<>();
