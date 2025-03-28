@@ -28,10 +28,20 @@ public class StartEnd {
         this.end = end;
     }
 
+    /**
+     * Returns the name of the starting station.
+     *
+     * @return The starting station name
+     */
     public String getStart() {
         return start;
     }
 
+    /**
+     * Returns the name of the ending station.
+     *
+     * @return The ending station name
+     */
     public String getEnd() {
         return end;
     }
@@ -52,6 +62,12 @@ public class StartEnd {
                 Objects.equals(end, startEnd.end);
     }
 
+    /**
+     * Generates a hash code for this StartEnd object.
+     * The hash code is based on the starting and ending stations.
+     *
+     * @return A hash code value for this object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(start, end);
