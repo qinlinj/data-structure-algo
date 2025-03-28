@@ -18,6 +18,9 @@ public class UndergroundSystem {
      */
     private Map<StartEnd, SumAmount> table;
 
+    /**
+     * Initializes a new UndergroundSystem with empty data structures.
+     */
     public UndergroundSystem() {
         startInfo = new HashMap<>();
         table = new HashMap<>();
@@ -54,6 +57,13 @@ public class UndergroundSystem {
         table.put(key, sumAmount);
     }
 
+    /**
+     * Calculates the average travel time between two stations.
+     *
+     * @param startStation The name of the starting station
+     * @param endStation   The name of the ending station
+     * @return The average travel time between the specified stations
+     */
     public double getAverageTime(String startStation, String endStation) {
         StartEnd key = new StartEnd(startStation, endStation);
 
@@ -62,5 +72,4 @@ public class UndergroundSystem {
         int amount = sumAmount.getAmount();
         return 1.0 * sum / amount;
     }
-
 }
