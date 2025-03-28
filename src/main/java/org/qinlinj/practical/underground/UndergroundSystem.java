@@ -53,6 +53,14 @@ public class UndergroundSystem {
      * Records a passenger check-out event and updates travel statistics.
      * Calculates the travel time between check-in and check-out stations and updates
      * the cumulative statistics for this station pair.
+     * Operations:
+     * - HashMap get: O(1)
+     * - Creating StartEnd object: O(1)
+     * - HashMap getOrDefault: O(1)
+     * - Setting values and calculations: O(1)
+     * - HashMap put: O(1)
+     * <p>
+     * Time Complexity: O(1)
      *
      * @param id          The passenger's unique identifier
      * @param stationName The name of the station where check-out occurs
