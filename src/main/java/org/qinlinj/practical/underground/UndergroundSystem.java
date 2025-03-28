@@ -9,6 +9,13 @@ import java.util.*;
  */
 public class UndergroundSystem {
     /**
+     * Data structures:
+     * - startInfo: Maps passenger IDs to their check-in information
+     * - table: Stores travel statistics for each station pair
+     *
+     * Both are implemented as HashMap with O(1) average time complexity for operations
+     */
+    /**
      * Maps passenger IDs to their check-in information (station and time)
      */
     private Map<Integer, Start> startInfo;
@@ -20,6 +27,8 @@ public class UndergroundSystem {
 
     /**
      * Initializes a new UndergroundSystem with empty data structures.
+     * Constructor initializes the HashMaps.
+     * Time Complexity: O(1)
      */
     public UndergroundSystem() {
         startInfo = new HashMap<>();
@@ -28,6 +37,9 @@ public class UndergroundSystem {
 
     /**
      * Records a passenger check-in event at a station.
+     * Records a check-in event.
+     * HashMap put operation has O(1) average time complexity.
+     * Time Complexity: O(1)
      *
      * @param id          The passenger's unique identifier
      * @param stationName The name of the station where check-in occurs
