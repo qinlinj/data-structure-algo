@@ -2,8 +2,19 @@ package org.qinlinj.practical.underground;
 
 import java.util.*;
 
+/**
+ * Represents a route segment with starting and ending stations.
+ * This class is used to define a journey between two points in an underground transport system.
+ */
 public class StartEnd {
+    /**
+     * The name of the starting station
+     */
     private String start;
+
+    /**
+     * The name of the ending station
+     */
     private String end;
 
     public StartEnd(String start, String end) {
