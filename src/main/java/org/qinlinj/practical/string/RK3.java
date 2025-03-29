@@ -46,6 +46,7 @@ public class RK3 {
         String mainStr = "this is your code";
         String patternStr = "your";
 
+        // Print the index where the pattern is found in the main string
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
@@ -83,26 +84,37 @@ public class RK3 {
      * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
     private int indexOf(String mainStr, String pattern) {
+        // Handle null inputs
         if (mainStr == null || pattern == null) return -1;
 
         int m = mainStr.length();
         int n = pattern.length();
+        // If pattern is longer than main string, it cannot be found
         if (m < n) return -1;
 
+        // Array to store hash codes for all possible n-length substrings
         int[] hashCodes = new int[m - n + 1];
+
+        // Calculate hash code for the first substring
         hashCodes[0] = calFirstSubStrHashCode(mainStr.substring(0, n));
 
+        // Calculate hash codes for remaining substrings using rolling hash technique
         for (int i = 1; i < m - n + 1; i++) {
             hashCodes[i] = calHashCode(mainStr, i, hashCodes, n);
         }
 
+        // Calculate hash code for the pattern
         int hashCode = calFirstSubStrHashCode(pattern);
 
+        // Compare hash codes to find matches
+        // NOTE: In a complete implementation, we would verify character-by-character
+        // to handle hash collisions, but this simplified version assumes no collisions
         for (int i = 0; i < m - n + 1; i++) {
             if (hashCode == hashCodes[i]) {
                 return i;
             }
         }
+        // Pattern not found
         return -1;
     }
 
@@ -138,7 +150,9 @@ public class RK3 {
         int n = str.length();
 
         int hashCode = 0;
+        // Calculate hash using polynomial formula
         for (int i = 0; i < n; i++) {
+            // For each character, add its contribution: (char - 'a') * 26^position
             hashCode += (int) Math.pow(26, i) * (str.charAt(n - i - 1) - 'a');
         }
 
@@ -165,6 +179,10 @@ public class RK3 {
      * @return the hash code for the current substring
      */
     private int calHashCode(String mainStr, int i, int[] hashCodes, int n) {
+        // Rolling hash formula:
+        // Multiply previous hash by base (26)
+        // Subtract the contribution of the character moving out of the window
+        // Add the contribution of the character moving into the window
         return hashCodes[i - 1] * 26 - (mainStr.charAt(i - 1) - 'a') * (int) Math.pow(26, n)
                 + (mainStr.charAt(i + n - 1) - 'a');
     }
