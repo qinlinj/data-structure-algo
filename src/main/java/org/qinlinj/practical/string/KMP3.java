@@ -58,6 +58,7 @@ public class KMP3 {
         String mainStr = "aaabaaa";
         String patternStr = "baaa";
 
+        // Find and print the starting index of the pattern in the main string
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
@@ -91,28 +92,39 @@ public class KMP3 {
      * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
     public int indexOf(String mainStr, String pattern) {
+        // Handle null inputs
         if (mainStr == null || pattern == null) return -1;
 
         int m = mainStr.length();
         int n = pattern.length();
+        // If pattern is longer than main string, it cannot be found
         if (m < n) return -1;
 
+        // Compute the next array for the pattern
         int[] next = getNext(pattern.toCharArray());
 
+        // j tracks the current position in the pattern
         int j = 0;
+        // Iterate through the main string
         for (int i = 0; i < m; i++) {
+            // If there's a mismatch and we've matched some characters
+            // Use the next array to shift the pattern appropriately
             while (j > 0 && mainStr.charAt(i) != pattern.charAt(j)) {
                 j = next[j - 1] + 1;
             }
 
+            // If current characters match, advance in the pattern
             if (mainStr.charAt(i) == pattern.charAt(j)) {
                 j++;
             }
 
+            // If we've matched the entire pattern
             if (j == n) {
+                // Return the starting index of the match
                 return i - n + 1;
             }
         }
+        // Pattern not found
         return -1;
     }
 
@@ -142,20 +154,32 @@ public class KMP3 {
      */
     private int[] getNext(char[] pattern) {
         int n = pattern.length;
+        // Handle single character pattern
         if (n == 1) return new int[0];
 
+        // Initialize next array
         int[] next = new int[n - 1];
 
+        // Base case: first character has no proper prefix
         next[0] = -1;
 
+        // Compute next values for remaining positions
         for (int j = 1; j < n - 1; j++) {
+            // Start with the previous position's next value
             int pre = next[j - 1];
+
+            // While we haven't found a match and haven't reached the beginning
+            // Backtrack to shorter prefixes using the next array
             while (pre != -1 && pattern[pre + 1] != pattern[j]) {
                 pre = next[pre];
             }
+
+            // If we found a character that can extend the current prefix-suffix match
             if (pattern[pre + 1] == pattern[j]) {
-                pre++;
+                pre++; // Extend the match length
             }
+
+            // Store the computed value
             next[j] = pre;
         }
 
