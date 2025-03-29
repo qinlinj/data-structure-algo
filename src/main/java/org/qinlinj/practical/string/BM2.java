@@ -30,6 +30,31 @@ import java.util.*;
  *
  * Space Complexity:
  * - O(n + σ) for the pattern preprocessing
+ *
+ * Example visualization with mainStr="aaabaaa", pattern="baaa":
+ *
+ * Bad Character Map: {'b': 0, 'a': 1, 'a': 2, 'a': 3} (simplified to {'b': 0, 'a': 3})
+ * Good Suffix arrays initialized
+ *
+ * Step 1: Align pattern at i=0
+ * "aaabaaa"
+ *  "baaa"
+ *     ^ Start comparing from right
+ * Text[3]='b' doesn't match Pattern[3]='a' ✗
+ * Bad character 'b' appears at position 0 in pattern
+ * Bad Character shift: 3-0 = 3
+ * No Good Suffix shift (mismatch at the rightmost position)
+ * Shift pattern by 3 positions
+ *
+ * Step 2: Align pattern at i=3
+ * "aaabaaa"
+ *     "baaa"
+ *        ^ Start comparing from right
+ * Text[6]='a' matches Pattern[3]='a' ✓
+ * Text[5]='a' matches Pattern[2]='a' ✓
+ * Text[4]='a' matches Pattern[1]='a' ✓
+ * Text[3]='b' matches Pattern[0]='b' ✓
+ * All characters match! Return i=3
  */
 public class BM2 {
     public static void main(String[] args) {
