@@ -189,6 +189,38 @@ public class BM2 {
         return n;
     }
 
+    /**
+     * Preprocesses the pattern to generate the Good Suffix arrays.
+     *
+     * This method builds two arrays:
+     * 1. suffix[i] = the starting position of the substring that matches the suffix of length i
+     * 2. prefix[i] = true if a prefix of the pattern matches the suffix of length i
+     *
+     * Time Complexity: O(n²) where n is the pattern length
+     *
+     * Example visualization for pattern="baaa":
+     *
+     * Initializing: suffix = [-1, -1, -1, -1], prefix = [false, false, false, false]
+     *
+     * i=0: Compare 'b' with suffix characters
+     *      No matches, no updates
+     *
+     * i=1: Compare 'a' with suffix characters
+     *      'a' matches with 'a' at position 3
+     *      suffix[1] = 1, prefix[1] = false
+     *
+     * i=2: Compare 'a' with suffix characters
+     *      'aa' matches with 'aa' at positions 2-3
+     *      suffix[2] = 1, prefix[2] = false
+     *
+     * Final arrays:
+     * suffix = [-1, 1, 1, -1]
+     * prefix = [false, false, false, false]
+     *
+     * @param pattern The pattern character array
+     * @param suffix The suffix array to be filled
+     * @param prefix The prefix array to be filled
+     */
     private void genGoodSuffixArr(char[] pattern, int[] suffix, boolean[] prefix) {
         Arrays.fill(suffix, -1);
         int n = pattern.length;
