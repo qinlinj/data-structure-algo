@@ -61,6 +61,35 @@ public class KMP3 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of a pattern in the main string using the KMP algorithm
+     *
+     * Visual example for our specific case:
+     * mainStr:  "a a a b a a a"
+     * pattern:  "b a a a"
+     *
+     * For pattern "baaa":
+     * - next[0] = -1 (for 'b', default base case)
+     * - next[1] = -1 (for "ba", no proper prefix that is also a suffix)
+     * - next[2] = -1 (for "baa", no proper prefix that is also a suffix)
+     *
+     * Matching process:
+     * 1. Start comparing mainStr[0]='a' with pattern[0]='b' -> mismatch, j=0, no shift needed
+     * 2. Compare mainStr[1]='a' with pattern[0]='b' -> mismatch, j=0, no shift needed
+     * 3. Compare mainStr[2]='a' with pattern[0]='b' -> mismatch, j=0, no shift needed
+     * 4. Compare mainStr[3]='b' with pattern[0]='b' -> match, j=1
+     * 5. Compare mainStr[4]='a' with pattern[1]='a' -> match, j=2
+     * 6. Compare mainStr[5]='a' with pattern[2]='a' -> match, j=3
+     * 7. Compare mainStr[6]='a' with pattern[3]='a' -> match, j=4
+     * 8. j == n, pattern found at position 3
+     *
+     * Time Complexity: O(m) where m is the length of the main string
+     * Space Complexity: O(1) additional space (not counting the next array)
+     *
+     * @param mainStr the main string to search in
+     * @param pattern the pattern string to search for
+     * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
