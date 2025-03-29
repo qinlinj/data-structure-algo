@@ -116,6 +116,30 @@ public class KMP3 {
         return -1;
     }
 
+    /**
+     * Computes the next array (partial match table) for the KMP algorithm
+     * This version is further optimized compared to previous implementations
+     *
+     * The next array contains information about the longest proper prefix
+     * that is also a suffix for each prefix of the pattern.
+     *
+     * For a pattern P[0...n-1]:
+     * - next[j] = the length of the longest proper prefix of P[0...j] that is also a suffix of P[0...j]
+     *
+     * Visual example for pattern "ABABAC":
+     * - For "A": next[0] = -1 (base case)
+     * - For "AB": next[1] = -1 (no proper prefix of "AB" is also a suffix)
+     * - For "ABA": next[2] = 0 ("A" is both a prefix and suffix of "ABA")
+     * - For "ABAB": next[3] = 1 ("AB" is both a prefix and suffix of "ABAB")
+     * - For "ABABA": next[4] = 2 ("ABA" is both a prefix and suffix of "ABABA")
+     * - For "ABABAC": next[5] = -1 (no proper prefix is also a suffix)
+     *
+     * Time Complexity: O(n) where n is the length of the pattern
+     * Space Complexity: O(n) for the next array
+     *
+     * @param pattern the pattern character array
+     * @return the next array for the pattern
+     */
     private int[] getNext(char[] pattern) {
         int n = pattern.length;
         if (n == 1) return new int[0];
