@@ -65,6 +65,56 @@ public class BM2 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of a pattern in a main string using the full Boyer-Moore algorithm
+     * with both Bad Character and Good Suffix rules.
+     *
+     * Algorithm steps:
+     * 1. Preprocess the pattern:
+     *    a. Generate the bad character map
+     *    b. Calculate the good suffix arrays
+     * 2. Align pattern at the beginning of the text
+     * 3. Compare characters from right to left
+     * 4. If mismatch occurs:
+     *    a. Calculate shift using bad character rule
+     *    b. Calculate shift using good suffix rule
+     *    c. Use the maximum of the two shifts
+     * 5. If all characters match, return the current position
+     *
+     * Visualization for mainStr="aaabaaa", pattern="baaa":
+     *
+     * Text:    "aaabaaa"
+     * Pattern: "baaa"
+     *
+     * i=0: Align pattern at position 0
+     *     "aaabaaa"
+     *     "baaa"
+     *        ^ Start comparing from right
+     *     Text[3]='b' doesn't match Pattern[3]='a' ✗
+     *     Bad character 'b' found at position 0 in pattern
+     *     Bad character shift = 3-0 = 3
+     *     No good suffix (mismatch at rightmost position)
+     *     Shift pattern by 3 positions
+     *
+     * i=3: Align pattern at position 3
+     *     "aaabaaa"
+     *        "baaa"
+     *           ^ Start comparing from right
+     *     Text[6]='a' matches Pattern[3]='a' ✓
+     *     Text[5]='a' matches Pattern[2]='a' ✓
+     *     Text[4]='a' matches Pattern[1]='a' ✓
+     *     Text[3]='b' matches Pattern[0]='b' ✓
+     *     All characters match! Return i=3
+     *
+     * Time Complexity:
+     * - Worst case: O(m*n) (rarely occurs in practice)
+     * - Average case: O(m/n) which is sublinear
+     * - Best case: O(m/n)
+     *
+     * @param mainStr The main string to search in
+     * @param pattern The pattern to search for
+     * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
