@@ -154,6 +154,29 @@ public class BM2 {
         return -1;
     }
 
+    /**
+     * Calculates the number of steps to move based on the Good Suffix rule.
+     *
+     * The Good Suffix rule has two cases:
+     * 1. If the same suffix occurs elsewhere in the pattern, shift to align with the next occurrence.
+     * 2. If a prefix of the pattern matches a suffix of the good suffix, shift to that position.
+     *
+     * Time Complexity: O(n) where n is the pattern length
+     *
+     * Example:
+     * For pattern="baaa" with a mismatch at position 0 (after matching "aaa"):
+     * - The good suffix is "aaa"
+     * - There's no other occurrence of "aaa" in the pattern
+     * - We check if prefixes of the pattern match suffixes of "aaa"
+     * - No such prefix exists in this case
+     * - Return n (the length of the pattern) as the shift distance
+     *
+     * @param y The position of the mismatch
+     * @param n The length of the pattern
+     * @param suffix The suffix array from preprocessing
+     * @param prefix The prefix array from preprocessing
+     * @return The number of steps to move based on the Good Suffix rule
+     */
     private int calMoveSteps(int y, int n, int[] suffix, boolean[] prefix) {
         int k = n - y - 1;
 
