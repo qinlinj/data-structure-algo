@@ -133,6 +133,26 @@ public class RK2 {
         return hashCode;
     }
 
+    /**
+     * Calculates the hash code for a substring using the rolling hash technique.
+     * <p>
+     * The key advantage of rolling hash is that we can compute the hash of the current
+     * substring in O(1) time using the hash of the previous substring.
+     * <p>
+     * Rolling hash formula:
+     * hash(text[i...i+n-1]) = hash(text[i-1...i+n-2]) - hash(text[i-1]) + hash(text[i+n-1])
+     * <p>
+     * Visual example for rolling from "this" to " is ":
+     * hash(" is ") = hash("this") - ('t'-'a') + (' '-'a')
+     * <p>
+     * Time Complexity: O(1) - constant time
+     *
+     * @param mainStr   the main string
+     * @param i         the current index
+     * @param hashCodes array of previously computed hash codes
+     * @param n         the length of the pattern
+     * @return the hash code for the current substring
+     */
     private int calHashCode(String mainStr, int i, int[] hashCodes, int n) {
         return hashCodes[i - 1] - (mainStr.charAt(i - 1) - 'a')
                 + (mainStr.charAt(i + n - 1) - 'a');
