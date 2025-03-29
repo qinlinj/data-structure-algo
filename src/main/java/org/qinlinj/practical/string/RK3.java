@@ -49,6 +49,39 @@ public class RK3 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of pattern in mainStr using the Rabin-Karp algorithm
+     * with polynomial rolling hash.
+     *
+     * Visual example for our specific case:
+     * mainStr:  "this is your code"
+     * pattern:  "your"
+     *
+     * Initial polynomial hash for "this":
+     * ('t'-'a')*26^3 + ('h'-'a')*26^2 + ('i'-'a')*26^1 + ('s'-'a')*26^0
+     * = (116-97)*17576 + (104-97)*676 + (105-97)*26 + (115-97)*1
+     * = 19*17576 + 7*676 + 8*26 + 18*1
+     * = 333944 + 4732 + 208 + 18 = 338902
+     *
+     * Initial polynomial hash for "your":
+     * ('y'-'a')*26^3 + ('o'-'a')*26^2 + ('u'-'a')*26^1 + ('r'-'a')*26^0
+     * = (121-97)*17576 + (111-97)*676 + (117-97)*26 + (114-97)*1
+     * = 24*17576 + 14*676 + 20*26 + 17*1
+     * = 421824 + 9464 + 520 + 17 = 431825
+     *
+     * Note: This implementation assumes no hash collisions to simplify the code.
+     * In practice, character-by-character verification would be needed.
+     *
+     * Time Complexity: O(m+n) in average case
+     * - Initial hash calculations: O(n)
+     * - Rolling hash calculations: O(m)
+     *
+     * Space Complexity: O(m) for storing hash codes
+     *
+     * @param mainStr the main string to search in
+     * @param pattern the pattern string to search for
+     * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     private int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
