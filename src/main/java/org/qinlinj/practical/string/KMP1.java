@@ -50,6 +50,7 @@ public class KMP1 {
         String mainStr = "aaabaaa";
         String patternStr = "baaa";
 
+        // Return the starting index of the first occurrence of pattern in the main string
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
@@ -94,28 +95,39 @@ public class KMP1 {
      * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
     public int indexOf(String mainStr, String pattern) {
+        // Handle null inputs
         if (mainStr == null || pattern == null) return -1;
 
         int m = mainStr.length();
         int n = pattern.length();
+        // If pattern is longer than main string, it cannot be found
         if (m < n) return -1;
 
+        // Get the next array (partial match table) for the pattern
         int[] next = getNext(pattern.toCharArray());
 
+        // j is the index in the pattern
         int j = 0;
+        // Iterate through the main string
         for (int i = 0; i < m; i++) {
+            // If mismatch occurs and we've already matched some characters
+            // Use the next array to determine how far to shift the pattern
             while (j > 0 && mainStr.charAt(i) != pattern.charAt(j)) {
                 j = next[j - 1] + 1;
             }
 
+            // If current characters match, advance in the pattern
             if (mainStr.charAt(i) == pattern.charAt(j)) {
                 j++;
             }
 
+            // If we've matched all characters in the pattern
             if (j == n) {
+                // Return the starting index of the match
                 return i - n + 1;
             }
         }
+        // Pattern not found
         return -1;
     }
 
@@ -139,26 +151,35 @@ public class KMP1 {
      * @param pattern the pattern character array
      * @return the next array for the pattern
      */
-    private int[] getNext(char[] pattern) { // O(n^3)
+    private int[] getNext(char[] pattern) { // O(n³)
         int n = pattern.length;
+        // Handle single character pattern
         if (n == 1) return new int[0];
 
+        // Initialize next array with -1 (no proper prefix is also a suffix)
         int[] next = new int[n - 1];
         Arrays.fill(next, -1);
 
+        // For each position in the pattern (excluding the first character)
         for (int i = 1; i < n - 1; i++) {
+            // Get the prefix up to position i+1
             String goodPrefix = new String(pattern, 0, i + 1);
 
+            // Check all possible proper suffixes of the good prefix
             for (int j = i; j > 0; j--) {
+                // Extract the suffix
                 String suffix = goodPrefix.substring(j);
                 int k;
+                // Compare suffix with the beginning of the good prefix
                 for (k = 0; k < suffix.length(); k++) {
                     if (suffix.charAt(k) != goodPrefix.charAt(k)) {
                         break;
                     }
                 }
 
+                // If the entire suffix matches with the beginning of the good prefix
                 if (k == suffix.length()) {
+                    // Update next[i] with the longest match length - 1
                     next[i] = Math.max(k - 1, next[i]);
                 }
             }
