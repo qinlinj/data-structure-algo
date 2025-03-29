@@ -1,5 +1,41 @@
 package org.qinlinj.practical.string;
 
+/**
+ * Optimized Rabin-Karp String Matching Algorithm with Rolling Hash
+ * <p>
+ * Advantages of Rabin-Karp with Rolling Hash:
+ * 1. Optimal Efficiency: Achieves O(m+n) time complexity where m is main string length and n is pattern length
+ * 2. Constant-time Hash Updates: Uses rolling hash technique to calculate subsequent hash values in O(1) time
+ * 3. Reduced False Positives: Includes character-by-character verification to handle hash collisions
+ * 4. Memory Efficient: Still requires O(m) space but with more efficient computations
+ * 5. Practical for Large Texts: Especially effective for longer strings and patterns
+ * <p>
+ * Concept and Principle:
+ * The Rabin-Karp algorithm with rolling hash optimizes string matching by:
+ * 1. Computing an initial hash for the pattern and the first substring of the text
+ * 2. Using a rolling hash function to efficiently compute subsequent hash values
+ * 3. Only performing character-by-character comparison when hash values match
+ * <p>
+ * Rolling hash is the key optimization - it allows calculating the next hash value
+ * in constant time by using the previous hash value, removing the oldest character's
+ * contribution and adding the newest character's contribution.
+ * <p>
+ * Visual example:
+ * Text:    "t h i s   i s   y o u r   c o d e"
+ * Pattern: "y o u r"
+ * <p>
+ * Step 1: Compute initial hash values
+ * hash("this") = hash value of first substring
+ * hash("your") = hash value of pattern
+ * <p>
+ * Step 2: Use rolling hash to compute subsequent hashes
+ * hash(" is ") = hash("this") - hash("t") + hash(" ")
+ * hash("is y") = hash(" is ") - hash(" ") + hash("y")
+ * ... and so on
+ * <p>
+ * Step 3: When hash("your") == hash(text substring), verify with character comparison
+ * If the characters all match, we've found our pattern.
+ */
 public class RK2 {
 
     public static void main(String[] args) {
