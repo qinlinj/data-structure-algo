@@ -1,7 +1,15 @@
 package org.qinlinj.practical.string;
 
-import java.util.*;
+// @formatter:off
 
+import java.util.*; /**
+ * Complete Boyer-Moore String Matching Algorithm Implementation
+ *
+ * This implementation includes both the Bad Character rule and the Good Suffix rule,
+ * making it a full implementation of the Boyer-Moore algorithm. The combination of
+ * these rules makes Boyer-Moore one of the most efficient string matching algorithms
+ * in practice.
+ */
 public class BM2 {
     public static void main(String[] args) {
         BM2 b = new BM2();
