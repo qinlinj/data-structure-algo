@@ -68,6 +68,50 @@ public class BM2 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of a pattern in a main string using the Boyer-Moore algorithm
+     * with both Bad Character and Good Suffix rules.
+     *
+     * Algorithm steps:
+     * 1. Preprocess the pattern:
+     *    a. Generate the bad character map
+     *    b. Compute the good suffix array and prefix flags
+     * 2. Align pattern at the beginning of the text
+     * 3. Compare characters from right to left
+     * 4. If mismatch occurs:
+     *    a. Calculate shift using bad character rule
+     *    b. Calculate shift using good suffix rule (if applicable)
+     *    c. Take the maximum of these shifts
+     * 5. If all characters match, return the current position
+     *
+     * Visualization for mainStr="aaabaaa", pattern="baaa":
+     *
+     * i=0: "aaabaaa"
+     *       "baaa"
+     *         ^ Start comparing from right
+     *     'b' in text doesn't match 'a' in pattern ✗
+     *     Bad character shift = 3 (no 'b' in pattern)
+     *     No good suffix, so shift = 3
+     *
+     * i=3: "aaabaaa"
+     *          "baaa"
+     *            ^ Start comparing from right
+     *     'a' in text matches 'a' in pattern ✓
+     *     'a' in text matches 'a' in pattern ✓
+     *     'b' in text doesn't match 'a' in pattern ✗
+     *     Bad character 'b' appears at position 0 in pattern
+     *     Good suffix "aa" must be considered
+     *     Shift pattern accordingly
+     *
+     * Time Complexity:
+     * - Worst case: O(m*n) in pathological cases
+     * - Average case: O(m/n) which is sublinear
+     * - Preprocessing: O(n) for bad character map and O(n²) for good suffix computation
+     *
+     * @param mainStr The main string to search in
+     * @param pattern The pattern to search for
+     * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
