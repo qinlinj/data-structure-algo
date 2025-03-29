@@ -102,6 +102,24 @@ public class RK1 {
         return -1;
     }
 
+    /**
+     * Calculates a hash code for the given string
+     * <p>
+     * This implementation uses Java's built-in hashCode method, which has O(n) time complexity
+     * where n is the length of the string.
+     * <p>
+     * In a more optimized Rabin-Karp implementation, we would use a rolling hash function
+     * that allows us to compute the next substring's hash in O(1) time using the previous hash.
+     * <p>
+     * Example of a rolling hash calculation:
+     * For hash("abcd") = a*31^3 + b*31^2 + c*31^1 + d*31^0
+     * Then hash("bcde") = (hash("abcd") - a*31^3) * 31 + e*31^0
+     * <p>
+     * Time Complexity: O(n) where n is the length of the string
+     *
+     * @param str the input string
+     * @return the hash code for the string
+     */
     private int calHashCode(String str) {
         return str.hashCode(); // O(n)
     }
