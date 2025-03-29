@@ -52,6 +52,33 @@ public class RK1 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of pattern in mainStr using the Rabin-Karp algorithm
+     * <p>
+     * Visual example for our specific case:
+     * mainStr:  "this is your code"
+     * pattern:  "your"
+     * <p>
+     * Step 1: Compute hash value for "your"
+     * <p>
+     * Step 2: Compute hash values for all 4-character substrings:
+     * "this", " is ", "is y", "s yo", " you", "your", "our ", "ur c", "r co", " cod", "code"
+     * <p>
+     * Step 3: Compare the pattern hash with each substring hash
+     * When we find a hash match at "your", we have our result: index 8
+     * <p>
+     * Time Complexity: O(m*n) in worst case, but typically closer to O(m+n) in practice
+     * - Computing hash for pattern: O(n)
+     * - Computing hashes for all substrings: O(m*n) in this implementation (could be optimized to O(m))
+     * - Comparing hashes: O(m)
+     * - Character comparison on hash match: O(n) (only performed on potential matches)
+     * <p>
+     * Space Complexity: O(m) for storing all hash codes
+     *
+     * @param mainStr the main string to search in
+     * @param pattern the pattern string to search for
+     * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     private int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
