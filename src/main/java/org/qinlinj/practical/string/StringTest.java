@@ -1,5 +1,18 @@
 package org.qinlinj.practical.string;
 
+/**
+ * String Matching Algorithms Performance Benchmark
+ * <p>
+ * This class benchmarks the performance of various string matching algorithms:
+ * 1. Java's built-in indexOf
+ * 2. Brute Force (BF)
+ * 3. Rabin-Karp (RK)
+ * 4. Boyer-Moore (BM)
+ * 5. Knuth-Morris-Pratt (KMP)
+ * <p>
+ * The benchmark uses randomly generated strings and patterns to provide a fair
+ * comparison across different algorithms and input sizes.
+ */
 public class StringTest {
     public static void main(String[] args) {
         String mainStr = "justin, shake your code";
