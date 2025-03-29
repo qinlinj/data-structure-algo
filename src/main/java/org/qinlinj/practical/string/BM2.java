@@ -6,58 +6,30 @@ import java.util.*;
 /**
  * Complete Boyer-Moore String Matching Algorithm Implementation
  *
- * This implementation includes both the Bad Character rule and the Good Suffix rule,
- * making it a full implementation of the Boyer-Moore algorithm. The combination of
- * these rules makes Boyer-Moore one of the most efficient string matching algorithms
- * in practice.
+ * This class implements the Boyer-Moore algorithm with both the Bad Character rule
+ * and the Good Suffix rule. It represents one of the most efficient string matching
+ * algorithms available, especially for large texts and patterns.
  *
  * Key concepts and principles:
- * 1. Right-to-Left Scanning: The algorithm compares characters from right to left within the pattern.
- * 2. Bad Character Rule: When a mismatch occurs, the algorithm shifts the pattern to align the
- *    mismatched character in the text with its rightmost occurrence in the pattern.
- * 3. Good Suffix Rule: After a mismatch, the algorithm also considers the matched suffix and
- *    tries to find another occurrence of it in the pattern, or a prefix of the pattern that
- *    matches a suffix of the matched part.
- * 4. Maximum Shift: The algorithm uses the maximum of the shifts suggested by both rules.
+ * 1. Right-to-Left Scanning: The algorithm compares characters from right to left.
+ * 2. Bad Character Rule: When a mismatch occurs, shift the pattern to align the
+ *    mismatched character with its rightmost occurrence in the pattern.
+ * 3. Good Suffix Rule: After a mismatch, shift the pattern to align with the next
+ *    occurrence of the matched suffix or a prefix of the pattern that matches a suffix.
+ * 4. Combined Approach: The algorithm takes the maximum shift suggested by either rule.
  *
  * Advantages of Full Boyer-Moore Algorithm:
- * - Highly Efficient: Often sublinear time complexity in practice
- * - Optimal Shifts: Combines two heuristics to maximize skipping of unnecessary comparisons
- * - Excellent for Long Patterns: Particularly efficient for long patterns and large texts
- * - Industry Standard: Used in many real-world applications like grep, text editors, etc.
+ * - Highly efficient: Often sublinear time complexity in practice
+ * - Optimal shifts: By using both rules, the algorithm makes larger jumps
+ * - Performance improves with pattern length: Longer patterns allow longer jumps
+ * - Industry standard: Used in many text editors, search utilities, and databases
  *
  * Time Complexity:
- * - Worst case: O(m*n) where m is the length of main string and n is the length of pattern
- * - Average case: O(m/n) which is sublinear
- * - Best case: O(m/n) when the pattern has distinct characters and good suffix structure
+ * - Preprocessing: O(n + σ) where n is pattern length and σ is alphabet size
+ * - Search: O(m) best case, O(m*n) worst case, but typically O(m/n) in practice
  *
- * Example visualization with mainStr="aaabaaa", pattern="baaa":
- *
- * Preprocessing:
- * - Bad Character Map: {'b': 0, 'a': 3}
- * - Suffix array and Prefix flags for "baaa"
- *
- * Step 1: Align pattern at i=0
- * "aaabaaa"
- *  "baaa"
- *    ^
- * Compare from right: Pattern[3]='a' matches Text[3]='b' ✗
- * Bad character 'b' appears at position 0 in pattern
- * Bad character shift: 3-0 = 3
- * Good suffix shift: 0 (no suffix matched)
- * Move pattern by max(3,0) = 3 positions
- *
- * Step 2: Align pattern at i=3
- * "aaabaaa"
- *     "baaa"
- *       ^
- * Compare from right: Pattern[3]='a' matches Text[6]='a' ✓
- * Compare next: Pattern[2]='a' matches Text[5]='a' ✓
- * Compare next: Pattern[1]='a' matches Text[4]='b' ✗
- * Bad character 'b' appears at position 0 in pattern
- * Bad character shift: 1-0 = 1
- * Good suffix shift: Based on matched suffix "aa"
- * Move pattern by max(1,goodSuffixShift) positions
+ * Space Complexity:
+ * - O(n + σ) for the pattern preprocessing
  */
 public class BM2 {
     public static void main(String[] args) {
@@ -68,50 +40,6 @@ public class BM2 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
-    /**
-     * Finds the first occurrence of a pattern in a main string using the Boyer-Moore algorithm
-     * with both Bad Character and Good Suffix rules.
-     *
-     * Algorithm steps:
-     * 1. Preprocess the pattern:
-     *    a. Generate the bad character map
-     *    b. Compute the good suffix array and prefix flags
-     * 2. Align pattern at the beginning of the text
-     * 3. Compare characters from right to left
-     * 4. If mismatch occurs:
-     *    a. Calculate shift using bad character rule
-     *    b. Calculate shift using good suffix rule (if applicable)
-     *    c. Take the maximum of these shifts
-     * 5. If all characters match, return the current position
-     *
-     * Visualization for mainStr="aaabaaa", pattern="baaa":
-     *
-     * i=0: "aaabaaa"
-     *       "baaa"
-     *         ^ Start comparing from right
-     *     'b' in text doesn't match 'a' in pattern ✗
-     *     Bad character shift = 3 (no 'b' in pattern)
-     *     No good suffix, so shift = 3
-     *
-     * i=3: "aaabaaa"
-     *          "baaa"
-     *            ^ Start comparing from right
-     *     'a' in text matches 'a' in pattern ✓
-     *     'a' in text matches 'a' in pattern ✓
-     *     'b' in text doesn't match 'a' in pattern ✗
-     *     Bad character 'b' appears at position 0 in pattern
-     *     Good suffix "aa" must be considered
-     *     Shift pattern accordingly
-     *
-     * Time Complexity:
-     * - Worst case: O(m*n) in pathological cases
-     * - Average case: O(m/n) which is sublinear
-     * - Preprocessing: O(n) for bad character map and O(n²) for good suffix computation
-     *
-     * @param mainStr The main string to search in
-     * @param pattern The pattern to search for
-     * @return The starting index of the first occurrence of pattern in mainStr, or -1 if not found
-     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
