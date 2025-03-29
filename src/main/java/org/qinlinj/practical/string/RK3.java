@@ -106,7 +106,34 @@ public class RK3 {
         return -1;
     }
 
-
+    /**
+     * Calculates the polynomial hash code for a string.
+     *
+     * This hash function uses a polynomial with base 26 (for the 26 lowercase letters).
+     * Each character contributes to the hash based on its value and position, with
+     * position weights calculated as powers of 26.
+     *
+     * Formula: hash = Σ (s[i] - 'a') * 26^(n-i-1) for i from 0 to n-1
+     *
+     * Example calculation for "your":
+     * hash = ('y'-'a')*26^3 + ('o'-'a')*26^2 + ('u'-'a')*26^1 + ('r'-'a')*26^0
+     *
+     * The numeric values are:
+     * 'y'-'a' = 121-97 = 24
+     * 'o'-'a' = 111-97 = 14
+     * 'u'-'a' = 117-97 = 20
+     * 'r'-'a' = 114-97 = 17
+     *
+     * So hash = 24*26^3 + 14*26^2 + 20*26^1 + 17*26^0
+     *         = 24*17576 + 14*676 + 20*26 + 17*1
+     *         = 421824 + 9464 + 520 + 17
+     *         = 431825
+     *
+     * Time Complexity: O(n) where n is the length of the string
+     *
+     * @param str the input string
+     * @return the polynomial hash code for the string
+     */
     private int calFirstSubStrHashCode(String str) { // O(n)
         int n = str.length();
 
