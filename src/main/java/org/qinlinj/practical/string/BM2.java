@@ -2,13 +2,62 @@ package org.qinlinj.practical.string;
 
 // @formatter:off
 
-import java.util.*; /**
+import java.util.*;
+/**
  * Complete Boyer-Moore String Matching Algorithm Implementation
  *
  * This implementation includes both the Bad Character rule and the Good Suffix rule,
  * making it a full implementation of the Boyer-Moore algorithm. The combination of
  * these rules makes Boyer-Moore one of the most efficient string matching algorithms
  * in practice.
+ *
+ * Key concepts and principles:
+ * 1. Right-to-Left Scanning: The algorithm compares characters from right to left within the pattern.
+ * 2. Bad Character Rule: When a mismatch occurs, the algorithm shifts the pattern to align the
+ *    mismatched character in the text with its rightmost occurrence in the pattern.
+ * 3. Good Suffix Rule: After a mismatch, the algorithm also considers the matched suffix and
+ *    tries to find another occurrence of it in the pattern, or a prefix of the pattern that
+ *    matches a suffix of the matched part.
+ * 4. Maximum Shift: The algorithm uses the maximum of the shifts suggested by both rules.
+ *
+ * Advantages of Full Boyer-Moore Algorithm:
+ * - Highly Efficient: Often sublinear time complexity in practice
+ * - Optimal Shifts: Combines two heuristics to maximize skipping of unnecessary comparisons
+ * - Excellent for Long Patterns: Particularly efficient for long patterns and large texts
+ * - Industry Standard: Used in many real-world applications like grep, text editors, etc.
+ *
+ * Time Complexity:
+ * - Worst case: O(m*n) where m is the length of main string and n is the length of pattern
+ * - Average case: O(m/n) which is sublinear
+ * - Best case: O(m/n) when the pattern has distinct characters and good suffix structure
+ *
+ * Example visualization with mainStr="aaabaaa", pattern="baaa":
+ *
+ * Preprocessing:
+ * - Bad Character Map: {'b': 0, 'a': 3}
+ * - Suffix array and Prefix flags for "baaa"
+ *
+ * Step 1: Align pattern at i=0
+ * "aaabaaa"
+ *  "baaa"
+ *    ^
+ * Compare from right: Pattern[3]='a' matches Text[3]='b' ✗
+ * Bad character 'b' appears at position 0 in pattern
+ * Bad character shift: 3-0 = 3
+ * Good suffix shift: 0 (no suffix matched)
+ * Move pattern by max(3,0) = 3 positions
+ *
+ * Step 2: Align pattern at i=3
+ * "aaabaaa"
+ *     "baaa"
+ *       ^
+ * Compare from right: Pattern[3]='a' matches Text[6]='a' ✓
+ * Compare next: Pattern[2]='a' matches Text[5]='a' ✓
+ * Compare next: Pattern[1]='a' matches Text[4]='b' ✗
+ * Bad character 'b' appears at position 0 in pattern
+ * Bad character shift: 1-0 = 1
+ * Good suffix shift: Based on matched suffix "aa"
+ * Move pattern by max(1,goodSuffixShift) positions
  */
 public class BM2 {
     public static void main(String[] args) {
