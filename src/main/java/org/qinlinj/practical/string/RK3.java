@@ -145,6 +145,25 @@ public class RK3 {
         return hashCode;
     }
 
+    /**
+     * Calculates the hash code for a substring using the polynomial rolling hash technique.
+     *
+     * The polynomial rolling hash update formula is:
+     * hash(s[i...i+n-1]) = hash(s[i-1...i+n-2]) * 26 - (s[i-1] - 'a') * 26^n + (s[i+n-1] - 'a')
+     *
+     * This allows us to compute the new hash in O(1) time instead of O(n).
+     *
+     * Visual example for rolling from "this" to " is ":
+     * hash(" is ") = hash("this") * 26 - ('t'-'a') * 26^4 + (' '-'a')
+     *
+     * Time Complexity: O(1) - constant time
+     *
+     * @param mainStr the main string
+     * @param i the current index
+     * @param hashCodes array of previously computed hash codes
+     * @param n the length of the pattern
+     * @return the hash code for the current substring
+     */
     private int calHashCode(String mainStr, int i, int[] hashCodes, int n) {
         return hashCodes[i - 1] * 26 - (mainStr.charAt(i - 1) - 'a') * (int) Math.pow(26, n)
                 + (mainStr.charAt(i + n - 1) - 'a');
