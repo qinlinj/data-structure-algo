@@ -59,6 +59,21 @@ public class KMP2 {
         System.out.println(b.indexOf(mainStr, patternStr));
     }
 
+    /**
+     * Finds the first occurrence of pattern in mainStr using the KMP algorithm
+     *
+     * Visual example for our specific case:
+     * mainStr:  "a a a b a a a"
+     * pattern:  "b a a a"
+     * next array: [-1] (Since we only compute for n-1 elements)
+     *
+     * Time Complexity: O(m) where m is the length of mainStr
+     * Space Complexity: O(n) where n is the length of pattern
+     *
+     * @param mainStr the main string to search in
+     * @param pattern the pattern string to search for
+     * @return the index of the first occurrence of pattern in mainStr, or -1 if not found
+     */
     public int indexOf(String mainStr, String pattern) {
         if (mainStr == null || pattern == null) return -1;
 
