@@ -105,6 +105,23 @@ public class RK2 {
         return -1;
     }
 
+    /**
+     * Calculates the hash code for a string by summing the difference between
+     * each character and 'a', reading the string from right to left.
+     * <p>
+     * This is a simple hash function that works well for demonstration purposes.
+     * In a production environment, a more sophisticated hash function would be used.
+     * <p>
+     * Example calculation for "your":
+     * hash = ('r'-'a') + ('u'-'a') + ('o'-'a') + ('y'-'a')
+     * = (114-97) + (117-97) + (111-97) + (121-97)
+     * = 17 + 20 + 14 + 24 = 75
+     * <p>
+     * Time Complexity: O(n) where n is the length of the string
+     *
+     * @param str the input string
+     * @return the hash code for the string
+     */
     private int calFirstSubStrHashCode(String str) { // O(n)
         int n = str.length();
 
