@@ -2,6 +2,48 @@ package org.qinlinj.practical.string;
 
 import java.util.*;
 
+// @formatter:off
+/**
+ * KMP (Knuth-Morris-Pratt) String Matching Algorithm
+ *
+ * Advantages of KMP:
+ * 1. Efficiency: O(m + n) time complexity where m is the length of the main string and n is the length of the pattern
+ * 2. No backtracking: Unlike naive approaches, KMP doesn't need to re-examine characters it has already checked
+ * 3. Preprocessing: Uses pattern information to skip unnecessary comparisons
+ *
+ * Concept and Principle:
+ * KMP algorithm improves string matching by using information from previous character comparisons.
+ * When a mismatch occurs, instead of starting comparison from the beginning of the pattern,
+ * KMP uses a precomputed "next" array (also called "partial match table" or "failure function")
+ * to determine how far to shift the pattern.
+ *
+ * The key insight is: when a mismatch occurs after matching some characters, we already know part of the text.
+ * We can use this information to avoid redundant comparisons.
+ *
+ * Visual example:
+ * Text:    "A B A B C A B A B D"
+ * Pattern: "A B A B D"
+ *
+ * Step 1: Compare characters until mismatch
+ * A B A B C A B A B D
+ * A B A B D
+ *         ^ Mismatch at position 4
+ *
+ * Step 2: Instead of shifting by just one character, KMP shifts according to the next array
+ * A B A B C A B A B D
+ *     A B A B D  <- Pattern shifted based on next array
+ *     ^ ^ ^ ^ ^
+ *
+ * Step 3: Continue matching
+ * A B A B C A B A B D
+ *     A B A B D
+ *         ^ Mismatch again
+ *
+ * Step 4: Shift again based on next array
+ * A B A B C A B A B D
+ *           A B A B D  <- Final position to match
+ *           ^ ^ ^ ^ ^
+ */
 public class KMP1 {
     public static void main(String[] args) {
         KMP1 b = new KMP1();
