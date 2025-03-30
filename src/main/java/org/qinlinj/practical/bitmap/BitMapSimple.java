@@ -89,6 +89,23 @@ public class BitMapSimple {
         b |= (1 << num);
     }
 
+    /**
+     * Checks if the specified number exists in the bitmap
+     *
+     * Visual Example:
+     *
+     * Example: Checking if bit 4 is set in bitmap 10101100
+     * Starting state: b = 10101100
+     * Operation:
+     *   1 << 4 = 00010000 (1 shifted left by 4 positions)
+     *   00010000 & 10101100 = 00000000 (bitwise AND)
+     * Result: 00000000 (zero, so target is not present)
+     *
+     * Time Complexity: O(1)
+     *
+     * @param target The number to check in the bitmap (should be between 0-7)
+     * @return true if the number exists, false otherwise
+     */
     public boolean contains(int target) {
         /*
             contains 4
