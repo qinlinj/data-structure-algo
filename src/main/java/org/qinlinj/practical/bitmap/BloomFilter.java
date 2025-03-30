@@ -53,4 +53,27 @@ public class BloomFilter {
     private int numHashes; // Number of hash functions (k)
     private int expectedElements; // Number of expected elements to be inserted
     private double falsePositiveRate; // Desired false positive rate
+
+    /**
+     * Constructor that calculates optimal bit size and number of hash functions
+     * based on expected number of elements and desired false positive rate.
+     * <p>
+     * Mathematical formulas used:
+     * m = -n*ln(p)/(ln(2)^2) where:
+     * m = bit size
+     * n = expected number of elements
+     * p = desired false positive probability
+     * <p>
+     * k = m/n*ln(2) where:
+     * k = optimal number of hash functions
+     * <p>
+     * Time Complexity: O(1)
+     * Space Complexity: O(m) where m is the calculated bit size
+     *
+     * @param expectedElements  The number of expected elements to be inserted
+     * @param falsePositiveRate The desired false positive probability (between 0 and 1)
+     */
+    public BloomFilter(int expectedElements, double falsePositiveRate) {
+        
+    }
 }
