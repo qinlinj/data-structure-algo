@@ -97,4 +97,20 @@ public class OptimizedBitMap {
         }
         return count;
     }
+
+    /**
+     * Performs a bitwise AND operation with another BitMap
+     *
+     * @param other The other BitMap
+     * @return A new BitMap containing the result of the AND operation
+     */
+    public OptimizedBitMap and(OptimizedBitMap other) {
+        OptimizedBitMap result = new OptimizedBitMap(Math.min(this.capacity, other.capacity));
+        for (int i = 0; i < result.bits.length; i++) {
+            if (i < this.bits.length && i < other.bits.length) {
+                result.bits[i] = this.bits[i] & other.bits[i];
+            }
+        }
+        return result;
+    }
 }
