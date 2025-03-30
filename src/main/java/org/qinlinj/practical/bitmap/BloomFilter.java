@@ -74,6 +74,23 @@ public class BloomFilter {
      * @param falsePositiveRate The desired false positive probability (between 0 and 1)
      */
     public BloomFilter(int expectedElements, double falsePositiveRate) {
-        
+        this.expectedElements = expectedElements;
+        this.falsePositiveRate = falsePositiveRate;
+
+        // Calculate optimal bit size (m)
+        this.bitSize = calculateBitSize(expectedElements, falsePositiveRate);
+
+        // Calculate optimal number of hash functions (k)
+        this.numHashes = calculateNumHashes(bitSize, expectedElements);
+
+        // Initialize the bit array
+        this.bitset = new BitSet(bitSize);
+    }
+
+    private int calculateNumHashes(int bitSize, int expectedElements) {
+    }
+
+    private int calculateBitSize(int expectedElements, double falsePositiveRate) {
+        return 0;
     }
 }
