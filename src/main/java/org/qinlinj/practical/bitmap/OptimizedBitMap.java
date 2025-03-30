@@ -84,4 +84,17 @@ public class OptimizedBitMap {
 
         bits[wordIndex] ^= (1L << bitIndex);
     }
+
+    /**
+     * Returns the number of bits set to 1 in this BitMap
+     *
+     * @return The number of bits set to 1
+     */
+    public int cardinality() {
+        int count = 0;
+        for (long word : bits) {
+            count += Long.bitCount(word);
+        }
+        return count;
+    }
 }
