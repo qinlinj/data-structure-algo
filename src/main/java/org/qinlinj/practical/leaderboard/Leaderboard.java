@@ -13,30 +13,45 @@ import java.util.*;
  * which provides O(1) time complexity for score updates and resets.
  */
 public class Leaderboard {
+    // Map to store player IDs (keys) and their corresponding scores (values)
     private Map<Integer, Integer> map;
 
+    /**
+     * Constructor initializes an empty leaderboard
+     */
     public Leaderboard() {
         this.map = new HashMap<>();
     }
 
+    /**
+     * Demo of leaderboard functionality
+     */
     public static void main(String[] args) {
+        // Create a new leaderboard
         Leaderboard leaderboard = new Leaderboard();
-        leaderboard.addScore(1, 20);
-        leaderboard.addScore(2, 30);
-        leaderboard.addScore(3, 16);
-        leaderboard.addScore(4, 44);
 
-        System.out.println(leaderboard.top(2));
+        // Add initial scores for players 1, 2, 3, and 4
+        leaderboard.addScore(1, 20);  // Player 1: 20 points
+        leaderboard.addScore(2, 30);  // Player 2: 30 points
+        leaderboard.addScore(3, 16);  // Player 3: 16 points
+        leaderboard.addScore(4, 44);  // Player 4: 44 points
 
-        leaderboard.addScore(2, 34);
-        leaderboard.addScore(3, 23);
+        // Get the sum of the top 2 scores (44 + 30 = 74)
+        System.out.println(leaderboard.top(2));  // Output: 74
 
-        System.out.println(leaderboard.top(1));
+        // Add more scores to players 2 and 3
+        leaderboard.addScore(2, 34);  // Player 2: 30 + 34 = 64 points
+        leaderboard.addScore(3, 23);  // Player 3: 16 + 23 = 39 points
 
-        leaderboard.reset(2);
-        leaderboard.reset(4);
+        // Get the sum of the top 1 score (Player 2: 64 points)
+        System.out.println(leaderboard.top(1));  // Output: 64
 
-        System.out.println(leaderboard.top(1));
+        // Reset scores for players 2 and 4
+        leaderboard.reset(2);  // Player 2's score is now 0 (removed)
+        leaderboard.reset(4);  // Player 4's score is now 0 (removed)
+
+        // Get the sum of the top 1 score (Player 3: 39 points)
+        System.out.println(leaderboard.top(1));  // Output: 39
     }
 
     /**
@@ -50,9 +65,12 @@ public class Leaderboard {
      * @param score    The score to add
      */
     public void addScore(int playerId, int score) {
+        // Check if the player already exists in the leaderboard
         if (map.containsKey(playerId)) {
+            // Add the new score to the player's existing score
             map.put(playerId, map.get(playerId) + score);
         } else {
+            // Add the player with their initial score
             map.put(playerId, score);
         }
     }
@@ -71,17 +89,23 @@ public class Leaderboard {
      * @return The sum of the top K scores
      */
     public int top(int k) {
+        // Convert the scores to an array
         Integer[] scores = map.values().toArray(new Integer[map.values().size()]);
+
+        // Sort the scores in descending order (highest scores first)
         Arrays.sort(scores, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
+                return o2 - o1;  // Descending order
             }
         });
+
+        // Sum the top k scores
         int sum = 0;
         for (int i = 0; i < k; i++) {
             sum += scores[i];
         }
+
         return sum;
     }
 
@@ -93,7 +117,9 @@ public class Leaderboard {
      * @param playerId The ID of the player to reset
      */
     public void reset(int playerId) {
+        // Check if the player exists in the leaderboard
         if (map.containsKey(playerId)) {
+            // Remove the player from the leaderboard
             map.remove(playerId);
         }
     }
