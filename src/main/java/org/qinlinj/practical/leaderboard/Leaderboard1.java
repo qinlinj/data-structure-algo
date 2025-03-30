@@ -53,6 +53,21 @@ public class Leaderboard1 {
         System.out.println(leaderboard.top(1));
     }
 
+    /**
+     * Adds a score to a player's total score
+     * <p>
+     * Time Complexity: O(log n) where n is the number of players
+     * - O(1) for HashMap operations
+     * - O(log n) for TreeSet removal and insertion
+     * <p>
+     * Implementation details:
+     * 1. If the player exists, we must remove them from TreeSet
+     * 2. Update their score
+     * 3. Re-insert them into TreeSet to maintain sorted order
+     *
+     * @param playerId The ID of the player
+     * @param score    The score to add
+     */
     public void addScore(int playerId, int score) {
         Player player = null;
         if (map.containsKey(playerId)) {
