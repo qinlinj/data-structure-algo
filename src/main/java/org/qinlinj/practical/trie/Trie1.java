@@ -40,6 +40,17 @@ public class Trie1 {
         System.out.println(trie.contains("biggere"));
     }
 
+    /**
+     * Adds a word to the trie
+     *
+     * Time Complexity: O(L*k) where:
+     * - L is the length of the word
+     * - k is the average number of children per node
+     *
+     * Space Complexity: O(L) in worst case if no shared prefixes
+     *
+     * @param word The word to add to the trie
+     */
     public void add(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
