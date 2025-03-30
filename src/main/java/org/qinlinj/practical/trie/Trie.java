@@ -37,6 +37,14 @@ public class Trie {
         System.out.println(trie.contains("dogddd"));
     }
 
+    /**
+     * Adds a word to the trie
+     *
+     * Time Complexity: O(L) where L is the length of the word
+     * Space Complexity: O(L) in worst case if no shared prefixes
+     *
+     * @param word The word to add to the trie
+     */
     public void add(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
