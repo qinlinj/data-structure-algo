@@ -1,7 +1,24 @@
 package org.qinlinj.practical.trie;
 
 import java.util.*;
-
+// @formatter:off
+/**
+ * Trie (Prefix Tree) Data Structure Implementation
+ *
+ * A Trie is an efficient information retrieval data structure specialized for string keys.
+ * Advantages of Trie:
+ * 1. Fast lookups - O(L) where L is the length of the word
+ * 2. Space efficiency when storing many strings with common prefixes
+ * 3. Excellent for prefix-based operations like autocomplete
+ * 4. Faster than hash tables for certain string operations
+ *
+ * Use cases:
+ * - Autocomplete suggestions
+ * - Spell checkers
+ * - IP routing (longest prefix matching)
+ * - Predictive text input
+ * - Word games (finding valid words from letters)
+ */
 public class Trie {
     private Node root;
 
