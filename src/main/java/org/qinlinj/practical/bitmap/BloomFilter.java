@@ -182,7 +182,18 @@ public class BloomFilter {
     private int calculateNumHashes(int bitSize, int expectedElements) {
     }
 
-    private int calculateBitSize(int expectedElements, double falsePositiveRate) {
-        return 0;
+    /**
+     * Calculates the optimal bit size for the Bloom Filter.
+     * <p>
+     * Formula: m = -n*ln(p)/(ln(2)^2)
+     * <p>
+     * Time Complexity: O(1)
+     *
+     * @param n Expected number of elements
+     * @param p Desired false positive probability
+     * @return The optimal bit size
+     */
+    private int calculateBitSize(int n, double p) {
+        return (int) Math.ceil(-(n * Math.log(p)) / (Math.log(2) * Math.log(2)));
     }
 }
