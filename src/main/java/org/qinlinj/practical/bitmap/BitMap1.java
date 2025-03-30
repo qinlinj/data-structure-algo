@@ -49,6 +49,29 @@ public class BitMap1 {
         }
     }
 
+    /**
+     * Sets the bit corresponding to the specified number
+     *
+     * Visual Examples:
+     *
+     * Example 1: Setting bit 2 in an empty bitmap
+     * Starting state: b = 00000000
+     * Operation:
+     *   1 << 2 = 00000100 (1 shifted left by 2 positions)
+     *   b |= 00000100 (bitwise OR)
+     * Result: b = 00000100
+     *
+     * Example 2: Setting bit 2 when it's already set
+     * Starting state: b = 00000100
+     * Operation:
+     *   1 << 2 = 00000100
+     *   b |= 00000100
+     * Result: b = 00000100 (unchanged, as the bit was already set)
+     *
+     * Time Complexity: O(1)
+     *
+     * @param num The number to set in the bitmap (should be between 0-7)
+     */
     public void set(int num) {
         /*
             set 2
@@ -78,6 +101,17 @@ public class BitMap1 {
         return ((1 << target) & b) != 0;
     }
 
+    /**
+     * Provides a string representation of the bitmap
+     *
+     * Example:
+     * For bitmap with bits 2, 3, 5, and 7 set (10101100),
+     * returns "BitMap{b=10101100}"
+     *
+     * Time Complexity: O(1)
+     *
+     * @return A string showing the binary representation of the bitmap
+     */
     @Override
     public String toString() {
         return "BitMap{" +
