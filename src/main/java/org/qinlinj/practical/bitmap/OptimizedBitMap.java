@@ -151,4 +151,28 @@ public class OptimizedBitMap {
         }
         return result;
     }
+
+    /**
+     * Provides a string representation of the bitmap
+     *
+     * @return A string showing values that are present in the bitmap
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("BitMap{");
+        boolean first = true;
+
+        for (int i = 0; i < capacity; i++) {
+            if (contains(i)) {
+                if (!first) {
+                    sb.append(", ");
+                }
+                sb.append(i);
+                first = false;
+            }
+        }
+
+        sb.append("}");
+        return sb.toString();
+    }
 }
