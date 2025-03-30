@@ -21,6 +21,10 @@ import java.util.*;
 public class Trie1 {
     private Node root;
 
+    /**
+     * Constructor initializes the trie with a root node containing a special character '/'
+     * The root character is arbitrary and serves as a marker for the start of the trie
+     */
     public Trie1() {
         this.root = new Node('/');
     }
