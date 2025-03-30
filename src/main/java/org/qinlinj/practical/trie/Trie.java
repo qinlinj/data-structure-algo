@@ -34,6 +34,27 @@ public class Trie {
         trie.add("dog");
         trie.add("door");
 
+        // Test if a word is contained in the trie
+        // This will return false because "dogddd" was not added, only "dog" was
+        System.out.println(trie.contains("dogddd"));
+
+        // Visualization example of how the trie structure looks after adding these words:
+        //
+        //                  root
+        //                /  |  \
+        //               b   p   d
+        //              /    |    \
+        //             i     a     o
+        //            /      |      \
+        //           g*      t*      g*  o
+        //          /                     \
+        //         g                       r*
+        //        /
+        //       e
+        //      /
+        //     r*
+        //
+        // Note: * indicates a complete word (isWord = true)
         System.out.println(trie.contains("dogddd"));
     }
 
