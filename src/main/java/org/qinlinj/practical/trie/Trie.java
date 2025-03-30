@@ -76,6 +76,12 @@ public class Trie {
         return curr.isWord;
     }
 
+    /**
+     * Node class for the Trie
+     * Each node represents a character in the trie and has:
+     * 1. A map of child nodes for subsequent characters
+     * 2. A flag indicating if the node represents the end of a word
+     */
     private class Node {
         Map<Character, Node> children;
         boolean isWord;
