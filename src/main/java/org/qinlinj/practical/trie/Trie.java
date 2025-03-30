@@ -1,6 +1,7 @@
 package org.qinlinj.practical.trie;
 
 import java.util.*;
+
 // @formatter:off
 /**
  * Trie (Prefix Tree) Data Structure Implementation
@@ -20,13 +21,21 @@ import java.util.*;
  * - Word games (finding valid words from letters)
  */
 public class Trie {
+    // Root node of the trie
     private Node root;
 
+    /**
+     * Constructor initializes an empty trie with just a root node
+     */
     public Trie() {
         this.root = new Node();
     }
 
+    /**
+     * Demo of trie functionality
+     */
     public static void main(String[] args) {
+        // Create a new trie and add several words
         Trie trie = new Trie();
         trie.add("big");
         trie.add("pat");
@@ -55,7 +64,6 @@ public class Trie {
         //     r*
         //
         // Note: * indicates a complete word (isWord = true)
-        System.out.println(trie.contains("dogddd"));
     }
 
     /**
@@ -68,12 +76,18 @@ public class Trie {
      */
     public void add(String word) {
         Node curr = root;
+
+        // Traverse through each character in the word
         for (Character c : word.toCharArray()) {
+            // If the current character isn't in the children map, add a new node
             if (!curr.children.containsKey(c)) {
                 curr.children.put(c, new Node());
             }
+            // Move to the next node
             curr = curr.children.get(c);
         }
+
+        // Mark the last node as a complete word
         curr.isWord = true;
     }
 
@@ -88,12 +102,18 @@ public class Trie {
      */
     public boolean contains(String word) {
         Node curr = root;
-        for (Character c : word.toCharArray()) { // O(n)
+
+        // Traverse through each character in the word
+        for (Character c : word.toCharArray()) {
+            // If character isn't found in the trie, the word doesn't exist
             if (!curr.children.containsKey(c)) {
                 return false;
             }
+            // Move to the next node
             curr = curr.children.get(c);
         }
+
+        // The word exists only if we've reached a node marked as a complete word
         return curr.isWord;
     }
 
@@ -104,9 +124,15 @@ public class Trie {
      * 2. A flag indicating if the node represents the end of a word
      */
     private class Node {
+        // Maps each character to its corresponding child node
         Map<Character, Node> children;
+
+        // Indicates whether this node represents the end of a complete word
         boolean isWord;
 
+        /**
+         * Constructor initializes an empty node
+         */
         Node() {
             children = new HashMap<>();
             isWord = false;
