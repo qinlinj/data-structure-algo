@@ -208,4 +208,23 @@ public class BloomFilter {
     private int calculateBitSize(int n, double p) {
         return (int) Math.ceil(-(n * Math.log(p)) / (Math.log(2) * Math.log(2)));
     }
+
+    /**
+     * Returns a human-readable representation of the Bloom Filter parameters.
+     * <p>
+     * Time Complexity: O(1)
+     *
+     * @return A string describing the Bloom Filter
+     */
+    @Override
+    public String toString() {
+        return "BloomFilter{" +
+                "bitSize=" + bitSize +
+                ", numHashes=" + numHashes +
+                ", expectedElements=" + expectedElements +
+                ", targetFalsePositiveRate=" + falsePositiveRate +
+                ", bitSetSize=" + bitset.size() +
+                ", bitsSet=" + bitset.cardinality() +
+                '}';
+    }
 }
