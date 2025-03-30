@@ -179,7 +179,19 @@ public class BloomFilter {
     }
 
 
-    private int calculateNumHashes(int bitSize, int expectedElements) {
+    /**
+     * Calculates the optimal number of hash functions.
+     * <p>
+     * Formula: k = m/n*ln(2)
+     * <p>
+     * Time Complexity: O(1)
+     *
+     * @param m Bit size
+     * @param n Expected number of elements
+     * @return The optimal number of hash functions
+     */
+    private int calculateNumHashes(int m, int n) {
+        return Math.max(1, (int) Math.round((m / n) * Math.log(2)));
     }
 
     /**
