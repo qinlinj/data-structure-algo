@@ -39,6 +39,16 @@ public class Leaderboard {
         System.out.println(leaderboard.top(1));
     }
 
+    /**
+     * Adds a score to a player's total score
+     * If the player doesn't exist in the leaderboard, they are added with the given score
+     * If the player already exists, the score is added to their current total
+     * <p>
+     * Time Complexity: O(1) for HashMap operations
+     *
+     * @param playerId The ID of the player
+     * @param score    The score to add
+     */
     public void addScore(int playerId, int score) {
         if (map.containsKey(playerId)) {
             map.put(playerId, map.get(playerId) + score);
