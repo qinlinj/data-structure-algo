@@ -1,5 +1,7 @@
 package org.qinlinj.practical.bitmap;
 
+import java.util.*;
+
 /**
  * Bloom Filter Implementation
  * <p>
@@ -46,4 +48,9 @@ package org.qinlinj.practical.bitmap;
  * To check if "banana" exists, if any of its hash bits are 0 → Definitely no
  */
 public class BloomFilter {
+    private BitSet bitset; // The bit array for storing hashed positions
+    private int bitSize;   // Size of the bit array (m)
+    private int numHashes; // Number of hash functions (k)
+    private int expectedElements; // Number of expected elements to be inserted
+    private double falsePositiveRate; // Desired false positive rate
 }
