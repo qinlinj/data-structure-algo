@@ -84,6 +84,18 @@ public class Trie1 {
         return -1;
     }
 
+    /**
+     * Checks if a word exists in the trie
+     *
+     * Time Complexity: O(L*k) where:
+     * - L is the length of the word
+     * - k is the average number of children per node
+     *
+     * Space Complexity: O(1) since no additional space is needed
+     *
+     * @param word The word to check
+     * @return true if the word exists in the trie, false otherwise
+     */
     public boolean contains(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) {
