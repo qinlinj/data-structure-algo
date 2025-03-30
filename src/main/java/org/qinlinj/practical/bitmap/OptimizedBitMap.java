@@ -113,4 +113,24 @@ public class OptimizedBitMap {
         }
         return result;
     }
+
+    /**
+     * Performs a bitwise OR operation with another BitMap
+     *
+     * @param other The other BitMap
+     * @return A new BitMap containing the result of the OR operation
+     */
+    public OptimizedBitMap or(OptimizedBitMap other) {
+        OptimizedBitMap result = new OptimizedBitMap(Math.max(this.capacity, other.capacity));
+        // Copy all bits from this bitmap
+        System.arraycopy(this.bits, 0, result.bits, 0, this.bits.length);
+
+        // OR with bits from other bitmap
+        for (int i = 0; i < other.bits.length; i++) {
+            if (i < result.bits.length) {
+                result.bits[i] |= other.bits[i];
+            }
+        }
+        return result;
+    }
 }
