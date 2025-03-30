@@ -2,6 +2,16 @@ package org.qinlinj.practical.leaderboard;
 
 import java.util.*;
 
+/**
+ * Leaderboard Implementation
+ * <p>
+ * This class implements a simple game leaderboard that tracks player scores.
+ * It supports adding scores to players, retrieving the sum of top K scores,
+ * and resetting a player's score.
+ * <p>
+ * The implementation uses a HashMap to store player IDs and their corresponding scores,
+ * which provides O(1) time complexity for score updates and resets.
+ */
 public class Leaderboard {
     private Map<Integer, Integer> map;
 
