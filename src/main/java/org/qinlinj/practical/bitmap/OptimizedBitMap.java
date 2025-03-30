@@ -70,4 +70,18 @@ public class OptimizedBitMap {
 
         bits[wordIndex] &= ~(1L << bitIndex);
     }
+
+    /**
+     * Toggles the bit at the specified position
+     *
+     * @param position The position to toggle
+     */
+    public void toggle(int position) {
+        if (position < 0 || position >= capacity) return;
+
+        int wordIndex = position >>> ADDRESS_BITS;
+        int bitIndex = position & MASK;
+
+        bits[wordIndex] ^= (1L << bitIndex);
+    }
 }
