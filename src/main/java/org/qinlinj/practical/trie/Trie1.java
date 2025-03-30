@@ -1,7 +1,23 @@
 package org.qinlinj.practical.trie;
 
 import java.util.*;
-
+// @formatter:off
+/**
+ * Trie (Prefix Tree) Data Structure Implementation Using Array Lists
+ *
+ * This implementation uses ArrayList instead of HashMap to store child nodes.
+ *
+ * Advantages of this implementation:
+ * 1. Potentially lower memory overhead for small character sets
+ * 2. Better cache locality in some cases
+ * 3. Avoids hash collisions entirely
+ * 4. May perform better when the branching factor is low (few children per node)
+ *
+ * Disadvantages compared to HashMap implementation:
+ * 1. O(k) lookup time where k is the number of children, vs O(1) for HashMap
+ * 2. Linear search through children is required to find a specific character
+ * 3. Less efficient for large alphabets or dense tries
+ */
 public class Trie1 {
     private Node root;
 
