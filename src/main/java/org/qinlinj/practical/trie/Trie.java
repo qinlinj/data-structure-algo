@@ -48,6 +48,15 @@ public class Trie {
         curr.isWord = true;
     }
 
+    /**
+     * Checks if a word exists in the trie
+     *
+     * Time Complexity: O(L) where L is the length of the word
+     * Space Complexity: O(1) since no additional space is needed
+     *
+     * @param word The word to check
+     * @return true if the word exists in the trie, false otherwise
+     */
     public boolean contains(String word) {
         Node curr = root;
         for (Character c : word.toCharArray()) { // O(n)
