@@ -19,7 +19,7 @@ import java.util.*;
  * 2. Linear search through children is required to find a specific character
  * 3. Less efficient for large alphabets or dense tries
  */
-public class Trie1 {
+public class TrieArrayListImp {
     // Root node of the trie
     private Node root;
 
@@ -27,7 +27,7 @@ public class Trie1 {
      * Constructor initializes the trie with a root node containing a special character '/'
      * The root character is arbitrary and serves as a marker for the start of the trie
      */
-    public Trie1() {
+    public TrieArrayListImp() {
         this.root = new Node('/');
     }
 
@@ -36,7 +36,7 @@ public class Trie1 {
      * Note: There's a type mismatch in the main method - it creates a Trie object but should create Trie1
      */
     public static void main(String[] args) {
-        Trie trie = new Trie();  // Note: This should be Trie1 trie = new Trie1();
+        TrieHashMapImp trie = new TrieHashMapImp();  // Note: This should be Trie1 trie = new Trie1();
         trie.add("big");
         trie.add("pat");
         trie.add("bigger");

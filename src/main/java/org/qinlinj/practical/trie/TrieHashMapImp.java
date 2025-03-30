@@ -20,14 +20,14 @@ import java.util.*;
  * - Predictive text input
  * - Word games (finding valid words from letters)
  */
-public class Trie {
+public class TrieHashMapImp {
     // Root node of the trie
     private Node root;
 
     /**
      * Constructor initializes an empty trie with just a root node
      */
-    public Trie() {
+    public TrieHashMapImp() {
         this.root = new Node();
     }
 
@@ -36,7 +36,7 @@ public class Trie {
      */
     public static void main(String[] args) {
         // Create a new trie and add several words
-        Trie trie = new Trie();
+        TrieHashMapImp trie = new TrieHashMapImp();
         trie.add("big");
         trie.add("pat");
         trie.add("bigger");
