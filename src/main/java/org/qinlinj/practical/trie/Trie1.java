@@ -65,6 +65,16 @@ public class Trie1 {
         curr.isWord = true;
     }
 
+    /**
+     * Searches for a character in a list of nodes
+     * This is a linear search through the children list
+     *
+     * Time Complexity: O(k) where k is the number of children
+     *
+     * @param children List of child nodes to search through
+     * @param c Character to find
+     * @return Index of the child node containing the character, or -1 if not found
+     */
     private int containsChar(List<Node> children, Character c) {
         for (int i = 0; i < children.size(); i++) {
             if (children.get(i).c == c) {
