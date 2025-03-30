@@ -87,6 +87,34 @@ public class BloomFilter {
         this.bitset = new BitSet(bitSize);
     }
 
+    /**
+     * Adds an element to the Bloom Filter.
+     * <p>
+     * Visual Example:
+     * Consider adding "cat" to our previous example:
+     * - Hash1("cat") = 4 → Set bit 4 to 1
+     * - Hash2("cat") = 9 → Set bit 9 to 1
+     * - Hash3("cat") = 15 → Set bit 15 to 1
+     * <p>
+     * Before: [0,1,1,0,0,0,0,1,0,0,0,1,0,0,1,0]
+     * After:  [0,1,1,0,1,0,0,1,0,1,0,1,0,0,1,1]
+     * <p>
+     * Time Complexity: O(k) where k is the number of hash functions
+     *
+     * @param value The element to add to the Bloom Filter
+     */
+    public void add(String value) {
+        // For each hash function
+        for (int i = 0; i < numHashes; i++) {
+            // Calculate the hash value and set the corresponding bit
+            int hash = getHash(value, i);
+            bitset.set(hash);
+        }
+    }
+
+    private int getHash(String value, int i) {
+    }
+
     private int calculateNumHashes(int bitSize, int expectedElements) {
     }
 
