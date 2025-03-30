@@ -145,8 +145,39 @@ public class BloomFilter {
         return true;
     }
 
-    private int getHash(String value, int i) {
+    /**
+     * Generates a hash value for a given string and hash function index.
+     * Uses a simple but effective hashing scheme with different seeds for each hash function.
+     * <p>
+     * Visual Example:
+     * For the string "apple" and hash function 0:
+     * 1. Start with seed = 0 * 31 + 17 = 17
+     * 2. For each character in "apple", update hash:
+     * - 'a': hash = (17 * 31) + 97 = 624
+     * - 'p': hash = (624 * 31) + 112 = 19,456
+     * - 'p': hash = (19,456 * 31) + 112 = 603,248
+     * - 'l': hash = (603,248 * 31) + 108 = 18,700,796
+     * - 'e': hash = (18,700,796 * 31) + 101 = 579,724,777
+     * 3. Take hash modulo bitSize to get the bit position:
+     * 579,724,777 % 16 = 9
+     * <p>
+     * Time Complexity: O(L) where L is the length of the input string
+     *
+     * @param value        The string to hash
+     * @param hashFunction The index of the hash function to use
+     * @return The hash value (a position in the bit array)
+     */
+    private int getHash(String value, int hashFunction) {
+        int hash = hashFunction * 31 + 17; // Different starting point for each hash function
+
+        for (int i = 0; i < value.length(); i++) {
+            hash = (hash * 31) + value.charAt(i);
+        }
+
+        // Make sure the hash is positive and within range
+        return Math.abs(hash % bitSize);
     }
+
 
     private int calculateNumHashes(int bitSize, int expectedElements) {
     }
