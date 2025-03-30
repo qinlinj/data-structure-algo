@@ -108,6 +108,13 @@ public class Trie1 {
         return curr.isWord;
     }
 
+    /**
+     * Node class for the Trie
+     * Each node represents a character in the trie and contains:
+     * 1. The character value itself
+     * 2. A list of child nodes for subsequent characters
+     * 3. A flag indicating if the node represents the end of a word
+     */
     private class Node {
         List<Node> children;
         boolean isWord;
