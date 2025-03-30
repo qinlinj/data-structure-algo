@@ -26,7 +26,7 @@ package org.qinlinj.practical.bitmap;
  * After set(2):   [0 0 0 0 0 1 0 0] (byte value: 4)
  * After set(5):   [0 0 1 0 0 1 0 0] (byte value: 36)
  */
-public class BitMap1 {
+public class BitMapSimple {
     // Single byte to store 8 boolean values (one per bit)
     private byte b;
 
@@ -36,7 +36,7 @@ public class BitMap1 {
      * Time Complexity: O(1)
      * Space Complexity: O(1) - uses exactly 1 byte of memory
      */
-    public BitMap1() {
+    public BitMapSimple() {
         b = 0;
     }
 
