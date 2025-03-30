@@ -41,4 +41,19 @@ public class OptimizedBitMap {
 
         bits[wordIndex] |= (1L << bitIndex);
     }
+
+    /**
+     * Checks if the bit at the specified position is set
+     *
+     * @param position The position to check
+     * @return true if the bit is set, false otherwise
+     */
+    public boolean contains(int position) {
+        if (position < 0 || position >= capacity) return false;
+
+        int wordIndex = position >>> ADDRESS_BITS;
+        int bitIndex = position & MASK;
+
+        return (bits[wordIndex] & (1L << bitIndex)) != 0;
+    }
 }
