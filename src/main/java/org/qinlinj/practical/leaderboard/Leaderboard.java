@@ -57,6 +57,19 @@ public class Leaderboard {
         }
     }
 
+    /**
+     * Returns the sum of the top K scores in the leaderboard
+     * <p>
+     * Time Complexity: O(n log n) where n is the number of players
+     * - O(n) to convert values to array
+     * - O(n log n) for sorting
+     * - O(k) to sum the top k scores
+     * <p>
+     * Space Complexity: O(n) for the scores array
+     *
+     * @param k The number of top scores to sum
+     * @return The sum of the top K scores
+     */
     public int top(int k) {
         Integer[] scores = map.values().toArray(new Integer[map.values().size()]);
         Arrays.sort(scores, new Comparator<Integer>() {
