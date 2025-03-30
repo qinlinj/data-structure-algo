@@ -1,5 +1,31 @@
 package org.qinlinj.practical.bitmap;
 
+// @formatter:off
+/**
+ * Single Byte BitMap Implementation
+ *
+ * Advantages of BitMap:
+ * 1. Memory Efficiency: Each bit represents one number, using 8x less memory than int arrays
+ * 2. Fast Operations: O(1) time complexity for setting and checking values
+ * 3. Simple Implementation: This version uses just a single byte to store 8 distinct values
+ * 4. Constant Space: Fixed memory usage regardless of how many unique numbers are stored
+ * 5. Efficient for Small Sets: Ideal for representing a small set of integers (0-7)
+ *
+ * Concept and Principle:
+ * This simplified BitMap uses a single byte (8 bits) to represent the presence or absence
+ * of integers from 0 to 7. Each bit position corresponds to an integer value:
+ *
+ * Bit positions:  7 6 5 4 3 2 1 0
+ * Values:         7 6 5 4 3 2 1 0
+ *
+ * When a bit is set to 1, it indicates the presence of the corresponding number.
+ * When a bit is 0, it indicates the absence of that number.
+ *
+ * Visual representation:
+ * Empty bitmap:   [0 0 0 0 0 0 0 0] (byte value: 0)
+ * After set(2):   [0 0 0 0 0 1 0 0] (byte value: 4)
+ * After set(5):   [0 0 1 0 0 1 0 0] (byte value: 36)
+ */
 public class BitMap1 {
     private byte b;
 
