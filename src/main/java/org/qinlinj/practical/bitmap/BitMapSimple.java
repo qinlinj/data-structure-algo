@@ -26,10 +26,10 @@ package org.qinlinj.practical.bitmap;
  * After set(2):   [0 0 0 0 0 1 0 0] (byte value: 4)
  * After set(5):   [0 0 1 0 0 1 0 0] (byte value: 36)
  */
-public class BitMap1 {
+public class BitMapSimple {
     private byte b;
 
-    public BitMap1() {
+    public BitMapSimple() {
         b = 0;
     }
 
