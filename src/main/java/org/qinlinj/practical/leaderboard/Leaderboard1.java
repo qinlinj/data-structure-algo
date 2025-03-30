@@ -81,6 +81,15 @@ public class Leaderboard1 {
         players.add(player);
     }
 
+    /**
+     * Returns the sum of the top K scores in the leaderboard
+     * <p>
+     * Time Complexity: O(k) where k is the number of top scores requested
+     * This is much more efficient than O(n log n) in the basic implementation
+     *
+     * @param k The number of top scores to sum
+     * @return The sum of the top K scores
+     */
     public int top(int k) {
         Iterator<Player> it = players.iterator();
         int sum = 0;
