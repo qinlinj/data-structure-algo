@@ -58,6 +58,22 @@ public class BitMap {
         }
     }
 
+    /**
+     * Sets the bit corresponding to the specified number
+     *
+     * Visual example: Setting bit 3 in an 8-bit bitmap
+     * Before: [00000000]
+     * Operation: Set bit at index 3 (num=3)
+     *   byteIndex = 3/8 = 0
+     *   bitIndex = 3%8 = 3
+     *   1 << bitIndex = 00001000
+     *   bytes[0] |= 00001000 = 00001000
+     * After: [00001000]
+     *
+     * Time Complexity: O(1)
+     *
+     * @param num The number to set in the bitmap
+     */
     public void set(int num) {
         if (num > nBits) return;
         int byteIndex = num / 8;
