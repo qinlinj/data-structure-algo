@@ -81,6 +81,22 @@ public class BitMap {
         bytes[byteIndex] |= (1 << bitIndex);
     }
 
+    /**
+     * Checks if the specified number exists in the bitmap
+     *
+     * Visual example: Checking bit 3 in bitmap [00001000]
+     * Operation: Check if bit at index 3 (target=3) is set
+     *   byteIndex = 3/8 = 0
+     *   bitIndex = 3%8 = 3
+     *   1 << bitIndex = 00001000
+     *   bytes[0] & 00001000 = 00001000 (non-zero result means the bit is set)
+     * Result: true (bit 3 is set)
+     *
+     * Time Complexity: O(1)
+     *
+     * @param target The number to check in the bitmap
+     * @return true if the number exists, false otherwise
+     */
     public boolean contains(int target) {
         if (target > nBits) return false;
         int byteIndex = target / 8;
