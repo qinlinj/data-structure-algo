@@ -2,6 +2,21 @@ package org.qinlinj.practical.leaderboard;
 
 import java.util.*;
 
+/**
+ * Optimized Leaderboard Implementation using TreeSet
+ * <p>
+ * This class implements a game leaderboard that tracks player scores with improved
+ * performance for retrieving top scores compared to the basic implementation.
+ * <p>
+ * Key optimizations:
+ * 1. Uses a TreeSet to maintain players in sorted order automatically (by score)
+ * 2. Provides O(log n) insertion and removal operations
+ * 3. Enables O(k) access to the top k scores without sorting each time
+ * <p>
+ * The implementation uses both:
+ * - HashMap for O(1) player lookups by ID
+ * - TreeSet for maintaining the sorted order of players by score
+ */
 public class Leaderboard1 {
     private Map<Integer, Player> map;
     private TreeSet<Player> players;
