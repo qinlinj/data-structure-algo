@@ -1,6 +1,7 @@
 package org.qinlinj.practical.trie;
 
 import java.util.*;
+
 // @formatter:off
 /**
  * Trie (Prefix Tree) Data Structure Implementation Using Array Lists
@@ -19,6 +20,7 @@ import java.util.*;
  * 3. Less efficient for large alphabets or dense tries
  */
 public class Trie1 {
+    // Root node of the trie
     private Node root;
 
     /**
@@ -29,14 +31,19 @@ public class Trie1 {
         this.root = new Node('/');
     }
 
+    /**
+     * Demo of trie functionality
+     * Note: There's a type mismatch in the main method - it creates a Trie object but should create Trie1
+     */
     public static void main(String[] args) {
-        Trie trie = new Trie();
+        Trie trie = new Trie();  // Note: This should be Trie1 trie = new Trie1();
         trie.add("big");
         trie.add("pat");
         trie.add("bigger");
         trie.add("dog");
         trie.add("door");
 
+        // This will check if "biggere" exists in the trie (should return false)
         System.out.println(trie.contains("biggere"));
     }
 
@@ -53,15 +60,23 @@ public class Trie1 {
      */
     public void add(String word) {
         Node curr = root;
+        // Traverse through each character in the word
         for (Character c : word.toCharArray()) {
+            // Search for the character in the current node's children
             int index = containsChar(curr.children, c);
+
+            // If character isn't found, add a new node for it
             if (index == -1) {
                 curr.children.add(new Node(c));
+                // Get the index of the newly added node
                 index = curr.children.size() - 1;
             }
+
+            // Move to the next node
             curr = curr.children.get(index);
         }
 
+        // Mark the last node as a complete word
         curr.isWord = true;
     }
 
@@ -76,11 +91,13 @@ public class Trie1 {
      * @return Index of the child node containing the character, or -1 if not found
      */
     private int containsChar(List<Node> children, Character c) {
+        // Linear search through the children list
         for (int i = 0; i < children.size(); i++) {
             if (children.get(i).c == c) {
                 return i;
             }
         }
+        // Character not found
         return -1;
     }
 
@@ -98,13 +115,21 @@ public class Trie1 {
      */
     public boolean contains(String word) {
         Node curr = root;
+        // Traverse through each character in the word
         for (Character c : word.toCharArray()) {
+            // Search for the character in the current node's children
             int index = containsChar(curr.children, c);
+
+            // If character isn't found, the word doesn't exist
             if (index == -1) {
                 return false;
             }
+
+            // Move to the next node
             curr = curr.children.get(index);
         }
+
+        // The word exists only if we've reached a node marked as a complete word
         return curr.isWord;
     }
 
@@ -116,10 +141,20 @@ public class Trie1 {
      * 3. A flag indicating if the node represents the end of a word
      */
     private class Node {
+        // List of child nodes
         List<Node> children;
+
+        // Indicates whether this node represents the end of a complete word
         boolean isWord;
+
+        // The character stored in this node
         private Character c;
 
+        /**
+         * Constructor initializes a node with the given character
+         *
+         * @param c The character to store in this node
+         */
         public Node(Character c) {
             this.c = c;
             this.children = new ArrayList<>();
