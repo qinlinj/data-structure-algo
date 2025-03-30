@@ -56,4 +56,18 @@ public class OptimizedBitMap {
 
         return (bits[wordIndex] & (1L << bitIndex)) != 0;
     }
+
+    /**
+     * Clears the bit at the specified position
+     *
+     * @param position The position to clear
+     */
+    public void clear(int position) {
+        if (position < 0 || position >= capacity) return;
+
+        int wordIndex = position >>> ADDRESS_BITS;
+        int bitIndex = position & MASK;
+
+        bits[wordIndex] &= ~(1L << bitIndex);
+    }
 }
