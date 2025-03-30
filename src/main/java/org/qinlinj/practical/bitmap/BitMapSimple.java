@@ -26,24 +26,40 @@ package org.qinlinj.practical.bitmap;
  * After set(2):   [0 0 0 0 0 1 0 0] (byte value: 4)
  * After set(5):   [0 0 1 0 0 1 0 0] (byte value: 36)
  */
-public class BitMapSimple {
+public class BitMap1 {
+    // Single byte to store 8 boolean values (one per bit)
     private byte b;
 
-    public BitMapSimple() {
+    /**
+     * Constructor initializes an empty bitmap with all bits set to 0
+     *
+     * Time Complexity: O(1)
+     * Space Complexity: O(1) - uses exactly 1 byte of memory
+     */
+    public BitMap1() {
         b = 0;
     }
 
+    /**
+     * Demonstration of BitMap functionality
+     * Note: There's a type mismatch here - it creates a BitMap object but should create BitMap1
+     */
     public static void main(String[] args) {
         int[] data = new int[]{2, 7, 2, 5, 3};
         int target = 2;
 
+        // This should be BitMap1 for the single byte implementation
         BitMap bitMap1 = new BitMap(8);
+
+        // Add each value from the data array to the bitmap
         for (int i = 0; i < data.length; i++) {
             bitMap1.set(data[i]);
         }
 
+        // Print the bitmap representation
         System.out.println(bitMap1);
 
+        // Check if the target value exists in the bitmap
         if (bitMap1.contains(target)) {
             System.out.println("There is a target value: " + target);
         }
