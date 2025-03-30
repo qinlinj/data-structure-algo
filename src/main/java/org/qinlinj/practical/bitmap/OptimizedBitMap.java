@@ -28,4 +28,17 @@ public class OptimizedBitMap {
         this.bits = new long[(capacity + BITS_PER_WORD - 1) / BITS_PER_WORD];
     }
 
+    /**
+     * Sets the bit at the specified position
+     *
+     * @param position The position to set
+     */
+    public void set(int position) {
+        if (position < 0 || position >= capacity) return;
+
+        int wordIndex = position >>> ADDRESS_BITS; // Divide by 64
+        int bitIndex = position & MASK;            // Modulo 64
+
+        bits[wordIndex] |= (1L << bitIndex);
+    }
 }
