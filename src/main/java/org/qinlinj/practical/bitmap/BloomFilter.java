@@ -112,6 +112,39 @@ public class BloomFilter {
         }
     }
 
+    /**
+     * Checks if an element might be in the Bloom Filter.
+     * <p>
+     * Visual Example:
+     * To check if "apple" exists in our example:
+     * - Hash1("apple") = 2 → Check bit 2: it's 1
+     * - Hash2("apple") = 7 → Check bit 7: it's 1
+     * - Hash3("apple") = 11 → Check bit 11: it's 1
+     * All bits are 1, so "apple" is probably in the set.
+     * <p>
+     * To check if "grape" exists:
+     * - Hash1("grape") = 3 → Check bit 3: it's 0
+     * Since one hash bit is 0, "grape" is definitely not in the set.
+     * <p>
+     * Time Complexity: O(k) where k is the number of hash functions
+     *
+     * @param value The element to check
+     * @return true if the element might be in the set, false if it's definitely not
+     */
+    public boolean mightContain(String value) {
+        // For each hash function
+        for (int i = 0; i < numHashes; i++) {
+            // Calculate the hash value and check the corresponding bit
+            int hash = getHash(value, i);
+            // If any bit is not set, the element is definitely not in the set
+            if (!bitset.get(hash)) {
+                return false;
+            }
+        }
+        // All bits are set, the element is probably in the set
+        return true;
+    }
+
     private int getHash(String value, int i) {
     }
 
