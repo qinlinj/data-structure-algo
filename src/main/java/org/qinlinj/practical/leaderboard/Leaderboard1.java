@@ -101,6 +101,15 @@ public class Leaderboard1 {
         return sum;
     }
 
+    /**
+     * Resets a player's score by removing them from the leaderboard
+     * <p>
+     * Time Complexity: O(log n) where n is the number of players
+     * - O(1) for HashMap lookups and removal
+     * - O(log n) for TreeSet removal
+     *
+     * @param playerId The ID of the player to reset
+     */
     public void reset(int playerId) { // O(logn)
         if (map.containsKey(playerId)) {
             players.remove(map.get(playerId));
