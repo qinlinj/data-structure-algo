@@ -77,7 +77,7 @@ public class RK2 {
      * @param pattern the pattern string to search for
      * @return the starting index of the first occurrence of pattern in mainStr, or -1 if not found
      */
-    private int indexOf(String mainStr, String pattern) {
+    public int indexOf(String mainStr, String pattern) {
         // Handle null inputs
         if (mainStr == null || pattern == null) return -1;
 

@@ -49,7 +49,7 @@ public class StringTest {
 
         // Initialize algorithm instances
         BF2 bf = new BF2();
-        RK3 rk = new RK3();
+        RK2 rk = new RK2();
         BM2 bm = new BM2();
         KMP1 kmp = new KMP1();
 
@@ -79,7 +79,7 @@ public class StringTest {
     private static void runPerformanceBenchmarks() {
         // Initialize algorithm instances
         BF2 bf = new BF2();
-        RK3 rk = new RK3();
+        RK2 rk = new RK2();
         BM2 bm = new BM2();
         KMP1 kmp = new KMP1();
 
