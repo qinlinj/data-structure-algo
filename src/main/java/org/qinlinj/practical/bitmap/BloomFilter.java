@@ -88,6 +88,56 @@ public class BloomFilter {
     }
 
     /**
+     * Main method to demonstrate the Bloom Filter usage.
+     */
+    public static void main(String[] args) {
+        // Create a Bloom Filter with expected 1000 elements and 1% false positive rate
+        BloomFilter filter = new BloomFilter(1000, 0.01);
+        System.out.println("Bloom Filter created: " + filter);
+
+        // Add some elements
+        String[] elementsToAdd = {"apple", "banana", "cherry", "date", "elderberry"};
+        for (String element : elementsToAdd) {
+            filter.add(element);
+            System.out.println("Added: " + element);
+        }
+
+        // Check for elements
+        System.out.println("\nChecking for elements:");
+        String[] elementsToCheck = {"apple", "banana", "grape", "kiwi", "elderberry"};
+        for (String element : elementsToCheck) {
+            boolean might = filter.mightContain(element);
+            System.out.println("Element '" + element + "' might be in the set: " + might);
+        }
+
+        // Demonstrate false positives by adding many random elements
+        System.out.println("\nDemonstrating false positives:");
+        Random random = new Random(123); // Fixed seed for reproducibility
+
+        // Add 800 more random elements
+        for (int i = 0; i < 800; i++) {
+            String randomElement = "element-" + random.nextInt(10000);
+            filter.add(randomElement);
+        }
+
+        System.out.println("Added 800 random elements, total 805 elements.");
+        System.out.println("Expected false positive rate: " + filter.getFalsePositiveRate(805));
+
+        // Check for elements we know are not in the set
+        int falsePositives = 0;
+        int trials = 10000;
+
+        for (int i = 0; i < trials; i++) {
+            String nonExistingElement = "non-existing-" + random.nextInt(1000000);
+            if (filter.mightContain(nonExistingElement)) {
+                falsePositives++;
+            }
+        }
+
+        System.out.println("Actual false positive rate: " + (falsePositives / (double) trials));
+    }
+
+    /**
      * Adds an element to the Bloom Filter.
      * <p>
      * Visual Example:
@@ -178,7 +228,6 @@ public class BloomFilter {
         return Math.abs(hash % bitSize);
     }
 
-
     /**
      * Calculates the optimal number of hash functions.
      * <p>
@@ -207,6 +256,21 @@ public class BloomFilter {
      */
     private int calculateBitSize(int n, double p) {
         return (int) Math.ceil(-(n * Math.log(p)) / (Math.log(2) * Math.log(2)));
+    }
+
+    /**
+     * Returns the current estimated false positive rate based on the number
+     * of elements added and the filter configuration.
+     * <p>
+     * Formula: p = (1 - e^(-k*n/m))^k
+     * <p>
+     * Time Complexity: O(1)
+     *
+     * @param elementsAdded Number of elements added to the filter
+     * @return The estimated false positive rate
+     */
+    public double getFalsePositiveRate(int elementsAdded) {
+        return Math.pow(1 - Math.exp(-numHashes * (double) elementsAdded / bitSize), numHashes);
     }
 
     /**
