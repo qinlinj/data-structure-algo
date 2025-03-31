@@ -62,9 +62,15 @@ public class LRUCache<K, V> implements Cache<K, V> {
                 Node delNode = removeTailNode();
                 cache.remove(delNode.key);
             }
+            node = new Node();
+            node.key = key;
+            node.value = value;
 
+            cache.put(key, node);
+            addNodeToHead(node);
         } else {
-
+            node.value = value;
+            moveNodeToHead(node);
         }
     }
 
