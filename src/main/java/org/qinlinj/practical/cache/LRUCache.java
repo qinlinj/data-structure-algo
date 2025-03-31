@@ -29,7 +29,18 @@ public class LRUCache<K, V> implements Cache<K, V> {
     }
 
     private void moveNodeToHead(Node node) {
+        removeNode(node);
+
+        addNodeToHead(node);
     }
+
+    private void addNodeToHead(Node node) {
+    }
+
+    private void removeNode(Node node) {
+
+    }
+
 
     @Override
     public void put(K key, V value) {
