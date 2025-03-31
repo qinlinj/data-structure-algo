@@ -56,7 +56,12 @@ public class LRUCache<K, V> implements Cache<K, V> {
 
     @Override
     public void put(K key, V value) {
+        Node node = cache.get(key);
+        if (node == null) {
 
+        } else {
+
+        }
     }
 
     private class Node {
