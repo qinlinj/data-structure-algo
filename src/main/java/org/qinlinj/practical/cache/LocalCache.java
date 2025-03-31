@@ -22,17 +22,47 @@ import java.util.*;
  * @param <V> the type of values stored in this cache
  */
 public class LocalCache<K, V> implements Cache<K, V> {
+    /**
+     * The internal map that stores the cached key-value pairs.
+     * HashMap is used for its O(1) average time complexity for get and put operations.
+     */
     private Map<K, V> cache;
 
+    /**
+     * Constructs a new empty LocalCache with a default initial capacity.
+     * <p>
+     * Time Complexity: O(1)
+     */
     public LocalCache() {
         cache = new HashMap<>();
     }
 
+    /**
+     * Retrieves the value associated with the specified key from the cache.
+     * If the key is not found, null is returned.
+     * <p>
+     * Time Complexity: O(1) on average due to HashMap's implementation
+     *
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with the key, or null if the key is not present
+     */
     @Override
     public V get(K key) {
         return cache.get(key);
     }
 
+    /**
+     * Associates the specified value with the specified key in the cache.
+     * If the cache previously contained a value for the key, the old value is replaced.
+     * <p>
+     * This implementation has no size limit or eviction policy, so the cache will grow
+     * unbounded as new entries are added.
+     * <p>
+     * Time Complexity: O(1) on average due to HashMap's implementation
+     *
+     * @param key   the key with which the specified value is to be associated
+     * @param value the value to be associated with the specified key
+     */
     @Override
     public void put(K key, V value) {
         cache.put(key, value);
