@@ -35,6 +35,11 @@ public class LRUCache<K, V> implements Cache<K, V> {
     }
 
     private void addNodeToHead(Node node) {
+        node.next = head.next;
+        head.next.prev = node;
+
+        head.next = node;
+        node.prev = head;
     }
 
     private void removeNode(Node node) {
