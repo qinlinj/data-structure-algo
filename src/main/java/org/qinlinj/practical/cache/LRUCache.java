@@ -22,7 +22,13 @@ public class LRUCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key) {
-        return null;
+        Node node = cache.get(key);
+        if (node == null) return null;
+        moveNodeToHead(node);
+        return node.value;
+    }
+
+    private void moveNodeToHead(Node node) {
     }
 
     @Override
