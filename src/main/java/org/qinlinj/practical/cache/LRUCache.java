@@ -20,6 +20,18 @@ public class LRUCache<K, V> implements Cache<K, V> {
         this.capacity = capacity;
     }
 
+    public static void main(String[] args) {
+        LRUCache<Integer, Integer> cache = new LRUCache<>(3);
+        cache.put(1, 1);
+        cache.put(2, 2);
+        cache.put(3, 3);
+        cache.put(4, 4);
+        System.out.println(cache.get(3));
+        cache.put(2, 5);
+        cache.put(5, 6);
+        System.out.println(cache.get(4));
+    }
+
     @Override
     public V get(K key) {
         Node node = cache.get(key);
@@ -52,7 +64,6 @@ public class LRUCache<K, V> implements Cache<K, V> {
         node.prev = null;
         node.next = null;
     }
-
 
     @Override
     public void put(K key, V value) {
