@@ -18,6 +18,19 @@ package org.qinlinj.practical.cache;
  */
 public interface Cache<K, V> {
 
+    /**
+     * Retrieves the value associated with the specified key from the cache.
+     * <p>
+     * This operation is typically expected to be fast (O(1) in most implementations)
+     * and may trigger cache-specific side effects such as:
+     * - Updating access statistics
+     * - Refreshing the element's position in an eviction queue
+     * - Loading the value from a backing store if not present in cache (for loading caches)
+     *
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with the specified key,
+     * or null if the key is not present in the cache
+     */
     V get(K key);
 
     /**
