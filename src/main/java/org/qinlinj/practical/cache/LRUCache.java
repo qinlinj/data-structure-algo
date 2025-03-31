@@ -75,6 +75,9 @@ public class LRUCache<K, V> implements Cache<K, V> {
     }
 
     private Node removeTailNode() {
+        Node delNode = tail.prev;
+        removeNode(delNode);
+        return delNode;
     }
 
     private class Node {
