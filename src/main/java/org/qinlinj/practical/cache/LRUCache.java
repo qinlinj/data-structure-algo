@@ -58,10 +58,17 @@ public class LRUCache<K, V> implements Cache<K, V> {
     public void put(K key, V value) {
         Node node = cache.get(key);
         if (node == null) {
+            if (cache.size() == capacity) {
+                Node delNode = removeTailNode();
+                cache.remove(delNode.key);
+            }
 
         } else {
 
         }
+    }
+
+    private Node removeTailNode() {
     }
 
     private class Node {
