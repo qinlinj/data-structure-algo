@@ -9,6 +9,17 @@ public class LRUCache<K, V> implements Cache<K, V> {
     private Node head;
     private Node tail;
 
+    public LRUCache(int capacity) {
+        head = new Node();
+        tail = new Node();
+
+        head.next = tail;
+        tail.prev = head;
+
+        cache = new HashMap<>(capacity);
+        this.capacity = capacity;
+    }
+
     @Override
     public V get(K key) {
         return null;
