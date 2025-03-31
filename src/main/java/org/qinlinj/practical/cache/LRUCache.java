@@ -38,7 +38,14 @@ public class LRUCache<K, V> implements Cache<K, V> {
     }
 
     private void removeNode(Node node) {
+        Node preNode = node.prev;
+        Node nextNode = node.next;
 
+        preNode.next = nextNode;
+        nextNode.prev = preNode;
+
+        node.prev = null;
+        node.next = null;
     }
 
 
