@@ -149,6 +149,21 @@ public class LRUCache<K, V> implements Cache<K, V> {
         node.next = null;
     }
 
+    /**
+     * Adds a key-value pair to the cache or updates the value if the key already exists.
+     * If adding a new key would exceed the capacity, the least recently used key is evicted.
+     * The newly added or updated node is moved to the head of the list (most recently used position).
+     * <p>
+     * Example with capacity = 3:
+     * 1. Current cache: [A:1, B:2, C:3] with access order C->B->A (C most recent, A least recent)
+     * 2. Call put(D, 4): A is evicted, cache becomes [D:4, C:3, B:2] with order D->C->B
+     * 3. Call put(B, 5): Only value is updated, cache becomes [B:5, D:4, C:3] with order B->D->C
+     *
+     * @param key   the key with which the specified value is to be associated
+     * @param value the value to be associated with the specified key
+     *              <p>
+     *              Time Complexity: O(1) - HashMap operations and list operations are constant time
+     */
     @Override
     public void put(K key, V value) {
         Node node = cache.get(key);
