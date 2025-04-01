@@ -50,6 +50,10 @@ public class LFUCache<K, V> implements Cache<K, V> {
 
     @Override
     public void put(K key, V value) {
-
+        if (cache.containsKey(key)) {
+            cache.put(key, value);
+            get(key);
+            return;
+        }
     }
 }
