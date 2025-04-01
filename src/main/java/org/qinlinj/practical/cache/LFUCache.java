@@ -141,6 +141,15 @@ public class LFUCache<K, V> implements Cache<K, V> {
         return value;
     }
 
+    /**
+     * Helper method to add a key to the appropriate frequency group.
+     * Creates a new frequency group if it doesn't exist yet.
+     *
+     * @param key   the key to be added
+     * @param count the frequency count to add the key to
+     *              <p>
+     *              Time Complexity: O(1)
+     */
     private void putUsedCount(K key, int count) {
         if (!usedCountToKeys.containsKey(count)) {
             usedCountToKeys.put(count, new LinkedHashSet<>());
