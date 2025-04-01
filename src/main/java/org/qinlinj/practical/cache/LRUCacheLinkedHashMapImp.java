@@ -71,6 +71,27 @@ public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
         this.capacity = capacity;
     }
 
+    /**
+     * Main method demonstrating the usage of LRU cache with LinkedHashMap.
+     * <p>
+     * Visual representation of the cache state during execution:
+     * <p>
+     * 1. Initially: []
+     * 2. After put(1, 1): [1:1]
+     * 3. After put(2, 2): [1:1, 2:2]
+     * 4. After put(3, 3): [1:1, 2:2, 3:3] (cache is full)
+     * 5. After put(4, 4): [2:2, 3:3, 4:4] (1:1 is evicted as LRU)
+     * 6. After get(3): [2:2, 4:4, 3:3] (3 moved to end as MRU)
+     * 7. After put(2, 5): [4:4, 3:3, 2:5] (2 updated and moved to end)
+     * 8. After put(5, 6): [3:3, 2:5, 5:6] (4:4 is evicted as LRU)
+     * 9. After get(4): returns null (4 was evicted)
+     * <p>
+     * Expected output:
+     * 3
+     * null
+     * <p>
+     * Time Complexity: O(1) for each operation
+     */
     public static void main(String[] args) {
         LRUCacheLinkedHashMapImp<Integer, Integer> cache =
                 new LRUCacheLinkedHashMapImp<>(3, 3, 0.75F);
