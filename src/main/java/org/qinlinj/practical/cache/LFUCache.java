@@ -55,5 +55,12 @@ public class LFUCache<K, V> implements Cache<K, V> {
             get(key);
             return;
         }
+
+        if (cache.size() == capacity) {
+            K removeKey = usedCountToKeys.get(minUsedCount).iterator().next();
+            usedCountToKeys.get(minUsedCount).remove(removeKey);
+            cache.remove(removeKey);
+            keyToUsedCount.remove(removeKey);
+        }
     }
 }
