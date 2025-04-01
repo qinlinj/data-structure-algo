@@ -80,6 +80,22 @@ public class FIFOCache<K, V> implements Cache<K, V> {
         return cache.get(key);
     }
 
+    /**
+     * Adds a key-value pair to the cache or updates the value if the key already exists.
+     * If adding a new key would exceed the capacity, the oldest key (first inserted) is evicted.
+     * <p>
+     * Example with capacity = 3:
+     * 1. Current cache: [A:1, B:2]
+     * 2. Call put(C, 3): Cache becomes [A:1, B:2, C:3]
+     * 3. Call put(D, 4): A is evicted, cache becomes [B:2, C:3, D:4]
+     * 4. Call put(B, 5): Only value is updated, cache becomes [B:5, C:3, D:4]
+     *
+     * @param key   the key with which the specified value is to be associated
+     * @param value the value to be associated with the specified key
+     *              <p>
+     *              Time Complexity: O(1) - HashMap operations and queue operations are constant time
+     */
+    @Override
     @Override
     public void put(K key, V value) {
         V oldValue = cache.get(key);
