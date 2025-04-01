@@ -53,6 +53,19 @@ import java.util.*;
 public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
     private int capacity;
 
+    /**
+     * Constructs a new LRU cache based on LinkedHashMap.
+     *
+     * @param capacity        the maximum number of elements the cache can hold
+     * @param initialCapacity the initial capacity of the underlying HashMap
+     * @param loadFactor      the load factor of the underlying HashMap
+     *                        <p>
+     *                        Note: The third parameter in the super constructor is set to true, which enables
+     *                        access-order instead of insertion-order. This is crucial for LRU functionality as
+     *                        it automatically moves accessed entries to the end of the linked list.
+     *                        <p>
+     *                        Time Complexity: O(1)
+     */
     public LRUCacheLinkedHashMapImp(int capacity, int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor, true);
         this.capacity = capacity;
