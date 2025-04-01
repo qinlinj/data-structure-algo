@@ -184,6 +184,13 @@ public class LRUCache<K, V> implements Cache<K, V> {
         }
     }
 
+    /**
+     * Removes the node right before the dummy tail, which is the least recently used node.
+     *
+     * @return the removed node
+     * <p>
+     * Time Complexity: O(1)
+     */
     private Node removeTailNode() {
         Node delNode = tail.prev;
         removeNode(delNode);
