@@ -32,6 +32,33 @@ import java.util.*;
  * After adding 3 (duplicate): [3, 1, 10] (no change, as 3 already exists)
  * <p>
  * Time complexity: All basic operations (add, remove, contains) have O(1) average time complexity.
+ * <p>
+ * Common Methods of LinkedHashSet:
+ * <p>
+ * 1. Constructors:
+ * - LinkedHashSet(): Creates an empty set with default capacity (16) and load factor (0.75)
+ * - LinkedHashSet(int initialCapacity): With specified initial capacity
+ * - LinkedHashSet(int initialCapacity, float loadFactor): With specified capacity and load factor
+ * - LinkedHashSet(Collection<? extends E> c): Creates a set with elements from the collection
+ * <p>
+ * 2. Basic Set Operations:
+ * - add(E e): Adds an element if not already present - O(1)
+ * - remove(Object o): Removes an element if present - O(1)
+ * - contains(Object o): Checks if an element exists - O(1)
+ * - size(): Returns number of elements in the set - O(1)
+ * - isEmpty(): Checks if set is empty - O(1)
+ * - clear(): Removes all elements - O(n)
+ * <p>
+ * 3. Bulk Operations:
+ * - addAll(Collection<? extends E> c): Adds all elements from a collection - O(n)
+ * - removeAll(Collection<?> c): Removes all elements contained in the collection - O(n)
+ * - retainAll(Collection<?> c): Retains only elements contained in the collection - O(n)
+ * - containsAll(Collection<?> c): Checks if all elements in a collection are present - O(n)
+ * <p>
+ * 4. Iteration:
+ * - iterator(): Returns an iterator over elements in insertion order
+ * - forEach(Consumer<? super E> action): Performs an action on each element (Java 8+)
+ * - Supports enhanced for-loop for convenient iteration, maintaining insertion order
  */
 public class LinkedHashSetTest {
     public static void main(String[] args) {
