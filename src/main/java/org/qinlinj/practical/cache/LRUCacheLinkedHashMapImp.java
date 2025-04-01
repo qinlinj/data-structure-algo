@@ -84,6 +84,18 @@ public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
         System.out.println(cache.get(4));
     }
 
+    /**
+     * Determines whether the oldest entry should be removed after a new entry has been added.
+     * This method is called automatically by LinkedHashMap after each put() or putAll() operation.
+     *
+     * @param eldest the oldest entry in the map (least recently used)
+     * @return true if the eldest entry should be removed, false otherwise
+     * <p>
+     * The method returns true when the map size exceeds the specified capacity,
+     * causing the least recently used entry to be automatically removed.
+     * <p>
+     * Time Complexity: O(1)
+     */
     @Override
     protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
         if (size() > capacity) {
