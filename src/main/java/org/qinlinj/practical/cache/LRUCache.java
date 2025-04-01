@@ -54,6 +54,14 @@ public class LRUCache<K, V> implements Cache<K, V> {
     private Node head;
     private Node tail;
 
+    /**
+     * Constructs a new LRU cache with the specified capacity.
+     * Initializes the doubly linked list with dummy head and tail nodes.
+     *
+     * @param capacity the maximum number of elements the cache can hold
+     *                 <p>
+     *                 Time Complexity: O(1)
+     */
     public LRUCache(int capacity) {
         head = new Node();
         tail = new Node();
