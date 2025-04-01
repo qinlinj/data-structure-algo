@@ -2,7 +2,6 @@ package org.qinlinj.practical.cache;
 
 import java.util.*;
 
-
 /**
  * LRU (Least Recently Used) Cache Implementation using LinkedHashMap
  * <p>
@@ -51,6 +50,7 @@ import java.util.*;
  * [4:D, 3:C, 2:E]
  */
 public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
+    // Maximum number of elements the cache can hold
     private int capacity;
 
     /**
@@ -67,6 +67,7 @@ public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
      *                        Time Complexity: O(1)
      */
     public LRUCacheLinkedHashMapImp(int capacity, int initialCapacity, float loadFactor) {
+        // The 'true' parameter enables access-order instead of insertion-order
         super(initialCapacity, loadFactor, true);
         this.capacity = capacity;
     }
@@ -98,11 +99,11 @@ public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
         cache.put(1, 1);
         cache.put(2, 2);
         cache.put(3, 3);
-        cache.put(4, 4);
-        System.out.println(cache.get(3));
-        cache.put(2, 5);
-        cache.put(5, 6);
-        System.out.println(cache.get(4));
+        cache.put(4, 4);  // Evicts key 1
+        System.out.println(cache.get(3));  // Returns 3 and moves it to the end (MRU position)
+        cache.put(2, 5);  // Updates value of key 2 and moves it to the end
+        cache.put(5, 6);  // Evicts key 4
+        System.out.println(cache.get(4));  // Returns null (not found)
     }
 
     /**
@@ -119,6 +120,7 @@ public class LRUCacheLinkedHashMapImp<K, V> extends LinkedHashMap<K, V> {
      */
     @Override
     protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        // Remove the eldest entry when size exceeds capacity
         if (size() > capacity) {
             return true;
         }
