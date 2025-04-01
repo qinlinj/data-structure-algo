@@ -13,6 +13,15 @@ public class LFUCache<K, V> implements Cache<K, V> {
 
     private int minUsedCount;
 
+    public LFUCache() {
+        cache = new HashMap<>();
+        keyToUsedCount = new HashMap<>();
+        usedCountToKeys = new HashMap<>();
+
+        this.capacity = capacity;
+        minUsedCount = 0;
+    }
+
     @Override
     public V get(K key) {
         return null;
