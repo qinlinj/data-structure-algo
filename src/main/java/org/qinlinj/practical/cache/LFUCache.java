@@ -65,5 +65,8 @@ public class LFUCache<K, V> implements Cache<K, V> {
 
         cache.put(key, value);
         keyToUsedCount.put(key, 1);
+
+        minUsedCount = 1;
+        putUsedCount(key, minUsedCount);
     }
 }
