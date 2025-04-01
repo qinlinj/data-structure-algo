@@ -62,5 +62,8 @@ public class LFUCache<K, V> implements Cache<K, V> {
             cache.remove(removeKey);
             keyToUsedCount.remove(removeKey);
         }
+
+        cache.put(key, value);
+        keyToUsedCount.put(key, 1);
     }
 }
