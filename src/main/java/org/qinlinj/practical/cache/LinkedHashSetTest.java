@@ -35,12 +35,40 @@ import java.util.*;
  */
 public class LinkedHashSetTest {
     public static void main(String[] args) {
+        // Create a new LinkedHashSet
+        // This set will maintain elements in the order they were first inserted
         Set<Integer> set = new LinkedHashSet<>();
+
+        // Add element 3 to the set
+        // Set now contains: [3]
         set.add(3);
+
+        // Add element 1 to the set
+        // Set now contains: [3, 1]
         set.add(1);
+
+        // Add element 10 to the set
+        // Set now contains: [3, 1, 10]
         set.add(10);
+
+        // Try to add element 1 again (duplicate)
+        // Since sets don't allow duplicates, this will not change the set
+        // Set still contains: [3, 1, 10]
         set.add(1);
+
+        // Try to add element 3 again (duplicate)
+        // Since sets don't allow duplicates, this will not change the set
+        // Set still contains: [3, 1, 10]
         set.add(3);
+
+        // Print the set
+        // The output will be [3, 1, 10], showing:
+        // 1. Elements are in insertion order (3 was added first, then 1, then 10)
+        // 2. Duplicates (the second 1 and 3) were ignored
         System.out.println(set);
+
+        /* Expected output:
+         * [3, 1, 10]
+         */
     }
 }
