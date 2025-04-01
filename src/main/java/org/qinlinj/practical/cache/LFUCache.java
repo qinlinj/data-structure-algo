@@ -92,6 +92,36 @@ public class LFUCache<K, V> implements Cache<K, V> {
         minUsedCount = 0;
     }
 
+    /**
+     * Retrieves the value associated with the given key from the cache.
+     * Accessing an item increases its usage count, potentially changing its
+     * position in the eviction order.
+     * <p>
+     * Process:
+     * 1. If key doesn't exist, return null
+     * 2. Get current usage count for the key
+     * 3. Remove key from its current frequency group
+     * 4. Increment usage count
+     * 5. Add key to the new frequency group
+     * 6. Update minimum frequency if needed
+     * 7. Return the value
+     * <p>
+     * Visual example:
+     * Before get(1):
+     * usedCountToKeys: {1:[1,2,3]}
+     * keyToUsedCount: {1:1, 2:1, 3:1}
+     * minUsedCount: 1
+     * <p>
+     * After get(1):
+     * usedCountToKeys: {1:[2,3], 2:[1]}
+     * keyToUsedCount: {1:2, 2:1, 3:1}
+     * minUsedCount: 1
+     * <p>
+     * Time Complexity: O(1)
+     *
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with the key, or null if the key is not in the cache
+     */
     @Override
     public V get(K key) {
         V value = cache.get(key);
