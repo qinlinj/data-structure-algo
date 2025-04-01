@@ -66,6 +66,15 @@ public class FIFOCache<K, V> implements Cache<K, V> {
         System.out.println(cache.get(2));
     }
 
+    /**
+     * Retrieves the value associated with the given key from the cache.
+     * Unlike LRU cache, accessing elements does not affect their eviction order.
+     *
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with the key, or null if the key is not in the cache
+     * <p>
+     * Time Complexity: O(1) - HashMap lookup is constant time
+     */
     @Override
     public V get(K key) {
         return cache.get(key);
