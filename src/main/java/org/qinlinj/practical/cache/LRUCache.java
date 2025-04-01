@@ -48,11 +48,16 @@ import java.util.*;
  * HEAD <-> 2:E <-> 3:C <-> 4:D <-> TAIL
  */
 public class LRUCache<K, V> implements Cache<K, V> {
+    // HashMap to store key-node pairs for O(1) access
     private Map<K, Node> cache;
+
+    // Maximum number of elements the cache can hold
     private int capacity;
 
-    private Node head;
-    private Node tail;
+    // Dummy head and tail nodes for the doubly linked list
+    // This simplifies node insertion and removal by avoiding null checks
+    private Node head; // Most recently used end
+    private Node tail; // Least recently used end
 
     /**
      * Constructs a new LRU cache with the specified capacity.
@@ -63,26 +68,50 @@ public class LRUCache<K, V> implements Cache<K, V> {
      *                 Time Complexity: O(1)
      */
     public LRUCache(int capacity) {
+        // Initialize dummy nodes
         head = new Node();
         tail = new Node();
 
+        // Connect dummy nodes
         head.next = tail;
         tail.prev = head;
 
+        // Initialize the cache map
         cache = new HashMap<>(capacity);
         this.capacity = capacity;
     }
 
+    /**
+     * Main method demonstrating the usage of LRU cache.
+     * <p>
+     * Visual representation of the cache state during execution:
+     * <p>
+     * 1. Initially: HEAD <-> TAIL
+     * 2. After put(1, 1): HEAD <-> 1:1 <-> TAIL
+     * 3. After put(2, 2): HEAD <-> 2:2 <-> 1:1 <-> TAIL
+     * 4. After put(3, 3): HEAD <-> 3:3 <-> 2:2 <-> 1:1 <-> TAIL (cache is full)
+     * 5. After put(4, 4): HEAD <-> 4:4 <-> 3:3 <-> 2:2 <-> TAIL (1:1 is evicted as LRU)
+     * 6. After get(3): HEAD <-> 3:3 <-> 4:4 <-> 2:2 <-> TAIL (3 moved to head as MRU)
+     * 7. After put(2, 5): HEAD <-> 2:5 <-> 3:3 <-> 4:4 <-> TAIL (2 updated and moved to head)
+     * 8. After put(5, 6): HEAD <-> 5:6 <-> 2:5 <-> 3:3 <-> TAIL (4:4 is evicted as LRU)
+     * 9. After get(4): returns null (4 was evicted)
+     * <p>
+     * Expected output:
+     * 3
+     * null
+     * <p>
+     * Time Complexity: O(1) for each operation
+     */
     public static void main(String[] args) {
         LRUCache<Integer, Integer> cache = new LRUCache<>(3);
         cache.put(1, 1);
         cache.put(2, 2);
         cache.put(3, 3);
-        cache.put(4, 4);
-        System.out.println(cache.get(3));
-        cache.put(2, 5);
-        cache.put(5, 6);
-        System.out.println(cache.get(4));
+        cache.put(4, 4);  // Evicts key 1
+        System.out.println(cache.get(3));  // Returns 3 and moves it to the front
+        cache.put(2, 5);  // Updates value of key 2 and moves it to the front
+        cache.put(5, 6);  // Evicts key 4
+        System.out.println(cache.get(4));  // Returns null (not found)
     }
 
     /**
@@ -98,6 +127,8 @@ public class LRUCache<K, V> implements Cache<K, V> {
     public V get(K key) {
         Node node = cache.get(key);
         if (node == null) return null;
+
+        // Move the accessed node to head (mark as most recently used)
         moveNodeToHead(node);
         return node.value;
     }
@@ -111,8 +142,10 @@ public class LRUCache<K, V> implements Cache<K, V> {
      *             Time Complexity: O(1) - Doubly linked list operations are constant time
      */
     private void moveNodeToHead(Node node) {
+        // Remove the node from its current position
         removeNode(node);
 
+        // Add the node right after the dummy head
         addNodeToHead(node);
     }
 
@@ -124,9 +157,11 @@ public class LRUCache<K, V> implements Cache<K, V> {
      *             Time Complexity: O(1)
      */
     private void addNodeToHead(Node node) {
+        // Connect node to the node after head
         node.next = head.next;
         head.next.prev = node;
 
+        // Connect head to the node
         head.next = node;
         node.prev = head;
     }
@@ -142,9 +177,11 @@ public class LRUCache<K, V> implements Cache<K, V> {
         Node preNode = node.prev;
         Node nextNode = node.next;
 
+        // Connect the previous node to the next node
         preNode.next = nextNode;
         nextNode.prev = preNode;
 
+        // Disconnect the node from the list
         node.prev = null;
         node.next = null;
     }
@@ -168,17 +205,23 @@ public class LRUCache<K, V> implements Cache<K, V> {
     public void put(K key, V value) {
         Node node = cache.get(key);
         if (node == null) {
+            // Key doesn't exist in cache
             if (cache.size() == capacity) {
+                // Cache is full, remove the least recently used node (from tail)
                 Node delNode = removeTailNode();
                 cache.remove(delNode.key);
             }
+
+            // Create a new node
             node = new Node();
             node.key = key;
             node.value = value;
 
+            // Add to the cache and to the front of the list
             cache.put(key, node);
             addNodeToHead(node);
         } else {
+            // Key exists, update value and move to front (most recently used)
             node.value = value;
             moveNodeToHead(node);
         }
@@ -197,10 +240,14 @@ public class LRUCache<K, V> implements Cache<K, V> {
         return delNode;
     }
 
+    /**
+     * Node class for the doubly linked list used by the LRU cache.
+     * Each node contains a key-value pair and references to the previous and next nodes.
+     */
     private class Node {
-        K key;
-        V value;
-        Node next;
-        Node prev;
+        K key;       // Cache key
+        V value;     // Cache value
+        Node next;   // Reference to the next node (more recently used direction)
+        Node prev;   // Reference to the previous node (less recently used direction)
     }
 }
