@@ -35,8 +35,13 @@ public class LFUCache<K, V> implements Cache<K, V> {
                 && usedCountToKeys.get(usedCount).size() == 0) {
             minUsedCount++;
         }
-        
+
+        putUsedCount(key, usedCount + 1);
+
         return value;
+    }
+
+    private void putUsedCount(K key, int i) {
     }
 
     @Override
