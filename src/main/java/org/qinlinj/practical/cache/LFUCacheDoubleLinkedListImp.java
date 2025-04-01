@@ -17,6 +17,15 @@ class Node {
 }
 
 class DoubleLinkedList {
+    private Node head;
+    private Node tail;
+
+    DoubleLinkedList() {
+        this.head = new Node();
+        this.tail = new Node();
+        this.head.next = this.tail;
+        this.tail.prev = this.head;
+    }
 }
 
 public class LFUCacheDoubleLinkedListImp {
