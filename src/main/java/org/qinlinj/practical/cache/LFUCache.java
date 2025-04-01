@@ -24,6 +24,8 @@ public class LFUCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key) {
+        V value = cache.get(key);
+        if (value == null) return null;
         return null;
     }
 
