@@ -64,14 +64,21 @@ import java.util.*;
  * minUsedCount: 1
  */
 public class LFUCache<K, V> implements Cache<K, V> {
+    // Main cache that stores key-value pairs
     private Map<K, V> cache;
 
+    // Map to track the frequency (usage count) of each key
     private Map<K, Integer> keyToUsedCount;
 
+    // Map to group keys by their usage counts, using LinkedHashSet to maintain order within each frequency
+    // This allows O(1) access to the least recently used key within each frequency group
     private Map<Integer, LinkedHashSet<K>> usedCountToKeys;
 
+    // Maximum capacity of the cache
     private int capacity;
 
+    // Keeps track of the minimum frequency across all items
+    // This allows O(1) access to the least frequently used key(s)
     private int minUsedCount;
 
     /**
@@ -88,7 +95,7 @@ public class LFUCache<K, V> implements Cache<K, V> {
         keyToUsedCount = new HashMap<>();
         usedCountToKeys = new HashMap<>();
 
-        this.capacity = capacity;
+        this.capacity = capacity;  // Bug: capacity parameter is missing
         minUsedCount = 0;
     }
 
@@ -127,15 +134,21 @@ public class LFUCache<K, V> implements Cache<K, V> {
         V value = cache.get(key);
         if (value == null) return null;
 
+        // Get current usage count and remove key from its current frequency set
         int usedCount = keyToUsedCount.get(key);
         usedCountToKeys.get(usedCount).remove(key);
+
+        // Increment the usage count in the key-to-count map
         keyToUsedCount.put(key, usedCount + 1);
 
+        // Update minimum frequency if needed
+        // This happens when we removed the last key with the minimum frequency
         if (usedCount == minUsedCount
                 && usedCountToKeys.get(usedCount).size() == 0) {
             minUsedCount++;
         }
 
+        // Add the key to its new frequency group
         putUsedCount(key, usedCount + 1);
 
         return value;
@@ -151,9 +164,11 @@ public class LFUCache<K, V> implements Cache<K, V> {
      *              Time Complexity: O(1)
      */
     private void putUsedCount(K key, int count) {
+        // Create a new frequency group if it doesn't exist
         if (!usedCountToKeys.containsKey(count)) {
             usedCountToKeys.put(count, new LinkedHashSet<>());
         }
+        // Add the key to the appropriate frequency group
         usedCountToKeys.get(count).add(key);
     }
 
@@ -191,22 +206,30 @@ public class LFUCache<K, V> implements Cache<K, V> {
      */
     @Override
     public void put(K key, V value) {
+        // If the key already exists, update the value and frequency
         if (cache.containsKey(key)) {
             cache.put(key, value);
-            get(key);
+            get(key);  // This updates frequency
             return;
         }
 
+        // If cache is at capacity, remove the least frequently used item
         if (cache.size() == capacity) {
+            // Get the first key from the set with minimum frequency
+            // LinkedHashSet maintains insertion order, so the first element is the least recently used
             K removeKey = usedCountToKeys.get(minUsedCount).iterator().next();
+
+            // Remove the key from all data structures
             usedCountToKeys.get(minUsedCount).remove(removeKey);
             cache.remove(removeKey);
             keyToUsedCount.remove(removeKey);
         }
 
+        // Add the new key-value pair to the cache
         cache.put(key, value);
-        keyToUsedCount.put(key, 1);
+        keyToUsedCount.put(key, 1);  // Initial frequency is 1
 
+        // New keys always have minimum frequency of 1
         minUsedCount = 1;
         putUsedCount(key, minUsedCount);
     }
