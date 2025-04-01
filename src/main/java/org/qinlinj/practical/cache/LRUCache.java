@@ -85,6 +85,15 @@ public class LRUCache<K, V> implements Cache<K, V> {
         System.out.println(cache.get(4));
     }
 
+    /**
+     * Retrieves the value associated with the given key from the cache.
+     * If the key exists, moves the accessed node to the head (most recently used position).
+     *
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with the key, or null if the key is not in the cache
+     * <p>
+     * Time Complexity: O(1) - HashMap lookup and list node movement are constant time
+     */
     @Override
     public V get(K key) {
         Node node = cache.get(key);
