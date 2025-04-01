@@ -116,6 +116,13 @@ public class LRUCache<K, V> implements Cache<K, V> {
         addNodeToHead(node);
     }
 
+    /**
+     * Adds a node right after the dummy head, making it the most recently used element.
+     *
+     * @param node the node to be added after the head
+     *             <p>
+     *             Time Complexity: O(1)
+     */
     private void addNodeToHead(Node node) {
         node.next = head.next;
         head.next.prev = node;
