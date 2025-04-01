@@ -26,7 +26,13 @@ public class LFUCache<K, V> implements Cache<K, V> {
     public V get(K key) {
         V value = cache.get(key);
         if (value == null) return null;
-        return null;
+
+        int usedCount = keyToUsedCount.get(key);
+        usedCountToKeys.get(usedCount).remove(key);
+        keyToUsedCount.put(key, usedCount + 1);
+
+        
+        return value;
     }
 
     @Override
