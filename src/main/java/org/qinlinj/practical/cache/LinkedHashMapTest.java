@@ -30,6 +30,35 @@ import java.util.*;
  * [9] -> [2] -> [5]  (5 moves to the end as most recently accessed)
  * <p>
  * Time complexity: All basic operations (get, put, remove) have O(1) average time complexity.
+ * <p>
+ * Common Methods of LinkedHashMap:
+ * <p>
+ * 1. Constructors:
+ * - LinkedHashMap(): Creates an insertion-ordered LinkedHashMap with default capacity and load factor
+ * - LinkedHashMap(int initialCapacity): With specified initial capacity
+ * - LinkedHashMap(int initialCapacity, float loadFactor): With specified initial capacity and load factor
+ * - LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder): With specified order mode
+ * - LinkedHashMap(Map<? extends K, ? extends V> m): Creates a LinkedHashMap with same mappings as the given map
+ * <p>
+ * 2. Basic Map Operations:
+ * - put(K key, V value): Adds or updates a mapping - O(1)
+ * - get(Object key): Returns the value for a key - O(1)
+ * - remove(Object key): Removes a mapping - O(1)
+ * - containsKey(Object key): Checks if a key exists - O(1)
+ * - containsValue(Object value): Checks if a value exists - O(n)
+ * - size(): Returns number of mappings - O(1)
+ * - isEmpty(): Checks if map is empty - O(1)
+ * - clear(): Removes all mappings - O(n)
+ * <p>
+ * 3. LinkedHashMap-specific Methods:
+ * - removeEldestEntry(Map.Entry<K,V> eldest): Override to implement auto-removal in LRU cache
+ * - eldest element is the one that would be removed next if insertion order is used
+ * <p>
+ * 4. Iteration Methods:
+ * - keySet(): Returns a Set view of keys
+ * - values(): Returns a Collection view of values
+ * - entrySet(): Returns a Set view of mappings
+ * - All these respect the ordering of the LinkedHashMap (insertion or access order)
  */
 public class LinkedHashMapTest {
     public static void main(String[] args) {
