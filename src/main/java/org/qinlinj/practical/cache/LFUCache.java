@@ -157,6 +157,38 @@ public class LFUCache<K, V> implements Cache<K, V> {
         usedCountToKeys.get(count).add(key);
     }
 
+    /**
+     * Adds a key-value pair to the cache or updates the value if the key already exists.
+     * If adding a new key would exceed the capacity, the least frequently used key is evicted.
+     * If multiple keys have the same minimum frequency, the least recently used among them is evicted.
+     * <p>
+     * Process for existing key:
+     * 1. Update the value
+     * 2. Call get(key) to update its frequency
+     * <p>
+     * Process for new key:
+     * 1. If at capacity, remove the LFU item
+     * 2. Add the new key-value pair with frequency 1
+     * 3. Update minimum frequency to 1
+     * <p>
+     * Visual example for adding new key when at capacity:
+     * Before put(4, D):
+     * cache: {1:A, 2:B, 3:C}
+     * usedCountToKeys: {1:[2,3], 2:[1]}
+     * keyToUsedCount: {1:2, 2:1, 3:1}
+     * minUsedCount: 1
+     * <p>
+     * After put(4, D): Evicts key 2 (first in the LFU group)
+     * cache: {1:A, 3:C, 4:D}
+     * usedCountToKeys: {1:[3,4], 2:[1]}
+     * keyToUsedCount: {1:2, 3:1, 4:1}
+     * minUsedCount: 1
+     * <p>
+     * Time Complexity: O(1)
+     *
+     * @param key   the key with which the specified value is to be associated
+     * @param value the value to be associated with the specified key
+     */
     @Override
     public void put(K key, V value) {
         if (cache.containsKey(key)) {
