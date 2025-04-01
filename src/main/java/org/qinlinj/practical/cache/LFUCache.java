@@ -74,6 +74,15 @@ public class LFUCache<K, V> implements Cache<K, V> {
 
     private int minUsedCount;
 
+    /**
+     * Constructs a new LFU cache with the specified capacity.
+     * Initializes the data structures needed to track item frequencies.
+     * <p>
+     * Note: There's a bug in the constructor - capacity parameter is missing but used.
+     * It should be: public LFUCache(int capacity) { ... }
+     * <p>
+     * Time Complexity: O(1)
+     */
     public LFUCache() {
         cache = new HashMap<>();
         keyToUsedCount = new HashMap<>();
