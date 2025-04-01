@@ -131,6 +131,13 @@ public class LRUCache<K, V> implements Cache<K, V> {
         node.prev = head;
     }
 
+    /**
+     * Removes a node from the doubly linked list by updating the links of its neighbors.
+     *
+     * @param node the node to be removed
+     *             <p>
+     *             Time Complexity: O(1)
+     */
     private void removeNode(Node node) {
         Node preNode = node.prev;
         Node nextNode = node.next;
