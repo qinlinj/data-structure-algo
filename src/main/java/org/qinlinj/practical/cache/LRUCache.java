@@ -102,6 +102,14 @@ public class LRUCache<K, V> implements Cache<K, V> {
         return node.value;
     }
 
+    /**
+     * Moves a node to the head of the doubly linked list, marking it as the most recently used.
+     * This is done by first removing the node from its current position and then adding it to the head.
+     *
+     * @param node the node to be moved to the head
+     *             <p>
+     *             Time Complexity: O(1) - Doubly linked list operations are constant time
+     */
     private void moveNodeToHead(Node node) {
         removeNode(node);
 
