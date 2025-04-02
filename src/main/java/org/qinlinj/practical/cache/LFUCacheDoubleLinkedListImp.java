@@ -88,7 +88,10 @@ public class LFUCacheDoubleLinkedListImp {
     }
 
     private void putUsedCount(Node node, int count) {
-
+        if (!usedCountToKeys.containsKey(count)) {
+            usedCountToKeys.put(count, new DoubleLinkedList());
+        }
+        usedCountToKeys.get(count).add(node);
     }
 
     public void put(int key, int value) {
