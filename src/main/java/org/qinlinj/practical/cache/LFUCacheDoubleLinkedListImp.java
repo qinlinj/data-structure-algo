@@ -41,6 +41,15 @@ class DoubleLinkedList {
         node.next = tail;
         tail.prev = node;
     }
+
+    Node popFirst() {
+        if (isEmpty()) return null;
+        return remove(this.head.next);
+    }
+
+    boolean isEmpty() {
+        return this.head.next == this.tail;
+    }
 }
 
 public class LFUCacheDoubleLinkedListImp {
