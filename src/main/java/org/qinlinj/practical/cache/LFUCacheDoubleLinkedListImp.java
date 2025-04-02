@@ -104,5 +104,10 @@ public class LFUCacheDoubleLinkedListImp {
             get(key);
             return;
         }
+
+        if (keyToNode.size() == capacity) {
+            Node removeNode = usedCountToKeys.get(minUsedCount).popFirst();
+            keyToNode.remove(removeNode.key);
+        }
     }
 }
