@@ -34,6 +34,13 @@ class DoubleLinkedList {
         node.next = null;
         return node;
     }
+
+    void add(Node node) {
+        node.prev = tail.prev;
+        tail.prev.next = node;
+        node.next = tail;
+        tail.prev = node;
+    }
 }
 
 public class LFUCacheDoubleLinkedListImp {
