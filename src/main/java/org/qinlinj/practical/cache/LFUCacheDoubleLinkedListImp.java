@@ -34,4 +34,12 @@ public class LFUCacheDoubleLinkedListImp {
 
     private int capacity;
     private int minUsedCount;
+
+    public LFUCacheDoubleLinkedListImp(int capacity) {
+        keyToNode = new HashMap<>();
+        usedCountToKeys = new HashMap<>();
+
+        this.capacity = capacity;
+        minUsedCount = 0;
+    }
 }
