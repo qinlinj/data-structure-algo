@@ -42,4 +42,16 @@ public class LFUCacheDoubleLinkedListImp {
         this.capacity = capacity;
         minUsedCount = 0;
     }
+
+    public int get(int key) {
+
+    }
+
+    private void putUsedCount(Node node, int count) {
+
+    }
+
+    public void put(int key, int value) {
+
+    }
 }
