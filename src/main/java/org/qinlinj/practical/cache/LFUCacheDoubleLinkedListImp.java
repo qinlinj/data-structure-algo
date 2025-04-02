@@ -26,6 +26,14 @@ class DoubleLinkedList {
         this.head.next = this.tail;
         this.tail.prev = this.head;
     }
+
+    Node remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        node.prev = null;
+        node.next = null;
+        return node;
+    }
 }
 
 public class LFUCacheDoubleLinkedListImp {
@@ -44,7 +52,7 @@ public class LFUCacheDoubleLinkedListImp {
     }
 
     public int get(int key) {
-
+        return 0;
     }
 
     private void putUsedCount(Node node, int count) {
