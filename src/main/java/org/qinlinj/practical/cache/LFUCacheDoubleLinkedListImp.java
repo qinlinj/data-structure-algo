@@ -115,6 +115,15 @@ public class LFUCacheDoubleLinkedListImp {
         return node.val;
     }
 
+    /**
+     * Helper method to add a node to the appropriate frequency list.
+     * Creates a new list if one doesn't exist for the given count.
+     *
+     * @param node  the node to be added
+     * @param count the frequency count to add the node to
+     *              <p>
+     *              Time Complexity: O(1)
+     */
     private void putUsedCount(Node node, int count) {
         if (!usedCountToKeys.containsKey(count)) {
             usedCountToKeys.put(count, new DoubleLinkedList());
