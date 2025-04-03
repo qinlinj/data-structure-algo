@@ -52,55 +52,6 @@ import java.util.*;
  * usedCountToKeys: {1: [3,4], 2: [1]}
  * minUsedCount: 1
  */
-class Node {
-    int key, val, count;
-    Node next, prev;
-
-    Node() {
-    }
-
-    Node(int key, int val, int count) {
-        this.key = key;
-        this.val = val;
-        this.count = count;
-    }
-}
-
-class DoubleLinkedList {
-    private Node head;
-    private Node tail;
-
-    DoubleLinkedList() {
-        this.head = new Node();
-        this.tail = new Node();
-        this.head.next = this.tail;
-        this.tail.prev = this.head;
-    }
-
-    Node remove(Node node) {
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
-        node.prev = null;
-        node.next = null;
-        return node;
-    }
-
-    void add(Node node) {
-        node.prev = tail.prev;
-        tail.prev.next = node;
-        node.next = tail;
-        tail.prev = node;
-    }
-
-    Node popFirst() {
-        if (isEmpty()) return null;
-        return remove(this.head.next);
-    }
-
-    boolean isEmpty() {
-        return this.head.next == this.tail;
-    }
-}
 
 public class LFUCacheDoubleLinkedListImp {
     private Map<Integer, Node> keyToNode;
@@ -167,4 +118,54 @@ public class LFUCacheDoubleLinkedListImp {
         putUsedCount(node, minUsedCount);
     }
 
+}
+
+class Node {
+    int key, val, count;
+    Node next, prev;
+
+    Node() {
+    }
+
+    Node(int key, int val, int count) {
+        this.key = key;
+        this.val = val;
+        this.count = count;
+    }
+}
+
+class DoubleLinkedList {
+    private Node head;
+    private Node tail;
+
+    DoubleLinkedList() {
+        this.head = new Node();
+        this.tail = new Node();
+        this.head.next = this.tail;
+        this.tail.prev = this.head;
+    }
+
+    Node remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        node.prev = null;
+        node.next = null;
+        return node;
+    }
+
+    void add(Node node) {
+        node.prev = tail.prev;
+        tail.prev.next = node;
+        node.next = tail;
+        tail.prev = node;
+    }
+
+    Node popFirst() {
+        if (isEmpty()) return null;
+        return remove(this.head.next);
+    }
+
+    boolean isEmpty() {
+        return this.head.next == this.tail;
+    }
 }
