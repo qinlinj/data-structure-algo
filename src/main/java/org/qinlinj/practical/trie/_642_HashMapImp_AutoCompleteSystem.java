@@ -36,8 +36,10 @@ import java.util.*;
  * - Returns: ["island"]
  */
 public class _642_HashMapImp_AutoCompleteSystem {
+    // Map to store sentences and their usage frequencies
     private Map<String, Integer> map;
 
+    // Current input sentence being built character by character
     private String currSentence = "";
 
     /**
@@ -56,7 +58,6 @@ public class _642_HashMapImp_AutoCompleteSystem {
             map.put(sentences[i], times[i]);
         }
     }
-
 
     /**
      * Process a character input and return the top 3 sentence suggestions.
@@ -130,10 +131,20 @@ public class _642_HashMapImp_AutoCompleteSystem {
         return res;
     }
 
+    /**
+     * Helper class to store sentence information for sorting.
+     * Combines a sentence with its usage frequency.
+     */
     private class SentenceInfo {
-        String content;
-        int time;
+        String content; // The sentence content
+        int time;       // The usage frequency
 
+        /**
+         * Create a new SentenceInfo object.
+         *
+         * @param content the sentence text
+         * @param time    the usage frequency
+         */
         SentenceInfo(String content, int time) {
             this.content = content;
             this.time = time;
