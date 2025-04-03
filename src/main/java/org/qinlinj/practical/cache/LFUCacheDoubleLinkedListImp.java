@@ -151,10 +151,20 @@ class Node {
     }
 }
 
+/**
+ * Custom doubly linked list implementation for managing nodes with the same frequency.
+ * This list maintains nodes in order of insertion, allowing for LRU behavior within each frequency group.
+ */
 class DoubleLinkedList {
-    private Node head;
-    private Node tail;
+    private Node head;  // Dummy head node
+    private Node tail;  // Dummy tail node
 
+    /**
+     * Initializes an empty doubly linked list with dummy head and tail nodes.
+     * This setup simplifies node insertion and removal by avoiding null checks.
+     * <p>
+     * Time Complexity: O(1)
+     */
     DoubleLinkedList() {
         this.head = new Node();
         this.tail = new Node();
