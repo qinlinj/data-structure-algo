@@ -96,6 +96,38 @@ public class _642_TrieImp_AutoCompleteSystem {
         curr.times += times;
     }
 
+    /**
+     * Process a character input and return the top 3 sentence suggestions.
+     * Special character '#' indicates the end of a sentence, which adds it to the Trie.
+     *
+     * Visual Example:
+     * For Trie containing: {"hello": 2, "hi": 3, "hey": 1}
+     *
+     * 1. User types 'h':
+     *    - currSentence becomes "h"
+     *    - lookup("h") finds all nodes in subtree starting with 'h'
+     *    - Results: "hi" (3), "hello" (2), "hey" (1)
+     *    - After sorting, returns: ["hi", "hello", "hey"]
+     *
+     * 2. User types 'e':
+     *    - currSentence becomes "he"
+     *    - lookup("he") finds all nodes in subtree starting with 'he'
+     *    - Results: "hello" (2), "hey" (1)
+     *    - After sorting, returns: ["hello", "hey"]
+     *
+     * 3. User types '#':
+     *    - Insert "he" with frequency 1
+     *    - Reset currSentence to ""
+     *    - Return empty list
+     *
+     * Time Complexity: O(p + q log q) where:
+     *   - p is the total number of characters in all matching sentences
+     *   - q is the number of matching sentences (for sorting)
+     * Space Complexity: O(p) for storing matching sentences
+     *
+     * @param c character input from the user
+     * @return List of top 3 sentence suggestions sorted by frequency and lexicographical order
+     */
     public List<String> input(char c) {
         List<String> res = new ArrayList<>();
         if (c == '#') {
