@@ -172,14 +172,26 @@ class DoubleLinkedList {
         this.tail.prev = this.head;
     }
 
+    /**
+     * Removes a node from the list and returns it.
+     *
+     * @param node the node to be removed
+     * @return the removed node
+     * <p>
+     * Time Complexity: O(1)
+     */
     Node remove(Node node) {
+        // Update links to remove the node from the list
         node.prev.next = node.next;
         node.next.prev = node.prev;
+
+        // Clean up node references
         node.prev = null;
         node.next = null;
+
         return node;
     }
-
+    
     void add(Node node) {
         node.prev = tail.prev;
         tail.prev.next = node;
