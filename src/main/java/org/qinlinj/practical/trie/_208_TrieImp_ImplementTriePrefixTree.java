@@ -88,14 +88,36 @@ public class _208_TrieImp_ImplementTriePrefixTree {
             curr.isWord = true;
         }
 
+        /**
+         * Searches for a word in the Trie.
+         * Returns true if the whole word is in the Trie, false otherwise.
+         *
+         * Visualization Example:
+         * Searching for "cat" in a Trie with "cat", "car":
+         * 1. Start at root
+         * 2. Follow path to 'c'
+         * 3. Follow path to 'a'
+         * 4. Follow path to 't'
+         * 5. Check if 't' node is marked as end of word (isWord = true)
+         * 6. Return true (found "cat")
+         *
+         * Time Complexity: O(n) where n is the length of the word
+         * Space Complexity: O(1) - no additional space required
+         *
+         * @param word the word to search for
+         * @return true if the word exists in the Trie, false otherwise
+         */
         public boolean search(String word) {
             Node curr = root;
-            for (Character o : word.toCharArray()) {
-                if (!curr.children.containsKey(o)) {
+            for (Character c : word.toCharArray()) {
+                // If character doesn't exist in current path, word doesn't exist
+                if (!curr.children.containsKey(c)) {
                     return false;
                 }
-                curr = curr.children.get(o);
+                // Move to the next node
+                curr = curr.children.get(c);
             }
+            // Return whether current node marks the end of a word
             return curr.isWord;
         }
 
