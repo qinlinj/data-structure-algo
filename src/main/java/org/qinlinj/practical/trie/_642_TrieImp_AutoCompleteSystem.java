@@ -13,8 +13,15 @@ public class _642_TrieImp_AutoCompleteSystem {
         }
     }
 
-    void insert(String s, int times) {
-        
+    public void insert(String s, int times) {
+        TrieNode curr = root;
+        for (char c : s.toCharArray()) {
+            if (!curr.children.containsKey(c)) {
+                curr.children.put(c, new TrieNode());
+            }
+            curr = curr.children.get(c);
+        }
+        curr.times += times;
     }
 
     private class SentenceInfo {
