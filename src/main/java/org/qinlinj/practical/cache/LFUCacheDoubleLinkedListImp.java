@@ -120,13 +120,30 @@ public class LFUCacheDoubleLinkedListImp {
 
 }
 
+/**
+ * Node class for the doubly linked list.
+ * Each node contains a key, value, usage count, and references to next and previous nodes.
+ */
 class Node {
-    int key, val, count;
-    Node next, prev;
+    int key;     // Cache key
+    int val;     // Cache value
+    int count;   // Usage frequency count
+    Node next;   // Reference to the next node
+    Node prev;   // Reference to the previous node
 
+    // Default constructor
     Node() {
     }
 
+    /**
+     * Constructs a new node with specified key, value, and initial count.
+     *
+     * @param key   the key for the cache entry
+     * @param val   the value for the cache entry
+     * @param count the initial frequency count (typically 1 for new entries)
+     *              <p>
+     *              Time Complexity: O(1)
+     */
     Node(int key, int val, int count) {
         this.key = key;
         this.val = val;
