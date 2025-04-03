@@ -58,14 +58,53 @@ public class _642_HashMapImp_AutoCompleteSystem {
     }
 
 
+    /**
+     * Process a character input and return the top 3 sentence suggestions.
+     * Special character '#' indicates the end of a sentence, which updates its frequency.
+     * <p>
+     * Visual Example:
+     * For map containing: {"hello": 2, "hi": 3, "hey": 1}
+     * <p>
+     * 1. User types 'h':
+     * - currSentence becomes "h"
+     * - Find sentences starting with "h": "hello" (2), "hi" (3), "hey" (1)
+     * - Sort by frequency: "hi" (3), "hello" (2), "hey" (1)
+     * - Return: ["hi", "hello", "hey"]
+     * <p>
+     * 2. User types 'e':
+     * - currSentence becomes "he"
+     * - Find sentences starting with "he": "hello" (2), "hey" (1)
+     * - Sort by frequency: "hello" (2), "hey" (1)
+     * - Return: ["hello", "hey"]
+     * <p>
+     * 3. User types '#':
+     * - Add/update "he" in the map with frequency 1
+     * - Reset currSentence to ""
+     * - Return empty list
+     * <p>
+     * Time Complexity: O(n*k + m log m) where:
+     * - n is the number of sentences
+     * - k is the average length of sentences (for startsWith comparison)
+     * - m is the number of matching sentences (for sorting)
+     * Space Complexity: O(m) for storing matching sentences
+     *
+     * @param c character input from the user
+     * @return List of top 3 sentence suggestions sorted by frequency and lexicographical order
+     */
     public List<String> input(char c) {
         List<String> res = new ArrayList<>();
+
         if (c == '#') {
+            // End of sentence marker
+            // Update the frequency of the current sentence in the map
             map.put(currSentence, map.getOrDefault(currSentence, 0) + 1);
+            // Reset the current sentence
             currSentence = "";
         } else {
+            // Append the character to the current sentence
             currSentence += c;
 
+            // Find all sentences that start with the current input
             List<SentenceInfo> list = new ArrayList<>();
             for (String sentence : map.keySet()) { // O(n*k)
                 if (sentence.startsWith(currSentence)) {
@@ -73,14 +112,17 @@ public class _642_HashMapImp_AutoCompleteSystem {
                 }
             }
 
+            // Sort matching sentences by frequency (descending) and lexicographical order (for ties)
             Collections.sort(list, new Comparator<SentenceInfo>() {
                 @Override
                 public int compare(SentenceInfo o1, SentenceInfo o2) {
                     return o1.time == o2.time ?
-                            o1.content.compareTo(o2.content) :
-                            o2.time - o1.time;
+                            o1.content.compareTo(o2.content) : // If frequencies are equal, sort lexicographically
+                            o2.time - o1.time;                 // Otherwise, sort by frequency (descending)
                 }
             });
+
+            // Return the top 3 (or fewer if less than 3 matches) suggestions
             for (int i = 0; i < Math.min(3, list.size()); i++) {
                 res.add(list.get(i).content);
             }
