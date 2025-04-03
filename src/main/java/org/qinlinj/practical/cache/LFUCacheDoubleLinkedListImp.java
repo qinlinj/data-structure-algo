@@ -2,6 +2,56 @@ package org.qinlinj.practical.cache;
 
 import java.util.*;
 
+/**
+ * LFU (Least Frequently Used) Cache Implementation Using Doubly Linked Lists
+ * <p>
+ * Concept and Principles:
+ * LFU cache is a caching strategy that discards the least frequently accessed items first when the cache reaches
+ * its capacity limit. If two items have the same frequency, the least recently used one is evicted first.
+ * <p>
+ * This implementation uses a combination of HashMap and custom DoubleLinkedList:
+ * 1. A map to store each key and its corresponding Node (keyToNode)
+ * 2. A map to group keys by their usage count using DoubleLinkedLists (usedCountToKeys)
+ * 3. Each DoubleLinkedList maintains keys with the same frequency in order of recency
+ * <p>
+ * Advantages of this LFU Implementation:
+ * 1. Constant time operations: Both get and put run in O(1) time
+ * 2. Efficient handling of same-frequency ties: Uses LRU strategy within each frequency group
+ * 3. Quick access to least frequently used items through minUsedCount tracking
+ * 4. Clear separation of concerns between frequency tracking and recency ordering
+ * <p>
+ * Visual example of LFU cache operations with capacity = 3:
+ * <p>
+ * Initial state: Empty cache
+ * keyToNode: {}
+ * usedCountToKeys: {}
+ * minUsedCount: 0
+ * <p>
+ * After put(1, 10):
+ * keyToNode: {1: Node(1,10,1)}
+ * usedCountToKeys: {1: [1]}
+ * minUsedCount: 1
+ * <p>
+ * After put(2, 20):
+ * keyToNode: {1: Node(1,10,1), 2: Node(2,20,1)}
+ * usedCountToKeys: {1: [1,2]}
+ * minUsedCount: 1
+ * <p>
+ * After get(1): Increases count for key 1
+ * keyToNode: {1: Node(1,10,2), 2: Node(2,20,1)}
+ * usedCountToKeys: {1: [2], 2: [1]}
+ * minUsedCount: 1
+ * <p>
+ * After put(3, 30): Cache is now full
+ * keyToNode: {1: Node(1,10,2), 2: Node(2,20,1), 3: Node(3,30,1)}
+ * usedCountToKeys: {1: [2,3], 2: [1]}
+ * minUsedCount: 1
+ * <p>
+ * After put(4, 40): Evict key 2 (lowest frequency, earliest inserted)
+ * keyToNode: {1: Node(1,10,2), 3: Node(3,30,1), 4: Node(4,40,1)}
+ * usedCountToKeys: {1: [3,4], 2: [1]}
+ * minUsedCount: 1
+ */
 class Node {
     int key, val, count;
     Node next, prev;
@@ -116,4 +166,5 @@ public class LFUCacheDoubleLinkedListImp {
         minUsedCount = 1;
         putUsedCount(node, minUsedCount);
     }
+
 }
