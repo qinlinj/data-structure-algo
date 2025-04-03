@@ -153,6 +153,21 @@ public class _642_TrieImp_AutoCompleteSystem {
         return res;
     }
 
+    /**
+     * Find all sentences in the Trie that start with the given prefix.
+     *
+     * Process:
+     * 1. Navigate to the node representing the last character of the prefix
+     * 2. Perform DFS from that node to find all complete sentences
+     *
+     * Time Complexity: O(m + p) where:
+     *   - m is the length of the prefix
+     *   - p is the total number of characters in all matching sentences
+     * Space Complexity: O(p) for storing all matching sentences
+     *
+     * @param s the prefix to search for
+     * @return List of SentenceInfo objects containing all matching sentences and their frequencies
+     */
     public List<SentenceInfo> lookup(String s) {
         List<SentenceInfo> list = new ArrayList<>();
 
