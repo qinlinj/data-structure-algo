@@ -47,7 +47,10 @@ import java.util.*;
  * Where the numbers in parentheses represent the frequency of complete sentences.
  */
 public class _642_TrieImp_AutoCompleteSystem {
+    // Root node of the Trie
     private TrieNode root;
+
+    // Current input sentence being built character by character
     private String currSentence = "";
 
     /**
@@ -87,12 +90,14 @@ public class _642_TrieImp_AutoCompleteSystem {
      */
     public void insert(String s, int times) {
         TrieNode curr = root;
+        // Traverse/build the Trie for each character in the sentence
         for (char c : s.toCharArray()) {
             if (!curr.children.containsKey(c)) {
                 curr.children.put(c, new TrieNode());
             }
             curr = curr.children.get(c);
         }
+        // Increment the times counter at the end node
         curr.times += times;
     }
 
@@ -130,22 +135,30 @@ public class _642_TrieImp_AutoCompleteSystem {
      */
     public List<String> input(char c) {
         List<String> res = new ArrayList<>();
+
         if (c == '#') {
+            // End of sentence marker - insert the current sentence with frequency 1
             insert(currSentence, 1);
+            // Reset the current sentence
             currSentence = "";
         } else {
+            // Append the character to the current sentence
             currSentence += c;
 
+            // Find all sentences that start with the current input
             List<SentenceInfo> list = lookup(currSentence);
 
+            // Sort matching sentences by frequency (descending) and lexicographical order (for ties)
             Collections.sort(list, new Comparator<SentenceInfo>() {
                 @Override
                 public int compare(SentenceInfo o1, SentenceInfo o2) {
                     return o1.time == o2.time ?
-                            o1.content.compareTo(o2.content) :
-                            o2.time - o1.time;
+                            o1.content.compareTo(o2.content) : // If frequencies are equal, sort lexicographically
+                            o2.time - o1.time;                 // Otherwise, sort by frequency (descending)
                 }
             });
+
+            // Return the top 3 (or fewer if less than 3 matches) suggestions
             for (int i = 0; i < Math.min(3, list.size()); i++) {
                 res.add(list.get(i).content);
             }
@@ -171,14 +184,17 @@ public class _642_TrieImp_AutoCompleteSystem {
     public List<SentenceInfo> lookup(String s) {
         List<SentenceInfo> list = new ArrayList<>();
 
+        // Navigate to the node representing the prefix
         TrieNode curr = root;
         for (char c : s.toCharArray()) {
             if (!curr.children.containsKey(c)) {
-                return list;
+                // Prefix not found in the Trie
+                return list; // Return empty list
             }
             curr = curr.children.get(c);
         }
 
+        // Perform DFS from the prefix node to find all complete sentences
         dfs(curr, s, list);
 
         return list;
@@ -205,27 +221,48 @@ public class _642_TrieImp_AutoCompleteSystem {
      * @param list the list to store complete sentences and their frequencies
      */
     private void dfs(TrieNode curr, String s, List<SentenceInfo> list) {
+        // If current node represents the end of a sentence (times > 0), add it to the list
         if (curr.times > 0) {
             list.add(new SentenceInfo(s, curr.times));
         }
 
+        // Explore all children nodes recursively
         for (char c : curr.children.keySet()) {
             dfs(curr.children.get(c), s + c, list);
         }
     }
 
+    /**
+     * Helper class to store sentence information for sorting.
+     * Combines a sentence with its usage frequency.
+     */
     private class SentenceInfo {
-        String content;
-        int time;
+        String content; // The sentence content
+        int time;       // The usage frequency
 
+        /**
+         * Create a new SentenceInfo object.
+         *
+         * @param content the sentence text
+         * @param time the usage frequency
+         */
         SentenceInfo(String content, int time) {
             this.content = content;
             this.time = time;
         }
     }
 
+    /**
+     * TrieNode class for the Trie data structure.
+     * Each node represents a character in the Trie and contains:
+     * 1. A map of children nodes (next characters in sequences)
+     * 2. A times counter to track how many times a sentence ending at this node occurs
+     */
     private class TrieNode {
+        // Map to store children nodes where key is the next character and value is the child node
         Map<Character, TrieNode> children = new HashMap<>();
+
+        // Counter for sentence frequency (0 if this node is not the end of any sentence)
         int times = 0;
     }
 }
