@@ -2,10 +2,10 @@ package org.qinlinj.practical.trie;
 
 import java.util.*;
 
-public class _208_2_ImplementTriePrefixTree {
+public class _208_HashMapImp_ImplementTriePrefixTree {
     private Node root;
 
-    public _208_2_ImplementTriePrefixTree() {
+    public _208_HashMapImp_ImplementTriePrefixTree() {
         root = new Node();
     }
 

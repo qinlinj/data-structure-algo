@@ -2,7 +2,7 @@ package org.qinlinj.practical.trie;
 
 import java.util.*;
 
-public class _208_1_ImplementTriePrefixTree {
+public class _208_TrieImp_ImplementTriePrefixTree {
     class Trie {
         private Node root;
 
