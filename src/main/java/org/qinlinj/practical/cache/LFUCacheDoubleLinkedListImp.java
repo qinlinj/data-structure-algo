@@ -58,10 +58,18 @@ import java.util.*;
  * This class implements the Least Frequently Used cache eviction policy.
  */
 public class LFUCacheDoubleLinkedListImp {
+    // Maps each key to its corresponding Node for O(1) access
     private Map<Integer, Node> keyToNode;
+
+    // Maps each frequency count to a DoubleLinkedList of nodes with that count
+    // Each list maintains nodes in order of recency (LRU within each frequency)
     private Map<Integer, DoubleLinkedList> usedCountToKeys;
 
+    // Maximum number of elements the cache can hold
     private int capacity;
+
+    // Tracks the minimum frequency across all current cache entries
+    // This allows O(1) access to the least frequently used node(s)
     private int minUsedCount;
 
     /**
