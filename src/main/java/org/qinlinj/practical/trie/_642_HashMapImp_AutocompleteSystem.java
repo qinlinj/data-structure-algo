@@ -14,6 +14,18 @@ public class _642_HashMapImp_AutocompleteSystem {
         }
     }
 
+    public List<String> input(char c) {
+        List<String> res = new ArrayList<>();
+        if (c == '#') {
+            map.put(currSentence, map.getOrDefault(currSentence, 0) + 1);
+            currSentence = "";
+        } else {
+            currSentence += c;
+            
+        }
+        return res;
+    }
+
     private class SentenceInfo {
         String content;
         int time;
