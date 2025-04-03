@@ -2,6 +2,39 @@ package org.qinlinj.practical.trie;
 
 import java.util.*;
 
+/**
+ * Auto-Complete System Implementation
+ * <p>
+ * Concept and Principles:
+ * This class implements an auto-complete system that suggests the most frequently used sentences
+ * based on the characters typed so far. It uses a HashMap to store sentences and their usage frequencies.
+ * When a user types a character, the system returns the top 3 matching sentences sorted by frequency
+ * and lexicographical order (for ties).
+ * <p>
+ * Advantages:
+ * 1. Simple implementation using HashMap for storage
+ * 2. Efficient for small to medium datasets
+ * 3. Easy to understand and maintain
+ * 4. Dynamic updating of frequencies when sentences are confirmed
+ * <p>
+ * Limitations:
+ * 1. Time complexity of O(n*k) for each input operation, where n is the number of sentences and k is the average sentence length
+ * 2. Not as efficient as a Trie-based implementation for large datasets
+ * 3. Performs a linear scan of all sentences for each character input
+ * <p>
+ * Visual Example:
+ * Given sentences: ["i love you", "island", "iroman"] with frequencies [5, 3, 2]
+ * <p>
+ * User types 'i':
+ * - System searches for sentences starting with "i"
+ * - Finds: "i love you" (5), "island" (3), "iroman" (2)
+ * - Returns: ["i love you", "island", "iroman"] (sorted by frequency)
+ * <p>
+ * User types 'l' (current input = "il"):
+ * - System searches for sentences starting with "il"
+ * - Finds only: "island" (3)
+ * - Returns: ["island"]
+ */
 public class _642_HashMapImp_AutoCompleteSystem {
     private Map<String, Integer> map;
 
