@@ -184,6 +184,26 @@ public class _642_TrieImp_AutoCompleteSystem {
         return list;
     }
 
+    /**
+     * Depth-First Search to find all complete sentences from a given node.
+     * Recursively explores all paths from the current node and adds complete sentences to the list.
+     *
+     * Visualization Example:
+     * For Trie path "h" -> "e" -> "l" -> "l" -> "o" (times=2):
+     * 1. Start DFS at "h" node with s="h"
+     * 2. Recursive calls for all children: DFS("e" node, "he", list)
+     * 3. Continue to: DFS("l" node, "hel", list)
+     * 4. Continue to: DFS("l" node, "hell", list)
+     * 5. Continue to: DFS("o" node, "hello", list)
+     * 6. At "o" node, times=2 > 0, so add ("hello", 2) to list
+     *
+     * Time Complexity: O(p) where p is the total number of characters in all paths from the current node
+     * Space Complexity: O(h) for recursion stack, where h is the maximum depth from current node
+     *
+     * @param curr the current TrieNode being explored
+     * @param s the current sentence being built
+     * @param list the list to store complete sentences and their frequencies
+     */
     private void dfs(TrieNode curr, String s, List<SentenceInfo> list) {
         if (curr.times > 0) {
             list.add(new SentenceInfo(s, curr.times));
