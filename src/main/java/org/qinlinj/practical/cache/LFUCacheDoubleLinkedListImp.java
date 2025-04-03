@@ -95,6 +95,14 @@ public class LFUCacheDoubleLinkedListImp {
     }
 
     public void put(int key, int value) {
+        if (capacity == 0) return;
 
+        if (keyToNode.containsKey(key)) {
+            Node node = keyToNode.get(key);
+            node.val = value;
+            keyToNode.put(key, node);
+            get(key);
+            return;
+        }
     }
 }
