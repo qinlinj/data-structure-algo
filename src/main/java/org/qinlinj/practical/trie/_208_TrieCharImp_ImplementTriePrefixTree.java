@@ -9,7 +9,14 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
     }
 
     public void insert(String word) {
-
+        Node curr = root;
+        for (char c : word.toCharArray()) { // O(n)
+            if (curr.children[c - 'a'] == null) {
+                curr.children[c - 'a'] = new Node();
+            }
+            curr = curr.children[c - 'a'];
+        }
+        curr.isWord = true;
     }
 
     public boolean search(String word) {
