@@ -47,6 +47,25 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
         root = new Node();
     }
 
+    /**
+     * Inserts a word into the Trie.
+     *
+     * Visualization Example:
+     * Inserting "dog" into an empty Trie:
+     * 1. Start at root
+     * 2. Calculate index for 'd': 'd' - 'a' = 3
+     * 3. Create new node at root.children[3]
+     * 4. Calculate index for 'o': 'o' - 'a' = 14
+     * 5. Create new node at d_node.children[14]
+     * 6. Calculate index for 'g': 'g' - 'a' = 6
+     * 7. Create new node at o_node.children[6]
+     * 8. Mark g_node as end of word (isWord = true)
+     *
+     * Time Complexity: O(n) where n is the length of the word
+     * Space Complexity: O(n) in worst case (if all characters are new)
+     *
+     * @param word the word to insert into the Trie (lowercase letters only)
+     */
     public void insert(String word) {
         Node curr = root;
         for (char c : word.toCharArray()) { // O(n)
