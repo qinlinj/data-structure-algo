@@ -108,6 +108,22 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
         return curr.isWord;
     }
 
+    /**
+     * Checks if there is any word in the Trie that starts with the given prefix.
+     *
+     * Visualization Example:
+     * Checking if prefix "do" exists in a Trie with "dog", "dot":
+     * 1. Start at root
+     * 2. Navigate to index 'd' - 'a' = 3
+     * 3. Navigate to index 'o' - 'a' = 14
+     * 4. Return true (found prefix "do")
+     *
+     * Time Complexity: O(n) where n is the length of the prefix
+     * Space Complexity: O(1) - no additional space required
+     *
+     * @param prefix the prefix to search for (lowercase letters only)
+     * @return true if any word with this prefix exists, false otherwise
+     */
     public boolean startsWith(String prefix) {
         Node curr = root;
         for (char c : prefix.toCharArray()) { // O(n)
