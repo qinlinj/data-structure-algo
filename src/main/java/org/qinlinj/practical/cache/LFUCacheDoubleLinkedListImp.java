@@ -191,8 +191,17 @@ class DoubleLinkedList {
 
         return node;
     }
-    
+
+    /**
+     * Adds a node to the end of the list (just before the dummy tail).
+     * This makes the newly added node the most recently used within its frequency group.
+     *
+     * @param node the node to be added
+     *             <p>
+     *             Time Complexity: O(1)
+     */
     void add(Node node) {
+        // Insert node just before the tail
         node.prev = tail.prev;
         tail.prev.next = node;
         node.next = tail;
