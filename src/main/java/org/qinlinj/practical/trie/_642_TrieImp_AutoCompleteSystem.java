@@ -66,6 +66,13 @@ public class _642_TrieImp_AutoCompleteSystem {
     }
 
     private void dfs(TrieNode curr, String s, List<SentenceInfo> list) {
+        if (curr.times > 0) {
+            list.add(new SentenceInfo(s, curr.times));
+        }
+
+        for (char c : curr.children.keySet()) {
+            dfs(curr.children.get(c), s + c, list);
+        }
     }
 
     private class SentenceInfo {
