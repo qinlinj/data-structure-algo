@@ -41,8 +41,13 @@ package org.qinlinj.practical.trie;
  * Node_a.children = [null,...,null,Node_r,null,Node_t,...,null] (size 26)
  */
 public class _208_TrieCharImp_ImplementTriePrefixTree {
+    // Root node of the Trie
     private Node root;
 
+    /**
+     * Initialize the Trie with an empty root node.
+     * Time Complexity: O(1)
+     */
     public _208_TrieCharImp_ImplementTriePrefixTree() {
         root = new Node();
     }
@@ -69,14 +74,17 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
     public void insert(String word) {
         Node curr = root;
         for (char c : word.toCharArray()) { // O(n)
+            // Calculate array index by subtracting 'a' from character
+            // For example: 'a' - 'a' = 0, 'b' - 'a' = 1, 'z' - 'a' = 25
             if (curr.children[c - 'a'] == null) {
                 curr.children[c - 'a'] = new Node();
             }
+            // Move to the child node
             curr = curr.children[c - 'a'];
         }
+        // Mark the end of the word
         curr.isWord = true;
     }
-
 
     /**
      * Searches for a word in the Trie.
@@ -100,11 +108,14 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
     public boolean search(String word) {
         Node curr = root;
         for (char c : word.toCharArray()) { // O(n)
+            // If node doesn't exist at calculated index, word doesn't exist
             if (curr.children[c - 'a'] == null) {
                 return false;
             }
+            // Move to the next node
             curr = curr.children[c - 'a'];
         }
+        // Return whether current node marks the end of a word
         return curr.isWord;
     }
 
@@ -127,11 +138,14 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
     public boolean startsWith(String prefix) {
         Node curr = root;
         for (char c : prefix.toCharArray()) { // O(n)
+            // If node doesn't exist at calculated index, prefix doesn't exist
             if (curr.children[c - 'a'] == null) {
                 return false;
             }
+            // Move to the next node
             curr = curr.children[c - 'a'];
         }
+        // If we've traversed the entire prefix, it exists in the Trie
         return true;
     }
 
