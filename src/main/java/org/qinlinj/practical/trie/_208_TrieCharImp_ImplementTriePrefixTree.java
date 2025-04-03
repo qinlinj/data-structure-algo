@@ -20,7 +20,14 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
     }
 
     public boolean search(String word) {
-
+        Node curr = root;
+        for (char c : word.toCharArray()) { // O(n)
+            if (curr.children[c - 'a'] == null) {
+                return false;
+            }
+            curr = curr.children[c - 'a'];
+        }
+        return curr.isWord;
     }
 
     public boolean startsWith(String prefix) {
