@@ -1,8 +1,8 @@
 package org.qinlinj.practical.trie;
 
 import java.util.*;
-// @formatter:off
 
+// @formatter:off
 /**
  * Trie-based Auto-Complete System Implementation
  *
@@ -50,8 +50,19 @@ public class _642_TrieImp_AutoCompleteSystem {
     private TrieNode root;
     private String currSentence = "";
 
+    /**
+     * Initialize the auto-complete system with historical sentences and their frequencies.
+     * Builds a Trie containing all provided sentences.
+     *
+     * Time Complexity: O(n*k) where n is the number of sentences and k is the average length
+     * Space Complexity: O(n*k) for storing all characters of all sentences in the Trie
+     *
+     * @param sentences array of historical sentences
+     * @param times array of usage frequencies corresponding to each sentence
+     */
     public _642_TrieImp_AutoCompleteSystem(String[] sentences, int[] times) {
         root = new TrieNode();
+        // Insert all historical sentences into the Trie with their frequencies
         for (int i = 0; i < sentences.length; i++) {
             insert(sentences[i], times[i]);
         }
