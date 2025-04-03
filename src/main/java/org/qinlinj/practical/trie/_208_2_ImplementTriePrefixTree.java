@@ -9,6 +9,17 @@ public class _208_2_ImplementTriePrefixTree {
         root = new Node();
     }
 
+    public void insert(String word) {
+        Node curr = root;
+        for (Character c : word.toCharArray()) { // O(n)
+            if (!curr.children.containsKey(c)) {
+                curr.children.put(c, new Node());
+            }
+            curr = curr.children.get(c);
+        }
+        curr.isWord = true;
+    }
+
     private class Node {
         Map<Character, Node> children;
         boolean isWord;
