@@ -50,7 +50,22 @@ public class _642_TrieImp_AutoCompleteSystem {
     }
 
     public List<SentenceInfo> lookup(String s) {
-        
+        List<SentenceInfo> list = new ArrayList<>();
+
+        TrieNode curr = root;
+        for (char c : s.toCharArray()) {
+            if (!curr.children.containsKey(c)) {
+                return list;
+            }
+            curr = curr.children.get(c);
+        }
+
+        dfs(curr, s, list);
+
+        return list;
+    }
+
+    private void dfs(TrieNode curr, String s, List<SentenceInfo> list) {
     }
 
     private class SentenceInfo {
