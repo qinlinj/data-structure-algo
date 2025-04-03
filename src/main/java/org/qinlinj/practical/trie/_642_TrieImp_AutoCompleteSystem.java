@@ -24,6 +24,18 @@ public class _642_TrieImp_AutoCompleteSystem {
         curr.times += times;
     }
 
+    public List<String> input(char c) {
+        List<String> res = new ArrayList<>();
+        if (c == '#') {
+            insert(currSentence, 1);
+            currSentence = "";
+        } else {
+            currSentence += c;
+
+        }
+        return res;
+    }
+
     private class SentenceInfo {
         String content;
         int time;
