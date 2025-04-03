@@ -202,7 +202,7 @@ public class LFUCacheDoubleLinkedListImp {
         // Add the node to frequency 1 list
         putUsedCount(node, minUsedCount);
     }
-    
+
     /**
      * Usage Example:
      * LFUCache2 obj = new LFUCache2(capacity);
