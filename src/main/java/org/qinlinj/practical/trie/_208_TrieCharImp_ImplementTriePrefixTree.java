@@ -135,10 +135,21 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
         return true;
     }
 
+    /**
+     * Node class for the Trie data structure.
+     * Each node contains an array of children nodes (size 26 for lowercase letters)
+     * and a flag indicating if it's the end of a word.
+     */
     private class Node {
+        // Array to store children nodes, indexed by character (a=0, b=1, ..., z=25)
         Node[] children;
+        // Flag to indicate if this node represents the end of a word
         boolean isWord;
 
+        /**
+         * Initialize a new Node with an empty children array of size 26
+         * (one position for each lowercase letter) and isWord set to false.
+         */
         Node() {
             children = new Node[26];
             isWord = false;
