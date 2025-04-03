@@ -40,12 +40,23 @@ public class _642_HashMapImp_AutoCompleteSystem {
 
     private String currSentence = "";
 
+    /**
+     * Initialize the auto-complete system with historical sentences and their frequencies.
+     * <p>
+     * Time Complexity: O(n) where n is the number of input sentences
+     * Space Complexity: O(n) to store all sentences and frequencies
+     *
+     * @param sentences array of historical sentences
+     * @param times     array of usage frequencies corresponding to each sentence
+     */
     public _642_HashMapImp_AutoCompleteSystem(String[] sentences, int[] times) {
         map = new HashMap<>();
+        // Initialize the map with historical sentences and their frequencies
         for (int i = 0; i < sentences.length; i++) {
             map.put(sentences[i], times[i]);
         }
     }
+
 
     public List<String> input(char c) {
         List<String> res = new ArrayList<>();
