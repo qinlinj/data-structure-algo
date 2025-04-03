@@ -109,5 +109,11 @@ public class LFUCacheDoubleLinkedListImp {
             Node removeNode = usedCountToKeys.get(minUsedCount).popFirst();
             keyToNode.remove(removeNode.key);
         }
+
+        Node node = new Node(key, value, 1);
+        keyToNode.put(key, node);
+
+        minUsedCount = 1;
+        putUsedCount(node, minUsedCount);
     }
 }
