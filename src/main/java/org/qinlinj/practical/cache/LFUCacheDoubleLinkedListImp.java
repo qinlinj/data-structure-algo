@@ -171,27 +171,38 @@ public class LFUCacheDoubleLinkedListImp {
      *              Time Complexity: O(1)
      */
     public void put(int key, int value) {
+        // Special case: if capacity is 0, cache is disabled
         if (capacity == 0) return;
 
+        // If key already exists, update its value and frequency
         if (keyToNode.containsKey(key)) {
             Node node = keyToNode.get(key);
             node.val = value;
+            // Update the node in the map
             keyToNode.put(key, node);
+            // Update frequency (calls get method)
             get(key);
             return;
         }
 
+        // If cache is full, evict the least frequently used item
         if (keyToNode.size() == capacity) {
+            // Get the first (least recently used) node from the minimum frequency list
             Node removeNode = usedCountToKeys.get(minUsedCount).popFirst();
+            // Remove it from the key-to-node map
             keyToNode.remove(removeNode.key);
         }
 
+        // Create a new node for the key-value pair with frequency 1
         Node node = new Node(key, value, 1);
         keyToNode.put(key, node);
 
+        // Set minimum frequency to 1 for the new node
         minUsedCount = 1;
+        // Add the node to frequency 1 list
         putUsedCount(node, minUsedCount);
     }
+    
     /**
      * Usage Example:
      * LFUCache2 obj = new LFUCache2(capacity);
