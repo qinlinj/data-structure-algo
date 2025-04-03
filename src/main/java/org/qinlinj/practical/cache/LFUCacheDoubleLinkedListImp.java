@@ -53,6 +53,10 @@ import java.util.*;
  * minUsedCount: 1
  */
 
+/**
+ * LFU Cache implementation using a HashMap and DoubleLinkedList combination.
+ * This class implements the Least Frequently Used cache eviction policy.
+ */
 public class LFUCacheDoubleLinkedListImp {
     private Map<Integer, Node> keyToNode;
     private Map<Integer, DoubleLinkedList> usedCountToKeys;
@@ -60,6 +64,13 @@ public class LFUCacheDoubleLinkedListImp {
     private int capacity;
     private int minUsedCount;
 
+    /**
+     * Constructs a new LFU cache with the specified capacity.
+     *
+     * @param capacity the maximum number of key-value pairs the cache can hold
+     *                 <p>
+     *                 Time Complexity: O(1)
+     */
     public LFUCacheDoubleLinkedListImp(int capacity) {
         keyToNode = new HashMap<>();
         usedCountToKeys = new HashMap<>();
@@ -68,6 +79,22 @@ public class LFUCacheDoubleLinkedListImp {
         minUsedCount = 0;
     }
 
+    /**
+     * Retrieves the value associated with the given key from the cache.
+     * Also increases the usage count for the key if found.
+     * <p>
+     * Process:
+     * 1. Handle edge cases (capacity = 0 or key doesn't exist)
+     * 2. Update the node's frequency count
+     * 3. Remove the node from its current frequency list
+     * 4. Add it to the next frequency list
+     * 5. Update minUsedCount if necessary
+     *
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with the key, or -1 if not found
+     * <p>
+     * Time Complexity: O(1)
+     */
     public int get(int key) {
         if (capacity == 0) return -1;
 
