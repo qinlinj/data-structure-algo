@@ -151,13 +151,22 @@ public class _208_TrieImp_ImplementTriePrefixTree {
             return true;
         }
 
-        class Node {
-            public Map<Character, Node> children;
-            public boolean isWord;
+        /**
+         * Node class for the Trie data structure.
+         * Each node contains a map of children nodes and a flag indicating if it's the end of a word.
+         */
+        private class Node {
+            // Map to store children nodes where key is the character and value is the child node
+            Map<Character, Node> children;
+            // Flag to indicate if this node represents the end of a word
+            boolean isWord;
 
-            public Node() {
-                this.children = new HashMap<>();
-                this.isWord = false;
+            /**
+             * Initialize a new Node with an empty children map and isWord set to false.
+             */
+            Node() {
+                children = new HashMap<>();
+                isWord = false;
             }
         }
     }
