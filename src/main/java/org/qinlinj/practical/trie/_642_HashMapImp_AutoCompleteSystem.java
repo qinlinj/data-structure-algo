@@ -2,12 +2,12 @@ package org.qinlinj.practical.trie;
 
 import java.util.*;
 
-public class _642_HashMapImp_AutocompleteSystem {
+public class _642_HashMapImp_AutoCompleteSystem {
     private Map<String, Integer> map;
 
     private String currSentence = "";
 
-    public _642_HashMapImp_AutocompleteSystem(String[] sentences, int[] times) {
+    public _642_HashMapImp_AutoCompleteSystem(String[] sentences, int[] times) {
         map = new HashMap<>();
         for (int i = 0; i < sentences.length; i++) {
             map.put(sentences[i], times[i]);
