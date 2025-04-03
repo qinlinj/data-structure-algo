@@ -171,7 +171,27 @@ public class LFUCacheDoubleLinkedListImp {
         minUsedCount = 1;
         putUsedCount(node, minUsedCount);
     }
-
+    /**
+     * Usage Example:
+     * LFUCache2 obj = new LFUCache2(capacity);
+     * int param_1 = obj.get(key);
+     * obj.put(key,value);
+     *
+     * Detailed example with capacity = 2:
+     *
+     * LFUCache2 cache = new LFUCache2(2);
+     *
+     * cache.put(1, 1);  // Cache: {1=1}
+     * cache.put(2, 2);  // Cache: {1=1, 2=2}
+     * cache.get(1);     // Returns 1, increases frequency of 1
+     * cache.put(3, 3);  // Removes key 2, Cache: {1=1, 3=3}
+     * cache.get(2);     // Returns -1 (not found)
+     * cache.get(3);     // Returns 3, increases frequency of 3
+     * cache.put(4, 4);  // Removes key 1, Cache: {3=3, 4=4}
+     * cache.get(1);     // Returns -1 (not found)
+     * cache.get(3);     // Returns 3, increases frequency of 3
+     * cache.get(4);     // Returns 4, increases frequency of 4
+     */
 }
 
 /**
