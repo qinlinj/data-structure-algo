@@ -208,11 +208,26 @@ class DoubleLinkedList {
         tail.prev = node;
     }
 
+    /**
+     * Removes and returns the first node in the list (just after the dummy head).
+     * This is the least recently used node within this frequency group.
+     *
+     * @return the removed first node, or null if the list is empty
+     * <p>
+     * Time Complexity: O(1)
+     */
     Node popFirst() {
         if (isEmpty()) return null;
         return remove(this.head.next);
     }
 
+    /**
+     * Checks if the list is empty.
+     *
+     * @return true if the list is empty, false otherwise
+     * <p>
+     * Time Complexity: O(1)
+     */
     boolean isEmpty() {
         return this.head.next == this.tail;
     }
