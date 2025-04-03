@@ -76,8 +76,15 @@ public class LFUCacheDoubleLinkedListImp {
         int usedCount = node.count;
         usedCountToKeys.get(usedCount).remove(node);
         node.count = usedCount + 1;
-        
-        return 0;
+
+        if (usedCount == minUsedCount
+                && usedCountToKeys.get(usedCount).isEmpty()) {
+            minUsedCount++;
+        }
+
+        putUsedCount(node, usedCount + 1);
+
+        return node.val;
     }
 
     private void putUsedCount(Node node, int count) {
