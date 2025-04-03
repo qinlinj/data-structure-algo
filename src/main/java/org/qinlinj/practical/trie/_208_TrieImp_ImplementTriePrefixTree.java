@@ -121,14 +121,33 @@ public class _208_TrieImp_ImplementTriePrefixTree {
             return curr.isWord;
         }
 
+        /**
+         * Checks if there is any word in the Trie that starts with the given prefix.
+         *
+         * Visualization Example:
+         * Checking if prefix "ca" exists in a Trie with "cat", "car":
+         * 1. Start at root
+         * 2. Follow path to 'c'
+         * 3. Follow path to 'a'
+         * 4. Return true (found prefix "ca")
+         *
+         * Time Complexity: O(n) where n is the length of the prefix
+         * Space Complexity: O(1) - no additional space required
+         *
+         * @param prefix the prefix to search for
+         * @return true if any word with this prefix exists, false otherwise
+         */
         public boolean startsWith(String prefix) {
             Node curr = root;
-            for (Character o : prefix.toCharArray()) {
-                if (!curr.children.containsKey(o)) {
+            for (Character c : prefix.toCharArray()) {
+                // If character doesn't exist in current path, prefix doesn't exist
+                if (!curr.children.containsKey(c)) {
                     return false;
                 }
-                curr = curr.children.get(o);
+                // Move to the next node
+                curr = curr.children.get(c);
             }
+            // If we've traversed the entire prefix, it exists in the Trie
             return true;
         }
 
