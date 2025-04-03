@@ -131,6 +131,24 @@ public class LFUCacheDoubleLinkedListImp {
         usedCountToKeys.get(count).add(node);
     }
 
+    /**
+     * Adds a key-value pair to the cache or updates the value if the key already exists.
+     * If adding a new key would exceed capacity, the least frequently used item is evicted.
+     * <p>
+     * Process for existing key:
+     * 1. Update the value
+     * 2. Call get(key) to update its frequency
+     * <p>
+     * Process for new key:
+     * 1. If at capacity, remove the LFU item
+     * 2. Add the new key-value pair with frequency 1
+     * 3. Update minimum frequency to 1
+     *
+     * @param key   the key with which the specified value is to be associated
+     * @param value the value to be associated with the specified key
+     *              <p>
+     *              Time Complexity: O(1)
+     */
     public void put(int key, int value) {
         if (capacity == 0) return;
 
