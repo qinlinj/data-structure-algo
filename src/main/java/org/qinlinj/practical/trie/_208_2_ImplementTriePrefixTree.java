@@ -20,6 +20,17 @@ public class _208_2_ImplementTriePrefixTree {
         curr.isWord = true;
     }
 
+    public boolean search(String word) {
+        Node curr = root;
+        for (Character c : word.toCharArray()) { // O(n)
+            if (!curr.children.containsKey(c)) {
+                return false;
+            }
+            curr = curr.children.get(c);
+        }
+        return curr.isWord;
+    }
+
     private class Node {
         Map<Character, Node> children;
         boolean isWord;
