@@ -31,7 +31,14 @@ public class _208_TrieCharImp_ImplementTriePrefixTree {
     }
 
     public boolean startsWith(String prefix) {
-
+        Node curr = root;
+        for (char c : prefix.toCharArray()) { // O(n)
+            if (curr.children[c - 'a'] == null) {
+                return false;
+            }
+            curr = curr.children[c - 'a'];
+        }
+        return true;
     }
 
     private class Node {
