@@ -68,6 +68,23 @@ public class _642_TrieImp_AutoCompleteSystem {
         }
     }
 
+    /**
+     * Insert a sentence into the Trie with its frequency.
+     * If the sentence already exists, the frequency is added to the existing value.
+     *
+     * Visualization Example:
+     * Inserting "go" with frequency 2:
+     * 1. Start at root
+     * 2. Create/navigate to child 'g'
+     * 3. Create/navigate to child 'o'
+     * 4. Increment times at node 'o' by 2
+     *
+     * Time Complexity: O(k) where k is the length of the sentence
+     * Space Complexity: O(k) for new nodes if sentence wasn't in the Trie
+     *
+     * @param s the sentence to insert
+     * @param times the frequency of the sentence
+     */
     public void insert(String s, int times) {
         TrieNode curr = root;
         for (char c : s.toCharArray()) {
