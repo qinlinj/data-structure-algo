@@ -104,20 +104,31 @@ public class LFUCacheDoubleLinkedListImp {
      * Time Complexity: O(1)
      */
     public int get(int key) {
+        // Special case: if capacity is 0, cache is disabled
         if (capacity == 0) return -1;
 
+        // Check if key exists in cache
         Node node = keyToNode.get(key);
         if (node == null) return -1;
 
+        // Get current frequency count
         int usedCount = node.count;
+
+        // 1. Remove node from its current frequency list
         usedCountToKeys.get(usedCount).remove(node);
+
+        // Increment node's frequency
         node.count = usedCount + 1;
 
+        // 2. Update minimum frequency if necessary
+        // If we just removed the last node with the minimum frequency,
+        // increment minUsedCount
         if (usedCount == minUsedCount
                 && usedCountToKeys.get(usedCount).isEmpty()) {
             minUsedCount++;
         }
 
+        // 3. Add node to the next frequency list
         putUsedCount(node, usedCount + 1);
 
         return node.val;
@@ -133,9 +144,11 @@ public class LFUCacheDoubleLinkedListImp {
      *              Time Complexity: O(1)
      */
     private void putUsedCount(Node node, int count) {
+        // Create a new list for this frequency if it doesn't exist
         if (!usedCountToKeys.containsKey(count)) {
             usedCountToKeys.put(count, new DoubleLinkedList());
         }
+        // Add the node to the end of the list (most recently used position)
         usedCountToKeys.get(count).add(node);
     }
 
