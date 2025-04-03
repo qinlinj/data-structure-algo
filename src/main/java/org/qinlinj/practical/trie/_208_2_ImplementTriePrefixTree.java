@@ -31,6 +31,17 @@ public class _208_2_ImplementTriePrefixTree {
         return curr.isWord;
     }
 
+    public boolean startsWith(String prefix) {
+        Node curr = root;
+        for (Character c : prefix.toCharArray()) { // O(n)
+            if (!curr.children.containsKey(c)) {
+                return false;
+            }
+            curr = curr.children.get(c);
+        }
+        return true;
+    }
+
     private class Node {
         Map<Character, Node> children;
         boolean isWord;
