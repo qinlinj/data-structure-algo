@@ -1,7 +1,51 @@
 package org.qinlinj.practical.trie;
 
 import java.util.*;
+// @formatter:off
 
+/**
+ * Trie-based Auto-Complete System Implementation
+ *
+ * Concept and Principles:
+ * This class implements an auto-complete system using a Trie data structure. It suggests the most
+ * frequently used sentences based on characters typed so far. The Trie efficiently stores all
+ * sentences and allows for quick prefix searches, which is ideal for auto-completion functionality.
+ *
+ * Advantages of Trie-based Implementation:
+ * 1. Efficient prefix searching - O(m) time complexity where m is the length of the prefix
+ * 2. Only explores the relevant parts of the Trie (unlike HashMap that scans all entries)
+ * 3. Space-efficient for datasets with common prefixes
+ * 4. Scalable for large datasets with many sentences
+ * 5. Natural traversal for collecting all sentences with a given prefix
+ *
+ * Visual Example:
+ * Given sentences: ["i love you", "island", "iroman"] with frequencies [5, 3, 2]
+ *
+ * The Trie would look like:
+ *                root
+ *                 |
+ *                 i
+ *           /     |     \
+ *          s      r      ' '(space)
+ *         /       |        \
+ *        l        o         l
+ *       /         |          \
+ *      a          m           o
+ *     /           |            \
+ *    n            a             v
+ *   /             |              \
+ *  d(3)           n               e
+ *                 |                \
+ *                (2)                ' '(space)
+ *                                    |
+ *                                    y
+ *                                    |
+ *                                    o
+ *                                    |
+ *                                    u(5)
+ *
+ * Where the numbers in parentheses represent the frequency of complete sentences.
+ */
 public class _642_TrieImp_AutoCompleteSystem {
     private TrieNode root;
     private String currSentence = "";
