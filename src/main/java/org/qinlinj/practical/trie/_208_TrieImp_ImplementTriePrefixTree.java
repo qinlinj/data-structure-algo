@@ -58,14 +58,33 @@ public class _208_TrieImp_ImplementTriePrefixTree {
             this.root = new Node();
         }
 
+        /**
+         * Inserts a word into the Trie.
+         *
+         * Visualization Example:
+         * Inserting "cat" into an empty Trie:
+         * 1. Start at root
+         * 2. Add 'c' as a child of root
+         * 3. Add 'a' as a child of 'c'
+         * 4. Add 't' as a child of 'a'
+         * 5. Mark 't' node as end of word (isWord = true)
+         *
+         * Time Complexity: O(n) where n is the length of the word
+         * Space Complexity: O(n) in worst case (if all characters are new)
+         *
+         * @param word the word to insert into the Trie
+         */
         public void insert(String word) {
             Node curr = root;
-            for (Character o : word.toCharArray()) {
-                if (!curr.children.containsKey(o)) {
-                    curr.children.put(o, new Node());
+            for (Character c : word.toCharArray()) {
+                // If the current character doesn't exist in children, create a new node
+                if (!curr.children.containsKey(c)) {
+                    curr.children.put(c, new Node());
                 }
-                curr = curr.children.get(o);
+                // Move to the child node
+                curr = curr.children.get(c);
             }
+            // Mark the end of the word
             curr.isWord = true;
         }
 
