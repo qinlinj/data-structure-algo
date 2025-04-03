@@ -32,8 +32,25 @@ public class _642_TrieImp_AutoCompleteSystem {
         } else {
             currSentence += c;
 
+            List<SentenceInfo> list = lookup(currSentence);
+
+            Collections.sort(list, new Comparator<SentenceInfo>() {
+                @Override
+                public int compare(SentenceInfo o1, SentenceInfo o2) {
+                    return o1.time == o2.time ?
+                            o1.content.compareTo(o2.content) :
+                            o2.time - o1.time;
+                }
+            });
+            for (int i = 0; i < Math.min(3, list.size()); i++) {
+                res.add(list.get(i).content);
+            }
         }
         return res;
+    }
+
+    public List<SentenceInfo> lookup(String s) {
+        
     }
 
     private class SentenceInfo {
