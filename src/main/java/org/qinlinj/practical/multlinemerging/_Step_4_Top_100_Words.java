@@ -16,6 +16,21 @@ public class _Step_4_Top_100_Words {
 
         BufferedReader br = FileIOUtils.getReader(fileName);
         String currWord = null;
+
+        while ((currWord = br.readLine()) != null) {
+            if (!currWord.equals(prevWord)) {
+                if (minHeap.size() < 100) {
+                    minHeap.add(new Pair(prevWord, prevCnt));
+                } else if (prevCnt > minHeap.peek().cnt) {
+                    minHeap.remove();
+                    minHeap.add(new Pair(prevWord, prevCnt));
+                }
+
+                prevWord = currWord;
+                prevCnt = 0;
+            }
+            prevCnt++;
+        }
     }
 
     class Pair {
