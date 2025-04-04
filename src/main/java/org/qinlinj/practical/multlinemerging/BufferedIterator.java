@@ -78,6 +78,18 @@ public class BufferedIterator {
         this.reader.close();
     }
 
+    /**
+     * Checks if there is another line available to read and advances the internal
+     * position to the next line.
+     * <p>
+     * This method reads the next line from the BufferedReader and stores it in the
+     * head field for later retrieval by next(). It catches and handles any IOException
+     * that might occur during reading.
+     * <p>
+     * Time Complexity: O(L) where L is the length of the next line
+     *
+     * @return true if there is another line available, false if the end of the stream has been reached
+     */
     public boolean hasNext() {
         try {
             head = this.reader.readLine();
