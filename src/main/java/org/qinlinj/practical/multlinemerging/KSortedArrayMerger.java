@@ -64,6 +64,30 @@ public class KSortedArrayMerger {
         System.out.println(Arrays.toString(res));
     }
 
+
+    /**
+     * Merges K sorted arrays into a single sorted array.
+     * <p>
+     * Algorithm:
+     * 1. Calculate the total length of the result array
+     * 2. Initialize a min-heap (priority queue) to track the smallest element
+     * 3. Initially add the first element from each array to the heap
+     * 4. Repeatedly extract the smallest element from the heap and add the next
+     * element from the same array (if available)
+     * 5. Continue until the heap is empty
+     * <p>
+     * Time Complexity: O(N log K) where:
+     * - N is the total number of elements across all arrays
+     * - K is the number of arrays
+     * - Each heap operation takes O(log K) time
+     * - We perform N heap operations (one for each element)
+     * <p>
+     * Space Complexity: O(K) for the heap + O(N) for the result array
+     *
+     * @param data List containing the K sorted arrays to merge
+     * @param k    The number of arrays to merge
+     * @return A new array containing all elements from the input arrays in sorted order
+     */
     public int[] mergeKSortedArray(List<int[]> data, int k) {
         int len = 0;
         for (int i = 0; i < k; i++) {
