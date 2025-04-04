@@ -2,6 +2,48 @@ package org.qinlinj.practical.multlinemerging;
 
 import java.io.*;
 
+/**
+ * File IO Utilities
+ * <p>
+ * Concept and Principles:
+ * This utility class provides convenient methods for creating and closing file readers and writers.
+ * It abstracts away the details of setting up IO streams and handles exceptions in a consistent way,
+ * converting checked exceptions (IOException) into unchecked exceptions (RuntimeException).
+ * <p>
+ * Advantages:
+ * 1. Simplified API: Reduces boilerplate code for file operations
+ * 2. Consistent Exception Handling: Converts checked exceptions to runtime exceptions
+ * 3. Resource Management: Provides helper methods for properly closing resources
+ * 4. Separation of Concerns: Centralizes file IO creation logic in one place
+ * <p>
+ * Usage Example:
+ * ```
+ * // Reading from a file
+ * BufferedReader reader = null;
+ * try {
+ * reader = FileIOUtils.getReader("input.txt");
+ * String line;
+ * while ((line = reader.readLine()) != null) {
+ * // Process line
+ * }
+ * } finally {
+ * FileIOUtils.closeReader(reader);
+ * }
+ * <p>
+ * // Writing to a file
+ * BufferedWriter writer = null;
+ * try {
+ * writer = FileIOUtils.getWriter("output.txt");
+ * writer.write("Hello, World!");
+ * writer.newLine();
+ * } finally {
+ * FileIOUtils.closeWriter(writer);
+ * }
+ * ```
+ * <p>
+ * Note: In modern Java, it's recommended to use try-with-resources instead,
+ * but these utilities can still be useful for creating the readers/writers.
+ */
 public class FileIOUtils {
     public static BufferedReader getReader(String name) {
         try {
