@@ -68,6 +68,22 @@ public class FileIOUtils {
         }
     }
 
+    /**
+     * Creates and returns a BufferedWriter for the specified file.
+     *
+     * This method sets up the proper stream chain:
+     * FileOutputStream → OutputStreamWriter → BufferedWriter
+     *
+     * The OutputStreamWriter uses the default character encoding.
+     * For custom encoding, a separate method would be needed.
+     *
+     * Note: This will create a new file or overwrite an existing file.
+     * For appending to existing files, a separate method would be needed.
+     *
+     * @param name The path/name of the file to write to
+     * @return A BufferedWriter ready to write to the specified file
+     * @throws RuntimeException If an IOException occurs (permissions issues, disk full, etc.)
+     */
     public static BufferedWriter getWriter(String name) {
         try {
             FileOutputStream outputStream = new FileOutputStream(name);
