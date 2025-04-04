@@ -94,6 +94,15 @@ public class FileIOUtils {
         }
     }
 
+    /**
+     * Safely closes a Reader (or its subclasses like BufferedReader).
+     *
+     * This method handles the null check and exception handling, making it
+     * convenient to use in finally blocks for proper resource cleanup.
+     *
+     * @param reader The Reader to close, can be null
+     * @throws RuntimeException If an IOException occurs during closing
+     */
     public static void closeReader(Reader reader) {
         try {
             if (reader != null) {
