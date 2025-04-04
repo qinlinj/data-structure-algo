@@ -44,6 +44,11 @@ public class BufferedIterator {
     private BufferedReader reader;
     private String head;
 
+    /**
+     * Constructs a new BufferedIterator that wraps around the provided BufferedReader.
+     *
+     * @param reader The BufferedReader to read lines from
+     */
     BufferedIterator(BufferedReader reader) {
         this.reader = reader;
     }
