@@ -48,22 +48,34 @@ import java.util.*;
  * Final result: [1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 13]
  */
 public class KSortedArrayMerger {
+    /**
+     * Main method demonstrating the usage of the K-way merger.
+     * <p>
+     * Creates several sorted arrays and merges them using the mergeKSortedArray method.
+     *
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
+        // Sample sorted arrays
         int[] a = {1, 2, 6, 9, 10};
         int[] b = {2, 3, 7, 11};
         int[] c = {4, 8, 9, 13};
         int[] d = {5};
 
+        // Collect arrays in a list
         List<int[]> data = new ArrayList<>();
         data.add(a);
         data.add(b);
         data.add(c);
         data.add(d);
 
+        // Create an instance and merge the arrays
         int[] res = new KSortedArrayMerger().mergeKSortedArray(data, 4);
-        System.out.println(Arrays.toString(res));
-    }
 
+        // Print the result
+        System.out.println(Arrays.toString(res));
+        // Output: [1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 13]
+    }
 
     /**
      * Merges K sorted arrays into a single sorted array.
@@ -89,13 +101,18 @@ public class KSortedArrayMerger {
      * @return A new array containing all elements from the input arrays in sorted order
      */
     public int[] mergeKSortedArray(List<int[]> data, int k) {
+        // Calculate the total length of the result array
         int len = 0;
         for (int i = 0; i < k; i++) {
             len += data.get(i).length;
         }
 
+        // Create result array with size equal to the total number of elements
         int[] res = new int[len];
 
+        // Initialize a min-heap (priority queue)
+        // Each entry in the heap is an array [value, array_id, index_in_array]
+        // Heap is sorted first by value, then by array_id (for stability)
         PriorityQueue<int[]> minHeap = new PriorityQueue<>(k, new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
@@ -103,26 +120,36 @@ public class KSortedArrayMerger {
             }
         });
 
+        // Add the first element from each array to the heap
         for (int i = 0; i < k; i++) {
-            if (data.get(i).length == 0) continue;
+            if (data.get(i).length == 0) continue; // Skip empty arrays
             minHeap.add(new int[]{data.get(i)[0], i, 0});
         }
 
+        // Index to track position in result array
         int index = 0;
-        while (!minHeap.isEmpty()) {
-            int[] record = minHeap.poll();
-            int value = record[0];
-            int whichArray = record[1];
-            int valueIndex = record[2];
 
+        // Process elements from the heap until it's empty
+        while (!minHeap.isEmpty()) {
+            // Extract the smallest element
+            int[] record = minHeap.poll();
+            int value = record[0];       // The value of the element
+            int whichArray = record[1];  // Which array it came from
+            int valueIndex = record[2];  // Index in its original array
+
+            // Add the value to the result array
             res[index++] = value;
 
+            // Move to the next element in the same array
             valueIndex++;
 
+            // If we've exhausted this array, continue to the next heap element
             if (valueIndex == data.get(whichArray).length) continue;
 
+            // Otherwise, add the next element from this array to the heap
             minHeap.add(new int[]{data.get(whichArray)[valueIndex], whichArray, valueIndex});
         }
+
         return res;
     }
 }
