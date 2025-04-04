@@ -68,6 +68,12 @@ public class BufferedIterator {
         return head;
     }
 
+    /**
+     * Closes the underlying BufferedReader to release system resources.
+     * This method should be called when done with the iterator to prevent resource leaks.
+     *
+     * @throws Exception If an error occurs when closing the reader
+     */
     public void close() throws Exception {
         this.reader.close();
     }
