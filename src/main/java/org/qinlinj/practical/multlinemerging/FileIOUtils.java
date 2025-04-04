@@ -1,6 +1,7 @@
 package org.qinlinj.practical.multlinemerging;
 
 import java.io.*;
+
 // @formatter:off
 /**
  * File IO Utilities
