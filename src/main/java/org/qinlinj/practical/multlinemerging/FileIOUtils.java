@@ -113,6 +113,18 @@ public class FileIOUtils {
         }
     }
 
+    /**
+     * Safely closes a Writer (or its subclasses like BufferedWriter).
+     *
+     * This method handles the null check and exception handling, making it
+     * convenient to use in finally blocks for proper resource cleanup.
+     *
+     * Important: Closing a writer typically flushes any buffered output before closing.
+     * If the close operation fails, data may be lost.
+     *
+     * @param writer The Writer to close, can be null
+     * @throws RuntimeException If an IOException occurs during closing
+     */
     public static void closeWriter(Writer writer) {
         try {
             if (writer != null) {
