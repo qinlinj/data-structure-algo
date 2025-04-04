@@ -24,7 +24,7 @@ public class _Step_3_ExternalSorter {
         });
 
         for (File file : children) {
-            BufferedReader br = FileIOUtils.getReader(file.getName());
+            BufferedReader br = FileIOUtils.getReader(file.getPath());
             BufferedIterator buf = new BufferedIterator(br);
             if (buf.hasNext()) {
                 minHeap.add(buf);
