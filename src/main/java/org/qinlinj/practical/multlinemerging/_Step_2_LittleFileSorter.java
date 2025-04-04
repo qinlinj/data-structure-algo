@@ -1,6 +1,7 @@
 package org.qinlinj.practical.multlinemerging;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -22,7 +23,12 @@ public class _Step_2_LittleFileSorter {
 
             Collections.sort(words);
 
-
+            BufferedWriter bw = FileIOUtils.getWriter("data/top100/sorted_data/" + i);
+            for (String word : words) {
+                bw.write(word);
+                bw.newLine();
+            }
+            FileIOUtils.closeWriter(bw);
         }
 
     }
