@@ -45,6 +45,19 @@ import java.io.*;
  * but these utilities can still be useful for creating the readers/writers.
  */
 public class FileIOUtils {
+    /**
+     * Creates and returns a BufferedReader for the specified file.
+     *
+     * This method sets up the proper stream chain:
+     * FileInputStream → InputStreamReader → BufferedReader
+     *
+     * The InputStreamReader uses the default character encoding.
+     * For custom encoding, a separate method would be needed.
+     *
+     * @param name The path/name of the file to read from
+     * @return A BufferedReader ready to read from the specified file
+     * @throws RuntimeException If an IOException occurs (file not found, permissions issues, etc.)
+     */
     public static BufferedReader getReader(String name) {
         try {
             FileInputStream inputStream = new FileInputStream(name);
