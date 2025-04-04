@@ -53,6 +53,17 @@ public class BufferedIterator {
         this.reader = reader;
     }
 
+    /**
+     * Returns the current line that was previously read by hasNext().
+     * <p>
+     * Important: This method does not advance to the next line. It only returns
+     * the line that was already read by a previous call to hasNext().
+     * Always call hasNext() before calling next() to ensure head is populated.
+     * <p>
+     * Time Complexity: O(1) - simply returns the cached line
+     *
+     * @return The current line from the reader, or null if no line has been read yet
+     */
     public String next() {
         return head;
     }
