@@ -6,6 +6,11 @@ import java.io.File;
 import java.util.*;
 
 public class _Step_3_ExternalSorter {
+    public static void main(String[] args) throws Exception {
+        String dirName = "data/top100/sorted_data/";
+        new _Step_3_ExternalSorter().mergeSort(dirName);
+    }
+
     public void mergeSort(String dirName) throws Exception {
 
         File dir = new File(dirName);
