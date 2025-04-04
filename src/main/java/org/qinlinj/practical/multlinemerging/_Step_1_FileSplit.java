@@ -5,6 +5,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 public class _Step_1_FileSplit {
+    public static void main(String[] args) throws IOException {
+        String fileName = "data/top100/words.txt";
+        new _Step_1_FileSplit().splitFile(fileName);
+    }
+
     public void splitFile(String fileName) throws IOException {
         int fileNum = 0;
         String fileSuffix = "data/top100/raw_data/";
@@ -17,7 +22,7 @@ public class _Step_1_FileSplit {
         BufferedReader br = FileIOUtils.getReader(fileName);
         String line = null;
         while ((line = br.readLine()) != null) {
-            if (totalSize >= 512 * 1024) {
+            if (totalSize >= 2 * 1024) {
                 FileIOUtils.closeWriter(bw);
 
                 fileNum++;
