@@ -48,11 +48,24 @@ import java.util.*;
  * Final result: [1, 2, 2, 3, 6, 7, 9, 10, 11]
  */
 public class TwoSortedArrayMerger {
+    /**
+     * Main method demonstrating the usage of the merger.
+     * <p>
+     * Creates two sample sorted arrays and prints the merged result.
+     *
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
+        // Sample sorted input arrays
         int[] a = {1, 2, 6, 9, 10};
         int[] b = {2, 3, 7, 11};
+
+        // Create an instance and call the merge method
         int[] res = new TwoSortedArrayMerger().mergeTwoSortedArray(a, b);
+
+        // Print the result
         System.out.println(Arrays.toString(res));
+        // Output: [1, 2, 2, 3, 6, 7, 9, 10, 11]
     }
 
     /**
@@ -74,21 +87,36 @@ public class TwoSortedArrayMerger {
      * @return a new array containing all elements from a and b in sorted order
      */
     public int[] mergeTwoSortedArray(int[] a, int[] b) {
+        // Get the lengths of both arrays
         int m = a.length, n = b.length;
+
+        // Create result array with size equal to sum of both arrays
         int[] res = new int[m + n];
+
+        // Pointers for arrays a and b
         int i = 0, j = 0;
+
+        // Index to track position in result array
         int index = 0;
+
+        // Traverse through both arrays and fill the result array
         for (int k = 0; k < res.length; k++) {
             if (i == m) {
+                // If array a is exhausted, add element from array b
                 res[index++] = b[j++];
             } else if (j == n) {
+                // If array b is exhausted, add element from array a
                 res[index++] = a[i++];
             } else if (a[i] < b[j]) {
+                // If current element in a is smaller, add it to result
                 res[index++] = a[i++];
             } else {
+                // If current element in b is smaller or equal, add it to result
+                // This makes the merge stable for equal elements
                 res[index++] = b[j++];
             }
         }
+
         return res;
     }
 }
