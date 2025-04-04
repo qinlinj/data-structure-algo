@@ -4,6 +4,12 @@ import java.io.BufferedReader;
 import java.util.*;
 
 public class _Step_4_Top_100_Words {
+    public static void main(String[] args) throws Exception {
+        String fileName = "data/top100/sorted_words.txt";
+        String[] res = new _Step_4_Top_100_Words().top_100(fileName);
+        System.out.println(Arrays.toString(res));
+    }
+
     public String[] top_100(String fileName) throws Exception {
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(100, new Comparator<Pair>() {
             @Override
