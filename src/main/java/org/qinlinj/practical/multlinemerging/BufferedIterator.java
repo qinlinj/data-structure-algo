@@ -3,7 +3,6 @@ package org.qinlinj.practical.multlinemerging;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-
 /**
  * BufferedIterator
  * <p>
@@ -41,7 +40,16 @@ import java.io.IOException;
  * hasNext() should only be called once before each next() call to avoid skipping lines.
  */
 public class BufferedIterator {
+    /**
+     * The underlying BufferedReader that this iterator wraps around.
+     * This reader provides efficient buffered reading from character-input streams.
+     */
     private BufferedReader reader;
+
+    /**
+     * Holds the current line that has been read ahead and will be returned by next().
+     * This field acts as a buffer that holds the "peeked" line.
+     */
     private String head;
 
     /**
@@ -92,11 +100,14 @@ public class BufferedIterator {
      */
     public boolean hasNext() {
         try {
+            // Read the next line and store it in head
             head = this.reader.readLine();
         } catch (IOException e) {
+            // If an exception occurs, print the stack trace and set head to null
             e.printStackTrace();
             head = null;
         }
+        // Return true if a line was successfully read, false otherwise
         return head != null;
     }
 }
