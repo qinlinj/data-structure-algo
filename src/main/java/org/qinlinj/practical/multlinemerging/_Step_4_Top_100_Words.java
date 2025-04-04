@@ -31,6 +31,14 @@ public class _Step_4_Top_100_Words {
             }
             prevCnt++;
         }
+
+        String[] res = new String[100];
+        int index = 0;
+        while (!minHeap.isEmpty()) {
+            res[index++] = minHeap.poll().word;
+        }
+
+        return res;
     }
 
     class Pair {
