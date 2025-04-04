@@ -1,5 +1,6 @@
 package org.qinlinj.practical.multlinemerging;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.util.*;
 
@@ -15,4 +16,15 @@ public class _Step_3_ExternalSorter {
                 return o1.next().compareTo(o2.next());
             }
         });
+        
+        for (File file : children) {
+            BufferedReader br = FileIOUtils.getReader(file.getName());
+            BufferedIterator buf = new BufferedIterator(br);
+            if (buf.hasNext()) {
+                minHeap.add(buf);
+            } else {
+                buf.close();
+            }
+        }
+    }
 }
