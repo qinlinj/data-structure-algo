@@ -55,6 +55,24 @@ public class TwoSortedArrayMerger {
         System.out.println(Arrays.toString(res));
     }
 
+    /**
+     * Merges two sorted integer arrays into a single sorted array.
+     * <p>
+     * Algorithm:
+     * 1. Create a result array with size equal to the sum of both input arrays
+     * 2. Use two pointers (i, j) to track positions in both arrays
+     * 3. Compare elements at current positions and add the smaller one to the result
+     * 4. Advance the pointer for the array from which we took the element
+     * 5. Handle cases where one array is exhausted by adding remaining elements
+     * from the other array
+     * <p>
+     * Time Complexity: O(m+n) where m and n are the lengths of arrays a and b
+     * Space Complexity: O(m+n) for the result array
+     *
+     * @param a first sorted array
+     * @param b second sorted array
+     * @return a new array containing all elements from a and b in sorted order
+     */
     public int[] mergeTwoSortedArray(int[] a, int[] b) {
         int m = a.length, n = b.length;
         int[] res = new int[m + n];
