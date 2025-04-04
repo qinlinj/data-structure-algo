@@ -17,7 +17,12 @@ public class _Step_2_LittleFileSorter {
             while ((line = br.readLine()) != null) {
                 words.add(line);
             }
-            
+
+            FileIOUtils.closeReader(br);
+
+            Collections.sort(words);
+
+
         }
 
     }
