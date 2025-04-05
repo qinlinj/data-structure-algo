@@ -40,9 +40,15 @@ import java.util.*;
  */
 public class _Step_3_ExternalSorter {
     /**
-     * Main method to merge all sorted files
-     * Time Complexity: O(n log k) where n is the total number of elements and k is the number of files
-     * Space Complexity: O(k) for the min-heap with k elements
+     * Main method to execute the k-way merge process
+     * <p>
+     * Time Complexity: O(n log k) where:
+     * - n is the total number of elements across all files
+     * - k is the number of separate sorted files
+     * - log k represents the cost of heap operations
+     * <p>
+     * Space Complexity: O(k) where k is the number of files
+     * - We only keep k elements (one from each file) in memory at any time
      */
     public static void main(String[] args) throws Exception {
         String dirName = "data/top100/sorted_data/";
