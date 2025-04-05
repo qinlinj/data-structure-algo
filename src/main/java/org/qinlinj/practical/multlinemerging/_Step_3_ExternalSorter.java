@@ -58,20 +58,53 @@ public class _Step_3_ExternalSorter {
     /**
      * Perform a k-way merge of all sorted files using a min-heap
      * <p>
-     * Example visualization:
-     * Sorted files:
+     * This method implements the efficient k-way merge algorithm that:
+     * 1. Initializes a min-heap with the first element from each sorted chunk
+     * 2. Repeatedly extracts the minimum element and writes it to the output
+     * 3. Replaces the extracted element with the next element from its chunk
+     * 4. Continues until all elements from all chunks are processed
+     * <p>
+     * Detailed Visual Example of K-Way Merge:
+     * ---------------------------------------
+     * Input: 3 sorted files
      * file0: [apple, cat, dog]
      * file1: [banana, elephant, zebra]
      * file2: [ant, bear, tiger]
      * <p>
-     * Min-heap initially contains: [apple, banana, ant]
-     * Pull smallest (ant) → Min-heap: [apple, banana, bear]
-     * Pull smallest (apple) → Min-heap: [banana, bear, cat]
-     * ... and so on until all elements are processed
+     * Step-by-step visualization:
      * <p>
-     * Time Complexity: O(n log k) where n is the total number of elements and k is the number of files
-     * The log k factor comes from the heap operations
-     * Space Complexity: O(k) for storing one element from each file in the min-heap
+     * 1. Initialize min-heap with first element from each file:
+     * Min-heap: [ant, apple, banana]
+     * <p>
+     * 2. Extract minimum (ant) and write to output:
+     * Output: [ant]
+     * Read next element from file2: "bear"
+     * Min-heap: [apple, banana, bear]
+     * <p>
+     * 3. Extract minimum (apple) and write to output:
+     * Output: [ant, apple]
+     * Read next element from file0: "cat"
+     * Min-heap: [banana, bear, cat]
+     * <p>
+     * 4. Extract minimum (banana) and write to output:
+     * Output: [ant, apple, banana]
+     * Read next element from file1: "elephant"
+     * Min-heap: [bear, cat, elephant]
+     * <p>
+     * 5. Continue this process until all elements are processed...
+     * <p>
+     * Final output: [ant, apple, banana, bear, cat, dog, elephant, tiger, zebra]
+     * ---------------------------------------
+     * <p>
+     * Time Complexity: O(n log k) where:
+     * - n is the total number of elements across all files
+     * - k is the number of files being merged
+     * - Each heap operation (poll/add) costs O(log k)
+     * - We perform these operations n times (once for each element)
+     * <p>
+     * Space Complexity: O(k) where k is the number of files
+     * - The min-heap stores exactly one element from each file
+     * - We maintain k file readers (one per input file)
      */
     public void mergeSort(String dirName) throws Exception {
         // Get all sorted files
