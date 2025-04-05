@@ -47,8 +47,12 @@ import java.util.*;
 public class _Step_4_Top_100_Words {
     /**
      * Main method to find the top 100 most frequent words
-     * Time Complexity: O(n) where n is the number of words in the file
-     * Space Complexity: O(1) as we only keep 100 entries in the min-heap
+     * <p>
+     * Time Complexity: O(n) where n is the total number of words in the file
+     * - We process each word exactly once, and heap operations are bounded (max size 100)
+     * <p>
+     * Space Complexity: O(1) as we only keep a constant number (100) of entries in the min-heap
+     * - This is significantly more memory-efficient than storing all unique words
      */
     public static void main(String[] args) throws Exception {
         String fileName = "data/top100/sorted_words.txt";
