@@ -21,6 +21,24 @@ public class _Step_3_ExternalSorter {
         new _Step_3_ExternalSorter().mergeSort(dirName);
     }
 
+    /**
+     * Perform a k-way merge of all sorted files using a min-heap
+     * <p>
+     * Example visualization:
+     * Sorted files:
+     * file0: [apple, cat, dog]
+     * file1: [banana, elephant, zebra]
+     * file2: [ant, bear, tiger]
+     * <p>
+     * Min-heap initially contains: [apple, banana, ant]
+     * Pull smallest (ant) → Min-heap: [apple, banana, bear]
+     * Pull smallest (apple) → Min-heap: [banana, bear, cat]
+     * ... and so on until all elements are processed
+     * <p>
+     * Time Complexity: O(n log k) where n is the total number of elements and k is the number of files
+     * The log k factor comes from the heap operations
+     * Space Complexity: O(k) for storing one element from each file in the min-heap
+     */
     public void mergeSort(String dirName) throws Exception {
 
         File dir = new File(dirName);
