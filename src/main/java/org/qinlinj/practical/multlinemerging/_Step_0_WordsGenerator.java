@@ -29,6 +29,11 @@ import java.util.*;
  * Step 3: Merge all sorted chunks using a min-heap
  * Step 4: Find the top 100 most frequent words from the sorted result
  */
+
+/**
+ * Step 0: Generate a file with random words for testing the external sort
+ * This class creates a dataset of random words made from characters a-g
+ */
 public class _Step_0_WordsGenerator {
     private static Random r = new Random();
 
