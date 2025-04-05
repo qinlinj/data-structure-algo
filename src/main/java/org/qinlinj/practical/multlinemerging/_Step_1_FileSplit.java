@@ -35,17 +35,20 @@ public class _Step_1_FileSplit {
      * Space Complexity: O(1) as we process line by line
      */
     public void splitFile(String fileName) throws IOException {
-        int fileNum = 0;
+        int fileNum = 0;  // Counter for the small files we'll create
         String fileSuffix = "data/top100/raw_data/";
         String littleFileName = fileSuffix + fileNum;
 
-        long totalSize = 0;
+        long totalSize = 0;  // Track the current small file's size
 
+        // Create the writer for the first small file
         BufferedWriter bw = FileIOUtils.getWriter(littleFileName);
 
+        // Read the large input file line by line
         BufferedReader br = FileIOUtils.getReader(fileName);
         String line = null;
         while ((line = br.readLine()) != null) {
+            // If the current small file reaches 2KB, create a new file
             if (totalSize >= 2 * 1024) {
                 FileIOUtils.closeWriter(bw);
 
@@ -55,13 +58,17 @@ public class _Step_1_FileSplit {
                 totalSize = 0;
             }
 
+            // Add the current line's length to the total size
             totalSize += line.length();
 
+            // Write the line to the current small file
             bw.write(line);
             bw.newLine();
         }
 
+        // Close all resources
         FileIOUtils.closeReader(br);
         FileIOUtils.closeWriter(bw);
     }
 }
+
