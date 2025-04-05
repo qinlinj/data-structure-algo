@@ -30,6 +30,16 @@ import java.util.*;
  * <p>
  * This class (_Step_2_LittleFileSorter) implements the "sorting phase" of the external sorting algorithm,
  * where each small file is sorted individually in memory before the merge phase.
+ * <p>
+ * Step 2: Sort each small file individually
+ * <p>
+ * This class handles the sorting phase of the external sorting algorithm. It processes
+ * each small chunk file (created in Step 1) and sorts its contents entirely in memory.
+ * <p>
+ * In external sorting, this step is critical because:
+ * - It ensures each individual chunk is sorted efficiently using in-memory algorithms
+ * - It prepares the data for the efficient k-way merge in the next step
+ * - It balances memory usage by only sorting manageable chunks at a time
  */
 public class _Step_2_LittleFileSorter {
     /**
