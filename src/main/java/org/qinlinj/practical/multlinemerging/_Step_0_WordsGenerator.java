@@ -4,6 +4,31 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * External Sorting Algorithm Implementation
+ * <p>
+ * External sorting is used when the data being sorted is too large to fit into memory.
+ * It works by:
+ * 1. Splitting the large file into smaller chunks that fit in memory
+ * 2. Sorting each chunk individually
+ * 3. Merging the sorted chunks using a k-way merge
+ * <p>
+ * Advantages of External Sorting:
+ * - Can handle datasets much larger than available memory
+ * - Efficient for disk-based sorting operations
+ * - Scales well with large datasets
+ * - Minimizes disk I/O operations
+ * <p>
+ * The algorithm has a time complexity of O(N log N) where N is the total number of elements,
+ * but with the additional cost of disk I/O operations which is the main bottleneck.
+ * <p>
+ * This implementation demonstrates a complete external sorting process through 4 steps:
+ * Step 0: Generate random words for testing
+ * Step 1: Split large file into smaller chunks
+ * Step 2: Sort each chunk individually
+ * Step 3: Merge all sorted chunks using a min-heap
+ * Step 4: Find the top 100 most frequent words from the sorted result
+ */
 public class _Step_0_WordsGenerator {
     private static Random r = new Random();
 
