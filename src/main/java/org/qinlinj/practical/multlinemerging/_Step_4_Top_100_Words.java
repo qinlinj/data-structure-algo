@@ -19,6 +19,23 @@ public class _Step_4_Top_100_Words {
         System.out.println(Arrays.toString(res));
     }
 
+    /**
+     * Find the top 100 most frequent words in the sorted file
+     * <p>
+     * Example visualization:
+     * Sorted file: [aaa, aaa, aaa, bbb, bbb, ccc, ddd, ddd, ddd, ddd]
+     * <p>
+     * Min-heap contents after processing:
+     * ["aaa", count=3]
+     * ["bbb", count=2]
+     * ["ddd", count=4]
+     * <p>
+     * Result: ["aaa", "bbb", "ddd"] (ordered by frequency from lowest to highest)
+     * <p>
+     * Time Complexity: O(n) where n is the number of words in the file
+     * Each word is processed exactly once, and heap operations are constant (max size 100)
+     * Space Complexity: O(1) as we maintain at most 100 entries in the min-heap
+     */
     public String[] top_100(String fileName) throws Exception {
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(100, new Comparator<Pair>() {
             @Override
