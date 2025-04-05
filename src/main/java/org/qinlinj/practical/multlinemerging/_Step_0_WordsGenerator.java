@@ -37,6 +37,11 @@ import java.util.*;
 public class _Step_0_WordsGenerator {
     private static Random r = new Random();
 
+    /**
+     * Main method to generate random words and write them to a file
+     * Time Complexity: O(n*m) where n is the number of words and m is the max length of each word
+     * Space Complexity: O(m) where m is the max length of a word
+     */
     public static void main(String[] args) throws IOException {
 
         BufferedWriter writer = FileIOUtils.getWriter("data/top100/words.txt");
