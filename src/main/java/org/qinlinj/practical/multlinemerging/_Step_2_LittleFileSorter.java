@@ -11,6 +11,11 @@ import java.util.*;
  * This is the second step of external sorting where we sort each chunk in memory
  */
 public class _Step_2_LittleFileSorter {
+    /**
+     * Main method to sort each small file
+     * Time Complexity: O(k * m log m) where k is the number of small files and m is the average number of lines per file
+     * Space Complexity: O(m) where m is the maximum number of lines in any small file
+     */
     public static void main(String[] args) throws IOException {
         String dir = "data/top100/raw_data";
         new _Step_2_LittleFileSorter().sortEachFile(dir);
