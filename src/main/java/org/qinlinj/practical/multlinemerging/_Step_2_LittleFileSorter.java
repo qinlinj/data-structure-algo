@@ -51,17 +51,38 @@ public class _Step_2_LittleFileSorter {
     /**
      * Sort each file in the directory individually
      * <p>
-     * Example visualization:
-     * Before sorting:
-     * file0: [cat, apple, dog]
-     * file1: [banana, zebra, elephant]
+     * This method:
+     * 1. Reads each small file completely into memory
+     * 2. Sorts the contents using an in-memory sorting algorithm
+     * 3. Writes the sorted results to new files in the sorted_data directory
      * <p>
-     * After sorting:
-     * sorted_data/0: [apple, cat, dog]
-     * sorted_data/1: [banana, elephant, zebra]
+     * Visual Example of External Sorting (Sorting Phase):
+     * -----------------------------------------------------
+     * Original Large File (too big for memory):
+     * [dog, zebra, apple, cat, elephant, fox, banana, hawk, ...]
+     * <p>
+     * After Step 1 (File Splitting):
+     * file0: [dog, zebra, apple]
+     * file1: [cat, elephant, fox]
+     * file2: [banana, hawk, ...]
+     * <p>
+     * After Step 2 (This class - Little File Sorting):
+     * sorted_data/0: [apple, dog, zebra]
+     * sorted_data/1: [cat, elephant, fox]
+     * sorted_data/2: [banana, hawk, ...]
+     * <p>
+     * (Later, Step 3 will merge these sorted files efficiently)
+     * -----------------------------------------------------
      * <p>
      * Time Complexity: O(k * m log m) where k is the number of files and m is the average number of lines per file
+     * - For each file: Reading takes O(m) time
+     * - Sorting takes O(m log m) time using Java's Collections.sort
+     * - Writing takes O(m) time
+     * - This is done for k files, so total complexity is O(k * m log m)
+     * <p>
      * Space Complexity: O(m) for storing the words of each file in memory
+     * - Only one file's contents are loaded into memory at a time
+     * - The ArrayList<String> uses O(m) space for m words
      */
     public void sortEachFile(String dirName) throws IOException {
         File dir = new File(dirName);
