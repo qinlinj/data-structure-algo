@@ -21,6 +21,21 @@ public class _Step_2_LittleFileSorter {
         new _Step_2_LittleFileSorter().sortEachFile(dir);
     }
 
+    /**
+     * Sort each file in the directory individually
+     * <p>
+     * Example visualization:
+     * Before sorting:
+     * file0: [cat, apple, dog]
+     * file1: [banana, zebra, elephant]
+     * <p>
+     * After sorting:
+     * sorted_data/0: [apple, cat, dog]
+     * sorted_data/1: [banana, elephant, zebra]
+     * <p>
+     * Time Complexity: O(k * m log m) where k is the number of files and m is the average number of lines per file
+     * Space Complexity: O(m) for storing the words of each file in memory
+     */
     public void sortEachFile(String dirName) throws IOException {
         File dir = new File(dirName);
         File[] littleFiles = dir.listFiles();
