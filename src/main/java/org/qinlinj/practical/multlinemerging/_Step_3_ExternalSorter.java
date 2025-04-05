@@ -51,6 +51,7 @@ public class _Step_3_ExternalSorter {
      * - We only keep k elements (one from each file) in memory at any time
      */
     public static void main(String[] args) throws Exception {
+        // Directory containing the sorted chunks from Step 2
         String dirName = "data/top100/sorted_data/";
         new _Step_3_ExternalSorter().mergeSort(dirName);
     }
@@ -107,52 +108,63 @@ public class _Step_3_ExternalSorter {
      * - We maintain k file readers (one per input file)
      */
     public void mergeSort(String dirName) throws Exception {
-        // Get all sorted files
+        // Get all sorted files from the directory
         File dir = new File(dirName);
         File[] children = dir.listFiles();
 
-        // Create a min-heap to help with the k-way merge
-        // The heap will store BufferedIterator objects, which wrap the file readers
+        // Create a min-heap (priority queue) to efficiently find the minimum element
+        // This heap will store BufferedIterator objects, which wrap file readers and provide access to lines
         PriorityQueue<BufferedIterator> minHeap = new PriorityQueue<>(children.length, new Comparator<BufferedIterator>() {
             @Override
             public int compare(BufferedIterator o1, BufferedIterator o2) {
+                // Compare based on the next available string in each iterator
                 return o1.next().compareTo(o2.next());
             }
         });
 
-        // Initialize the heap with the first element from each file
+        // Initialize the heap with the first element from each sorted file
         for (File file : children) {
+            // Create a reader for the current file
             BufferedReader br = FileIOUtils.getReader(file.getPath());
+
+            // Wrap it in a BufferedIterator for easier access
             BufferedIterator buf = new BufferedIterator(br);
+
+            // Add to the heap if the file is not empty
             if (buf.hasNext()) {
                 minHeap.add(buf);
             } else {
+                // Close empty files immediately
                 buf.close();
             }
         }
 
-        // Create the output file for the merged result
+        // Create a writer for the final merged output file
         BufferedWriter bw = FileIOUtils.getWriter("data/top100/sorted_words.txt");
 
-        // Perform the k-way merge
+        // Perform the k-way merge as long as there are elements in the heap
         while (!minHeap.isEmpty()) {
-            // Get the iterator with the smallest next value
+            // Extract the iterator containing the smallest element
             BufferedIterator firstBuf = minHeap.poll();
 
-            // Write the smallest value to the output file
+            // Write the smallest element to the output file
+            // The next() method both retrieves and advances the iterator
             bw.write(firstBuf.next());
             bw.newLine();
 
-            // If the iterator has more elements, add it back to the heap
+            // If this iterator has more elements, put it back in the heap
             if (firstBuf.hasNext()) {
                 minHeap.add(firstBuf);
             } else {
-                // Otherwise, close it
+                // If no more elements, close the associated file
                 firstBuf.close();
             }
         }
 
-        // Close the output file
+        // Close the output file to ensure all data is flushed to disk
         FileIOUtils.closeWriter(bw);
+
+        // At this point, all elements from all chunks have been merged
+        // into a single sorted file "sorted_words.txt"
     }
 }
