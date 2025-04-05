@@ -8,7 +8,28 @@ import java.util.*;
 
 /**
  * Step 2: Sort each small file individually
- * This is the second step of external sorting where we sort each chunk in memory
+ * External Sorting Algorithm
+ * <p>
+ * External sorting is an efficient algorithm for sorting large volumes of data that cannot fit entirely in the
+ * computer's main memory (RAM). The algorithm works by breaking the large dataset into smaller manageable chunks,
+ * sorting each chunk individually in memory, and then merging these sorted chunks to produce the final sorted output.
+ * <p>
+ * Key advantages of External Sorting:
+ * 1. Memory Efficiency: Can process datasets much larger than available RAM
+ * 2. Scalability: Works well with extremely large files (gigabytes/terabytes)
+ * 3. I/O Optimization: Minimizes disk read/write operations
+ * 4. Practical Application: Essential for database systems, big data processing, and file systems
+ * 5. Predictable Performance: Maintains O(N log N) time complexity even for large datasets
+ * <p>
+ * Concept and Principles:
+ * - External sorting follows a divide-and-conquer approach
+ * - The algorithm has two main phases: the "sorting phase" and the "merging phase"
+ * - In the sorting phase, we divide data into manageable chunks and sort each chunk
+ * - In the merging phase, we combine these sorted chunks using a k-way merge algorithm
+ * - A min-heap data structure is often used to efficiently perform the k-way merge
+ * <p>
+ * This class (_Step_2_LittleFileSorter) implements the "sorting phase" of the external sorting algorithm,
+ * where each small file is sorted individually in memory before the merge phase.
  */
 public class _Step_2_LittleFileSorter {
     /**
