@@ -40,7 +40,9 @@ public class _Step_2_LittleFileSorter {
         File dir = new File(dirName);
         File[] littleFiles = dir.listFiles();
 
+        // Process each small file
         for (int i = 0; i < littleFiles.length; i++) {
+            // Read all words from the current file
             BufferedReader br = FileIOUtils.getReader(littleFiles[i].getPath());
             List<String> words = new ArrayList<>();
             String line = null;
@@ -50,8 +52,10 @@ public class _Step_2_LittleFileSorter {
 
             FileIOUtils.closeReader(br);
 
+            // Sort the words in memory (using Java's built-in sort, which is typically a variant of mergesort)
             Collections.sort(words);
 
+            // Write the sorted words to a new file
             BufferedWriter bw = FileIOUtils.getWriter("data/top100/sorted_data/" + i);
             for (String word : words) {
                 bw.write(word);
