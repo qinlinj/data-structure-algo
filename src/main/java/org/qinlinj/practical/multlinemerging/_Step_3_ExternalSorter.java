@@ -5,6 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.util.*;
 
+/**
+ * Step 3: Merge all sorted files using a k-way merge with a min-heap
+ * This is the key step of external sorting where we merge all sorted chunks
+ * to produce the final sorted output
+ */
 public class _Step_3_ExternalSorter {
     public static void main(String[] args) throws Exception {
         String dirName = "data/top100/sorted_data/";
