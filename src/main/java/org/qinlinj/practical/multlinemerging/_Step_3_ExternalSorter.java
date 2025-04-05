@@ -11,6 +11,11 @@ import java.util.*;
  * to produce the final sorted output
  */
 public class _Step_3_ExternalSorter {
+    /**
+     * Main method to merge all sorted files
+     * Time Complexity: O(n log k) where n is the total number of elements and k is the number of files
+     * Space Complexity: O(k) for the min-heap with k elements
+     */
     public static void main(String[] args) throws Exception {
         String dirName = "data/top100/sorted_data/";
         new _Step_3_ExternalSorter().mergeSort(dirName);
