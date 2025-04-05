@@ -63,19 +63,53 @@ public class _Step_4_Top_100_Words {
     /**
      * Find the top 100 most frequent words in the sorted file
      * <p>
-     * Example visualization:
-     * Sorted file: [aaa, aaa, aaa, bbb, bbb, ccc, ddd, ddd, ddd, ddd]
+     * This method implements a streaming algorithm that:
+     * 1. Reads the sorted file sequentially, counting word frequencies
+     * 2. Maintains a min-heap of the 100 most frequent words seen so far
+     * 3. Returns these words ordered by their frequency (from lowest to highest)
      * <p>
-     * Min-heap contents after processing:
-     * ["aaa", count=3]
-     * ["bbb", count=2]
-     * ["ddd", count=4]
+     * Detailed Visual Example:
+     * -----------------------------------------------------
+     * Input Sorted File:
+     * [aaa, aaa, aaa, bbb, bbb, ccc, ddd, ddd, ddd, ddd, eee, eee, fff]
      * <p>
-     * Result: ["aaa", "bbb", "ddd"] (ordered by frequency from lowest to highest)
+     * Processing step by step:
+     * <p>
+     * 1. Read "aaa" (count: 3)
+     * Min-heap: ["aaa", count=3]
+     * <p>
+     * 2. Read "bbb" (count: 2)
+     * Min-heap: ["bbb", count=2], ["aaa", count=3]
+     * <p>
+     * 3. Read "ccc" (count: 1)
+     * Min-heap: ["ccc", count=1], ["bbb", count=2], ["aaa", count=3]
+     * <p>
+     * 4. Read "ddd" (count: 4)
+     * Min-heap is full, but "ddd" has higher count than minimum ("ccc")
+     * Remove ["ccc", count=1]
+     * Add ["ddd", count=4]
+     * Min-heap: ["bbb", count=2], ["aaa", count=3], ["ddd", count=4]
+     * <p>
+     * 5. Read "eee" (count: 2)
+     * Min-heap is full, "eee" has same count as minimum ("bbb")
+     * No change to min-heap
+     * <p>
+     * 6. Read "fff" (count: 1)
+     * Min-heap is full, "fff" has lower count than minimum ("bbb")
+     * No change to min-heap
+     * <p>
+     * Final min-heap: ["bbb", count=2], ["aaa", count=3], ["ddd", count=4]
+     * Result array after polling: ["bbb", "aaa", "ddd"]
+     * -----------------------------------------------------
      * <p>
      * Time Complexity: O(n) where n is the number of words in the file
-     * Each word is processed exactly once, and heap operations are constant (max size 100)
+     * - We process each word exactly once in a single pass
+     * - Heap operations (add/remove) take O(log 100) = O(1) time
+     * - Total runtime is dominated by the single pass through the data: O(n)
+     * <p>
      * Space Complexity: O(1) as we maintain at most 100 entries in the min-heap
+     * - This is constant with respect to the input size
+     * - Much more efficient than storing all unique words for large vocabularies
      */
     public String[] top_100(String fileName) throws Exception {
         // Create a min-heap to track the top 100 words by frequency
