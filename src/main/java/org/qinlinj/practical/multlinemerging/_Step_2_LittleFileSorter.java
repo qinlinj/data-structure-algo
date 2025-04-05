@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Step 2: Sort each small file individually
+ * This is the second step of external sorting where we sort each chunk in memory
+ */
 public class _Step_2_LittleFileSorter {
     public static void main(String[] args) throws IOException {
         String dir = "data/top100/raw_data";
