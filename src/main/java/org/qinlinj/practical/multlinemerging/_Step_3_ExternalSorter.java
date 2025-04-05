@@ -9,6 +9,34 @@ import java.util.*;
  * Step 3: Merge all sorted files using a k-way merge with a min-heap
  * This is the key step of external sorting where we merge all sorted chunks
  * to produce the final sorted output
+ * <p>
+ * External Sorting: K-Way Merge Implementation
+ * <p>
+ * External sorting is a technique used when the data being sorted doesn't fit entirely in memory.
+ * It follows a two-phase approach:
+ * 1. Split and Sort: Divide the large file into smaller chunks, sort each chunk in memory
+ * 2. Merge: Combine all sorted chunks using a k-way merge algorithm (implemented in this class)
+ * <p>
+ * Advantages of External Sorting with K-Way Merge:
+ * 1. Memory Efficiency: Processes data larger than available RAM
+ * 2. I/O Optimization: Minimizes disk reads/writes by sequential access patterns
+ * 3. Scalability: Effectively handles gigabytes or terabytes of data
+ * 4. Performance: Maintains near-optimal O(N log K) time complexity even for huge datasets
+ * 5. Practical: Used in databases, big data frameworks, and operating systems
+ * <p>
+ * K-Way Merge Concept:
+ * The k-way merge is the heart of external sorting, efficiently combining multiple sorted chunks
+ * into a single sorted output. It uses a min-heap data structure to always select the smallest
+ * element from among all chunks with minimal comparisons.
+ * <p>
+ * The algorithm works by:
+ * - Keeping exactly one element from each sorted chunk in a min-heap
+ * - Repeatedly extracting the minimum element and writing it to the output
+ * - Replacing the extracted element with the next element from its chunk
+ * - Continuing until all elements from all chunks are processed
+ * <p>
+ * This approach ensures that elements are merged in sorted order using minimal memory
+ * (proportional to the number of chunks, not the total data size).
  */
 public class _Step_3_ExternalSorter {
     /**
