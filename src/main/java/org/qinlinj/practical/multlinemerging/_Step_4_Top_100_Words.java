@@ -8,6 +8,11 @@ import java.util.*;
  * This is a follow-up application that demonstrates how we can use the sorted output
  */
 public class _Step_4_Top_100_Words {
+    /**
+     * Main method to find the top 100 most frequent words
+     * Time Complexity: O(n) where n is the number of words in the file
+     * Space Complexity: O(1) as we only keep 100 entries in the min-heap
+     */
     public static void main(String[] args) throws Exception {
         String fileName = "data/top100/sorted_words.txt";
         String[] res = new _Step_4_Top_100_Words().top_100(fileName);
