@@ -33,9 +33,15 @@ import java.util.*;
  */
 public class _Step_2_LittleFileSorter {
     /**
-     * Main method to sort each small file
-     * Time Complexity: O(k * m log m) where k is the number of small files and m is the average number of lines per file
-     * Space Complexity: O(m) where m is the maximum number of lines in any small file
+     * Step 2: Sort each small file individually
+     * <p>
+     * This class handles the sorting phase of the external sorting algorithm. It processes
+     * each small chunk file (created in Step 1) and sorts its contents entirely in memory.
+     * <p>
+     * In external sorting, this step is critical because:
+     * - It ensures each individual chunk is sorted efficiently using in-memory algorithms
+     * - It prepares the data for the efficient k-way merge in the next step
+     * - It balances memory usage by only sorting manageable chunks at a time
      */
     public static void main(String[] args) throws IOException {
         String dir = "data/top100/raw_data";
