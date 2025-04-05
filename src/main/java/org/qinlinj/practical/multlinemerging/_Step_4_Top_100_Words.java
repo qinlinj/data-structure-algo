@@ -33,6 +33,16 @@ import java.util.*;
  * 1. The sorted nature of the input (from previous external sorting steps)
  * 2. The bounded-size min-heap to track only the top K elements
  * 3. Single-pass processing to minimize I/O operations
+ * <p>
+ * Step 4: Find the top 100 most frequent words from the sorted result
+ * <p>
+ * This class performs frequency analysis on the sorted data to identify the most
+ * common words. It demonstrates a practical application of the sorted output from
+ * the external sorting process, showing how sorted data enables efficient frequency counting.
+ * <p>
+ * The algorithm leverages the fact that identical words are grouped together in the
+ * sorted file, allowing us to count frequencies in a single pass while maintaining
+ * a fixed-size data structure (min-heap) to track the top 100 words.
  */
 public class _Step_4_Top_100_Words {
     /**
