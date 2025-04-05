@@ -10,11 +10,30 @@ import java.io.IOException;
  * into smaller files that can fit in memory
  */
 public class _Step_1_FileSplit {
+    /**
+     * Main method to split the input file
+     * Time Complexity: O(n) where n is the number of lines in the input file
+     * Space Complexity: O(1) as we process line by line
+     */
     public static void main(String[] args) throws IOException {
         String fileName = "data/top100/words.txt";
         new _Step_1_FileSplit().splitFile(fileName);
     }
 
+    /**
+     * Split the input file into smaller chunks of approximately 2KB each
+     * <p>
+     * Example visualization:
+     * Original file (words.txt):  [abcde, fghij, klmno, pqrst, uvwxy, zabcd, ...]
+     * After splitting:
+     * file0: [abcde, fghij]  (size ~2KB)
+     * file1: [klmno, pqrst]  (size ~2KB)
+     * file2: [uvwxy, zabcd]  (size ~2KB)
+     * ...
+     * <p>
+     * Time Complexity: O(n) where n is the number of lines in the input file
+     * Space Complexity: O(1) as we process line by line
+     */
     public void splitFile(String fileName) throws IOException {
         int fileNum = 0;
         String fileSuffix = "data/top100/raw_data/";
