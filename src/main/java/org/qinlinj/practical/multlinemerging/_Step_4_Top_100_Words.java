@@ -55,7 +55,10 @@ public class _Step_4_Top_100_Words {
      * - This is significantly more memory-efficient than storing all unique words
      */
     public static void main(String[] args) throws Exception {
+        // Path to the sorted words file from Step 3
         String fileName = "data/top100/sorted_words.txt";
+
+        // Call the method to find top 100 words and print the result
         String[] res = new _Step_4_Top_100_Words().top_100(fileName);
         System.out.println(Arrays.toString(res));
     }
@@ -113,7 +116,7 @@ public class _Step_4_Top_100_Words {
      */
     public String[] top_100(String fileName) throws Exception {
         // Create a min-heap to track the top 100 words by frequency
-        // Using a min-heap allows us to efficiently remove the least frequent word when needed
+        // The heap is ordered by count, so the least frequent word is always at the top
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(100, new Comparator<Pair>() {
             @Override
             public int compare(Pair o1, Pair o2) {
@@ -121,39 +124,43 @@ public class _Step_4_Top_100_Words {
             }
         });
 
-        String prevWord = null;
-        int prevCnt = 0;
+        // Variables to track the current word being processed
+        String prevWord = null;  // The word we're currently counting
+        int prevCnt = 0;        // Its frequency count so far
 
-        // Process the sorted file line by line
+        // Open the sorted file for reading
         BufferedReader br = FileIOUtils.getReader(fileName);
         String currWord = null;
 
+        // Process the file one word at a time
         while ((currWord = br.readLine()) != null) {
-            // If we encounter a new word
+            // If we've encountered a new word, process the previous word
             if (!currWord.equals(prevWord)) {
-                // Process the previous word if it exists
+                // Only process if we had a previous word (skips the first iteration)
                 if (prevWord != null) {
-                    // If the heap is not full, simply add the word
+                    // Case 1: Heap isn't full yet (less than 100 words)
                     if (minHeap.size() < 100) {
                         minHeap.add(new Pair(prevWord, prevCnt));
                     }
-                    // If the heap is full, replace the least frequent word if the current word is more frequent
+                    // Case 2: Heap is full, current word has higher count than the minimum
                     else if (prevCnt > minHeap.peek().cnt) {
-                        minHeap.remove();
-                        minHeap.add(new Pair(prevWord, prevCnt));
+                        minHeap.remove();  // Remove the least frequent word
+                        minHeap.add(new Pair(prevWord, prevCnt));  // Add current word
                     }
                 }
 
-                // Reset for the new word
+                // Reset counters for the new word
                 prevWord = currWord;
                 prevCnt = 0;
             }
-            // Increment the count for the current word
+
+            // Increment count for the current word
             prevCnt++;
         }
 
-        // Don't forget to process the last word
+        // Process the last word (which won't trigger the if-condition in the loop)
         if (prevWord != null) {
+            // Same logic as in the loop
             if (minHeap.size() < 100) {
                 minHeap.add(new Pair(prevWord, prevCnt));
             } else if (prevCnt > minHeap.peek().cnt) {
@@ -162,24 +169,38 @@ public class _Step_4_Top_100_Words {
             }
         }
 
+        // Close the file reader
+        FileIOUtils.closeReader(br);
+
         // Convert the heap to an array
+        // Note: Elements will come out in ascending order of frequency
         String[] res = new String[minHeap.size()];
         int index = 0;
         while (!minHeap.isEmpty()) {
             res[index++] = minHeap.poll().word;
         }
 
-        // Note: The result array will have the words ordered by frequency from lowest to highest
+        // At this point, the array contains the top words sorted by frequency (lowest to highest)
         return res;
     }
 
     /**
      * Helper class to store a word and its frequency count
+     * <p>
+     * This simple pair class enables us to keep track of both the word and its count
+     * in the min-heap. It's used internally by the algorithm and doesn't need to be
+     * exposed outside this class.
      */
     class Pair {
-        String word;
-        int cnt;
+        String word;  // The word itself
+        int cnt;      // Its frequency count
 
+        /**
+         * Constructor to create a word-count pair
+         * <p>
+         * Time Complexity: O(1)
+         * Space Complexity: O(1)
+         */
         Pair(String word, int cnt) {
             this.word = word;
             this.cnt = cnt;
