@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+/**
+ * Step 1: Split the large file into smaller chunks
+ * This is the first step of external sorting where we divide the large input file
+ * into smaller files that can fit in memory
+ */
 public class _Step_1_FileSplit {
     public static void main(String[] args) throws IOException {
         String fileName = "data/top100/words.txt";
