@@ -37,6 +37,17 @@ import java.util.*;
  * <p>
  * This approach ensures that elements are merged in sorted order using minimal memory
  * (proportional to the number of chunks, not the total data size).
+ * <p>
+ * Step 3: Merge all sorted files using a k-way merge with a min-heap
+ * <p>
+ * This class implements the merge phase of external sorting where all previously sorted
+ * chunks are merged into a single, fully-sorted output file. This is the most critical step
+ * in external sorting as it combines the partial results while maintaining memory efficiency.
+ * <p>
+ * The k-way merge algorithm used here is optimal for external sorting because:
+ * - It processes data in a streaming fashion, never loading all data into memory
+ * - It maintains sorted order with minimal comparisons using a priority queue (min-heap)
+ * - It works with an arbitrary number of input chunks
  */
 public class _Step_3_ExternalSorter {
     /**
