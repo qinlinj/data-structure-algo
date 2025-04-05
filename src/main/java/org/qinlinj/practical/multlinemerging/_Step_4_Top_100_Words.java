@@ -3,6 +3,10 @@ package org.qinlinj.practical.multlinemerging;
 import java.io.BufferedReader;
 import java.util.*;
 
+/**
+ * Step 4: Find the top 100 most frequent words from the sorted result
+ * This is a follow-up application that demonstrates how we can use the sorted output
+ */
 public class _Step_4_Top_100_Words {
     public static void main(String[] args) throws Exception {
         String fileName = "data/top100/sorted_words.txt";
