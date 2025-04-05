@@ -43,22 +43,32 @@ public class _Step_0_WordsGenerator {
      * Space Complexity: O(m) where m is the max length of a word
      */
     public static void main(String[] args) throws IOException {
-
+        // Initialize a writer to the output file
         BufferedWriter writer = FileIOUtils.getWriter("data/top100/words.txt");
 
+        // Define the character set we'll use to generate words
         char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
         int m = chars.length;
 
+        // Generate 10,000 random words
         for (int i = 0; i < 10000; i++) {
             StringBuilder line = new StringBuilder();
+
+            // Each word has a random length between 0 and 15
             for (int j = 0; j < r.nextInt(16); j++) {
+                // Randomly select a character from our character set
                 line.append(chars[r.nextInt(m)]);
             }
+
+            // Skip empty lines
             if (line.length() == 0) continue;
+
+            // Write the word to the file
             writer.write(line.toString());
             writer.newLine();
         }
 
+        // Close the writer to flush and release resources
         FileIOUtils.closeWriter(writer);
     }
 }
