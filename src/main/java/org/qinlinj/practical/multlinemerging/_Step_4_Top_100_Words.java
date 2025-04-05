@@ -6,6 +6,33 @@ import java.util.*;
 /**
  * Step 4: Find the top 100 most frequent words from the sorted result
  * This is a follow-up application that demonstrates how we can use the sorted output
+ * <p>
+ * Word Frequency Analysis with Min-Heap
+ * <p>
+ * This class demonstrates an efficient algorithm for finding the most frequent words in a large dataset
+ * by leveraging both external sorting and a min-heap data structure. It serves as an application of
+ * the previously sorted data from the external sorting process.
+ * <p>
+ * Advantages of Min-Heap for Top-K Problems:
+ * 1. Memory Efficiency: Only stores K items (100 in this case) regardless of input size
+ * 2. Performance: Maintains O(N) time complexity with respect to input size
+ * 3. Single-Pass: Processes data in a streaming fashion without requiring multiple scans
+ * 4. Adaptability: Works well with external sorting results by leveraging the sorted order
+ * 5. Simplicity: Provides a straightforward solution to the common "Top-K" problem
+ * <p>
+ * Concept and Principles:
+ * - We use a min-heap of fixed size K (100) to maintain the K most frequent words
+ * - The min-heap is ordered by frequency (lowest frequency at the root)
+ * - When we encounter a word with higher frequency than the minimum in our heap,
+ * we remove the minimum and add the new word
+ * - This ensures we always maintain the K highest frequency words we've seen so far
+ * - Since the input is sorted, we can easily count word frequencies in a single pass
+ * - The algorithm maintains O(N) time complexity while using only O(K) extra space
+ * <p>
+ * This implementation is particularly efficient because it takes advantage of:
+ * 1. The sorted nature of the input (from previous external sorting steps)
+ * 2. The bounded-size min-heap to track only the top K elements
+ * 3. Single-pass processing to minimize I/O operations
  */
 public class _Step_4_Top_100_Words {
     /**
