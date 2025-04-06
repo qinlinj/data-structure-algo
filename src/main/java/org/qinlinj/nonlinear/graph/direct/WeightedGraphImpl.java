@@ -171,6 +171,14 @@ public class WeightedGraphImpl implements Graph {
         return V;
     }
 
+    /**
+     * Returns the number of edges in the graph.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @return the number of edges
+     */
     @Override
     public int getE() {
         return E;
