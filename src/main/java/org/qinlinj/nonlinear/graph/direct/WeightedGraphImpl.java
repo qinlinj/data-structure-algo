@@ -146,6 +146,14 @@ public class WeightedGraphImpl implements Graph {
         }
     }
 
+    /**
+     * Returns whether the graph is directed.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @return true if the graph is directed, false otherwise
+     */
     public boolean isDirected() {
         return isDirected;
     }
