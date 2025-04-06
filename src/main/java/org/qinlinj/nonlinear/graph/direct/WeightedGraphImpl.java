@@ -158,6 +158,14 @@ public class WeightedGraphImpl implements Graph {
         return isDirected;
     }
 
+    /**
+     * Returns the number of vertices in the graph.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @return the number of vertices
+     */
     @Override
     public int getV() {
         return V;
