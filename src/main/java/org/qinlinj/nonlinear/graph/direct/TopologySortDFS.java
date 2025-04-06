@@ -141,6 +141,14 @@ public class TopologySortDFS {
         return false;
     }
 
+    /**
+     * Returns whether the graph contains a cycle.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @return true if the graph contains a cycle, false otherwise
+     */
     public boolean isHasCycle() {
         return hasCycle;
     }
