@@ -49,13 +49,23 @@ import org.qinlinj.nonlinear.graph.Graph;
  *   - Value: edge weight
  */
 public class WeightedGraphImpl implements Graph {
-    private int V; //
-    private int E; //
+    // Number of vertices in the graph
+    private int V;
+
+    // Number of edges in the graph
+    private int E;
+
+    // Adjacency list representation using TreeMap for fast lookup
+    // Each TreeMap maps: destination vertex -> edge weight
     private TreeMap<Integer, Integer>[] adj;
 
+    // Flag indicating whether the graph is directed
     private boolean isDirected;
 
+    // Array tracking the number of incoming edges for each vertex (for directed graphs)
     private int[] indegrees;
+
+    // Array tracking the number of outgoing edges for each vertex (for directed graphs)
     private int[] outdegrees;
 
     /**
@@ -74,42 +84,53 @@ public class WeightedGraphImpl implements Graph {
     public WeightedGraphImpl(String fileName, boolean isDirected) {
         this.isDirected = isDirected;
         try {
-            BufferedReader reader
-                    = new BufferedReader(new FileReader(fileName));
+            // Open the file and read the first line containing vertices and edges count
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line = reader.readLine();
             String[] arr = line.split(" ");
             this.V = Integer.valueOf(arr[0]);
             this.E = Integer.valueOf(arr[1]);
 
+            // Initialize the adjacency list
             this.adj = new TreeMap[V];
             for (int i = 0; i < V; i++) {
                 adj[i] = new TreeMap<>();
             }
+
+            // Initialize the degree tracking arrays
             this.indegrees = new int[V];
             this.outdegrees = new int[V];
+
+            // Read each edge from the file
             while ((line = reader.readLine()) != null) { // O(E)
                 arr = line.split(" ");
-                int a = Integer.valueOf(arr[0]);
+                int a = Integer.valueOf(arr[0]); // Source vertex
                 validateVertex(a);
-                int b = Integer.valueOf(arr[1]);
+                int b = Integer.valueOf(arr[1]); // Destination vertex
                 validateVertex(b);
 
+                // Self-loops are not allowed
                 if (a == b) {
-                    throw new RuntimeException("error");
+                    throw new RuntimeException("Self-loops are not allowed");
                 }
 
-                if (adj[a].containsKey(b)) { // O(logV)
-                    throw new RuntimeException("error");
+                // Duplicate edges are not allowed
+                if (adj[a].containsKey(b)) { // O(log V)
+                    throw new RuntimeException("Parallel edges are not allowed");
                 }
 
+                // Get the edge weight and add to adjacency list
                 int weight = Integer.valueOf(arr[2]);
-                adj[a].put(b, weight);
+                adj[a].put(b, weight); // O(log V)
 
+                // Update degree information for directed graphs
                 if (isDirected) {
                     outdegrees[a]++;
                     indegrees[b]++;
                 }
-                if (!isDirected) adj[b].put(a, weight);
+
+                // For undirected graphs, add the reverse edge with the same weight
+                if (!isDirected) adj[b].put(a, weight); // O(log V)
             }
 
         } catch (IOException e) {
@@ -126,8 +147,9 @@ public class WeightedGraphImpl implements Graph {
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
-        WeightedGraphImpl adjList
-                = new WeightedGraphImpl("data/weighted-graph.txt", true);
+        // Create a weighted directed graph from a file
+        WeightedGraphImpl adjList = new WeightedGraphImpl("data/weighted-graph.txt", true);
+        // Print the graph structure
         System.out.println(adjList);
     }
 
@@ -142,7 +164,7 @@ public class WeightedGraphImpl implements Graph {
      */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
-            throw new IllegalArgumentException(String.format("V %d invalid", v));
+            throw new IllegalArgumentException(String.format("Vertex %d is invalid", v));
         }
     }
 
@@ -202,18 +224,26 @@ public class WeightedGraphImpl implements Graph {
     }
 
     /**
-     * Get the degree of the specified vertex
+     * Get the degree of the specified vertex.
+     * In a weighted graph context, this would typically be the sum of weights,
+     * but this implementation returns 0 as it's not fully implemented.
+     *
+     * Time Complexity: O(1) - constant time
+     * Space Complexity: O(1) - no additional space used
      *
      * @param v the vertex
      * @return the degree of the vertex
      */
     @Override
     public int degree(int v) {
-        return 0;
+        return 0; // Note: This method is not fully implemented
     }
 
     /**
-     * Get all adjacent vertices of the specified vertex
+     * Get all adjacent vertices of the specified vertex.
+     *
+     * Time Complexity: O(1) - constant time to return the keyset reference
+     * Space Complexity: O(1) - no additional space used
      *
      * @param v the vertex
      * @return a collection of adjacent vertices
@@ -221,12 +251,14 @@ public class WeightedGraphImpl implements Graph {
     @Override
     public Collection<Integer> adj(int v) {
         validateVertex(v);
-
         return adj[v].keySet();
     }
 
     /**
-     * Determine if there is an edge between two specified vertices
+     * Determine if there is an edge between two specified vertices.
+     *
+     * Time Complexity: O(log V) due to TreeMap lookup
+     * Space Complexity: O(1) - no additional space used
      *
      * @param v first vertex
      * @param w second vertex
@@ -236,7 +268,6 @@ public class WeightedGraphImpl implements Graph {
     public boolean hasEdge(int v, int w) {
         validateVertex(v);
         validateVertex(w);
-
         return adj[v].containsKey(w);
     }
 
@@ -253,7 +284,7 @@ public class WeightedGraphImpl implements Graph {
      */
     public int indegree(int v) {
         if (!isDirected) {
-            throw new RuntimeException("error");
+            throw new RuntimeException("In-degree is only defined for directed graphs");
         }
         validateVertex(v);
         return indegrees[v];
@@ -272,19 +303,31 @@ public class WeightedGraphImpl implements Graph {
      */
     public int outdegree(int v) {
         if (!isDirected) {
-            throw new RuntimeException("error");
+            throw new RuntimeException("Out-degree is only defined for directed graphs");
         }
         validateVertex(v);
         return outdegrees[v];
     }
 
+    /**
+     * Returns a string representation of the graph.
+     *
+     * Time Complexity: O(V + E) to iterate through all vertices and edges
+     * Space Complexity: O(V + E) for the string builder
+     *
+     * @return a string representation of the graph
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("V = %d，E = %d，isDirected = %b \n", V, E, isDirected));
+        sb.append(String.format("V = %d, E = %d, isDirected = %b \n", V, E, isDirected));
+
+        // For each vertex, append its adjacency list
         for (int v = 0; v < V; v++) {
             sb.append(v + ": ");
             Map<Integer, Integer> adjMap = adj[v];
+
+            // For each edge, append the destination and weight
             for (Map.Entry<Integer, Integer> entry : adjMap.entrySet()) {
                 sb.append("(" + entry.getKey() + ", " + entry.getValue() + ")");
             }
