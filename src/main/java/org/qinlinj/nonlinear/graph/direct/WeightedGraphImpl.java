@@ -117,6 +117,14 @@ public class WeightedGraphImpl implements Graph {
         }
     }
 
+    /**
+     * Main method to demonstrate the weighted graph implementation.
+     *
+     * Time Complexity: Depends on the graph size, same as constructor
+     * Space Complexity: Depends on the graph size, same as constructor
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         WeightedGraphImpl adjList
                 = new WeightedGraphImpl("data/weighted-graph.txt", true);
