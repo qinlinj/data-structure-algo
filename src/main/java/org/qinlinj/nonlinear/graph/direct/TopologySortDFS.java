@@ -62,13 +62,22 @@ import org.qinlinj.nonlinear.graph.Graph;
  * so no explicit reversal step is needed.
  */
 public class TopologySortDFS {
+    // The directed graph to be topologically sorted
     private Graph g;
+
+    // Flag indicating if the graph contains a cycle (if true, no valid topological sort exists)
     private boolean hasCycle = false;
 
+    // Track visited vertices across all DFS traversals
     private boolean[] visited;
+
+    // Track vertices on the current DFS path (used for cycle detection)
     private boolean[] isOnPath;
 
+    // Array to store the topological ordering
     private int[] res;
+
+    // Index pointer for filling the result array (starts from the end for post-order traversal)
     private int index;
 
     /**
@@ -82,18 +91,24 @@ public class TopologySortDFS {
     public TopologySortDFS(Graph g) {
         this.g = g;
 
+        // Handle null graph case
         if (g == null) return;
 
+        // Initialize tracking arrays
         this.visited = new boolean[g.getV()];
         this.isOnPath = new boolean[g.getV()];
+
+        // Initialize result array and index pointer
+        // We fill the array from the end to naturally capture the reversed post-order
         this.res = new int[g.getV()];
         this.index = this.res.length - 1;
 
+        // Start DFS from each unvisited vertex to handle disconnected graphs
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) {
                 if (dfs(v)) {
                     hasCycle = true;
-                    break;
+                    break; // Early termination once a cycle is found
                 }
             }
         }
@@ -108,10 +123,17 @@ public class TopologySortDFS {
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
+        // Create a graph from a file
         Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
+
+        // Run topological sort algorithm
         TopologySortDFS graphDFS = new TopologySortDFS(g);
-        System.out.println(graphDFS.isHasCycle());
-        System.out.println(Arrays.toString(graphDFS.getRes()));
+
+        // Output whether the graph has a cycle (if true, topological sort is not possible)
+        System.out.println("Has cycle: " + graphDFS.isHasCycle());
+
+        // Output the topological ordering (if no cycle exists)
+        System.out.println("Topological order: " + Arrays.toString(graphDFS.getRes()));
     }
 
     /**
@@ -127,18 +149,30 @@ public class TopologySortDFS {
      * @return true if a cycle is detected, false otherwise
      */
     private boolean dfs(int v) {
+        // Mark the current vertex as visited and on the current path
         visited[v] = true;
         isOnPath[v] = true;
+
+        // Explore all neighbors of the current vertex
         for (int w : g.adj(v)) {
             if (!visited[w]) {
-                if (dfs(w)) return true;
+                // If neighbor hasn't been visited, recursively visit it
+                if (dfs(w)) return true; // Propagate cycle detection upward
             } else {
+                // If neighbor is already visited AND on the current path, we found a cycle
                 if (isOnPath[w]) return true;
             }
         }
+
+        // Backtrack: remove the current vertex from the current path
         isOnPath[v] = false;
+
+        // Post-order processing: add vertex to result after exploring all its descendants
+        // This is the key to topological sorting - a vertex is added only after all its
+        // dependencies (outgoing edges) have been processed
         res[index--] = v;
-        return false;
+
+        return false; // No cycle found in this path
     }
 
     /**
