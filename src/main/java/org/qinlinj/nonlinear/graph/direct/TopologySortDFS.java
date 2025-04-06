@@ -3,60 +3,61 @@ package org.qinlinj.nonlinear.graph.direct;
 import java.util.*;
 import org.qinlinj.nonlinear.graph.Graph;
 
+// @formatter:off
 /**
  * Topological Sort using Depth-First Search
- * <p>
+ *
  * Concept and Principles:
  * - Topological sorting is an ordering of vertices in a directed acyclic graph (DAG)
- * such that for every directed edge (u,v), vertex u comes before vertex v in the ordering.
+ *   such that for every directed edge (u,v), vertex u comes before vertex v in the ordering.
  * - This implementation uses DFS-based approach:
- * 1. Perform DFS traversal of the graph
- * 2. When backtracking from a vertex (after exploring all its neighbors),
- * add the vertex to the result
- * 3. Reverse the result to get the topological ordering
- * 4. Detect cycles during DFS to ensure the graph is a DAG
- * <p>
+ *   1. Perform DFS traversal of the graph
+ *   2. When backtracking from a vertex (after exploring all its neighbors),
+ *      add the vertex to the result
+ *   3. Reverse the result to get the topological ordering
+ *   4. Detect cycles during DFS to ensure the graph is a DAG
+ *
  * Advantages:
  * - Efficient: O(V+E) time complexity where V is number of vertices and E is number of edges
  * - Intuitive: Uses the natural recursion of DFS to determine dependencies
  * - Memory efficient: Uses O(V) extra space for tracking visited vertices
  * - Integrated cycle detection: Can detect if the graph contains cycles (topological sort only works on DAGs)
- * <p>
+ *
  * Visualization Example:
  * Consider a directed graph representing build dependencies:
- * <p>
- * 0 --> 1 --> 3
- * |     |
- * v     v
- * 2 --> 4
- * <p>
+ *
+ *    0 --> 1 --> 3
+ *    |     |
+ *    v     v
+ *    2 --> 4
+ *
  * DFS execution:
  * 1. Start DFS at vertex 0:
- * - Mark 0 as visited and on current path
- * - Explore neighbor 1:
- * - Mark 1 as visited and on current path
- * - Explore neighbor 3:
- * - Mark 3 as visited and on current path
- * - No neighbors to explore
- * - Mark 3 as not on current path
- * - Add 3 to result: res=[3]
- * - Explore neighbor 4:
- * - Mark 4 as visited and on current path
- * - No neighbors to explore
- * - Mark 4 as not on current path
- * - Add 4 to result: res=[3,4]
- * - Mark 1 as not on current path
- * - Add 1 to result: res=[3,4,1]
- * - Explore neighbor 2:
- * - Mark 2 as visited and on current path
- * - Explore neighbor 4 (already visited, not on current path)
- * - Mark 2 as not on current path
- * - Add 2 to result: res=[3,4,1,2]
- * - Mark 0 as not on current path
- * - Add 0 to result: res=[3,4,1,2,0]
- * <p>
+ *    - Mark 0 as visited and on current path
+ *    - Explore neighbor 1:
+ *      - Mark 1 as visited and on current path
+ *      - Explore neighbor 3:
+ *        - Mark 3 as visited and on current path
+ *        - No neighbors to explore
+ *        - Mark 3 as not on current path
+ *        - Add 3 to result: res=[3]
+ *      - Explore neighbor 4:
+ *        - Mark 4 as visited and on current path
+ *        - No neighbors to explore
+ *        - Mark 4 as not on current path
+ *        - Add 4 to result: res=[3,4]
+ *      - Mark 1 as not on current path
+ *      - Add 1 to result: res=[3,4,1]
+ *    - Explore neighbor 2:
+ *      - Mark 2 as visited and on current path
+ *      - Explore neighbor 4 (already visited, not on current path)
+ *      - Mark 2 as not on current path
+ *      - Add 2 to result: res=[3,4,1,2]
+ *    - Mark 0 as not on current path
+ *    - Add 0 to result: res=[3,4,1,2,0]
+ *
  * 2. Final result (after reversing): [0,2,1,4,3] - A valid topological ordering
- * <p>
+ *
  * In this implementation, the result is built in reverse order during DFS,
  * so no explicit reversal step is needed.
  */
