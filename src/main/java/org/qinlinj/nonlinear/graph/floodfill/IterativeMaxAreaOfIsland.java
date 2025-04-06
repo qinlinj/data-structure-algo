@@ -2,7 +2,7 @@ package org.qinlinj.nonlinear.graph.floodfill;
 
 import java.util.*;
 
-public class MaxAreaOfIsland2 {
+public class IterativeMaxAreaOfIsland {
     private int rows;
     private int cols;
 
@@ -22,7 +22,7 @@ public class MaxAreaOfIsland2 {
                 {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
         };
-        MaxAreaOfIsland2 maxAreaOfIsland = new MaxAreaOfIsland2();
+        IterativeMaxAreaOfIsland maxAreaOfIsland = new IterativeMaxAreaOfIsland();
         System.out.println(maxAreaOfIsland.maxAreaOfIsland(grid));
     }
 
