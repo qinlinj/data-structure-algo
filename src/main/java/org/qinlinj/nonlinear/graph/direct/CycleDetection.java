@@ -51,6 +51,14 @@ public class CycleDetection {
     private boolean[] visited;
     private boolean[] isOnPath;
 
+    /**
+     * Constructor that initializes and runs the cycle detection algorithm.
+     *
+     * Time Complexity: O(V+E) where V is number of vertices and E is number of edges
+     * Space Complexity: O(V) for the visited and isOnPath arrays plus recursion stack
+     *
+     * @param g The directed graph to check for cycles
+     */
     public CycleDetection(Graph g) {
         this.g = g;
 
