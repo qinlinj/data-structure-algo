@@ -240,6 +240,17 @@ public class WeightedGraphImpl implements Graph {
         return adj[v].containsKey(w);
     }
 
+    /**
+     * Returns the in-degree of a vertex (number of incoming edges).
+     * Only applicable for directed graphs.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @param v the vertex
+     * @return the in-degree of the vertex
+     * @throws RuntimeException if the graph is not directed
+     */
     public int indegree(int v) {
         if (!isDirected) {
             throw new RuntimeException("error");
