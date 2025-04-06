@@ -53,9 +53,13 @@ import java.util.*;
  * Final result: [0,1,2,3,4] - A valid topological ordering
  */
 public class TopologySortBFS {
+    // The directed graph to be topologically sorted
     private GraphImpl g;
 
+    // Array to store the topological ordering
     private int[] res;
+
+    // Flag indicating if the graph contains a cycle (if true, no valid topological sort exists)
     private boolean hasCycle = false;
 
     /**
@@ -68,16 +72,19 @@ public class TopologySortBFS {
      * @throws IllegalArgumentException if the input graph is not directed
      */
     public TopologySortBFS(GraphImpl g) {
+        // Topological sort is only defined for directed graphs
         if (!g.isDirected()) {
-            throw new IllegalArgumentException("error");
+            throw new IllegalArgumentException("Topological sort can only be applied to directed graphs");
         }
         this.g = g;
 
+        // Calculate in-degree for each vertex (number of incoming edges)
         int[] indegrees = new int[g.getV()];
         for (int v = 0; v < g.getV(); v++) {
             indegrees[v] = g.indegree(v);
         }
 
+        // Initialize queue with all vertices that have no dependencies (in-degree = 0)
         Queue<Integer> queue = new LinkedList<>();
         for (int v = 0; v < g.getV(); v++) {
             if (indegrees[v] == 0) {
@@ -85,18 +92,30 @@ public class TopologySortBFS {
             }
         }
 
+        // Initialize result array to store the topological ordering
         this.res = new int[g.getV()];
         int index = 0;
+
+        // Process vertices in topological order
         while (!queue.isEmpty()) {
+            // Remove a vertex with no dependencies
             int v = queue.remove();
+
+            // Add it to the result
             res[index++] = v;
+
+            // For each neighbor, reduce its in-degree by 1 (removing the edge from v to w)
             for (int w : g.adj(v)) {
                 indegrees[w]--;
+
+                // If the neighbor now has no dependencies, add it to the queue
                 if (indegrees[w] == 0) {
                     queue.add(w);
                 }
             }
         }
+
+        // If we couldn't process all vertices, the graph must have a cycle
         if (index != g.getV()) {
             hasCycle = true;
         }
@@ -111,10 +130,17 @@ public class TopologySortBFS {
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
+        // Create a graph from a file
         GraphImpl g = new GraphImpl("data/directedgraph-dfs.txt", true);
+
+        // Run topological sort algorithm
         TopologySortBFS bfs = new TopologySortBFS(g);
-        System.out.println(bfs.isHasCycle());
-        System.out.println(Arrays.toString(bfs.getRes()));
+
+        // Output whether the graph has a cycle (if true, topological sort is not possible)
+        System.out.println("Has cycle: " + bfs.isHasCycle());
+
+        // Output the topological ordering (if no cycle exists)
+        System.out.println("Topological order: " + Arrays.toString(bfs.getRes()));
     }
 
     /**
