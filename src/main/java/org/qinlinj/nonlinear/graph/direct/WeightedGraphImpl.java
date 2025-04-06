@@ -131,6 +131,15 @@ public class WeightedGraphImpl implements Graph {
         System.out.println(adjList);
     }
 
+    /**
+     * Validates that a vertex identifier is within the valid range.
+     *
+     * Time Complexity: O(1) - constant time check
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @param v The vertex to validate
+     * @throws IllegalArgumentException if the vertex is invalid
+     */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("V %d invalid", v));
