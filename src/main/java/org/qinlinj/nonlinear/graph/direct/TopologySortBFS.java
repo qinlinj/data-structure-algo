@@ -58,6 +58,15 @@ public class TopologySortBFS {
     private int[] res;
     private boolean hasCycle = false;
 
+    /**
+     * Constructor that initializes and runs the topological sort algorithm.
+     *
+     * Time Complexity: O(V+E) where V is number of vertices and E is number of edges
+     * Space Complexity: O(V) for the result array, in-degree array, and queue
+     *
+     * @param g The directed graph to be topologically sorted
+     * @throws IllegalArgumentException if the input graph is not directed
+     */
     public TopologySortBFS(GraphImpl g) {
         if (!g.isDirected()) {
             throw new IllegalArgumentException("error");
