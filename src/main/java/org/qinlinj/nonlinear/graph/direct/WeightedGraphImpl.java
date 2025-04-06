@@ -184,6 +184,16 @@ public class WeightedGraphImpl implements Graph {
         return E;
     }
 
+    /**
+     * Returns the weight of the edge between two vertices.
+     *
+     * Time Complexity: O(log V) due to TreeMap lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @param v source vertex
+     * @param w destination vertex
+     * @return the weight of the edge, or -1 if the edge doesn't exist
+     */
     public int getWeight(int v, int w) {
         if (hasEdge(v, w)) {
             return adj[v].get(w);
