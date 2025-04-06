@@ -102,6 +102,14 @@ public class TopologySortBFS {
         }
     }
 
+    /**
+     * Main method to demonstrate the topological sort algorithm.
+     *
+     * Time Complexity: Depends on graph size, same as constructor
+     * Space Complexity: Depends on graph size, same as constructor
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         GraphImpl g = new GraphImpl("data/directedgraph-dfs.txt", true);
         TopologySortBFS bfs = new TopologySortBFS(g);
@@ -109,6 +117,14 @@ public class TopologySortBFS {
         System.out.println(Arrays.toString(bfs.getRes()));
     }
 
+    /**
+     * Returns whether the graph contains a cycle.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @return true if the graph contains a cycle, false otherwise
+     */
     public boolean isHasCycle() {
         return hasCycle;
     }
