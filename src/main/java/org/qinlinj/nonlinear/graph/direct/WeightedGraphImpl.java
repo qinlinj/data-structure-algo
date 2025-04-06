@@ -259,6 +259,17 @@ public class WeightedGraphImpl implements Graph {
         return indegrees[v];
     }
 
+    /**
+     * Returns the out-degree of a vertex (number of outgoing edges).
+     * Only applicable for directed graphs.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @param v the vertex
+     * @return the out-degree of the vertex
+     * @throws RuntimeException if the graph is not directed
+     */
     public int outdegree(int v) {
         if (!isDirected) {
             throw new RuntimeException("error");
