@@ -58,6 +58,19 @@ public class WeightedGraphImpl implements Graph {
     private int[] indegrees;
     private int[] outdegrees;
 
+    /**
+     * Constructor that initializes the weighted graph from a file.
+     *
+     * The file format should be:
+     * - First line: [number of vertices] [number of edges]
+     * - Subsequent lines: [source vertex] [destination vertex] [weight]
+     *
+     * Time Complexity: O(E log V) where E is the number of edges and V is the number of vertices
+     * Space Complexity: O(V + E) for storing the graph structure
+     *
+     * @param fileName path to the file containing the graph data
+     * @param isDirected flag indicating whether the graph is directed
+     */
     public WeightedGraphImpl(String fileName, boolean isDirected) {
         this.isDirected = isDirected;
         try {
