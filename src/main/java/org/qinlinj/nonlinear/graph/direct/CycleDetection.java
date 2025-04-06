@@ -90,6 +90,23 @@ public class CycleDetection {
         System.out.println(graphDFS.isHasCycle());
     }
 
+    /**
+     * Depth-first search implementation for cycle detection.
+     *
+     * Time Complexity: O(V+E) where V is number of vertices and E is number of edges
+     * Space Complexity: O(V) for the recursion stack in worst case (linear graph)
+     *
+     * Visualization example (continuing from class description):
+     * When exploring from vertex 0:
+     * - We mark 0 as visited and on current path
+     * - We explore each neighbor (1 and 2 in our example)
+     * - For each neighbor, we recursively call DFS
+     * - If we encounter a vertex that is already on our current path, we've found a cycle
+     * - After exploring all neighbors of a vertex, we remove it from the current path (isOnPath[v] = false)
+     *
+     * @param v The current vertex being visited
+     * @return true if a cycle is detected, false otherwise
+     */
     private boolean dfs(int v) {
         visited[v] = true;
         isOnPath[v] = true;
