@@ -51,7 +51,7 @@ package org.qinlinj.nonlinear.graph.floodfill;
  *
  * The maximum island area is therefore 3.
  */
-public class InPlaceMaxAreaOfIsland {
+public class MaxAreaOfIslandInPlaceImp {
     // Number of rows in the grid
     private int rows;
 
@@ -84,7 +84,7 @@ public class InPlaceMaxAreaOfIsland {
                 {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
         };
-        InPlaceMaxAreaOfIsland maxAreaOfIsland = new InPlaceMaxAreaOfIsland();
+        MaxAreaOfIslandInPlaceImp maxAreaOfIsland = new MaxAreaOfIslandInPlaceImp();
         System.out.println(maxAreaOfIsland.maxAreaOfIsland(grid));
     }
 
