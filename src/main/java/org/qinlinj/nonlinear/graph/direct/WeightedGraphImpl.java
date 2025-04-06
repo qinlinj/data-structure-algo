@@ -8,61 +8,45 @@ import org.qinlinj.nonlinear.graph.Graph;
 
 // @formatter:off
 /**
- * Topological Sort using Depth-First Search
+ * Weighted Graph Implementation
  *
  * Concept and Principles:
- * - Topological sorting is an ordering of vertices in a directed acyclic graph (DAG)
- *   such that for every directed edge (u,v), vertex u comes before vertex v in the ordering.
- * - This implementation uses DFS-based approach:
- *   1. Perform DFS traversal of the graph
- *   2. When backtracking from a vertex (after exploring all its neighbors),
- *      add the vertex to the result
- *   3. Reverse the result to get the topological ordering
- *   4. Detect cycles during DFS to ensure the graph is a DAG
+ * - A weighted graph is a graph where each edge has an associated weight or cost.
+ * - This implementation uses an adjacency list representation with TreeMap to store edges and weights.
+ * - Can represent both directed and undirected graphs.
+ * - For directed graphs, we maintain in-degree and out-degree for each vertex.
  *
  * Advantages:
- * - Efficient: O(V+E) time complexity where V is number of vertices and E is number of edges
- * - Intuitive: Uses the natural recursion of DFS to determine dependencies
- * - Memory efficient: Uses O(V) extra space for tracking visited vertices
- * - Integrated cycle detection: Can detect if the graph contains cycles (topological sort only works on DAGs)
+ * - Space Efficient: O(V+E) space complexity compared to O(V²) for adjacency matrix
+ * - Fast Edge Lookup: O(log V) time for edge existence check and weight retrieval using TreeMap
+ * - Flexible: Supports both directed and undirected graphs
+ * - Memory Efficient: Only stores edges that actually exist
+ * - Fast Iteration: Quickly iterate through all edges connected to a vertex
+ * - Degree Tracking: Maintains in-degree and out-degree information for directed graphs
  *
  * Visualization Example:
- * Consider a directed graph representing build dependencies:
+ * Consider a weighted directed graph with 4 vertices:
  *
- *    0 --> 1 --> 3
- *    |     |
- *    v     v
- *    2 --> 4
+ *          3
+ *     0 -------> 1
+ *     |         /|
+ *  5  |        / | 2
+ *     |       /  |
+ *     v      /   v
+ *     2 <---/    3
+ *        4
  *
- * DFS execution:
- * 1. Start DFS at vertex 0:
- *    - Mark 0 as visited and on current path
- *    - Explore neighbor 1:
- *      - Mark 1 as visited and on current path
- *      - Explore neighbor 3:
- *        - Mark 3 as visited and on current path
- *        - No neighbors to explore
- *        - Mark 3 as not on current path
- *        - Add 3 to result: res=[3]
- *      - Explore neighbor 4:
- *        - Mark 4 as visited and on current path
- *        - No neighbors to explore
- *        - Mark 4 as not on current path
- *        - Add 4 to result: res=[3,4]
- *      - Mark 1 as not on current path
- *      - Add 1 to result: res=[3,4,1]
- *    - Explore neighbor 2:
- *      - Mark 2 as visited and on current path
- *      - Explore neighbor 4 (already visited, not on current path)
- *      - Mark 2 as not on current path
- *      - Add 2 to result: res=[3,4,1,2]
- *    - Mark 0 as not on current path
- *    - Add 0 to result: res=[3,4,1,2,0]
+ * This would be represented as:
+ * 0: (1, 3), (2, 5)
+ * 1: (2, 4), (3, 2)
+ * 2:
+ * 3:
  *
- * 2. Final result (after reversing): [0,2,1,4,3] - A valid topological ordering
- *
- * In this implementation, the result is built in reverse order during DFS,
- * so no explicit reversal step is needed.
+ * The adjacency list representation uses TreeMap arrays where:
+ * - The array index is the source vertex
+ * - Each TreeMap contains entries where:
+ *   - Key: destination vertex
+ *   - Value: edge weight
  */
 public class WeightedGraphImpl implements Graph {
     private int V; //
