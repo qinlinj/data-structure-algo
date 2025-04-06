@@ -76,6 +76,14 @@ public class CycleDetection {
         }
     }
 
+    /**
+     * Main method to demonstrate the cycle detection algorithm.
+     *
+     * Time Complexity: Depends on graph size, same as constructor
+     * Space Complexity: Depends on graph size, same as constructor
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
         CycleDetection graphDFS = new CycleDetection(g);
