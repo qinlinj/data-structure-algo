@@ -2,6 +2,42 @@ package org.qinlinj.nonlinear.graph.floodfill;
 
 import java.util.*;
 
+/**
+ * Max Area of Island - Flood Fill Algorithm Implementation
+ * <p>
+ * Concept and Principles:
+ * - A flood fill algorithm is used to determine connected regions in a 2D grid.
+ * - In this problem, we're finding islands (connected land cells) in a grid where:
+ * - 1 represents land
+ * - 0 represents water
+ * - The "area" of an island is the number of connected land cells.
+ * - We convert the 2D grid into a graph representation and use DFS to find connected components.
+ * <p>
+ * Advantages:
+ * - Graph Representation: Simplifies traversal by converting a 2D problem into a graph problem
+ * - DFS Approach: Efficiently explores all connected cells in each island
+ * - Modularity: Clear separation between graph construction and traversal
+ * - Flexibility: Can be easily adapted for similar flood fill problems
+ * - Intuitive: Models the real-world concept of islands as connected landmasses
+ * <p>
+ * Visualization Example:
+ * Consider a small 3x3 grid:
+ * <p>
+ * 1 1 0
+ * 1 0 0
+ * 0 0 1
+ * <p>
+ * This would be represented as a graph where:
+ * - Vertex 0 (row=0, col=0) connects to vertices 1 and 3
+ * - Vertex 1 (row=0, col=1) connects to vertex 0
+ * - Vertex 3 (row=1, col=0) connects to vertex 0
+ * - Vertex 8 (row=2, col=2) has no connections
+ * <p>
+ * DFS traversal from vertex 0 visits vertices 0, 1, and 3, finding an island of area 3.
+ * DFS traversal from vertex 8 finds an island of area 1.
+ * <p>
+ * The maximum island area is therefore 3.
+ */
 public class MaxAreaOfIsland {
     private int rows;
     private int cols;
