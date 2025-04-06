@@ -51,7 +51,7 @@ import java.util.*;
  *
  * The maximum island area is therefore 3.
  */
-public class MaxAreaOfIslandIterative {
+public class MaxAreaOfIslandIterativeImp {
     // Number of rows in the grid
     private int rows;
 
@@ -87,7 +87,7 @@ public class MaxAreaOfIslandIterative {
                 {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
         };
-        MaxAreaOfIslandIterative maxAreaOfIsland = new MaxAreaOfIslandIterative();
+        MaxAreaOfIslandIterativeImp maxAreaOfIsland = new MaxAreaOfIslandIterativeImp();
         System.out.println(maxAreaOfIsland.maxAreaOfIsland(grid));
     }
 
