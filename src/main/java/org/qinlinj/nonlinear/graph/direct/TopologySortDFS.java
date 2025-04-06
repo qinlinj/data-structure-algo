@@ -114,6 +114,18 @@ public class TopologySortDFS {
         System.out.println(Arrays.toString(graphDFS.getRes()));
     }
 
+    /**
+     * Depth-first search implementation for topological sorting.
+     *
+     * The key insight is that the reverse post-order of DFS gives a valid topological sort.
+     * We also check for cycles during the traversal, as topological sort is only defined for DAGs.
+     *
+     * Time Complexity: O(V+E) where V is number of vertices and E is number of edges
+     * Space Complexity: O(V) for the recursion stack in worst case (linear graph)
+     *
+     * @param v The current vertex being visited
+     * @return true if a cycle is detected, false otherwise
+     */
     private boolean dfs(int v) {
         visited[v] = true;
         isOnPath[v] = true;
