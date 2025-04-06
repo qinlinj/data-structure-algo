@@ -45,10 +45,14 @@ import org.qinlinj.nonlinear.graph.Graph;
  * The cycle in this example is: 0 -> 1 -> 3 -> 2 -> 0
  */
 public class CycleDetection {
+    // The graph to be analyzed
     private Graph g;
+    // Flag indicating if the graph contains a cycle
     private boolean hasCycle = false;
 
+    // Track visited vertices across all DFS traversals
     private boolean[] visited;
+    // Track vertices on the current DFS path (recursion stack)
     private boolean[] isOnPath;
 
     /**
@@ -62,15 +66,19 @@ public class CycleDetection {
     public CycleDetection(Graph g) {
         this.g = g;
 
+        // Handle null graph case
         if (g == null) return;
 
+        // Initialize tracking arrays
         this.visited = new boolean[g.getV()];
         this.isOnPath = new boolean[g.getV()];
+
+        // Start DFS from each unvisited vertex to handle disconnected graphs
         for (int v = 0; v < g.getV(); v++) {
             if (!visited[v]) {
                 if (dfs(v)) {
                     hasCycle = true;
-                    break;
+                    break; // Early termination once a cycle is found
                 }
             }
         }
@@ -85,8 +93,11 @@ public class CycleDetection {
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
+        // Create a graph from a file
         Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
+        // Run cycle detection algorithm
         CycleDetection graphDFS = new CycleDetection(g);
+        // Output whether the graph has a cycle
         System.out.println(graphDFS.isHasCycle());
     }
 
@@ -108,17 +119,24 @@ public class CycleDetection {
      * @return true if a cycle is detected, false otherwise
      */
     private boolean dfs(int v) {
+        // Mark the current vertex as visited and on the current path
         visited[v] = true;
         isOnPath[v] = true;
+
+        // Explore all neighbors of the current vertex
         for (int w : g.adj(v)) {
             if (!visited[w]) {
-                if (dfs(w)) return true;
+                // If neighbor hasn't been visited, recursively visit it
+                if (dfs(w)) return true; // Propagate cycle detection upward
             } else {
+                // If neighbor is already visited AND on the current path, we found a cycle
                 if (isOnPath[w]) return true;
             }
         }
+
+        // Backtrack: remove the current vertex from the current path
         isOnPath[v] = false;
-        return false;
+        return false; // No cycle found in this path
     }
 
     /**
