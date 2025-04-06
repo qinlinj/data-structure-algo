@@ -1,8 +1,7 @@
 package org.qinlinj.nonlinear.highlevel.map;
 
-import org.qinlinj.others.test.TestFileReader;
-
-import java.util.List;
+import java.util.*;
+import org.qinlinj.practical.others.test.TestFileReader;
 
 /**
  * Test class for comparing the performance of different Map implementations.

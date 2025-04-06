@@ -1,8 +1,7 @@
 package org.qinlinj.nonlinear.highlevel.set;
 
-import org.qinlinj.others.test.TestFileReader;
-
-import java.util.List;
+import java.util.*;
+import org.qinlinj.practical.others.test.TestFileReader;
 
 public class TestSet {
     /**
