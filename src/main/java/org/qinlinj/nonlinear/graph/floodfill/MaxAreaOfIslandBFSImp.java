@@ -46,12 +46,19 @@ import java.util.*;
  * The maximum island area is 3.
  */
 public class MaxAreaOfIslandBFSImp {
+    // Number of rows in the grid
     private int rows;
+
+    // Number of columns in the grid
     private int cols;
 
+    // The original grid (will be modified during processing)
     private int[][] grid;
 
+    // Graph representation (unused in this implementation but kept for consistency)
     private Set<Integer>[] graph;
+
+    // Four possible directions: up, down, left, right
     private int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     /**
@@ -63,6 +70,7 @@ public class MaxAreaOfIslandBFSImp {
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
+        // Example grid with multiple islands
         int[][] grid = {
                 {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
                 {0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
@@ -87,6 +95,7 @@ public class MaxAreaOfIslandBFSImp {
      * @return the maximum area of an island (maximum number of connected land cells)
      */
     private int maxAreaOfIsland(int[][] grid) {
+        // Handle edge cases
         if (grid == null) return 0;
 
         rows = grid.length;
@@ -96,39 +105,64 @@ public class MaxAreaOfIslandBFSImp {
         if (cols == 0) return 0;
 
         this.grid = grid;
-
         int res = 0;
 
+        // Iterate through all cells in the grid
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
+                // If the cell is land, explore the island using BFS
                 if (grid[row][col] == 1) {
+                    // Counter for current island size
                     int currOnes = 0;
+
+                    // Queue for BFS traversal (stores coordinates as [row, col] arrays)
                     Queue<int[]> queue = new LinkedList<>();
+
+                    // Add the starting cell to the queue and mark as visited
                     queue.add(new int[]{row, col});
-                    grid[row][col] = 0;
+                    grid[row][col] = 0;  // Mark as visited immediately
+
+                    // Process cells level by level until queue is empty
                     while (!queue.isEmpty()) {
+                        // Remove a cell from the queue (FIFO - First In, First Out)
                         int[] curr = queue.remove();
                         int currRow = curr[0], currCol = curr[1];
+
+                        // Increment island size
                         currOnes++;
+
+                        // Check all four directions
                         for (int[] dir : directions) {
                             int nextRow = currRow + dir[0];
                             int nextCol = currCol + dir[1];
-                            if (inArea(nextRow, nextCol)
-                                    && grid[nextRow][nextCol] == 1) {
+
+                            // If the neighboring cell is within bounds and is land
+                            if (inArea(nextRow, nextCol) && grid[nextRow][nextCol] == 1) {
+                                // Add to queue and mark as visited
                                 queue.add(new int[]{nextRow, nextCol});
-                                grid[nextRow][nextCol] = 0;
+                                grid[nextRow][nextCol] = 0;  // Mark as visited immediately
                             }
                         }
                     }
+
+                    // Update maximum island area
                     res = Math.max(res, currOnes);
                 }
             }
         }
-
         return res;
     }
 
-
+    /**
+     * Check if a given row and column are within the grid boundaries.
+     *
+     * Time Complexity: O(1) - constant time checks
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @param row The row index
+     * @param col The column index
+     * @return true if the cell is within the grid, false otherwise
+     */
     private boolean inArea(int row, int col) {
         return row >= 0 && row < rows && col >= 0 && col < cols;
     }
