@@ -99,6 +99,14 @@ public class TopologySortDFS {
         }
     }
 
+    /**
+     * Main method to demonstrate the topological sort algorithm.
+     *
+     * Time Complexity: Depends on graph size, same as constructor
+     * Space Complexity: Depends on graph size, same as constructor
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         Graph g = new GraphImpl("data/directedgraph-dfs.txt", true);
         TopologySortDFS graphDFS = new TopologySortDFS(g);
