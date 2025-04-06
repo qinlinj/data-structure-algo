@@ -120,6 +120,14 @@ public class MaxAreaOfIsland {
         return res;
     }
 
+    /**
+     * Convert the 2D grid into a graph representation.
+     *
+     * Time Complexity: O(R*C) where R is the number of rows and C is the number of columns
+     * Space Complexity: O(R*C) for the graph adjacency list
+     *
+     * @return An array of sets representing the adjacency list of the graph
+     */
     private Set<Integer>[] constructGraph() {
         Set<Integer>[] g = new HashSet[rows * cols];
         for (int v = 0; v < g.length; v++) {
