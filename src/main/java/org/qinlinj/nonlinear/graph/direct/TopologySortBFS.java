@@ -129,6 +129,15 @@ public class TopologySortBFS {
         return hasCycle;
     }
 
+    /**
+     * Returns the topological ordering of the graph vertices.
+     * Note: If the graph has a cycle, the returned array will be incomplete.
+     *
+     * Time Complexity: O(1) - constant time lookup
+     * Space Complexity: O(1) - no additional space used
+     *
+     * @return array containing vertices in topological order
+     */
     public int[] getRes() {
         return res;
     }
