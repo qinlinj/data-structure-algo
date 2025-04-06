@@ -99,6 +99,16 @@ public class MaxAreaOfIsland {
         return res;
     }
 
+    /**
+     * Perform DFS traversal from a vertex to find the area of an island.
+     *
+     * Time Complexity: O(V+E) where V is the number of vertices and E is the number of edges
+     * In the context of this problem, it's bounded by O(R*C) where R is rows and C is columns
+     * Space Complexity: O(R*C) for the recursion stack in worst case
+     *
+     * @param v The current vertex (cell) being visited
+     * @return The area of the island (number of connected land cells)
+     */
     private int dfs(int v) {
         visited[v] = true;
         int res = 1;
