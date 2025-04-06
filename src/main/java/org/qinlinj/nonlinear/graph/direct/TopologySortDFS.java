@@ -71,6 +71,14 @@ public class TopologySortDFS {
     private int[] res;
     private int index;
 
+    /**
+     * Constructor that initializes and runs the topological sort algorithm.
+     *
+     * Time Complexity: O(V+E) where V is number of vertices and E is number of edges
+     * Space Complexity: O(V) for the result array, visited array, isOnPath array, plus recursion stack
+     *
+     * @param g The directed graph to be topologically sorted
+     */
     public TopologySortDFS(Graph g) {
         this.g = g;
 
