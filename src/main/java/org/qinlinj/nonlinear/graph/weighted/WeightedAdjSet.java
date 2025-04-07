@@ -189,6 +189,18 @@ public class WeightedAdjSet implements Graph {
         return -1;
     }
 
+    /**
+     * Returns all vertices adjacent to vertex v.
+     *
+     * @param v Vertex to get neighbors for
+     * @return Collection of vertices adjacent to v
+     * <p>
+     * Time Complexity: O(1) - returns a reference to the existing keyset
+     * <p>
+     * Example:
+     * WeightedAdjSet graph = new WeightedAdjSet("data/weighted-graph.txt");
+     * Collection<Integer> neighbors = graph.adj(0); // Returns vertices connected to New York [1, 2]
+     */
     @Override
     public Collection<Integer> adj(int v) {
         validateVertex(v);
