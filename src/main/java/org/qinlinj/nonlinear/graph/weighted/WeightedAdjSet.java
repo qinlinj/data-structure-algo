@@ -148,6 +148,19 @@ public class WeightedAdjSet implements Graph {
         return E;
     }
 
+    /**
+     * Checks if there is an edge between vertices v and w.
+     *
+     * @param v First vertex
+     * @param w Second vertex
+     * @return true if there is an edge between v and w, false otherwise
+     * <p>
+     * Time Complexity: O(log V) - TreeMap containsKey operation
+     * <p>
+     * Example:
+     * WeightedAdjSet graph = new WeightedAdjSet("data/weighted-graph.txt");
+     * boolean connected = graph.hasEdge(0, 1); // Returns true if there's a road between New York and Boston
+     */
     @Override
     public boolean hasEdge(int v, int w) {
         validateVertex(v);
