@@ -124,6 +124,14 @@ public class WeightedAdjSet implements Graph {
         System.out.println(adjList);
     }
 
+    /**
+     * Validates that the given vertex exists in the graph.
+     *
+     * @param v Vertex to validate
+     * @throws IllegalArgumentException if vertex is invalid
+     *                                  <p>
+     *                                  Time Complexity: O(1) - constant time operation
+     */
     private void validateVertex(int v) {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException(String.format("V %d invalid", v));
