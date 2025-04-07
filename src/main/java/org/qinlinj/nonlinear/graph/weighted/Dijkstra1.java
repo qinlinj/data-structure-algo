@@ -124,6 +124,19 @@ public class Dijkstra1 {
     private int[] distance;
     private boolean[] visited;
 
+    /**
+     * Constructs a Dijkstra shortest path calculator using a priority queue for optimization.
+     *
+     * @param g The weighted graph
+     * @param source The source vertex from which to compute shortest paths
+     *
+     * Time Complexity: O((V+E) log V) where V is the number of vertices and E is the number of edges
+     *   - Each vertex is extracted from the priority queue once: O(V log V)
+     *   - Each edge can lead to at most one vertex insertion: O(E log V)
+     *   - Total: O((V+E) log V), which is much better than O(V²) for sparse graphs
+     *
+     * Space Complexity: O(V) for the distance and visited arrays, plus O(V) for the priority queue
+     */
     public Dijkstra1(WeightedAdjSet g, int source) {
         this.g = g;
         this.source = source;
