@@ -199,6 +199,20 @@ public class Dijkstra2 {
         return visited[v];
     }
 
+    /**
+     * Reconstructs the shortest path from the source vertex to the target vertex.
+     *
+     * @param target The destination vertex
+     * @return Collection of vertices representing the shortest path from source to target,
+     *         or an empty list if no path exists
+     *
+     * Time Complexity: O(P) where P is the path length (at most V)
+     *
+     * Example:
+     * Dijkstra2 dijkstra = new Dijkstra2(graph, 0);
+     * Collection<Integer> shortestPath = dijkstra.path(5);
+     * // Returns the sequence of vertices in the shortest path from 0 to 5, e.g., [0, 2, 3, 5]
+     */
     public Collection<Integer> path(int target) {
         List<Integer> res = new ArrayList<>();
         if (!isConnected(target)) {
