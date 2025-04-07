@@ -1,12 +1,43 @@
 package org.qinlinj.nonlinear.graph.weighted;
 
-import org.qinlinj.nonlinear.graph.Graph;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import org.qinlinj.nonlinear.graph.Graph;
 
+/**
+ * WeightedAdjSet Class
+ * <p>
+ * Concept and Principles:
+ * This class implements a weighted undirected graph using an adjacency set representation.
+ * In this implementation, each vertex maintains a TreeMap where:
+ * - Keys are adjacent vertices
+ * - Values are the weights of the corresponding edges
+ * <p>
+ * Advantages of Weighted Adjacency Set:
+ * 1. Space Efficiency: Only stores connected vertices, optimal for sparse graphs
+ * 2. Fast Edge Weight Lookup: O(log V) time complexity for finding edge weights
+ * 3. Fast Adjacency Iteration: Quickly iterate through all neighbors of a vertex
+ * 4. Ordered Neighbors: TreeMap automatically keeps neighbors sorted by vertex id
+ * 5. Memory Optimization: Compared to adjacency matrix, much more space-efficient for sparse graphs
+ * <p>
+ * Example Visualization:
+ * Consider a road network with 3 cities:
+ * - Vertex 0: New York
+ * - Vertex 1: Boston
+ * - Vertex 2: Washington DC
+ * <p>
+ * With roads:
+ * - New York to Boston: 215 miles (edge 0-1, weight 215)
+ * - New York to Washington DC: 225 miles (edge 0-2, weight 225)
+ * - Boston to Washington DC: 440 miles (edge 1-2, weight 440)
+ * <p>
+ * The adjacency set representation would be:
+ * adj[0] = {(1,215), (2,225)}  // New York connected to Boston (215) and Washington DC (225)
+ * adj[1] = {(0,215), (2,440)}  // Boston connected to New York (215) and Washington DC (440)
+ * adj[2] = {(0,225), (1,440)}  // Washington DC connected to New York (225) and Boston (440)
+ */
 public class WeightedAdjSet implements Graph {
     private int V;
     private int E;
