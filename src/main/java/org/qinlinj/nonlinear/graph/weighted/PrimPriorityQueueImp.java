@@ -146,6 +146,16 @@ public class PrimPriorityQueueImp {
 
     }
 
+    /**
+     * Main method to demonstrate the optimized Prim's algorithm.
+     *
+     * @param args Command line arguments
+     *
+     * Example Output (depending on the graph in prim.txt):
+     * WeightedEdge{v=0, w=2, weight=5}
+     * WeightedEdge{v=2, w=3, weight=3}
+     * WeightedEdge{v=3, w=1, weight=2}
+     */
     public static void main(String[] args) {
         WeightedAdjSet adjSet = new WeightedAdjSet("data/prim.txt");
         PrimPriorityQueueImp prim = new PrimPriorityQueueImp(adjSet);
