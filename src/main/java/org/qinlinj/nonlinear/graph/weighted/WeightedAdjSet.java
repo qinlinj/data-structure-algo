@@ -39,9 +39,9 @@ import org.qinlinj.nonlinear.graph.Graph;
  * adj[2] = {(0,225), (1,440)}  // Washington DC connected to New York (225) and Boston (440)
  */
 public class WeightedAdjSet implements Graph {
-    private int V;
-    private int E;
-    private TreeMap<Integer, Integer>[] adj;
+    private int V;                      // Number of vertices
+    private int E;                      // Number of edges
+    private TreeMap<Integer, Integer>[] adj;  // Adjacency sets with weights (vertex -> weight)
 
     /**
      * Constructs a weighted graph from a file.
@@ -69,18 +69,21 @@ public class WeightedAdjSet implements Graph {
      */
     public WeightedAdjSet(String fileName) {
         try {
-            BufferedReader reader
-                    = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+
+            // Read vertex and edge counts
             String line = reader.readLine();
             String[] arr = line.split(" ");
             this.V = Integer.valueOf(arr[0]);
             this.E = Integer.valueOf(arr[1]);
 
+            // Initialize adjacency lists
             this.adj = new TreeMap[V];
             for (int i = 0; i < V; i++) {
                 adj[i] = new TreeMap<>();
             }
 
+            // Read each edge
             while ((line = reader.readLine()) != null) { // O(E)
                 arr = line.split(" ");
                 int a = Integer.valueOf(arr[0]);
@@ -88,19 +91,21 @@ public class WeightedAdjSet implements Graph {
                 int b = Integer.valueOf(arr[1]);
                 validateVertex(b);
 
+                // Check for self-loops
                 if (a == b) {
                     throw new RuntimeException("There is a self-loop edge, error");
                 }
 
-                if (adj[a].containsKey(b)) { // O(logV)
+                // Check for parallel edges
+                if (adj[a].containsKey(b)) { // O(log V)
                     throw new RuntimeException("There's a parallel edge. Wrong");
                 }
+
+                // Add edge with weight to both vertices (undirected graph)
                 int weight = Integer.valueOf(arr[2]);
                 adj[a].put(b, weight);
                 adj[b].put(a, weight);
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,11 +143,25 @@ public class WeightedAdjSet implements Graph {
         }
     }
 
+    /**
+     * Returns the number of vertices in the graph.
+     *
+     * @return Number of vertices
+     * <p>
+     * Time Complexity: O(1) - constant time operation
+     */
     @Override
     public int getV() {
         return V;
     }
 
+    /**
+     * Returns the number of edges in the graph.
+     *
+     * @return Number of edges
+     * <p>
+     * Time Complexity: O(1) - constant time operation
+     */
     @Override
     public int getE() {
         return E;
@@ -225,6 +244,19 @@ public class WeightedAdjSet implements Graph {
         return adj(v).size();
     }
 
+    /**
+     * Returns a string representation of the graph.
+     *
+     * @return String with vertex count, edge count, and adjacency list representation
+     * <p>
+     * Time Complexity: O(V + E) - iterates through all vertices and all edges
+     * <p>
+     * Example output:
+     * V nums = 3, E nums = 3
+     * 0: (1, 215)(2, 225)
+     * 1: (0, 215)(2, 440)
+     * 2: (0, 225)(1, 440)
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
