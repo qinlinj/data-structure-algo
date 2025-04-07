@@ -117,11 +117,10 @@ import java.util.*;
  * Space Complexity: O(V) for the distance and visited arrays
  */
 public class Dijkstra {
-    private WeightedAdjSet g;
-    private int source;
-
-    private int[] distance;
-    private boolean[] visited;
+    private WeightedAdjSet g;        // The weighted graph
+    private int source;              // Source vertex for shortest paths
+    private int[] distance;          // Array to store shortest distance from source to each vertex
+    private boolean[] visited;       // Array to track visited vertices
 
     /**
      * Constructs a Dijkstra shortest path calculator from a source vertex.
@@ -140,27 +139,36 @@ public class Dijkstra {
         this.g = g;
         this.source = source;
 
+        // Initialize distance array with infinity for all vertices except source
         distance = new int[g.getV()];
         Arrays.fill(distance, Integer.MAX_VALUE);
-        distance[source] = 0;
+        distance[source] = 0;  // Distance from source to itself is 0
 
+        // Initialize visited array to track processed vertices
         visited = new boolean[g.getV()];
 
+        // Main Dijkstra algorithm loop
         while (true) {
+            // Find the unvisited vertex with minimum distance
             int curDis = Integer.MAX_VALUE;
             int curr = -1;
-            for (int v = 0; v < g.getV(); v++) { // O(V)
+            for (int v = 0; v < g.getV(); v++) {  // O(V)
                 if (!visited[v] && distance[v] < curDis) {
                     curDis = distance[v];
                     curr = v;
                 }
             }
+
+            // If no unvisited vertex with finite distance, we're done
             if (curr == -1) break;
 
+            // Mark the selected vertex as visited
             visited[curr] = true;
 
-            for (int w : g.adj(curr)) { // O(E)
+            // Relaxation step: Update distances to adjacent vertices
+            for (int w : g.adj(curr)) {  // O(E) in total across all iterations
                 if (!visited[w]) {
+                    // If a shorter path is found, update the distance
                     if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
                         distance[w] = distance[curr] + g.getWeight(curr, w);
                     }
