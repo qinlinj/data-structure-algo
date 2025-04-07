@@ -60,6 +60,24 @@ public class WeightedEdge implements Comparable<WeightedEdge> {
         return weight;
     }
 
+    /**
+     * Compares this edge with another edge based on their weights.
+     * This method is essential for algorithms that need to process edges in order of their weights,
+     * such as Kruskal's algorithm for finding minimum spanning trees.
+     *
+     * @param o The other weighted edge to compare with
+     * @return A negative value if this edge's weight is less than the other edge's weight,
+     * zero if they are equal, or a positive value if this edge's weight is greater
+     * <p>
+     * Time Complexity: O(1) - constant time operation
+     * <p>
+     * WeightedEdge road1 = new WeightedEdge(0, 1, 215); // New York to Boston (215 miles)
+     * WeightedEdge road2 = new WeightedEdge(0, 2, 225); // New York to Washington DC (225 miles)
+     * int comparison = road1.compareTo(road2); // Returns -10, indicating road1 has lower weight
+     * <p>
+     * Note: This implementation may cause integer overflow for very large weight differences.
+     * A more robust implementation would be: return Integer.compare(weight, o.getWeight());
+     */
     @Override
     public int compareTo(WeightedEdge o) {
         return weight - o.getWeight();
