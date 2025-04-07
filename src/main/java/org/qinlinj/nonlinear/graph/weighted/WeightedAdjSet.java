@@ -43,6 +43,30 @@ public class WeightedAdjSet implements Graph {
     private int E;
     private TreeMap<Integer, Integer>[] adj;
 
+    /**
+     * Constructs a weighted graph from a file.
+     * <p>
+     * The file format should be:
+     * First line: V E (number of vertices and edges)
+     * Following E lines: v w weight (an edge between vertex v and w with specified weight)
+     *
+     * @param fileName Path to the graph file
+     *                 <p>
+     *                 Time Complexity: O(E log V) - where E is the number of edges and V is the number of vertices
+     *                 Reading each edge takes O(log V) time for TreeMap operations
+     *                 <p>
+     *                 Example:
+     *                 File content:
+     *                 3 3
+     *                 0 1 215
+     *                 0 2 225
+     *                 1 2 440
+     *                 <p>
+     *                 This creates a graph with 3 vertices and 3 edges, where:
+     *                 - Edge between vertices 0 and 1 has weight 215
+     *                 - Edge between vertices 0 and 2 has weight 225
+     *                 - Edge between vertices 1 and 2 has weight 440
+     */
     public WeightedAdjSet(String fileName) {
         try {
             BufferedReader reader
