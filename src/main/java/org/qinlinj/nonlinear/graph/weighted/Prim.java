@@ -50,8 +50,8 @@ import org.qinlinj.nonlinear.graph.dfs.ConnectedComponentsAnalyzer;
  * More efficient implementations using priority queues can achieve O(E log V)
  */
 public class Prim {
-    private WeightedAdjSet g;
-    private List<WeightedEdge> result;
+    private WeightedAdjSet g;           // The weighted graph
+    private List<WeightedEdge> result;  // Edges in the minimum spanning tree
 
     /**
      * Constructs a minimum spanning tree using Prim's algorithm.
@@ -74,29 +74,38 @@ public class Prim {
         this.g = g;
         this.result = new ArrayList<>();
 
+        // Check if the graph is connected (Prim's algorithm requires a connected graph)
         ConnectedComponentsAnalyzer cc = new ConnectedComponentsAnalyzer(g);
-        if (cc.getCcCount() > 1) return;
+        if (cc.getCcCount() > 1) return;  // If not connected, return without computing MST
 
-        // Prim
-        boolean[] visited = new boolean[g.getV()];
+        // Implementation of Prim's algorithm
+        boolean[] visited = new boolean[g.getV()];  // Track visited vertices
+        visited[0] = true;  // Start from vertex 0
 
-        visited[0] = true;
-
-        for (int i = 0; i < g.getV() - 1; i++) { // O(V)
+        // For a graph with V vertices, an MST has exactly V-1 edges
+        for (int i = 0; i < g.getV() - 1; i++) {  // O(V)
+            // Initialize with an invalid edge of infinite weight
             WeightedEdge minEdge = new WeightedEdge(-1, -1, Integer.MAX_VALUE);
-            for (int v = 0; v < g.getV(); v++) { // O(V)
-                if (visited[v]) {
-                    for (int w : g.adj(v)) { // O(E)
+
+            // Find the minimum weight edge that connects a visited vertex to an unvisited vertex
+            for (int v = 0; v < g.getV(); v++) {  // O(V)
+                if (visited[v]) {  // For each visited vertex
+                    for (int w : g.adj(v)) {  // Check all its adjacent vertices
+                        // If the adjacent vertex is not visited and the edge weight is less than current minimum
                         if (!visited[w] && g.getWeight(v, w) < minEdge.getWeight()) {
                             minEdge = new WeightedEdge(v, w, g.getWeight(v, w));
                         }
                     }
                 }
             }
+
+            // Add the minimum edge to the MST
             result.add(minEdge);
 
+            // Mark the newly connected vertex as visited
             int v = minEdge.getV();
             int w = minEdge.getW();
+            // Determine which endpoint is the new vertex (the one that wasn't visited)
             int newV = visited[v] ? w : v;
             visited[newV] = true;
         }
