@@ -166,6 +166,13 @@ public class PrimPriorityQueueImp {
         }
     }
 
+    /**
+     * Returns the edges in the minimum spanning tree.
+     *
+     * @return List of weighted edges in the MST
+     *
+     * Time Complexity: O(1) - constant time operation
+     */
     public List<WeightedEdge> getResult() {
         return result;
     }
