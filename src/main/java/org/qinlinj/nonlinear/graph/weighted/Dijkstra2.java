@@ -167,6 +167,14 @@ public class Dijkstra2 {
         return distance[v];
     }
 
+    /**
+     * Validates that the given vertex exists in the graph.
+     *
+     * @param v Vertex to validate
+     * @throws IllegalArgumentException if vertex is invalid
+     *
+     * Time Complexity: O(1) - constant time operation
+     */
     public void validateVertex(int v) {
         if (v < 0 || v >= g.getV()) {
             throw new IllegalArgumentException(String.format("Vertex %d invalid", v));
