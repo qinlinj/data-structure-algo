@@ -118,11 +118,10 @@ import java.util.*;
  * Space Complexity: O(V) for the distance and visited arrays, plus O(V) for the priority queue
  */
 public class Dijkstra1 {
-    private WeightedAdjSet g;
-    private int source;
-
-    private int[] distance;
-    private boolean[] visited;
+    private WeightedAdjSet g;        // The weighted graph
+    private int source;              // Source vertex for shortest paths
+    private int[] distance;          // Array to store shortest distance from source to each vertex
+    private boolean[] visited;       // Array to track visited vertices
 
     /**
      * Constructs a Dijkstra shortest path calculator using a priority queue for optimization.
@@ -141,26 +140,38 @@ public class Dijkstra1 {
         this.g = g;
         this.source = source;
 
+        // Initialize distance array with infinity for all vertices except source
         distance = new int[g.getV()];
         Arrays.fill(distance, Integer.MAX_VALUE);
-        distance[source] = 0;
+        distance[source] = 0;  // Distance from source to itself is 0
 
+        // Initialize visited array to track processed vertices
         visited = new boolean[g.getV()];
 
+        // Priority queue to efficiently get the vertex with minimum distance
         PriorityQueue<Pair> pq = new PriorityQueue<>();
 
+        // Add the source vertex to the priority queue with distance 0
         pq.add(new Pair(source, 0));
 
-        while (!pq.isEmpty()) { // O(V)
-            int curr = pq.poll().v; // O(logV)
+        // Main Dijkstra algorithm loop with priority queue optimization
+        while (!pq.isEmpty()) {  // O(V) iterations total
+            // Extract vertex with minimum distance from priority queue
+            int curr = pq.poll().v;  // O(log V)
+
+            // Skip if already processed (lazy deletion approach)
             if (visited[curr]) continue;
 
+            // Mark the current vertex as visited
             visited[curr] = true;
 
-            for (int w : g.adj(curr)) { // O(E)
+            // Relaxation step: Update distances to adjacent vertices
+            for (int w : g.adj(curr)) {  // O(E) total across all iterations
                 if (!visited[w]) {
+                    // If a shorter path is found, update the distance
                     if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
                         distance[w] = distance[curr] + g.getWeight(curr, w);
+                        // Add the updated vertex to the priority queue
                         pq.add(new Pair(w, distance[w]));
                     }
                 }
