@@ -53,6 +53,23 @@ public class Prim {
     private WeightedAdjSet g;
     private List<WeightedEdge> result;
 
+    /**
+     * Constructs a minimum spanning tree using Prim's algorithm.
+     *
+     * @param g Weighted undirected graph
+     *
+     * Time Complexity: O(V^2 + E) where V is the number of vertices and E is the number of edges
+     *   - Checking connectivity: O(V + E)
+     *   - Outer loop: O(V)
+     *   - For each iteration, we scan all vertices: O(V)
+     *   - For each vertex, we examine all its edges: O(E) in total
+     *   - Overall: O(V) * O(V + E/V) = O(V^2 + E)
+     *
+     * Space Complexity: O(V) for the visited array and O(V-1) for the result list
+     *
+     * Example:
+     * For the graph above, Prim's algorithm would add edges: A-C, C-D, D-B to the MST
+     */
     public Prim(WeightedAdjSet g) {
         this.g = g;
         this.result = new ArrayList<>();
