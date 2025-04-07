@@ -5,7 +5,7 @@ import org.qinlinj.nonlinear.graph.dfs.ConnectedComponentsAnalyzer;
 
 // @formatter:off
 /**
- * Optimized Prim's Algorithm Implementation (Prim1)
+ * Optimized Prim's Algorithm Implementation
  *
  * Concept and Principles:
  * This is an optimized version of Prim's algorithm that uses a priority queue to efficiently find
