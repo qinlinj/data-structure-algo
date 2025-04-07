@@ -185,15 +185,35 @@ public class Dijkstra1 {
         }
     }
 
+    /**
+     * Inner class that represents a vertex-distance pair for the priority queue.
+     * Implements Comparable to allow the priority queue to order by distance.
+     */
     private class Pair implements Comparable<Pair> {
-        int v;
-        int dis;
+        int v;    // Vertex
+        int dis;  // Distance from source to this vertex
 
+        /**
+         * Constructs a vertex-distance pair.
+         *
+         * @param v The vertex
+         * @param dis The distance to this vertex from the source
+         */
         public Pair(int v, int dis) {
             this.v = v;
             this.dis = dis;
         }
 
+        /**
+         * Compares this pair with another pair based on distance.
+         *
+         * @param o The other pair to compare with
+         * @return A negative value if this pair's distance is less, zero if equal,
+         *         or a positive value if greater
+         *
+         * Note: This implementation may cause integer overflow for very large distances.
+         * A more robust implementation would be: return Integer.compare(dis, o.dis);
+         */
         @Override
         public int compareTo(Pair o) {
             return dis - o.dis;
