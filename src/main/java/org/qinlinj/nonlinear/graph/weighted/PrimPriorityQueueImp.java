@@ -93,8 +93,8 @@ import org.qinlinj.nonlinear.graph.dfs.ConnectedComponentsAnalyzer;
  * Space Complexity: O(E) for the priority queue storage
  */
 public class PrimPriorityQueueImp {
-    private WeightedAdjSet g;
-    private List<WeightedEdge> result;
+    private WeightedAdjSet g;           // The weighted graph
+    private List<WeightedEdge> result;  // Edges in the minimum spanning tree
 
     /**
      * Constructs a minimum spanning tree using optimized Prim's algorithm with a priority queue.
@@ -112,38 +112,46 @@ public class PrimPriorityQueueImp {
         this.g = g;
         this.result = new ArrayList<>();
 
+        // Check if the graph is connected (Prim's algorithm requires a connected graph)
         ConnectedComponentsAnalyzer cc = new ConnectedComponentsAnalyzer(g);
-        if (cc.getCcCount() > 1) return;
+        if (cc.getCcCount() > 1) return;  // If not connected, return without computing MST
 
-        // Prim
-        boolean[] visited = new boolean[g.getV()];
+        // Implementation of optimized Prim's algorithm
+        boolean[] visited = new boolean[g.getV()];  // Track visited vertices
+        visited[0] = true;  // Start from vertex 0
 
-        visited[0] = true;
-
+        // Priority queue automatically keeps the minimum weight edge at the top
         PriorityQueue<WeightedEdge> pq = new PriorityQueue<>();
 
+        // Add all edges from the starting vertex to the priority queue
         for (int w : g.adj(0)) {
             pq.add(new WeightedEdge(0, w, g.getWeight(0, w)));
         }
 
-        while (!pq.isEmpty()) { // O(E)
-            WeightedEdge minEdge = pq.poll(); // O(logE)
+        // Process edges until the priority queue is empty
+        while (!pq.isEmpty()) {  // O(E) iterations in worst case
+            // Extract the minimum weight edge from the priority queue
+            WeightedEdge minEdge = pq.poll();  // O(log E)
+
+            // Skip if both endpoints are already in the MST (lazy deletion approach)
             if (visited[minEdge.getV()] && visited[minEdge.getW()]) {
                 continue;
             }
 
+            // Add the edge to the MST
             result.add(minEdge);
 
+            // Determine which endpoint is the new vertex to be added to the MST
             int newV = visited[minEdge.getV()] ? minEdge.getW() : minEdge.getV();
             visited[newV] = true;
 
+            // Add all edges from the new vertex to unvisited vertices
             for (int w : g.adj(newV)) {
                 if (!visited[w]) {
                     pq.add(new WeightedEdge(newV, w, g.getWeight(newV, w)));
                 }
             }
         }
-
     }
 
     /**
