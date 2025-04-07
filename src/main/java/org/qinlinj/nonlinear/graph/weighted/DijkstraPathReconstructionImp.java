@@ -4,7 +4,7 @@ import java.util.*;
 
 // @formatter:off
 /**
- * Dijkstra's Algorithm with Path Reconstruction Implementation (Dijkstra2)
+ * Dijkstra's Algorithm with Path Reconstruction Implementation
  *
  * Concept and Principles:
  * This is an enhanced version of the optimized Dijkstra algorithm that not only calculates
@@ -84,7 +84,7 @@ import java.util.*;
  * Space Complexity: O(V)
  * - Additional O(V) space for the predecessors array
  */
-public class Dijkstra2 {
+public class DijkstraPathReconstructionImp {
     private WeightedAdjSet g;        // The weighted graph
     private int source;              // Source vertex for shortest paths
     private int[] distance;          // Array to store shortest distance from source to each vertex
@@ -102,7 +102,7 @@ public class Dijkstra2 {
      *
      * Space Complexity: O(V) for the distance, visited, and predecessors arrays, plus O(V) for the priority queue
      */
-    public Dijkstra2(WeightedAdjSet g, int source) {
+    public DijkstraPathReconstructionImp(WeightedAdjSet g, int source) {
         this.g = g;
         this.source = source;
 
@@ -162,7 +162,7 @@ public class Dijkstra2 {
      */
     public static void main(String[] args) {
         WeightedAdjSet g = new WeightedAdjSet("data/dijkstra.txt");
-        Dijkstra2 dijkstra = new Dijkstra2(g, 0);
+        DijkstraPathReconstructionImp dijkstra = new DijkstraPathReconstructionImp(g, 0);
         System.out.println(dijkstra.minDistanceTo(1));
         System.out.println(dijkstra.path(1));
     }
@@ -203,7 +203,7 @@ public class Dijkstra2 {
      * Time Complexity: O(1) - constant time lookup in the visited array
      *
      * Example:
-     * Dijkstra2 dijkstra = new Dijkstra2(graph, 0);
+     * DijkstraPathReconstructionImp dijkstra = new DijkstraPathReconstructionImp(graph, 0);
      * boolean canReach = dijkstra.isConnected(5);
      * // Returns true if there's a path from vertex 0 to vertex 5
      */
@@ -222,7 +222,7 @@ public class Dijkstra2 {
      * Time Complexity: O(P) where P is the path length (at most V)
      *
      * Example:
-     * Dijkstra2 dijkstra = new Dijkstra2(graph, 0);
+     * DijkstraPathReconstructionImp dijkstra = new DijkstraPathReconstructionImp(graph, 0);
      * Collection<Integer> shortestPath = dijkstra.path(5);
      * // Returns the sequence of vertices in the shortest path from 0 to 5, e.g., [0, 2, 3, 5]
      */
