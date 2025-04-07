@@ -106,6 +106,19 @@ public class WeightedAdjSet implements Graph {
         }
     }
 
+    /**
+     * Main method to demonstrate WeightedAdjSet usage.
+     *
+     * @param args Command line arguments
+     *             <p>
+     *             Time Complexity: O(E log V) for graph construction
+     *             <p>
+     *             Example Output (for the road network described above):
+     *             V nums = 3, E nums = 3
+     *             0: (1, 215)(2, 225)
+     *             1: (0, 215)(2, 440)
+     *             2: (0, 225)(1, 440)
+     */
     public static void main(String[] args) {
         WeightedAdjSet adjList = new WeightedAdjSet("data/weighted-graph.txt");
         System.out.println(adjList);
