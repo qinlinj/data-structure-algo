@@ -169,6 +169,14 @@ public class Dijkstra {
         }
     }
 
+    /**
+     * Main method to demonstrate Dijkstra's algorithm.
+     *
+     * @param args Command line arguments
+     *
+     * Example Output (depending on the graph in dijkstra.txt):
+     * The shortest distance from vertex 0 to vertex 1 is: X
+     */
     public static void main(String[] args) {
         WeightedAdjSet g = new WeightedAdjSet("data/dijkstra.txt");
         Dijkstra dijkstra = new Dijkstra(g, 0);
