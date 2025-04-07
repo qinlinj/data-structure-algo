@@ -117,7 +117,7 @@ import java.util.*;
  *
  * Space Complexity: O(V) for the distance and visited arrays, plus O(V) for the priority queue
  */
-public class Dijkstra1 {
+public class DijkstraPriorityQueueImp {
     private WeightedAdjSet g;        // The weighted graph
     private int source;              // Source vertex for shortest paths
     private int[] distance;          // Array to store shortest distance from source to each vertex
@@ -136,7 +136,7 @@ public class Dijkstra1 {
      *
      * Space Complexity: O(V) for the distance and visited arrays, plus O(V) for the priority queue
      */
-    public Dijkstra1(WeightedAdjSet g, int source) {
+    public DijkstraPriorityQueueImp(WeightedAdjSet g, int source) {
         this.g = g;
         this.source = source;
 
@@ -189,7 +189,7 @@ public class Dijkstra1 {
      */
     public static void main(String[] args) {
         WeightedAdjSet g = new WeightedAdjSet("data/dijkstra.txt");
-        Dijkstra1 dijkstra = new Dijkstra1(g, 0);
+        DijkstraPriorityQueueImp dijkstra = new DijkstraPriorityQueueImp(g, 0);
         System.out.println(dijkstra.minDistanceTo(1));
     }
 
