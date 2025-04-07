@@ -93,6 +93,17 @@ public class Dijkstra2 {
 
     private int[] prevs;
 
+    /**
+     * Constructs a Dijkstra shortest path calculator with path reconstruction capability.
+     *
+     * @param g The weighted graph
+     * @param source The source vertex from which to compute shortest paths
+     *
+     * Time Complexity: O((V+E) log V) where V is the number of vertices and E is the number of edges
+     *   - Same as Dijkstra1, with minimal overhead for tracking predecessors
+     *
+     * Space Complexity: O(V) for the distance, visited, and predecessors arrays, plus O(V) for the priority queue
+     */
     public Dijkstra2(WeightedAdjSet g, int source) {
         this.g = g;
         this.source = source;
@@ -127,6 +138,15 @@ public class Dijkstra2 {
         }
     }
 
+    /**
+     * Main method to demonstrate Dijkstra's algorithm with path reconstruction.
+     *
+     * @param args Command line arguments
+     *
+     * Example Output (depending on the graph in dijkstra.txt):
+     * The shortest distance from vertex 0 to vertex 1 is: X
+     * The shortest path from vertex 0 to vertex 1 is: [0, ..., 1]
+     */
     public static void main(String[] args) {
         WeightedAdjSet g = new WeightedAdjSet("data/dijkstra.txt");
         Dijkstra2 dijkstra = new Dijkstra2(g, 0);
