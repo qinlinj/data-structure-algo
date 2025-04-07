@@ -96,6 +96,18 @@ public class PrimPriorityQueueImp {
     private WeightedAdjSet g;
     private List<WeightedEdge> result;
 
+    /**
+     * Constructs a minimum spanning tree using optimized Prim's algorithm with a priority queue.
+     *
+     * @param g Weighted undirected graph
+     *
+     * Time Complexity: O(E log E) where E is the number of edges
+     *   - Checking connectivity: O(V + E)
+     *   - Main algorithm: Each edge can be added to PQ once, and each extraction takes O(log E)
+     *   - Total: O(E log E) which is much better than O(V²) for sparse graphs
+     *
+     * Space Complexity: O(E) for the priority queue and O(V) for the visited array
+     */
     public PrimPriorityQueueImp(WeightedAdjSet g) {
         this.g = g;
         this.result = new ArrayList<>();
