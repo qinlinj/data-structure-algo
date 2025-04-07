@@ -30,6 +30,18 @@ public class WeightedEdge implements Comparable<WeightedEdge> {
     private int w;
     private int weight;
 
+    /**
+     * Constructs a weighted edge between vertices v and w with the specified weight.
+     *
+     * @param v      First vertex of the edge
+     * @param w      Second vertex of the edge
+     * @param weight The weight or cost associated with this edge
+     *               <p>
+     *               Time Complexity: O(1) - constant time operation
+     *               <p>
+     *               WeightedEdge road = new WeightedEdge(0, 1, 215);
+     *               // Creates an edge between vertex 0 (New York) and vertex 1 (Boston) with a weight of 215 miles
+     */
     public WeightedEdge(int v, int w, int weight) {
         this.v = v;
         this.w = w;
