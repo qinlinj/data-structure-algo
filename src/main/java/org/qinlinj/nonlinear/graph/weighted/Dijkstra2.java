@@ -85,13 +85,11 @@ import java.util.*;
  * - Additional O(V) space for the predecessors array
  */
 public class Dijkstra2 {
-    private WeightedAdjSet g;
-    private int source;
-
-    private int[] distance;
-    private boolean[] visited;
-
-    private int[] prevs;
+    private WeightedAdjSet g;        // The weighted graph
+    private int source;              // Source vertex for shortest paths
+    private int[] distance;          // Array to store shortest distance from source to each vertex
+    private boolean[] visited;       // Array to track visited vertices
+    private int[] prevs;             // Array to store predecessor vertices (for path reconstruction)
 
     /**
      * Constructs a Dijkstra shortest path calculator with path reconstruction capability.
@@ -108,29 +106,44 @@ public class Dijkstra2 {
         this.g = g;
         this.source = source;
 
+        // Initialize distance array with infinity for all vertices except source
         distance = new int[g.getV()];
         Arrays.fill(distance, Integer.MAX_VALUE);
-        distance[source] = 0;
+        distance[source] = 0;  // Distance from source to itself is 0
 
+        // Initialize visited array to track processed vertices
         visited = new boolean[g.getV()];
-        prevs = new int[g.getV()];
-        Arrays.fill(prevs, -1);
 
+        // Initialize predecessors array to store the previous vertex in the shortest path
+        prevs = new int[g.getV()];
+        Arrays.fill(prevs, -1);  // -1 indicates no predecessor (unreachable or source)
+
+        // Priority queue to efficiently get the vertex with minimum distance
         PriorityQueue<Pair> pq = new PriorityQueue<>();
 
+        // Add the source vertex to the priority queue with distance 0
         pq.add(new Pair(source, 0));
 
-        while (!pq.isEmpty()) { // O(V)
-            int curr = pq.poll().v; // O(logV)
+        // Main Dijkstra algorithm loop with priority queue optimization
+        while (!pq.isEmpty()) {  // O(V) iterations total
+            // Extract vertex with minimum distance from priority queue
+            int curr = pq.poll().v;  // O(log V)
+
+            // Skip if already processed (lazy deletion approach)
             if (visited[curr]) continue;
 
+            // Mark the current vertex as visited
             visited[curr] = true;
 
-            for (int w : g.adj(curr)) { // O(E)
+            // Relaxation step: Update distances to adjacent vertices
+            for (int w : g.adj(curr)) {  // O(E) total across all iterations
                 if (!visited[w]) {
+                    // If a shorter path is found, update the distance
                     if (distance[curr] + g.getWeight(curr, w) < distance[w]) {
                         distance[w] = distance[curr] + g.getWeight(curr, w);
+                        // Add the updated vertex to the priority queue
                         pq.add(new Pair(w, distance[w]));
+                        // Record the predecessor for path reconstruction
                         prevs[w] = curr;
                     }
                 }
@@ -215,15 +228,20 @@ public class Dijkstra2 {
      */
     public Collection<Integer> path(int target) {
         List<Integer> res = new ArrayList<>();
+
+        // If target is not reachable from source, return empty path
         if (!isConnected(target)) {
             return res;
         }
+
+        // Reconstruct the path by walking backwards from target to source
         while (target != source) {
             res.add(target);
-            target = prevs[target];
+            target = prevs[target];  // Move to the predecessor
         }
-        res.add(source);
+        res.add(source);  // Add the source vertex
 
+        // Reverse to get the path from source to target
         Collections.reverse(res);
 
         return res;
