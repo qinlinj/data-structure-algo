@@ -154,6 +154,14 @@ public class Dijkstra2 {
         System.out.println(dijkstra.path(1));
     }
 
+    /**
+     * Returns the minimum distance from the source vertex to the specified vertex.
+     *
+     * @param v The destination vertex
+     * @return The shortest distance from source to v, or Integer.MAX_VALUE if no path exists
+     *
+     * Time Complexity: O(1) - constant time lookup in the distance array
+     */
     public int minDistanceTo(int v) {
         validateVertex(v);
         return distance[v];
