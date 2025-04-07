@@ -169,6 +169,19 @@ public class WeightedAdjSet implements Graph {
         return adj[v].containsKey(w);
     }
 
+    /**
+     * Returns the weight of the edge between vertices v and w.
+     *
+     * @param v First vertex
+     * @param w Second vertex
+     * @return Weight of the edge if it exists, -1 otherwise
+     * <p>
+     * Time Complexity: O(log V) - TreeMap lookup operation
+     * <p>
+     * Example:
+     * WeightedAdjSet graph = new WeightedAdjSet("data/weighted-graph.txt");
+     * int distance = graph.getWeight(0, 1); // Returns 215 (miles between New York and Boston)
+     */
     public int getWeight(int v, int w) {
         if (hasEdge(v, w)) {
             return adj[v].get(w);
