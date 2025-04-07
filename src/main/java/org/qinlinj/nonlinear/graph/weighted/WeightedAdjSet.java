@@ -208,6 +208,18 @@ public class WeightedAdjSet implements Graph {
         return adj[v].keySet();
     }
 
+    /**
+     * Returns the degree (number of edges) of vertex v.
+     *
+     * @param v Vertex to get degree for
+     * @return Degree of vertex v
+     * <p>
+     * Time Complexity: O(1) - simply returns the size of the adjacency set
+     * <p>
+     * Example:
+     * WeightedAdjSet graph = new WeightedAdjSet("data/weighted-graph.txt");
+     * int connections = graph.degree(0); // Returns 2 (New York is connected to 2 cities)
+     */
     @Override
     public int degree(int v) {
         return adj(v).size();
