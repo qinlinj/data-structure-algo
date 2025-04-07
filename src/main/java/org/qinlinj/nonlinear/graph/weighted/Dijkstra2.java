@@ -165,6 +165,19 @@ public class Dijkstra2 {
         }
     }
 
+    /**
+     * Checks if there is a path from the source vertex to the specified vertex.
+     *
+     * @param v The destination vertex
+     * @return true if v is reachable from the source, false otherwise
+     *
+     * Time Complexity: O(1) - constant time lookup in the visited array
+     *
+     * Example:
+     * Dijkstra2 dijkstra = new Dijkstra2(graph, 0);
+     * boolean canReach = dijkstra.isConnected(5);
+     * // Returns true if there's a path from vertex 0 to vertex 5
+     */
     public boolean isConnected(int v) {
         validateVertex(v);
         return visited[v];
