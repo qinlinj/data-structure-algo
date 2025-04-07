@@ -122,6 +122,18 @@ public class Prim {
         }
     }
 
+    /**
+     * Returns the edges in the minimum spanning tree.
+     *
+     * @return List of weighted edges in the MST
+     *
+     * Time Complexity: O(1) - constant time operation
+     *
+     * Example:
+     * Prim prim = new Prim(graph);
+     * List<WeightedEdge> mstEdges = prim.getResult();
+     * // mstEdges contains the edges that form the minimum spanning tree
+     */
     public List<WeightedEdge> getResult() {
         return result;
     }
