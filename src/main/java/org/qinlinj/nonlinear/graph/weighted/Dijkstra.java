@@ -183,11 +183,32 @@ public class Dijkstra {
         System.out.println(dijkstra.minDistanceTo(1));
     }
 
+    /**
+     * Returns the minimum distance from the source vertex to the specified vertex.
+     *
+     * @param v The destination vertex
+     * @return The shortest distance from source to v, or Integer.MAX_VALUE if no path exists
+     *
+     * Time Complexity: O(1) - constant time lookup in the distance array
+     *
+     * Example:
+     * Dijkstra dijkstra = new Dijkstra(graph, 0);
+     * int shortestPath = dijkstra.minDistanceTo(5);
+     * // Returns the shortest distance from vertex 0 to vertex 5
+     */
     public int minDistanceTo(int v) {
         validateVertex(v);
         return distance[v];
     }
 
+    /**
+     * Validates that the given vertex exists in the graph.
+     *
+     * @param v Vertex to validate
+     * @throws IllegalArgumentException if vertex is invalid
+     *
+     * Time Complexity: O(1) - constant time operation
+     */
     public void validateVertex(int v) {
         if (v < 0 || v >= g.getV()) {
             throw new IllegalArgumentException(String.format("Vertex %d invalid", v));
