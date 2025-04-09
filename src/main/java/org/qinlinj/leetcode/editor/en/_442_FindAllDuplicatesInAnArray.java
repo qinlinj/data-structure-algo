@@ -23,7 +23,7 @@ public class _442_FindAllDuplicatesInAnArray {
                 int index = nums[i];
                 int absIndex = Math.abs(index);
                 if (nums[absIndex - 1] < 0) {
-                    list.add(-nums[absIndex - 1]);
+                    list.add(absIndex);
                 } else {
                     nums[absIndex - 1] = -nums[absIndex - 1];
                 }
