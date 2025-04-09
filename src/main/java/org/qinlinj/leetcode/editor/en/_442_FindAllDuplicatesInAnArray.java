@@ -8,7 +8,7 @@ public class _442_FindAllDuplicatesInAnArray {
     public static void main(String[] args) {
         Solution solution = new _442_FindAllDuplicatesInAnArray().new Solution();
         // put your test code here
-        int[] nums = new int[]{1, 2, 3, 4, 5, 6, 6};
+        int[] nums = new int[]{4, 3, 2, 7, 8, 2, 3, 1};
         System.out.println(solution.findDuplicates(nums));
     }
 
@@ -16,15 +16,16 @@ public class _442_FindAllDuplicatesInAnArray {
     class Solution {
         public List<Integer> findDuplicates(int[] nums) {
             if (nums == null || nums.length < 2) {
-                return null;
+                return new ArrayList<>();
             }
             ArrayList<Integer> list = new ArrayList<>();
             for (int i = 0; i < nums.length; i++) {
                 int index = nums[i];
-                if (nums[index - 1] < 0) {
-                    list.add(nums[i]);
+                int absIndex = Math.abs(index);
+                if (nums[absIndex - 1] < 0) {
+                    list.add(-nums[absIndex - 1]);
                 } else {
-                    nums[index - 1] = -nums[index - 1];
+                    nums[absIndex - 1] = -nums[absIndex - 1];
                 }
             }
             return list;
