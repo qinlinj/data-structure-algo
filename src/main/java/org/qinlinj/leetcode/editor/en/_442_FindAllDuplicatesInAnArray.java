@@ -1,20 +1,33 @@
 package org.qinlinj.leetcode.editor.en;
 
 import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
+
 // [442] Find All Duplicates in an Array
 public class _442_FindAllDuplicatesInAnArray {
-    
+
     public static void main(String[] args) {
         Solution solution = new _442_FindAllDuplicatesInAnArray().new Solution();
         // put your test code here
-        
+        int[] nums = new int[]{1, 2, 3, 4, 5, 6, 6};
+        System.out.println(solution.findDuplicates(nums));
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<Integer> findDuplicates(int[] nums) {
-            
+            if (nums == null || nums.length < 2) {
+                return null;
+            }
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < nums.length; i++) {
+                int index = nums[i];
+                if (nums[index - 1] < 0) {
+                    list.add(nums[i]);
+                } else {
+                    nums[index - 1] = -nums[index - 1];
+                }
+            }
+            return list;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +36,7 @@ public class _442_FindAllDuplicatesInAnArray {
 }
 
 
-
-
-
-//Given an integer array nums of length n where all the integers of nums are in 
+//Given an integer array nums of length n where all the integers of nums are in
 //the range [1, n] and each integer appears at most twice, return an array of all 
 //the integers that appears twice. 
 //
