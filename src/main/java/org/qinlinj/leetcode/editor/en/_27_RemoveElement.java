@@ -1,20 +1,31 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
 // [27] Remove Element
 public class _27_RemoveElement {
-    
+
     public static void main(String[] args) {
         Solution solution = new _27_RemoveElement().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeElement(int[] nums, int val) {
-            
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+
+            int slow = 0, fast = nums.length - 1;
+            while (slow <= fast) {
+                if (nums[slow] == val) {
+                    nums[slow] = nums[fast];
+                    fast--;
+                } else {
+                    slow++;
+                }
+            }
+            return slow;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +34,7 @@ public class _27_RemoveElement {
 }
 
 
-
-
-
-//Given an integer array nums and an integer val, remove all occurrences of val 
+//Given an integer array nums and an integer val, remove all occurrences of val
 //in nums in-place. The order of the elements may be changed. Then return the 
 //number of elements in nums which are not equal to val. 
 //
