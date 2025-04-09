@@ -33,7 +33,7 @@ public class _448_FindAllNumbersDisappearedInAnArray {
             return res;
         }
     }
-    
+
     //leetcode submit region end(Prohibit modification and deletion)
 
     public List<Integer> findDisappearedNumbers1(int[] nums) {
