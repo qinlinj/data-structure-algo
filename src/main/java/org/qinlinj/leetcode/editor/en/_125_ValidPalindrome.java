@@ -14,21 +14,23 @@ public class _125_ValidPalindrome {
         public boolean isPalindrome(String s) {
 //            Character.isLetterOrDigit();
             char[] data = s.toCharArray();
-            int start = 0, end = data.length - 1;
-            while (start < end) {
-                while (start < data.length - 1 && !Character.isLetterOrDigit(data[start])) {
-                    start++;
+            int left = 0, right = data.length - 1;
+            while (left < right) {
+                while (left < right && !Character.isLetterOrDigit(data[left])) {
+                    left++;
                 }
-                while (end > 0 && !Character.isLetterOrDigit(data[end])) {
-                    end--;
+                while (left < right && !Character.isLetterOrDigit(data[right])) {
+                    right--;
                 }
-                if (Character.toLowerCase(data[start]) != Character.toLowerCase(data[end])) {
-                    return false;
+                if (left < right) {
+                    if (Character.toLowerCase(data[left]) != Character.toLowerCase(data[right])) {
+                        return false;
+                    }
+                    left++;
+                    right--;
                 }
-                start++;
-                end--;
             }
-            return start != data.length || end != 0;
+            return true;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
