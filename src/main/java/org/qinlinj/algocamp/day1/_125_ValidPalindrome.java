@@ -7,10 +7,27 @@ public class _125_ValidPalindrome {
 
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isPalindrome(String s) {
-            return false;
+//            Character.isLetterOrDigit();
+            char[] data = s.toCharArray();
+            int left = 0, right = data.length - 1;
+            while (left < right) {
+                while (left < right && !Character.isLetterOrDigit(data[left])) {
+                    left++;
+                }
+                while (left < right && !Character.isLetterOrDigit(data[right])) {
+                    right--;
+                }
+                if (left < right) {
+                    if (Character.toLowerCase(data[left]) != Character.toLowerCase(data[right])) {
+                        return false;
+                    }
+                    left++;
+                    right--;
+                }
+            }
+            return true;
         }
     }
 }
