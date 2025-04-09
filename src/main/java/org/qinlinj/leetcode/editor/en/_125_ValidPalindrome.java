@@ -1,20 +1,34 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
 // [125] Valid Palindrome
 public class _125_ValidPalindrome {
-    
+
     public static void main(String[] args) {
         Solution solution = new _125_ValidPalindrome().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isPalindrome(String s) {
-            
+//            Character.isLetterOrDigit();
+            char[] data = s.toCharArray();
+            int start = 0, end = data.length - 1;
+            while (start < end) {
+                while (start < data.length - 1 && !Character.isLetterOrDigit(data[start])) {
+                    start++;
+                }
+                while (end > 0 && !Character.isLetterOrDigit(data[end])) {
+                    end--;
+                }
+                if (Character.toLowerCase(data[start]) != Character.toLowerCase(data[end])) {
+                    return false;
+                }
+                start++;
+                end--;
+            }
+            return start != data.length || end != 0;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +37,7 @@ public class _125_ValidPalindrome {
 }
 
 
-
-
-
-//A phrase is a palindrome if, after converting all uppercase letters into 
+//A phrase is a palindrome if, after converting all uppercase letters into
 //lowercase letters and removing all non-alphanumeric characters, it reads the same 
 //forward and backward. Alphanumeric characters include letters and numbers. 
 //
