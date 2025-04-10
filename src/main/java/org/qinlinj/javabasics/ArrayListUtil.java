@@ -2,7 +2,7 @@ package org.qinlinj.javabasics;
 
 import java.util.*;
 
-public class ArrayListImp {
+public class ArrayListUtil {
     public static void main(String[] args) {
         int n = 10;
 
