@@ -1,20 +1,30 @@
 package org.qinlinj.leetcode.editor.en;
 
-import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
 // [941] Valid Mountain Array
 public class _941_ValidMountainArray {
-    
+
     public static void main(String[] args) {
         Solution solution = new _941_ValidMountainArray().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean validMountainArray(int[] arr) {
-            
+            if (arr == null || arr.length < 3) return false;
+
+            int i = 0;
+            while (i < arr.length - 1 && arr[i] < arr[i + 1]) {
+                i++;
+            }
+            if (i == arr.length - 1 || i == 0) {
+                return false;
+            }
+            while (i < arr.length - 1 && arr[i] > arr[i + 1]) {
+                i++;
+            }
+            return i == arr.length - 1;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +33,7 @@ public class _941_ValidMountainArray {
 }
 
 
-
-
-
-//Given an array of integers arr, return true if and only if it is a valid 
+//Given an array of integers arr, return true if and only if it is a valid
 //mountain array. 
 //
 // Recall that arr is a mountain array if and only if: 
