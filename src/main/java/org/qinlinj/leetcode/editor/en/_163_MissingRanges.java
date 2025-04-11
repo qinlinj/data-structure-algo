@@ -1,20 +1,44 @@
 package org.qinlinj.leetcode.editor.en;
 
 import java.util.*;
-import org.qinlinj.leetcode.editor.common.*;
+
 // [163] Missing Ranges
 public class _163_MissingRanges {
-    
+
     public static void main(String[] args) {
         Solution solution = new _163_MissingRanges().new Solution();
         // put your test code here
-        
+
     }
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<List<Integer>> findMissingRanges(int[] nums, int lower, int upper) {
-            
+            List<List<Integer>> lists = new ArrayList<>();
+            if (nums.length == 0) {
+                lists.add(Arrays.asList(lower, upper));
+                return lists;
+            }
+
+            if (nums[0] > lower) {
+                lists.add(Arrays.asList(lower, nums[0] - 1));
+            }
+
+            for (int i = 1; i < nums.length; i++) {
+                if (nums[i] == nums[i - 1]) {
+                    continue;
+                }
+
+                if (nums[i] > nums[i - 1] + 1) {
+                    lists.add(Arrays.asList(nums[i - 1] + 1, nums[i] - 1));
+                }
+            }
+
+            if (nums[nums.length - 1] < upper) {
+                lists.add(Arrays.asList(nums[nums.length - 1] + 1, upper));
+            }
+
+            return lists;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -23,10 +47,7 @@ public class _163_MissingRanges {
 }
 
 
-
-
-
-//You are given an inclusive range [lower, upper] and a sorted unique integer 
+//You are given an inclusive range [lower, upper] and a sorted unique integer
 //array nums, where all elements are within the inclusive range. 
 //
 // A number x is considered missing if x is in the range [lower, upper] and x 
