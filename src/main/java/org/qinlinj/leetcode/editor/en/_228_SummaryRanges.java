@@ -15,25 +15,25 @@ public class _228_SummaryRanges {
     class Solution {
         public List<String> summaryRanges(int[] nums) {
             ArrayList<String> list = new ArrayList<>();
-            for (int i = 0; i < nums.length - 1; i++) {
-                int curr = i;
-                while (curr < nums.length - 1 && nums[curr + 1] - nums[curr] == 1) {
-                    curr++;
+
+            if (nums.length == 0) {
+                return list;
+            }
+
+            for (int i = 0; i < nums.length; i++) {
+                int start = nums[i];
+
+                while (i + 1 < nums.length && nums[i + 1] - nums[i] == 1) {
+                    i++;
                 }
-                if (curr != i) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(nums[i]);
-                    sb.append("->");
-                    sb.append(nums[curr]);
-                    list.add(sb.toString());
+
+                if (start != nums[i]) {
+                    list.add(start + "->" + nums[i]);
                 } else {
-                    list.add(String.valueOf(nums[i]));
-                }
-                i = curr;
-                if (i == nums.length - 2) {
-                    list.add(String.valueOf(nums[i + 1]));
+                    list.add(String.valueOf(start));
                 }
             }
+
             return list;
         }
     }
