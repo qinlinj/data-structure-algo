@@ -31,4 +31,5 @@ public class _163_MissingRanges {
 
             return lists;
         }
+    }
 }
