@@ -12,19 +12,19 @@ public class _665_NonDecreasingArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean checkPossibility(int[] nums) {
-            int i = 0;
             int count = 0;
-            while (i < nums.length - 1) {
-                if (nums[i] > nums[i + 1]) {
+            for (int i = 1; i < nums.length; i++) {
+                if (nums[i] < nums[i - 1]) {
                     count++;
-                    nums[i + 1] = nums[i];
-                    i = 0;
-                    continue;
+                    if (count > 1) {
+                        return false;
+                    }
+                    if (i > 1 && nums[i] < nums[i - 2]) {
+                        nums[i] = nums[i - 1];
+                    } else {
+                        nums[i - 1] = nums[i];
+                    }
                 }
-                if (count > 1) {
-                    return false;
-                }
-                i++;
             }
             return true;
         }
