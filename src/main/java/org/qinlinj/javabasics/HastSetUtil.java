@@ -15,6 +15,11 @@ public class HastSetUtil {
         System.out.println(set.size());
 
         // check if the HashSet has a specific key
+        if (set.contains(3)) {
+            System.out.println("Element 3 found.");
+        } else {
+            System.out.println("Element 3 not found.");
+        }
 
         // get the value of the specific key, or returns null if it does not exist
 
