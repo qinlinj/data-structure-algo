@@ -26,9 +26,12 @@ public class HastMapUtil {
             System.out.println("Key 2 not found.");
         }
 
-        // get the value of the specific key
+        // get the value of the specific key, or returns null if it does not exist
         System.out.println(map.get(2));
-        // null
         System.out.println(map.get(4));
+
+        // get the value of the specific key, or returns default value if it does not exist
+        System.out.println(map.getOrDefault(2, "Default Value"));
+        System.out.println(map.getOrDefault(4, "Default Value"));
     }
 }
