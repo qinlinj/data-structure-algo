@@ -10,5 +10,9 @@ public class LinkedListUtil {
 
         System.out.println(list.isEmpty());
         System.out.println(list.size());
+
+        // add an element to the end of the LinkedList
+        list.add(4);
+        
     }
 }
