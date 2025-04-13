@@ -20,8 +20,11 @@ public class LinkedListUtil {
 
         // get the element at the top and end of the LinkedList
         System.out.println("the element at the top of the LinkedList: " + list.getFirst() + "\nthe element at the end of the LinkedList: " + list.getLast());
+
+        // remove the element at the top of the LinkedList
+        list.removeFirst();
         // remove the element at the end of the LinkedList
-        list.remove(list.size() - 1);
+        list.removeLast();
 
         System.out.println(list);
     }
