@@ -22,6 +22,6 @@ public class StackUtil {
         System.out.println(stack);
 
         // get the element at the top of the stack
-
+        System.out.println(stack.peek());
     }
 }
