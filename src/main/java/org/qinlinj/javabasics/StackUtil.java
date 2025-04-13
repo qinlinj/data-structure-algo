@@ -18,7 +18,8 @@ public class StackUtil {
         System.out.println("size: " + stack.size());
 
         // remove the element at the top of the stack
-
+        stack.pop();
+        System.out.println(stack);
 
         // get the element at the top of the stack
 
