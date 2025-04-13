@@ -7,10 +7,12 @@ public class HastSetUtil {
         // init a HashSet
         HashSet<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
         System.out.println(set);
-        
+
         // check if the HashSet is empty
+        System.out.println(set.isEmpty());
 
         // get size
+        System.out.println(set.size());
 
         // check if the HashSet has a specific key
 
