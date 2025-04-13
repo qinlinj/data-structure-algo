@@ -26,6 +26,9 @@ public class HastMapUtil {
             System.out.println("Key 2 not found.");
         }
 
-
+        // get the value of the specific key
+        System.out.println(map.get(2));
+        // null
+        System.out.println(map.get(4));
     }
 }
