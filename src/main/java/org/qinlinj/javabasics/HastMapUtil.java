@@ -15,7 +15,17 @@ public class HastMapUtil {
 
         // check if the hashmap is empty
         System.out.println("is empty: " + map.isEmpty());
-        
+
+        // get size
+        System.out.println("size: " + map.size());
+
+        // check if the hashmap has a specific key
+        if (map.containsKey(2)) {
+            System.out.println("Key 2 -> " + map.get(2));
+        } else {
+            System.out.println("Key 2 not found.");
+        }
+
 
     }
 }
