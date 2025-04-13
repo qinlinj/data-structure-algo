@@ -21,9 +21,8 @@ public class HastSetUtil {
             System.out.println("Element 3 not found.");
         }
 
-        // get the value of the specific key, or returns null if it does not exist
-
         // add a new element
+        set.add(10);
 
         // remove an exist element
 
