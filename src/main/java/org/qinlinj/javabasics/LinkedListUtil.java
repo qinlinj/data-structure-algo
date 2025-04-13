@@ -25,7 +25,15 @@ public class LinkedListUtil {
         list.removeFirst();
         // remove the element at the end of the LinkedList
         list.removeLast();
+        System.out.println(list);
 
+        // remove the element of the LinkedList at index 2;
+        list.remove(2);
+        list.removeLast();
+        System.out.println(list);
+
+        // add an element of the LinkedList at index 1;
+        list.add(1, 99);
         System.out.println(list);
     }
 }
