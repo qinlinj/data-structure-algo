@@ -28,8 +28,10 @@ public class HastSetUtil {
         // remove an exist element
         set.remove(3);
         System.out.println(set);
-        
-        // traverse the HashSet
 
+        // traverse the HashSet
+        for (int element : set) {
+            System.out.println(element);
+        }
     }
 }
