@@ -12,5 +12,10 @@ public class QueueUtil {
         queue.offer(2);
         queue.offer(10);
 
+        // check if the queue is empty
+        System.out.println("is empty: " + queue.isEmpty());
+
+        // get size
+        System.out.println("size: " + queue.size());
     }
 }
