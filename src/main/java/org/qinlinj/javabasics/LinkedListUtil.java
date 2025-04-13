@@ -13,12 +13,13 @@ public class LinkedListUtil {
 
         // add an element to the end of the LinkedList
         list.addLast(4);
+        System.out.println(list);
         // add an element to the top of the LinkedList
-        list.addLast(0);
+        list.addFirst(0);
+        System.out.println(list);
 
-
-        // get the element at the end of the LinkedList
-        System.out.println("the element at the end of the LinkedList: " + list.get(list.size() - 1));
+        // get the element at the top and end of the LinkedList
+        System.out.println("the element at the top of the LinkedList: " + list.getFirst() + "\nthe element at the end of the LinkedList: " + list.getLast());
         // remove the element at the end of the LinkedList
         list.remove(list.size() - 1);
 
