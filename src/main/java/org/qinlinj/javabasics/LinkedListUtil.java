@@ -5,7 +5,7 @@ import java.util.*;
 public class LinkedListUtil {
     public static void main(String[] args) {
         // init LinkedList with specific element
-        LinkedList<Integer> list = new LinkedList<>(Arrays.asList(1, 2, 3));
+        LinkedList<Integer> list = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         System.out.println(list);
 
         System.out.println(list.isEmpty());
@@ -34,6 +34,12 @@ public class LinkedListUtil {
 
         // add an element of the LinkedList at index 1;
         list.add(1, 99);
+        System.out.println(list);
+
+        // traverse the LinkedList
+        for (Integer i : list) {
+            System.out.println(i + " ");
+        }
         System.out.println(list);
     }
 }
