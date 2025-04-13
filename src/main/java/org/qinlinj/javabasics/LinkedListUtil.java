@@ -8,7 +8,7 @@ public class LinkedListUtil {
         LinkedList<Integer> list = new LinkedList<>(Arrays.asList(1, 2, 3));
         System.out.println(list);
 
-
-
+        System.out.println(list.isEmpty());
+        System.out.println(list.size());
     }
 }
