@@ -46,6 +46,10 @@ public class HastMapUtil {
         } else {
             System.out.println("Key 2 not found.");
         }
-        
+
+        // traverse the hashmap
+        for (Map.Entry<Integer, String> integerStringEntry : map.entrySet()) {
+            System.out.println(integerStringEntry.getKey() + " -> " + integerStringEntry.getValue());
+        }
     }
 }
