@@ -23,9 +23,12 @@ public class HastSetUtil {
 
         // add a new element
         set.add(10);
+        System.out.println(set);
 
         // remove an exist element
-
+        set.remove(3);
+        System.out.println(set);
+        
         // traverse the HashSet
 
     }
