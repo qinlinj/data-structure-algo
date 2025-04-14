@@ -23,7 +23,7 @@ public class FindFromEnd {
      * p2: 1 -> 2 -> 3 -> 4 -> 5 -> null
      * <p>
      * Step 2: Move both pointers until p1 reaches end
-     * p1:                5 -> null
+     * p1:                   5 -> null
      * p2:         3 -> 4 -> 5 -> null
      * <p>
      * Result: Returns node with value 4 (2nd from end)
