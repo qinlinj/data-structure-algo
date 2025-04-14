@@ -61,32 +61,74 @@ public class GetIntersectionNode {
     }
 
 
+    /**
+     * Solution 2: Length Difference Approach
+     *
+     * Algorithm Strategy: Offset Pointers Based on List Lengths
+     *
+     * Key Concept:
+     * - Calculate lengths of both lists
+     * - Move longer list's pointer forward to align lengths
+     * - Synchronously traverse to find intersection
+     *
+     * Visualization:
+     * ListA: 1 -> 2 -> 3 -> 4 -> 5
+     * ListB:      6 -> 7 -> 4 -> 5
+     *
+     * Steps:
+     * 1. Calculate list lengths
+     * 2. Offset longer list's pointer
+     * 3. Synchronous traversal to find intersection
+     *
+     * Scenarios Handled:
+     * 1. Lists of different lengths
+     * 2. No intersection (returns null)
+     * 3. Partial or full intersection
+     *
+     * Time Complexity: O(m + n)
+     * Space Complexity: O(1)
+     */
     class Solution1 {
         public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            // Calculate lengths of both lists
             int lenA = 0, lenB = 0;
 
+            // Calculate length of list A
             for (ListNode p1 = headA; p1 != null; p1 = p1.next) {
                 lenA++;
             }
+
+            // Calculate length of list B
             for (ListNode p2 = headB; p2 != null; p2 = p2.next) {
                 lenB++;
             }
 
+            // Align pointers by offsetting the longer list
             ListNode p1 = headA, p2 = headB;
+
+            // If list A is longer, move p1 forward
             if (lenA > lenB) {
                 for (int i = 0; i < lenA - lenB; i++) {
                     p1 = p1.next;
                 }
-            } else {
+            }
+            // If list B is longer, move p2 forward
+            else {
                 for (int i = 0; i < lenB - lenA; i++) {
                     p2 = p2.next;
                 }
             }
 
+            // Synchronous traversal to find intersection
+            // Two possible outcomes:
+            // 1. No intersection: pointers reach null simultaneously
+            // 2. Intersection found: pointers meet at intersection node
             while (p1 != p2) {
                 p1 = p1.next;
                 p2 = p2.next;
             }
+
+            // Return intersection point (or null if no intersection)
             return p1;
         }
     }
