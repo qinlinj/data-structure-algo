@@ -1,5 +1,6 @@
 package org.qinlinj.algoframework.coreframework.doublepointerlinkedlist;
 
+import java.util.*;
 import org.qinlinj.leetcode.editor.common.ListNode;
 
 public class MergeKLists {
