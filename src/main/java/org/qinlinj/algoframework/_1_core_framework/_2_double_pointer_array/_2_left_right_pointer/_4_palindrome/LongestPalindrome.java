@@ -28,5 +28,24 @@ public class LongestPalindrome {
         return res;
     }
 
-    private String palindrome(String s, int i, int i1) {}
+    /**
+     * Expands around center to find the longest palindrome.
+     *
+     * @param s The input string
+     * @param l The left position of the center
+     * @param r The right position of the center
+     * @return The longest palindromic substring centered at positions l and r
+     */
+    String palindrome(String s, int l, int r) {
+        // Expand outward from center as long as characters match
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            // Expand the potential palindrome by moving outward in both directions
+            l--;
+            r++;
+        }
+
+        // At this point, the palindrome is s[l+1:r-1]
+        // Note: substring takes start (inclusive) and end (exclusive) indices
+        return s.substring(l + 1, r);
+    }
 }
