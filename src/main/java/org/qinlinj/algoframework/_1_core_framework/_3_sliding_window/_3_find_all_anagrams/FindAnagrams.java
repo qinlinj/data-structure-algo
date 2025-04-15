@@ -4,6 +4,45 @@ import java.util.*;
 
 // @formatter:off
 public class FindAnagrams {
+    /**
+     * Finds all starting indices of anagrams (permutations) of string t in string s.
+     *
+     * This solution uses the sliding window technique to efficiently find all occurrences
+     * where an anagram of t appears in s.
+     *
+     * Visual example:
+     * For s = "cbaebabacd", t = "abc"
+     *
+     * Initial state:
+     * "cbaebabacd"
+     *  l
+     *  r
+     * window: {} valid: 0/3
+     *
+     * After window reaches t.length():
+     * "cbaebabacd"
+     *  l   r
+     * window: {c:1, b:1, a:1} valid: 3/3
+     * Found anagram at index 0
+     *
+     * After shrinking and expanding:
+     * "cbaebabacd"
+     *    l   r
+     * window: {a:1, e:1, b:1} valid: 1/3
+     *
+     * Eventually:
+     * "cbaebabacd"
+     *       l   r
+     * window: {a:1, b:1, c:1} valid: 3/3
+     * Found anagram at index 6
+     *
+     * Time Complexity: O(n) where n is the length of string s
+     * Space Complexity: O(k) where k is the size of the character set
+     *
+     * @param s The source string to search in
+     * @param t The pattern string (looking for anagrams of this)
+     * @return List of starting indices where anagrams of t appear in s
+     */
     public List<Integer> findAnagrams(String s, String t) {
         // Maps to track character frequencies
         Map<Character, Integer> need = new HashMap<>(); // Characters needed from t
@@ -60,6 +99,7 @@ public class FindAnagrams {
                 }
             }
         }
-        return null;
+
+        return res;
     }
 }
