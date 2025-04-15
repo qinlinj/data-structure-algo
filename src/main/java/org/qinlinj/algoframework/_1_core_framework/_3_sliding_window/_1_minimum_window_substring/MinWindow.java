@@ -1,6 +1,6 @@
 package org.qinlinj.algoframework._1_core_framework._3_sliding_window._1_minimum_window_substring;
 
-import java.util.*;// @formatter:off
+import java.util.*;
 public class MinWindow {
     /**
      * Finds the minimum window substring that contains all characters from string t.
@@ -51,6 +51,23 @@ public class MinWindow {
 
         // Variables to track the minimum window substring
         int start = 0, len = Integer.MAX_VALUE;
+
+        // Expand the window by moving right pointer
+        while (right < s.length()) {
+            // Character to be added to the window
+            char c = s.charAt(right);
+            // Expand window
+            right++;
+
+            // Update window data
+            if (need.containsKey(c)) {
+                // Increment the count of this character in the window
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                // If we have exactly the required count of this character, increase valid count
+                if (window.get(c).equals(need.get(c)))
+                    valid++;
+            }
+        }
         return null;
     }
 }
