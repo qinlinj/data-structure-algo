@@ -83,9 +83,16 @@ public class MinWindow {
                 left++;
 
                 // Update window data
-
+                if (need.containsKey(d)) {
+                    // If removing this character breaks the valid count, decrease valid
+                    if (window.get(d).equals(need.get(d)))
+                        valid--;
+                    // Decrement the count of this character in the window
+                    window.put(d, window.get(d) - 1);
+                }
             }
         }
-        return null;
+        // Return the minimum window substring if found, otherwise empty string
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
     }
 }
