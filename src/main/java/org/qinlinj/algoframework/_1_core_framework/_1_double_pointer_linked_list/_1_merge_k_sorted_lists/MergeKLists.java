@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework.coreframework.doublepointerlinkedlist;
+package org.qinlinj.algoframework._1_core_framework._1_double_pointer_linked_list._1_merge_k_sorted_lists;
 
 import java.util.*;
 import org.qinlinj.leetcode.editor.common.ListNode;

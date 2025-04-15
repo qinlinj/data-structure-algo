@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework.coreframework.doublepointerarray;
+package org.qinlinj.algoframework._1_core_framework._2_double_pointer_array;
 
 public class RemoveDuplicates {
     // @formatter:off
