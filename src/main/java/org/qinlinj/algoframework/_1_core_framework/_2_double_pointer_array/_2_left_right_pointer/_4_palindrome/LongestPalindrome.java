@@ -1,6 +1,32 @@
 package org.qinlinj.algoframework._1_core_framework._2_double_pointer_array._2_left_right_pointer._4_palindrome;
 
 // @formatter:off
+/**
+ * Finds the longest palindromic substring in a given string.
+ *
+ * This solution uses the "expand around center" approach, checking all possible
+ * palindrome centers (both single character and between characters) and expanding
+ * outward to find the longest palindrome.
+ *
+ * Visual example:
+ * For string: "babad"
+ *
+ * Checking centers:
+ * - Center at 'b' (i=0): "b" (palindrome of length 1)
+ * - Center between 'b' and 'a' (i=0,i+1): "" (not a palindrome)
+ * - Center at 'a' (i=1): "a" (palindrome of length 1)
+ * - Center between 'a' and 'b' (i=1,i+1): "" (not a palindrome)
+ * - Center at 'b' (i=2): "bab" (palindrome of length 3) ← longest so far
+ * - Center between 'b' and 'a' (i=2,i+1): "" (not a palindrome)
+ * - Center at 'a' (i=3): "aba" (palindrome of length 3) - same length as previous
+ * - Center between 'a' and 'd' (i=3,i+1): "" (not a palindrome)
+ * - Center at 'd' (i=4): "d" (palindrome of length 1)
+ *
+ * Result: "bab" (or "aba" depending on implementation details)
+ *
+ * Time Complexity: O(n²) where n is the length of the string
+ * Space Complexity: O(1) excluding the space for the result
+ */
 public class LongestPalindrome {
     /**
      * Finds the longest palindromic substring in the given string.
