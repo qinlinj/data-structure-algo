@@ -12,6 +12,10 @@ public class CheckInclusion {
         for (char c : t.toCharArray()) {
             need.put(c, need.getOrDefault(c, 0) + 1);
         }
+
+        // Initialize pointers and counter
+        int left = 0, right = 0;
+        int valid = 0; // Count of characters with satisfied frequency requirements
         return false;
     }
 }
