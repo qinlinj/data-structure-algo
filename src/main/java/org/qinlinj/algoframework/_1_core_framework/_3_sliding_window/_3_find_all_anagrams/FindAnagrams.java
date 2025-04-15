@@ -39,7 +39,26 @@ public class FindAnagrams {
             }
 
             // Shrink window when its size equals or exceeds t's length
-            
+            while (right - left >= t.length()) {
+                // If we found a valid anagram, add its starting index to result
+                if (valid == need.size())
+                    res.add(left);
+
+                // Character to be removed from the window
+                char d = s.charAt(left);
+                // Shrink window
+                left++;
+
+                // Update window data
+                if (need.containsKey(d)) {
+                    // If removing this character breaks the valid count, decrease valid
+                    if (window.get(d).equals(need.get(d))) {
+                        valid--;
+                    }
+                    // Decrement the count of this character in the window
+                    window.put(d, window.get(d) - 1);
+                }
+            }
         }
         return null;
     }
