@@ -1,33 +1,34 @@
 package org.qinlinj.algoframework._1_core_framework._3_sliding_window._1_minimum_window_substring;
 
 import java.util.*;
+
 public class MinWindow {
     /**
      * Finds the minimum window substring that contains all characters from string t.
-     *
+     * <p>
      * This solution implements the sliding window algorithm to efficiently find the
      * smallest substring in s that contains all characters from t, including duplicates.
-     *
+     * <p>
      * Visual example:
      * For s = "ADOBECODEBANC", t = "ABC"
-     *
+     * <p>
      * Initial state:
      * "ADOBECODEBANC"
-     *  l
-     *  r
+     * l
+     * r
      * window: {} valid: 0/3
-     *
+     * <p>
      * After expanding window to include all necessary characters:
      * "ADOBECODEBANC"
-     *  l            r
+     * l            r
      * window: {A:1, B:1, C:1} valid: 3/3
-     *
+     * <p>
      * After first minimum found and shrinking:
      * "ADOBECODEBANC"
-     *            l  r
+     * l  r
      * window: {A:1, B:1, C:1} valid: 3/3
      * Minimum window: "BANC"
-     *
+     * <p>
      * Time Complexity: O(n) where n is the length of string s
      * Space Complexity: O(k) where k is the size of the character set (in this case, at most 52)
      *
@@ -66,6 +67,23 @@ public class MinWindow {
                 // If we have exactly the required count of this character, increase valid count
                 if (window.get(c).equals(need.get(c)))
                     valid++;
+            }
+
+            // Try to shrink the window when all required characters are found
+            while (valid == need.size()) {
+                // Update the minimum window substring if current is smaller
+                if (right - left < len) {
+                    start = left;
+                    len = right - left;
+                }
+
+                // Character to be removed from the window
+                char d = s.charAt(left);
+                // Shrink window
+                left++;
+
+                // Update window data
+
             }
         }
         return null;
