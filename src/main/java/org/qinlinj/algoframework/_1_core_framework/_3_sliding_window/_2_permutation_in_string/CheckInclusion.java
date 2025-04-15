@@ -2,7 +2,47 @@ package org.qinlinj.algoframework._1_core_framework._3_sliding_window._2_permuta
 
 import java.util.*;
 
+// @formatter:off
 public class CheckInclusion {
+    /**
+     * Determines if string s contains any permutation of string t.
+     *
+     * This solution uses the sliding window technique to efficiently check if a permutation
+     * (anagram) of string t exists as a substring in string s.
+     *
+     * Visual example:
+     * For s = "eidbaooo", t = "ab"
+     *
+     * Initial state:
+     * "eidbaooo"
+     *  l
+     *  r
+     * window: {} valid: 0/2
+     *
+     * After window reaches t.length():
+     * "eidbaooo"
+     *  l  r
+     * window: {e:1, i:1} valid: 0/2
+     * Window size = 2, start shrinking (not a match)
+     *
+     * After several iterations:
+     * "eidbaooo"
+     *    l  r
+     * window: {d:1, b:1} valid: 1/2 (b matches)
+     *
+     * Eventually:
+     * "eidbaooo"
+     *     l  r
+     * window: {b:1, a:1} valid: 2/2 (both a and b match)
+     * Return true
+     *
+     * Time Complexity: O(n) where n is the length of string s
+     * Space Complexity: O(k) where k is the size of the character set
+     *
+     * @param t The pattern string (looking for permutations of this)
+     * @param s The source string to search in
+     * @return true if any permutation of t exists in s, false otherwise
+     */
     public boolean checkInclusion(String t, String s) {
         // Maps to track character frequencies
         Map<Character, Integer> need = new HashMap<>(); // Characters needed from t
@@ -55,6 +95,8 @@ public class CheckInclusion {
                 }
             }
         }
+
+        // No permutation of t found in s
         return false;
     }
 }
