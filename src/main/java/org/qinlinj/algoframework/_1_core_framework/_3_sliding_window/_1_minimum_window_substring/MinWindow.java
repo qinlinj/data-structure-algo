@@ -1,6 +1,6 @@
 package org.qinlinj.algoframework._1_core_framework._3_sliding_window._1_minimum_window_substring;
 
-// @formatter:off
+import java.util.*;// @formatter:off
 public class MinWindow {
     /**
      * Finds the minimum window substring that contains all characters from string t.
@@ -36,6 +36,21 @@ public class MinWindow {
      * @return The minimum window substring containing all characters from t
      */
     public String minWindow(String s, String t) {
+        // Maps to track character frequencies
+        Map<Character, Integer> need = new HashMap<>(); // Characters needed from t
+        Map<Character, Integer> window = new HashMap<>(); // Current window characters
+
+        // Count character frequencies in string t
+        for (char c : t.toCharArray()) {
+            need.put(c, need.getOrDefault(c, 0) + 1);
+        }
+
+        // Initialize pointers and counters
+        int left = 0, right = 0;
+        int valid = 0; // Count of characters with satisfied frequency requirements
+
+        // Variables to track the minimum window substring
+        int start = 0, len = Integer.MAX_VALUE;
         return null;
     }
 }
