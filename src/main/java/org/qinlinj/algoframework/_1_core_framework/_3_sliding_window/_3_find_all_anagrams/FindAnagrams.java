@@ -13,7 +13,34 @@ public class FindAnagrams {
         for (char c : t.toCharArray()) {
             need.put(c, need.getOrDefault(c, 0) + 1);
         }
-        
+
+        // Initialize pointers and counter
+        int left = 0, right = 0;
+        int valid = 0; // Count of characters with satisfied frequency requirements
+
+        // Result list to store starting indices of anagrams
+        List<Integer> res = new ArrayList<>();
+
+        // Expand the window by moving right pointer
+        while (right < s.length()) {
+            // Character to be added to the window
+            char c = s.charAt(right);
+            // Expand window
+            right++;
+
+            // Update window data
+            if (need.containsKey(c)) {
+                // Increment the count of this character in the window
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                // If we have exactly the required count of this character, increase valid count
+                if (window.get(c).equals(need.get(c))) {
+                    valid++;
+                }
+            }
+
+            // Shrink window when its size equals or exceeds t's length
+            
+        }
         return null;
     }
 }
