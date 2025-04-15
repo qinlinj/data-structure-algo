@@ -33,7 +33,27 @@ public class CheckInclusion {
                 if (window.get(c).intValue() == need.get(c).intValue())
                     valid++;
             }
-            
+
+            // Shrink window when its size equals or exceeds t's length
+            while (right - left >= t.length()) {
+                // Check if we've found a valid permutation
+                if (valid == need.size())
+                    return true;
+
+                // Character to be removed from the window
+                char d = s.charAt(left);
+                // Shrink window
+                left++;
+
+                // Update window data
+                if (need.containsKey(d)) {
+                    // If removing this character breaks the valid count, decrease valid
+                    if (window.get(d).intValue() == need.get(d).intValue())
+                        valid--;
+                    // Decrement the count of this character in the window
+                    window.put(d, window.get(d) - 1);
+                }
+            }
         }
         return false;
     }
