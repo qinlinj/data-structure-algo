@@ -2,6 +2,28 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
 
 import java.util.*;
 
+/**
+ * TRAVERSAL MODE FOR RECURSION
+ * <p>
+ * Key Concepts:
+ * 1. The traversal approach is a different mental model for recursive algorithms
+ * 2. In traversal mode, nodes in the recursion tree don't have specific meanings
+ * 3. The recursive function simply explores all possibilities systematically
+ * 4. Results are collected during the traversal process
+ * <p>
+ * Characteristics of Traversal Mode:
+ * 1. The recursive function typically has no return value (void)
+ * 2. Global variables or parameters track the state during traversal
+ * 3. Results are collected when certain conditions are met (e.g., at leaf nodes)
+ * 4. The function doesn't have a clear mathematical definition
+ * 5. The recursion resembles a systematic exploration, similar to loops
+ * <p>
+ * Comparison with Problem Decomposition:
+ * - Problem Decomposition: Function has clear definition and return value
+ * - Traversal: Function has no return value, collects results during traversal
+ * <p>
+ * Example: Binary Tree Maximum Depth using Traversal Approach (LeetCode 104)
+ */
 public class TraversalMode {
     // Global variables to track state during traversal
     private int depth = 0;    // Current depth during traversal
