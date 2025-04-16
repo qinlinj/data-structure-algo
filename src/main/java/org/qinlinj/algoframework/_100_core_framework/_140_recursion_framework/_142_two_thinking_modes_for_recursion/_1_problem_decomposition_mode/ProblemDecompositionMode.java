@@ -2,6 +2,35 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
 
 // @formatter:off
 public class ProblemDecompositionMode {
+    public static void main(String[] args) {
+        ProblemDecompositionMode solution = new ProblemDecompositionMode();
+
+        // Create the example tree from LeetCode problem 104
+        //        3
+        //       / \
+        //      9  20
+        //        /  \
+        //       15   7
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        int depth = solution.maxDepth(root);
+        System.out.println("Maximum depth of the tree: " + depth); // Should output 3
+
+        // Create the second example from LeetCode problem 104
+        //      1
+        //       \
+        //        2
+        TreeNode root2 = new TreeNode(1);
+        root2.right = new TreeNode(2);
+
+        int depth2 = solution.maxDepth(root2);
+        System.out.println("Maximum depth of the second tree: " + depth2); // Should output 2
+    }
+
     /**
      * Problem: Calculate the maximum depth of a binary tree
      *
