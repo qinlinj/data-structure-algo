@@ -2,6 +2,18 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
 
 // @formatter:off
 public class ProblemDecompositionMode {
+    /**
+     * Problem: Calculate the maximum depth of a binary tree
+     *
+     * Approach using problem decomposition:
+     * 1. Define the function clearly: maxDepth returns the maximum depth of the tree rooted at node 'root'
+     * 2. Base case: If root is null, depth is 0
+     * 3. Recursive case: Calculate max depth of left subtree and right subtree
+     * 4. Combine results: Overall max depth = max(left depth, right depth) + 1
+     *
+     * Time Complexity: O(n) where n is the number of nodes in the tree
+     * Space Complexity: O(h) where h is the height of the tree (recursion stack)
+     */
     public int maxDepth(TreeNode root) {
         // Base case: empty tree has depth 0
         if (root == null) {
