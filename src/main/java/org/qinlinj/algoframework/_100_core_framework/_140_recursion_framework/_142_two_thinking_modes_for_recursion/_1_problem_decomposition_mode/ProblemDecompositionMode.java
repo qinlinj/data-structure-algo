@@ -1,6 +1,28 @@
 package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._142_two_thinking_modes_for_recursion._1_problem_decomposition_mode;
 
 // @formatter:off
+/**
+ * PROBLEM DECOMPOSITION MODE FOR RECURSION
+ *
+ * Key Concepts:
+ * 1. Problem decomposition is a powerful mental model for recursive algorithms
+ * 2. Each node in the recursion tree represents a subproblem
+ * 3. The solution to the original problem is built from solutions to smaller subproblems
+ * 4. This approach follows a "divide and conquer" strategy
+ *
+ * Critical Requirements for Problem Decomposition:
+ * 1. The recursive function must have a clear, precise definition
+ * 2. The definition must specify:
+ *    - What the function parameters represent
+ *    - What result the function returns
+ * 3. The recursive calls must use this definition to solve subproblems
+ * 4. The original problem's solution is computed from subproblem solutions
+ *
+ * Example: Binary Tree Maximum Depth (LeetCode 104)
+ * - Clear definition: Given a node, return the maximum depth of the tree rooted at this node
+ * - Base case: An empty tree (null node) has depth 0
+ * - Recursive formula: maxDepth(root) = max(maxDepth(root.left), maxDepth(root.right)) + 1
+ */
 public class ProblemDecompositionMode {
     /**
      * Visualization of the recursion tree for maxDepth calculation
