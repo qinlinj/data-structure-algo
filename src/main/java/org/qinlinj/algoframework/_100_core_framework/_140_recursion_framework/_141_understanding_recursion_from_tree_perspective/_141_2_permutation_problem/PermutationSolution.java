@@ -2,6 +2,38 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
 
 import java.util.*;
 
+
+/**
+ * PERMUTATION PROBLEM SUMMARY
+ * <p>
+ * Key Concepts:
+ * 1. Permutation: An arrangement of all elements in a set where order matters
+ * 2. For n distinct elements, there are n! possible permutations
+ * 3. Backtracking Algorithm: A systematic way to enumerate all possibilities
+ * <p>
+ * Backtracking Approach for Permutations:
+ * - Uses a decision tree structure where each level represents a position in the array
+ * - At each level, try all possible elements that haven't been used yet
+ * - Uses a "track" to record the current path being explored
+ * - Uses a "used" array to mark elements that have already been placed
+ * - When the track length equals the input array length, we've found a valid permutation
+ * <p>
+ * Algorithm Structure:
+ * 1. Define a result list to store all permutations
+ * 2. Define a backtracking function that builds permutations one element at a time
+ * 3. In the backtracking function:
+ * - If the current permutation is complete, add it to the result
+ * - For each element in the input array:
+ * - If the element is already used, skip it
+ * - Otherwise, add it to the current permutation
+ * - Mark it as used
+ * - Recursively call the backtracking function
+ * - Remove the element (backtrack)
+ * - Mark it as unused
+ * <p>
+ * Time Complexity: O(n!), where n is the number of elements
+ * Space Complexity: O(n) for the recursion stack and temporary storage
+ */
 public class PermutationSolution {
     private List<List<Integer>> result = new LinkedList<>();
 
