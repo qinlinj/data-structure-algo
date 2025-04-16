@@ -44,6 +44,30 @@ public class TraversalMode {
         for (java.util.List<Integer> perm : permutations) {
             System.out.println(perm);
         }
+
+        /**
+         * Visualization of the traversal for tree depth calculation:
+         *
+         * For input tree:
+         *        3
+         *       / \
+         *      9  20
+         *        /  \
+         *       15   7
+         *
+         * Traversal process (depth updates shown at each step):
+         * 1. Enter node 3:    depth = 1
+         * 2. Enter node 9:    depth = 2 (leaf node, maxDepth = 2)
+         * 3. Exit node 9:     depth = 1
+         * 4. Enter node 20:   depth = 2
+         * 5. Enter node 15:   depth = 3 (leaf node, maxDepth = 3)
+         * 6. Exit node 15:    depth = 2
+         * 7. Enter node 7:    depth = 3 (leaf node, maxDepth still 3)
+         * 8. Exit node 7:     depth = 2
+         * 9. Exit node 20:    depth = 1
+         * 10. Exit node 3:    depth = 0
+         * Final result: maxDepth = 3
+         */
     }
 
     /**
