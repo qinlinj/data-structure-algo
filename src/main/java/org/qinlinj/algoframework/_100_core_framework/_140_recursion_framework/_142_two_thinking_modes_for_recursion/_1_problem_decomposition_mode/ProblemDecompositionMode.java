@@ -2,6 +2,56 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
 
 // @formatter:off
 public class ProblemDecompositionMode {
+    /**
+     * Visualization of the recursion tree for maxDepth calculation
+     *
+     * For input tree:
+     *        3
+     *       / \
+     *      9  20
+     *        /  \
+     *       15   7
+     *
+     * Recursion tree (values represent the returned maxDepth at each node):
+     *        3 (3)
+     *       /   \
+     *   9 (1)   20 (2)
+     *          /  \
+     *      15 (1)  7 (1)
+     *      /  \    /  \
+     *  null(0) null(0) null(0) null(0)
+     *
+     * Calculation process:
+     * 1. maxDepth(3) calls maxDepth(9) and maxDepth(20)
+     * 2. maxDepth(9) calls maxDepth(null) twice, both return 0, so maxDepth(9) = max(0,0) + 1 = 1
+     * 3. maxDepth(20) calls maxDepth(15) and maxDepth(7)
+     * 4. Both maxDepth(15) and maxDepth(7) return 1 (same logic as for node 9)
+     * 5. So maxDepth(20) = max(1,1) + 1 = 2
+     * 6. Finally, maxDepth(3) = max(1,2) + 1 = 3
+     */
+
+    /**
+     * Comparison with Fibonacci to highlight problem decomposition pattern:
+     *
+     * Fibonacci recursion:
+     * - Clear definition: fib(n) returns the nth Fibonacci number
+     * - Base case: fib(0) = 0, fib(1) = 1
+     * - Decomposition: fib(n) = fib(n-1) + fib(n-2)
+     *
+     * maxDepth recursion:
+     * - Clear definition: maxDepth(root) returns max depth of tree rooted at 'root'
+     * - Base case: maxDepth(null) = 0
+     * - Decomposition: maxDepth(root) = max(maxDepth(root.left), maxDepth(root.right)) + 1
+     *
+     * Both follow the same pattern:
+     * 1. Decompose problem into smaller subproblems
+     * 2. Solve subproblems recursively
+     * 3. Combine solutions to subproblems to get solution to original problem
+     */
+
+    /**
+     * Demonstration of the maxDepth algorithm
+     */
     public static void main(String[] args) {
         ProblemDecompositionMode solution = new ProblemDecompositionMode();
 
