@@ -48,10 +48,8 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
  * - "Problem decomposition" mindset: Breaking into smaller subproblems
  * - Both models are illuminated by the tree visualization approach
  */
-public class RecursionTreeUnderstanding {
+public class FibonacciSolution {
     /**
-     * Example 1: Fibonacci Sequence
-     * <p>
      * The recursive call tree for Fibonacci forms a binary tree where:
      * - Each node computes fib(n) for a specific n
      * - Left child computes fib(n-1)
