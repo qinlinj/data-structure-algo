@@ -50,6 +50,30 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
  */
 public class RecursionTreeUnderstanding {
     /**
+     * Example 1: Fibonacci Sequence
+     * <p>
+     * The recursive call tree for Fibonacci forms a binary tree where:
+     * - Each node computes fib(n) for a specific n
+     * - Left child computes fib(n-1)
+     * - Right child computes fib(n-2)
+     * - Base cases (n=0, n=1) are leaf nodes
+     * - Parent nodes sum the results of their children
+     * <p>
+     * Time Complexity: O(2^n) - each call branches into two recursive calls
+     * Space Complexity: O(n) - maximum depth of recursion stack
+     */
+    public static int fibonacci(int n) {
+        // Base case (leaf nodes in the recursion tree)
+        if (n < 2) {
+            return n;
+        }
+
+        // Recursive case (internal nodes with two children)
+        // This creates a binary tree structure in the recursion
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    /**
      * Optimized Fibonacci using memoization
      * Time Complexity: O(n) - each value calculated exactly once
      */
@@ -88,27 +112,18 @@ public class RecursionTreeUnderstanding {
         printFibTree(n - 2, prefix + (isLeft ? "│   " : "    "), false);
     }
 
-    /**
-     * Example 1: Fibonacci Sequence
-     * <p>
-     * The recursive call tree for Fibonacci forms a binary tree where:
-     * - Each node computes fib(n) for a specific n
-     * - Left child computes fib(n-1)
-     * - Right child computes fib(n-2)
-     * - Base cases (n=0, n=1) are leaf nodes
-     * - Parent nodes sum the results of their children
-     * <p>
-     * Time Complexity: O(2^n) - each call branches into two recursive calls
-     * Space Complexity: O(n) - maximum depth of recursion stack
-     */
-    public int fibonacci(int n) {
-        // Base case (leaf nodes in the recursion tree)
-        if (n < 2) {
-            return n;
-        }
+    public static void main(String[] args) {
+        int n = 5;
 
-        // Recursive case (internal nodes with two children)
-        // This creates a binary tree structure in the recursion
-        return fibonacci(n - 1) + fibonacci(n - 2);
+        // Calculate fibonacci
+        System.out.println("Fibonacci of " + n + " is: " + fibonacci(n));
+
+        // Print the recursive tree structure
+        System.out.println("\nRecursion Tree for fib(" + n + "):");
+        printFibTree(n, "", false);
+
+        // Demonstrate memoized version
+        Integer[] memo = new Integer[n + 1];
+        System.out.println("\nFibonacci of " + n + " using memoization: " + fibMemoized(n, memo));
     }
 }
