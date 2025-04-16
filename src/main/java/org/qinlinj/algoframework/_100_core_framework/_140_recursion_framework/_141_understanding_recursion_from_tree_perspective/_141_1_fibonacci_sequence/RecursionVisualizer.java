@@ -33,4 +33,23 @@ public class RecursionVisualizer {
         memo[n] = fibMemoized(n - 1, memo) + fibMemoized(n - 2, memo);
         return memo[n];
     }
+
+    /**
+     * Prints the recursion tree for Fibonacci calculation
+     * This is a simplified visualization
+     */
+    public static void printFibTree(int n, String prefix, boolean isLeft) {
+        if (n < 2) {
+            System.out.println(prefix + (isLeft ? "├── " : "└── ") + "fib(" + n + ") = " + n);
+            return;
+        }
+
+        System.out.println(prefix + (isLeft ? "├── " : "└── ") + "fib(" + n + ")");
+
+        // Left branch represents fib(n-1)
+        printFibTree(n - 1, prefix + (isLeft ? "│   " : "    "), true);
+
+        // Right branch represents fib(n-2)
+        printFibTree(n - 2, prefix + (isLeft ? "│   " : "    "), false);
+    }
 }
