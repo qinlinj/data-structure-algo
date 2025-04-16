@@ -6,6 +6,31 @@ public class PermutationSolution {
     private List<List<Integer>> result = new LinkedList<>();
 
     /**
+     * Example usage of the permutation algorithm
+     */
+    public static void main(String[] args) {
+        PermutationSolution solution = new PermutationSolution();
+
+        // Example from the problem: [1,2,3]
+        int[] nums = {1, 2, 3};
+        List<List<Integer>> permutations = solution.permute(nums);
+
+        // Print all permutations
+        System.out.println("All permutations of [1,2,3]:");
+        for (List<Integer> perm : permutations) {
+            System.out.println(perm);
+        }
+
+        // The output should be:
+        // [1, 2, 3]
+        // [1, 3, 2]
+        // [2, 1, 3]
+        // [2, 3, 1]
+        // [3, 1, 2]
+        // [3, 2, 1]
+    }
+
+    /**
      * Main function to find all permutations of the given array of distinct integers.
      *
      * @param nums An array of distinct integers
