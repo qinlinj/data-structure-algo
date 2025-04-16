@@ -37,7 +37,7 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
  * - "Problem decomposition" mindset: Breaking into smaller subproblems
  * - Both models are illuminated by the tree visualization approach
  */
-public class RecursionVisualizer {
+public class RecursionTreeUnderstanding {
     /**
      * Naive recursive implementation of Fibonacci
      * Time Complexity: O(2^n) - exponential due to repeated calculations
