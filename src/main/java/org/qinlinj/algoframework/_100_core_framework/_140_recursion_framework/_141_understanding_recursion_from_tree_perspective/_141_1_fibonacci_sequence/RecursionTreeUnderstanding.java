@@ -1,9 +1,28 @@
 package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._141_understanding_recursion_from_tree_perspective._141_1_fibonacci_sequence;
 
+
 /**
- * RecursionVisualizer - Understanding Recursion through Tree Visualization
+ * UNDERSTANDING RECURSION THROUGH TREE STRUCTURES
  * <p>
- * KEY LESSONS ABOUT RECURSION:
+ * Key Concepts:
+ * 1. The most effective way to understand recursion is by visualizing it as a tree structure
+ * 2. Each recursive call can be seen as a node in a tree, with its own subtrees
+ * 3. The base case represents leaf nodes in the tree
+ * 4. Two classic examples demonstrate this perspective:
+ * - Fibonacci sequence (binary tree)
+ * - Permutation problem (multi-branch tree)
+ * <p>
+ * Tree Perspective Benefits:
+ * - Clarifies the execution flow of recursive algorithms
+ * - Helps visualize the call stack behavior
+ * - Makes it easier to understand time and space complexity
+ * - Provides a mental model for debugging recursive functions
+ * <p>
+ * Recursion Process:
+ * 1. Each function call creates a new node in the tree
+ * 2. Computation proceeds by traversing the entire tree
+ * 3. Results from child nodes are combined to compute parent node values
+ * 4. The final result is obtained when computation returns to the root node
  * <p>
  * 1. UNDERSTANDING RECURSION FROM A TREE PERSPECTIVE:
  * While many approaches exist for understanding recursion:
@@ -24,33 +43,12 @@ package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._
  * - Node values combine according to fib(n) = fib(n-1) + fib(n-2)
  * - The tree visualization reveals the inefficiency of naive recursion (duplicate calculations)
  * <p>
- * 3. VISUALIZATION INSIGHTS:
- * - Nodes change color as recursion progresses:
- * * Semi-transparent: Not yet processed
- * * Pink: In process (on the call stack)
- * * Green: Completed (returned a value)
- * - The calculation follows a clear pattern down the tree and back up
- * - Similar structure to recursive tree traversal algorithms
- * <p>
- * 4. RECURSIVE THINKING MODELS:
+ * 3. RECURSIVE THINKING MODELS:
  * - "Traversal" mindset: Moving through a structure (like tree traversal)
  * - "Problem decomposition" mindset: Breaking into smaller subproblems
  * - Both models are illuminated by the tree visualization approach
  */
 public class RecursionTreeUnderstanding {
-    /**
-     * Naive recursive implementation of Fibonacci
-     * Time Complexity: O(2^n) - exponential due to repeated calculations
-     */
-    public static int fib(int n) {
-        // Base case: fib(0) = 0, fib(1) = 1
-        if (n < 2) {
-            return n;
-        }
-        // Recursive case: fib(n) = fib(n-1) + fib(n-2)
-        return fib(n - 1) + fib(n - 2);
-    }
-
     /**
      * Optimized Fibonacci using memoization
      * Time Complexity: O(n) - each value calculated exactly once
@@ -90,18 +88,27 @@ public class RecursionTreeUnderstanding {
         printFibTree(n - 2, prefix + (isLeft ? "│   " : "    "), false);
     }
 
-    public static void main(String[] args) {
-        int n = 5;
+    /**
+     * Example 1: Fibonacci Sequence
+     * <p>
+     * The recursive call tree for Fibonacci forms a binary tree where:
+     * - Each node computes fib(n) for a specific n
+     * - Left child computes fib(n-1)
+     * - Right child computes fib(n-2)
+     * - Base cases (n=0, n=1) are leaf nodes
+     * - Parent nodes sum the results of their children
+     * <p>
+     * Time Complexity: O(2^n) - each call branches into two recursive calls
+     * Space Complexity: O(n) - maximum depth of recursion stack
+     */
+    public int fibonacci(int n) {
+        // Base case (leaf nodes in the recursion tree)
+        if (n < 2) {
+            return n;
+        }
 
-        // Calculate fibonacci
-        System.out.println("Fibonacci of " + n + " is: " + fib(n));
-
-        // Print the recursive tree structure
-        System.out.println("\nRecursion Tree for fib(" + n + "):");
-        printFibTree(n, "", false);
-
-        // Demonstrate memoized version
-        Integer[] memo = new Integer[n + 1];
-        System.out.println("\nFibonacci of " + n + " using memoization: " + fibMemoized(n, memo));
+        // Recursive case (internal nodes with two children)
+        // This creates a binary tree structure in the recursion
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
 }
