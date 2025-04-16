@@ -128,13 +128,16 @@ public class RecursionTreeUnderstanding {
     }
     // @formatter:off
     /**
-     * Visualizing permute([1,2,3]) as a tree (simplified):
-     *                        []
-     *            /            |             \
-     *          [1]           [2]            [3]
-     *        /     \       /     \        /     \
-     *     [1,2]   [1,3]  [2,1]   [2,3]  [3,1]   [3,2]
-     *      |       |      |       |      |       |
-     *   [1,2,3] [1,3,2] [2,1,3] [2,3,1] [3,1,2] [3,2,1]
+     * Visualizing fibonacci(5) as a tree:
+     *                 fib(5)
+     *               /       \
+     *          fib(4)       fib(3)
+     *         /     \       /     \
+     *     fib(3)   fib(2) fib(2)  fib(1)=1
+     *     /    \    /   \   /   \
+     * fib(2) fib(1) fib(1) fib(0) fib(1) fib(0)
+     *  / \    =1     =1    =0     =1     =0
+     * fib(1) fib(0)
+     *  =1     =0
      */
 }
