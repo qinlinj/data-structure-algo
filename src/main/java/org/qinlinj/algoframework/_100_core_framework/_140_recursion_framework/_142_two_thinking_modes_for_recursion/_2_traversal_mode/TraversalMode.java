@@ -29,8 +29,33 @@ public class TraversalMode {
         return maxDepth;
     }
 
-    private void traverse(TreeNode root) {}
+    /**
+     * Traverse the tree to find maximum depth
+     * Note: This function has no return value - it's purely for traversal
+     * Results are collected via side effects (updating maxDepth)
+     */
+    private void traverse(TreeNode root) {
+        // Base case: reached null node
+        if (root == null) {
+            return;
+        }
 
+        // Preorder position (entering the node) - increase depth
+        depth++;
+
+        // If this is a leaf node, check if we have a new maximum depth
+        if (root.left == null && root.right == null) {
+            maxDepth = Math.max(maxDepth, depth);
+        }
+
+        // Continue traversal
+        traverse(root.left);
+        traverse(root.right);
+
+        // Postorder position (leaving the node) - decrease depth
+        depth--;
+    }
+    
     /**
      * Definition for a binary tree node
      */
