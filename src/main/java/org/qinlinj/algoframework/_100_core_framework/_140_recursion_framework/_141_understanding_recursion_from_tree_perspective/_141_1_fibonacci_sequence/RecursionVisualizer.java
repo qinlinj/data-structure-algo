@@ -1,5 +1,42 @@
 package org.qinlinj.algoframework._100_core_framework._140_recursion_framework._141_understanding_recursion_from_tree_perspective._141_1_fibonacci_sequence;
 
+/**
+ * RecursionVisualizer - Understanding Recursion through Tree Visualization
+ * <p>
+ * KEY LESSONS ABOUT RECURSION:
+ * <p>
+ * 1. UNDERSTANDING RECURSION FROM A TREE PERSPECTIVE:
+ * While many approaches exist for understanding recursion:
+ * - Mirror analogy: Two mirrors facing each other creating infinite reflections
+ * - Stack perspective: Viewing recursion as function calls pushed and popped from a stack
+ * <p>
+ * The most effective approach is understanding recursion as a tree structure:
+ * - Each function call is a node in the tree
+ * - Child nodes represent subproblems
+ * - Base cases are leaf nodes
+ * - The execution follows tree traversal patterns
+ * <p>
+ * 2. FIBONACCI EXAMPLE DEMONSTRATES THIS CLEARLY:
+ * - The Fibonacci function naturally forms a binary tree
+ * - Each fib(n) node splits into fib(n-1) and fib(n-2) children
+ * - Base cases (n=0, n=1) form the leaves
+ * - Computation follows post-order traversal (process children before parent)
+ * - Node values combine according to fib(n) = fib(n-1) + fib(n-2)
+ * - The tree visualization reveals the inefficiency of naive recursion (duplicate calculations)
+ * <p>
+ * 3. VISUALIZATION INSIGHTS:
+ * - Nodes change color as recursion progresses:
+ * * Semi-transparent: Not yet processed
+ * * Pink: In process (on the call stack)
+ * * Green: Completed (returned a value)
+ * - The calculation follows a clear pattern down the tree and back up
+ * - Similar structure to recursive tree traversal algorithms
+ * <p>
+ * 4. RECURSIVE THINKING MODELS:
+ * - "Traversal" mindset: Moving through a structure (like tree traversal)
+ * - "Problem decomposition" mindset: Breaking into smaller subproblems
+ * - Both models are illuminated by the tree visualization approach
+ */
 public class RecursionVisualizer {
     /**
      * Naive recursive implementation of Fibonacci
