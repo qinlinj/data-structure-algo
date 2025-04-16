@@ -52,4 +52,19 @@ public class RecursionVisualizer {
         // Right branch represents fib(n-2)
         printFibTree(n - 2, prefix + (isLeft ? "│   " : "    "), false);
     }
+
+    public static void main(String[] args) {
+        int n = 5;
+
+        // Calculate fibonacci
+        System.out.println("Fibonacci of " + n + " is: " + fib(n));
+
+        // Print the recursive tree structure
+        System.out.println("\nRecursion Tree for fib(" + n + "):");
+        printFibTree(n, "", false);
+
+        // Demonstrate memoized version
+        Integer[] memo = new Integer[n + 1];
+        System.out.println("\nFibonacci of " + n + " using memoization: " + fibMemoized(n, memo));
+    }
 }
