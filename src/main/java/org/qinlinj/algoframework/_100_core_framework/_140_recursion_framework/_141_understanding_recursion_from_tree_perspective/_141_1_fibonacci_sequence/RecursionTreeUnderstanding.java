@@ -126,4 +126,15 @@ public class RecursionTreeUnderstanding {
         Integer[] memo = new Integer[n + 1];
         System.out.println("\nFibonacci of " + n + " using memoization: " + fibMemoized(n, memo));
     }
+    // @formatter:off
+    /**
+     * Visualizing permute([1,2,3]) as a tree (simplified):
+     *                        []
+     *            /            |             \
+     *          [1]           [2]            [3]
+     *        /     \       /     \        /     \
+     *     [1,2]   [1,3]  [2,1]   [2,3]  [3,1]   [3,2]
+     *      |       |      |       |      |       |
+     *   [1,2,3] [1,3,2] [2,1,3] [2,3,1] [3,1,2] [3,2,1]
+     */
 }
