@@ -54,4 +54,32 @@ public class _151_d_DynamicProgrammingAdvanced {
         // Final result is in dp_i_1
         return dp_i_1;
     }
+
+    /**
+     * Example 2: Space-optimized coin change
+     *
+     * State transition equation: dp[i] = min(dp[i], dp[i-coin] + 1) for each coin
+     *
+     * While full space optimization isn't possible (we need values for all amounts),
+     * we can still demonstrate the principle by using a single array rather than
+     * multiple data structures.
+     */
+    public int coinChange(int[] coins, int amount) {
+        // Initialize DP array
+        int[] dp = new int[amount + 1];
+        java.util.Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+
+        // Use the state transition equation to fill the array
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (coin <= i) {
+                    // Here is our state transition equation in action
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
 }
