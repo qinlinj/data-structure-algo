@@ -90,6 +90,28 @@ public class DynamicProgrammingMemoization {
     }
 
     private int coinChangeMemoized(int[] coins, int amount, int[] memo) {
+        // Base case
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
 
+        // Check if we've already calculated this value
+        if (memo[amount] != -1) return memo[amount];
+
+        // Initialize with a value greater than any possible answer
+        int minCoins = Integer.MAX_VALUE;
+
+        // Try each coin
+        for (int coin : coins) {
+            int result = coinChangeMemoized(coins, amount - coin, memo);
+
+            // If it's possible to make change with this coin
+            if (result >= 0) {
+                minCoins = Math.min(minCoins, result + 1);
+            }
+        }
+
+        // Store the result in memo
+        memo[amount] = (minCoins == Integer.MAX_VALUE) ? -1 : minCoins;
+        return memo[amount];
     }
 }
