@@ -16,7 +16,7 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * 2. This approach maintains the intuitive recursive formulation
  * 3. The "memo" array serves a similar purpose to the DP table in bottom-up approaches
  */
-public class CoinChangeMemoization {
+public class _152_b_CoinChangeMemoization {
     /**
      * Execution flow explanation:
      *
@@ -63,7 +63,7 @@ public class CoinChangeMemoization {
      * - The recursive structure remains the same, making the solution intuitive
      */
     public static void main(String[] args) {
-        CoinChangeMemoization solver = new CoinChangeMemoization();
+        _152_b_CoinChangeMemoization solver = new _152_b_CoinChangeMemoization();
 
         int[] coins = {1, 2, 5};
         int amount = 11;

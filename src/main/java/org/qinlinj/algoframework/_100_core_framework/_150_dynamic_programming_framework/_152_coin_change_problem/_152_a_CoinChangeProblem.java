@@ -18,7 +18,7 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * number of coins needed to make up that amount. Return -1 if the amount
  * cannot be made up by any combination of coins.
  */
-public class CoinChangeProblem {
+public class _152_a_CoinChangeProblem {
     /**
      * Understanding Optimal Substructure in Coin Change:
      *
@@ -68,7 +68,7 @@ public class CoinChangeProblem {
      * to polynomial by avoiding redundant calculations.
      */
     public static void main(String[] args) {
-        CoinChangeProblem solver = new CoinChangeProblem();
+        _152_a_CoinChangeProblem solver = new _152_a_CoinChangeProblem();
 
         int[] coins = {1, 2, 5};
         int amount = 11;
