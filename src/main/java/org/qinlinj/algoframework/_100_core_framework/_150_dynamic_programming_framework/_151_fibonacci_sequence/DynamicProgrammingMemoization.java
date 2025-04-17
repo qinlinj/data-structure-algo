@@ -114,4 +114,44 @@ public class DynamicProgrammingMemoization {
         memo[amount] = (minCoins == Integer.MAX_VALUE) ? -1 : minCoins;
         return memo[amount];
     }
+
+    /**
+     * Generic template for memoized dynamic programming:
+     *
+     * 1. Define the recursive function with state parameters
+     * 2. Initialize a memoization data structure
+     * 3. Check base cases
+     * 4. Check if the result is already in memo, return it if so
+     * 5. Calculate the result recursively
+     * 6. Store the result in memo before returning
+     *
+     * Example template:
+     *
+     * public int solve(InputType input) {
+     *     // Initialize memoization structure
+     *     Map<State, Result> memo = new HashMap<>();
+     *     // Call recursive helper
+     *     return dp(input, initialState, memo);
+     * }
+     *
+     * private int dp(InputType input, State state, Map<State, Result> memo) {
+     *     // Base case
+     *     if (isBaseCase(state)) return baseValue;
+     *
+     *     // Check memoization
+     *     if (memo.containsKey(state)) return memo.get(state);
+     *
+     *     // Calculate result
+     *     Result result = initialValue;
+     *     for (Choice choice : possibleChoices(state)) {
+     *         State nextState = applyChoice(state, choice);
+     *         Result nextResult = dp(input, nextState, memo);
+     *         result = getBetterResult(result, nextResult);
+     *     }
+     *
+     *     // Memoize and return
+     *     memo.put(state, result);
+     *     return result;
+     * }
+     */
 }
