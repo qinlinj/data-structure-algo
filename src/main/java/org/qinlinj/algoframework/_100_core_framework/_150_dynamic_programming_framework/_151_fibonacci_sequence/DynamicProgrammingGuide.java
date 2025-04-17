@@ -1,5 +1,29 @@
 package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_framework._151_fibonacci_sequence;
 
+/**
+ * Dynamic Programming Guide
+ * -----------------------
+ * <p>
+ * Key Concepts:
+ * 1. Dynamic Programming (DP) is an optimization technique primarily used to solve problems seeking maximum or minimum values.
+ * 2. The core of DP is exhaustive enumeration of all possible solutions to find the optimal one.
+ * 3. Three essential elements of DP:
+ * - Overlapping subproblems: The same subproblems are solved multiple times
+ * - Optimal substructure: The optimal solution to the original problem can be constructed from optimal solutions of its subproblems
+ * - State transition equation: Formula that relates the solution of a problem to solutions of its subproblems
+ * <p>
+ * Framework for solving DP problems:
+ * 1. Identify the "state" (variables that define a subproblem)
+ * 2. Identify the "choices" available at each state
+ * 3. Define the meaning of the dp array/function
+ * 4. Implement using either:
+ * - Top-down approach (recursion with memoization)
+ * - Bottom-up approach (iterative with tabulation)
+ * <p>
+ * This class demonstrates DP concepts through two classic examples:
+ * 1. Fibonacci sequence - Illustrates overlapping subproblems
+ * 2. Coin change problem - Demonstrates state transition equations
+ */
 public class DynamicProgrammingGuide {
     public static void main(String[] args) {
         DynamicProgrammingGuide dpGuide = new DynamicProgrammingGuide();
