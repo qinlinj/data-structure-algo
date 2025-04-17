@@ -19,7 +19,7 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * - Top-down (memoization): Recursive, starts with the original problem, caches results
  * - Bottom-up (tabulation): Iterative, starts with base cases, builds up to the solution
  */
-public class DynamicProgrammingMemoization {
+public class _151_b_DynamicProgrammingMemoization {
     /**
      * Generic template for memoized dynamic programming:
      *
@@ -61,7 +61,7 @@ public class DynamicProgrammingMemoization {
      */
 
     public static void main(String[] args) {
-        DynamicProgrammingMemoization dp = new DynamicProgrammingMemoization();
+        _151_b_DynamicProgrammingMemoization dp = new _151_b_DynamicProgrammingMemoization();
 
         // Test Fibonacci
         int n = 30;

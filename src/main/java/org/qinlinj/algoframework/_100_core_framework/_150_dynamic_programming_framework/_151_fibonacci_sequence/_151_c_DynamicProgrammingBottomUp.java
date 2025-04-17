@@ -20,7 +20,7 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * - Usually simpler to implement with loops rather than recursion
  * - Easier to optimize for space complexity in many cases
  */
-public class DynamicProgrammingBottomUp {
+public class _151_c_DynamicProgrammingBottomUp {
     /**
      * Bottom-up vs Top-down comparison:
      *
@@ -42,7 +42,7 @@ public class DynamicProgrammingBottomUp {
      */
 
     public static void main(String[] args) {
-        DynamicProgrammingBottomUp dp = new DynamicProgrammingBottomUp();
+        _151_c_DynamicProgrammingBottomUp dp = new _151_c_DynamicProgrammingBottomUp();
 
         // Test Fibonacci
         int n = 30;

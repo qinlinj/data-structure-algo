@@ -24,9 +24,9 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * 1. Fibonacci sequence - Illustrates overlapping subproblems
  * 2. Coin change problem - Demonstrates state transition equations
  */
-public class DynamicProgrammingGuide {
+public class _151_a_DynamicProgrammingGuide {
     public static void main(String[] args) {
-        DynamicProgrammingGuide dpGuide = new DynamicProgrammingGuide();
+        _151_a_DynamicProgrammingGuide dpGuide = new _151_a_DynamicProgrammingGuide();
 
         // Test Fibonacci implementations
         int n = 10;
