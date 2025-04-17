@@ -21,4 +21,37 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * - All DP implementations (recursive, memoized, tabulated) are built around them
  */
 public class _151_d_DynamicProgrammingAdvanced {
+    /**
+     * Example 1: Space-optimized Fibonacci implementation
+     *
+     * State transition equation: f(n) = f(n-1) + f(n-2)
+     *
+     * Observation: Each state only depends on the two previous states,
+     * so we only need to store two values rather than the entire sequence.
+     *
+     * This reduces space complexity from O(n) to O(1).
+     */
+    public int fibonacci(int n) {
+        // Base cases
+        if (n == 0 || n == 1) {
+            return n;
+        }
+
+        // Instead of a full DP table, we only keep track of the two most recent values
+        int dp_i_1 = 1;  // Represents dp[i-1], initialized to f(1)
+        int dp_i_2 = 0;  // Represents dp[i-2], initialized to f(0)
+
+        // Iterate from 2 to n
+        for (int i = 2; i <= n; i++) {
+            // Calculate current Fibonacci number using state transition equation
+            int dp_i = dp_i_1 + dp_i_2;
+
+            // Update variables for next iteration (rolling update)
+            dp_i_2 = dp_i_1;
+            dp_i_1 = dp_i;
+        }
+
+        // Final result is in dp_i_1
+        return dp_i_1;
+    }
 }
