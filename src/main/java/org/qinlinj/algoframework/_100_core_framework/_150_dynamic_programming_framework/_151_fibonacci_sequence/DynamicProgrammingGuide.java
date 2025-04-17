@@ -34,4 +34,20 @@ public class DynamicProgrammingGuide {
         memo[n] = fibMemoHelper(n - 1, memo) + fibMemoHelper(n - 2, memo);
         return memo[n];
     }
+
+    // Approach 3: Bottom-up DP with tabulation - O(n) time complexity
+    public int fibTabulation(int n) {
+        if (n == 1 || n == 2) return 1;
+
+        // Initialize DP table with base cases
+        int[] dp = new int[n + 1];
+        dp[1] = dp[2] = 1;
+
+        // Fill the table bottom-up
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        return dp[n];
+    }
 }
