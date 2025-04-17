@@ -17,6 +17,51 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * 3. The "memo" array serves a similar purpose to the DP table in bottom-up approaches
  */
 public class CoinChangeMemoization {
+    /**
+     * Execution flow explanation:
+     *
+     * For coins = [1,2,5] and amount = 11:
+     *
+     * 1. Initial call: dp(coins, 11, memo)
+     *
+     * 2. For coin=1:
+     *    - Call dp(coins, 10, memo)
+     *    - This recursively solves for amount 10
+     *    - Eventually gets an answer (e.g., 3 coins)
+     *    - res = min(MAX_VALUE, 3+1) = 4
+     *
+     * 3. For coin=2:
+     *    - Call dp(coins, 9, memo)
+     *    - This recursively solves for amount 9
+     *    - Eventually gets an answer (e.g., 3 coins)
+     *    - res = min(4, 3+1) = 4
+     *
+     * 4. For coin=5:
+     *    - Call dp(coins, 6, memo)
+     *    - This recursively solves for amount 6
+     *    - Eventually gets an answer (2 coins)
+     *    - res = min(4, 2+1) = 3
+     *
+     * 5. memo[11] = 3, return 3
+     *
+     * The key difference from the brute force approach is that once a subproblem
+     * like dp(coins, 6, memo) is solved, its result is stored in memo[6].
+     * If dp(coins, 6, memo) is needed again in another part of the recursion tree,
+     * the result is retrieved from memo instead of recalculating it.
+     */
+
+    /**
+     * Memoization vs Recursion:
+     * <p>
+     * Without memoization, the recursive tree would have an exponential number of nodes,
+     * with many redundant calculations of the same subproblems.
+     * <p>
+     * With memoization:
+     * - Each amount from 0 to 'amount' is calculated exactly once
+     * - Once calculated, results are stored in the memo array
+     * - This reduces time complexity from O(k^n) to O(n*k)
+     * - The recursive structure remains the same, making the solution intuitive
+     */
     public static void main(String[] args) {
         CoinChangeMemoization solver = new CoinChangeMemoization();
 
