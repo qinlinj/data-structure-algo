@@ -102,4 +102,36 @@ public class CoinChangeProblem {
         memo[amount] = minCoins == Integer.MAX_VALUE ? -1 : minCoins;
         return memo[amount];
     }
+
+    /**
+     * 3. Bottom-Up DP with Tabulation
+     *
+     * Iterative solution that builds up the dp table from base cases
+     *
+     * Time Complexity: O(n * k) where k is the number of coin denominations
+     * Space Complexity: O(n) for the dp array
+     */
+    public int coinChangeBottomUp(int[] coins, int amount) {
+        // Initialize dp array with amount+1 (greater than any possible answer)
+        int[] dp = new int[amount + 1];
+        java.util.Arrays.fill(dp, amount + 1);
+
+        // Base case
+        dp[0] = 0;
+
+        // Build the dp array bottom-up
+        for (int currentAmount = 1; currentAmount <= amount; currentAmount++) {
+            // Try each coin
+            for (int coin : coins) {
+                // If this coin can be used (not larger than current amount)
+                if (coin <= currentAmount) {
+                    // State transition equation
+                    dp[currentAmount] = Math.min(dp[currentAmount], dp[currentAmount - coin] + 1);
+                }
+            }
+        }
+
+        // Return the result or -1 if impossible
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
 }
