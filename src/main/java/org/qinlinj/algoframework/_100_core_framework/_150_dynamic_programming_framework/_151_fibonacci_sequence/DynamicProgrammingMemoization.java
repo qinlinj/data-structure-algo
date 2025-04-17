@@ -46,4 +46,32 @@ public class DynamicProgrammingMemoization {
         memo[n] = fibMemoized(memo, n - 1) + fibMemoized(memo, n - 2);
         return memo[n];
     }
+
+    /**
+     * Visualization of memoization benefit:
+     *
+     * Without memoization (exponential time):
+     *                 f(5)
+     *               /     \
+     *          f(4)         f(3)
+     *        /     \       /    \
+     *     f(3)     f(2)  f(2)    f(1)
+     *    /   \    /   \  /  \
+     * f(2)  f(1) f(1) f(0) f(1) f(0)
+     * /  \
+     *f(1) f(0)
+     *
+     * With memoization (linear time):
+     *                 f(5)
+     *               /     \
+     *          f(4)         f(3)*
+     *        /     \
+     *     f(3)     f(2)*
+     *    /   \
+     * f(2)  f(1)*
+     * /  \
+     *f(1) f(0)*
+     *
+     * (* = already computed, retrieved from memo)
+     */
 }
