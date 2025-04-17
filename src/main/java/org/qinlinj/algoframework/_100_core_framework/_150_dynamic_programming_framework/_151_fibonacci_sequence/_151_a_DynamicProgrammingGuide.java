@@ -25,6 +25,63 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * 2. Coin change problem - Demonstrates state transition equations
  */
 public class _151_a_DynamicProgrammingGuide {
+    // @formatter:off
+    /**
+     * General DP algorithm templates:
+     *
+     * 1. Top-down (recursive with memoization):
+     *
+     * int dp(int state1, int state2, ...) {
+     *     // Base cases
+     *     if (base case) return base value;
+     *
+     *     // Check if already computed
+     *     if (memo[state1][state2]... != null) return memo[state1][state2]...;
+     *
+     *     // Initialize result (often with worst possible value)
+     *     int result = initial value;
+     *
+     *     // Try all possible choices
+     *     for (choice : all possible choices) {
+     *         // Update state based on choice
+     *         int newState1 = ...;
+     *         int newState2 = ...;
+     *
+     *         // Calculate result based on choice
+     *         int newResult = dp(newState1, newState2, ...);
+     *
+     *         // Update result if better
+     *         result = optimal(result, calculate using newResult);
+     *     }
+     *
+     *     // Save and return result
+     *     memo[state1][state2]... = result;
+     *     return result;
+     * }
+     *
+     * 2. Bottom-up (iterative with tabulation):
+     *
+     * void solve() {
+     *     // Initialize dp table with base cases
+     *     dp[base_state1][base_state2]... = base_value;
+     *
+     *     // Iterate through all states
+     *     for (state1 : all possible values of state1) {
+     *         for (state2 : all possible values of state2) {
+     *             ...
+     *             // Try all possible choices
+     *             for (choice : all possible choices) {
+     *                 // Calculate result based on choice
+     *                 dp[state1][state2]... = optimal(dp[state1][state2]...,
+     *                                               calculate using dp[previous states]);
+     *             }
+     *         }
+     *     }
+     *
+     *     // Final answer
+     *     return dp[final_state1][final_state2]...;
+     * }
+     */
     public static void main(String[] args) {
         _151_a_DynamicProgrammingGuide dpGuide = new _151_a_DynamicProgrammingGuide();
 
@@ -123,62 +180,4 @@ public class _151_a_DynamicProgrammingGuide {
         // If dp[amount] is still amount+1, it means no solution exists
         return dp[amount] > amount ? -1 : dp[amount];
     }
-
-    // @formatter:off
-    /**
-     * General DP algorithm templates:
-     *
-     * 1. Top-down (recursive with memoization):
-     *
-     * int dp(int state1, int state2, ...) {
-     *     // Base cases
-     *     if (base case) return base value;
-     *
-     *     // Check if already computed
-     *     if (memo[state1][state2]... != null) return memo[state1][state2]...;
-     *
-     *     // Initialize result (often with worst possible value)
-     *     int result = initial value;
-     *
-     *     // Try all possible choices
-     *     for (choice : all possible choices) {
-     *         // Update state based on choice
-     *         int newState1 = ...;
-     *         int newState2 = ...;
-     *
-     *         // Calculate result based on choice
-     *         int newResult = dp(newState1, newState2, ...);
-     *
-     *         // Update result if better
-     *         result = optimal(result, calculate using newResult);
-     *     }
-     *
-     *     // Save and return result
-     *     memo[state1][state2]... = result;
-     *     return result;
-     * }
-     *
-     * 2. Bottom-up (iterative with tabulation):
-     *
-     * void solve() {
-     *     // Initialize dp table with base cases
-     *     dp[base_state1][base_state2]... = base_value;
-     *
-     *     // Iterate through all states
-     *     for (state1 : all possible values of state1) {
-     *         for (state2 : all possible values of state2) {
-     *             ...
-     *             // Try all possible choices
-     *             for (choice : all possible choices) {
-     *                 // Calculate result based on choice
-     *                 dp[state1][state2]... = optimal(dp[state1][state2]...,
-     *                                               calculate using dp[previous states]);
-     *             }
-     *         }
-     *     }
-     *
-     *     // Final answer
-     *     return dp[final_state1][final_state2]...;
-     * }
-     */
 }
