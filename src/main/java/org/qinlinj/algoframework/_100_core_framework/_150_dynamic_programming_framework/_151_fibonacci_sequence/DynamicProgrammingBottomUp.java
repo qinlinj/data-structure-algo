@@ -49,4 +49,29 @@ public class DynamicProgrammingBottomUp {
         // Return the final answer
         return dp[n];
     }
+
+    /**
+     * Space-optimized Fibonacci calculation
+     *
+     * Since each Fibonacci calculation only depends on the two previous values,
+     * we can optimize space complexity from O(n) to O(1).
+     */
+    public int fibonacciOptimized(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+
+        // Only store the two most recent values
+        int prev = 0;
+        int curr = 1;
+
+        for (int i = 2; i <= n; i++) {
+            // Calculate next value
+            int next = prev + curr;
+            // Update for next iteration
+            prev = curr;
+            curr = next;
+        }
+
+        return curr;
+    }
 }
