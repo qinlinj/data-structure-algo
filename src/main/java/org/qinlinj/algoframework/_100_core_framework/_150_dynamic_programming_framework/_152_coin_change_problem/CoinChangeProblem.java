@@ -19,6 +19,60 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * cannot be made up by any combination of coins.
  */
 public class CoinChangeProblem {
+    public static void main(String[] args) {
+        CoinChangeProblem solver = new CoinChangeProblem();
+
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+
+        // Expected output: 3 (11 = 5 + 5 + 1)
+
+        System.out.println("=== Coin Change Problem ===");
+        System.out.println("Coins: [1, 2, 5], Amount: 11");
+
+        // 1. Recursive solution (may be slow for larger amounts)
+        long start = System.nanoTime();
+        int recursiveResult = solver.coinChangeRecursive(coins, amount);
+        long end = System.nanoTime();
+        System.out.println("\nRecursive result: " + recursiveResult);
+        System.out.println("Time (ms): " + (end - start) / 1_000_000.0);
+
+        // 2. Memoized solution
+        start = System.nanoTime();
+        int memoizedResult = solver.coinChangeMemoized(coins, amount);
+        end = System.nanoTime();
+        System.out.println("\nMemoized result: " + memoizedResult);
+        System.out.println("Time (ms): " + (end - start) / 1_000_000.0);
+
+        // 3. Bottom-up solution
+        start = System.nanoTime();
+        int bottomUpResult = solver.coinChangeBottomUp(coins, amount);
+        end = System.nanoTime();
+        System.out.println("\nBottom-up result: " + bottomUpResult);
+        System.out.println("Time (ms): " + (end - start) / 1_000_000.0);
+
+        // Larger example to demonstrate efficiency differences
+        int bigAmount = 100;
+        System.out.println("\n=== Larger Example ===");
+        System.out.println("Coins: [1, 2, 5], Amount: " + bigAmount);
+
+        // Skip recursive for large amount as it would be too slow
+
+        // Memoized solution
+        start = System.nanoTime();
+        memoizedResult = solver.coinChangeMemoized(coins, bigAmount);
+        end = System.nanoTime();
+        System.out.println("\nMemoized result: " + memoizedResult);
+        System.out.println("Time (ms): " + (end - start) / 1_000_000.0);
+
+        // Bottom-up solution
+        start = System.nanoTime();
+        bottomUpResult = solver.coinChangeBottomUp(coins, bigAmount);
+        end = System.nanoTime();
+        System.out.println("\nBottom-up result: " + bottomUpResult);
+        System.out.println("Time (ms): " + (end - start) / 1_000_000.0);
+    }
+    
     /**
      * 1. Brute Force Recursive Solution
      *
