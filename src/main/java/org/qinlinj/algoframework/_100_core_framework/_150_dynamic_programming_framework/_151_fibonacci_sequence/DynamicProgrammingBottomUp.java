@@ -152,4 +152,24 @@ public class DynamicProgrammingBottomUp {
      *     return dp[n];
      * }
      */
+
+    /**
+     * Bottom-up vs Top-down comparison:
+     *
+     * Bottom-up (Tabulation):
+     * - Iterative approach
+     * - Starts from base cases
+     * - Builds table systematically
+     * - No recursion overhead
+     * - Often more intuitive visually
+     * - Easier to optimize space complexity
+     *
+     * Top-down (Memoization):
+     * - Recursive approach
+     * - Starts from original problem
+     * - Fills memo as needed
+     * - Has recursion overhead
+     * - Sometimes more intuitive to write
+     * - Solution structure often follows problem description
+     */
 }
