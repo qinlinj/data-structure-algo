@@ -22,6 +22,51 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  */
 public class DynamicProgrammingBottomUp {
     /**
+     * Bottom-up vs Top-down comparison:
+     *
+     * Bottom-up (Tabulation):
+     * - Iterative approach
+     * - Starts from base cases
+     * - Builds table systematically
+     * - No recursion overhead
+     * - Often more intuitive visually
+     * - Easier to optimize space complexity
+     *
+     * Top-down (Memoization):
+     * - Recursive approach
+     * - Starts from original problem
+     * - Fills memo as needed
+     * - Has recursion overhead
+     * - Sometimes more intuitive to write
+     * - Solution structure often follows problem description
+     */
+
+    public static void main(String[] args) {
+        DynamicProgrammingBottomUp dp = new DynamicProgrammingBottomUp();
+
+        // Test Fibonacci
+        int n = 30;
+        long start = System.nanoTime();
+        int fibResult = dp.fibonacci(n);
+        long end = System.nanoTime();
+        System.out.println("Fibonacci(" + n + ") = " + fibResult);
+        System.out.println("Bottom-up time (ms): " + (end - start) / 1_000_000.0);
+
+        // Test optimized Fibonacci
+        start = System.nanoTime();
+        fibResult = dp.fibonacciOptimized(n);
+        end = System.nanoTime();
+        System.out.println("Optimized Fibonacci(" + n + ") = " + fibResult);
+        System.out.println("Optimized bottom-up time (ms): " + (end - start) / 1_000_000.0);
+
+        // Test coin change
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+        System.out.println("Minimum coins needed for amount " + amount + ": " +
+                dp.coinChange(coins, amount));
+    }
+
+    /**
      * Example: Fibonacci sequence with bottom-up approach
      *
      * This implementation builds the solution iteratively from the base cases up,
@@ -76,37 +121,6 @@ public class DynamicProgrammingBottomUp {
     }
 
     /**
-     * Example 2: Coin change problem with bottom-up approach
-     *
-     * Problem: Given coins of certain denominations and a target amount,
-     * find the minimum number of coins needed to make up that amount.
-     */
-    public int coinChange(int[] coins, int amount) {
-        // Initialize DP table with "infinity" (amount+1 is sufficient)
-        int[] dp = new int[amount + 1];
-        java.util.Arrays.fill(dp, amount + 1);
-
-        // Base case: 0 coins needed to make amount 0
-        dp[0] = 0;
-
-        // Fill the table bottom-up for all amounts from 1 to target
-        for (int currentAmount = 1; currentAmount <= amount; currentAmount++) {
-            // Try each coin denomination
-            for (int coin : coins) {
-                // If this coin can be used (not larger than current amount)
-                if (coin <= currentAmount) {
-                    // Update the minimum coins needed
-                    // State transition equation: dp[i] = min(dp[i], dp[i-coin] + 1)
-                    dp[currentAmount] = Math.min(dp[currentAmount], dp[currentAmount - coin] + 1);
-                }
-            }
-        }
-
-        // If dp[amount] is still "infinity", no solution exists
-        return dp[amount] > amount ? -1 : dp[amount];
-    }
-
-    /**
      * Visualization of bottom-up DP for Fibonacci(5):
      *
      * DP table:
@@ -154,22 +168,33 @@ public class DynamicProgrammingBottomUp {
      */
 
     /**
-     * Bottom-up vs Top-down comparison:
+     * Example 2: Coin change problem with bottom-up approach
      *
-     * Bottom-up (Tabulation):
-     * - Iterative approach
-     * - Starts from base cases
-     * - Builds table systematically
-     * - No recursion overhead
-     * - Often more intuitive visually
-     * - Easier to optimize space complexity
-     *
-     * Top-down (Memoization):
-     * - Recursive approach
-     * - Starts from original problem
-     * - Fills memo as needed
-     * - Has recursion overhead
-     * - Sometimes more intuitive to write
-     * - Solution structure often follows problem description
+     * Problem: Given coins of certain denominations and a target amount,
+     * find the minimum number of coins needed to make up that amount.
      */
+    public int coinChange(int[] coins, int amount) {
+        // Initialize DP table with "infinity" (amount+1 is sufficient)
+        int[] dp = new int[amount + 1];
+        java.util.Arrays.fill(dp, amount + 1);
+
+        // Base case: 0 coins needed to make amount 0
+        dp[0] = 0;
+
+        // Fill the table bottom-up for all amounts from 1 to target
+        for (int currentAmount = 1; currentAmount <= amount; currentAmount++) {
+            // Try each coin denomination
+            for (int coin : coins) {
+                // If this coin can be used (not larger than current amount)
+                if (coin <= currentAmount) {
+                    // Update the minimum coins needed
+                    // State transition equation: dp[i] = min(dp[i], dp[i-coin] + 1)
+                    dp[currentAmount] = Math.min(dp[currentAmount], dp[currentAmount - coin] + 1);
+                }
+            }
+        }
+
+        // If dp[amount] is still "infinity", no solution exists
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
 }
