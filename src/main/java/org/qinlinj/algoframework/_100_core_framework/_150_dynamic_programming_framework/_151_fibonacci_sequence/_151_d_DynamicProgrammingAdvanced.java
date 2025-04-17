@@ -150,4 +150,24 @@ public class _151_d_DynamicProgrammingAdvanced {
      * 2. Determine the minimum information needed at each step
      * 3. Design a storage scheme that maintains only necessary states
      */
+
+    /**
+     * Summary:
+     *
+     * 1. State transition equations are the heart of dynamic programming:
+     *    - They are equivalent to the brute force recursive solution
+     *    - All optimizations revolve around them
+     *    - Finding them is the most challenging part
+     *
+     * 2. Space optimization is often the final step:
+     *    - Reduces memory usage, sometimes drastically (O(n²) → O(n) or O(n) → O(1))
+     *    - Depends on analyzing the state transition equation
+     *    - Requires understanding exactly which previous states are needed
+     *
+     * 3. The general DP optimization process:
+     *    - Start with brute force recursive solution (state transition equation)
+     *    - Add memoization to avoid redundant calculations
+     *    - Convert to bottom-up iterative approach
+     *    - Optimize space usage
+     */
 }
