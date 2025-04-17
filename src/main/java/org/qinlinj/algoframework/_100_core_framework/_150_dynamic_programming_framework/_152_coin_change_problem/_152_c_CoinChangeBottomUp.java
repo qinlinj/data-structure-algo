@@ -30,7 +30,72 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * This class demonstrates the bottom-up approach to the Coin Change problem,
  * which builds solutions iteratively from the base case up to the target amount.
  */
+
+/**
+ * Dynamic Programming Summary
+ *
+ * 1. Framework for Solving DP Problems:
+ *    a. Define the state variables
+ *    b. Define the dp array/function meaning
+ *    c. Define base cases
+ *    d. Define state transitions
+ *    e. Choose implementation approach (recursive with memoization or iterative)
+ *
+ * 2. Similarities and Differences:
+ *    - Recursive (top-down) with memoization:
+ *      * Starts from the original problem
+ *      * Breaks down into subproblems
+ *      * Uses memoization to avoid redundant calculations
+ *      * Usually more intuitive to write
+ *
+ *    - Iterative (bottom-up) with tabulation:
+ *      * Starts from base cases
+ *      * Builds up to the original problem
+ *      * Systematically fills a dp table
+ *      * Usually more efficient (avoids recursion overhead)
+ *
+ * 3. Key Insight: The most challenging part is identifying the state transition equation.
+ *    - This equation directly represents the recursive structure of the problem
+ *    - Once you have this equation, the rest is implementation details
+ *
+ * 4. Space Optimization:
+ *    - Often the final step in optimizing a DP solution
+ *    - Based on analyzing which previous states are actually needed
+ */
+
+/**
+ * Final Thoughts on Dynamic Programming:
+ *
+ * 1. Computer problem-solving is fundamentally about enumeration (trying all possibilities)
+ *
+ * 2. Algorithm design involves two steps:
+ *    - Figuring out how to enumerate all possibilities
+ *    - Finding smart ways to enumerate efficiently
+ *
+ * 3. DP is powerful because it:
+ *    - Eliminates redundant calculations through memoization/tabulation
+ *    - Provides a systematic approach to problem decomposition
+ *    - Trades space for time, which is often a beneficial tradeoff
+ *
+ * 4. The key to mastering DP is focusing on:
+ *    - Identifying states and choices
+ *    - Formulating clear state transition equations
+ *    - Practice, practice, practice!
+ */
 public class _152_c_CoinChangeBottomUp {
+    /**
+     * Visual explanation of dp array for coins=[1,2,5], amount=11:
+     *
+     * Index (amount): 0  1  2  3  4  5  6  7  8  9  10  11
+     * dp value:       0  1  1  2  2  1  2  2  3  3  2   3
+     *
+     * For example, at amount=6:
+     * - Using coin=1: dp[6] = min(dp[6], dp[5] + 1) = min(∞, 1+1) = 2
+     * - Using coin=2: dp[6] = min(dp[6], dp[4] + 1) = min(2, 2+1) = 2
+     * - Using coin=5: dp[6] = min(dp[6], dp[1] + 1) = min(2, 1+1) = 2
+     *
+     * So dp[6] = 2, meaning we need at least 2 coins to make amount 6.
+     */
     public static void main(String[] args) {
         _152_c_CoinChangeBottomUp solver = new _152_c_CoinChangeBottomUp();
 
