@@ -55,9 +55,34 @@ public class DynamicProgrammingGuide {
      * Example: Coin Change Problem
      * Problem: Given coins of certain denominations and a target amount,
      * find the minimum number of coins needed to make up that amount.
-     *
+     * <p>
      * This demonstrates how to formulate a state transition equation:
      * dp[i] = min(dp[i], dp[i - coin] + 1) for each coin in coins
      * where dp[i] represents the minimum number of coins needed for amount i
      */
+    public int coinChange(int[] coins, int amount) {
+        // Initialize dp array with amount+1 (which is greater than any possible answer)
+        int[] dp = new int[amount + 1];
+        java.util.Arrays.fill(dp, amount + 1);
+
+        // Base case: 0 coins needed to make amount 0
+        dp[0] = 0;
+
+        // Fill dp table bottom-up
+        for (int i = 1; i <= amount; i++) {
+            // Try each coin
+            for (int coin : coins) {
+                // If the coin value is less than or equal to current amount
+                if (coin <= i) {
+                    // State transition: dp[i] = min(dp[i], dp[i-coin] + 1)
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        // If dp[amount] is still amount+1, it means no solution exists
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+    
 }
