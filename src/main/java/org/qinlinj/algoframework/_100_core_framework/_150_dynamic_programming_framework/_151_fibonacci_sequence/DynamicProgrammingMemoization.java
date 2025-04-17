@@ -21,6 +21,64 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  */
 public class DynamicProgrammingMemoization {
     /**
+     * Generic template for memoized dynamic programming:
+     *
+     * 1. Define the recursive function with state parameters
+     * 2. Initialize a memoization data structure
+     * 3. Check base cases
+     * 4. Check if the result is already in memo, return it if so
+     * 5. Calculate the result recursively
+     * 6. Store the result in memo before returning
+     *
+     * Example template:
+     *
+     * public int solve(InputType input) {
+     *     // Initialize memoization structure
+     *     Map<State, Result> memo = new HashMap<>();
+     *     // Call recursive helper
+     *     return dp(input, initialState, memo);
+     * }
+     *
+     * private int dp(InputType input, State state, Map<State, Result> memo) {
+     *     // Base case
+     *     if (isBaseCase(state)) return baseValue;
+     *
+     *     // Check memoization
+     *     if (memo.containsKey(state)) return memo.get(state);
+     *
+     *     // Calculate result
+     *     Result result = initialValue;
+     *     for (Choice choice : possibleChoices(state)) {
+     *         State nextState = applyChoice(state, choice);
+     *         Result nextResult = dp(input, nextState, memo);
+     *         result = getBetterResult(result, nextResult);
+     *     }
+     *
+     *     // Memoize and return
+     *     memo.put(state, result);
+     *     return result;
+     * }
+     */
+
+    public static void main(String[] args) {
+        DynamicProgrammingMemoization dp = new DynamicProgrammingMemoization();
+
+        // Test Fibonacci
+        int n = 30;
+        long start = System.nanoTime();
+        int fibResult = dp.fibonacci(n);
+        long end = System.nanoTime();
+        System.out.println("Fibonacci(" + n + ") = " + fibResult);
+        System.out.println("Time taken (ms): " + (end - start) / 1_000_000.0);
+
+        // Test coin change
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+        System.out.println("Minimum coins needed for amount " + amount + ": " +
+                dp.coinChange(coins, amount));
+    }
+
+    /**
      * Example: Fibonacci sequence with memoization
      * <p>
      * This implementation demonstrates how a memoized solution transforms the
@@ -33,18 +91,6 @@ public class DynamicProgrammingMemoization {
         // Initialize memo array with zeros
         int[] memo = new int[n + 1];
         return fibMemoized(memo, n);
-    }
-
-    private int fibMemoized(int[] memo, int n) {
-        // Base cases
-        if (n == 0 || n == 1) return n;
-
-        // Check if we've already calculated this value
-        if (memo[n] != 0) return memo[n];
-
-        // Calculate and store the result
-        memo[n] = fibMemoized(memo, n - 1) + fibMemoized(memo, n - 2);
-        return memo[n];
     }
 
     /**
@@ -74,6 +120,18 @@ public class DynamicProgrammingMemoization {
      *
      * (* = already computed, retrieved from memo)
      */
+
+    private int fibMemoized(int[] memo, int n) {
+        // Base cases
+        if (n == 0 || n == 1) return n;
+
+        // Check if we've already calculated this value
+        if (memo[n] != 0) return memo[n];
+
+        // Calculate and store the result
+        memo[n] = fibMemoized(memo, n - 1) + fibMemoized(memo, n - 2);
+        return memo[n];
+    }
 
     /**
      * Example 2: Coin change problem with memoization
@@ -114,44 +172,4 @@ public class DynamicProgrammingMemoization {
         memo[amount] = (minCoins == Integer.MAX_VALUE) ? -1 : minCoins;
         return memo[amount];
     }
-
-    /**
-     * Generic template for memoized dynamic programming:
-     *
-     * 1. Define the recursive function with state parameters
-     * 2. Initialize a memoization data structure
-     * 3. Check base cases
-     * 4. Check if the result is already in memo, return it if so
-     * 5. Calculate the result recursively
-     * 6. Store the result in memo before returning
-     *
-     * Example template:
-     *
-     * public int solve(InputType input) {
-     *     // Initialize memoization structure
-     *     Map<State, Result> memo = new HashMap<>();
-     *     // Call recursive helper
-     *     return dp(input, initialState, memo);
-     * }
-     *
-     * private int dp(InputType input, State state, Map<State, Result> memo) {
-     *     // Base case
-     *     if (isBaseCase(state)) return baseValue;
-     *
-     *     // Check memoization
-     *     if (memo.containsKey(state)) return memo.get(state);
-     *
-     *     // Calculate result
-     *     Result result = initialValue;
-     *     for (Choice choice : possibleChoices(state)) {
-     *         State nextState = applyChoice(state, choice);
-     *         Result nextResult = dp(input, nextState, memo);
-     *         result = getBetterResult(result, nextResult);
-     *     }
-     *
-     *     // Memoize and return
-     *     memo.put(state, result);
-     *     return result;
-     * }
-     */
 }
