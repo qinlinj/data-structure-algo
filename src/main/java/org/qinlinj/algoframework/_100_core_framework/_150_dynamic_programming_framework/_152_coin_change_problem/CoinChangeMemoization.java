@@ -36,6 +36,42 @@ public class CoinChangeMemoization {
         return dp(coins, amount, memo);
     }
 
+    /**
+     * Recursive helper function with memoization
+     *
+     * @param coins  Array of available coin denominations
+     * @param amount Current target amount to make change for
+     * @param memo   Memoization array to avoid redundant calculations
+     * @return Minimum coins needed for current amount, or -1 if impossible
+     */
     private int dp(int[] coins, int amount, int[] memo) {
+        // Base cases
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
+
+        // Check memo to avoid redundant calculations
+        if (memo[amount] != -666) {
+            return memo[amount];
+        }
+
+        // Initialize result to "infinity"
+        int res = Integer.MAX_VALUE;
+
+        // Try each coin as the last coin in the solution
+        for (int coin : coins) {
+            // Calculate subproblem (amount - coin)
+            int subProblem = dp(coins, amount - coin, memo);
+
+            // Skip invalid subproblems
+            if (subProblem == -1) continue;
+
+            // Update the minimum number of coins needed
+            // Add 1 to count the current coin
+            res = Math.min(res, subProblem + 1);
+        }
+
+        // Store result in memo before returning
+        memo[amount] = (res == Integer.MAX_VALUE) ? -1 : res;
+        return memo[amount];
     }
 }
