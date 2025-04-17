@@ -111,4 +111,43 @@ public class _151_d_DynamicProgrammingAdvanced {
 
         return dp[capacity];
     }
+
+    /**
+     * State Transition Equations Explained:
+     *
+     * 1. They are the mathematical representation of the problem's recursive structure
+     * 2. They directly correspond to the brute force recursive solution
+     * 3. They define how to calculate the current state based on previous states
+     *
+     * Examples:
+     * - Fibonacci: f(n) = f(n-1) + f(n-2)
+     * - Coin Change: dp[i] = min(dp[i], dp[i-coin] + 1)
+     * - Knapsack: dp[i][w] = max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])
+     *
+     * Why they're important:
+     * - They are the core of the DP solution
+     * - All optimizations (memoization, tabulation, space reduction) are built around them
+     * - Finding them is often the most challenging part of solving DP problems
+     */
+
+    /**
+     * Space Optimization Techniques:
+     *
+     * 1. Rolling Array/Variables:
+     *    - When current state depends only on a few previous states
+     *    - Example: Fibonacci needs only the previous two values
+     *
+     * 2. Dimension Reduction:
+     *    - Convert a 2D DP problem to 1D by processing in a specific order
+     *    - Example: Knapsack optimization from O(n*W) space to O(W)
+     *
+     * 3. In-place Computation:
+     *    - Reuse the same array by careful ordering of computations
+     *    - Often requires processing in reverse order
+     *
+     * General process for space optimization:
+     * 1. Analyze the state transition equation to identify dependencies
+     * 2. Determine the minimum information needed at each step
+     * 3. Design a storage scheme that maintains only necessary states
+     */
 }
