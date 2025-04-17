@@ -31,6 +31,42 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * which builds solutions iteratively from the base case up to the target amount.
  */
 public class _152_c_CoinChangeBottomUp {
+    public static void main(String[] args) {
+        _152_c_CoinChangeBottomUp solver = new _152_c_CoinChangeBottomUp();
+
+        // Example 1: Standard case
+        int[] coins1 = {1, 2, 5};
+        int amount1 = 11;
+        System.out.println("Example 1: coins = [1, 2, 5], amount = 11");
+        System.out.println("Minimum coins needed: " + solver.coinChange(coins1, amount1));
+        System.out.println("Expected: 3 (5 + 5 + 1)");
+
+        // Example 2: No solution
+        int[] coins2 = {2};
+        int amount2 = 3;
+        System.out.println("\nExample 2: coins = [2], amount = 3");
+        System.out.println("Minimum coins needed: " + solver.coinChange(coins2, amount2));
+        System.out.println("Expected: -1 (impossible to make this amount)");
+
+        // Example 3: Zero amount
+        int[] coins3 = {1, 2, 5};
+        int amount3 = 0;
+        System.out.println("\nExample 3: coins = [1, 2, 5], amount = 0");
+        System.out.println("Minimum coins needed: " + solver.coinChange(coins3, amount3));
+        System.out.println("Expected: 0 (no coins needed for zero amount)");
+
+        // Performance test
+        int[] coins4 = {1, 2, 5};
+        int amount4 = 10000;
+        long start = System.nanoTime();
+        int result = solver.coinChange(coins4, amount4);
+        long end = System.nanoTime();
+
+        System.out.println("\nPerformance Test: amount = " + amount4);
+        System.out.println("Result: " + result);
+        System.out.println("Time taken (ms): " + (end - start) / 1_000_000.0);
+    }
+
     /**
      * Bottom-up (tabulation) solution for Coin Change problem
      *
