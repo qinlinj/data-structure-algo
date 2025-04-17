@@ -19,6 +19,54 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * cannot be made up by any combination of coins.
  */
 public class CoinChangeProblem {
+    /**
+     * Understanding Optimal Substructure in Coin Change:
+     *
+     * The coin change problem exhibits optimal substructure because the optimal solution
+     * can be constructed from optimal solutions of its subproblems.
+     *
+     * For example, if we have coins [1,2,5] and amount 11:
+     * - If we know the optimal way to make change for 10, 9, and 6
+     * - Then optimal for 11 = min(optimal for 10 + 1 coin of value 1,
+     *                             optimal for 9 + 1 coin of value 2,
+     *                             optimal for 6 + 1 coin of value 5)
+     *
+     * This works because:
+     * 1. Coins are unlimited, so using a coin doesn't affect future choices
+     * 2. We're seeking the minimum, so there's always a single "best" answer for each subproblem
+     * 3. Subproblems are independent - the optimal way to make 10 doesn't affect the optimal way to make 6
+     */
+
+    /**
+     * State and Choices Analysis:
+     *
+     * 1. State: The only changing variable is the remaining amount
+     *    - dp(amount) represents minimum coins needed for that amount
+     *
+     * 2. Choices: For each state, we have k choices (where k is the number of coin denominations)
+     *    - For each coin, we can choose to use it or not
+     *    - If we use it, we transition to state dp(amount - coin)
+     *
+     * 3. State Transition Equation:
+     *    dp(amount) = min(dp(amount - coin) + 1) for each coin in coins
+     *
+     * 4. Base Cases:
+     *    - dp(0) = 0 (no coins needed to make amount 0)
+     *    - dp(negative) = -1 (impossible)
+     */
+
+    /**
+     * Recursive Tree for coins=[1,2,5], amount=11:
+     *
+     * This recursive tree would be extremely large due to overlapping subproblems.
+     * For example, dp(5) would be calculated multiple times:
+     * - dp(11) → dp(6) → dp(5)
+     * - dp(11) → dp(9) → dp(7) → dp(5)
+     * - Many more paths...
+     *
+     * This is why memoization is crucial - it reduces the exponential time complexity
+     * to polynomial by avoiding redundant calculations.
+     */
     public static void main(String[] args) {
         CoinChangeProblem solver = new CoinChangeProblem();
 
@@ -72,7 +120,7 @@ public class CoinChangeProblem {
         System.out.println("\nBottom-up result: " + bottomUpResult);
         System.out.println("Time (ms): " + (end - start) / 1_000_000.0);
     }
-    
+
     /**
      * 1. Brute Force Recursive Solution
      *
