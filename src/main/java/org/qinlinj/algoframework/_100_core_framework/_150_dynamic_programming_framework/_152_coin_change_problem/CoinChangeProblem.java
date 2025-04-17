@@ -61,4 +61,45 @@ public class CoinChangeProblem {
         // Return the minimum or -1 if no solution
         return minCoins == Integer.MAX_VALUE ? -1 : minCoins;
     }
+
+    /**
+     * 2. Top-Down DP with Memoization
+     *
+     * Same recursive structure but with memoization to avoid redundant calculations
+     *
+     * Time Complexity: O(n * k) where k is the number of coin denominations
+     * Space Complexity: O(n) for memo array and recursion stack
+     */
+    public int coinChangeMemoized(int[] coins, int amount) {
+        // Initialize memoization array with -2 (indicating not calculated)
+        int[] memo = new int[amount + 1];
+        java.util.Arrays.fill(memo, -2);
+
+        return dpMemoized(coins, amount, memo);
+    }
+
+    private int dpMemoized(int[] coins, int amount, int[] memo) {
+        // Base cases
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
+
+        // If already calculated, return the stored result
+        if (memo[amount] != -2) return memo[amount];
+
+        // Initialize result to "infinity"
+        int minCoins = Integer.MAX_VALUE;
+
+        // Try each coin
+        for (int coin : coins) {
+            int subproblem = dpMemoized(coins, amount - coin, memo);
+
+            if (subproblem != -1) {
+                minCoins = Math.min(minCoins, subproblem + 1);
+            }
+        }
+
+        // Store and return the result
+        memo[amount] = minCoins == Integer.MAX_VALUE ? -1 : minCoins;
+        return memo[amount];
+    }
 }
