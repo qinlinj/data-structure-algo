@@ -17,6 +17,41 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * 3. The "memo" array serves a similar purpose to the DP table in bottom-up approaches
  */
 public class CoinChangeMemoization {
+    public static void main(String[] args) {
+        CoinChangeMemoization solver = new CoinChangeMemoization();
+
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+
+        // Expected output: 3 (11 = 5 + 5 + 1)
+        int result = solver.coinChange(coins, amount);
+
+        System.out.println("Coins: [1, 2, 5]");
+        System.out.println("Amount: " + amount);
+        System.out.println("Minimum coins needed: " + result);
+
+        // Test with some edge cases
+        System.out.println("\n=== Edge Cases ===");
+
+        // Amount 0
+        System.out.println("Amount 0: " + solver.coinChange(coins, 0));
+
+        // Impossible amount (e.g., amount 3 with coins [2, 5])
+        int[] coins2 = {2, 5};
+        System.out.println("Amount 3 with coins [2, 5]: " + solver.coinChange(coins2, 3));
+
+        // Larger amount to demonstrate efficiency
+        int largeAmount = 1000;
+        long start = System.nanoTime();
+        int largeResult = solver.coinChange(coins, largeAmount);
+        long end = System.nanoTime();
+
+        System.out.println("\n=== Performance Test ===");
+        System.out.println("Amount: " + largeAmount);
+        System.out.println("Result: " + largeResult);
+        System.out.println("Time taken (ms): " + (end - start) / 1_000_000.0);
+    }
+
     /**
      * Memoized solution for Coin Change problem
      * <p>
