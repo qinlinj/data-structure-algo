@@ -74,4 +74,22 @@ public class DynamicProgrammingMemoization {
      *
      * (* = already computed, retrieved from memo)
      */
+
+    /**
+     * Example 2: Coin change problem with memoization
+     *
+     * This demonstrates how the same problem can be solved with
+     * a top-down memoized approach.
+     */
+    public int coinChange(int[] coins, int amount) {
+        // Initialize memo array with -1 (indicating not calculated yet)
+        int[] memo = new int[amount + 1];
+        java.util.Arrays.fill(memo, -1);
+
+        return coinChangeMemoized(coins, amount, memo);
+    }
+
+    private int coinChangeMemoized(int[] coins, int amount, int[] memo) {
+
+    }
 }
