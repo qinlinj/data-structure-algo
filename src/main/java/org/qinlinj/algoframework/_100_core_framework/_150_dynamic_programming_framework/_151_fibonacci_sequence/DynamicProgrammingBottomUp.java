@@ -105,4 +105,51 @@ public class DynamicProgrammingBottomUp {
         // If dp[amount] is still "infinity", no solution exists
         return dp[amount] > amount ? -1 : dp[amount];
     }
+
+    /**
+     * Visualization of bottom-up DP for Fibonacci(5):
+     *
+     * DP table:
+     *
+     * Index:   0  1  2  3  4  5
+     * Value:   0  1  1  2  3  5
+     *             ↑  ↑  ↑  ↑  ↑
+     * Computed   ↑  ↑  ↑  ↑  ↑
+     * In order:  1  2  3  4  5
+     *
+     * The arrows indicate the direction of computation - from smaller to larger indices.
+     * This is exactly the reverse of the top-down approach!
+     */
+
+    /**
+     * Generic template for bottom-up dynamic programming:
+     *
+     * 1. Define the state and meaning of the DP table
+     * 2. Initialize the DP table with base cases
+     * 3. Iterate through states in a bottom-up manner
+     * 4. Apply the state transition equation at each step
+     * 5. Return the final answer from the appropriate cell of the DP table
+     *
+     * Example template:
+     *
+     * public Result solve(InputType input) {
+     *     // 1. Initialize DP table
+     *     Result[] dp = new Result[n + 1];
+     *
+     *     // 2. Set base cases
+     *     dp[0] = baseValue;
+     *
+     *     // 3. Fill the table bottom-up
+     *     for (State i = 1; i <= n; i++) {
+     *         // 4. Consider all choices for current state
+     *         for (Choice choice : possibleChoices(i)) {
+     *             // 5. Apply state transition equation
+     *             dp[i] = getBetterResult(dp[i], calculate(dp[i - something], choice));
+     *         }
+     *     }
+     *
+     *     // 6. Return final answer
+     *     return dp[n];
+     * }
+     */
 }
