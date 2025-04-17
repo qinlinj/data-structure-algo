@@ -36,6 +36,14 @@ public class DynamicProgrammingMemoization {
     }
 
     private int fibMemoized(int[] memo, int n) {
+        // Base cases
+        if (n == 0 || n == 1) return n;
 
+        // Check if we've already calculated this value
+        if (memo[n] != 0) return memo[n];
+
+        // Calculate and store the result
+        memo[n] = fibMemoized(memo, n - 1) + fibMemoized(memo, n - 2);
+        return memo[n];
     }
 }
