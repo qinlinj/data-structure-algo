@@ -82,4 +82,33 @@ public class _151_d_DynamicProgrammingAdvanced {
 
         return dp[amount] > amount ? -1 : dp[amount];
     }
+
+    /**
+     * Example 3: 0-1 Knapsack with space optimization
+     *
+     * Problem: Given weights and values of n items, put these items in a knapsack
+     * of capacity W to get the maximum value.
+     *
+     * State transition equation:
+     * dp[i][w] = max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])
+     *
+     * Space optimization: The naive solution uses a 2D array dp[n+1][W+1],
+     * but we can optimize to use a 1D array since each row only depends on the previous row.
+     */
+    public int knapsack(int[] values, int[] weights, int capacity) {
+        // Create a 1D array instead of 2D
+        int[] dp = new int[capacity + 1];
+
+        // Process each item
+        for (int i = 0; i < values.length; i++) {
+            // Process weights in reverse to avoid using items multiple times
+            // This is crucial for the space optimization to work correctly
+            for (int w = capacity; w >= weights[i]; w--) {
+                // State transition equation
+                dp[w] = Math.max(dp[w], dp[w - weights[i]] + values[i]);
+            }
+        }
+
+        return dp[capacity];
+    }
 }
