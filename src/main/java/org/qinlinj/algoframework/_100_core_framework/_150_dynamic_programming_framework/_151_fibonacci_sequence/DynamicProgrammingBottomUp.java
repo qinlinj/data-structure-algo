@@ -21,4 +21,32 @@ package org.qinlinj.algoframework._100_core_framework._150_dynamic_programming_f
  * - Easier to optimize for space complexity in many cases
  */
 public class DynamicProgrammingBottomUp {
+    /**
+     * Example: Fibonacci sequence with bottom-up approach
+     *
+     * This implementation builds the solution iteratively from the base cases up,
+     * filling in the DP table from smallest to largest indices.
+     *
+     * Time complexity: O(n) - each subproblem computed exactly once
+     * Space complexity: O(n) - for the DP table
+     */
+    public int fibonacci(int n) {
+        if (n == 0) return 0;
+
+        // Initialize DP table
+        int[] dp = new int[n + 1];
+
+        // Base cases
+        dp[0] = 0;
+        dp[1] = 1;
+
+        // Fill the table bottom-up (from smaller to larger subproblems)
+        for (int i = 2; i <= n; i++) {
+            // State transition: use previously computed values
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        // Return the final answer
+        return dp[n];
+    }
 }
