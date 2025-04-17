@@ -50,4 +50,14 @@ public class DynamicProgrammingGuide {
 
         return dp[n];
     }
+
+    /**
+     * Example: Coin Change Problem
+     * Problem: Given coins of certain denominations and a target amount,
+     * find the minimum number of coins needed to make up that amount.
+     *
+     * This demonstrates how to formulate a state transition equation:
+     * dp[i] = min(dp[i], dp[i - coin] + 1) for each coin in coins
+     * where dp[i] represents the minimum number of coins needed for amount i
+     */
 }
