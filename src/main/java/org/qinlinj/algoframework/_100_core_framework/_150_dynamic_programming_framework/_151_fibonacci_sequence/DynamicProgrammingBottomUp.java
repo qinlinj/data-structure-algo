@@ -74,4 +74,35 @@ public class DynamicProgrammingBottomUp {
 
         return curr;
     }
+
+    /**
+     * Example 2: Coin change problem with bottom-up approach
+     *
+     * Problem: Given coins of certain denominations and a target amount,
+     * find the minimum number of coins needed to make up that amount.
+     */
+    public int coinChange(int[] coins, int amount) {
+        // Initialize DP table with "infinity" (amount+1 is sufficient)
+        int[] dp = new int[amount + 1];
+        java.util.Arrays.fill(dp, amount + 1);
+
+        // Base case: 0 coins needed to make amount 0
+        dp[0] = 0;
+
+        // Fill the table bottom-up for all amounts from 1 to target
+        for (int currentAmount = 1; currentAmount <= amount; currentAmount++) {
+            // Try each coin denomination
+            for (int coin : coins) {
+                // If this coin can be used (not larger than current amount)
+                if (coin <= currentAmount) {
+                    // Update the minimum coins needed
+                    // State transition equation: dp[i] = min(dp[i], dp[i-coin] + 1)
+                    dp[currentAmount] = Math.min(dp[currentAmount], dp[currentAmount - coin] + 1);
+                }
+            }
+        }
+
+        // If dp[amount] is still "infinity", no solution exists
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
 }
