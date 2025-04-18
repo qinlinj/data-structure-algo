@@ -148,4 +148,17 @@ public class TotalPermutationProblem {
             path.remove(path.size() - 1);
         }
     }
+
+    // ========== SUBSET EXAMPLE ==========
+    /**
+     * Generate all possible subsets of the given array
+     * Another classic backtracking problem
+     */
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrackSubsets(nums, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void backtrackSubsets(int[] nums, int i, ArrayList<Object> objects, List<List<Integer>> result) {}
 }
