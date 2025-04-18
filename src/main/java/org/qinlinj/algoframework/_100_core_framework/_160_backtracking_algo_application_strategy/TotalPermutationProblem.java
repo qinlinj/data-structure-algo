@@ -25,11 +25,34 @@ package org.qinlinj.algoframework._100_core_framework._160_backtracking_algo_app
  * - Each node represents a state in the solution construction
  * - Each branch represents a choice
  * - Leaf nodes represent either complete solutions or dead-ends
- * 
+ *
  * Time Complexity:
  * - Generally high (often exponential or factorial)
  * - Unlike dynamic programming, backtracking doesn't benefit from overlapping subproblems
  * - For permutation problems: O(n!)
+ *
+ * Common Pattern in Code:
+ * ```
+ * void backtrack(path, choices) {
+ *     if (terminationCondition) {
+ *         saveResult(path);
+ *         return;
+ *     }
+ *
+ *     for (choice in choices) {
+ *         // Make choice
+ *         add choice to path;
+ *         mark choice as used;
+ *
+ *         // Recursive exploration
+ *         backtrack(path, choices);
+ *
+ *         // Undo choice (backtrack)
+ *         remove choice from path;
+ *         mark choice as unused;
+ *     }
+ * }
+ * ```
  */
 public class TotalPermutationProblem {
 
