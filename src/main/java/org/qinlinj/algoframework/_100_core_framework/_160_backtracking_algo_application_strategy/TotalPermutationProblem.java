@@ -121,5 +121,31 @@ public class TotalPermutationProblem {
         return result;
     }
 
-    private static void backtrackCombine(int i, int n, int k, ArrayList<Object> objects, List<List<Integer>> result) {}
+    /**
+     * Backtracking function for combination problem
+     *
+     * Path: Elements currently in 'path'
+     * Choice List: Numbers from 'start' to 'n'
+     * Termination Condition: When path.size() == k
+     */
+    private static void backtrackCombine(int start, int n, int k, List<Integer> path, List<List<Integer>> result) {
+        // Termination condition: path contains k elements
+        if (path.size() == k) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        // Try each possible next choice
+        for (int i = start; i <= n; i++) {
+            // Make choice
+            path.add(i);
+
+            // Explore next level of decision tree
+            // Notice we pass i+1 as the start to avoid using the same number again
+            backtrackCombine(i + 1, n, k, path, result);
+
+            // Undo choice (backtrack)
+            path.remove(path.size() - 1);
+        }
+    }
 }
