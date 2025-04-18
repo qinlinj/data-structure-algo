@@ -75,5 +75,38 @@ public class TotalPermutationProblem {
         return result;
     }
 
-    private static void backtrackPermute(int[] nums, List<Integer> path, boolean[] used, List<List<Integer>> result) {}
+    /**
+     * Backtracking function for permutation problem
+     *
+     * Path: Elements currently in 'path'
+     * Choice List: Unused elements in 'nums' (tracked by 'used' array)
+     * Termination Condition: When path.size() == nums.length
+     */
+    private static void backtrackPermute(int[] nums, List<Integer> path, boolean[] used, List<List<Integer>> result) {
+        // Termination condition: path contains all elements
+        if (path.size() == nums.length) {
+            // Save a copy of the current permutation
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        // Try each possible next choice
+        for (int i = 0; i < nums.length; i++) {
+            // Skip if this element is already used
+            if (used[i]) {
+                continue;
+            }
+
+            // Make choice
+            path.add(nums[i]);
+            used[i] = true;
+
+            // Explore next level of decision tree
+            backtrackPermute(nums, path, used, result);
+
+            // Undo choice (backtrack)
+            path.remove(path.size() - 1);
+            used[i] = false;
+        }
+    }
 }
