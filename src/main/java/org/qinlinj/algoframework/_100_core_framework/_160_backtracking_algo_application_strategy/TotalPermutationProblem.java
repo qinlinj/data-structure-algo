@@ -236,8 +236,44 @@ public class TotalPermutationProblem {
         }
     }
 
-    private static boolean isValid(char[][] board, int row, int col) {}
+    /**
+     * Check if placing a queen at position (row, col) is valid
+     */
+    private static boolean isValid(char[][] board, int row, int col) {
+        // Check column
+        for (int i = 0; i < row; i++) {
+            if (board[i][col] == 'Q') {
+                return false;
+            }
+        }
 
-    private static List<String> constructBoard(char[][] board) {}
+        // Check left diagonal
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        // Check right diagonal
+        for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Convert the char[][] board to List<String> representation
+     */
+    private static List<String> constructBoard(char[][] board) {
+        List<String> result = new ArrayList<>();
+        for (char[] row : board) {
+            result.add(new String(row));
+        }
+        return result;
+    }
+}
 
 }
