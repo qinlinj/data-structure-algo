@@ -1,7 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._160_backtracking_algo_application_strategy;
 
 // @formatter:off
-/**
+import java.util.*; /**
  * Backtracking Algorithm Framework and Explanation
  * -----------------------------------------------
  *
@@ -53,7 +53,27 @@ package org.qinlinj.algoframework._100_core_framework._160_backtracking_algo_app
  *     }
  * }
  * ```
+ *
+ * This class demonstrates backtracking algorithm using the classic permutation problem as an example.
  */
 public class TotalPermutationProblem {
+    // ========== PERMUTATION EXAMPLE ==========
+    /**
+     * Generate all permutations of the given array of integers
+     * This demonstrates the core backtracking framework
+     */
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
 
+        // Track the current path (partial permutation being built)
+        List<Integer> path = new ArrayList<>();
+
+        // Keep track of which elements have been used
+        boolean[] used = new boolean[nums.length];
+
+        backtrackPermute(nums, path, used, result);
+        return result;
+    }
+
+    private static void backtrackPermute(int[] nums, List<Integer> path, boolean[] used, List<List<Integer>> result) {}
 }
