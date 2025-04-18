@@ -15,6 +15,17 @@ package org.qinlinj.algoframework._100_core_framework._160_backtracking_algo_app
  * 2. Choice List: Available choices at the current decision point.
  * 3. Termination Condition: Criteria to identify when a complete solution is found.
  *
+ * The Algorithm Framework:
+ * - At each decision point, try each available choice
+ * - Make a choice and mark it as used
+ * - Recursively explore with this choice added to the path
+ * - Undo the choice (backtrack) and try the next option
+ *
+ * Visualization of a Decision Tree:
+ * - Each node represents a state in the solution construction
+ * - Each branch represents a choice
+ * - Leaf nodes represent either complete solutions or dead-ends
+ *
  */
 public class TotalPermutationProblem {
 
