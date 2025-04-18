@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._100_core_framework._110_double_pointer_linked_list._6_intersection_of_two_linked_lists;
+package org.qinlinj.algoframework._100_core_framework._110_double_pointer_linked_list._116_intersection_of_two_linked_lists;
 
 import org.qinlinj.leetcode.editor.common.ListNode;
 

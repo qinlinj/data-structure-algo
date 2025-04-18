@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._100_core_framework._120_double_pointer_array._1_fast_slow_pointer._1_in_place_modification;
+package org.qinlinj.algoframework._100_core_framework._120_double_pointer_array._121_fast_slow_pointer._121_1_in_place_modification;
 
 // @formatter:off
 public class RemoveElement {

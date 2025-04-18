@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._100_core_framework._130_sliding_window._2_permutation_in_string;
+package org.qinlinj.algoframework._100_core_framework._130_sliding_window._133_permutation_in_string;
 
 import java.util.*;
 

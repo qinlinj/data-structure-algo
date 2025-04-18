@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._100_core_framework._120_double_pointer_array._1_fast_slow_pointer._2_sliding_window;
+package org.qinlinj.algoframework._100_core_framework._120_double_pointer_array._121_fast_slow_pointer._121_2_sliding_window;
 
 // @formatter:off
 /**

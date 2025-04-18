@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._100_core_framework._130_sliding_window._0_algo_framework;
+package org.qinlinj.algoframework._100_core_framework._130_sliding_window._131_algo_framework;
 
 /**
  * Sliding Window Algorithm Framework (Pseudocode)

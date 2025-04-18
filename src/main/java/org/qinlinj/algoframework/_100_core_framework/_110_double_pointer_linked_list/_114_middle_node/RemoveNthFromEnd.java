@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._100_core_framework._110_double_pointer_linked_list._4_middle_node;
+package org.qinlinj.algoframework._100_core_framework._110_double_pointer_linked_list._114_middle_node;
 
 import org.qinlinj.leetcode.editor.common.ListNode;
 
