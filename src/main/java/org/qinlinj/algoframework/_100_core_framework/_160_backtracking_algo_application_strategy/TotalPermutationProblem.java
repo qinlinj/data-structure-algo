@@ -160,5 +160,26 @@ public class TotalPermutationProblem {
         return result;
     }
 
-    private static void backtrackSubsets(int[] nums, int i, ArrayList<Object> objects, List<List<Integer>> result) {}
-}
+    /**
+     * Backtracking function for subset problem
+     *
+     * Path: Elements currently in 'path'
+     * Choice List: Include or exclude each element starting from 'start'
+     * Termination Condition: When start == nums.length
+     */
+    private static void backtrackSubsets(int[] nums, int start, List<Integer> path, List<List<Integer>> result) {
+        // Add the current subset
+        result.add(new ArrayList<>(path));
+
+        // Try each possible next choice
+        for (int i = start; i < nums.length; i++) {
+            // Make choice to include nums[i]
+            path.add(nums[i]);
+
+            // Explore next level of decision tree
+            backtrackSubsets(nums, i + 1, path, result);
+
+            // Undo choice (backtrack)
+            path.remove(path.size() - 1);
+        }
+    }}
