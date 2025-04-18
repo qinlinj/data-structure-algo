@@ -109,4 +109,17 @@ public class TotalPermutationProblem {
             used[i] = false;
         }
     }
+
+    // ========== COMBINATION EXAMPLE ==========
+    /**
+     * Generate all combinations of k numbers out of the range [1, n]
+     * Another application of backtracking
+     */
+    public static List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrackCombine(1, n, k, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void backtrackCombine(int i, int n, int k, ArrayList<Object> objects, List<List<Integer>> result) {}
 }
