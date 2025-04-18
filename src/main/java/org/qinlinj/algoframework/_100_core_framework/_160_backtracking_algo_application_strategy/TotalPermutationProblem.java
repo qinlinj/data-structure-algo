@@ -182,4 +182,62 @@ public class TotalPermutationProblem {
             // Undo choice (backtrack)
             path.remove(path.size() - 1);
         }
-    }}
+    }
+
+    // ========== ADVANCED APPLICATION: N-QUEENS PROBLEM ==========
+    /**
+     * Solve the N-Queens problem: place N queens on an NxN chessboard
+     * such that no two queens attack each other
+     */
+    public static List<List<String>> solveNQueens(int n) {
+        List<List<String>> result = new ArrayList<>();
+
+        // Represent the board as a 2D char array
+        char[][] board = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
+        }
+
+        backtrackNQueens(board, 0, result);
+        return result;
+    }
+
+    /**
+     * Backtracking function for N-Queens problem
+     *
+     * Path: Queens placed in rows 0 to row-1
+     * Choice List: Valid positions in the current row
+     * Termination Condition: When all rows have a queen (row == board.length)
+     */
+    private static void backtrackNQueens(char[][] board, int row, List<List<String>> result) {
+        // Termination condition: all rows have a queen
+        if (row == board.length) {
+            result.add(constructBoard(board));
+            return;
+        }
+
+        // Try each column in the current row
+        for (int col = 0; col < board.length; col++) {
+            // Skip if this position is under attack
+            if (!isValid(board, row, col)) {
+                continue;
+            }
+
+            // Make choice
+            board[row][col] = 'Q';
+
+            // Explore next row
+            backtrackNQueens(board, row + 1, result);
+
+            // Undo choice (backtrack)
+            board[row][col] = '.';
+        }
+    }
+
+    private static boolean isValid(char[][] board, int row, int col) {}
+
+    private static List<String> constructBoard(char[][] board) {}
+
+}
