@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._170_bfs_framework._172_sliding_puzzle;
 
+import java.util.*;
+
 /**
  * LeetCode 773: Sliding Puzzle Solution
  * <p>
@@ -30,4 +32,48 @@ package org.qinlinj.algoframework._100_core_framework._170_bfs_framework._172_sl
  * This class provides a complete solution using BFS with detailed comments.
  */
 public class SlidingPuzzleSolution {
+    /**
+     * Solves the sliding puzzle problem using BFS.
+     *
+     * @param board Initial board state as a 2x3 array
+     * @return Minimum number of moves to reach target state, or -1 if impossible
+     */
+    public int slidingPuzzle(int[][] board) {
+        // Target configuration represented as a string for easy comparison
+        final String TARGET = "123450";
+
+        // Convert initial board to string representation
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                sb.append(board[i][j]);
+            }
+        }
+        String start = sb.toString();
+
+        // If we're already at the target state, return 0
+        if (start.equals(TARGET)) {
+            return 0;
+        }
+
+        // BFS algorithm implementation
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+
+        // Add starting state to queue and visited set
+        queue.offer(start);
+        visited.add(start);
+
+        // Track number of moves
+        int moves = 0;
+
+        // BFS traversal
+
+
+        // If we exit the loop without finding the target, it's impossible
+        return -1;
+    }
+
+    private List<String> getNeighborStates(String currentState) {
+    }
 }
