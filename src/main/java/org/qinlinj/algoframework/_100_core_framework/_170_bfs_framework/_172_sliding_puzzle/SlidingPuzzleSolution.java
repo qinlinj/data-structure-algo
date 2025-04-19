@@ -68,12 +68,64 @@ public class SlidingPuzzleSolution {
         int moves = 0;
 
         // BFS traversal
+        while (!queue.isEmpty()) {
+            // Process all states at current move count
+            int size = queue.size();
 
+            for (int i = 0; i < size; i++) {
+                String currentState = queue.poll();
+
+                // Check if we've reached the target state
+                if (TARGET.equals(currentState)) {
+                    return moves;
+                }
+
+                // Generate all possible next states by moving the empty space
+                List<String> neighbors = getNeighborStates(currentState);
+
+                // Add unvisited neighbors to the queue
+                for (String neighbor : neighbors) {
+                    if (!visited.contains(neighbor)) {
+                        queue.offer(neighbor);
+                        visited.add(neighbor);
+                    }
+                }
+            }
+
+            // Increment move count after processing all states at current level
+            moves++;
+        }
 
         // If we exit the loop without finding the target, it's impossible
         return -1;
     }
 
     private List<String> getNeighborStates(String currentState) {
+        // Define adjacency mapping for each position in the 2x3 board
+        int[][] adjacencyMap = new int[][]{
+                {1, 3},       // Position 0 can move to 1 and 3
+                {0, 2, 4},    // Position 1 can move to 0, 2, and 4
+                {1, 5},       // Position 2 can move to 1 and 5
+                {0, 4},       // Position 3 can move to 0 and 4
+                {1, 3, 5},    // Position 4 can move to 1, 3, and 5
+                {2, 4}        // Position 5 can move to 2 and 4
+        };
+
+        // Find the position of the empty space (0)
+        int emptyPosition = currentState.indexOf('0');
+
+        List<String> neighbors = new ArrayList<>();
+
+        // Generate all possible moves by swapping the empty space with adjacent tiles
+        for (int adjacentPos : adjacencyMap[emptyPosition]) {
+            // Create a new state by swapping the empty space with the adjacent tile
+            String newState = swapCharacters(currentState, emptyPosition, adjacentPos);
+            neighbors.add(newState);
+        }
+
+        return neighbors;
+    }
+
+    private String swapCharacters(String currentState, int emptyPosition, int adjacentPos) {
     }
 }
