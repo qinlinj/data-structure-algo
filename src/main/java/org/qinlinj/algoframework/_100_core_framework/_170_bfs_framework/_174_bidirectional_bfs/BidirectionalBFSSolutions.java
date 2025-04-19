@@ -244,6 +244,28 @@ public class BidirectionalBFSSolutions {
         return -1;
     }
 
-    private String[] getLockNeighbors(String current) {
+    /**
+     * Gets all possible next combinations for the lock by turning each wheel.
+     *
+     * @param combination Current combination
+     * @return List of all possible next combinations
+     */
+    private List<String> getLockNeighbors(String combination) {
+        List<String> neighbors = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            neighbors.add(plusOne(combination, i));
+            neighbors.add(minusOne(combination, i));
+        }
+
+        return neighbors;
+    }
+
+    private String minusOne(String combination, int i) {
+        return null;
+    }
+
+    private String plusOne(String combination, int i) {
+        return null;
     }
 }
