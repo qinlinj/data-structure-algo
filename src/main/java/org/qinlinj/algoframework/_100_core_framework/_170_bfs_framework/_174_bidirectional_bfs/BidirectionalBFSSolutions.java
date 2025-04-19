@@ -85,6 +85,24 @@ public class BidirectionalBFSSolutions {
         return -1;
     }
 
+    /**
+     * Gets all possible next states for the sliding puzzle by moving the empty space.
+     * <p>
+     * In a 2x3 board, the mapping of adjacent positions for each index is:
+     * - Position 0: can move to positions 1, 3
+     * - Position 1: can move to positions 0, 2, 4
+     * - Position 2: can move to positions 1, 5
+     * - Position 3: can move to positions 0, 4
+     * - Position 4: can move to positions 1, 3, 5
+     * - Position 5: can move to positions 2, 4
+     * <p>
+     * This mapping represents the physical adjacency in the 2x3 grid:
+     * [0][1][2]
+     * [3][4][5]
+     *
+     * @param state Current state as a string
+     * @return List of all possible next states
+     */
     private List<String> getSlidingNeighbors(String state) {
         // Define adjacency mapping for each position in the 2x3 board
         int[][] neighbors = new int[][]{
