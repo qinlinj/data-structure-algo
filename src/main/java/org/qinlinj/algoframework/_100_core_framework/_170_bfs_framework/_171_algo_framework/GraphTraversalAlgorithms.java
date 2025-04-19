@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._170_bfs_framework._171_algo_framework;
 
+import java.util.*;
+
 /**
  * Tree and Graph Traversal Algorithms Summary
  * <p>
@@ -28,4 +30,10 @@ package org.qinlinj.algoframework._100_core_framework._170_bfs_framework._171_al
  * - Most common approach uses a queue with step counting
  */
 public class GraphTraversalAlgorithms {
+    // Generic graph representation (adjacency list)
+    private Map<Integer, List<Integer>> graph;
+
+    public GraphTraversalAlgorithms() {
+        graph = new HashMap<>();
+    }
 }
