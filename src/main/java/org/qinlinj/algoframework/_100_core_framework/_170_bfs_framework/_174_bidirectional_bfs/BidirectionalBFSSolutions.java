@@ -113,6 +113,35 @@ public class BidirectionalBFSSolutions {
 
         int step = 0;
 
+        while (!startSet.isEmpty() && !endSet.isEmpty()) {
+            // Always expand the smaller set for efficiency
+            if (startSet.size() > endSet.size()) {
+                Set<String> temp = startSet;
+                startSet = endSet;
+                endSet = temp;
+            }
+
+            Set<String> nextSet = new HashSet<>();
+
+            for (String current : startSet) {
+                List<String> neighbors = getSlidingNeighbors(current);
+
+                for (String neighbor : neighbors) {
+                    // If the other set contains this neighbor, we've found a path
+                    if (endSet.contains(neighbor)) {
+                        return step + 1;
+                    }
+
+                    if (!visited.contains(neighbor)) {
+                        nextSet.add(neighbor);
+                        visited.add(neighbor);
+                    }
+                }
+            }
+
+            startSet = nextSet;
+            step++;
+        }
 
         return -1;
     }
