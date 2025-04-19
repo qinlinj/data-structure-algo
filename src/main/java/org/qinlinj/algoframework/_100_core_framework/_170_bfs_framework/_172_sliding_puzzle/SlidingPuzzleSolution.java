@@ -33,6 +33,35 @@ import java.util.*;
  */
 public class SlidingPuzzleSolution {
     /**
+     * Example usage with test cases.
+     */
+    public static void main(String[] args) {
+        SlidingPuzzleSolution solution = new SlidingPuzzleSolution();
+
+        // Test Case 1: Solvable puzzle, should take 5 moves
+        int[][] board1 = {{4, 1, 2}, {5, 0, 3}};
+        System.out.println("Test Case 1: Board = [[4,1,2],[5,0,3]]");
+        System.out.println("Minimum moves: " + solution.slidingPuzzle(board1));
+        System.out.println();
+
+        // Test Case 2: Unsolvable puzzle, should return -1
+        int[][] board2 = {{1, 2, 3}, {5, 4, 0}};
+        System.out.println("Test Case 2: Board = [[1,2,3],[5,4,0]]");
+        System.out.println("Minimum moves: " + solution.slidingPuzzle(board2));
+        System.out.println();
+
+        // Test Case 3: Already solved, should return 0
+        int[][] board3 = {{1, 2, 3}, {4, 5, 0}};
+        System.out.println("Test Case 3: Board = [[1,2,3],[4,5,0]]");
+        System.out.println("Minimum moves: " + solution.slidingPuzzle(board3));
+
+        // Visualization of the board structure and indices:
+        System.out.println("\nBoard Structure (2x3):");
+        System.out.println("[0][1][2]");
+        System.out.println("[3][4][5]");
+    }
+
+    /**
      * Solves the sliding puzzle problem using BFS.
      *
      * @param board Initial board state as a 2x3 array
