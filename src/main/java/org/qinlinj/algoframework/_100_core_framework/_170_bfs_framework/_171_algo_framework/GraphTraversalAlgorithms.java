@@ -145,7 +145,8 @@ public class GraphTraversalAlgorithms {
         return -1;
     }
 
-    private boolean isValidCell(int[][] maze, int newRow, int newCol, int rows, int cols) {
+    private boolean isValidCell(int[][] maze, int row, int col, int rows, int cols) {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
     }
 
     /**
