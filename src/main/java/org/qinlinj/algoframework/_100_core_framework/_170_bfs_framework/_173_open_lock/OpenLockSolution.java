@@ -124,4 +124,26 @@ public class OpenLockSolution {
 
         return new String(chars);
     }
+
+    /**
+     * Alternative implementation for generating neighbors.
+     * This version explicitly implements plusOne and minusOne operations.
+     */
+    private List<String> getNeighborsAlternative(String combination) {
+        List<String> neighbors = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            neighbors.add(plusOne(combination, i));
+            neighbors.add(minusOne(combination, i));
+        }
+
+        return neighbors;
+    }
+
+    private String minusOne(String combination, int i) {
+    }
+
+    private String plusOne(String combination, int i) {
+        return null;
+    }
 }
