@@ -245,6 +245,67 @@ public class BidirectionalBFSSolutions {
     }
 
     /**
+     * Solves the lock problem using bidirectional BFS for optimization.
+     *
+     * @param deadends Combinations that will lock the lock
+     * @param target   Target combination
+     * @return Minimum moves to reach target, or -1 if impossible
+     */
+    public int openLockBidirectional(String[] deadends, String target) {
+        Set<String> deadendSet = new HashSet<>(Arrays.asList(deadends));
+
+        // Handle edge cases
+        if (deadendSet.contains("0000")) {
+            return -1;
+        }
+        if (target.equals("0000")) {
+            return 0;
+        }
+
+        // Bidirectional BFS with sets instead of queues
+        Set<String> startSet = new HashSet<>();
+        Set<String> endSet = new HashSet<>();
+        Set<String> visited = new HashSet<>();
+
+        startSet.add("0000");
+        endSet.add(target);
+
+        int step = 0;
+
+        while (!startSet.isEmpty() && !endSet.isEmpty()) {
+            // Always expand the smaller set for efficiency
+            if (startSet.size() > endSet.size()) {
+                Set<String> temp = startSet;
+                startSet = endSet;
+                endSet = temp;
+            }
+
+            Set<String> nextSet = new HashSet<>();
+
+            for (String current : startSet) {
+                List<String> neighbors = getLockNeighbors(current);
+
+                for (String neighbor : neighbors) {
+                    // If the other set contains this neighbor, we've found a path
+                    if (endSet.contains(neighbor)) {
+                        return step + 1;
+                    }
+
+                    if (!visited.contains(neighbor) && !deadendSet.contains(neighbor)) {
+                        nextSet.add(neighbor);
+                        visited.add(neighbor);
+                    }
+                }
+            }
+
+            startSet = nextSet;
+            step++;
+        }
+
+        return -1;
+    }
+
+    /**
      * Gets all possible next combinations for the lock by turning each wheel.
      *
      * @param combination Current combination
