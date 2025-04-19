@@ -36,4 +36,46 @@ public class GraphTraversalAlgorithms {
     public GraphTraversalAlgorithms() {
         graph = new HashMap<>();
     }
+
+    public int bfs(int start, int target) {
+        boolean[] visited = new boolean[graph.size()];
+        Queue<Integer> queue = new LinkedList<>();
+
+        // Initialize with start node
+        queue.offer(start);
+        visited[start] = true;
+
+        // Track steps from start to current position
+        int step = 0;
+
+        while (!queue.isEmpty()) {
+            // Process nodes level by level
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int current = queue.poll();
+                System.out.println("Visiting node " + current + " at step " + step);
+
+                // Check if target found
+                if (current == target) {
+                    return step;
+                }
+
+                // Explore neighbors (expand search in all directions)
+                for (int neighbor : getNeighbors(current)) {
+                    if (!visited[neighbor]) {
+                        queue.offer(neighbor);
+                        visited[neighbor] = true;
+                    }
+                }
+            }
+            // Move to next level
+            step++;
+        }
+
+        // Target not found
+        return -1;
+    }
+
+    private int[] getNeighbors(int current) {
+    }
 }
