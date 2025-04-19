@@ -76,6 +76,8 @@ public class GraphTraversalAlgorithms {
         return -1;
     }
 
-    private int[] getNeighbors(int current) {
+    // Helper methods
+    private List<Integer> getNeighbors(int node) {
+        return graph.getOrDefault(node, new ArrayList<>());
     }
 }
