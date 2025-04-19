@@ -145,6 +145,32 @@ public class GraphTraversalAlgorithms {
         return -1;
     }
 
+    /**
+     * Example application: Word transformation
+     * <p>
+     * We can abstract word transformation as:
+     * - Words are nodes
+     * - Words with one character difference are connected
+     * - BFS finds shortest transformation path
+     */
+    public int wordTransformation(String beginWord, String endWord, List<String> wordList) {
+        // Create a set for O(1) lookup
+        Set<String> wordSet = new HashSet<>(wordList);
+
+        // Check if end word exists
+        if (!wordSet.contains(endWord)) {
+            return -1;
+        }
+
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
+        wordSet.remove(beginWord); // Mark as visited
+
+        int steps = 1;  // Start at 1 since we count transformations
+
+        return -1;
+    }
+
     private boolean isValidCell(int[][] maze, int row, int col, int rows, int cols) {
         return row >= 0 && row < rows && col >= 0 && col < cols;
     }
