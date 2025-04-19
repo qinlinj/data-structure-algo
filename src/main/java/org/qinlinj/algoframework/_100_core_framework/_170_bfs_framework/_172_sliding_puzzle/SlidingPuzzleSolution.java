@@ -126,6 +126,19 @@ public class SlidingPuzzleSolution {
         return neighbors;
     }
 
-    private String swapCharacters(String currentState, int emptyPosition, int adjacentPos) {
+    /**
+     * Swaps two characters in a string.
+     *
+     * @param str The original string
+     * @param i   First position
+     * @param j   Second position
+     * @return New string with the characters at positions i and j swapped
+     */
+    private String swapCharacters(String str, int i, int j) {
+        char[] chars = str.toCharArray();
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+        return new String(chars);
     }
 }
