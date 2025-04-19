@@ -195,4 +195,13 @@ public class BidirectionalBFSSolutions {
         chars[j] = temp;
         return new String(chars);
     }
+
+    /**
+     * ===== SOLUTION FOR OPEN THE LOCK (LEETCODE 752) =====
+     *
+     * In the open the lock problem:
+     * - We have a 4-wheel lock, each wheel with digits 0-9
+     * - Each wheel can be turned forward or backward
+     * - We need to find minimum turns to reach target while avoiding deadends
+     */
 }
