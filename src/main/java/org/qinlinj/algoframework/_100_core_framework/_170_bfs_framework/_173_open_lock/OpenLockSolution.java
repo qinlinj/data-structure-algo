@@ -140,10 +140,37 @@ public class OpenLockSolution {
         return neighbors;
     }
 
-    private String minusOne(String combination, int i) {
+    /**
+     * Turns a wheel backward (decrement by 1).
+     *
+     * @param s        Current combination
+     * @param position Position to turn (0-3)
+     * @return New combination after turning
+     */
+    private String minusOne(String s, int position) {
+        char[] chars = s.toCharArray();
+        if (chars[position] == '0') {
+            chars[position] = '9';
+        } else {
+            chars[position]--;
+        }
+        return new String(chars);
     }
 
-    private String plusOne(String combination, int i) {
-        return null;
+    /**
+     * Turns a wheel forward (increment by 1).
+     *
+     * @param s        Current combination
+     * @param position Position to turn (0-3)
+     * @return New combination after turning
+     */
+    private String plusOne(String s, int position) {
+        char[] chars = s.toCharArray();
+        if (chars[position] == '9') {
+            chars[position] = '0';
+        } else {
+            chars[position]++;
+        }
+        return new String(chars);
     }
 }
