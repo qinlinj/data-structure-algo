@@ -198,10 +198,52 @@ public class BidirectionalBFSSolutions {
 
     /**
      * ===== SOLUTION FOR OPEN THE LOCK (LEETCODE 752) =====
-     *
+     * <p>
      * In the open the lock problem:
      * - We have a 4-wheel lock, each wheel with digits 0-9
      * - Each wheel can be turned forward or backward
      * - We need to find minimum turns to reach target while avoiding deadends
      */
+
+    public int openLock(String[] deadends, String target) {
+        Set<String> deadendSet = new HashSet<>(Arrays.asList(deadends));
+
+        // If starting position is a deadend, return -1
+        if (deadendSet.contains("0000")) {
+            return -1;
+        }
+
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+
+        queue.offer("0000");
+        visited.add("0000");
+
+        int step = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String current = queue.poll();
+
+                if (current.equals(target)) {
+                    return step;
+                }
+
+                // Get all possible next states
+                for (String neighbor : getLockNeighbors(current)) {
+                    if (!visited.contains(neighbor) && !deadendSet.contains(neighbor)) {
+                        queue.offer(neighbor);
+                        visited.add(neighbor);
+                    }
+                }
+            }
+            step++;
+        }
+
+        return -1;
+    }
+
+    private String[] getLockNeighbors(String current) {
+    }
 }
