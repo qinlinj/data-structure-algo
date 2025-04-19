@@ -63,12 +63,53 @@ public class OpenLockSolution {
         int moves = 0;
 
         // BFS traversal
+        while (!queue.isEmpty()) {
+            // Process all combinations at current move count
+            int size = queue.size();
 
+            for (int i = 0; i < size; i++) {
+                String currentCombination = queue.poll();
+
+                // Check if we've reached the target
+                if (currentCombination.equals(target)) {
+                    return moves;
+                }
+
+                // Generate all neighboring combinations by turning each wheel
+                List<String> neighbors = getNeighbors(currentCombination);
+
+                // Add valid and unvisited neighbors to the queue
+                for (String neighbor : neighbors) {
+                    if (!visited.contains(neighbor) && !deadendSet.contains(neighbor)) {
+                        queue.offer(neighbor);
+                        visited.add(neighbor);
+                    }
+                }
+            }
+
+            // Increment move count after processing all combinations at current level
+            moves++;
+        }
 
         // If we exit the loop without finding the target, it's impossible
         return -1;
     }
 
-    private List<String> getNeighbors(String currentCombination) {
+    private List<String> getNeighbors(String combination) {
+        List<String> neighbors = new ArrayList<>();
+
+        // For each of the 4 wheels
+        for (int i = 0; i < 4; i++) {
+            // Turn wheel forward (+1)
+            neighbors.add(turnDigit(combination, i, true));
+
+            // Turn wheel backward (-1)
+            neighbors.add(turnDigit(combination, i, false));
+        }
+
+        return neighbors;
+    }
+
+    private String turnDigit(String combination, int i, boolean b) {
     }
 }
