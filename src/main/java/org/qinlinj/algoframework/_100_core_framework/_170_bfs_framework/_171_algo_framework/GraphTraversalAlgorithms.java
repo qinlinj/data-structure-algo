@@ -89,6 +89,66 @@ public class GraphTraversalAlgorithms {
     }
 
     /**
+     * Example application: Solving a maze
+     * <p>
+     * We can abstract a maze as a grid where:
+     * - Each cell is a node
+     * - Adjacent walkable cells are connected nodes
+     * - BFS finds shortest path from start to exit
+     */
+    public int solveMaze(int[][] maze, int[] start, int[] exit) {
+        int rows = maze.length;
+        int cols = maze[0].length;
+
+        // Directions: up, right, down, left
+        int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+        // Mark visited cells
+        boolean[][] visited = new boolean[rows][cols];
+        Queue<int[]> queue = new LinkedList<>();
+
+        // Add start position
+        queue.offer(start);
+        visited[start[0]][start[1]] = true;
+
+        int steps = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int[] current = queue.poll();
+
+                // Check if reached exit
+                if (current[0] == exit[0] && current[1] == exit[1]) {
+                    return steps;
+                }
+
+                // Try all four directions
+                for (int[] dir : directions) {
+                    int newRow = current[0] + dir[0];
+                    int newCol = current[1] + dir[1];
+
+                    // Check if valid move (in bounds, not a wall, not visited)
+                    if (isValidCell(maze, newRow, newCol, rows, cols) &&
+                            maze[newRow][newCol] == 0 &&
+                            !visited[newRow][newCol]) {
+
+                        queue.offer(new int[]{newRow, newCol});
+                        visited[newRow][newCol] = true;
+                    }
+                }
+            }
+            steps++;
+        }
+
+        // No path found
+        return -1;
+    }
+
+    private boolean isValidCell(int[][] maze, int newRow, int newCol, int rows, int cols) {
+    }
+
+    /**
      * DFS recursive traversal example
      * Used for exhaustive search, backtracking
      */
