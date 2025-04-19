@@ -221,4 +221,15 @@ public class OpenLockSolution {
         }
         return new String(chars);
     }
+
+    /**
+     * Optimization: Bidirectional BFS
+     *
+     * For more efficient solutions, bidirectional BFS can be implemented:
+     * - Start BFS from both the start ("0000") and the target
+     * - Expand the smaller frontier at each step
+     * - Return when the two frontiers intersect
+     *
+     * This can significantly reduce the search space in many cases.
+     */
 }
