@@ -2,39 +2,43 @@ package org.qinlinj.algoframework._100_core_framework._170_bfs_framework._171_al
 
 import java.util.*;
 
-/**
- * Tree and Graph Traversal Algorithms Summary
- * <p>
- * Key Concepts:
- * <p>
- * 1. Algorithm Foundations:
- * - DFS/Backtracking: Essentially recursive traversal of an enumeration tree
- * - BFS: Fundamentally traversal of a graph
- * - Both derive from binary tree traversal algorithms
- * <p>
- * 2. Relationships between algorithms:
- * - DFS/Backtracking → Multi-way tree recursive traversal → Binary tree recursive traversal
- * - BFS → Graph traversal → Multi-way tree traversal with visited array → Binary tree level-order traversal
- * <p>
- * 3. BFS for Shortest Path:
- * - BFS is often used for finding shortest paths because it explores nodes level by level
- * - Similar to finding the minimum depth in a binary tree
- * - Recursive traversal must visit all nodes, while level-order traversal can find the target earlier
- * <p>
- * 4. Problem Abstraction:
- * - Real-world problems require abstracting specific scenarios into standard graph/tree structures
- * - Examples: maze paths, word transformations, connecting-blocks games
- * <p>
- * 5. BFS Framework:
- * - Multiple implementation approaches with increasing complexity and flexibility
- * - Most common approach uses a queue with step counting
- */
 public class GraphTraversalAlgorithms {
+
     // Generic graph representation (adjacency list)
     private Map<Integer, List<Integer>> graph;
 
     public GraphTraversalAlgorithms() {
         graph = new HashMap<>();
+    }
+
+    // Main method to demonstrate usage
+    public static void main(String[] args) {
+        // Example: Create a simple graph
+        GraphTraversalAlgorithms graph = new GraphTraversalAlgorithms();
+
+        // Add some nodes and edges
+        for (int i = 0; i < 6; i++) {
+            graph.addEdge(i, (i + 1) % 6);  // Create a cycle 0->1->2->3->4->5->0
+        }
+        graph.addEdge(0, 3);  // Add a shortcut
+
+        // Find shortest path from 0 to 3
+        int shortestPath = graph.bfs(0, 3);
+        System.out.println("Shortest path from 0 to 3: " + shortestPath + " steps");
+
+        // Example maze solving
+        int[][] maze = {
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 1, 0},
+                {0, 0, 0, 1, 0},
+                {1, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0}
+        };
+        int[] start = {0, 0};
+        int[] exit = {4, 4};
+
+        int mazeSteps = graph.solveMaze(maze, start, exit);
+        System.out.println("Steps to solve maze: " + mazeSteps);
     }
 
     /**
@@ -207,9 +211,7 @@ public class GraphTraversalAlgorithms {
         return -1;
     }
 
-    private boolean isValidCell(int[][] maze, int row, int col, int rows, int cols) {
-        return row >= 0 && row < rows && col >= 0 && col < cols;
-    }
+    // Helper methods
 
     /**
      * DFS recursive traversal example
@@ -228,8 +230,17 @@ public class GraphTraversalAlgorithms {
         }
     }
 
-    // Helper methods
     private List<Integer> getNeighbors(int node) {
         return graph.getOrDefault(node, new ArrayList<>());
+    }
+
+    private boolean isValidCell(int[][] maze, int row, int col, int rows, int cols) {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
+    }
+
+    // Example of adding edges to the graph
+    public void addEdge(int from, int to) {
+        graph.computeIfAbsent(from, k -> new ArrayList<>()).add(to);
+        graph.computeIfAbsent(to, k -> new ArrayList<>());  // Ensure the node exists
     }
 }
