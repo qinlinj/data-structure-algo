@@ -100,6 +100,24 @@ public class SlidingPuzzleSolution {
         return -1;
     }
 
+    /**
+     * Generates all possible board states that can be reached with one move.
+     * <p>
+     * In a 2x3 board, the mapping of adjacent positions for each index is:
+     * - Position 0: can move to positions 1, 3
+     * - Position 1: can move to positions 0, 2, 4
+     * - Position 2: can move to positions 1, 5
+     * - Position 3: can move to positions 0, 4
+     * - Position 4: can move to positions 1, 3, 5
+     * - Position 5: can move to positions 2, 4
+     * <p>
+     * This mapping represents the physical adjacency in the 2x3 grid:
+     * [0][1][2]
+     * [3][4][5]
+     *
+     * @param currentState Current board state as a string
+     * @return List of all possible next states
+     */
     private List<String> getNeighborStates(String currentState) {
         // Define adjacency mapping for each position in the 2x3 board
         int[][] adjacencyMap = new int[][]{
