@@ -110,6 +110,18 @@ public class OpenLockSolution {
         return neighbors;
     }
 
-    private String turnDigit(String combination, int i, boolean b) {
+    private String turnDigit(String combination, int position, boolean forward) {
+        char[] chars = combination.toCharArray();
+        char digit = chars[position];
+
+        if (forward) {
+            // Turn forward: 0->1, 1->2, ..., 9->0
+            chars[position] = (digit == '9') ? '0' : (char) (digit + 1);
+        } else {
+            // Turn backward: 0->9, 9->8, ..., 1->0
+            chars[position] = (digit == '0') ? '9' : (char) (digit - 1);
+        }
+
+        return new String(chars);
     }
 }
