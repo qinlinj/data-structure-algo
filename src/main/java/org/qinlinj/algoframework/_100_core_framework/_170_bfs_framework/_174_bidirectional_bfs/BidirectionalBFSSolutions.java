@@ -142,6 +142,49 @@ public class BidirectionalBFSSolutions {
         System.out.println("\nStandard BFS result: " + standardResult);
         System.out.println("Bidirectional BFS result: " + biResult);
         System.out.println();
+
+        // Explanation of bidirectional BFS advantage with visualization
+        System.out.println("===== BIDIRECTIONAL BFS VISUALIZATION =====");
+        System.out.println("Consider a graph where each node has 3 neighbors:");
+        System.out.println();
+        System.out.println("Standard BFS from Start:");
+        System.out.println("Level 0:          S          (1 node)");
+        System.out.println("Level 1:       /  |  \\        (3 nodes)");
+        System.out.println("Level 2:    / /   |   \\ \\       (9 nodes)");
+        System.out.println("Level 3:   ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯      (27 nodes)");
+        System.out.println("Level 4:   ⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯      (81 nodes)");
+        System.out.println("Total:                      (121 nodes)");
+        System.out.println();
+        System.out.println("Bidirectional BFS:");
+        System.out.println("From Start:       S          (1 node)");
+        System.out.println("Level 1:       /  |  \\        (3 nodes)");
+        System.out.println("Level 2:    / /   |   \\ \\       (9 nodes)");
+        System.out.println();
+        System.out.println("From Target:      T          (1 node)");
+        System.out.println("Level 1:       /  |  \\        (3 nodes)");
+        System.out.println("Level 2:    / /   |   \\ \\       (9 nodes)");
+        System.out.println();
+        System.out.println("When they meet in the middle: (13 + 13 = 26 nodes)");
+        System.out.println("That's only ~21% of the nodes explored by standard BFS!");
+        System.out.println();
+        System.out.println("===== IMPLEMENTATION DETAILS =====");
+        System.out.println("Key Optimizations in the Bidirectional BFS:");
+        System.out.println("1. Using Sets instead of Queues:");
+        System.out.println("   - Allows O(1) lookups to check if frontiers intersect");
+        System.out.println("   - Example: if (endSet.contains(neighbor)) { return step + 1; }");
+        System.out.println();
+        System.out.println("2. Always expanding the smaller frontier:");
+        System.out.println("   - if (startSet.size() > endSet.size()) { swap(startSet, endSet); }");
+        System.out.println("   - Ensures we always expand the smaller set, reducing total nodes");
+        System.out.println("   - Think of it as: 'Always dig from the side with less dirt'");
+        System.out.println();
+        System.out.println("3. Early termination when frontiers meet:");
+        System.out.println("   - Stop as soon as any node appears in both frontiers");
+        System.out.println("   - Don't need to process entire levels");
+        System.out.println();
+        System.out.println("In summary, bidirectional BFS is a powerful optimization technique");
+        System.out.println("when both start and end states are known. It can dramatically reduce");
+        System.out.println("the search space, especially for problems with large branching factors.");
     }
 
     /**
