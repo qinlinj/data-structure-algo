@@ -37,6 +37,18 @@ public class GraphTraversalAlgorithms {
         graph = new HashMap<>();
     }
 
+    /**
+     * BFS algorithm framework for finding shortest path.
+     * <p>
+     * This is the standard implementation for BFS that:
+     * 1. Uses a queue to track nodes to visit
+     * 2. Maintains a visited array to prevent cycles
+     * 3. Counts steps to reach the target
+     *
+     * @param start  Starting node
+     * @param target Target node to find
+     * @return Minimum steps to reach target, or -1 if unreachable
+     */
     public int bfs(int start, int target) {
         boolean[] visited = new boolean[graph.size()];
         Queue<Integer> queue = new LinkedList<>();
