@@ -62,7 +62,25 @@ public class BidirectionalBFSSolutions {
         visited.add(start);
 
         int step = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String current = queue.poll();
 
+                if (current.equals(target)) {
+                    return step;
+                }
+
+                // Get all possible next states
+                for (String neighbor : getSlidingNeighbors(current)) {
+                    if (!visited.contains(neighbor)) {
+                        queue.offer(neighbor);
+                        visited.add(neighbor);
+                    }
+                }
+            }
+            step++;
+        }
 
         return -1;
     }
