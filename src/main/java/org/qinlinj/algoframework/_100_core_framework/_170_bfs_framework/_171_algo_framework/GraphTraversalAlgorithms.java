@@ -168,6 +168,42 @@ public class GraphTraversalAlgorithms {
 
         int steps = 1;  // Start at 1 since we count transformations
 
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String currentWord = queue.poll();
+
+                // Try changing each character
+                char[] wordChars = currentWord.toCharArray();
+                for (int j = 0; j < wordChars.length; j++) {
+                    char originalChar = wordChars[j];
+
+                    // Try all possible characters
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (c == originalChar) continue;
+
+                        wordChars[j] = c;
+                        String newWord = new String(wordChars);
+
+                        // Found target word
+                        if (newWord.equals(endWord)) {
+                            return steps;
+                        }
+
+                        // Valid transformation
+                        if (wordSet.contains(newWord)) {
+                            queue.offer(newWord);
+                            wordSet.remove(newWord); // Mark as visited
+                        }
+                    }
+
+                    // Restore original character
+                    wordChars[j] = originalChar;
+                }
+            }
+            steps++;
+        }
+
         return -1;
     }
 
