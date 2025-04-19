@@ -85,6 +85,38 @@ public class BidirectionalBFSSolutions {
         return -1;
     }
 
+    public int slidingPuzzleBidirectional(int[][] board) {
+        // Target state: "123450"
+        String target = "123450";
+
+        // Convert initial board to string representation
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                sb.append(board[i][j]);
+            }
+        }
+        String start = sb.toString();
+
+        // Handle edge case: already at target
+        if (start.equals(target)) {
+            return 0;
+        }
+
+        // Bidirectional BFS
+        Set<String> startSet = new HashSet<>();
+        Set<String> endSet = new HashSet<>();
+        Set<String> visited = new HashSet<>();
+
+        startSet.add(start);
+        endSet.add(target);
+
+        int step = 0;
+
+
+        return -1;
+    }
+
     /**
      * Gets all possible next states for the sliding puzzle by moving the empty space.
      * <p>
