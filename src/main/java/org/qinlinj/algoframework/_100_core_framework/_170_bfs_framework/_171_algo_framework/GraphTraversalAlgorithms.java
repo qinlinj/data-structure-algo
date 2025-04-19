@@ -76,6 +76,23 @@ public class GraphTraversalAlgorithms {
         return -1;
     }
 
+    /**
+     * DFS recursive traversal example
+     * Used for exhaustive search, backtracking
+     */
+    public void dfs(int node, boolean[] visited) {
+        // Mark current node as visited
+        visited[node] = true;
+        System.out.println("Visiting node " + node);
+
+        // Recursively visit all unvisited neighbors
+        for (int neighbor : getNeighbors(node)) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, visited);
+            }
+        }
+    }
+
     // Helper methods
     private List<Integer> getNeighbors(int node) {
         return graph.getOrDefault(node, new ArrayList<>());
