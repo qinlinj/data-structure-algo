@@ -261,11 +261,29 @@ public class BidirectionalBFSSolutions {
         return neighbors;
     }
 
-    private String minusOne(String combination, int i) {
-        return null;
+    /**
+     * Turns a wheel forward (increment by 1).
+     */
+    private String plusOne(String s, int position) {
+        char[] chars = s.toCharArray();
+        if (chars[position] == '9') {
+            chars[position] = '0';
+        } else {
+            chars[position]++;
+        }
+        return new String(chars);
     }
 
-    private String plusOne(String combination, int i) {
-        return null;
+    /**
+     * Turns a wheel backward (decrement by 1).
+     */
+    private String minusOne(String s, int position) {
+        char[] chars = s.toCharArray();
+        if (chars[position] == '0') {
+            chars[position] = '9';
+        } else {
+            chars[position]--;
+        }
+        return new String(chars);
     }
 }
