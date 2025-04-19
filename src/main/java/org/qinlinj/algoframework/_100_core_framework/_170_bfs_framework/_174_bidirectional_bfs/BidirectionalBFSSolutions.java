@@ -85,6 +85,35 @@ public class BidirectionalBFSSolutions {
         return -1;
     }
 
-    private String[] getSlidingNeighbors(String current) {
+    private List<String> getSlidingNeighbors(String state) {
+        // Define adjacency mapping for each position in the 2x3 board
+        int[][] neighbors = new int[][]{
+                {1, 3},       // Position 0 can move to 1 and 3
+                {0, 2, 4},    // Position 1 can move to 0, 2, and 4
+                {1, 5},       // Position 2 can move to 1 and 5
+                {0, 4},       // Position 3 can move to 0 and 4
+                {1, 3, 5},    // Position 4 can move to 1, 3, and 5
+                {2, 4}        // Position 5 can move to 2 and 4
+        };
+
+        List<String> result = new ArrayList<>();
+        int emptyPos = state.indexOf('0');
+
+        for (int adj : neighbors[emptyPos]) {
+            result.add(swap(state, emptyPos, adj));
+        }
+
+        return result;
+    }
+
+    /**
+     * Swaps two characters in a string.
+     */
+    private String swap(String s, int i, int j) {
+        char[] chars = s.toCharArray();
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+        return new String(chars);
     }
 }
