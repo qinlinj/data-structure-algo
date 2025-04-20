@@ -113,6 +113,38 @@ public class BinaryTreeTraversalInsights {
         inorderTraversal(root.right, result);
     }
 
+    public void postorderTraversal(TreeNode root, StringBuilder result) {
+        if (root == null) return;
+
+        postorderTraversal(root.left, result);
+        postorderTraversal(root.right, result);
+
+        // Post-order position - visit node after subtrees
+        result.append(root.val).append(" ");
+    }
+
+    // =====================================================
+    // UNIFIED TRAVERSAL DEMONSTRATING ALL THREE POSITIONS
+    // =====================================================
+
+    // This single function demonstrates all three positions in action
+    public void unifiedTraversal(TreeNode root) {
+        if (root == null) return;
+
+        // Pre-order position - when we first encounter the node
+        System.out.println("Pre-order: " + root.val);
+
+        unifiedTraversal(root.left);
+
+        // In-order position - after left subtree, before right subtree
+        System.out.println("In-order: " + root.val);
+
+        unifiedTraversal(root.right);
+
+        // Post-order position - after both subtrees are processed
+        System.out.println("Post-order: " + root.val);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
