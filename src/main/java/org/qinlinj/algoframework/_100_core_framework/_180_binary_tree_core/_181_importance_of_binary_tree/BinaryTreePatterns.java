@@ -81,6 +81,24 @@ public class BinaryTreePatterns {
         currentDepth[0]--;
     }
 
+    // =====================================================
+    // PATTERN 2: DIVIDE & CONQUER
+    // =====================================================
+
+    // Example 1: Find the maximum depth of a binary tree using divide & conquer
+    public int maxDepth(TreeNode root) {
+        // Base case
+        if (root == null) return 0;
+
+        // Divide: find the maximum depth of left and right subtrees
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+
+        // Conquer: find the maximum and add 1 for the current node
+        // This is the post-order position, as we use results from subtrees
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
