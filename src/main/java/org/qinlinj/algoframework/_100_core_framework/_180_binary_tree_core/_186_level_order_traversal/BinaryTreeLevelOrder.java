@@ -129,6 +129,37 @@ public class BinaryTreeLevelOrder {
         return depth;
     }
 
+    // =====================================================
+    // APPROACH 2: RECURSIVE DFS SIMULATING LEVEL-ORDER
+    // =====================================================
+
+    /**
+     * Uses DFS with depth tracking to simulate level-order traversal
+     * - Not truly BFS, more like "column-order" traversal
+     * - Good demonstration of how pre-order traversal can be adapted
+     */
+    public List<List<Integer>> levelOrderRecursiveDFS(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfsLevelOrder(root, 0, result);
+        return result;
+    }
+
+    private void dfsLevelOrder(TreeNode root, int depth, List<List<Integer>> result) {
+        if (root == null) return;
+
+        // Ensure the list for this depth exists
+        if (result.size() <= depth) {
+            result.add(new ArrayList<>());
+        }
+
+        // Pre-order position: add current node's value to its level's list
+        result.get(depth).add(root.val);
+
+        // Recurse on left and right with incremented depth
+        dfsLevelOrder(root.left, depth + 1, result);
+        dfsLevelOrder(root.right, depth + 1, result);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
