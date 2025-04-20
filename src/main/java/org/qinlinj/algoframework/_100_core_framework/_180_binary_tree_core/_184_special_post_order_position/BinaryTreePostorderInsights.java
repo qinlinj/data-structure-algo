@@ -117,6 +117,33 @@ public class BinaryTreePostorderInsights {
         return 1 + Math.max(maxDepthSimple(root.left), maxDepthSimple(root.right));
     }
 
+    // EFFICIENT APPROACH: O(N) time complexity
+    // Using post-order position to calculate diameter and depth simultaneously
+    public int diameterOfBinaryTreeEfficient(TreeNode root) {
+        int[] maxDiameter = new int[1];
+        maxDepth(root, maxDiameter);
+        return maxDiameter[0];
+    }
+
+    private int maxDepth(TreeNode root, int[] maxDiameter) {
+        if (root == null) {
+            return 0;
+        }
+
+        // Recursively calculate depths of left and right subtrees
+        int leftDepth = maxDepth(root.left, maxDiameter);
+        int rightDepth = maxDepth(root.right, maxDiameter);
+
+        // POST-ORDER POSITION
+        // Now that we have information from both subtrees, calculate the diameter
+        // passing through this node
+        int diameter = leftDepth + rightDepth;
+        maxDiameter[0] = Math.max(maxDiameter[0], diameter);
+
+        // Return the depth of this subtree to its parent
+        return 1 + Math.max(leftDepth, rightDepth);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
