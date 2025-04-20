@@ -205,6 +205,27 @@ public class BinaryTreeProblemSolving {
         pathSum[0] -= root.val;
     }
 
+    // APPROACH 2: PROBLEM DECOMPOSITION METHOD
+    public boolean hasPathSumDecomposition(TreeNode root, int targetSum) {
+        // Base case
+        if (root == null) {
+            return false;
+        }
+
+        // If leaf node, check if current value equals remaining target
+        if (root.left == null && root.right == null) {
+            return root.val == targetSum;
+        }
+
+        // Reduce the target by current node's value for the subtrees
+        int remainingSum = targetSum - root.val;
+
+        // The tree has a path with the sum if either left or right subtree has it
+        return hasPathSumDecomposition(root.left, remainingSum) ||
+                hasPathSumDecomposition(root.right, remainingSum);
+    }
+
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
