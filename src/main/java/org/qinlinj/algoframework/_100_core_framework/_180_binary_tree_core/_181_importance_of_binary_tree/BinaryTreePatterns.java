@@ -30,6 +30,42 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._181
  * Understanding binary tree thinking patterns provides a framework for approaching many complex algorithms.
  */
 public class BinaryTreePatterns {
+    public static void main(String[] args) {
+        BinaryTreePatterns solution = new BinaryTreePatterns();
+
+        // Create a sample binary tree
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        // Test traversal pattern
+        System.out.println("Node count: " + solution.countNodes(root));
+        System.out.println("Max depth (traversal): " + solution.maxDepthTraversal(root));
+
+        // Test divide & conquer pattern
+        System.out.println("Max depth (divide & conquer): " + solution.maxDepth(root));
+        System.out.println("Is balanced: " + solution.isBalanced(root));
+
+        // Test sorting algorithms
+        int[] array1 = {5, 3, 8, 4, 2, 7, 1, 6};
+        int[] array2 = {5, 3, 8, 4, 2, 7, 1, 6};
+
+        solution.quickSort(array1, 0, array1.length - 1);
+        solution.mergeSort(array2, 0, array2.length - 1);
+
+        System.out.print("Quick sort result: ");
+        for (int num : array1) System.out.print(num + " ");
+
+        System.out.print("\nMerge sort result: ");
+        for (int num : array2) System.out.print(num + " ");
+    }
+
+    // =====================================================
+    // PATTERN 1: TRAVERSAL
+    // =====================================================
+
     // Example 1: Count the total number of nodes in a binary tree
     public int countNodes(TreeNode root) {
         // External variable to maintain state during traversal
@@ -38,10 +74,6 @@ public class BinaryTreePatterns {
         traverse(root, count);
         return count[0];
     }
-
-    // =====================================================
-    // PATTERN 1: TRAVERSAL
-    // =====================================================
 
     // Traversal function that visits each node once
     private void traverse(TreeNode root, int[] count) {
@@ -66,6 +98,10 @@ public class BinaryTreePatterns {
         return maxDepth[0];
     }
 
+    // =====================================================
+    // PATTERN 2: DIVIDE & CONQUER
+    // =====================================================
+
     private void traverseWithDepth(TreeNode node, int[] currentDepth, int[] maxDepth) {
         if (node == null) return;
 
@@ -80,10 +116,6 @@ public class BinaryTreePatterns {
         // Post-order position: leaving this node
         currentDepth[0]--;
     }
-
-    // =====================================================
-    // PATTERN 2: DIVIDE & CONQUER
-    // =====================================================
 
     // Example 1: Find the maximum depth of a binary tree using divide & conquer
     public int maxDepth(TreeNode root) {
@@ -103,6 +135,10 @@ public class BinaryTreePatterns {
     public boolean isBalanced(TreeNode root) {
         return height(root) != -1;
     }
+
+    // =====================================================
+    // SORTING ALGORITHMS AS BINARY TREE TRAVERSALS
+    // =====================================================
 
     // Returns height of the tree if balanced, -1 if not balanced
     private int height(TreeNode root) {
@@ -124,10 +160,6 @@ public class BinaryTreePatterns {
         // Conquer: return height of this subtree (post-order position)
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
-    // =====================================================
-    // SORTING ALGORITHMS AS BINARY TREE TRAVERSALS
-    // =====================================================
 
     // Quick Sort: Pre-order traversal pattern
     public void quickSort(int[] nums, int lo, int hi) {
@@ -212,13 +244,17 @@ public class BinaryTreePatterns {
             k++;
         }
     }
-    
+
     // Helper method for swapping elements in an array
     private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
+    // =====================================================
+    // MAIN METHOD FOR TESTING
+    // =====================================================
 
     // Definition for a binary tree node
     public static class TreeNode {
