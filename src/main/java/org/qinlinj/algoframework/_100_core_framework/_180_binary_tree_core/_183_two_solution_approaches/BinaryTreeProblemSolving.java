@@ -225,7 +225,64 @@ public class BinaryTreeProblemSolving {
                 hasPathSumDecomposition(root.right, remainingSum);
     }
 
+    // =====================================================
+    // VISUALIZATION HELPER METHODS
+    // =====================================================
 
+    public void visualizeTraversalDepth(TreeNode root) {
+        System.out.println("Visualizing Traversal Approach for Max Depth:");
+        int[] depth = new int[1];
+        visualizeTraverse(root, depth, 0);
+    }
+
+    private void visualizeTraverse(TreeNode root, int[] depth, int indentation) {
+        if (root == null) {
+            return;
+        }
+
+        // Pre-order - entering node
+        depth[0]++;
+        String indent = " ".repeat(indentation * 2);
+        System.out.println(indent + "Enter Node " + root.val + " (Depth: " + depth[0] + ")");
+
+        visualizeTraverse(root.left, depth, indentation + 1);
+        visualizeTraverse(root.right, depth, indentation + 1);
+
+        // Post-order - leaving node
+        System.out.println(indent + "Exit Node " + root.val + " (Depth: " + depth[0] + ")");
+        depth[0]--;
+    }
+
+    public void visualizeDecomposition(TreeNode root) {
+        System.out.println("Visualizing Problem Decomposition Approach for Max Depth:");
+        int depth = visualizeMaxDepth(root, 0);
+        System.out.println("Final Max Depth: " + depth);
+    }
+
+    private int visualizeMaxDepth(TreeNode root, int indentation) {
+        if (root == null) {
+            String indent = " ".repeat(indentation * 2);
+            System.out.println(indent + "Null node, returning 0");
+            return 0;
+        }
+
+        String indent = " ".repeat(indentation * 2);
+        System.out.println(indent + "Processing Node " + root.val);
+
+        System.out.println(indent + "Calculating left subtree depth for Node " + root.val);
+        int leftDepth = visualizeMaxDepth(root.left, indentation + 1);
+        System.out.println(indent + "Left subtree depth: " + leftDepth);
+
+        System.out.println(indent + "Calculating right subtree depth for Node " + root.val);
+        int rightDepth = visualizeMaxDepth(root.right, indentation + 1);
+        System.out.println(indent + "Right subtree depth: " + rightDepth);
+
+        int result = 1 + Math.max(leftDepth, rightDepth);
+        System.out.println(indent + "Node " + root.val + "'s max depth: " + result);
+
+        return result;
+    }
+    
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
