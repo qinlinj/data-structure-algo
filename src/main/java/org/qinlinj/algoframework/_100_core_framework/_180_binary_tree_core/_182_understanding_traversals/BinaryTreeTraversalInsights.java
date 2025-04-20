@@ -23,6 +23,18 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._182
  * you only need to decide what each individual node should do at each position.
  */
 public class BinaryTreeTraversalInsights {
+    // =====================================================
+    // COMPARING TRAVERSAL STRUCTURES
+    // =====================================================
+
+    // Iterative array traversal
+    public void traverseArrayIterative(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            // Process arr[i]
+            System.out.println("Processing element: " + arr[i]);
+        }
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
