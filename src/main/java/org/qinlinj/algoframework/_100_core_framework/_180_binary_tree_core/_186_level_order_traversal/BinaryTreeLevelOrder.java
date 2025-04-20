@@ -160,6 +160,53 @@ public class BinaryTreeLevelOrder {
         dfsLevelOrder(root.right, depth + 1, result);
     }
 
+    // =====================================================
+    // APPROACH 3: RECURSIVE BFS IMPLEMENTATION
+    // =====================================================
+
+    /**
+     * True recursive implementation of BFS
+     * - Processes each level as a whole recursively
+     * - Conceptually closer to iterative BFS
+     */
+    public List<List<Integer>> levelOrderRecursiveBFS(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        List<TreeNode> currentLevel = new ArrayList<>();
+        currentLevel.add(root);
+
+        recursiveLevelOrder(currentLevel, result);
+        return result;
+    }
+
+    private void recursiveLevelOrder(List<TreeNode> currentLevel, List<List<Integer>> result) {
+        // Base case: no more nodes at this level
+        if (currentLevel.isEmpty()) return;
+
+        // Process current level
+        List<Integer> values = new ArrayList<>();
+        List<TreeNode> nextLevel = new ArrayList<>();
+
+        for (TreeNode node : currentLevel) {
+            // Collect values
+            values.add(node.val);
+
+            // Prepare next level
+            if (node.left != null) nextLevel.add(node.left);
+            if (node.right != null) nextLevel.add(node.right);
+        }
+
+        // Add current level's values to result
+        result.add(values);
+
+        // Process next level recursively
+        recursiveLevelOrder(nextLevel, result);
+
+        // Note: If we add to result here instead, we get bottom-up level order
+        // result.add(values);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
