@@ -125,6 +125,47 @@ public class BinaryTreePatterns {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    // =====================================================
+    // SORTING ALGORITHMS AS BINARY TREE TRAVERSALS
+    // =====================================================
+
+    // Quick Sort: Pre-order traversal pattern
+    public void quickSort(int[] nums, int lo, int hi) {
+        if (lo >= hi) return;
+
+        // Pre-order position: partition before recursive calls
+        int p = partition(nums, lo, hi);
+
+        // Recursive calls on left and right subarrays
+        quickSort(nums, lo, p - 1);
+        quickSort(nums, p + 1, hi);
+    }
+
+    private int partition(int[] nums, int lo, int hi) {
+        // Choose pivot as the last element
+        int pivot = nums[hi];
+        int i = lo;
+
+        // Partition array around pivot
+        for (int j = lo; j < hi; j++) {
+            if (nums[j] <= pivot) {
+                swap(nums, i, j);
+                i++;
+            }
+        }
+
+        // Place pivot in its final position
+        swap(nums, i, hi);
+        return i;
+    }
+
+    // Helper method for swapping elements in an array
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
