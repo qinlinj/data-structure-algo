@@ -33,9 +33,8 @@ import java.util.*;
  */
 public class BinaryTreeProblemSolving {
     // =====================================================
-    // EXAMPLE 1: MAXIMUM DEPTH OF BINARY TREE (LEETCODE 104)
+    // MAIN METHOD FOR TESTING
     // =====================================================
-
     public static void main(String[] args) {
         BinaryTreeProblemSolving solution = new BinaryTreeProblemSolving();
 
@@ -78,6 +77,9 @@ public class BinaryTreeProblemSolving {
         solution.visualizeDecomposition(root);
     }
 
+    // =====================================================
+    // EXAMPLE 1: MAXIMUM DEPTH OF BINARY TREE (LEETCODE 104)
+    // =====================================================
     // APPROACH 1: TRAVERSAL METHOD
     public int maxDepthTraversal(TreeNode root) {
         // External variables to track state during traversal
@@ -300,10 +302,6 @@ public class BinaryTreeProblemSolving {
         int depth = visualizeMaxDepth(root, 0);
         System.out.println("Final Max Depth: " + depth);
     }
-
-    // =====================================================
-    // MAIN METHOD FOR TESTING
-    // =====================================================
 
     private int visualizeMaxDepth(TreeNode root, int indentation) {
         if (root == null) {
