@@ -31,4 +31,43 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._184
  * determining if a tree is balanced, and finding paths with specific properties.
  */
 public class BinaryTreePostorderInsights {
+    // =====================================================
+    // EXAMPLE 1: PRINTING NODE LEVELS (PRE-ORDER CAPABLE)
+    // =====================================================
+
+    public void printNodeLevels(TreeNode root) {
+        traverse(root, 1);
+    }
+
+    private void traverse(TreeNode root, int level) {
+        if (root == null) {
+            return;
+        }
+
+        // PRE-ORDER POSITION
+        // We can easily print the level here because it's passed down from the parent
+        System.out.println("Node " + root.val + " is at level " + level);
+
+        // Pass updated level to children
+        traverse(root.left, level + 1);
+        traverse(root.right, level + 1);
+    }
+
+    // Definition for a binary tree node
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+
+        // Helper constructor for creating trees easily
+        TreeNode(int x, TreeNode left, TreeNode right) {
+            this.val = x;
+            this.left = left;
+            this.right = right;
+        }
+    }
 }
