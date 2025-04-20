@@ -31,6 +31,7 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._184
  * determining if a tree is balanced, and finding paths with specific properties.
  */
 public class BinaryTreePostorderInsights {
+
     // =====================================================
     // MAIN METHOD FOR TESTING
     // =====================================================

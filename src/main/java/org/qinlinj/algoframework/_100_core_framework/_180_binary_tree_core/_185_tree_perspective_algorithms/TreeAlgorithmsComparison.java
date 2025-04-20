@@ -32,6 +32,7 @@ import java.util.*;
  * and clarifies why implementation details vary between these related algorithms.
  */
 public class TreeAlgorithmsComparison {
+
     // =====================================================
     // MAIN METHOD FOR TESTING
     // =====================================================

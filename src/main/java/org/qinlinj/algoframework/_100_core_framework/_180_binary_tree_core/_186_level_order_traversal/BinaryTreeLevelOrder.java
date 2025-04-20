@@ -23,10 +23,86 @@ import java.util.*;
  * particularly those requiring shortest path calculations.
  */
 public class BinaryTreeLevelOrder {
+    
+    // =====================================================
+    // MAIN METHOD FOR TESTING
+    // =====================================================
+
+    public static void main(String[] args) {
+        BinaryTreeLevelOrder solution = new BinaryTreeLevelOrder();
+
+        // Create a sample binary tree
+        //      1
+        //     / \
+        //    2   3
+        //   / \   \
+        //  4   5   6
+        //     /
+        //    7
+        TreeNode root = new TreeNode(1,
+                new TreeNode(2,
+                        new TreeNode(4),
+                        new TreeNode(5,
+                                new TreeNode(7), null)),
+                new TreeNode(3,
+                        null, new TreeNode(6)));
+
+        System.out.println("=== STANDARD ITERATIVE LEVEL ORDER ===");
+        System.out.println(solution.levelOrderIterative(root));
+
+        System.out.println("\n=== LEVEL TRAVERSAL WITH PRINTING ===");
+        solution.levelTraverse(root);
+
+        System.out.println("\n=== RECURSIVE DFS SIMULATING LEVEL ORDER ===");
+        System.out.println(solution.levelOrderRecursiveDFS(root));
+
+        System.out.println("\n=== RECURSIVE BFS IMPLEMENTATION ===");
+        System.out.println(solution.levelOrderRecursiveBFS(root));
+
+        System.out.println("\n=== RIGHT SIDE VIEW ===");
+        System.out.println(solution.rightSideView(root));
+
+        System.out.println("\n=== ZIGZAG LEVEL ORDER ===");
+        System.out.println(solution.zigzagLevelOrder(root));
+
+        System.out.println("\n=== MINIMUM DEPTH ===");
+        System.out.println("Minimum depth: " + solution.minDepth(root));
+
+        System.out.println("\n=== PERFORMANCE COMPARISON ===");
+        solution.comparePerformance(root);
+
+        // Create a larger tree for better performance comparison
+        TreeNode largeRoot = createLargeTree(5); // 31 nodes
+        System.out.println("\n=== PERFORMANCE COMPARISON (LARGER TREE) ===");
+        solution.comparePerformance(largeRoot);
+    }
 
     // =====================================================
     // APPROACH 1: STANDARD ITERATIVE LEVEL-ORDER TRAVERSAL
     // =====================================================
+
+    // Helper to create a large balanced binary tree of given height
+    private static TreeNode createLargeTree(int height) {
+        if (height <= 0) return null;
+        TreeNode root = new TreeNode(1);
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int count = 2;
+
+        for (int h = 1; h < height; h++) {
+            int levelSize = queue.size();
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode node = queue.poll();
+                node.left = new TreeNode(count++);
+                node.right = new TreeNode(count++);
+                queue.offer(node.left);
+                queue.offer(node.right);
+            }
+        }
+
+        return root;
+    }
 
     /**
      * Standard iterative level-order traversal using a queue
@@ -95,6 +171,10 @@ public class BinaryTreeLevelOrder {
         }
     }
 
+    // =====================================================
+    // APPROACH 2: RECURSIVE DFS SIMULATING LEVEL-ORDER
+    // =====================================================
+
     // Modified BFS for finding minimum depth
     public int minDepth(TreeNode root) {
         if (root == null) return 0;
@@ -129,10 +209,6 @@ public class BinaryTreeLevelOrder {
         return depth;
     }
 
-    // =====================================================
-    // APPROACH 2: RECURSIVE DFS SIMULATING LEVEL-ORDER
-    // =====================================================
-
     /**
      * Uses DFS with depth tracking to simulate level-order traversal
      * - Not truly BFS, more like "column-order" traversal
@@ -143,6 +219,10 @@ public class BinaryTreeLevelOrder {
         dfsLevelOrder(root, 0, result);
         return result;
     }
+
+    // =====================================================
+    // APPROACH 3: RECURSIVE BFS IMPLEMENTATION
+    // =====================================================
 
     private void dfsLevelOrder(TreeNode root, int depth, List<List<Integer>> result) {
         if (root == null) return;
@@ -160,10 +240,6 @@ public class BinaryTreeLevelOrder {
         dfsLevelOrder(root.right, depth + 1, result);
     }
 
-    // =====================================================
-    // APPROACH 3: RECURSIVE BFS IMPLEMENTATION
-    // =====================================================
-
     /**
      * True recursive implementation of BFS
      * - Processes each level as a whole recursively
@@ -179,6 +255,10 @@ public class BinaryTreeLevelOrder {
         recursiveLevelOrder(currentLevel, result);
         return result;
     }
+
+    // =====================================================
+    // ADDITIONAL LEVEL-ORDER APPLICATIONS
+    // =====================================================
 
     private void recursiveLevelOrder(List<TreeNode> currentLevel, List<List<Integer>> result) {
         // Base case: no more nodes at this level
@@ -206,10 +286,6 @@ public class BinaryTreeLevelOrder {
         // Note: If we add to result here instead, we get bottom-up level order
         // result.add(values);
     }
-
-    // =====================================================
-    // ADDITIONAL LEVEL-ORDER APPLICATIONS
-    // =====================================================
 
     /**
      * Right side view of the binary tree

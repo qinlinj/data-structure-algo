@@ -23,6 +23,7 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._182
  * you only need to decide what each individual node should do at each position.
  */
 public class BinaryTreeTraversalInsights {
+
     // =====================================================
     // MAIN METHOD FOR TESTING
     // =====================================================

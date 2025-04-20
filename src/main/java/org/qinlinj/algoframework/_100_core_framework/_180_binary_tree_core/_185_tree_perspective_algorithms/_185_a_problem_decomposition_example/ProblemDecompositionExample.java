@@ -3,6 +3,7 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._185
 import org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._185_tree_perspective_algorithms.TreeAlgorithmsComparison;
 
 public class ProblemDecompositionExample {
+
     // =====================================================
     // EXAMPLE 1: DYNAMIC PROGRAMMING - FOCUS ON "SUBTREES"
     // =====================================================
