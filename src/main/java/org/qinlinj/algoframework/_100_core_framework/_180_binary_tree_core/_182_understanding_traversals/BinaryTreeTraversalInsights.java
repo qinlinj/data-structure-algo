@@ -145,6 +145,23 @@ public class BinaryTreeTraversalInsights {
         System.out.println("Post-order: " + root.val);
     }
 
+    // =====================================================
+    // PRACTICAL EXAMPLES OF PRE/IN/POST-ORDER USAGE
+    // =====================================================
+
+    // Example 1: Calculate tree height - uses post-order position
+    public int calculateHeight(TreeNode root) {
+        if (root == null) return 0;
+
+        // Process the subtrees first
+        int leftHeight = calculateHeight(root.left);
+        int rightHeight = calculateHeight(root.right);
+
+        // Post-order position - ideal for bottom-up calculations
+        // We combine results from subtrees to calculate current node's result
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
