@@ -107,6 +107,27 @@ public class BinaryTreeProblemSolving {
         preorderTraverse(root.right, result);
     }
 
+    // APPROACH 2: PROBLEM DECOMPOSITION METHOD
+    public List<Integer> preorderTraversalMethod2(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+
+        // Base case
+        if (root == null) {
+            return result;
+        }
+
+        // Preorder traversal: root node first
+        result.add(root.val);
+
+        // Then append left subtree's preorder traversal result
+        result.addAll(preorderTraversalMethod2(root.left));
+
+        // Finally append right subtree's preorder traversal result
+        result.addAll(preorderTraversalMethod2(root.right));
+
+        return result;
+    }
+    
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
