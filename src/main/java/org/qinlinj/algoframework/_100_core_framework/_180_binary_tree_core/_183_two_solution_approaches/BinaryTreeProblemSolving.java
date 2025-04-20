@@ -148,6 +148,25 @@ public class BinaryTreeProblemSolving {
         return result;
     }
 
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+
+        if (root == null) {
+            return result;
+        }
+
+        // First append left subtree's postorder traversal
+        result.addAll(postorderTraversal(root.left));
+
+        // Then append right subtree's postorder traversal
+        result.addAll(postorderTraversal(root.right));
+
+        // Finally add root's value (post-order position)
+        result.add(root.val);
+
+        return result;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
