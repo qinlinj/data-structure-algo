@@ -1,6 +1,8 @@
 package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._183_two_solution_approaches;
 
 
+import java.util.*;
+
 /**
  * TWO APPROACHES TO SOLVING BINARY TREE PROBLEMS
  * ==============================================
@@ -79,6 +81,30 @@ public class BinaryTreeProblemSolving {
         // Post-order position - combine results from subtrees
         // The tree's max depth = max(left subtree depth, right subtree depth) + 1
         return 1 + Math.max(leftMax, rightMax);
+    }
+
+    // =====================================================
+    // EXAMPLE 2: BINARY TREE PREORDER TRAVERSAL (LEETCODE 144)
+    // =====================================================
+
+    // APPROACH 1: TRAVERSAL METHOD
+    public List<Integer> preorderTraversalMethod1(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+        preorderTraverse(root, result);
+        return result;
+    }
+
+    private void preorderTraverse(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+
+        // Pre-order position - add current node's value
+        result.add(root.val);
+
+        // Continue traversing
+        preorderTraverse(root.left, result);
+        preorderTraverse(root.right, result);
     }
 
     // Definition for a binary tree node
