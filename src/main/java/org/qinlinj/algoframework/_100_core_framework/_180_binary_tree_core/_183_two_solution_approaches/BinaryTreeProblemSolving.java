@@ -183,6 +183,26 @@ public class BinaryTreeProblemSolving {
     }
 
     private void traverseForPathSum(TreeNode root, int targetSum, int[] pathSum, boolean[] found) {
+        // Base case or early return if already found
+        if (root == null || found[0]) {
+            return;
+        }
+
+        // Pre-order position - add current node value to path sum
+        pathSum[0] += root.val;
+
+        // Check if it's a leaf node and sum equals target
+        if (root.left == null && root.right == null && pathSum[0] == targetSum) {
+            found[0] = true;
+            return;
+        }
+
+        // Continue traversing
+        traverseForPathSum(root.left, targetSum, pathSum, found);
+        traverseForPathSum(root.right, targetSum, pathSum, found);
+
+        // Post-order position - backtrack by removing current node's value
+        pathSum[0] -= root.val;
     }
 
     // Definition for a binary tree node
