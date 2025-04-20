@@ -95,6 +95,40 @@ public class BinaryTreeLevelOrder {
         }
     }
 
+    // Modified BFS for finding minimum depth
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int depth = 1; // Start with depth 1 for root
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode current = queue.poll();
+
+                // Check if this is a leaf node
+                if (current.left == null && current.right == null) {
+                    return depth; // Found the first leaf node
+                }
+
+                // Add children to queue
+                if (current.left != null) {
+                    queue.offer(current.left);
+                }
+                if (current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+
+            depth++; // Increment depth after processing each level
+        }
+
+        return depth;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
