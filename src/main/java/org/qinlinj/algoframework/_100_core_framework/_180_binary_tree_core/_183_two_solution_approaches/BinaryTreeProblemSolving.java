@@ -167,6 +167,24 @@ public class BinaryTreeProblemSolving {
         return result;
     }
 
+    // =====================================================
+    // EXAMPLE 3: BINARY TREE PATH SUM (LEETCODE 112)
+    // =====================================================
+
+    // APPROACH 1: TRAVERSAL METHOD
+    public boolean hasPathSumTraversal(TreeNode root, int targetSum) {
+        // External variable to store the result
+        boolean[] found = new boolean[1];
+        // Current path sum during traversal
+        int[] pathSum = new int[1];
+
+        traverseForPathSum(root, targetSum, pathSum, found);
+        return found[0];
+    }
+
+    private void traverseForPathSum(TreeNode root, int targetSum, int[] pathSum, boolean[] found) {
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
