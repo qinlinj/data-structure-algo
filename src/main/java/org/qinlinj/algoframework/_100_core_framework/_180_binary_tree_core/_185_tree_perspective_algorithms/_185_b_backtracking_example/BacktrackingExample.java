@@ -57,4 +57,31 @@ public class BacktrackingExample {
         backtrack(nums, track, used, result);
         return result;
     }
+
+    private void backtrack(int[] nums, LinkedList<Integer> track, boolean[] used, List<List<Integer>> result) {
+        // Base case: found a valid permutation
+        if (track.size() == nums.length) {
+            result.add(new ArrayList<>(track));
+            return;
+        }
+
+        // Try all possible next elements
+        for (int i = 0; i < nums.length; i++) {
+            // Skip used elements
+            if (used[i]) continue;
+
+            // Make choice - add this element to permutation
+            used[i] = true;
+            track.add(nums[i]);
+            System.out.println("Added " + nums[i] + " to permutation: " + track);
+
+            // Explore further with this choice
+            backtrack(nums, track, used, result);
+
+            // Unmake choice - remove this element from permutation
+            track.removeLast();
+            used[i] = false;
+            System.out.println("Removed " + nums[i] + " from permutation: " + track);
+        }
+    }
 }
