@@ -242,6 +242,44 @@ public class BinaryTreeLevelOrder {
         return result;
     }
 
+    /**
+     * Zigzag level order traversal
+     * Alternates between left-to-right and right-to-left ordering
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean leftToRight = true;
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            LinkedList<Integer> currentLevel = new LinkedList<>();
+
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode current = queue.poll();
+
+                // Add to current level based on direction
+                if (leftToRight) {
+                    currentLevel.addLast(current.val);
+                } else {
+                    currentLevel.addFirst(current.val);
+                }
+
+                // Add children to queue
+                if (current.left != null) queue.offer(current.left);
+                if (current.right != null) queue.offer(current.right);
+            }
+
+            result.add(currentLevel);
+            leftToRight = !leftToRight; // Toggle direction for next level
+        }
+
+        return result;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
