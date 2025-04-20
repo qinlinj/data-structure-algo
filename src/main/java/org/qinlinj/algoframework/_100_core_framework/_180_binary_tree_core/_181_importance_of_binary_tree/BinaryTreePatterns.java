@@ -55,6 +55,20 @@ public class BinaryTreePatterns {
         traverse(root.right, count);
     }
 
+    // Example 2: Find the maximum depth of a binary tree using traversal
+    public int maxDepthTraversal(TreeNode root) {
+        // External variables to track state
+        int[] maxDepth = new int[1];
+        int[] currentDepth = new int[1];
+
+        // Perform traversal with depth tracking
+        traverseWithDepth(root, currentDepth, maxDepth);
+        return maxDepth[0];
+    }
+
+    private void traverseWithDepth(TreeNode root, int[] currentDepth, int[] maxDepth) {
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
