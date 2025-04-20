@@ -206,6 +206,31 @@ public class BinaryTreePostorderInsights {
         return leftResult != null ? leftResult : rightResult;
     }
 
+    // =====================================================
+    // VISUALIZATION AND COMPARISON HELPERS
+    // =====================================================
+
+    public void visualizeIneffcientVsEfficient(TreeNode root) {
+        System.out.println("=== COMPARISON OF APPROACHES FOR TREE DIAMETER ===");
+
+        System.out.println("\nINEFFICIENT APPROACH (Separate maxDepth calls):");
+        long startTime1 = System.nanoTime();
+        int diameter1 = diameterOfBinaryTreeInefficient(root);
+        long endTime1 = System.nanoTime();
+        System.out.println("Result: " + diameter1);
+        System.out.println("Time taken: " + (endTime1 - startTime1) + " ns");
+
+        System.out.println("\nEFFICIENT APPROACH (Post-order optimization):");
+        long startTime2 = System.nanoTime();
+        int diameter2 = diameterOfBinaryTreeEfficient(root);
+        long endTime2 = System.nanoTime();
+        System.out.println("Result: " + diameter2);
+        System.out.println("Time taken: " + (endTime2 - startTime2) + " ns");
+
+        System.out.println("\nSpeed improvement: " +
+                ((double) (endTime1 - startTime1) / (endTime2 - startTime2)) + "x");
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
