@@ -50,6 +50,14 @@ public class BinaryTreeTraversalInsights {
         System.out.println("Post-order: Finished processing " + arr[i]);
     }
 
+    // Iterative linked list traversal
+    public void traverseLinkedListIterative(ListNode head) {
+        for (ListNode p = head; p != null; p = p.next) {
+            // Process p
+            System.out.println("Processing node: " + p.val);
+        }
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
