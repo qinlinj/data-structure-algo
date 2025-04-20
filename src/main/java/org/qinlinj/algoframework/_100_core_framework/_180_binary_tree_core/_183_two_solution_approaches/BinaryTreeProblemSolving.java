@@ -64,7 +64,23 @@ public class BinaryTreeProblemSolving {
         // Post-order position - leaving node, decrease depth
         depth[0]--;
     }
-    
+
+    // APPROACH 2: PROBLEM DECOMPOSITION METHOD
+    public int maxDepthDecomposition(TreeNode root) {
+        // Base case
+        if (root == null) {
+            return 0;
+        }
+
+        // Calculate max depth of left and right subtrees
+        int leftMax = maxDepthDecomposition(root.left);
+        int rightMax = maxDepthDecomposition(root.right);
+
+        // Post-order position - combine results from subtrees
+        // The tree's max depth = max(left subtree depth, right subtree depth) + 1
+        return 1 + Math.max(leftMax, rightMax);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
