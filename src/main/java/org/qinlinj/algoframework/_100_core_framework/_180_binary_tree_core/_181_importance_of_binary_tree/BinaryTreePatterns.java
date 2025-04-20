@@ -159,6 +159,60 @@ public class BinaryTreePatterns {
         return i;
     }
 
+    // Merge Sort: Post-order traversal pattern
+    public void mergeSort(int[] nums, int lo, int hi) {
+        if (lo >= hi) return;
+
+        int mid = lo + (hi - lo) / 2;
+
+        // Divide: sort left and right subarrays
+        mergeSort(nums, lo, mid);
+        mergeSort(nums, mid + 1, hi);
+
+        // Post-order position: merge after recursive calls
+        merge(nums, lo, mid, hi);
+    }
+
+    private void merge(int[] nums, int lo, int mid, int hi) {
+        // Create temporary arrays for merging
+        int[] leftArray = new int[mid - lo + 1];
+        int[] rightArray = new int[hi - mid];
+
+        // Copy data to temporary arrays
+        for (int i = 0; i < leftArray.length; i++)
+            leftArray[i] = nums[lo + i];
+
+        for (int i = 0; i < rightArray.length; i++)
+            rightArray[i] = nums[mid + 1 + i];
+
+        // Merge the temporary arrays back into nums[lo..hi]
+        int i = 0, j = 0, k = lo;
+        while (i < leftArray.length && j < rightArray.length) {
+            if (leftArray[i] <= rightArray[j]) {
+                nums[k] = leftArray[i];
+                i++;
+            } else {
+                nums[k] = rightArray[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy remaining elements from leftArray, if any
+        while (i < leftArray.length) {
+            nums[k] = leftArray[i];
+            i++;
+            k++;
+        }
+
+        // Copy remaining elements from rightArray, if any
+        while (j < rightArray.length) {
+            nums[k] = rightArray[j];
+            j++;
+            k++;
+        }
+    }
+    
     // Helper method for swapping elements in an array
     private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
