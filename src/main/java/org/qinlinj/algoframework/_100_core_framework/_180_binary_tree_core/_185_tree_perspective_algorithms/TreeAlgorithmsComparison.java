@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._185_tree_perspective_algorithms;
 
+import java.util.*;
+
 /**
  * UNDERSTANDING DYNAMIC PROGRAMMING, BACKTRACKING AND DFS FROM A TREE PERSPECTIVE
  * ===============================================================================
@@ -31,4 +33,31 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._185
  */
 
 public class TreeAlgorithmsComparison {
+    // =====================================================
+    // BINARY TREE NODE DEFINITION
+    // =====================================================
+
+    public static class TreeNode {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    // =====================================================
+    // N-ARY TREE NODE DEFINITION (FOR MULTI-WAY BRANCHING)
+    // =====================================================
+
+    public static class Node {
+        int val;
+        List<Node> children;
+
+        Node(int x) {
+            val = x;
+            children = new ArrayList<>();
+        }
+    }
 }
