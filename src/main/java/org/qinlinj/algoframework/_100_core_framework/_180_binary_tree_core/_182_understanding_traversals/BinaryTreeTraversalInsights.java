@@ -24,9 +24,74 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._182
  */
 public class BinaryTreeTraversalInsights {
     // =====================================================
+    // MAIN METHOD FOR TESTING
+    // =====================================================
+    public static void main(String[] args) {
+        BinaryTreeTraversalInsights insights = new BinaryTreeTraversalInsights();
+
+        // Create a binary tree for testing
+        //      1
+        //     / \
+        //    2   3
+        //   / \   \
+        //  4   5   6
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(6);
+
+        System.out.println("=== TRAVERSAL DEMONSTRATION ===");
+        System.out.println("\n1. Demonstrating traversal positions on node 1:");
+        insights.unifiedTraversal(root);
+
+        System.out.println("\n2. Traditional traversal results:");
+        StringBuilder preorder = new StringBuilder();
+        StringBuilder inorder = new StringBuilder();
+        StringBuilder postorder = new StringBuilder();
+
+        insights.preorderTraversal(root, preorder);
+        insights.inorderTraversal(root, inorder);
+        insights.postorderTraversal(root, postorder);
+
+        System.out.println("Preorder traversal: " + preorder);
+        System.out.println("Inorder traversal: " + inorder);
+        System.out.println("Postorder traversal: " + postorder);
+
+        System.out.println("\n3. Linked list reverse printing (post-order application):");
+        // Create a linked list: 1 -> 2 -> 3 -> 4 -> 5
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        System.out.print("Original list: 1 2 3 4 5, Reversed: ");
+        insights.printLinkedListReverse(head);
+
+        System.out.println("\n\n4. Tree height calculation (post-order application):");
+        int height = insights.calculateHeight(root);
+        System.out.println("Tree height: " + height);
+
+        System.out.println("\n5. Node depth calculation (pre-order application):");
+        insights.computeDepth(root, 0, new int[100]);
+
+        // Create an N-ary tree
+        NaryTreeNode naryRoot = new NaryTreeNode(1);
+        naryRoot.children.add(new NaryTreeNode(2));
+        naryRoot.children.add(new NaryTreeNode(3));
+        naryRoot.children.add(new NaryTreeNode(4));
+        naryRoot.children.get(0).children.add(new NaryTreeNode(5));
+        naryRoot.children.get(0).children.add(new NaryTreeNode(6));
+
+        System.out.println("\n6. N-ary tree traversal (demonstrates absence of in-order):");
+        insights.traverseNaryTree(naryRoot);
+    }
+
+    // =====================================================
     // COMPARING TRAVERSAL STRUCTURES
     // =====================================================
-
     // Iterative array traversal
     public void traverseArrayIterative(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
@@ -58,6 +123,10 @@ public class BinaryTreeTraversalInsights {
         }
     }
 
+    // =====================================================
+    // PRACTICAL APPLICATION OF TRAVERSAL POSITIONS
+    // =====================================================
+
     // Recursive linked list traversal with pre and post positions
     public void traverseLinkedListRecursive(ListNode head) {
         if (head == null) {
@@ -72,10 +141,6 @@ public class BinaryTreeTraversalInsights {
         // Post-order position - after recursion
         System.out.println("Post-order: Finished processing " + head.val);
     }
-
-    // =====================================================
-    // PRACTICAL APPLICATION OF TRAVERSAL POSITIONS
-    // =====================================================
 
     // Example 1: Printing a linked list in reverse using post-order position
     public void printLinkedListReverse(ListNode head) {
@@ -113,6 +178,10 @@ public class BinaryTreeTraversalInsights {
         inorderTraversal(root.right, result);
     }
 
+    // =====================================================
+    // UNIFIED TRAVERSAL DEMONSTRATING ALL THREE POSITIONS
+    // =====================================================
+
     public void postorderTraversal(TreeNode root, StringBuilder result) {
         if (root == null) return;
 
@@ -124,7 +193,7 @@ public class BinaryTreeTraversalInsights {
     }
 
     // =====================================================
-    // UNIFIED TRAVERSAL DEMONSTRATING ALL THREE POSITIONS
+    // PRACTICAL EXAMPLES OF PRE/IN/POST-ORDER USAGE
     // =====================================================
 
     // This single function demonstrates all three positions in action
@@ -144,10 +213,6 @@ public class BinaryTreeTraversalInsights {
         // Post-order position - after both subtrees are processed
         System.out.println("Post-order: " + root.val);
     }
-
-    // =====================================================
-    // PRACTICAL EXAMPLES OF PRE/IN/POST-ORDER USAGE
-    // =====================================================
 
     // Example 1: Calculate tree height - uses post-order position
     public int calculateHeight(TreeNode root) {
@@ -179,6 +244,10 @@ public class BinaryTreeTraversalInsights {
         return validateBSTHelper(root, null, null);
     }
 
+    // =====================================================
+    // N-ARY TREE TRAVERSAL (NO IN-ORDER POSITION!)
+    // =====================================================
+
     private boolean validateBSTHelper(TreeNode root, Integer min, Integer max) {
         if (root == null) return true;
 
@@ -192,10 +261,6 @@ public class BinaryTreeTraversalInsights {
         return validateBSTHelper(root.left, min, root.val) &&
                 validateBSTHelper(root.right, root.val, max);
     }
-
-    // =====================================================
-    // N-ARY TREE TRAVERSAL (NO IN-ORDER POSITION!)
-    // =====================================================
 
     // N-ary tree traversal has pre-order and post-order, but no in-order
     public void traverseNaryTree(NaryTreeNode root) {
@@ -226,7 +291,7 @@ public class BinaryTreeTraversalInsights {
             children = new java.util.ArrayList<>();
         }
     }
-    
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
