@@ -36,6 +36,48 @@ public class BinaryTreeProblemSolving {
     // EXAMPLE 1: MAXIMUM DEPTH OF BINARY TREE (LEETCODE 104)
     // =====================================================
 
+    public static void main(String[] args) {
+        BinaryTreeProblemSolving solution = new BinaryTreeProblemSolving();
+
+        // Create a sample binary tree
+        //        3
+        //       / \
+        //      9  20
+        //        /  \
+        //       15   7
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        // Test max depth using both approaches
+        System.out.println("=== MAXIMUM DEPTH EXAMPLE ===");
+        System.out.println("Max Depth (Traversal): " + solution.maxDepthTraversal(root));
+        System.out.println("Max Depth (Decomposition): " + solution.maxDepthDecomposition(root));
+
+        // Test preorder traversal using both approaches
+        System.out.println("\n=== PREORDER TRAVERSAL EXAMPLE ===");
+        System.out.println("Preorder (Traversal): " + solution.preorderTraversalMethod1(root));
+        System.out.println("Preorder (Decomposition): " + solution.preorderTraversalMethod2(root));
+
+        // Test inorder and postorder traversal
+        System.out.println("Inorder: " + solution.inorderTraversal(root));
+        System.out.println("Postorder: " + solution.postorderTraversal(root));
+
+        // Test path sum using both approaches
+        System.out.println("\n=== PATH SUM EXAMPLE ===");
+        System.out.println("Has Path Sum 38 (Traversal): " + solution.hasPathSumTraversal(root, 38));
+        System.out.println("Has Path Sum 38 (Decomposition): " + solution.hasPathSumDecomposition(root, 38));
+        System.out.println("Has Path Sum 30 (Traversal): " + solution.hasPathSumTraversal(root, 30));
+        System.out.println("Has Path Sum 30 (Decomposition): " + solution.hasPathSumDecomposition(root, 30));
+
+        System.out.println("\n=== VISUALIZATION OF APPROACHES ===");
+        solution.visualizeTraversalDepth(root);
+        System.out.println();
+        solution.visualizeDecomposition(root);
+    }
+
     // APPROACH 1: TRAVERSAL METHOD
     public int maxDepthTraversal(TreeNode root) {
         // External variables to track state during traversal
@@ -67,6 +109,10 @@ public class BinaryTreeProblemSolving {
         depth[0]--;
     }
 
+    // =====================================================
+    // EXAMPLE 2: BINARY TREE PREORDER TRAVERSAL (LEETCODE 144)
+    // =====================================================
+
     // APPROACH 2: PROBLEM DECOMPOSITION METHOD
     public int maxDepthDecomposition(TreeNode root) {
         // Base case
@@ -82,10 +128,6 @@ public class BinaryTreeProblemSolving {
         // The tree's max depth = max(left subtree depth, right subtree depth) + 1
         return 1 + Math.max(leftMax, rightMax);
     }
-
-    // =====================================================
-    // EXAMPLE 2: BINARY TREE PREORDER TRAVERSAL (LEETCODE 144)
-    // =====================================================
 
     // APPROACH 1: TRAVERSAL METHOD
     public List<Integer> preorderTraversalMethod1(TreeNode root) {
@@ -148,6 +190,10 @@ public class BinaryTreeProblemSolving {
         return result;
     }
 
+    // =====================================================
+    // EXAMPLE 3: BINARY TREE PATH SUM (LEETCODE 112)
+    // =====================================================
+
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new LinkedList<>();
 
@@ -166,10 +212,6 @@ public class BinaryTreeProblemSolving {
 
         return result;
     }
-
-    // =====================================================
-    // EXAMPLE 3: BINARY TREE PATH SUM (LEETCODE 112)
-    // =====================================================
 
     // APPROACH 1: TRAVERSAL METHOD
     public boolean hasPathSumTraversal(TreeNode root, int targetSum) {
@@ -205,6 +247,10 @@ public class BinaryTreeProblemSolving {
         pathSum[0] -= root.val;
     }
 
+    // =====================================================
+    // VISUALIZATION HELPER METHODS
+    // =====================================================
+
     // APPROACH 2: PROBLEM DECOMPOSITION METHOD
     public boolean hasPathSumDecomposition(TreeNode root, int targetSum) {
         // Base case
@@ -224,10 +270,6 @@ public class BinaryTreeProblemSolving {
         return hasPathSumDecomposition(root.left, remainingSum) ||
                 hasPathSumDecomposition(root.right, remainingSum);
     }
-
-    // =====================================================
-    // VISUALIZATION HELPER METHODS
-    // =====================================================
 
     public void visualizeTraversalDepth(TreeNode root) {
         System.out.println("Visualizing Traversal Approach for Max Depth:");
@@ -259,6 +301,10 @@ public class BinaryTreeProblemSolving {
         System.out.println("Final Max Depth: " + depth);
     }
 
+    // =====================================================
+    // MAIN METHOD FOR TESTING
+    // =====================================================
+
     private int visualizeMaxDepth(TreeNode root, int indentation) {
         if (root == null) {
             String indent = " ".repeat(indentation * 2);
@@ -282,7 +328,7 @@ public class BinaryTreeProblemSolving {
 
         return result;
     }
-    
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
