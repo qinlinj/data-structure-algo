@@ -30,4 +30,30 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._181
  * Understanding binary tree thinking patterns provides a framework for approaching many complex algorithms.
  */
 public class BinaryTreePatterns {
+    // Example 1: Count the total number of nodes in a binary tree
+    public int countNodes(TreeNode root) {
+        // External variable to maintain state during traversal
+        int[] count = new int[1];
+        // Perform traversal
+        traverse(root, count);
+        return count[0];
+    }
+
+    // =====================================================
+    // PATTERN 1: TRAVERSAL
+    // =====================================================
+
+    private void traverse(TreeNode root, int[] count) {
+    }
+
+    // Definition for a binary tree node
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
 }
