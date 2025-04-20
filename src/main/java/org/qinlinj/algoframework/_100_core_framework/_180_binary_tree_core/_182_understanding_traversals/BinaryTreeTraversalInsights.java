@@ -35,6 +35,21 @@ public class BinaryTreeTraversalInsights {
         }
     }
 
+    // Recursive array traversal with pre and post positions
+    public void traverseArrayRecursive(int[] arr, int i) {
+        if (i == arr.length) {
+            return;
+        }
+
+        // Pre-order position - before recursion
+        System.out.println("Pre-order: About to process " + arr[i]);
+
+        traverseArrayRecursive(arr, i + 1);
+
+        // Post-order position - after recursion
+        System.out.println("Post-order: Finished processing " + arr[i]);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
