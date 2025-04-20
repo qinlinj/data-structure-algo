@@ -31,6 +31,67 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._184
  * determining if a tree is balanced, and finding paths with specific properties.
  */
 public class BinaryTreePostorderInsights {
+    // =====================================================
+    // MAIN METHOD FOR TESTING
+    // =====================================================
+
+    public static void main(String[] args) {
+        BinaryTreePostorderInsights solution = new BinaryTreePostorderInsights();
+
+        // Create a sample binary tree
+        //        1
+        //       / \
+        //      2   3
+        //     / \   \
+        //    4   5   6
+        TreeNode root = new TreeNode(1,
+                new TreeNode(2,
+                        new TreeNode(4), new TreeNode(5)),
+                new TreeNode(3,
+                        null, new TreeNode(6)));
+
+        System.out.println("=== EXAMPLE 1: NODE LEVELS (PRE-ORDER) ===");
+        solution.printNodeLevels(root);
+
+        System.out.println("\n=== EXAMPLE 2: SUBTREE NODE COUNTS (POST-ORDER) ===");
+        solution.printSubtreeNodeCounts(root);
+
+        System.out.println("\n=== EXAMPLE 3: TREE DIAMETER COMPARISON ===");
+        solution.visualizeIneffcientVsEfficient(root);
+
+        System.out.println("\n=== EXAMPLE 4: BALANCED TREE CHECK ===");
+        System.out.println("Is the tree balanced? " + solution.isBalanced(root));
+
+        System.out.println("\n=== EXAMPLE 5: LOWEST COMMON ANCESTOR ===");
+        TreeNode p = root.left;  // Node 2
+        TreeNode q = root.right; // Node 3
+        TreeNode lca = solution.lowestCommonAncestor(root, p, q);
+        System.out.println("LCA of nodes " + p.val + " and " + q.val + " is node " + lca.val);
+
+        System.out.println("\n=== EXAMPLE 6: DEMONSTRATING POSITION CAPABILITIES ===");
+        solution.demonstratePositionCapabilities(new TreeNode(1,
+                new TreeNode(2),
+                new TreeNode(3)));
+
+        // Create the example tree from the article for diameter calculation
+        //        1
+        //       / \
+        //      2   3
+        //     / \
+        //    4   5
+        //   /     \
+        //  9       6
+        TreeNode diameterTree = new TreeNode(1,
+                new TreeNode(2,
+                        new TreeNode(4,
+                                new TreeNode(9), null),
+                        new TreeNode(5,
+                                null, new TreeNode(6))),
+                new TreeNode(3));
+
+        System.out.println("\n=== CALCULATED DIAMETER FOR EXAMPLE TREE ===");
+        System.out.println("Diameter: " + solution.diameterOfBinaryTreeEfficient(diameterTree));
+    }
 
     // =====================================================
     // EXAMPLE 1: PRINTING NODE LEVELS (PRE-ORDER CAPABLE)

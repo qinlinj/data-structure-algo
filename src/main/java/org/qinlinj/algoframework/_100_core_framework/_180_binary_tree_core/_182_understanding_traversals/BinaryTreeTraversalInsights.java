@@ -26,6 +26,7 @@ public class BinaryTreeTraversalInsights {
     // =====================================================
     // MAIN METHOD FOR TESTING
     // =====================================================
+
     public static void main(String[] args) {
         BinaryTreeTraversalInsights insights = new BinaryTreeTraversalInsights();
 
@@ -92,6 +93,7 @@ public class BinaryTreeTraversalInsights {
     // =====================================================
     // COMPARING TRAVERSAL STRUCTURES
     // =====================================================
+
     // Iterative array traversal
     public void traverseArrayIterative(int[] arr) {
         for (int i = 0; i < arr.length; i++) {

@@ -35,6 +35,7 @@ public class BinaryTreeProblemSolving {
     // =====================================================
     // MAIN METHOD FOR TESTING
     // =====================================================
+
     public static void main(String[] args) {
         BinaryTreeProblemSolving solution = new BinaryTreeProblemSolving();
 
@@ -80,6 +81,7 @@ public class BinaryTreeProblemSolving {
     // =====================================================
     // EXAMPLE 1: MAXIMUM DEPTH OF BINARY TREE (LEETCODE 104)
     // =====================================================
+
     // APPROACH 1: TRAVERSAL METHOD
     public int maxDepthTraversal(TreeNode root) {
         // External variables to track state during traversal
