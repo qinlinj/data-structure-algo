@@ -99,6 +99,14 @@ public class BinaryTreePatterns {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    // Example 2: Determine if a binary tree is balanced using divide & conquer
+    public boolean isBalanced(TreeNode root) {
+        return height(root) != -1;
+    }
+
+    private int height(TreeNode root) {
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
