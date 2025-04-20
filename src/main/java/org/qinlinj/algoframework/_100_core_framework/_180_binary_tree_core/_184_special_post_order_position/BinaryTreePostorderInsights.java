@@ -231,6 +231,50 @@ public class BinaryTreePostorderInsights {
                 ((double) (endTime1 - startTime1) / (endTime2 - startTime2)) + "x");
     }
 
+    // =====================================================
+    // EXAMPLE 6: DEMONSTRATING POSITION CAPABILITIES
+    // =====================================================
+
+    public void demonstratePositionCapabilities(TreeNode root) {
+        positionDemo(root, "Root");
+    }
+
+    private int positionDemo(TreeNode root, String path) {
+        if (root == null) {
+            return 0;
+        }
+
+        // PRE-ORDER POSITION
+        System.out.println("\nPRE-ORDER at " + path + " (Node " + root.val + "):");
+        System.out.println("- Can access: Current node value = " + root.val);
+        System.out.println("- Can access: Path from root = " + path);
+        System.out.println("- CANNOT YET access: Info about left or right subtrees");
+
+        // Process left subtree with updated path
+        int leftSum = positionDemo(root.left, path + " → Left");
+
+        // IN-ORDER POSITION
+        System.out.println("\nIN-ORDER at " + path + " (Node " + root.val + "):");
+        System.out.println("- Can access: Current node value = " + root.val);
+        System.out.println("- Can access: Path from root = " + path);
+        System.out.println("- Can access: Left subtree sum = " + leftSum);
+        System.out.println("- CANNOT YET access: Info about right subtree");
+
+        // Process right subtree with updated path
+        int rightSum = positionDemo(root.right, path + " → Right");
+
+        // POST-ORDER POSITION
+        int totalSum = leftSum + rightSum + root.val;
+        System.out.println("\nPOST-ORDER at " + path + " (Node " + root.val + "):");
+        System.out.println("- Can access: Current node value = " + root.val);
+        System.out.println("- Can access: Path from root = " + path);
+        System.out.println("- Can access: Left subtree sum = " + leftSum);
+        System.out.println("- Can access: Right subtree sum = " + rightSum);
+        System.out.println("- Can access: Total subtree sum = " + totalSum);
+
+        return totalSum;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
