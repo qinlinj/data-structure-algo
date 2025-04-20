@@ -31,9 +31,11 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._184
  * determining if a tree is balanced, and finding paths with specific properties.
  */
 public class BinaryTreePostorderInsights {
+
     // =====================================================
     // EXAMPLE 1: PRINTING NODE LEVELS (PRE-ORDER CAPABLE)
     // =====================================================
+
     public void printNodeLevels(TreeNode root) {
         traverse(root, 1);
     }
@@ -55,6 +57,7 @@ public class BinaryTreePostorderInsights {
     // =====================================================
     // EXAMPLE 2: PRINTING SUBTREE NODE COUNTS (REQUIRES POST-ORDER)
     // =====================================================
+
     public void printSubtreeNodeCounts(TreeNode root) {
         count(root);
     }
@@ -82,6 +85,7 @@ public class BinaryTreePostorderInsights {
     // EXAMPLE 3: TREE DIAMETER (LEETCODE 543)
     // DEMONSTRATING POST-ORDER OPTIMIZATION
     // =====================================================
+
     // INEFFICIENT APPROACH: O(N²) time complexity
     // Using separate traversal and maxDepth functions
     public int diameterOfBinaryTreeInefficient(TreeNode root) {
@@ -142,6 +146,64 @@ public class BinaryTreePostorderInsights {
 
         // Return the depth of this subtree to its parent
         return 1 + Math.max(leftDepth, rightDepth);
+    }
+
+    // =====================================================
+    // EXAMPLE 4: BALANCED BINARY TREE (LEETCODE 110)
+    // ANOTHER POST-ORDER APPLICATION
+    // =====================================================
+
+    public boolean isBalanced(TreeNode root) {
+        return checkBalanced(root) != -1;
+    }
+
+    // Returns the height of the tree if balanced, -1 if not balanced
+    private int checkBalanced(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        // Process left and right subtrees
+        int leftHeight = checkBalanced(root.left);
+        if (leftHeight == -1) return -1;  // Short-circuit if left subtree is unbalanced
+
+        int rightHeight = checkBalanced(root.right);
+        if (rightHeight == -1) return -1;  // Short-circuit if right subtree is unbalanced
+
+        // POST-ORDER POSITION
+        // Now that we have heights from both subtrees, check if this node is balanced
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;  // This subtree is not balanced
+        }
+
+        // Return the height of this subtree to its parent
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+    // =====================================================
+    // EXAMPLE 5: LOWEST COMMON ANCESTOR (LEETCODE 236)
+    // ADVANCED POST-ORDER APPLICATION
+    // =====================================================
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return null;
+        if (root == p || root == q) return root;
+
+        // Look for p and q in left and right subtrees
+        TreeNode leftResult = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightResult = lowestCommonAncestor(root.right, p, q);
+
+        // POST-ORDER POSITION
+        // Now we can make a decision based on what we found in the subtrees
+
+        // Case 1: Found p in one subtree and q in the other
+        if (leftResult != null && rightResult != null) {
+            return root;  // This is the LCA
+        }
+
+        // Case 2: Found either p or q in one subtree, nothing in the other
+        // Or found the LCA in one subtree
+        return leftResult != null ? leftResult : rightResult;
     }
 
     // Definition for a binary tree node
