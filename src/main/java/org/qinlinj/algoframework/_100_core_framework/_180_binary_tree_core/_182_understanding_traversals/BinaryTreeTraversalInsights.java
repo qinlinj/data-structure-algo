@@ -174,6 +174,25 @@ public class BinaryTreeTraversalInsights {
         computeDepth(root.right, depth + 1, depths);
     }
 
+    // Example 3: Binary Search Tree validation - uses in-order position
+    public boolean validateBST(TreeNode root) {
+        return validateBSTHelper(root, null, null);
+    }
+
+    private boolean validateBSTHelper(TreeNode root, Integer min, Integer max) {
+        if (root == null) return true;
+
+        // Validate current node's constraints
+        if ((min != null && root.val <= min) || (max != null && root.val >= max)) {
+            return false;
+        }
+
+        // In-order traversal ensures we process nodes in ascending order
+        // This is why in-order traversal is special for BSTs
+        return validateBSTHelper(root.left, min, root.val) &&
+                validateBSTHelper(root.right, root.val, max);
+    }
+
 
     // Definition for a binary tree node
     public static class TreeNode {
