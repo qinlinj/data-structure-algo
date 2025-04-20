@@ -162,6 +162,19 @@ public class BinaryTreeTraversalInsights {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    // Example 2: Precompute tree depth for each node - uses pre-order position
+    public void computeDepth(TreeNode root, int depth, int[] depths) {
+        if (root == null) return;
+
+        // Pre-order position - ideal for top-down information passing
+        // We know the depth as soon as we visit the node
+        System.out.println("Node " + root.val + " is at depth " + depth);
+
+        computeDepth(root.left, depth + 1, depths);
+        computeDepth(root.right, depth + 1, depths);
+    }
+
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
