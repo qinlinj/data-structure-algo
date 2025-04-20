@@ -102,6 +102,17 @@ public class BinaryTreeTraversalInsights {
         preorderTraversal(root.right, result);
     }
 
+    public void inorderTraversal(TreeNode root, StringBuilder result) {
+        if (root == null) return;
+
+        inorderTraversal(root.left, result);
+
+        // In-order position - visit node between subtrees
+        result.append(root.val).append(" ");
+
+        inorderTraversal(root.right, result);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
