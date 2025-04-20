@@ -43,7 +43,16 @@ public class BinaryTreePatterns {
     // PATTERN 1: TRAVERSAL
     // =====================================================
 
+    // Traversal function that visits each node once
     private void traverse(TreeNode root, int[] count) {
+        if (root == null) return;
+
+        // Pre-order position: counting each node as we visit it
+        count[0]++;
+
+        // Continue traversal to child nodes
+        traverse(root.left, count);
+        traverse(root.right, count);
     }
 
     // Definition for a binary tree node
