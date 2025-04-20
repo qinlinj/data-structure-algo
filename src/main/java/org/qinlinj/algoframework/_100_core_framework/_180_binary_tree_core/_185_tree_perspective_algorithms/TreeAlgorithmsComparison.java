@@ -52,8 +52,8 @@ public class TreeAlgorithmsComparison {
     // =====================================================
 
     public static class Node {
-        int val;
-        List<Node> children;
+        public int val;
+        public List<Node> children;
 
         Node(int x) {
             val = x;
