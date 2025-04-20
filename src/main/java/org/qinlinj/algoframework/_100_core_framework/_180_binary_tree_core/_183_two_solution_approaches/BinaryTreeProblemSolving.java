@@ -29,6 +29,50 @@ package org.qinlinj.algoframework._100_core_framework._180_binary_tree_core._183
  * If yes, clearly define this function and use its return values effectively.
  * 3. Regardless of which approach you use, understand what each node needs to do and when (pre/in/post order).
  */
-
 public class BinaryTreeProblemSolving {
+    // =====================================================
+    // EXAMPLE 1: MAXIMUM DEPTH OF BINARY TREE (LEETCODE 104)
+    // =====================================================
+
+    // APPROACH 1: TRAVERSAL METHOD
+    public int maxDepthTraversal(TreeNode root) {
+        // External variables to track state during traversal
+        int[] depth = new int[1]; // Current depth
+        int[] maxDepth = new int[1]; // Maximum depth found
+
+        traverse(root, depth, maxDepth);
+        return maxDepth[0];
+    }
+
+    private void traverse(TreeNode root, int[] depth, int[] maxDepth) {
+        if (root == null) {
+            return;
+        }
+
+        // Pre-order position - entering node, increase depth
+        depth[0]++;
+
+        // If we're at a leaf node, update the max depth if needed
+        if (root.left == null && root.right == null) {
+            maxDepth[0] = Math.max(maxDepth[0], depth[0]);
+        }
+
+        // Continue traversing
+        traverse(root.left, depth, maxDepth);
+        traverse(root.right, depth, maxDepth);
+
+        // Post-order position - leaving node, decrease depth
+        depth[0]--;
+    }
+    
+    // Definition for a binary tree node
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
 }
