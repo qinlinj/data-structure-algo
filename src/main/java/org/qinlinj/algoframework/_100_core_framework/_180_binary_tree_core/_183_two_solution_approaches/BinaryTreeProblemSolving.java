@@ -127,7 +127,27 @@ public class BinaryTreeProblemSolving {
 
         return result;
     }
-    
+
+    // Similarly, we can implement inorder and postorder traversals
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+
+        if (root == null) {
+            return result;
+        }
+
+        // First append left subtree's inorder traversal
+        result.addAll(inorderTraversal(root.left));
+
+        // Then add root's value (in-order position)
+        result.add(root.val);
+
+        // Finally append right subtree's inorder traversal
+        result.addAll(inorderTraversal(root.right));
+
+        return result;
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
