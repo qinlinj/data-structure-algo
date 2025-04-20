@@ -104,7 +104,25 @@ public class BinaryTreePatterns {
         return height(root) != -1;
     }
 
+    // Returns height of the tree if balanced, -1 if not balanced
     private int height(TreeNode root) {
+        // Base case
+        if (root == null) return 0;
+
+        // Divide: get height of left and right subtrees
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+
+        // If any subtree is unbalanced, propagate the -1 signal up
+        if (leftHeight == -1 || rightHeight == -1)
+            return -1;
+
+        // Check if current node is balanced
+        if (Math.abs(leftHeight - rightHeight) > 1)
+            return -1;
+
+        // Conquer: return height of this subtree (post-order position)
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
     // Definition for a binary tree node
