@@ -280,6 +280,32 @@ public class BinaryTreeLevelOrder {
         return result;
     }
 
+    // =====================================================
+    // PERFORMANCE COMPARISON
+    // =====================================================
+
+    public void comparePerformance(TreeNode root) {
+        long startTime, endTime;
+
+        // Test iterative approach
+        startTime = System.nanoTime();
+        List<List<Integer>> iterativeResult = levelOrderIterative(root);
+        endTime = System.nanoTime();
+        System.out.println("Iterative BFS: " + (endTime - startTime) + " ns");
+
+        // Test recursive DFS approach
+        startTime = System.nanoTime();
+        List<List<Integer>> dfsResult = levelOrderRecursiveDFS(root);
+        endTime = System.nanoTime();
+        System.out.println("Recursive DFS: " + (endTime - startTime) + " ns");
+
+        // Test recursive BFS approach
+        startTime = System.nanoTime();
+        List<List<Integer>> bfsResult = levelOrderRecursiveBFS(root);
+        endTime = System.nanoTime();
+        System.out.println("Recursive BFS: " + (endTime - startTime) + " ns");
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
