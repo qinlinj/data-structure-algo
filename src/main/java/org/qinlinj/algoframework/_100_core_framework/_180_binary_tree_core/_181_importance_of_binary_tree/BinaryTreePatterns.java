@@ -66,7 +66,19 @@ public class BinaryTreePatterns {
         return maxDepth[0];
     }
 
-    private void traverseWithDepth(TreeNode root, int[] currentDepth, int[] maxDepth) {
+    private void traverseWithDepth(TreeNode node, int[] currentDepth, int[] maxDepth) {
+        if (node == null) return;
+
+        // Pre-order position: entering this node
+        currentDepth[0]++;
+        // Update max depth when we reach a leaf or deeper level
+        maxDepth[0] = Math.max(maxDepth[0], currentDepth[0]);
+
+        traverseWithDepth(node.left, currentDepth, maxDepth);
+        traverseWithDepth(node.right, currentDepth, maxDepth);
+
+        // Post-order position: leaving this node
+        currentDepth[0]--;
     }
 
     // Definition for a binary tree node
