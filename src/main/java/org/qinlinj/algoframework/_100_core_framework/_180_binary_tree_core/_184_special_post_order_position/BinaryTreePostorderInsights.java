@@ -34,7 +34,6 @@ public class BinaryTreePostorderInsights {
     // =====================================================
     // EXAMPLE 1: PRINTING NODE LEVELS (PRE-ORDER CAPABLE)
     // =====================================================
-
     public void printNodeLevels(TreeNode root) {
         traverse(root, 1);
     }
@@ -51,6 +50,32 @@ public class BinaryTreePostorderInsights {
         // Pass updated level to children
         traverse(root.left, level + 1);
         traverse(root.right, level + 1);
+    }
+
+    // =====================================================
+    // EXAMPLE 2: PRINTING SUBTREE NODE COUNTS (REQUIRES POST-ORDER)
+    // =====================================================
+    public void printSubtreeNodeCounts(TreeNode root) {
+        count(root);
+    }
+
+    private int count(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        // First calculate counts for subtrees
+        int leftCount = count(root.left);
+        int rightCount = count(root.right);
+
+        // POST-ORDER POSITION
+        // We can only print this information AFTER we've processed both subtrees
+        System.out.println("Node " + root.val + " has " + leftCount +
+                " nodes in its left subtree and " + rightCount +
+                " nodes in its right subtree");
+
+        // Return total count of this subtree to parent
+        return leftCount + rightCount + 1;
     }
 
     // Definition for a binary tree node
