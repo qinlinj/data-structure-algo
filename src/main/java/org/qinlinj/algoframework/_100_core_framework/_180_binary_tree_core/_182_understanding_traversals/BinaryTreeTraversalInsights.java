@@ -193,7 +193,40 @@ public class BinaryTreeTraversalInsights {
                 validateBSTHelper(root.right, root.val, max);
     }
 
+    // =====================================================
+    // N-ARY TREE TRAVERSAL (NO IN-ORDER POSITION!)
+    // =====================================================
 
+    // N-ary tree traversal has pre-order and post-order, but no in-order
+    public void traverseNaryTree(NaryTreeNode root) {
+        if (root == null) return;
+
+        // Pre-order position
+        System.out.println("Pre-order (N-ary): " + root.val);
+
+        // Process all children
+        for (NaryTreeNode child : root.children) {
+            traverseNaryTree(child);
+        }
+
+        // Post-order position
+        System.out.println("Post-order (N-ary): " + root.val);
+
+        // Note: There is NO unique "in-order" position for N-ary trees
+        // because there's no single point where we've finished exactly half the children
+    }
+
+    // Definition for an N-ary tree node
+    public static class NaryTreeNode {
+        int val;
+        java.util.List<NaryTreeNode> children;
+
+        NaryTreeNode(int x) {
+            val = x;
+            children = new java.util.ArrayList<>();
+        }
+    }
+    
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
