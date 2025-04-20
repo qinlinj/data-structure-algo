@@ -64,7 +64,37 @@ public class BinaryTreeLevelOrder {
 
         return result;
     }
-    
+
+    // BFS framework for traversal without collecting results
+    public void levelTraverse(TreeNode root) {
+        if (root == null) return;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        // From top to bottom
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+
+            // From left to right within each level
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode current = queue.poll();
+
+                // Process the current node
+                System.out.print(current.val + " ");
+
+                // Add children to queue
+                if (current.left != null) {
+                    queue.offer(current.left);
+                }
+                if (current.right != null) {
+                    queue.offer(current.right);
+                }
+            }
+            System.out.println(); // Line break after each level
+        }
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
