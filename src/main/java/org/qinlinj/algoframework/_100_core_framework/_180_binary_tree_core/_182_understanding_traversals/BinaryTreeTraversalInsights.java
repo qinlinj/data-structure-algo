@@ -90,6 +90,18 @@ public class BinaryTreeTraversalInsights {
         System.out.print(head.val + " ");
     }
 
+    // Example 2: Understanding binary tree traversals
+    // The three classic traversal orders as we typically understand them
+    public void preorderTraversal(TreeNode root, StringBuilder result) {
+        if (root == null) return;
+
+        // Pre-order position - visit node first
+        result.append(root.val).append(" ");
+
+        preorderTraversal(root.left, result);
+        preorderTraversal(root.right, result);
+    }
+
     // Definition for a binary tree node
     public static class TreeNode {
         int val;
