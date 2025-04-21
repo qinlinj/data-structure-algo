@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._193_permutations_unique_elements_no_reuse;
+
+public class PermutationGenerator {
+}
