@@ -38,6 +38,47 @@ import java.util.*;
  */
 public class PermutationWithReuseGenerator {
     /**
+     * Example usage of the permutation with reuse algorithm.
+     */
+    public static void main(String[] args) {
+        PermutationWithReuseGenerator generator = new PermutationWithReuseGenerator();
+        int[] nums = {1, 2, 3};
+
+        // Get all permutations with reuse
+        List<List<Integer>> permutations = generator.permuteWithReuse(nums);
+
+        System.out.println("All permutations of " + java.util.Arrays.toString(nums) + " with element reuse:");
+        System.out.println("Total count: " + permutations.size() + " (should be " + Math.pow(nums.length, nums.length) + ")");
+
+        // Print first few permutations as examples
+        for (int i = 0; i < Math.min(10, permutations.size()); i++) {
+            System.out.println(permutations.get(i));
+        }
+        System.out.println("... (more permutations)");
+
+        // Example with shorter permutation length to show a smaller result set
+        int length = 2;
+        List<List<Integer>> shorterPermutations = generator.permuteWithReuseOfLength(nums, length);
+
+        System.out.println("\nAll " + length + "-length permutations of " +
+                java.util.Arrays.toString(nums) + " with element reuse:");
+        for (List<Integer> perm : shorterPermutations) {
+            System.out.println(perm);
+        }
+
+        // Expected output for length=2:
+        // [1, 1]
+        // [1, 2]
+        // [1, 3]
+        // [2, 1]
+        // [2, 2]
+        // [2, 3]
+        // [3, 1]
+        // [3, 2]
+        // [3, 3]
+    }
+
+    /**
      * Generates all possible permutations of the given array with element reuse.
      *
      * @param nums An array of distinct integers
