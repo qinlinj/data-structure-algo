@@ -47,7 +47,7 @@ public class SubsetWithDuplicatesGenerator {
         backtrack(nums, 0, track, result);
         return result;
     }
-    
+
     /**
      * Backtracking function to explore the tree of all possible subsets.
      *
@@ -72,6 +72,70 @@ public class SubsetWithDuplicatesGenerator {
 
             // Explore further (next level in the tree)
             backtrack(nums, i + 1, track, result);
+
+            // Undo the choice
+            track.removeLast();
+        }
+    }
+
+    /**
+     * Finds all combinations of numbers that sum to target, with each number used at most once.
+     *
+     * @param candidates Array of integers to choose from (may contain duplicates)
+     * @param target     The target sum to achieve
+     * @return All unique combinations that sum to target
+     */
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+
+        // Sort to group duplicates and enable pruning
+        Arrays.sort(candidates);
+
+        combinationBacktrack(candidates, 0, target, 0, track, result);
+        return result;
+    }
+
+    /**
+     * Backtracking function for finding combinations that sum to target.
+     *
+     * @param nums       The input array of integers (sorted)
+     * @param start      The starting index to consider
+     * @param target     The target sum to achieve
+     * @param currentSum The current sum of elements in the track
+     * @param track      The current combination being built
+     * @param result     The list to store all valid combinations
+     */
+    private void combinationBacktrack(int[] nums, int start, int target, int currentSum,
+                                      LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: found a valid combination
+        if (currentSum == target) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Base case: exceeded target sum, no need to explore further
+        if (currentSum > target) {
+            return;
+        }
+
+        for (int i = start; i < nums.length; i++) {
+            // Skip duplicates at the same level
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            // Early termination: if current element would exceed target, stop
+            // This works because the array is sorted
+            if (currentSum + nums[i] > target) {
+                break;
+            }
+
+            // Make a choice
+            track.addLast(nums[i]);
+
+            // Explore further with updated sum
+            combinationBacktrack(nums, i + 1, target, currentSum + nums[i], track, result);
 
             // Undo the choice
             track.removeLast();
