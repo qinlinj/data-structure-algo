@@ -88,5 +88,56 @@ public class PermutationWithDuplicatesGenerator {
             used[i] = false;
         }
     }
+
+    /**
+     * Alternative pruning approach using prevNum to avoid duplicates.
+     */
+    public List<List<Integer>> permuteUniqueAlt(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        boolean[] used = new boolean[nums.length];
+
+        // Sort the array to group duplicates together
+        Arrays.sort(nums);
+
+        backtrackAlt(nums, used, track, result);
+        return result;
+    }
+
+    private void backtrackAlt(int[] nums, boolean[] used, LinkedList<Integer> track, List<List<Integer>> result) {
+        if (track.size() == nums.length) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Use prevNum to track the previous value at this level
+        // Initialize with a value outside the possible range (-10 to 10 per problem constraints)
+        int prevNum = -666;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+
+            // Skip if this value equals the previous value at this level
+            if (nums[i] == prevNum) {
+                continue;
+            }
+
+            // Update prevNum for this level
+            prevNum = nums[i];
+
+            // Make a choice
+            used[i] = true;
+            track.addLast(nums[i]);
+
+            // Explore further
+            backtrackAlt(nums, used, track, result);
+
+            // Undo the choice
+            track.removeLast();
+            used[i] = false;
+        }
+    }
 }
 
