@@ -35,6 +35,27 @@ import java.util.*;
  */
 public class CombinationGenerator {
     /**
+     * Example usage of the combination generation algorithm.
+     */
+    public static void main(String[] args) {
+        CombinationGenerator generator = new CombinationGenerator();
+        int n = 3;
+        int k = 2;
+
+        List<List<Integer>> allCombinations = generator.combine(n, k);
+
+        System.out.println("All " + k + "-sized combinations from range [1," + n + "]:");
+        for (List<Integer> combination : allCombinations) {
+            System.out.println(combination);
+        }
+
+        // Expected output for n=3, k=2:
+        // [1, 2]
+        // [1, 3]
+        // [2, 3]
+    }
+
+    /**
      * Generates all possible k-sized combinations of numbers from 1 to n.
      *
      * @param n The upper bound of the range [1,n]
