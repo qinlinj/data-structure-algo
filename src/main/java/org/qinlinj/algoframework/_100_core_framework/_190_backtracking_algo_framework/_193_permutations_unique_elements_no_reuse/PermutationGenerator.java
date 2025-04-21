@@ -89,4 +89,20 @@ public class PermutationGenerator {
             used[i] = false;
         }
     }
+
+    /**
+     * Generates all k-length permutations of the given array.
+     *
+     * @param nums An array of distinct integers
+     * @param k    The desired length of each permutation
+     * @return A list containing all possible k-length permutations
+     */
+    public List<List<Integer>> permuteK(int[] nums, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        boolean[] used = new boolean[nums.length];
+
+        backtrackK(nums, k, used, track, result);
+        return result;
+    }
 }
