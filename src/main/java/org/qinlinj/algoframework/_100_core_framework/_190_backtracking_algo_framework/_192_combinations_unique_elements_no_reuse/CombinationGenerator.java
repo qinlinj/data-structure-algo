@@ -103,4 +103,25 @@ public class CombinationGenerator {
             track.removeLast();
         }
     }
+
+    /**
+     * Optional optimization: We can prune branches that won't lead to valid solutions.
+     * If the remaining numbers aren't enough to form a k-sized combination, we can stop.
+     */
+    private void backtrackWithPruning(int start, int n, int k, LinkedList<Integer> track, List<List<Integer>> result) {
+        // If we've collected k elements, we have a valid combination
+        if (track.size() == k) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Pruning: If remaining numbers are not enough to form a combination of size k
+        // (n-i+1) represents the remaining available numbers
+        // (k-track.size()) represents how many more numbers we need
+        for (int i = start; i <= n - (k - track.size()) + 1; i++) {
+            track.addLast(i);
+            backtrackWithPruning(i + 1, n, k, track, result);
+            track.removeLast();
+        }
+    }
 }
