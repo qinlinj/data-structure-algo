@@ -53,4 +53,40 @@ public class PermutationGenerator {
         backtrack(nums, used, track, result);
         return result;
     }
+
+    /**
+     * Backtracking function to explore the tree of all possible permutations.
+     *
+     * @param nums   The input array of distinct integers
+     * @param used   Boolean array marking which elements are already used in current path
+     * @param track  The current permutation being built
+     * @param result The list to store all found permutations
+     */
+    private void backtrack(int[] nums, boolean[] used, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: if track size equals the array length, we have a complete permutation
+        if (track.size() == nums.length) {
+            // Add a copy of the current permutation to the result
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Standard backtracking framework
+        for (int i = 0; i < nums.length; i++) {
+            // Skip elements that are already used in the current path
+            if (used[i]) {
+                continue;
+            }
+
+            // Make a choice: add current element to the permutation
+            used[i] = true;
+            track.addLast(nums[i]);
+
+            // Explore further: recursive call
+            backtrack(nums, used, track, result);
+
+            // Undo the choice: remove the last added element
+            track.removeLast();
+            used[i] = false;
+        }
+    }
 }
