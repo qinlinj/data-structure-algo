@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._197_permutations_unique_elements_with_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF PERMUTATION GENERATION WITH ELEMENT REUSE
  * <p>
@@ -35,4 +37,77 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(k) for recursion stack and tracking current permutation
  */
 public class PermutationWithReuseGenerator {
+    /**
+     * Generates all possible permutations of the given array with element reuse.
+     *
+     * @param nums An array of distinct integers
+     * @return A list containing all possible permutations with element reuse
+     */
+    public List<List<Integer>> permuteWithReuse(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+
+        // Start backtracking
+        backtrack(nums, track, result);
+        return result;
+    }
+
+    /**
+     * Backtracking function to explore the tree of all possible permutations with element reuse.
+     *
+     * @param nums   The input array of distinct integers
+     * @param track  The current permutation being built
+     * @param result The list to store all found permutations
+     */
+    private void backtrack(int[] nums, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: if track size equals the array length, we have a complete permutation
+        if (track.size() == nums.length) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Standard backtracking framework without the 'used' check
+        for (int i = 0; i < nums.length; i++) {
+            // Make a choice
+            track.addLast(nums[i]);
+
+            // Explore further
+            backtrack(nums, track, result);
+
+            // Undo the choice
+            track.removeLast();
+        }
+    }
+
+    /**
+     * Generates permutations with element reuse of a specified length.
+     *
+     * @param nums   An array of distinct integers
+     * @param length The desired length of each permutation
+     * @return A list containing all possible permutations of the specified length
+     */
+    public List<List<Integer>> permuteWithReuseOfLength(int[] nums, int length) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+
+        backtrackWithLength(nums, length, track, result);
+        return result;
+    }
+
+    /**
+     * Backtracking function for generating permutations of specified length.
+     */
+    private void backtrackWithLength(int[] nums, int length, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: if track size equals the desired length, we have a complete permutation
+        if (track.size() == length) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            track.addLast(nums[i]);
+            backtrackWithLength(nums, length, track, result);
+            track.removeLast();
+        }
+    }
 }
