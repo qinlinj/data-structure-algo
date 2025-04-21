@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._193_permutations_unique_elements_no_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF PERMUTATION GENERATION USING BACKTRACKING
  * <p>
@@ -35,4 +37,20 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(n) for recursion stack and tracking used elements
  */
 public class PermutationGenerator {
+    /**
+     * Generates all possible permutations of the given array.
+     *
+     * @param nums An array of distinct integers
+     * @return A list containing all possible permutations
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        // List to track the current permutation being built
+        LinkedList<Integer> track = new LinkedList<>();
+        // Boolean array to track which elements have been used
+        boolean[] used = new boolean[nums.length];
+
+        backtrack(nums, used, track, result);
+        return result;
+    }
 }
