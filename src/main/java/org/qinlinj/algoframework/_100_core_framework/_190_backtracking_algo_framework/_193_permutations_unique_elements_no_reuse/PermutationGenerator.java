@@ -38,6 +38,47 @@ import java.util.*;
  */
 public class PermutationGenerator {
     /**
+     * Example usage of the permutation generation algorithm.
+     */
+    public static void main(String[] args) {
+        PermutationGenerator generator = new PermutationGenerator();
+        int[] nums = {1, 2, 3};
+
+        // Generate all permutations
+        List<List<Integer>> allPermutations = generator.permute(nums);
+
+        System.out.println("All permutations of " + java.util.Arrays.toString(nums) + ":");
+        for (List<Integer> permutation : allPermutations) {
+            System.out.println(permutation);
+        }
+
+        // Expected output for [1,2,3]:
+        // [1, 2, 3]
+        // [1, 3, 2]
+        // [2, 1, 3]
+        // [2, 3, 1]
+        // [3, 1, 2]
+        // [3, 2, 1]
+
+        // Generate k-length permutations
+        int k = 2;
+        List<List<Integer>> kPermutations = generator.permuteK(nums, k);
+
+        System.out.println("\nAll " + k + "-length permutations of " + java.util.Arrays.toString(nums) + ":");
+        for (List<Integer> permutation : kPermutations) {
+            System.out.println(permutation);
+        }
+
+        // Expected output for k=2:
+        // [1, 2]
+        // [1, 3]
+        // [2, 1]
+        // [2, 3]
+        // [3, 1]
+        // [3, 2]
+    }
+
+    /**
      * Generates all possible permutations of the given array.
      *
      * @param nums An array of distinct integers
