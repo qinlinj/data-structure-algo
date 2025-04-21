@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._196_subsets_combinations_unique_elements_with_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF COMBINATION SUM WITH REUSABLE ELEMENTS
  * <p>
@@ -33,4 +35,95 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(target/min(candidates)) for the maximum recursion depth
  */
 public class SubsetWithDuplicatesGeneratorReuse {
+    /**
+     * Finds all combinations of numbers in candidates that sum to target.
+     * Each number in candidates may be used multiple times.
+     *
+     * @param candidates Array of distinct integers
+     * @param target     The target sum to achieve
+     * @return All unique combinations that sum to target
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+        // List to track the current combination being built
+        LinkedList<Integer> track = new LinkedList<>();
+        // Track the current sum for efficiency
+        int trackSum = 0;
+
+        backtrack(candidates, 0, target, trackSum, track, result);
+        return result;
+    }
+
+    /**
+     * Backtracking function to explore all possible combinations.
+     *
+     * @param nums       Array of candidate numbers
+     * @param start      The starting index to consider for this recursive call
+     * @param target     The target sum to achieve
+     * @param currentSum The current sum of elements in track
+     * @param track      The current combination being built
+     * @param result     The list to store all valid combinations
+     */
+    private void backtrack(int[] nums, int start, int target, int currentSum,
+                           LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case 1: Found a valid combination
+        if (currentSum == target) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Base case 2: Sum exceeds target - no need to explore further
+        if (currentSum > target) {
+            return;
+        }
+
+        // Standard backtracking framework
+        for (int i = start; i < nums.length; i++) {
+            // Make a choice
+            track.addLast(nums[i]);
+            currentSum += nums[i];
+
+            // Explore further - KEY DIFFERENCE: pass 'i' instead of 'i+1' to allow reuse
+            // This allows the same element to be used multiple times
+            backtrack(nums, i, target, currentSum, track, result);
+
+            // Undo the choice
+            track.removeLast();
+            currentSum -= nums[i];
+        }
+    }
+
+    /**
+     * Optimized version with sorting and additional pruning.
+     */
+    public List<List<Integer>> combinationSumOptimized(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+
+        // Sort array to enable early termination
+        java.util.Arrays.sort(candidates);
+
+        backtrackOptimized(candidates, 0, target, 0, track, result);
+        return result;
+    }
+
+    private void backtrackOptimized(int[] nums, int start, int target, int currentSum,
+                                    LinkedList<Integer> track, List<List<Integer>> result) {
+        if (currentSum == target) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        for (int i = start; i < nums.length; i++) {
+            // Early termination - if current number already makes sum exceed target
+            // Since array is sorted, all subsequent numbers will also exceed
+            if (currentSum + nums[i] > target) {
+                break;
+            }
+
+            track.addLast(nums[i]);
+            backtrackOptimized(nums, i, target, currentSum + nums[i], track, result);
+            track.removeLast();
+        }
+    }
 }
