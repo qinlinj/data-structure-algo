@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._192_combinations_unique_elements_no_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF COMBINATION GENERATION USING BACKTRACKING
  * <p>
@@ -32,4 +34,20 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(k) for recursion stack and tracking current combination
  */
 public class CombinationGenerator {
+    /**
+     * Generates all possible k-sized combinations of numbers from 1 to n.
+     *
+     * @param n The upper bound of the range [1,n]
+     * @param k The size of each combination
+     * @return A list containing all possible k-sized combinations
+     */
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        // List to track the current combination being built
+        LinkedList<Integer> track = new LinkedList<>();
+
+        // Start backtracking from 1 (the first number in range)
+        backtrack(1, n, k, track, result);
+        return result;
+    }
 }
