@@ -169,5 +169,46 @@ public class PermutationWithDuplicatesGenerator {
             used[i] = false;
         }
     }
+
+    /**
+     * Demonstrates the difference between using !used[i-1] vs used[i-1] in pruning.
+     */
+    public List<List<Integer>> permuteUniqueAlternativePruning(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        boolean[] used = new boolean[nums.length];
+
+        Arrays.sort(nums);
+
+        backtrackAltPruning(nums, used, track, result);
+        return result;
+    }
+
+    private void backtrackAltPruning(int[] nums, boolean[] used, LinkedList<Integer> track, List<List<Integer>> result) {
+        if (track.size() == nums.length) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+
+            // Alternative pruning logic using used[i-1] instead of !used[i-1]
+            // This works but is less efficient as it prunes fewer branches
+            if (i > 0 && nums[i] == nums[i - 1] && used[i - 1]) {
+                continue;
+            }
+
+            used[i] = true;
+            track.addLast(nums[i]);
+
+            backtrackAltPruning(nums, used, track, result);
+
+            track.removeLast();
+            used[i] = false;
+        }
+    }
 }
 
