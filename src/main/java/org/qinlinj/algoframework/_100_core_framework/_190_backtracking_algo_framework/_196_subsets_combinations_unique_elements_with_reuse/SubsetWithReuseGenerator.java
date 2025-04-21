@@ -34,12 +34,12 @@ import java.util.*;
  * Time Complexity: Exponential, as each element can be selected multiple times
  * Space Complexity: O(target/min(candidates)) for the maximum recursion depth
  */
-public class SubsetWithDuplicatesGeneratorReuse {
+public class SubsetWithReuseGenerator {
     /**
      * Example usage of the combination sum algorithm.
      */
     public static void main(String[] args) {
-        SubsetWithDuplicatesGeneratorReuse generator = new SubsetWithDuplicatesGeneratorReuse();
+        SubsetWithReuseGenerator generator = new SubsetWithReuseGenerator();
         int[] candidates = {2, 3, 6, 7};
         int target = 7;
 
