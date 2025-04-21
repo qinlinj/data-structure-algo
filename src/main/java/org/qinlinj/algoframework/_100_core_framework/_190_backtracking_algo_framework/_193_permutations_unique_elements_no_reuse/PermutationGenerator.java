@@ -105,4 +105,29 @@ public class PermutationGenerator {
         backtrackK(nums, k, used, track, result);
         return result;
     }
+
+    /**
+     * Backtracking function to generate k-length permutations.
+     */
+    private void backtrackK(int[] nums, int k, boolean[] used, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: if track size equals k, we have a k-length permutation
+        if (track.size() == k) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+
+            used[i] = true;
+            track.addLast(nums[i]);
+
+            backtrackK(nums, k, used, track, result);
+
+            track.removeLast();
+            used[i] = false;
+        }
+    }
 }
