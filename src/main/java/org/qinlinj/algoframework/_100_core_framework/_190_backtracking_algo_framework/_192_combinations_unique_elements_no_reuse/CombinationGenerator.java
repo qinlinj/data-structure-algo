@@ -50,4 +50,36 @@ public class CombinationGenerator {
         backtrack(1, n, k, track, result);
         return result;
     }
+
+    /**
+     * Backtracking function to explore the tree of all possible combinations.
+     *
+     * @param start  The starting number to consider for this recursive call
+     * @param n      The upper bound of the range [1,n]
+     * @param k      The required size of each combination
+     * @param track  The current combination being built
+     * @param result The list to store all found combinations
+     */
+    private void backtrack(int start, int n, int k, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: if we've collected exactly k elements
+        if (track.size() == k) {
+            // We've reached level k, add the current combination to result
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Standard backtracking framework
+        for (int i = start; i <= n; i++) {
+            // Make a choice: add current number to the combination
+            track.addLast(i);
+
+            // Explore further: recursive call with increased start index
+            // This ensures we only consider numbers after the current one
+            // which prevents duplicates and maintains order
+            backtrack(i + 1, n, k, track, result);
+
+            // Undo the choice: remove the last added number
+            track.removeLast();
+        }
+    }
 }
