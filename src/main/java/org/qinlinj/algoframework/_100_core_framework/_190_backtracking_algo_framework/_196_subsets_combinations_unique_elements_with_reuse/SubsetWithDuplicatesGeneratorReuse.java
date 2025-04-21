@@ -36,6 +36,46 @@ import java.util.*;
  */
 public class SubsetWithDuplicatesGeneratorReuse {
     /**
+     * Example usage of the combination sum algorithm.
+     */
+    public static void main(String[] args) {
+        SubsetWithDuplicatesGeneratorReuse generator = new SubsetWithDuplicatesGeneratorReuse();
+        int[] candidates = {2, 3, 6, 7};
+        int target = 7;
+
+        List<List<Integer>> combinations = generator.combinationSum(candidates, target);
+
+        System.out.println("All combinations from " + java.util.Arrays.toString(candidates) +
+                " that sum to " + target + ":");
+        for (List<Integer> combination : combinations) {
+            System.out.println(combination);
+        }
+
+        // Expected output:
+        // [2, 2, 3]
+        // [7]
+
+        // Example with smaller numbers to demonstrate multiple reuse
+        int[] candidates2 = {1, 2, 3};
+        int target2 = 5;
+
+        List<List<Integer>> combinations2 = generator.combinationSum(candidates2, target2);
+
+        System.out.println("\nAll combinations from " + java.util.Arrays.toString(candidates2) +
+                " that sum to " + target2 + ":");
+        for (List<Integer> combination : combinations2) {
+            System.out.println(combination);
+        }
+
+        // Expected output:
+        // [1, 1, 1, 1, 1]
+        // [1, 1, 1, 2]
+        // [1, 1, 3]
+        // [1, 2, 2]
+        // [2, 3]
+    }
+
+    /**
      * Finds all combinations of numbers in candidates that sum to target.
      * Each number in candidates may be used multiple times.
      *
