@@ -33,6 +33,31 @@ import java.util.*;
  */
 public class SubsetGenerator {
     /**
+     * Example usage of the subset generation algorithm.
+     */
+    public static void main(String[] args) {
+        SubsetGenerator generator = new SubsetGenerator();
+        int[] nums = {1, 2, 3};
+
+        List<List<Integer>> allSubsets = generator.subsets(nums);
+
+        System.out.println("All subsets of " + java.util.Arrays.toString(nums) + ":");
+        for (List<Integer> subset : allSubsets) {
+            System.out.println(subset);
+        }
+
+        // Expected output for [1,2,3]:
+        // []
+        // [1]
+        // [1, 2]
+        // [1, 2, 3]
+        // [1, 3]
+        // [2]
+        // [2, 3]
+        // [3]
+    }
+
+    /**
      * Generates all possible subsets of the given array.
      *
      * @param nums An array of unique integers
