@@ -47,4 +47,34 @@ public class SubsetWithDuplicatesGenerator {
         backtrack(nums, 0, track, result);
         return result;
     }
+    
+    /**
+     * Backtracking function to explore the tree of all possible subsets.
+     *
+     * @param nums   The input array of integers (sorted)
+     * @param start  The starting index to consider for this recursive call
+     * @param track  The current subset being built
+     * @param result The list to store all found subsets
+     */
+    private void backtrack(int[] nums, int start, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Add current subset to the result (pre-order position)
+        result.add(new LinkedList<>(track));
+
+        for (int i = start; i < nums.length; i++) {
+            // Skip duplicate elements at the same level (pruning)
+            // i > start ensures we only skip duplicates at the same level, not across levels
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            // Make a choice
+            track.addLast(nums[i]);
+
+            // Explore further (next level in the tree)
+            backtrack(nums, i + 1, track, result);
+
+            // Undo the choice
+            track.removeLast();
+        }
+    }
 }
