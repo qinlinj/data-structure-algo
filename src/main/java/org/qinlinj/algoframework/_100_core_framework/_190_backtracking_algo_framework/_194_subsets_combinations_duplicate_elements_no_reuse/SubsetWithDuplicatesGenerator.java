@@ -32,6 +32,45 @@ import java.util.*;
  */
 public class SubsetWithDuplicatesGenerator {
     /**
+     * Example usage of the subset and combination sum algorithms with duplicates.
+     */
+    public static void main(String[] args) {
+        SubsetWithDuplicatesGenerator generator = new SubsetWithDuplicatesGenerator();
+
+        // Example 1: Subsets with duplicates
+        int[] nums1 = {1, 2, 2};
+        List<List<Integer>> allSubsets = generator.subsetsWithDup(nums1);
+
+        System.out.println("All unique subsets of " + Arrays.toString(nums1) + ":");
+        for (List<Integer> subset : allSubsets) {
+            System.out.println(subset);
+        }
+        // Expected output:
+        // []
+        // [1]
+        // [1, 2]
+        // [1, 2, 2]
+        // [2]
+        // [2, 2]
+
+        // Example 2: Combination Sum II
+        int[] nums2 = {10, 1, 2, 7, 6, 1, 5};
+        int target = 8;
+        List<List<Integer>> combinations = generator.combinationSum2(nums2, target);
+
+        System.out.println("\nAll combinations from " + Arrays.toString(nums2) +
+                " that sum to " + target + ":");
+        for (List<Integer> combination : combinations) {
+            System.out.println(combination);
+        }
+        // Expected output:
+        // [1, 1, 6]
+        // [1, 2, 5]
+        // [1, 7]
+        // [2, 6]
+    }
+
+    /**
      * Generates all possible subsets of the given array with possible duplicates.
      *
      * @param nums An array of integers, possibly containing duplicates
