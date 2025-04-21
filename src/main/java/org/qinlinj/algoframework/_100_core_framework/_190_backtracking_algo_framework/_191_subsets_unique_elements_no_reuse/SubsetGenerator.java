@@ -48,7 +48,34 @@ public class SubsetGenerator {
         return result;
     }
 
-    private void backtrack(int[] nums, int i, LinkedList<Integer> track, List<List<Integer>> result) {
-    }
+    /**
+     * Backtracking function to explore the tree of all possible subsets.
+     *
+     * @param nums   The input array of unique integers
+     * @param start  The starting index to consider for this recursive call
+     * @param track  The current subset being built
+     * @param result The list to store all found subsets
+     */
+    private void backtrack(int[] nums, int start, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Preorder position: add current subset to the result
+        // Every node in the tree represents a valid subset
+        result.add(new LinkedList<>(track));
 
+        // Standard backtracking framework
+        for (int i = start; i < nums.length; i++) {
+            // Make a choice: add current element to the subset
+            track.addLast(nums[i]);
+
+            // Explore further: recursive call with increased start index
+            // This ensures we only consider elements after the current one
+            // which prevents duplicates and maintains order
+            backtrack(nums, i + 1, track, result);
+
+            // Undo the choice: remove the last added element
+            track.removeLast();
+        }
+
+        // Note: No explicit base case is needed as the for loop will not
+        // execute when start >= nums.length, naturally ending the recursion
+    }
 }
