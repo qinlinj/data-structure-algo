@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._194_subsets_combinations_duplicate_elements_no_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF SUBSET GENERATION WITH DUPLICATES USING BACKTRACKING
  * <p>
@@ -29,4 +31,20 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(n) for recursion stack, O(2^n) for storing all subsets
  */
 public class SubsetWithDuplicatesGenerator {
+    /**
+     * Generates all possible subsets of the given array with possible duplicates.
+     *
+     * @param nums An array of integers, possibly containing duplicates
+     * @return A list containing all possible unique subsets
+     */
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+
+        // Sort the array to group duplicates together - critical step!
+        Arrays.sort(nums);
+
+        backtrack(nums, 0, track, result);
+        return result;
+    }
 }
