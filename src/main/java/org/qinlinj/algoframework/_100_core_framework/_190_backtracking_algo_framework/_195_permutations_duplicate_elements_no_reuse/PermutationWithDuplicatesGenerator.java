@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._195_permutations_duplicate_elements_no_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF PERMUTATION GENERATION WITH DUPLICATES USING BACKTRACKING
  * <p>
@@ -29,4 +31,62 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(n) for recursion stack, tracking used elements, and current permutation
  */
 public class PermutationWithDuplicatesGenerator {
+    /**
+     * Generates all possible unique permutations of the given array with duplicates.
+     *
+     * @param nums An array of integers, possibly containing duplicates
+     * @return A list containing all possible unique permutations
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        boolean[] used = new boolean[nums.length];
+
+        // Sort the array to group duplicates together - critical step!
+        Arrays.sort(nums);
+
+        backtrack(nums, used, track, result);
+        return result;
+    }
+
+    /**
+     * Backtracking function to explore the tree of all possible permutations.
+     *
+     * @param nums   The input array of integers (sorted)
+     * @param used   Boolean array marking which elements are already used in current path
+     * @param track  The current permutation being built
+     * @param result The list to store all found permutations
+     */
+    private void backtrack(int[] nums, boolean[] used, LinkedList<Integer> track, List<List<Integer>> result) {
+        // Base case: if track size equals the array length, we have a complete permutation
+        if (track.size() == nums.length) {
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            // Skip if the element is already used in current permutation
+            if (used[i]) {
+                continue;
+            }
+
+            // Skip if current element is a duplicate and its previous duplicate hasn't been used
+            // This ensures we maintain fixed relative ordering of duplicate elements
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                continue;
+            }
+
+            // Make a choice
+            used[i] = true;
+            track.addLast(nums[i]);
+
+            // Explore further
+            backtrack(nums, used, track, result);
+
+            // Undo the choice
+            track.removeLast();
+            used[i] = false;
+        }
+    }
 }
+
