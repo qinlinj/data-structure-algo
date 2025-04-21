@@ -32,6 +32,36 @@ import java.util.*;
  */
 public class PermutationWithDuplicatesGenerator {
     /**
+     * Example usage of both permutation generation approaches.
+     */
+    public static void main(String[] args) {
+        PermutationWithDuplicatesGenerator generator = new PermutationWithDuplicatesGenerator();
+
+        int[] nums = {1, 2, 2};
+
+        // Method 1: Using !used[i-1] pruning
+        List<List<Integer>> uniquePermutations = generator.permuteUnique(nums);
+
+        System.out.println("All unique permutations of " + Arrays.toString(nums) + " (Method 1):");
+        for (List<Integer> perm : uniquePermutations) {
+            System.out.println(perm);
+        }
+
+        // Method 2: Using prevNum approach
+        List<List<Integer>> uniquePermutationsAlt = generator.permuteUniqueAlt(nums);
+
+        System.out.println("\nAll unique permutations of " + Arrays.toString(nums) + " (Method 2):");
+        for (List<Integer> perm : uniquePermutationsAlt) {
+            System.out.println(perm);
+        }
+
+        // Expected output for both methods:
+        // [1, 2, 2]
+        // [2, 1, 2]
+        // [2, 2, 1]
+    }
+
+    /**
      * Generates all possible unique permutations of the given array with duplicates.
      *
      * @param nums An array of integers, possibly containing duplicates
