@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_framework._191_subsets_unique_elements_no_reuse;
 
+import java.util.*;
+
 /**
  * SUMMARY OF SUBSET GENERATION USING BACKTRACKING
  * <p>
@@ -30,4 +32,23 @@ package org.qinlinj.algoframework._100_core_framework._190_backtracking_algo_fra
  * Space Complexity: O(n) for recursion stack, O(2^n) for storing all subsets
  */
 public class SubsetGenerator {
+    /**
+     * Generates all possible subsets of the given array.
+     *
+     * @param nums An array of unique integers
+     * @return A list containing all possible subsets
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        // List to track the current subset being built
+        LinkedList<Integer> track = new LinkedList<>();
+
+        // Start backtracking from index 0
+        backtrack(nums, 0, track, result);
+        return result;
+    }
+
+    private void backtrack(int[] nums, int i, LinkedList<Integer> track, List<List<Integer>> result) {
+    }
+
 }
