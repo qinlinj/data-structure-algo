@@ -216,4 +216,58 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
 
         return new int[]{-1, -1}; // No solution
     }
+
+    /**
+     * Example 4: Sliding window - Linear time complexity despite nested loops
+     */
+    public static int maxSubarraySum(int[] nums, int k) {
+        int n = nums.length;
+        if (n < k) return -1;
+
+        int maxSum = 0;
+        int windowSum = 0;
+
+        // First window
+        for (int i = 0; i < k; i++) {
+            windowSum += nums[i];
+        }
+        maxSum = windowSum;
+
+        // Slide window, this is O(n) despite nested loop appearance
+        // because each element is processed exactly once
+        int left = 0, right = k;
+        while (right < n) {
+            // Add element entering window
+            windowSum += nums[right];
+            right++;
+
+            // Remove element leaving window
+            windowSum -= nums[left];
+            left++;
+
+            maxSum = Math.max(maxSum, windowSum);
+        }
+
+        return maxSum;
+    }
+
+    /**
+     * Example 5: Standard nested loops - O(n²) complexity
+     * Contrast with previous examples
+     */
+    public static int[][] matrixMultiplication(int[][] a, int[][] b) {
+        int n = a.length;
+        int[][] result = new int[n][n];
+
+        // Classic O(n³) complexity for matrix multiplication
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < n; k++) {
+                    result[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+
+        return result;
+    }
 }
