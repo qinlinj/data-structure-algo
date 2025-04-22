@@ -92,4 +92,54 @@ public class GreedyAlgorithmExample {
         int largerValue = Math.max(value1, value2);
         return largerValue * n;
     }
+
+    /**
+     * Demonstrates how the complexity decreases with each optimization
+     */
+    public static void main(String[] args) {
+        int n = 10; // Number of bills to select
+
+        System.out.println("Problem: Select " + n + " bills of either $1 or $100 to maximize total amount");
+
+        // Original recursive (exponential) approach
+        // Warning: This would be very slow for large n due to exponential complexity
+        if (n <= 20) { // Only run for small n to avoid stack overflow
+            System.out.println("\nApproach 1 (Recursive - O(2^n))");
+            long startTime = System.nanoTime();
+            int maxAmount1 = findMaxRecursive(n);
+            long endTime = System.nanoTime();
+            System.out.println("Maximum amount: $" + maxAmount1);
+            System.out.println("Execution time: " + (endTime - startTime) / 1000000.0 + " ms");
+        } else {
+            System.out.println("\nApproach 1 (Recursive - O(2^n))");
+            System.out.println("Skipped due to large n (would cause stack overflow)");
+        }
+
+        // Optimized recursive approach
+        System.out.println("\nApproach 2 (Optimized Recursive - O(n))");
+        long startTime = System.nanoTime();
+        int maxAmount2 = findMaxOptimized1(n);
+        long endTime = System.nanoTime();
+        System.out.println("Maximum amount: $" + maxAmount2);
+        System.out.println("Execution time: " + (endTime - startTime) / 1000000.0 + " ms");
+
+        // Iterative approach
+        System.out.println("\nApproach 3 (Iterative - O(n))");
+        startTime = System.nanoTime();
+        int maxAmount3 = findMaxOptimized2(n);
+        endTime = System.nanoTime();
+        System.out.println("Maximum amount: $" + maxAmount3);
+        System.out.println("Execution time: " + (endTime - startTime) / 1000000.0 + " ms");
+
+        // Direct calculation approach
+        System.out.println("\nApproach 4 (Direct Calculation - O(1))");
+        startTime = System.nanoTime();
+        int maxAmount4 = findMaxOptimized3(n);
+        endTime = System.nanoTime();
+        System.out.println("Maximum amount: $" + maxAmount4);
+        System.out.println("Execution time: " + (endTime - startTime) / 1000000.0 + " ms");
+
+        System.out.println("\nConclusion: The greedy approach dramatically reduced the complexity from O(2^n) to O(1)");
+        System.out.println("This is the power of identifying the greedy choice property in a problem!");
+    }
 }
