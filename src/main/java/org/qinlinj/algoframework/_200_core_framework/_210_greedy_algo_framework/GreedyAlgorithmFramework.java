@@ -37,7 +37,7 @@ package org.qinlinj.algoframework._200_core_framework._210_greedy_algo_framework
  * The problem must have the "greedy choice property" where local optimal
  * choices lead to a global optimum.
  */
-public class GreedyAlgorithmExample {
+public class GreedyAlgorithmFramework {
     /**
      * Initial recursive approach - exponential complexity O(2^n)
      * This represents the exhaustive enumeration approach
