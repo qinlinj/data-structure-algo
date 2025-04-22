@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._200_core_framework._210_greedy_algo_framework;
 
+import java.util.*;
+
 /**
  * Jump Game II - Greedy Algorithm Solution
  * ========================================
@@ -37,4 +39,21 @@ package org.qinlinj.algoframework._200_core_framework._210_greedy_algo_framework
  * 4. Verify if local optimal choices lead to the global optimal solution
  */
 public class GreedyJumpGameII {
+    /**
+     * Dynamic Programming solution for Jump Game II
+     * Time Complexity: O(n²)
+     * Space Complexity: O(n)
+     */
+    public static int jumpDP(int[] nums) {
+        int n = nums.length;
+        // Memoization array to store minimum jumps from each position
+        int[] memo = new int[n];
+        // Initialize with n (representing infinity since we need at most n-1 jumps)
+        Arrays.fill(memo, n);
+
+        return dpHelper(nums, 0, memo);
+    }
+
+    private static int dpHelper(int[] nums, int i, int[] memo) {
+    }
 }
