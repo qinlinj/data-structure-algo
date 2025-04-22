@@ -27,6 +27,7 @@ package org.qinlinj.algoframework._200_core_framework._230_algo_complexity_analy
  * - Analysis focuses on counting recursion tree nodes and work at each node
  */
 public class RecursiveAlgorithmAnalysis {
+
     /**
      * SECTION 1: DYNAMIC PROGRAMMING EXAMPLES
      */
@@ -325,5 +326,60 @@ public class RecursiveAlgorithmAnalysis {
          * - Additional storage for results is O(N × 2^N)
          * - Therefore, space complexity is O(N × 2^N)
          */
+    }
+
+    /**
+     * Main method with examples and explanations
+     */
+    public static void main(String[] args) {
+        System.out.println("Recursive Algorithm Analysis Examples");
+        System.out.println("=====================================\n");
+
+        // Coin Change Example
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+
+        System.out.println("1. Coin Change Problem:");
+        System.out.println("   - Target amount: " + amount);
+        System.out.println("   - Available coins: [1, 2, 5]");
+
+        // We'll only run the efficient version to avoid long execution time
+        int result = coinChangeBottomUp(coins, amount);
+        System.out.println("   - Minimum coins needed: " + result);
+        System.out.println("   - Time complexity analysis:");
+        System.out.println("     * Brute force: O(K^(N+1)) ≈ O(3^12) ≈ O(500,000)");
+        System.out.println("     * With memoization: O(N×K) = O(11×3) = O(33)");
+        System.out.println("     * Bottom-up DP: Same as memoization but more space efficient\n");
+
+        // Permutation Example
+        int[] permuteNums = {1, 2, 3};
+        System.out.println("2. Permutation Problem:");
+        System.out.println("   - Input array: [1, 2, 3]");
+        java.util.List<java.util.List<Integer>> permutations = permute(permuteNums);
+        System.out.println("   - All permutations (" + permutations.size() + "):");
+        for (java.util.List<Integer> perm : permutations) {
+            System.out.println("     " + perm);
+        }
+        System.out.println("   - Time complexity: O(N^2 × N!) = O(3^2 × 6) = O(54)");
+        System.out.println("   - Space complexity: O(N × N!) = O(3 × 6) = O(18)\n");
+
+        // Subset Example
+        int[] subsetNums = {1, 2, 3};
+        System.out.println("3. Subset Problem:");
+        System.out.println("   - Input array: [1, 2, 3]");
+        java.util.List<java.util.List<Integer>> allSubsets = subsets(subsetNums);
+        System.out.println("   - All subsets (" + allSubsets.size() + "):");
+        for (java.util.List<Integer> subset : allSubsets) {
+            System.out.println("     " + subset);
+        }
+        System.out.println("   - Time complexity: O(N × 2^N) = O(3 × 8) = O(24)");
+        System.out.println("   - Space complexity: O(N × 2^N) = O(3 × 8) = O(24)\n");
+
+        System.out.println("Key Insights for Recursive Algorithm Analysis:");
+        System.out.println("1. View recursive algorithms as tree traversals");
+        System.out.println("2. Time complexity = nodes in recursion tree × work per node");
+        System.out.println("3. Space complexity = tree height + additional storage");
+        System.out.println("4. Memoization reduces time by pruning the recursion tree");
+        System.out.println("5. Bottom-up DP eliminates recursion stack overhead");
     }
 }
