@@ -159,6 +159,50 @@ public class DivideAndConquer {
     }
 
     /**
+     * Main method with examples
+     */
+    public static void main(String[] args) {
+        // Example usage of Fibonacci
+        System.out.println("Fibonacci of 6: " + fib(6)); // Output: 8
+
+        // Example usage of Tree Node Count
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        System.out.println("Total nodes in tree: " + count(root)); // Output: 5
+
+        // Example usage of Merge Sort
+        int[] arr = {12, 11, 13, 5, 6, 7};
+        System.out.println("Array before sorting:");
+        printArray(arr);
+        mergeSort(arr, 0, arr.length - 1);
+        System.out.println("Array after sorting:");
+        printArray(arr);
+
+        // Example usage of Binary Search
+        int[] sortedArr = {2, 3, 4, 10, 40};
+        int target = 10;
+        int result = binarySearch(sortedArr, target, 0, sortedArr.length - 1);
+        if (result == -1) {
+            System.out.println("Element not present in array");
+        } else {
+            System.out.println("Element found at index " + result);
+        }
+    }
+
+    /**
+     * Helper method to print an array
+     */
+    private static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    /**
      * TreeNode class for binary tree examples
      */
     public static class TreeNode {
