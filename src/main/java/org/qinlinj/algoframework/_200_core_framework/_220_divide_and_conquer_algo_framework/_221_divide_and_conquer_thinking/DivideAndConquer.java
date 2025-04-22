@@ -34,4 +34,17 @@ package org.qinlinj.algoframework._200_core_framework._220_divide_and_conquer_al
  * - Examples include: merge sort, quick sort, binary search
  */
 public class DivideAndConquer {
+    /**
+     * Example 1: Fibonacci sequence using recursive approach
+     * This demonstrates divide and conquer thinking by breaking the problem
+     * into smaller sub-problems (fib(n-1) and fib(n-2))
+     */
+    public static int fib(int n) {
+        // Base case
+        if (n == 0 || n == 1) {
+            return n;
+        }
+        // Divide the problem and combine the results
+        return fib(n - 1) + fib(n - 2);
+    }
 }
