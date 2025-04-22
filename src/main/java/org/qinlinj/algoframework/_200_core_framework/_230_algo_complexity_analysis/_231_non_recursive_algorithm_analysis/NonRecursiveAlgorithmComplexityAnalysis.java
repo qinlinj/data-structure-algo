@@ -88,4 +88,15 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
         }
         return sum;
     }
+
+    /**
+     * Example 2: Pass by value vs. pass by reference
+     * Note: In Java, objects are passed by reference, but these examples
+     * illustrate the concept for languages where this matters more
+     */
+    // Inefficient (if in C++ or similar language)
+    public static void processArrayByValue(int[] array) {
+        // In some languages, this would create a copy (not in Java)
+        // Expensive in time and space, especially for recursive calls
+    }
 }
