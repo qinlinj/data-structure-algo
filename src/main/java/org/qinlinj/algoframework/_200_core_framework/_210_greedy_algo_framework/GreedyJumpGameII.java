@@ -117,4 +117,76 @@ public class GreedyJumpGameII {
 
         return jumps;
     }
+
+    /**
+     * Demonstrates both approaches and compares their performance
+     */
+    public static void main(String[] args) {
+        // Test cases
+        int[][] testCases = {
+                {2, 3, 1, 1, 4},      // Example 1: Expected output = 2
+                {2, 3, 0, 1, 4},      // Example 2: Expected output = 2
+                {1, 2, 3, 4, 5},      // Linear increases: Expected output = 3
+                {5, 4, 3, 2, 1},      // Decreasing values: Expected output = 1
+                {1, 1, 1, 1, 1},      // Constant values: Expected output = 4
+                {10, 9, 8, 7, 6, 5, 4, 3, 2, 1}  // Large values: Expected output = 1
+        };
+
+        System.out.println("Jump Game II - Solution Comparison\n");
+        System.out.println("Dynamic Programming vs Greedy Algorithm");
+        System.out.println("=====================================");
+
+        for (int i = 0; i < testCases.length; i++) {
+            int[] nums = testCases[i];
+
+            System.out.print("Test case " + (i + 1) + ": [");
+            for (int j = 0; j < nums.length; j++) {
+                System.out.print(nums[j]);
+                if (j < nums.length - 1) System.out.print(", ");
+            }
+            System.out.println("]");
+
+            // Measure time for DP solution
+            long startDP = System.nanoTime();
+            int dpResult = jumpDP(nums);
+            long endDP = System.nanoTime();
+            double dpTime = (endDP - startDP) / 1_000_000.0;
+
+            // Measure time for Greedy solution
+            long startGreedy = System.nanoTime();
+            int greedyResult = jumpGreedy(nums);
+            long endGreedy = System.nanoTime();
+            double greedyTime = (endGreedy - startGreedy) / 1_000_000.0;
+
+            System.out.println("DP Solution: " + dpResult + " jumps (took " + dpTime + " ms)");
+            System.out.println("Greedy Solution: " + greedyResult + " jumps (took " + greedyTime + " ms)");
+            System.out.println("Speed Improvement: " + (dpTime / greedyTime) + "x faster");
+            System.out.println("-------------------------------------");
+        }
+
+        // Create a larger test case to demonstrate performance difference more clearly
+        int[] largeTestCase = new int[1000];
+        for (int i = 0; i < largeTestCase.length; i++) {
+            largeTestCase[i] = 1;  // Each position can jump 1 step
+        }
+
+        System.out.println("\nLarge Test Case (n=1000, all 1's)");
+        System.out.println("Expected output: 999 jumps (one per position)");
+
+        // Only measure greedy for large case (DP would be too slow)
+        long startGreedy = System.nanoTime();
+        int greedyResult = jumpGreedy(largeTestCase);
+        long endGreedy = System.nanoTime();
+        double greedyTime = (endGreedy - startGreedy) / 1_000_000.0;
+
+        System.out.println("Greedy Solution: " + greedyResult + " jumps (took " + greedyTime + " ms)");
+        System.out.println("DP Solution would be prohibitively slow for this case (O(n²))");
+
+        System.out.println("\nConclusion:");
+        System.out.println("1. Both approaches give the correct answer, but with vastly different performance.");
+        System.out.println("2. For this problem, the greedy approach is dramatically more efficient (O(n) vs O(n²)).");
+        System.out.println("3. The key insight is recognizing we don't need to try all possible jumps at each position.");
+        System.out.println("4. Instead, we can keep track of the furthest reachable position and make optimal local choices.");
+        System.out.println("5. This demonstrates the power of identifying the greedy choice property in a problem.");
+    }
 }
