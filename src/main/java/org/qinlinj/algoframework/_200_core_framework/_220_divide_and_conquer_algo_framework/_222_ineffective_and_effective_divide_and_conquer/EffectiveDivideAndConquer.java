@@ -164,6 +164,33 @@ public class EffectiveDivideAndConquer {
     }
 
     /**
+     * Effective divide and conquer approach for merging k sorted lists
+     * O(N log k) time complexity where N is total number of nodes and k is number of lists
+     * Creates a balanced binary recursive tree with O(log k) height
+     * Each list is processed O(log k) times
+     */
+    public static ListNode mergeKLists3(ListNode[] lists, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        if (start == end) {
+            return lists[start];
+        }
+
+        // Divide the lists into two halves
+        int mid = start + (end - start) / 2;
+
+        // Merge left half lists[start...mid]
+        ListNode left = mergeKLists3(lists, start, mid);
+
+        // Merge right half lists[mid+1...end]
+        ListNode right = mergeKLists3(lists, mid + 1, end);
+
+        // Combine results
+        return mergeTwoLists(left, right);
+    }
+
+    /**
      * Definition for singly-linked list node
      */
     public static class ListNode {
