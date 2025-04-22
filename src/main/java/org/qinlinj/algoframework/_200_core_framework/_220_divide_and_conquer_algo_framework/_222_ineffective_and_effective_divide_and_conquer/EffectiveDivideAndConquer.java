@@ -191,6 +191,109 @@ public class EffectiveDivideAndConquer {
     }
 
     /**
+     * Main method with examples
+     */
+    public static void main(String[] args) {
+        // Example for array sum calculations
+        int[] nums = {1, 2, 3, 4, 5, 6, 7, 8};
+
+        System.out.println("Iterative sum: " + getSum(nums));
+        System.out.println("Recursive linear sum: " + getSum2(nums, 0));
+        System.out.println("Recursive binary sum: " + getSum3(nums, 0, nums.length - 1));
+
+        // Example for merging k sorted lists
+        ListNode list1 = createList(new int[]{1, 4, 5});
+        ListNode list2 = createList(new int[]{1, 3, 4});
+        ListNode list3 = createList(new int[]{2, 6});
+
+        ListNode[] lists = new ListNode[]{list1, list2, list3};
+
+        System.out.println("\nMerging k sorted lists:");
+        System.out.println("Original lists:");
+        for (ListNode list : lists) {
+            printList(list);
+        }
+
+        System.out.println("\nIneffective approach result:");
+        ListNode result1 = mergeKLists(copyLists(lists));
+        printList(result1);
+
+        System.out.println("\nIneffective recursive approach result:");
+        ListNode result2 = mergeKLists2(copyLists(lists), 0);
+        printList(result2);
+
+        System.out.println("\nEffective divide and conquer approach result:");
+        ListNode result3 = mergeKLists3(copyLists(lists), 0, lists.length - 1);
+        printList(result3);
+
+        System.out.println("\nTime Complexity Analysis:");
+        System.out.println("- Iterative sum: O(n) time, O(1) space");
+        System.out.println("- Recursive linear sum: O(n) time, O(n) space");
+        System.out.println("- Recursive binary sum: O(n) time, O(log n) space");
+        System.out.println("- Ineffective merge k lists: O(N²/k) time");
+        System.out.println("- Effective divide and conquer merge k lists: O(N log k) time, O(log k) space");
+    }
+
+    /**
+     * Utility method to create a linked list from an array
+     */
+    private static ListNode createList(int[] values) {
+        ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+
+        for (int val : values) {
+            p.next = new ListNode(val);
+            p = p.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Utility method to print a linked list
+     */
+    private static void printList(ListNode head) {
+        ListNode p = head;
+        while (p != null) {
+            System.out.print(p.val + " -> ");
+            p = p.next;
+        }
+        System.out.println("null");
+    }
+
+    /**
+     * Utility method to create a deep copy of the lists array
+     */
+    private static ListNode[] copyLists(ListNode[] lists) {
+        ListNode[] copy = new ListNode[lists.length];
+        for (int i = 0; i < lists.length; i++) {
+            copy[i] = copyList(lists[i]);
+        }
+        return copy;
+    }
+
+    /**
+     * Utility method to create a deep copy of a linked list
+     */
+    private static ListNode copyList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode newHead = new ListNode(head.val);
+        ListNode p = head.next;
+        ListNode q = newHead;
+
+        while (p != null) {
+            q.next = new ListNode(p.val);
+            p = p.next;
+            q = q.next;
+        }
+
+        return newHead;
+    }
+
+    /**
      * Definition for singly-linked list node
      */
     public static class ListNode {
