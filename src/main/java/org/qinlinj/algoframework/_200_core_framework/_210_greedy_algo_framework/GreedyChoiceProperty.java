@@ -70,4 +70,29 @@ public class GreedyChoiceProperty {
         return dp[amount] > amount ? -1 : dp[amount]; // Return -1 if solution impossible
     }
 
+    /**
+     * LeetCode 55: Jump Game
+     * Determine if you can reach the last index
+     * <p>
+     * This problem has the greedy choice property because at each position,
+     * we only need to track the farthest we can reach, not all possible paths.
+     */
+    public static boolean canJump(int[] nums) {
+        int n = nums.length;
+        int farthest = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            // Update the farthest position we can reach
+            farthest = Math.max(farthest, i + nums[i]);
+
+            // If we can't move forward from current position
+            if (farthest <= i) {
+                return false;
+            }
+        }
+
+        // Check if we can reach the last index
+        return farthest >= n - 1;
+    }
+
 }
