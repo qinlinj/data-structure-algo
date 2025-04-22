@@ -66,6 +66,28 @@ public class DivideAndConquer {
     }
 
     /**
+     * Example 3: Merge Sort - A formal Divide and Conquer Algorithm
+     * This is a classic example of a true divide and conquer algorithm
+     * where the problem is divided into independent sub-problems
+     */
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            // Divide the array into two halves
+            int mid = left + (right - left) / 2;
+
+            // Recursively sort both halves
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+
+            // Merge the sorted halves
+            merge(arr, left, mid, right);
+        }
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+    }
+
+    /**
      * TreeNode class for binary tree examples
      */
     public static class TreeNode {
