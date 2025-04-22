@@ -38,4 +38,20 @@ package org.qinlinj.algoframework._200_core_framework._210_greedy_algo_framework
  * choices lead to a global optimum.
  */
 public class GreedyAlgorithmExample {
+    /**
+     * Initial recursive approach - exponential complexity O(2^n)
+     * This represents the exhaustive enumeration approach
+     */
+    public static int findMaxRecursive(int n) {
+        if (n == 0) return 0;
+
+        // Choose $1 bill for this position, then solve for remaining positions
+        int result1 = 1 + findMaxRecursive(n - 1);
+
+        // Choose $100 bill for this position, then solve for remaining positions
+        int result2 = 100 + findMaxRecursive(n - 1);
+
+        // Return the better of the two choices
+        return Math.max(result1, result2);
+    }
 }
