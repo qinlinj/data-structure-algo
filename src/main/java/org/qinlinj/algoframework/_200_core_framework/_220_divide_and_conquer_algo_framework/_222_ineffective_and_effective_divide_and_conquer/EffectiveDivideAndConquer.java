@@ -85,4 +85,55 @@ public class EffectiveDivideAndConquer {
         // Combine results
         return leftSum + rightSum;
     }
+
+    /**
+     * SECTION 2: EFFECTIVE DIVIDE AND CONQUER EXAMPLES
+     */
+
+    /**
+     * Merge two sorted linked lists
+     * O(l1 + l2) time complexity where l1 and l2 are lengths of the two lists
+     */
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // Dummy head
+        ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+        ListNode p1 = l1, p2 = l2;
+
+        while (p1 != null && p2 != null) {
+            // Compare p1 and p2, connect smaller value to p
+            if (p1.val > p2.val) {
+                p.next = p2;
+                p2 = p2.next;
+            } else {
+                p.next = p1;
+                p1 = p1.next;
+            }
+            // Advance p pointer
+            p = p.next;
+        }
+
+        // Connect remaining nodes
+        if (p1 != null) {
+            p.next = p1;
+        }
+
+        if (p2 != null) {
+            p.next = p2;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Definition for singly-linked list node
+     */
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 }
