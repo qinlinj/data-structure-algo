@@ -32,4 +32,20 @@ package org.qinlinj.algoframework._200_core_framework._220_divide_and_conquer_al
  * - Space complexity relates to recursive stack depth (tree height)
  */
 public class EffectiveDivideAndConquer {
+
+    /**
+     * SECTION 1: INEFFECTIVE DIVIDE AND CONQUER EXAMPLES
+     */
+
+    /**
+     * Example 1: Iterative sum calculation
+     * Simple O(n) time and O(1) space approach
+     */
+    public static int getSum(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        return sum;
+    }
 }
