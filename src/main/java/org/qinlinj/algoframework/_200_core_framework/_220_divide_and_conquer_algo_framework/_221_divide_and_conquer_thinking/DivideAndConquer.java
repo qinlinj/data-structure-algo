@@ -134,6 +134,31 @@ public class DivideAndConquer {
     }
 
     /**
+     * Example 4: Binary Search - Another formal Divide and Conquer Algorithm
+     */
+    public static int binarySearch(int[] arr, int target, int left, int right) {
+        if (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            // If the element is present at the middle
+            if (arr[mid] == target) {
+                return mid;
+            }
+
+            // If element is smaller than mid, search in left subarray
+            if (arr[mid] > target) {
+                return binarySearch(arr, target, left, mid - 1);
+            }
+
+            // Else search in right subarray
+            return binarySearch(arr, target, mid + 1, right);
+        }
+
+        // Element not found
+        return -1;
+    }
+
+    /**
      * TreeNode class for binary tree examples
      */
     public static class TreeNode {
