@@ -48,7 +48,7 @@ public class EffectiveDivideAndConquer {
         }
         return sum;
     }
-    
+
     /**
      * Example 2: Recursive sum calculation (linear recursion)
      * This is an ineffective divide and conquer approach
@@ -62,5 +62,27 @@ public class EffectiveDivideAndConquer {
         }
         // Breaking problem into first element + sum of rest
         return nums[start] + getSum2(nums, start + 1);
+    }
+
+    /**
+     * Example 3: Recursive sum with binary splitting
+     * Still ineffective for sum calculation but demonstrates binary splitting
+     * O(n) time and O(log n) space
+     * Creates a balanced binary tree with O(log n) height
+     */
+    public static int getSum3(int[] nums, int start, int end) {
+        // Base case
+        if (start == end) {
+            return nums[start];
+        }
+
+        int mid = start + (end - start) / 2;
+        // Calculate sum of left half
+        int leftSum = getSum3(nums, start, mid);
+        // Calculate sum of right half
+        int rightSum = getSum3(nums, mid + 1, end);
+
+        // Combine results
+        return leftSum + rightSum;
     }
 }
