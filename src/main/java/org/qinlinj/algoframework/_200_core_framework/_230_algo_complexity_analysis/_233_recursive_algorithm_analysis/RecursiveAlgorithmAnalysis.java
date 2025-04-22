@@ -129,4 +129,95 @@ public class RecursiveAlgorithmAnalysis {
 
         return (dp[amount] == amount + 1) ? -1 : dp[amount];
     }
+
+    /**
+     * SECTION 2: BACKTRACKING EXAMPLES
+     */
+
+    /**
+     * Example 1: Permutation Problem (No Duplicates, No Reuse)
+     * <p>
+     * Time Complexity: O(N^2 × N!) where:
+     * - Each node takes O(N) time
+     * - There are approximately N! × N nodes in the recursion tree
+     * <p>
+     * Space Complexity: O(N) for recursion stack + O(N × N!) for results
+     */
+    public static java.util.List<java.util.List<Integer>> permute(int[] nums) {
+        java.util.List<java.util.List<Integer>> result = new java.util.ArrayList<>();
+        java.util.LinkedList<Integer> track = new java.util.LinkedList<>();
+        boolean[] used = new boolean[nums.length];
+
+        permuteBacktrack(nums, track, used, result);
+        return result;
+    }
+
+    private static void permuteBacktrack(
+            int[] nums,
+            java.util.LinkedList<Integer> track,
+            boolean[] used,
+            java.util.List<java.util.List<Integer>> result) {
+
+        // Reached leaf node, collect result (time: O(N) to copy the list)
+        if (track.size() == nums.length) {
+            result.add(new java.util.ArrayList<>(track));
+            return;
+        }
+
+        // For each position, try each number (time: O(N) for the loop)
+        for (int i = 0; i < nums.length; i++) {
+            // Skip used numbers
+            if (used[i]) continue;
+
+            // Make choice
+            used[i] = true;
+            track.addLast(nums[i]);
+
+            // Recurse
+            permuteBacktrack(nums, track, used, result);
+
+            // Undo choice (backtrack)
+            track.removeLast();
+            used[i] = false;
+        }
+    }
+
+    /**
+     * Example 2: Subset Problem (Power Set)
+     * <p>
+     * Time Complexity: O(N × 2^N) where:
+     * - Each node takes O(N) time
+     * - There are 2^N nodes in the recursion tree
+     * <p>
+     * Space Complexity: O(N) for recursion stack + O(N × 2^N) for results
+     */
+    public static java.util.List<java.util.List<Integer>> subsets(int[] nums) {
+        java.util.List<java.util.List<Integer>> result = new java.util.ArrayList<>();
+        java.util.LinkedList<Integer> track = new java.util.LinkedList<>();
+
+        subsetsBacktrack(nums, 0, track, result);
+        return result;
+    }
+
+    private static void subsetsBacktrack(
+            int[] nums,
+            int start,
+            java.util.LinkedList<Integer> track,
+            java.util.List<java.util.List<Integer>> result) {
+
+        // Add current combination to result (time: O(N) to copy the list)
+        result.add(new java.util.ArrayList<>(track));
+
+        // Try adding each remaining element (time: O(N) for the loop)
+        for (int i = start; i < nums.length; i++) {
+            // Make choice
+            track.addLast(nums[i]);
+
+            // Recurse with next starting position
+            subsetsBacktrack(nums, i + 1, track, result);
+
+            // Undo choice (backtrack)
+            track.removeLast();
+        }
+    }
 }
