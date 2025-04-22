@@ -104,4 +104,41 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
     public static void processArrayByReference(int[] array) {
         // No copying of the array, just passing the reference
     }
+
+    /**
+     * SECTION 3: BIG O NOTATION EXAMPLES
+     */
+
+    /**
+     * Examples of Big O simplification:
+     *
+     * O(2n + 100) = O(n)              // Drop constants
+     * O(n³ + 999n² + 999n) = O(n³)    // Keep fastest growing term
+     * O(n + m) cannot be simplified    // Multiple variables may be kept
+     */
+
+    /**
+     * Example of using looser upper bounds when exact analysis is difficult
+     */
+    public static int coinChange(int[] coins, int amount) {
+        // This is a recursive solution with complex time complexity
+        // Exact analysis is difficult, so we use a loose upper bound
+
+        // If k is the number of coin denominations and n is the amount
+        // Worst case complexity is O(k^n) - exponential
+
+        if (amount <= 0) return 0;
+
+        int minCoins = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            if (coin <= amount) {
+                int subproblem = coinChange(coins, amount - coin);
+                if (subproblem != -1) {
+                    minCoins = Math.min(minCoins, subproblem + 1);
+                }
+            }
+        }
+
+        return minCoins == Integer.MAX_VALUE ? -1 : minCoins;
+    }
 }
