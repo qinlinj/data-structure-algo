@@ -31,6 +31,7 @@ import java.util.*;
  * - Key insight: Focus on what the algorithm actually does, not just its structure
  */
 public class NonRecursiveAlgorithmComplexityAnalysis {
+
     /**
      * SECTION 1: COMPLEXITY ANALYSIS TO INFER SOLUTION APPROACHES
      */
@@ -62,17 +63,6 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
         // For this size, exponential solutions are acceptable:
         // Generate all subsets - O(2^n)
         generateAllSubsets(smallArray);
-    }
-
-    private static void generateAllSubsets(int[] smallArray) {
-    }
-
-    private static void mergeSort(int[] largeArray, int i, int i1) {
-
-    }
-
-    private static int sumArray(int[] largeArray) {
-        return 0;
     }
 
     /**
@@ -269,5 +259,59 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
         }
 
         return result;
+    }
+
+    /**
+     * HELPER METHODS FOR THE EXAMPLES ABOVE
+     */
+
+    private static int sumArray(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+        return sum;
+    }
+
+    private static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+        // Merge implementation omitted for brevity
+    }
+
+    private static void generateAllSubsets(int[] arr) {
+        // Subset generation implementation omitted for brevity
+    }
+
+    /**
+     * Main method with example execution
+     */
+    public static void main(String[] args) {
+        System.out.println("Time Complexity Analysis Examples:");
+
+        // Example with two pointers
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        int[] result = twoSum(nums, target);
+        System.out.println("Two Sum result indices: [" + result[0] + ", " + result[1] + "]");
+
+        // Example with sliding window
+        int[] windowArray = {1, 4, 2, 10, 2, 3, 1, 0, 20};
+        int k = 3;
+        int maxSum = maxSubarraySum(windowArray, k);
+        System.out.println("Maximum sum of subarray of length " + k + ": " + maxSum);
+
+        System.out.println("\nKey insights about time complexity analysis:");
+        System.out.println("1. Pay attention to data size constraints in problems");
+        System.out.println("2. Focus on what algorithms actually do, not just loop structure");
+        System.out.println("3. Non-retreating pointers often result in linear complexity");
+        System.out.println("4. Big O represents upper bounds - sometimes loose bounds are acceptable");
     }
 }
