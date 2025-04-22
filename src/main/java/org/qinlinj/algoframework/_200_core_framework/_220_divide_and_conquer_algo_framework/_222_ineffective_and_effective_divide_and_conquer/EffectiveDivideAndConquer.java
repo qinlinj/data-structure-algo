@@ -48,4 +48,19 @@ public class EffectiveDivideAndConquer {
         }
         return sum;
     }
+    
+    /**
+     * Example 2: Recursive sum calculation (linear recursion)
+     * This is an ineffective divide and conquer approach
+     * O(n) time and O(n) space due to recursion stack
+     * The recursive tree degenerates into a linked list with O(n) height
+     */
+    public static int getSum2(int[] nums, int start) {
+        // Base case
+        if (start == nums.length) {
+            return 0;
+        }
+        // Breaking problem into first element + sum of rest
+        return nums[start] + getSum2(nums, start + 1);
+    }
 }
