@@ -34,4 +34,13 @@ package org.qinlinj.algoframework._200_core_framework._210_greedy_algo_framework
  * - We make a greedy choice at each step by tracking the farthest reachable position
  */
 public class GreedyChoiceProperty {
+    /**
+     * Problem 1: Has Greedy Choice Property
+     * Maximize total amount with 10 bills of $1 or $100
+     */
+    public static int maximizeMoney(int n) {
+        // Greedy approach: Always choose $100 bills
+        return 100 * n; // O(1) solution
+    }
+
 }
