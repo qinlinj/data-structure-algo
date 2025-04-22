@@ -54,4 +54,13 @@ public class GreedyAlgorithmExample {
         // Return the better of the two choices
         return Math.max(result1, result2);
     }
+
+    /**
+     * Optimization 1: Eliminate unnecessary comparison
+     * Since we know choosing $100 is always better than choosing $1
+     */
+    public static int findMaxOptimized1(int n) {
+        if (n == 0) return 0;
+        return 100 + findMaxOptimized1(n - 1);
+    }
 }
