@@ -27,8 +27,62 @@ package org.qinlinj.algoframework._200_core_framework._230_algo_complexity_analy
  * - Monotonic queue operations
  */
 public class DataStructureAnalysis {
+
     /**
      * SECTION 1: DYNAMIC ARRAY EXAMPLE
+     */
+
+    /**
+     * Main method with demonstration and explanation
+     */
+    public static void main(String[] args) {
+        System.out.println("Data Structure Analysis and Amortized Time Complexity");
+        System.out.println("=====================================================\n");
+
+        // Demonstrate dynamic array
+        System.out.println("1. Dynamic Array Example:");
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
+        System.out.println("Adding 20 elements to a dynamic array with initial capacity 10");
+        for (int i = 0; i < 20; i++) {
+            dynamicArray.add(i);
+        }
+        System.out.println("- Although resizing occurred (O(n) operation), the amortized cost per add is O(1)");
+        System.out.println("- This is because the expensive resizing operation happens infrequently\n");
+
+        // Demonstrate monotonic queue
+        System.out.println("2. Monotonic Queue Example:");
+        MonotonicQueue monotonicQueue = new MonotonicQueue();
+        System.out.println("Push sequence: 3, 1, 5, 2, 4");
+        monotonicQueue.push(3);
+        monotonicQueue.push(1);
+        monotonicQueue.push(5);
+        monotonicQueue.push(2);
+        monotonicQueue.push(4);
+
+        System.out.println("- When pushing 5, elements 3 and 1 were removed (multiple removals)");
+        System.out.println("- When pushing 4, element 2 was removed");
+        System.out.println("- Despite these O(n) operations, the amortized cost remains O(1)");
+        System.out.println("- This is because each element can only be removed once across all operations\n");
+
+        // Amortized analysis explanation
+        System.out.println("Amortized Analysis Methods:");
+        System.out.println("1. Aggregate Analysis:");
+        System.out.println("   - Consider the total cost of n operations and divide by n");
+        System.out.println("   - For dynamic array with n add operations: Total cost is O(n), so amortized cost is O(1)");
+
+        System.out.println("\n2. Accounting Method:");
+        System.out.println("   - Charge each operation more than its actual cost");
+        System.out.println("   - Use the excess as 'credit' to pay for expensive operations");
+        System.out.println("   - Example: Charge O(2) for each add, save O(1) as credit for future resizing");
+
+        System.out.println("\n3. Potential Method:");
+        System.out.println("   - Define a potential function mapping data structure state to a number");
+        System.out.println("   - Amortized cost = actual cost + change in potential");
+        System.out.println("   - Design potential function so expensive operations cause large decrease in potential");
+    }
+
+    /**
+     * SECTION 2: HASH TABLE EXAMPLE
      */
 
     /**
@@ -140,7 +194,7 @@ public class DataStructureAnalysis {
     }
 
     /**
-     * SECTION 2: HASH TABLE EXAMPLE
+     * SECTION 3: MONOTONIC QUEUE EXAMPLE
      */
 
     /**
@@ -268,10 +322,6 @@ public class DataStructureAnalysis {
             }
         }
     }
-
-    /**
-     * SECTION 3: MONOTONIC QUEUE EXAMPLE
-     */
 
     /**
      * Monotonic Queue implementation with amortized O(1) operations
