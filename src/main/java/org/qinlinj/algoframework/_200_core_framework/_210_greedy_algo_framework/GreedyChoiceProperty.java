@@ -139,5 +139,4 @@ public class GreedyChoiceProperty {
         System.out.println("3. Not all problems have this property - when they don't, we need dynamic");
         System.out.println("   programming or other exhaustive approaches.");
     }
-
 }
