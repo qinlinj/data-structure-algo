@@ -63,4 +63,16 @@ public class GreedyAlgorithmExample {
         if (n == 0) return 0;
         return 100 + findMaxOptimized1(n - 1);
     }
+
+    /**
+     * Optimization 2: Convert recursion to iteration
+     * Reduces call stack overhead and improves readability
+     */
+    public static int findMaxOptimized2(int n) {
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result += 100;
+        }
+        return result;
+    }
 }
