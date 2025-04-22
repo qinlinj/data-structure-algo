@@ -83,4 +83,13 @@ public class GreedyAlgorithmExample {
     public static int findMaxOptimized3(int n) {
         return 100 * n;
     }
+
+    /**
+     * A more general method that works with any two denominations
+     */
+    public static int findMaxGeneral(int n, int value1, int value2) {
+        // In a greedy approach, always choose the larger value
+        int largerValue = Math.max(value1, value2);
+        return largerValue * n;
+    }
 }
