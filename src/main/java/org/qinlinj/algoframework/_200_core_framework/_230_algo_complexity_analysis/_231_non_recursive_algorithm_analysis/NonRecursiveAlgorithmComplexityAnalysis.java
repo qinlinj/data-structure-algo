@@ -99,4 +99,9 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
         // In some languages, this would create a copy (not in Java)
         // Expensive in time and space, especially for recursive calls
     }
+
+    // Efficient (if in C++ or similar language)
+    public static void processArrayByReference(int[] array) {
+        // No copying of the array, just passing the reference
+    }
 }
