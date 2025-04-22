@@ -54,6 +54,32 @@ public class GreedyJumpGameII {
         return dpHelper(nums, 0, memo);
     }
 
-    private static int dpHelper(int[] nums, int i, int[] memo) {
+    /**
+     * Helper function for dynamic programming approach
+     * Definition: minimum jumps needed to reach the end from position p
+     */
+    private static int dpHelper(int[] nums, int p, int[] memo) {
+        int n = nums.length;
+
+        // Base case: already at or beyond the last position
+        if (p >= n - 1) {
+            return 0;
+        }
+
+        // Return cached result if available
+        if (memo[p] != n) {
+            return memo[p];
+        }
+
+        int steps = nums[p];
+        // Try all possible jumps from current position
+        for (int i = 1; i <= steps; i++) {
+            // Calculate result for the subproblem (jumping i steps)
+            int subProblem = dpHelper(nums, p + i, memo);
+            // Update with minimum jumps
+            memo[p] = Math.min(memo[p], subProblem + 1);
+        }
+
+        return memo[p];
     }
 }
