@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._200_core_framework._220_divide_and_conquer_algo_framework._221_divide_and_conquer_thinking;
+package org.qinlinj.algoframework._200_core_framework._220_divide_and_conquer_algo_framework._221_divide_and_conquer_algorithm;
 
 
 /**
