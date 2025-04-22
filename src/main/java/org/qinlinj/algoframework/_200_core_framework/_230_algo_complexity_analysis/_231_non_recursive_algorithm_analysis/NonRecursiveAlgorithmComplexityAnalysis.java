@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._200_core_framework._230_algo_complexity_analysis._231_non_recursive_algorithm_analysis;
 
+import java.util.*;
+
 /**
  * Algorithm Complexity Analysis Guide
  * <p>
@@ -165,5 +167,53 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
         }
 
         return dp[n][capacity];
+    }
+
+    /**
+     * Example 2: Nested loops with variable inner bound - O(n²)
+     */
+    public static int triangularSum(int n) {
+        int sum = 0;
+
+        // Time complexity: O(n²) because inner loop iterations form an arithmetic sequence
+        // 1 + 2 + 3 + ... + n = n(n+1)/2 which is O(n²)
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j >= 0; j--) {
+                sum += i * j;
+            }
+        }
+
+        return sum;
+    }
+
+    /**
+     * Example 3: Two pointers - Linear time complexity despite nested loops
+     * This is the key insight: Focus on what the algorithm actually does
+     */
+    public static int[] twoSum(int[] nums, int target) {
+        // Sort the array first (O(n log n))
+        Arrays.sort(nums);
+
+        int left = 0, right = nums.length - 1;
+
+        // Despite nested loops, this is O(n) time complexity
+        // because the pointers never retreat
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            int leftVal = nums[left], rightVal = nums[right];
+
+            if (sum < target) {
+                // Move left pointer right until different value
+                while (left < right && nums[left] == leftVal) left++;
+            } else if (sum > target) {
+                // Move right pointer left until different value
+                while (left < right && nums[right] == rightVal) right--;
+            } else {
+                // Found target sum
+                return new int[]{left, right};
+            }
+        }
+
+        return new int[]{-1, -1}; // No solution
     }
 }
