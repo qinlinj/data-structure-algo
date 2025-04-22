@@ -126,6 +126,44 @@ public class EffectiveDivideAndConquer {
     }
 
     /**
+     * Ineffective approach to merge k sorted lists
+     * O(N²/k) time complexity where N is total number of nodes
+     * Each list gets processed multiple times
+     */
+    public static ListNode mergeKLists(ListNode[] lists) {
+        if (lists.length == 0) {
+            return null;
+        }
+
+        // Merge all lists into the first one
+        ListNode result = lists[0];
+        for (int i = 1; i < lists.length; i++) {
+            result = mergeTwoLists(result, lists[i]);
+        }
+        return result;
+    }
+
+    /**
+     * Ineffective recursive approach (linear recursion)
+     * Similar to the previous approach, but using recursion
+     * The recursive tree degenerates into a linked list with O(k) height
+     */
+    public static ListNode mergeKLists2(ListNode[] lists, int start) {
+        if (start >= lists.length) {
+            return null;
+        }
+        if (start == lists.length - 1) {
+            return lists[start];
+        }
+
+        // Merge lists[start+1...] first
+        ListNode subProblem = mergeKLists2(lists, start + 1);
+
+        // Then merge lists[start] with the result
+        return mergeTwoLists(lists[start], subProblem);
+    }
+
+    /**
      * Definition for singly-linked list node
      */
     public static class ListNode {
