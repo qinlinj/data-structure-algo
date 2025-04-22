@@ -27,4 +27,106 @@ package org.qinlinj.algoframework._200_core_framework._230_algo_complexity_analy
  * - Analysis focuses on counting recursion tree nodes and work at each node
  */
 public class RecursiveAlgorithmAnalysis {
+    /**
+     * SECTION 1: DYNAMIC PROGRAMMING EXAMPLES
+     */
+
+    /**
+     * Example 1: Coin Change Problem - Brute Force Recursion
+     * <p>
+     * Time Complexity: O(K^(N+1)) where:
+     * - K is the number of coin denominations
+     * - N is the target amount
+     * <p>
+     * Space Complexity: O(N) for recursion stack
+     */
+    public static int coinChangeBruteForce(int[] coins, int amount) {
+        // Base case
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
+
+        int res = Integer.MAX_VALUE;
+        // Time complexity O(K) where K is the number of coin denominations
+        for (int coin : coins) {
+            int subProblem = coinChangeBruteForce(coins, amount - coin);
+            if (subProblem == -1) continue;
+            res = Math.min(res, subProblem + 1);
+        }
+
+        return res == Integer.MAX_VALUE ? -1 : res;
+    }
+
+    /**
+     * Example 2: Coin Change Problem - Memoization Optimization
+     * <p>
+     * Time Complexity: O(N × K) where:
+     * - N is the number of states (target amount)
+     * - K is the time to compute each state (number of coins)
+     * <p>
+     * Space Complexity: O(N) for recursion stack and memoization array
+     */
+    public static int coinChangeMemoization(int[] coins, int amount) {
+        // Memoization array, space complexity O(N)
+        int[] memo = new int[amount + 1];
+        // Initialize with a value that indicates "not calculated yet"
+        for (int i = 0; i <= amount; i++) {
+            memo[i] = -666;
+        }
+
+        return coinChangeMemoHelper(coins, amount, memo);
+    }
+
+    private static int coinChangeMemoHelper(int[] coins, int amount, int[] memo) {
+        // Base case
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
+
+        // Check memo to avoid duplicate calculations
+        if (memo[amount] != -666) {
+            return memo[amount];
+        }
+
+        int res = Integer.MAX_VALUE;
+        // Time complexity O(K)
+        for (int coin : coins) {
+            int subProblem = coinChangeMemoHelper(coins, amount - coin, memo);
+            if (subProblem == -1) continue;
+            res = Math.min(res, subProblem + 1);
+        }
+
+        // Store result in memo
+        memo[amount] = (res == Integer.MAX_VALUE) ? -1 : res;
+        return memo[amount];
+    }
+
+    /**
+     * Example 3: Coin Change Problem - Bottom-up DP
+     * <p>
+     * Time Complexity: O(N × K) - same as memoization approach
+     * <p>
+     * Space Complexity: O(N) for dp array, but no recursion stack overhead
+     */
+    public static int coinChangeBottomUp(int[] coins, int amount) {
+        // DP array, space complexity O(N)
+        int[] dp = new int[amount + 1];
+
+        // Fill with a large value (amount + 1 works as "infinity")
+        for (int i = 0; i <= amount; i++) {
+            dp[i] = amount + 1;
+        }
+
+        // Base case
+        dp[0] = 0;
+
+        // Bottom-up calculation
+        // Time complexity: O(N × K)
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (i - coin < 0) continue;
+                dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+            }
+        }
+
+        return (dp[amount] == amount + 1) ? -1 : dp[amount];
+    }
 }
