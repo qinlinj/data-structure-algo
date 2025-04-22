@@ -75,4 +75,12 @@ public class GreedyAlgorithmExample {
         }
         return result;
     }
+
+    /**
+     * Optimization 3: Direct calculation
+     * Recognizing the pattern allows constant time complexity O(1)
+     */
+    public static int findMaxOptimized3(int n) {
+        return 100 * n;
+    }
 }
