@@ -220,4 +220,110 @@ public class RecursiveAlgorithmAnalysis {
             track.removeLast();
         }
     }
+
+    /**
+     * SECTION 3: VISUALIZATION OF RECURSION TREES
+     */
+
+    /**
+     * Visual representation of a permutation recursion tree for [1,2,3]
+     * <p>
+     * This method doesn't actually run, it's just to illustrate the structure
+     * of the recursion tree discussed in the analysis.
+     */
+    public static void visualizePermutationTree() {
+        /*
+         * For nums = [1,2,3], the recursion tree looks like:
+         *
+         *                     []
+         *          /           |           \
+         *       [1]           [2]           [3]
+         *      /   \         /   \         /   \
+         *   [1,2] [1,3]   [2,1] [2,3]   [3,1] [3,2]
+         *     |     |       |     |       |     |
+         * [1,2,3] [1,3,2] [2,1,3] [2,3,1] [3,1,2] [3,2,1]
+         *
+         * Tree properties:
+         * - Level 0: C(3,0) = 1 node
+         * - Level 1: P(3,1) = 3 nodes
+         * - Level 2: P(3,2) = 6 nodes
+         * - Level 3: P(3,3) = 6 nodes
+         * - Total nodes: approximately N! × N = 3! × 3 = 18 nodes
+         * - Each node performs O(N) work
+         * - Total time complexity: O(N^2 × N!) = O(3^2 × 3!) = O(9 × 6) = O(54)
+         */
+    }
+
+    /**
+     * Visual representation of a subset recursion tree for [1,2,3]
+     * <p>
+     * This method doesn't actually run, it's just to illustrate the structure
+     * of the recursion tree discussed in the analysis.
+     */
+    public static void visualizeSubsetTree() {
+        /*
+         * For nums = [1,2,3], the recursion tree looks like:
+         *
+         *                     []
+         *          /           |           \
+         *       [1]           [2]           [3]
+         *      /   \           |
+         *   [1,2]  [1,3]     [2,3]
+         *     |
+         * [1,2,3]
+         *
+         * Tree properties:
+         * - Level 0: C(3,0) = 1 node
+         * - Level 1: C(3,1) = 3 nodes
+         * - Level 2: C(3,2) = 3 nodes
+         * - Level 3: C(3,3) = 1 node
+         * - Total nodes: 2^N = 2^3 = 8 nodes (equals the number of possible subsets)
+         * - Each node performs O(N) work
+         * - Total time complexity: O(N × 2^N) = O(3 × 2^3) = O(3 × 8) = O(24)
+         */
+    }
+
+    /**
+     * SECTION 4: TIME AND SPACE COMPLEXITY CALCULATIONS
+     */
+
+    /**
+     * Demonstrates how to calculate time complexity for a recursive function
+     */
+    public static void timeComplexityCalculation() {
+        /*
+         * For a recursive algorithm:
+         * Time Complexity = Number of Recursive Calls × Complexity of Each Call
+         *
+         * Example: Permutation backtracking
+         * - Each recursive call takes O(N) time
+         * - Total number of calls is approximately N! × N
+         * - Therefore, time complexity is O(N^2 × N!)
+         *
+         * Example: Subset generation
+         * - Each recursive call takes O(N) time
+         * - Total number of calls is 2^N (one for each possible subset)
+         * - Therefore, time complexity is O(N × 2^N)
+         */
+    }
+
+    /**
+     * Demonstrates how to calculate space complexity for a recursive function
+     */
+    public static void spaceComplexityCalculation() {
+        /*
+         * For a recursive algorithm:
+         * Space Complexity = Recursion Stack Depth + Additional Storage
+         *
+         * Example: Permutation backtracking
+         * - Recursion stack depth is O(N)
+         * - Additional storage for results is O(N × N!)
+         * - Therefore, space complexity is O(N × N!)
+         *
+         * Example: Subset generation
+         * - Recursion stack depth is O(N)
+         * - Additional storage for results is O(N × 2^N)
+         * - Therefore, space complexity is O(N × 2^N)
+         */
+    }
 }
