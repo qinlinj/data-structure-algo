@@ -72,4 +72,20 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
     private static int sumArray(int[] largeArray) {
         return 0;
     }
+
+    /**
+     * SECTION 2: COMMON CODING MISTAKES
+     */
+
+    /**
+     * Example 1: Inefficient - Using unnecessary standard output
+     */
+    public static int inefficientSumWithPrinting(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            System.out.println("Current sum: " + sum); // Slows down execution
+        }
+        return sum;
+    }
 }
