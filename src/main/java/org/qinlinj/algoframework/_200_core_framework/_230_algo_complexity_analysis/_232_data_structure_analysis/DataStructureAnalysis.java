@@ -268,4 +268,61 @@ public class DataStructureAnalysis {
             }
         }
     }
+
+    /**
+     * SECTION 3: MONOTONIC QUEUE EXAMPLE
+     */
+
+    /**
+     * Monotonic Queue implementation with amortized O(1) operations
+     * despite having loops in push method
+     */
+    public static class MonotonicQueue {
+        private java.util.LinkedList<Integer> q = new java.util.LinkedList<>();
+
+        /**
+         * Push an element into the queue, maintaining monotonic property
+         * <p>
+         * Time Complexity:
+         * - Best case: O(1) when no elements are removed
+         * - Worst case: O(n) when all elements are removed
+         * - Amortized: O(1) across a sequence of operations
+         * <p>
+         * Explanation of amortized complexity:
+         * Each element can only be removed from the queue once.
+         * Over N operations, at most N elements can be removed,
+         * so the total cost is O(N), making the amortized cost O(1) per operation.
+         */
+        public void push(int e) {
+            // Remove all elements smaller than e from the back
+            while (!q.isEmpty() && q.getLast() < e) {
+                q.pollLast();
+            }
+            q.addLast(e);
+        }
+
+        /**
+         * Remove an element from the front of the queue if it matches
+         * <p>
+         * Time Complexity: O(1)
+         */
+        public void pop(int e) {
+            // Only remove if the element is at the front
+            if (!q.isEmpty() && q.getFirst() == e) {
+                q.pollFirst();
+            }
+        }
+
+        /**
+         * Get the maximum value in the queue (front element)
+         * <p>
+         * Time Complexity: O(1)
+         */
+        public int max() {
+            if (q.isEmpty()) {
+                throw new IllegalStateException("Queue is empty");
+            }
+            return q.getFirst();
+        }
+    }
 }
