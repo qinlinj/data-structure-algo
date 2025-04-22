@@ -47,4 +47,34 @@ public class DivideAndConquer {
         // Divide the problem and combine the results
         return fib(n - 1) + fib(n - 2);
     }
+
+    /**
+     * Example 2: Binary Tree Node Count
+     * This demonstrates divide and conquer thinking in tree traversal
+     */
+    public static int count(TreeNode root) {
+        // Base case
+        if (root == null) {
+            return 0;
+        }
+        // Divide: Count nodes in left and right subtrees
+        int leftCount = count(root.left);
+        int rightCount = count(root.right);
+
+        // Combine: Total count is left count + right count + 1 (current node)
+        return leftCount + rightCount + 1;
+    }
+
+    /**
+     * TreeNode class for binary tree examples
+     */
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
 }
