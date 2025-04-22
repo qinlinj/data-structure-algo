@@ -141,4 +141,29 @@ public class NonRecursiveAlgorithmComplexityAnalysis {
 
         return minCoins == Integer.MAX_VALUE ? -1 : minCoins;
     }
+
+    /**
+     * SECTION 4: NON-RECURSIVE ALGORITHM ANALYSIS
+     */
+
+    /**
+     * Example 1: Nested loops with O(n*w) complexity
+     */
+    public static int knapsackDP(int[] weights, int[] values, int n, int capacity) {
+        int[][] dp = new int[n + 1][capacity + 1];
+
+        // Time complexity: O(n * capacity)
+        for (int i = 1; i <= n; i++) {
+            for (int w = 1; w <= capacity; w++) {
+                // Skip item or take item
+                if (weights[i - 1] <= w) {
+                    dp[i][w] = Math.max(dp[i - 1][w], values[i - 1] + dp[i - 1][w - weights[i - 1]]);
+                } else {
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
+        }
+
+        return dp[n][capacity];
+    }
 }
