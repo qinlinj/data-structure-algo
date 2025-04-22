@@ -82,4 +82,39 @@ public class GreedyJumpGameII {
 
         return memo[p];
     }
+
+    /**
+     * Greedy Algorithm solution for Jump Game II
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public static int jumpGreedy(int[] nums) {
+        int n = nums.length;
+        // If array has only one element, no jumps needed
+        if (n == 1) return 0;
+
+        int jumps = 0;       // Number of jumps made
+        int end = 0;          // End of current jump range
+        int farthest = 0;     // Farthest position reachable so far
+
+        for (int i = 0; i < n - 1; i++) {
+            // Update the farthest position we can reach
+            farthest = Math.max(farthest, i + nums[i]);
+
+            // If we've reached the end of current jump range
+            if (i == end) {
+                // Make a jump
+                jumps++;
+                // Update the end of new jump range
+                end = farthest;
+
+                // If we can already reach the last index, no need to continue
+                if (end >= n - 1) {
+                    break;
+                }
+            }
+        }
+
+        return jumps;
+    }
 }
