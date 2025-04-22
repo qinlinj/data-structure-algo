@@ -95,4 +95,49 @@ public class GreedyChoiceProperty {
         return farthest >= n - 1;
     }
 
+    /**
+     * Demonstrates the difference between problems with and without
+     * the greedy choice property
+     */
+    public static void main(String[] args) {
+        // Problem 1: Has greedy choice property
+        System.out.println("Problem 1: Maximize money with 10 bills");
+        System.out.println("Solution: $" + maximizeMoney(10));
+        System.out.println("Time Complexity: O(1) - Constant time due to greedy choice property");
+
+        // Problem 2: No greedy choice property
+        System.out.println("\nProblem 2: Minimize bills to make specific amounts");
+        int[] testAmounts = {100, 101, 3, 200};
+
+        for (int amount : testAmounts) {
+            int minBills = minimizeBills(amount);
+            System.out.println("Amount $" + amount + " requires " + minBills + " bills");
+        }
+        System.out.println("Time Complexity: O(n*k) - Due to lack of greedy choice property");
+
+        // Problem 3: Jump Game (LeetCode 55)
+        System.out.println("\nProblem 3: Jump Game (LeetCode 55)");
+        int[][] testCases = {
+                {2, 3, 1, 1, 4},  // Can reach the end
+                {3, 2, 1, 0, 4}   // Cannot reach the end
+        };
+
+        for (int i = 0; i < testCases.length; i++) {
+            boolean canReach = canJump(testCases[i]);
+            System.out.print("Test case " + (i + 1) + ": ");
+            for (int num : testCases[i]) {
+                System.out.print(num + " ");
+            }
+            System.out.println("\nCan reach end: " + canReach);
+        }
+        System.out.println("Time Complexity: O(n) - Linear time due to greedy choice property");
+
+        System.out.println("\nConclusion:");
+        System.out.println("1. When a problem has the greedy choice property, we can achieve dramatic");
+        System.out.println("   efficiency improvements (from exponential to linear or constant time).");
+        System.out.println("2. The key is identifying whether local optimal choices lead to the global optimum.");
+        System.out.println("3. Not all problems have this property - when they don't, we need dynamic");
+        System.out.println("   programming or other exhaustive approaches.");
+    }
+
 }
