@@ -43,4 +43,31 @@ public class GreedyChoiceProperty {
         return 100 * n; // O(1) solution
     }
 
+    /**
+     * Problem 2: No Greedy Choice Property
+     * Minimize number of bills to make a specific amount
+     * This requires dynamic programming, not greedy algorithm
+     */
+    public static int minimizeBills(int amount) {
+        // Create DP array, initialize with a value larger than any possible solution
+        int[] dp = new int[amount + 1];
+        for (int i = 0; i <= amount; i++) {
+            dp[i] = amount + 1; // Initialize with a value larger than worst case
+        }
+        dp[0] = 0; // Base case
+
+        int[] coins = {1, 100}; // Available bill denominations
+
+        // Fill the DP table
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (i - coin >= 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        return dp[amount] > amount ? -1 : dp[amount]; // Return -1 if solution impossible
+    }
+
 }
