@@ -24,6 +24,9 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Maintaining the integrity of the original list structure
  */
 public class ReverseFirstNNodes {
+    // Global variable to keep track of the node after the reversed portion
+    private ListNode successor = null;
+
     /**
      * 1. Reverse first N nodes - Iterative Approach
      * <p>
@@ -74,6 +77,73 @@ public class ReverseFirstNNodes {
 
         // Return the new head of the list
         return prev;
+    }
+
+    /**
+     * 2. Reverse first N nodes - Recursive Approach
+     * <p>
+     * This method recursively reverses the first N nodes of a linked list.
+     * <p>
+     * Time Complexity: O(N)
+     * Space Complexity: O(N) due to the recursive call stack
+     */
+    public ListNode reverseNRecursive(ListNode head, int n) {
+        // Reset the successor for each new call to this method
+        this.successor = null;
+        return reverseNRecursiveHelper(head, n);
+    }
+
+    /**
+     * Helper method for recursive reversal of first N nodes
+     */
+    private ListNode reverseNRecursiveHelper(ListNode head, int n) {
+        // Base case: reached the Nth node
+        if (n == 1) {
+            // Save the N+1 node (successor)
+            successor = head.next;
+            return head;
+        }
+
+        // Recursively reverse the remaining N-1 nodes
+        ListNode newHead = reverseNRecursiveHelper(head.next, n - 1);
+
+        // Reverse the current node's pointer
+        head.next.next = head;
+
+        // Connect the current node to the successor (N+1 node)
+        head.next = successor;
+
+        // Return the new head of the reversed portion
+        return newHead;
+    }
+
+    /**
+     * Alternative implementation with successor as a parameter
+     * This avoids using a class member variable
+     */
+    public ListNode reverseNRecursiveAlternative(ListNode head, int n) {
+        return reverseNWithSuccessor(head, n, new ListNode[1]);
+    }
+
+    private ListNode reverseNWithSuccessor(ListNode head, int n, ListNode[] successorHolder) {
+        // Base case: reached the Nth node
+        if (n == 1) {
+            // Save the N+1 node (successor)
+            successorHolder[0] = head.next;
+            return head;
+        }
+
+        // Recursively reverse the remaining N-1 nodes
+        ListNode newHead = reverseNWithSuccessor(head.next, n - 1, successorHolder);
+
+        // Reverse the current node's pointer
+        head.next.next = head;
+
+        // Connect the current node to the successor (N+1 node)
+        head.next = successorHolder[0];
+
+        // Return the new head of the reversed portion
+        return newHead;
     }
 
     // Definition for singly-linked list
