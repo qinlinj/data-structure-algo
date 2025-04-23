@@ -34,6 +34,101 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  */
 public class LinkedListArithmetic {
     /**
+     * Helper method to create a linked list from an array
+     * The most significant digit is at the beginning (index 0)
+     */
+    public static ListNode createList(int[] digits, boolean reverseOrder) {
+        if (digits == null || digits.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
+
+        if (reverseOrder) {
+            // For LeetCode 2: least significant digit first
+            for (int digit : digits) {
+                current.next = new ListNode(digit);
+                current = current.next;
+            }
+        } else {
+            // For LeetCode 445: most significant digit first
+            for (int digit : digits) {
+                current.next = new ListNode(digit);
+                current = current.next;
+            }
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Helper method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val);
+            if (current.next != null) {
+                System.out.print(" -> ");
+            }
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    /**
+     * Main method to demonstrate the solutions
+     */
+    public static void main(String[] args) {
+        LinkedListArithmetic solution = new LinkedListArithmetic();
+
+        // Example 1 (LeetCode 2): [2,4,3] + [5,6,4] = [7,0,8] (342 + 465 = 807)
+        ListNode l1 = createList(new int[]{2, 4, 3}, true);
+        ListNode l2 = createList(new int[]{5, 6, 4}, true);
+
+        System.out.println("Example 1 (Reverse Order):");
+        System.out.print("List 1: ");
+        printList(l1);
+        System.out.print("List 2: ");
+        printList(l2);
+
+        ListNode result1 = solution.addTwoNumbers(l1, l2);
+        System.out.print("Sum: ");
+        printList(result1);
+        System.out.println();
+
+        // Example 2 (LeetCode 2): [9,9,9,9,9,9,9] + [9,9,9,9] = [8,9,9,9,0,0,0,1] (9999999 + 9999 = 10009998)
+        ListNode l3 = createList(new int[]{9, 9, 9, 9, 9, 9, 9}, true);
+        ListNode l4 = createList(new int[]{9, 9, 9, 9}, true);
+
+        System.out.println("Example 2 (Reverse Order):");
+        System.out.print("List 1: ");
+        printList(l3);
+        System.out.print("List 2: ");
+        printList(l4);
+
+        ListNode result2 = solution.addTwoNumbers(l3, l4);
+        System.out.print("Sum: ");
+        printList(result2);
+        System.out.println();
+
+        // Example 3 (LeetCode 445): [7,2,4,3] + [5,6,4] = [7,8,0,7] (7243 + 564 = 7807)
+        ListNode l5 = createList(new int[]{7, 2, 4, 3}, false);
+        ListNode l6 = createList(new int[]{5, 6, 4}, false);
+
+        System.out.println("Example 3 (Forward Order):");
+        System.out.print("List 1: ");
+        printList(l5);
+        System.out.print("List 2: ");
+        printList(l6);
+
+        ListNode result3 = solution.addTwoNumbersII(l5, l6);
+        System.out.print("Sum: ");
+        printList(result3);
+    }
+
+    /**
      * LeetCode 2: Add Two Numbers
      * <p>
      * Add two non-negative integers represented by linked lists.
