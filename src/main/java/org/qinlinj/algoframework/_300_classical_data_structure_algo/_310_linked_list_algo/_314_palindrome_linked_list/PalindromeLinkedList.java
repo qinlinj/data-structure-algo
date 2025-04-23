@@ -137,6 +137,40 @@ public class PalindromeLinkedList {
         return prev;
     }
 
+    /**
+     * 3. Array Conversion Approach
+     * <p>
+     * Converts the linked list to an array and checks for palindrome
+     * using traditional two-pointer technique.
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
+     */
+    public boolean isPalindromeArray(ListNode head) {
+        // Convert the linked list to an array
+        java.util.List<Integer> values = new java.util.ArrayList<>();
+
+        ListNode current = head;
+        while (current != null) {
+            values.add(current.val);
+            current = current.next;
+        }
+
+        // Use two pointers to check if the array is a palindrome
+        int left = 0;
+        int right = values.size() - 1;
+
+        while (left < right) {
+            if (!values.get(left).equals(values.get(right))) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
