@@ -36,6 +36,103 @@ public class LinkedListReversal {
     private ListNode successor = null;
 
     /**
+     * Helper method to create a linked list from an array
+     */
+    public static ListNode createList(int[] values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Helper method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val);
+            if (current.next != null) {
+                System.out.print(" -> ");
+            }
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    /**
+     * Main method to demonstrate all the linked list reversal techniques
+     */
+    public static void main(String[] args) {
+        LinkedListReversal solution = new LinkedListReversal();
+
+        // Example list: 1->2->3->4->5
+        int[] values = {1, 2, 3, 4, 5};
+
+        System.out.println("1. Reversing entire linked list:");
+
+        // Iterative approach
+        ListNode list1 = createList(values);
+        System.out.print("Original list: ");
+        printList(list1);
+
+        ListNode reversed1 = solution.reverseListIterative(list1);
+        System.out.print("After iterative reversal: ");
+        printList(reversed1);
+
+        // Recursive approach
+        ListNode list2 = createList(values);
+        ListNode reversed2 = solution.reverseListRecursive(list2);
+        System.out.print("After recursive reversal: ");
+        printList(reversed2);
+        System.out.println();
+
+        System.out.println("2. Reversing a portion of linked list (from position 2 to 4):");
+
+        // Iterative approach
+        ListNode list3 = createList(values);
+        System.out.print("Original list: ");
+        printList(list3);
+
+        ListNode partialReversed1 = solution.reverseBetweenIterative(list3, 2, 4);
+        System.out.print("After iterative partial reversal: ");
+        printList(partialReversed1);
+
+        // Recursive approach
+        ListNode list4 = createList(values);
+        ListNode partialReversed2 = solution.reverseBetweenRecursive(list4, 2, 4);
+        System.out.print("After recursive partial reversal: ");
+        printList(partialReversed2);
+        System.out.println();
+
+        System.out.println("3. Reversing in k-group segments (k=2):");
+
+        // Iterative approach
+        ListNode list5 = createList(values);
+        System.out.print("Original list: ");
+        printList(list5);
+
+        ListNode kGroupReversed1 = solution.reverseKGroupIterative(list5, 2);
+        System.out.print("After iterative k-group reversal: ");
+        printList(kGroupReversed1);
+
+        // Recursive approach
+        ListNode list6 = createList(values);
+        ListNode kGroupReversed2 = solution.reverseKGroupRecursive(list6, 2);
+        System.out.print("After recursive k-group reversal: ");
+        printList(kGroupReversed2);
+    }
+
+    /**
      * 1A. Reverse the entire linked list - Iterative Approach
      * <p>
      * This method reverses a linked list by changing the direction of pointers
