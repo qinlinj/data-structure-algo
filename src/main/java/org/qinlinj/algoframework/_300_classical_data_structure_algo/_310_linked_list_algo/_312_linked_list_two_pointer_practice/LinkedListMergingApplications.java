@@ -86,4 +86,51 @@ public class LinkedListMergingApplications {
         return ugly[n];
     }
 
+    /**
+     * LeetCode 378: Kth Smallest Element in a Sorted Matrix
+     * <p>
+     * Given an n x n matrix where each row and column is sorted in ascending order,
+     * find the kth smallest element in the matrix.
+     * <p>
+     * Approach:
+     * - Treat each row as a sorted linked list
+     * - Use a priority queue to merge these lists efficiently
+     * - Track indices to generate "next" elements
+     * <p>
+     * Time Complexity: O(k log n) where n is the matrix dimension
+     * Space Complexity: O(n) for the priority queue
+     */
+    public int kthSmallest(int[][] matrix, int k) {
+        if (matrix == null || matrix.length == 0) return -1;
+
+        int n = matrix.length;
+
+        // Priority queue to hold elements in the form: [value, row, column]
+        // Sorted by value in ascending order
+        java.util.PriorityQueue<int[]> pq = new java.util.PriorityQueue<>(
+                (a, b) -> a[0] - b[0]
+        );
+
+        // Initialize with the first element from each row
+        for (int i = 0; i < n; i++) {
+            pq.offer(new int[]{matrix[i][0], i, 0});
+        }
+
+        // Process until we find the kth element
+        int result = -1;
+        while (!pq.isEmpty() && k > 0) {
+            int[] current = pq.poll();
+            result = current[0];
+            k--;
+
+            // Add the next element from the same row if available
+            int row = current[1];
+            int col = current[2];
+            if (col + 1 < n) {
+                pq.offer(new int[]{matrix[row][col + 1], row, col + 1});
+            }
+        }
+
+        return result;
+    }
 }
