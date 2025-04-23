@@ -26,6 +26,103 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Useful when the input list should not be modified
  */
 public class OptimizedPalindromeLinkedList {
+
+    /**
+     * Helper method to create a linked list from an array
+     */
+    public static ListNode createList(int[] values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Helper method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        System.out.print("[");
+        while (current != null) {
+            System.out.print(current.val);
+            if (current.next != null) {
+                System.out.print(", ");
+            }
+            current = current.next;
+        }
+        System.out.println("]");
+    }
+
+    /**
+     * Helper method to verify that two linked lists are identical
+     * Used to check if restoration was successful
+     */
+    public static boolean areListsIdentical(ListNode list1, ListNode list2) {
+        while (list1 != null && list2 != null) {
+            if (list1.val != list2.val) {
+                return false;
+            }
+            list1 = list1.next;
+            list2 = list2.next;
+        }
+
+        return list1 == null && list2 == null;
+    }
+
+    /**
+     * Main method to demonstrate the optimized palindrome detection
+     */
+    public static void main(String[] args) {
+        OptimizedPalindromeLinkedList solution = new OptimizedPalindromeLinkedList();
+
+        // Test cases
+        testPalindrome(solution, new int[]{1, 2, 2, 1}, "Even length palindrome");
+        testPalindrome(solution, new int[]{1, 2, 3, 2, 1}, "Odd length palindrome");
+        testPalindrome(solution, new int[]{1, 2}, "Non-palindrome");
+        testPalindrome(solution, new int[]{1}, "Single element");
+
+        // Test to verify list restoration
+        System.out.println("\nVerifying list restoration:");
+        int[] values = {1, 2, 3, 4, 5};
+        ListNode original = createList(values);
+        System.out.print("Original list: ");
+        printList(original);
+
+        // Create a copy to compare after restoration
+        int[] valuesCopy = {1, 2, 3, 4, 5};
+        ListNode expectedAfterRestore = createList(valuesCopy);
+
+        solution.isPalindrome(original);
+
+        System.out.print("List after palindrome check: ");
+        printList(original);
+
+        boolean restored = areListsIdentical(original, expectedAfterRestore);
+        System.out.println("Successfully restored to original: " + restored);
+    }
+
+    /**
+     * Helper method to test a palindrome case
+     */
+    private static void testPalindrome(OptimizedPalindromeLinkedList solution, int[] values, String description) {
+        System.out.println("\nTesting: " + description);
+        ListNode list = createList(values);
+        System.out.print("List: ");
+        printList(list);
+
+        boolean isPalindrome = solution.isPalindrome(list);
+        System.out.println("Is palindrome: " + isPalindrome);
+    }
+
     /**
      * Main method to determine if a linked list is a palindrome
      * using O(1) space complexity.
