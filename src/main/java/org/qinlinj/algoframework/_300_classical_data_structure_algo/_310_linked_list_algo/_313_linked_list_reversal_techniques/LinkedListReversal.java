@@ -32,6 +32,9 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Reconnecting segments properly
  */
 public class LinkedListReversal {
+    // Global variable to track the node after the reversed portion
+    private ListNode successor = null;
+
     /**
      * 1A. Reverse the entire linked list - Iterative Approach
      * <p>
@@ -141,6 +144,44 @@ public class LinkedListReversal {
         sublistTail.next = current;         // Connect the tail of the reversed portion to the rest of the list
 
         return dummy.next;
+    }
+
+    /**
+     * 2B. Reverse a portion of a linked list (from position left to right) - Recursive
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(n) due to the recursive call stack
+     */
+    public ListNode reverseBetweenRecursive(ListNode head, int left, int right) {
+        // Base case: if we're at the start position, reverse until the end position
+        if (left == 1) {
+            return reverseFirstN(head, right);
+        }
+
+        // Move head forward and adjust positions
+        head.next = reverseBetweenRecursive(head.next, left - 1, right - 1);
+        return head;
+    }
+
+    /**
+     * Helper method to reverse the first n nodes of a linked list
+     */
+    private ListNode reverseFirstN(ListNode head, int n) {
+        // Base case: when we've reversed enough nodes
+        if (n == 1) {
+            // Save the node after the reversed portion
+            successor = head.next;
+            return head;
+        }
+
+        // Recursively reverse the remaining nodes
+        ListNode newHead = reverseFirstN(head.next, n - 1);
+
+        // Adjust pointers for the current node
+        head.next.next = head;
+        head.next = successor;
+
+        return newHead;
     }
 
     // Definition for singly-linked list
