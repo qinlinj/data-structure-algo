@@ -133,4 +133,58 @@ public class LinkedListMergingApplications {
 
         return result;
     }
+
+    /**
+     * LeetCode 373: Find K Pairs with Smallest Sums
+     * <p>
+     * Given two sorted arrays nums1 and nums2, find the k pairs (u,v) with the smallest sums,
+     * where u is from nums1 and v is from nums2.
+     * <p>
+     * Approach:
+     * - Think of each element in nums1 as the start of a virtual linked list of pairs
+     * - Each "linked list" contains pairs of a fixed element from nums1 with all elements from nums2
+     * - Merge these virtual linked lists using a priority queue
+     * <p>
+     * Time Complexity: O(k log n) where n is the smaller of nums1.length and k
+     * Space Complexity: O(min(k, nums1.length)) for the priority queue
+     */
+    public java.util.List<java.util.List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        java.util.List<java.util.List<Integer>> result = new java.util.ArrayList<>();
+
+        if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0 || k <= 0) {
+            return result;
+        }
+
+        // Priority queue to hold elements in the form: [value1, value2, index2]
+        // Sorted by sum in ascending order
+        java.util.PriorityQueue<int[]> pq = new java.util.PriorityQueue<>(
+                (a, b) -> (a[0] + a[1]) - (b[0] + b[1])
+        );
+
+        // Initialize with pairs of each element in nums1 with the first element in nums2
+        for (int i = 0; i < Math.min(nums1.length, k); i++) {
+            pq.offer(new int[]{nums1[i], nums2[0], 0});
+        }
+
+        // Process until we find k pairs or exhaust the queue
+        while (!pq.isEmpty() && k > 0) {
+            int[] current = pq.poll();
+
+            // Create and add the current pair to the result
+            java.util.List<Integer> pair = new java.util.ArrayList<>();
+            pair.add(current[0]);  // Element from nums1
+            pair.add(current[1]);  // Element from nums2
+            result.add(pair);
+
+            k--;
+
+            // Add the next pair from the same "linked list" if available
+            int index2 = current[2];
+            if (index2 + 1 < nums2.length) {
+                pq.offer(new int[]{current[0], nums2[index2 + 1], index2 + 1});
+            }
+        }
+
+        return result;
+    }
 }
