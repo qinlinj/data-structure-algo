@@ -89,6 +89,74 @@ public class LinkedListArithmetic {
         return dummy.next;
     }
 
+    /**
+     * LeetCode 445: Add Two Numbers II
+     * <p>
+     * Add two non-negative integers represented by linked lists.
+     * The digits are stored in forward order (most significant digit first).
+     * <p>
+     * Approach using stacks:
+     * - Use stacks to reverse the order of digits
+     * - Process digits from least significant to most significant
+     * - Insert new digits at the beginning of the result list
+     * <p>
+     * Time Complexity: O(m+n) where m and n are the lengths of the lists
+     * Space Complexity: O(m+n) for the stacks
+     */
+    public ListNode addTwoNumbersII(ListNode l1, ListNode l2) {
+        // Use stacks to reverse the order of digits
+        java.util.Stack<Integer> stack1 = new java.util.Stack<>();
+        java.util.Stack<Integer> stack2 = new java.util.Stack<>();
+
+        // Push all digits from first list to stack
+        ListNode current = l1;
+        while (current != null) {
+            stack1.push(current.val);
+            current = current.next;
+        }
+
+        // Push all digits from second list to stack
+        current = l2;
+        while (current != null) {
+            stack2.push(current.val);
+            current = current.next;
+        }
+
+        // Dummy node for the result
+        ListNode dummy = new ListNode(-1);
+
+        // Track carry between additions
+        int carry = 0;
+
+        // Process digits from least significant to most significant
+        while (!stack1.isEmpty() || !stack2.isEmpty() || carry > 0) {
+            // Add carry from previous addition
+            int sum = carry;
+
+            // Add digit from first stack if available
+            if (!stack1.isEmpty()) {
+                sum += stack1.pop();
+            }
+
+            // Add digit from second stack if available
+            if (!stack2.isEmpty()) {
+                sum += stack2.pop();
+            }
+
+            // Calculate new carry and digit value
+            carry = sum / 10;
+            int digit = sum % 10;
+
+            // Insert new digit at the beginning of the result list
+            ListNode newNode = new ListNode(digit);
+            newNode.next = dummy.next;
+            dummy.next = newNode;
+        }
+
+        // Return head of the result list (skip dummy node)
+        return dummy.next;
+    }
+
     // Definition for singly-linked list node
     public static class ListNode {
         int val;
