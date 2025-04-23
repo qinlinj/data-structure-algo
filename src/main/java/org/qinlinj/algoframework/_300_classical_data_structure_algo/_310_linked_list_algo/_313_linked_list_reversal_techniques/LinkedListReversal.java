@@ -32,4 +32,58 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Reconnecting segments properly
  */
 public class LinkedListReversal {
+    /**
+     * 1A. Reverse the entire linked list - Iterative Approach
+     * <p>
+     * This method reverses a linked list by changing the direction of pointers
+     * while iterating through the list once.
+     * <p>
+     * Time Complexity: O(n) where n is the number of nodes
+     * Space Complexity: O(1) - only uses a constant amount of extra space
+     */
+    public ListNode reverseListIterative(ListNode head) {
+        // Edge cases: empty list or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Initialize three pointers for the reversal process
+        ListNode prev = null;          // Previous node (initially null)
+        ListNode current = head;       // Current node being processed
+        ListNode next = null;          // Temporary storage for the next node
+
+        // Iterate through the list
+        while (current != null) {
+            // Save the next node before we change the pointer
+            next = current.next;
+
+            // Reverse the pointer of the current node
+            current.next = prev;
+
+            // Move the pointers one position ahead
+            prev = current;
+            current = next;
+        }
+
+        // At the end, prev will be pointing to the new head
+        return prev;
+    }
+
+    // Definition for singly-linked list
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 }
