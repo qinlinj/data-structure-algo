@@ -184,6 +184,64 @@ public class LinkedListReversal {
         return newHead;
     }
 
+    /**
+     * 3A. Reverse linked list in k-group segments - Iterative
+     * <p>
+     * This corresponds to LeetCode 25: Reverse Nodes in k-Group
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public ListNode reverseKGroupIterative(ListNode head, int k) {
+        if (head == null || head.next == null || k <= 1) {
+            return head;
+        }
+
+        // Create a dummy node to simplify edge cases
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        // Pointers to track segments
+        ListNode prevGroupEnd = dummy;  // Points to the node before the current group
+        ListNode current = head;        // Current node being processed
+
+        int count = 0;  // Count of nodes processed
+
+        // Count the total number of nodes
+        int length = 0;
+        ListNode temp = head;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+
+        // Process each group of k nodes
+        while (length >= k) {
+            // The current group starts from 'current'
+            ListNode groupStart = current;
+            ListNode prev = null;
+            ListNode next = null;
+
+            // Reverse k nodes
+            for (int i = 0; i < k; i++) {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+                length--;
+            }
+
+            // Connect the reversed group to the rest of the list
+            prevGroupEnd.next = prev;            // Connect previous segment to new head of reversed segment
+            groupStart.next = current;           // Connect tail of reversed segment to next segment
+
+            // Update prevGroupEnd for the next iteration
+            prevGroupEnd = groupStart;
+        }
+
+        return dummy.next;
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
