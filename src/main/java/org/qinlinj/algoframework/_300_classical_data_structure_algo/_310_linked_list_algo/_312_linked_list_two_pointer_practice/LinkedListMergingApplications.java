@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked_list_algo._312_linked_list_two_pointer_practice;
 
+import java.util.*;
+
 /**
  * LINKED LIST MERGING APPLICATIONS
  * <p>
@@ -31,6 +33,88 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Using similar pointer/index manipulation techniques
  */
 public class LinkedListMergingApplications {
+    /**
+     * General pattern for merging k sorted lists using a priority queue
+     * This demonstrates the core technique applied in the problems above
+     */
+    public static <T extends Comparable<T>> List<T> mergeKSortedLists(List<List<T>> lists) {
+        List<T> result = new ArrayList<>();
+
+        if (lists == null || lists.isEmpty()) {
+            return result;
+        }
+
+        // Priority queue to hold elements with their source list information
+        // Element format: [value, listIndex, elementIndex]
+        PriorityQueue<Object[]> pq = new PriorityQueue<>(
+                (a, b) -> ((T) a[0]).compareTo((T) b[0])
+        );
+
+        // Initialize with the first element from each list
+        for (int i = 0; i < lists.size(); i++) {
+            if (!lists.get(i).isEmpty()) {
+                pq.offer(new Object[]{lists.get(i).get(0), i, 0});
+            }
+        }
+
+        // Merge until all elements are processed
+        while (!pq.isEmpty()) {
+            Object[] current = pq.poll();
+            result.add((T) current[0]);
+
+            int listIndex = (int) current[1];
+            int elementIndex = (int) current[2];
+
+            // Add the next element from the same list if available
+            if (elementIndex + 1 < lists.get(listIndex).size()) {
+                pq.offer(new Object[]{
+                        lists.get(listIndex).get(elementIndex + 1),
+                        listIndex,
+                        elementIndex + 1
+                });
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Main method to demonstrate the solutions
+     */
+    public static void main(String[] args) {
+        LinkedListMergingApplications solution = new LinkedListMergingApplications();
+
+        // Example 1: Ugly Number II
+        int n = 10;
+        int uglyNumber = solution.nthUglyNumber(n);
+        System.out.println("The " + n + "th ugly number is: " + uglyNumber);
+
+        // Example 2: Kth Smallest Element in a Sorted Matrix
+        int[][] matrix = {
+                {1, 5, 9},
+                {10, 11, 13},
+                {12, 13, 15}
+        };
+        int k1 = 8;
+        int kthSmallest = solution.kthSmallest(matrix, k1);
+        System.out.println("The " + k1 + "th smallest element in the matrix is: " + kthSmallest);
+
+        // Example 3: Find K Pairs with Smallest Sums
+        int[] nums1 = {1, 7, 11};
+        int[] nums2 = {2, 4, 6};
+        int k2 = 3;
+        java.util.List<java.util.List<Integer>> kPairs = solution.kSmallestPairs(nums1, nums2, k2);
+        System.out.println("The " + k2 + " pairs with smallest sums are: " + kPairs);
+
+        // Example 4: General merging of k sorted lists
+        java.util.List<java.util.List<Integer>> lists = new java.util.ArrayList<>();
+        lists.add(java.util.Arrays.asList(1, 4, 7));
+        lists.add(java.util.Arrays.asList(2, 5, 8));
+        lists.add(java.util.Arrays.asList(3, 6, 9));
+        java.util.List<Integer> merged = mergeKSortedLists(lists);
+        System.out.println("Merged list: " + merged);
+    }
+
     /**
      * LeetCode 264: Ugly Number II
      * <p>
