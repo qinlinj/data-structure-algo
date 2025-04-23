@@ -90,6 +90,50 @@ public class LinkedListDuplicateRemoval {
         return dummyUnique.next;
     }
 
+    /**
+     * Solution 2: Fast/Slow Pointer Technique
+     * <p>
+     * This approach uses two pointers:
+     * - A slow pointer (p) that builds the result list
+     * - A fast pointer (q) that scans ahead to detect duplicates
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public ListNode deleteDuplicates_twoPointers(ListNode head) {
+        // Edge case: empty list or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Create a dummy node to simplify handling the head
+        ListNode dummy = new ListNode(-1);
+
+        // p builds the result list, q scans the original list
+        ListNode p = dummy;
+        ListNode q = head;
+
+        while (q != null) {
+            // Check if current node is the start of a duplicate sequence
+            if (q.next != null && q.val == q.next.val) {
+                // Skip all nodes with this value
+                int duplicateValue = q.val;
+                while (q != null && q.val == duplicateValue) {
+                    q = q.next;
+                }
+                // At this point, q points to either null or the first node with a different value
+            } else {
+                // Current node is unique, add it to the result list
+                p.next = q;
+                p = p.next;
+                q = q.next;
+                p.next = null;  // Disconnect to avoid cycles
+            }
+        }
+
+        return dummy.next;
+    }
+
     // Definition for a singly linked list node
     public static class ListNode {
         int val;
