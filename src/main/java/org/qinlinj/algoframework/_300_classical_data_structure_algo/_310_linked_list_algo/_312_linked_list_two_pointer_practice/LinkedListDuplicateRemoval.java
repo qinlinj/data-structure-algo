@@ -32,6 +32,77 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  */
 public class LinkedListDuplicateRemoval {
     /**
+     * Utility method to create a linked list from an array of values
+     */
+    public static ListNode createList(int[] values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Utility method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    /**
+     * Main method to demonstrate the solutions
+     */
+    public static void main(String[] args) {
+        LinkedListDuplicateRemoval solution = new LinkedListDuplicateRemoval();
+
+        // Example 1: [1,2,3,3,4,4,5] -> [1,2,5]
+        int[] values1 = {1, 2, 3, 3, 4, 4, 5};
+        ListNode list1 = createList(values1);
+
+        System.out.println("Original List:");
+        printList(list1);
+
+        System.out.println("\nAfter removing duplicates (Decomposition):");
+        ListNode result1 = solution.deleteDuplicates_decomposition(list1);
+        printList(result1);
+
+        // Example 2: [1,1,1,2,3] -> [2,3]
+        int[] values2 = {1, 1, 1, 2, 3};
+        ListNode list2 = createList(values2);
+
+        System.out.println("\nOriginal List:");
+        printList(list2);
+
+        System.out.println("\nAfter removing duplicates (Two Pointers):");
+        ListNode result2 = solution.deleteDuplicates_twoPointers(list2);
+        printList(result2);
+
+        // Example with recursive solution
+        int[] values3 = {1, 2, 2, 3, 3, 3, 4, 5, 5};
+        ListNode list3 = createList(values3);
+
+        System.out.println("\nOriginal List:");
+        printList(list3);
+
+        System.out.println("\nAfter removing duplicates (Recursive):");
+        ListNode result3 = solution.deleteDuplicates_recursive(list3);
+        printList(result3);
+    }
+
+    /**
      * Solution 1: List Decomposition Technique
      * <p>
      * This approach decomposes the original list into two separate lists:
