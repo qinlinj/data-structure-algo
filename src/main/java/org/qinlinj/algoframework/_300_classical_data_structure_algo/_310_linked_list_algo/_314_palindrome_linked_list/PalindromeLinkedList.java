@@ -25,8 +25,122 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Simple but requires O(n) extra space
  */
 public class PalindromeLinkedList {
+
     // Class member to track the "left" or "front" pointer
     private ListNode frontPointer;
+
+    /**
+     * Helper method to create a linked list from an array
+     */
+    public static ListNode createList(int[] values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Helper method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        System.out.print("[");
+        while (current != null) {
+            System.out.print(current.val);
+            if (current.next != null) {
+                System.out.print(", ");
+            }
+            current = current.next;
+        }
+        System.out.println("]");
+    }
+
+    /**
+     * Main method to demonstrate palindrome linked list detection
+     */
+    public static void main(String[] args) {
+        PalindromeLinkedList solution = new PalindromeLinkedList();
+
+        // Example 1: Palindrome [1,2,2,1]
+        int[] values1 = {1, 2, 2, 1};
+        ListNode list1 = createList(values1);
+
+        System.out.println("Example 1:");
+        System.out.print("List: ");
+        printList(list1);
+
+        boolean isPalindrome1Recursive = solution.isPalindromeRecursive(list1);
+        System.out.println("Is palindrome (recursive): " + isPalindrome1Recursive);
+
+        boolean isPalindrome1Optimized = solution.isPalindromeOptimized(list1);
+        System.out.println("Is palindrome (optimized): " + isPalindrome1Optimized);
+
+        boolean isPalindrome1Array = solution.isPalindromeArray(list1);
+        System.out.println("Is palindrome (array): " + isPalindrome1Array);
+        System.out.println();
+
+        // Example 2: Not a palindrome [1,2]
+        int[] values2 = {1, 2};
+        ListNode list2 = createList(values2);
+
+        System.out.println("Example 2:");
+        System.out.print("List: ");
+        printList(list2);
+
+        boolean isPalindrome2Recursive = solution.isPalindromeRecursive(list2);
+        System.out.println("Is palindrome (recursive): " + isPalindrome2Recursive);
+
+        boolean isPalindrome2Optimized = solution.isPalindromeOptimized(list2);
+        System.out.println("Is palindrome (optimized): " + isPalindrome2Optimized);
+
+        boolean isPalindrome2Array = solution.isPalindromeArray(list2);
+        System.out.println("Is palindrome (array): " + isPalindrome2Array);
+        System.out.println();
+
+        // Example 3: Palindrome with odd length [1,2,3,2,1]
+        int[] values3 = {1, 2, 3, 2, 1};
+        ListNode list3 = createList(values3);
+
+        System.out.println("Example 3:");
+        System.out.print("List: ");
+        printList(list3);
+
+        boolean isPalindrome3Recursive = solution.isPalindromeRecursive(list3);
+        System.out.println("Is palindrome (recursive): " + isPalindrome3Recursive);
+
+        boolean isPalindrome3Optimized = solution.isPalindromeOptimized(list3);
+        System.out.println("Is palindrome (optimized): " + isPalindrome3Optimized);
+
+        boolean isPalindrome3Array = solution.isPalindromeArray(list3);
+        System.out.println("Is palindrome (array): " + isPalindrome3Array);
+        System.out.println();
+
+        // Example 4: Single node [1]
+        int[] values4 = {1};
+        ListNode list4 = createList(values4);
+
+        System.out.println("Example 4:");
+        System.out.print("List: ");
+        printList(list4);
+
+        boolean isPalindrome4Recursive = solution.isPalindromeRecursive(list4);
+        System.out.println("Is palindrome (recursive): " + isPalindrome4Recursive);
+
+        boolean isPalindrome4Optimized = solution.isPalindromeOptimized(list4);
+        System.out.println("Is palindrome (optimized): " + isPalindrome4Optimized);
+
+        boolean isPalindrome4Array = solution.isPalindromeArray(list4);
+        System.out.println("Is palindrome (array): " + isPalindrome4Array);
+    }
 
     /**
      * 1. Recursive Approach
