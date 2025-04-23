@@ -96,6 +96,53 @@ public class LinkedListReversal {
         return newHead;
     }
 
+    /**
+     * 2A. Reverse a portion of a linked list (from position left to right) - Iterative
+     * <p>
+     * This corresponds to LeetCode 92: Reverse Linked List II
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public ListNode reverseBetweenIterative(ListNode head, int left, int right) {
+        // Edge cases
+        if (head == null || head.next == null || left == right) {
+            return head;
+        }
+
+        // Create a dummy node to handle the case where left = 1
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        // Find the node before the reversal start point
+        ListNode beforeReverse = dummy;
+        for (int i = 1; i < left; i++) {
+            beforeReverse = beforeReverse.next;
+        }
+
+        // Start of the sublist to reverse
+        ListNode current = beforeReverse.next;
+        ListNode prev = null;
+        ListNode next = null;
+
+        // The tail of the reversed sublist (will be the same node, but positioned differently)
+        ListNode sublistTail = current;
+
+        // Reverse the sublist
+        for (int i = left; i <= right; i++) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        // Connect the reversed sublist back to the original list
+        beforeReverse.next = prev;          // Connect the node before reversal to the new head of the reversed portion
+        sublistTail.next = current;         // Connect the tail of the reversed portion to the rest of the list
+
+        return dummy.next;
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
