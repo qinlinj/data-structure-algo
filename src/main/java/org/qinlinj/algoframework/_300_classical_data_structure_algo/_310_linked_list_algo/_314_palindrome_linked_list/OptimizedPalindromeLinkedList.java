@@ -87,7 +87,24 @@ public class OptimizedPalindromeLinkedList {
         return isPalindrome;
     }
 
-    private ListNode reverse(ListNode secondHalfHead) {
+    /**
+     * Helper method to reverse a linked list
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+
+        while (current != null) {
+            ListNode nextTemp = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextTemp;
+        }
+
+        return prev;
     }
 
     // Definition for singly-linked list
