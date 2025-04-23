@@ -33,4 +33,77 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Handling lists of different lengths
  */
 public class LinkedListArithmetic {
+    /**
+     * LeetCode 2: Add Two Numbers
+     * <p>
+     * Add two non-negative integers represented by linked lists.
+     * The digits are stored in reverse order (least significant digit first).
+     * <p>
+     * Approach:
+     * - Traverse both lists simultaneously
+     * - Add corresponding digits along with any carry from previous addition
+     * - Create a new node for each sum digit
+     * - Track carry for the next iteration
+     * <p>
+     * Time Complexity: O(max(m,n)) where m and n are the lengths of the lists
+     * Space Complexity: O(max(m,n)) for the result list
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // Pointers for traversing the input lists
+        ListNode p1 = l1, p2 = l2;
+
+        // Dummy node to simplify head insertion
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        // Track carry between additions
+        int carry = 0;
+
+        // Continue until both lists are processed and no carry remains
+        while (p1 != null || p2 != null || carry > 0) {
+            // Add carry from previous addition
+            int sum = carry;
+
+            // Add value from first list if available
+            if (p1 != null) {
+                sum += p1.val;
+                p1 = p1.next;
+            }
+
+            // Add value from second list if available
+            if (p2 != null) {
+                sum += p2.val;
+                p2 = p2.next;
+            }
+
+            // Calculate new carry and digit value
+            carry = sum / 10;
+            int digit = sum % 10;
+
+            // Create new node for the result
+            current.next = new ListNode(digit);
+            current = current.next;
+        }
+
+        // Return head of the result list (skip dummy node)
+        return dummy.next;
+    }
+
+    // Definition for singly-linked list node
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 }
