@@ -63,6 +63,73 @@ public class ReverseKGroup {
     }
 
     /**
+     * 2. Reverse Nodes in K-Group - Iterative Approach
+     * <p>
+     * This method uses iteration to avoid recursive call stack:
+     * 1. Use a dummy node to simplify head pointer handling
+     * 2. Process each K-group iteratively
+     * 3. Maintain pointers to connect segments properly
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public ListNode reverseKGroupIterative(ListNode head, int k) {
+        if (head == null || k <= 1) {
+            return head;
+        }
+
+        // Dummy node to simplify handling of the head node
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        // prevGroupEnd points to the node before each K-group
+        ListNode prevGroupEnd = dummy;
+
+        // Count total nodes to avoid traversing the list multiple times
+        int count = 0;
+        ListNode current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+
+        // Process each K-group
+        current = head;
+        while (count >= k) {
+            // The first node of current K-group (will be the tail after reversal)
+            ListNode groupStart = current;
+            // The node after the current K-group
+            ListNode nextGroupStart = null;
+
+            // Reverse the current K-group
+            ListNode prev = null;
+            for (int i = 0; i < k; i++) {
+                ListNode next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+                count--;
+            }
+
+            // At this point:
+            // - current points to the first node after this K-group
+            // - prev points to the new head of the reversed K-group
+            // - groupStart points to the new tail of the reversed K-group
+
+            // Connect the previous group's end to the new head of this group
+            prevGroupEnd.next = prev;
+
+            // Connect the new tail of this group to the start of the next group
+            groupStart.next = current;
+
+            // Move prevGroupEnd to the end of the current group (for next iteration)
+            prevGroupEnd = groupStart;
+        }
+
+        return dummy.next;
+    }
+
+    /**
      * Helper method to reverse the first N nodes of a linked list
      * Used by the recursive approach to reverse each K-group
      */
