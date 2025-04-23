@@ -107,6 +107,45 @@ public class OptimizedPalindromeLinkedList {
         return prev;
     }
 
+    /**
+     * Simplified version that does not restore the original list structure
+     * Use this if preserving the input list is not required
+     */
+    public boolean isPalindromeSimple(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        // Find the middle
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Adjust for odd length
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        // Reverse second half
+        ListNode right = reverse(slow);
+        ListNode left = head;
+
+        // Compare
+        while (right != null) {
+            if (left.val != right.val) {
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+
+        return true;
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
