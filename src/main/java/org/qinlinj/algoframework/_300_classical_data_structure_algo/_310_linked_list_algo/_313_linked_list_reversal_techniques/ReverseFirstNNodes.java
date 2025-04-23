@@ -28,6 +28,85 @@ public class ReverseFirstNNodes {
     private ListNode successor = null;
 
     /**
+     * Helper method to create a linked list from an array
+     */
+    public static ListNode createList(int[] values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Helper method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val);
+            if (current.next != null) {
+                System.out.print(" -> ");
+            }
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    /**
+     * Main method to demonstrate reversing the first N nodes
+     */
+    public static void main(String[] args) {
+        ReverseFirstNNodes solution = new ReverseFirstNNodes();
+
+        // Example list: 1->2->3->4->5
+        int[] values = {1, 2, 3, 4, 5};
+
+        System.out.println("Reversing first N nodes of a linked list:");
+
+        // Test iterative approach with N=3
+        ListNode list1 = createList(values);
+        System.out.print("Original list: ");
+        printList(list1);
+
+        ListNode reversed1 = solution.reverseNIterative(list1, 3);
+        System.out.print("After reversing first 3 nodes (iterative): ");
+        printList(reversed1);
+
+        // Test recursive approach with N=3
+        ListNode list2 = createList(values);
+        ListNode reversed2 = solution.reverseNRecursive(list2, 3);
+        System.out.print("After reversing first 3 nodes (recursive): ");
+        printList(reversed2);
+
+        // Test with N=1 (should not change the list)
+        ListNode list3 = createList(values);
+        ListNode reversed3 = solution.reverseNIterative(list3, 1);
+        System.out.print("After reversing first 1 node (iterative): ");
+        printList(reversed3);
+
+        // Test with N=5 (entire list)
+        ListNode list4 = createList(values);
+        ListNode reversed4 = solution.reverseNRecursive(list4, 5);
+        System.out.print("After reversing first 5 nodes (recursive): ");
+        printList(reversed4);
+
+        // Test the alternative recursive implementation
+        ListNode list5 = createList(values);
+        ListNode reversed5 = solution.reverseNRecursiveAlternative(list5, 3);
+        System.out.print("After reversing first 3 nodes (alternative recursive): ");
+        printList(reversed5);
+    }
+
+    /**
      * 1. Reverse first N nodes - Iterative Approach
      * <p>
      * This method reverses only the first N nodes of a linked list
@@ -144,6 +223,23 @@ public class ReverseFirstNNodes {
 
         // Return the new head of the reversed portion
         return newHead;
+    }
+
+    /**
+     * Helper method to verify if N is valid for the given list
+     * (useful for checking before reversal)
+     */
+    public boolean isValidN(ListNode head, int n) {
+        if (n <= 0) return false;
+
+        int length = 0;
+        ListNode current = head;
+        while (current != null) {
+            length++;
+            current = current.next;
+        }
+
+        return n <= length;
     }
 
     // Definition for singly-linked list
