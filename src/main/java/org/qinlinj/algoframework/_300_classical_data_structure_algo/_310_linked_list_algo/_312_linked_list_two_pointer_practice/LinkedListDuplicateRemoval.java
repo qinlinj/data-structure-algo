@@ -31,4 +31,80 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * Return the linked list sorted as well.
  */
 public class LinkedListDuplicateRemoval {
+    /**
+     * Solution 1: List Decomposition Technique
+     * <p>
+     * This approach decomposes the original list into two separate lists:
+     * - One for unique elements
+     * - One for duplicate elements
+     * <p>
+     * Then it returns only the unique elements list.
+     * <p>
+     * Time Complexity: O(n) where n is the number of nodes in the list
+     * Space Complexity: O(1) - only constant extra space used
+     */
+    public ListNode deleteDuplicates_decomposition(ListNode head) {
+        // Edge case: empty list or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Create dummy nodes for both lists
+        // Since node values are between -100 and 100, we can use 101 as dummy value
+        ListNode dummyUnique = new ListNode(101);
+        ListNode dummyDuplicate = new ListNode(101);
+
+        ListNode uniquePtr = dummyUnique;    // Pointer for unique elements list
+        ListNode duplicatePtr = dummyDuplicate;  // Pointer for duplicate elements list
+        ListNode current = head;              // Pointer for traversing the original list
+
+        while (current != null) {
+            // Check if current node is a duplicate
+            // Either its value matches the next node or it matches the last duplicate we saw
+            if ((current.next != null && current.val == current.next.val) ||
+                    current.val == duplicatePtr.val) {
+
+                // Add to duplicate list
+                duplicatePtr.next = current;
+                duplicatePtr = duplicatePtr.next;
+            } else {
+                // Add to unique list
+                uniquePtr.next = current;
+                uniquePtr = uniquePtr.next;
+            }
+
+            // Move to next node in original list
+            current = current.next;
+
+            // Disconnect the node from its original next pointer
+            // This is crucial to avoid cycles and ensure proper list termination
+            if (uniquePtr != dummyUnique) {
+                uniquePtr.next = null;
+            }
+            if (duplicatePtr != dummyDuplicate) {
+                duplicatePtr.next = null;
+            }
+        }
+
+        // Return the list of unique elements
+        return dummyUnique.next;
+    }
+
+    // Definition for a singly linked list node
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 }
