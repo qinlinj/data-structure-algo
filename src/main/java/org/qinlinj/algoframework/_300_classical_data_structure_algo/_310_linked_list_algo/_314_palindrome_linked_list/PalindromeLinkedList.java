@@ -71,6 +71,58 @@ public class PalindromeLinkedList {
         return valueMatch;
     }
 
+    /**
+     * 2. Optimized Two-Pointer Approach
+     * <p>
+     * Finds the middle of the list, reverses the second half,
+     * and then compares the first and second halves.
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public boolean isPalindromeOptimized(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;  // Empty list or single node is palindrome
+        }
+
+        // Step 1: Find the middle of the linked list
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // At this point, slow points to the middle node (for odd length)
+        // or the end of the first half (for even length)
+
+        // Step 2: Reverse the second half of the linked list
+        ListNode secondHalfHead = reverseList(slow.next);
+
+        // Step 3: Compare the first half with the reversed second half
+        ListNode p1 = head;           // First half
+        ListNode p2 = secondHalfHead; // Reversed second half
+        boolean result = true;
+
+        while (p2 != null) {
+            if (p1.val != p2.val) {
+                result = false;
+                break;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        // Step 4: Restore the original list by reversing the second half again
+        slow.next = reverseList(secondHalfHead);
+
+        return result;
+    }
+
+    private ListNode reverseList(ListNode next) {
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
