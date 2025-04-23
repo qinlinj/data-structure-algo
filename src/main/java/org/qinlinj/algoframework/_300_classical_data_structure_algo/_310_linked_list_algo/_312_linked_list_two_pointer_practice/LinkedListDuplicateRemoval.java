@@ -134,6 +134,40 @@ public class LinkedListDuplicateRemoval {
         return dummy.next;
     }
 
+    /**
+     * Solution 3: Recursive Approach
+     * <p>
+     * This solution uses recursion to solve the problem:
+     * - If the current node is not part of a duplicate sequence, keep it and process the rest
+     * - If the current node is part of a duplicate sequence, skip all duplicates and process the rest
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(n) due to the recursive call stack
+     */
+    public ListNode deleteDuplicates_recursive(ListNode head) {
+        // Base case: empty list or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // If current node's value is different from the next node
+        if (head.val != head.next.val) {
+            // Keep this node and recursively process the rest
+            head.next = deleteDuplicates_recursive(head.next);
+            return head;
+        }
+
+        // Current node is the start of a duplicate sequence
+        // Find the first node after all duplicates
+        int duplicateValue = head.val;
+        while (head != null && head.val == duplicateValue) {
+            head = head.next;
+        }
+
+        // Recursively process the rest of the list
+        return deleteDuplicates_recursive(head);
+    }
+
     // Definition for a singly linked list node
     public static class ListNode {
         int val;
