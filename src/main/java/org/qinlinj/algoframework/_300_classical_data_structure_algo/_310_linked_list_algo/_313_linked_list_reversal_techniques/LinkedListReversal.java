@@ -242,6 +242,45 @@ public class LinkedListReversal {
         return dummy.next;
     }
 
+    /**
+     * 3B. Reverse linked list in k-group segments - Recursive
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(n/k) due to the recursive call stack
+     */
+    public ListNode reverseKGroupRecursive(ListNode head, int k) {
+        if (head == null) return null;
+
+        // Check if there are at least k nodes remaining
+        ListNode current = head;
+        int count = 0;
+        while (current != null && count < k) {
+            current = current.next;
+            count++;
+        }
+
+        // If less than k nodes, don't reverse
+        if (count < k) {
+            return head;
+        }
+
+        // Reverse the first k nodes
+        ListNode prev = null;
+        ListNode next = null;
+        current = head;
+        for (int i = 0; i < k; i++) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        // Recursively reverse the next k nodes and connect
+        head.next = reverseKGroupRecursive(current, k);
+
+        return prev; // prev is the new head of the reversed k-group
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
