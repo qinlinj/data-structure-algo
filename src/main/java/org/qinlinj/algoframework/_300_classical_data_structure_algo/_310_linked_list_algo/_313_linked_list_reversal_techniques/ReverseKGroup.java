@@ -62,7 +62,42 @@ public class ReverseKGroup {
         return newHead;
     }
 
-    private ListNode reverseN(ListNode head, int k) {
+    /**
+     * Helper method to reverse the first N nodes of a linked list
+     * Used by the recursive approach to reverse each K-group
+     */
+    private ListNode reverseN(ListNode head, int n) {
+        if (head == null || head.next == null || n <= 1) {
+            return head;
+        }
+
+        ListNode prev = null;
+        ListNode current = head;
+        ListNode next = null;
+
+        // The node that will follow the reversed portion
+        ListNode connection = null;
+
+        int count = 0;
+        while (current != null && count < n) {
+            next = current.next;
+
+            // Save the connection point when we're at the last node of the segment
+            if (count == n - 1) {
+                connection = next;
+            }
+
+            current.next = prev;
+            prev = current;
+            current = next;
+            count++;
+        }
+
+        // Connect the original head (now the tail of reversed portion)
+        // to the remainder of the list
+        head.next = connection;
+
+        return prev;
     }
 
     // Definition for singly-linked list
