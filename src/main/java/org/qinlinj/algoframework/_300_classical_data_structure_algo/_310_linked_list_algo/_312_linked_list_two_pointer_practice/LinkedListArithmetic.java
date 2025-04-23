@@ -157,6 +157,90 @@ public class LinkedListArithmetic {
         return dummy.next;
     }
 
+    /**
+     * Alternative approach for LeetCode 445 without using stacks
+     * <p>
+     * This approach:
+     * 1. Calculates the length of both lists
+     * 2. Adds corresponding digits after padding the shorter list with zeros
+     * 3. Handles any remaining carry
+     * <p>
+     * Time Complexity: O(m+n)
+     * Space Complexity: O(max(m,n)) for the result list
+     */
+    public ListNode addTwoNumbersIIAlternative(ListNode l1, ListNode l2) {
+        // Calculate lengths of both lists
+        int len1 = getLength(l1);
+        int len2 = getLength(l2);
+
+        // Initialize pointers for the result
+        ListNode dummy = new ListNode(-1);
+
+        // First pass: add aligned digits
+        ListNode resultHead = addAlignedLists(l1, l2, len1, len2);
+
+        // Check if there's a carry at the most significant digit
+        if (resultHead.val > 9) {
+            ListNode newHead = new ListNode(1);
+            resultHead.val %= 10;
+            newHead.next = resultHead;
+            resultHead = newHead;
+        }
+
+        return resultHead;
+    }
+
+    /**
+     * Helper method to get the length of a linked list
+     */
+    private int getLength(ListNode head) {
+        int length = 0;
+        while (head != null) {
+            length++;
+            head = head.next;
+        }
+        return length;
+    }
+
+    /**
+     * Helper method to add two lists with potential different lengths
+     * Returns the head of the resulting list
+     */
+    private ListNode addAlignedLists(ListNode l1, ListNode l2, int len1, int len2) {
+        // Base case: both lists are empty
+        if (l1 == null && l2 == null) return null;
+
+        // Recursive case: process next nodes first (to handle carries properly)
+        ListNode next;
+        int sum;
+
+        if (len1 > len2) {
+            // l1 is longer, only process its current digit
+            next = addAlignedLists(l1.next, l2, len1 - 1, len2);
+            sum = l1.val;
+        } else if (len1 < len2) {
+            // l2 is longer, only process its current digit
+            next = addAlignedLists(l1, l2.next, len1, len2 - 1);
+            sum = l2.val;
+        } else {
+            // Both lists have same length, process both digits
+            next = addAlignedLists(l1.next, l2.next, len1 - 1, len2 - 1);
+            sum = l1.val + l2.val;
+        }
+
+        // Handle carry from the next digit
+        if (next != null && next.val > 9) {
+            sum += 1;
+            next.val %= 10;
+        }
+
+        // Create new node for current digit
+        ListNode current = new ListNode(sum);
+        current.next = next;
+
+        return current;
+    }
+
     // Definition for singly-linked list node
     public static class ListNode {
         int val;
