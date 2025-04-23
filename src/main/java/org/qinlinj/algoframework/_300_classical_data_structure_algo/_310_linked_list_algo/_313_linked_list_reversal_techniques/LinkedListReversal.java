@@ -69,6 +69,33 @@ public class LinkedListReversal {
         return prev;
     }
 
+    /**
+     * 1B. Reverse the entire linked list - Recursive Approach
+     * <p>
+     * This method uses recursion to reverse a linked list by:
+     * 1. Recursively reversing the sublist starting from the next node
+     * 2. Adjusting the current node's pointers
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(n) due to the recursive call stack
+     */
+    public ListNode reverseListRecursive(ListNode head) {
+        // Base case: empty list or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Recursive step: reverse the rest of the list
+        ListNode newHead = reverseListRecursive(head.next);
+
+        // Adjust the pointers
+        head.next.next = head;  // Make the next node point back to the current node
+        head.next = null;       // Break the original forward pointer
+
+        // Return the new head (which was found in the recursive call)
+        return newHead;
+    }
+
     // Definition for singly-linked list
     public static class ListNode {
         int val;
