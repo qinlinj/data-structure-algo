@@ -25,6 +25,147 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._310_linked
  * - Constant space complexity without using the call stack
  */
 public class ReverseKGroup {
+
+    /**
+     * Helper method to create a linked list from an array
+     */
+    public static ListNode createList(int[] values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * Helper method to print a linked list
+     */
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val);
+            if (current.next != null) {
+                System.out.print(" -> ");
+            }
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    /**
+     * Helper method to count nodes in a linked list
+     */
+    public static int countNodes(ListNode head) {
+        int count = 0;
+        ListNode current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    /**
+     * Main method to demonstrate reversing linked lists in K-groups
+     */
+    public static void main(String[] args) {
+        ReverseKGroup solution = new ReverseKGroup();
+
+        // Example 1: [1,2,3,4,5] with k=2
+        int[] values1 = {1, 2, 3, 4, 5};
+        ListNode list1 = createList(values1);
+
+        System.out.println("Example 1: Reversing in groups of 2");
+        System.out.print("Original list: ");
+        printList(list1);
+
+        // Recursive approach
+        ListNode result1Recursive = solution.reverseKGroupRecursive(list1, 2);
+        System.out.print("After recursive reversal: ");
+        printList(result1Recursive);
+
+        // Reset list for iterative approach
+        list1 = createList(values1);
+        ListNode result1Iterative = solution.reverseKGroupIterative(list1, 2);
+        System.out.print("After iterative reversal: ");
+        printList(result1Iterative);
+        System.out.println();
+
+        // Example 2: [1,2,3,4,5] with k=3
+        int[] values2 = {1, 2, 3, 4, 5};
+        ListNode list2 = createList(values2);
+
+        System.out.println("Example 2: Reversing in groups of 3");
+        System.out.print("Original list: ");
+        printList(list2);
+
+        // Recursive approach
+        ListNode result2Recursive = solution.reverseKGroupRecursive(list2, 3);
+        System.out.print("After recursive reversal: ");
+        printList(result2Recursive);
+
+        // Reset list for iterative approach
+        list2 = createList(values2);
+        ListNode result2Iterative = solution.reverseKGroupIterative(list2, 3);
+        System.out.print("After iterative reversal: ");
+        printList(result2Iterative);
+        System.out.println();
+
+        // Example 3: [1,2,3,4,5,6,7,8] with k=3
+        int[] values3 = {1, 2, 3, 4, 5, 6, 7, 8};
+        ListNode list3 = createList(values3);
+
+        System.out.println("Example 3: Reversing in groups of 3 (with remainder)");
+        System.out.print("Original list: ");
+        printList(list3);
+
+        // Recursive approach
+        ListNode result3Recursive = solution.reverseKGroupRecursive(list3, 3);
+        System.out.print("After recursive reversal: ");
+        printList(result3Recursive);
+
+        // Reset list for iterative approach
+        list3 = createList(values3);
+        ListNode result3Iterative = solution.reverseKGroupIterative(list3, 3);
+        System.out.print("After iterative reversal: ");
+        printList(result3Iterative);
+        System.out.println();
+
+        // Edge cases
+        // Example 4: k=1 (no reversal should happen)
+        int[] values4 = {1, 2, 3};
+        ListNode list4 = createList(values4);
+
+        System.out.println("Example 4: Edge case - k=1 (no reversal)");
+        System.out.print("Original list: ");
+        printList(list4);
+
+        ListNode result4 = solution.reverseKGroupRecursive(list4, 1);
+        System.out.print("After reversal with k=1: ");
+        printList(result4);
+        System.out.println();
+
+        // Example 5: k > list length (no reversal for final segment)
+        int[] values5 = {1, 2, 3};
+        ListNode list5 = createList(values5);
+
+        System.out.println("Example 5: Edge case - k=4 (larger than list length)");
+        System.out.print("Original list: ");
+        printList(list5);
+
+        ListNode result5 = solution.reverseKGroupRecursive(list5, 4);
+        System.out.print("After reversal with k=4: ");
+        printList(result5);
+    }
+
     /**
      * 1. Reverse Nodes in K-Group - Recursive Approach
      * <p>
