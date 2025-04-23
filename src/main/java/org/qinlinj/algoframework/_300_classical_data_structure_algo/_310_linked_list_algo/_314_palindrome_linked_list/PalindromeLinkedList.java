@@ -120,7 +120,21 @@ public class PalindromeLinkedList {
         return result;
     }
 
-    private ListNode reverseList(ListNode next) {
+    /**
+     * Helper method to reverse a linked list
+     */
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+
+        return prev;
     }
 
     // Definition for singly-linked list
