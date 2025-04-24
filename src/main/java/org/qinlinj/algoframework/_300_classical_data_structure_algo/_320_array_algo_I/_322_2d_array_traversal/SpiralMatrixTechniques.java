@@ -22,6 +22,51 @@ import java.util.*;
  */
 public class SpiralMatrixTechniques {
     /**
+     * Demonstrates the spiral matrix techniques with examples.
+     */
+    public static void main(String[] args) {
+        SpiralMatrixTechniques demo = new SpiralMatrixTechniques();
+
+        // Example 1: Spiral traversal of a 3×3 matrix
+        int[][] matrix1 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        System.out.println("Original 3×3 matrix:");
+        demo.printMatrix(matrix1);
+
+        List<Integer> spiralResult1 = demo.spiralOrder(matrix1);
+        System.out.println("Spiral traversal: " + spiralResult1);
+        System.out.println();
+
+        // Example 2: Spiral traversal of a 3×4 matrix
+        int[][] matrix2 = {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12}
+        };
+        System.out.println("Original 3×4 matrix:");
+        demo.printMatrix(matrix2);
+
+        List<Integer> spiralResult2 = demo.spiralOrder(matrix2);
+        System.out.println("Spiral traversal: " + spiralResult2);
+        System.out.println();
+
+        // Example 3: Generate a 3×3 spiral matrix
+        int n = 3;
+        System.out.println("Generated " + n + "×" + n + " spiral matrix:");
+        int[][] generatedMatrix = demo.generateMatrix(n);
+        demo.printMatrix(generatedMatrix);
+
+        // Example 4: Generate a 4×4 spiral matrix
+        n = 4;
+        System.out.println("Generated " + n + "×" + n + " spiral matrix:");
+        generatedMatrix = demo.generateMatrix(n);
+        demo.printMatrix(generatedMatrix);
+    }
+
+    /**
      * Traverses a matrix in spiral order and returns all elements.
      * <p>
      * Algorithm:
@@ -148,5 +193,24 @@ public class SpiralMatrixTechniques {
         }
 
         return matrix;
+    }
+
+    /**
+     * Utility method to print a matrix for visualization.
+     *
+     * @param matrix The matrix to print
+     */
+    public void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            System.out.print("[");
+            for (int i = 0; i < row.length; i++) {
+                System.out.print(row[i]);
+                if (i < row.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+        System.out.println();
     }
 }
