@@ -20,6 +20,59 @@ import java.util.*;
  */
 public class GeneralizedTwoSum {
     /**
+     * Demonstration of the Two Sum algorithms.
+     */
+    public static void main(String[] args) {
+        GeneralizedTwoSum solution = new GeneralizedTwoSum();
+
+        // Basic Two Sum example
+        int[] nums1 = {1, 3, 5, 6};
+        int target1 = 9;
+
+        System.out.println("Basic Two Sum Example:");
+        System.out.println("Input: nums = [1, 3, 5, 6], target = 9");
+        int[] result1 = solution.twoSum(nums1, target1);
+        System.out.print("Output: [");
+        for (int i = 0; i < result1.length; i++) {
+            System.out.print(result1[i]);
+            if (i < result1.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println();
+
+        // Generalized Two Sum example 1
+        int[] nums2 = {1, 3, 1, 2, 2, 3};
+        int target2 = 4;
+
+        System.out.println("Generalized Two Sum Example 1:");
+        System.out.println("Input: nums = [1, 3, 1, 2, 2, 3], target = 4");
+        List<List<Integer>> result2 = solution.twoSumTarget(nums2, target2);
+        System.out.println("Output: " + result2);
+        System.out.println();
+
+        // Generalized Two Sum example 2
+        int[] nums3 = {1, 1, 1, 2, 2, 3, 3};
+        int target3 = 4;
+
+        System.out.println("Generalized Two Sum Example 2:");
+        System.out.println("Input: nums = [1, 1, 1, 2, 2, 3, 3], target = 4");
+        List<List<Integer>> result3 = solution.twoSumTarget(nums3, target3);
+        System.out.println("Output: " + result3);
+        System.out.println();
+
+        // Generalized Two Sum example 3
+        int[] nums4 = {-2, -1, 0, 1, 2, 3, 4, 5};
+        int target4 = 3;
+
+        System.out.println("Generalized Two Sum Example 3:");
+        System.out.println("Input: nums = [-2, -1, 0, 1, 2, 3, 4, 5], target = 3");
+        List<List<Integer>> result4 = solution.twoSumTarget(nums4, target4);
+        System.out.println("Output: " + result4);
+    }
+
+    /**
      * Basic Two Sum: Find one pair of elements that sum to the target.
      * Assumes there is exactly one solution.
      *
