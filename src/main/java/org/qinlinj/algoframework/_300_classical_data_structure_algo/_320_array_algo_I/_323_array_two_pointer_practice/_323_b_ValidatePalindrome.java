@@ -61,4 +61,37 @@ public class _323_b_ValidatePalindrome {
 
         return true;
     }
+
+    /**
+     * Alternative implementation that uses less space by filtering characters on-the-fly.
+     * This avoids creating a new string but makes the code slightly more complex.
+     *
+     * @param s The input string to check
+     * @return true if the string is a palindrome, false otherwise
+     */
+    public boolean isPalindromeOptimized(String s) {
+        int left = 0, right = s.length() - 1;
+
+        while (left < right) {
+            // Skip non-alphanumeric characters from the left
+            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
+                left++;
+            }
+
+            // Skip non-alphanumeric characters from the right
+            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+                right--;
+            }
+
+            // Compare characters (ignoring case)
+            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
 }
