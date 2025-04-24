@@ -28,6 +28,48 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class _323_a_RemoveDuplicatesII {
     /**
+     * Demonstration of the algorithm.
+     */
+    public static void main(String[] args) {
+        _323_a_RemoveDuplicatesII solution = new _323_a_RemoveDuplicatesII();
+
+        // Example 1
+        int[] nums1 = {1, 1, 1, 2, 2, 3};
+        int length1 = solution.removeDuplicates(nums1);
+        System.out.println("Example 1:");
+        System.out.println("Length after removing duplicates: " + length1);
+        System.out.print("Array: ");
+        solution.printArray(nums1, length1);
+        System.out.println();
+
+        // Example 2
+        int[] nums2 = {0, 0, 1, 1, 1, 1, 2, 3, 3};
+        int length2 = solution.removeDuplicates(nums2);
+        System.out.println("Example 2:");
+        System.out.println("Length after removing duplicates: " + length2);
+        System.out.print("Array: ");
+        solution.printArray(nums2, length2);
+        System.out.println();
+
+        // Example using the alternative implementation
+        int[] nums3 = {0, 0, 1, 1, 1, 1, 2, 3, 3};
+        int length3 = solution.removeDuplicatesAlt(nums3);
+        System.out.println("Example using alternative implementation:");
+        System.out.println("Length after removing duplicates: " + length3);
+        System.out.print("Array: ");
+        solution.printArray(nums3, length3);
+        System.out.println();
+
+        // Example using the cleaner implementation
+        int[] nums4 = {0, 0, 1, 1, 1, 1, 2, 3, 3};
+        int length4 = solution.removeDuplicatesClean(nums4);
+        System.out.println("Example using cleaner implementation:");
+        System.out.println("Length after removing duplicates: " + length4);
+        System.out.print("Array: ");
+        solution.printArray(nums4, length4);
+    }
+
+    /**
      * Removes duplicates from a sorted array such that each element appears at most twice.
      *
      * @param nums The sorted input array
@@ -129,5 +171,19 @@ public class _323_a_RemoveDuplicatesII {
         }
 
         return index;
+    }
+
+    /**
+     * Utility method to print the array up to a specified length.
+     */
+    public void printArray(int[] nums, int length) {
+        System.out.print("[");
+        for (int i = 0; i < length; i++) {
+            System.out.print(nums[i]);
+            if (i < length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
     }
 }
