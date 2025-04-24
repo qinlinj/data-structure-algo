@@ -28,4 +28,37 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * Space Complexity: O(n) for creating a filtered string
  */
 public class _323_b_ValidatePalindrome {
+    /**
+     * Determines if a string is a palindrome considering only alphanumeric characters
+     * and ignoring case.
+     *
+     * @param s The input string to check
+     * @return true if the string is a palindrome, false otherwise
+     */
+    public boolean isPalindrome(String s) {
+        // First, convert all characters to lowercase and remove non-alphanumeric characters
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                sb.append(Character.toLowerCase(c));
+            }
+        }
+
+        // Get the filtered string
+        String filteredString = sb.toString();
+
+        // Use left and right pointers moving toward each other
+        int left = 0, right = filteredString.length() - 1;
+
+        while (left < right) {
+            if (filteredString.charAt(left) != filteredString.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
 }
