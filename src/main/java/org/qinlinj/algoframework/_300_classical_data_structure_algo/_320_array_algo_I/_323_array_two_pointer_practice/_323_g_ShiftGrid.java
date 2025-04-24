@@ -133,4 +133,39 @@ public class _323_g_ShiftGrid {
         int col = index % n;
         grid[row][col] = value;
     }
+
+    /**
+     * Alternative approach that creates a new grid instead of modifying in-place.
+     * This might be easier to understand but uses more memory.
+     */
+    public List<List<Integer>> shiftGridAlternative(int[][] grid, int k) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int totalSize = m * n;
+
+        // Handle case where k is greater than total size
+        k = k % totalSize;
+
+        // Create a new grid to store the result
+        int[][] result = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // Convert 2D position to 1D index
+                int index = i * n + j;
+
+                // Calculate the new position after shifting
+                int newIndex = (index + k) % totalSize;
+
+                // Convert back to 2D position
+                int newRow = newIndex / n;
+                int newCol = newIndex % n;
+
+                // Set the value in the new position
+                result[newRow][newCol] = grid[i][j];
+            }
+        }
+
+        return gridToList(result);
+    }
 }
