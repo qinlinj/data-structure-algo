@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_algo_I._324_n_sum_problems;
 
+import java.util.*;
+
 /**
  * Three Sum Solution (LeetCode 15)
  * ==============================
@@ -19,9 +21,6 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * Time Complexity: O(n²) where n is the length of the array
  * Space Complexity: O(1) excluding the output space
  */
-
-import java.util.*;
-
 public class ThreeSumSolution {
 
     /**
@@ -85,7 +84,7 @@ public class ThreeSumSolution {
      * Generalized solution that finds all unique triplets in the array
      * that sum to the given target.
      *
-     * @param nums The input array
+     * @param nums   The input array
      * @param target The target sum
      * @return List of all unique triplets that sum to target
      */
@@ -121,8 +120,8 @@ public class ThreeSumSolution {
     /**
      * Finds all unique pairs in nums[start...] that sum to target.
      *
-     * @param nums The sorted input array
-     * @param start The starting index to consider
+     * @param nums   The sorted input array
+     * @param start  The starting index to consider
      * @param target The target sum
      * @return List of all unique pairs that sum to target
      */
