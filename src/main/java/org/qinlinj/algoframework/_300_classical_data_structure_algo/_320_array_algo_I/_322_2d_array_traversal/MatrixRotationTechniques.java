@@ -26,4 +26,37 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * - Rotating a linked list
  */
 public class MatrixRotationTechniques {
+    /**
+     * Rotates a matrix 90 degrees clockwise in-place.
+     * <p>
+     * The algorithm works in two steps:
+     * 1. Transpose the matrix (reflect along the main diagonal)
+     * 2. Reverse each row
+     * <p>
+     * Time Complexity: O(n²) where n is the side length of the matrix
+     * Space Complexity: O(1) - in-place operation
+     *
+     * @param matrix an n×n square matrix
+     */
+    public void rotateClockwise(int[][] matrix) {
+        int n = matrix.length;
+
+        // Step 1: Transpose the matrix along the main diagonal
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                // Swap matrix[i][j] with matrix[j][i]
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        // Step 2: Reverse each row
+        for (int[] row : matrix) {
+            reverse(row);
+        }
+    }
+
+    private void reverse(int[] row) {
+    }
 }
