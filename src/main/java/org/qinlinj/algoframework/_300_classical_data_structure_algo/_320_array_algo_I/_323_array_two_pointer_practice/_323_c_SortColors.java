@@ -34,4 +34,49 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * Space Complexity: O(1) - we only use a constant amount of extra space
  */
 public class _323_c_SortColors {
+    /**
+     * Sorts an array containing only 0s, 1s, and 2s in a single pass.
+     *
+     * @param nums Array to sort, containing only values 0, 1, and 2
+     */
+    public void sortColors(int[] nums) {
+        // Initialize pointers
+        // [0, p0) contains all 0s
+        // [p0, p) contains all 1s
+        // (p2, nums.length-1] contains all 2s
+        // [p, p2] is the region to be explored
+
+        int p0 = 0;         // Boundary of 0s
+        int p = 0;          // Current element
+        int p2 = nums.length - 1;  // Boundary of 2s
+
+        while (p <= p2) {
+            if (nums[p] == 0) {
+                // If the current element is 0, swap it to the 0s boundary
+                swap(nums, p0, p);
+                p0++;
+                // Since we know the element that was at p0 was either 0 or 1,
+                // we can safely increment p
+                p++;
+            } else if (nums[p] == 2) {
+                // If the current element is 2, swap it to the 2s boundary
+                swap(nums, p, p2);
+                p2--;
+                // Don't increment p here, as the element we swapped might be 0,
+                // which requires further processing
+            } else {
+                // If the current element is 1, just move forward
+                p++;
+            }
+        }
+    }
+
+    /**
+     * Swaps elements at indices i and j in the array.
+     */
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 }
