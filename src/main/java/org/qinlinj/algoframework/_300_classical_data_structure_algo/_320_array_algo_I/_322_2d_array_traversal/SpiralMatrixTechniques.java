@@ -86,4 +86,67 @@ public class SpiralMatrixTechniques {
 
         return result;
     }
+
+    /**
+     * Generates an n×n matrix with numbers 1 to n² arranged in spiral order.
+     * <p>
+     * Algorithm:
+     * 1. Create an empty n×n matrix
+     * 2. Define four boundaries: upper, lower, left, right
+     * 3. Fill the matrix in four directions: right, down, left, up
+     * 4. After filling in each direction, update the respective boundary
+     * 5. Continue until all cells are filled
+     *
+     * @param n The size of the square matrix
+     * @return The generated spiral matrix
+     */
+    public int[][] generateMatrix(int n) {
+        int[][] matrix = new int[n][n];
+
+        // Define the four boundaries
+        int upperBound = 0;
+        int lowerBound = n - 1;
+        int leftBound = 0;
+        int rightBound = n - 1;
+
+        // Number to be placed in the matrix
+        int num = 1;
+
+        // Continue until we've filled all cells
+        while (num <= n * n) {
+            // Fill right along top row
+            if (upperBound <= lowerBound) {
+                for (int j = leftBound; j <= rightBound; j++) {
+                    matrix[upperBound][j] = num++;
+                }
+                upperBound++; // Move upper boundary down
+            }
+
+            // Fill down along rightmost column
+            if (leftBound <= rightBound) {
+                for (int i = upperBound; i <= lowerBound; i++) {
+                    matrix[i][rightBound] = num++;
+                }
+                rightBound--; // Move right boundary left
+            }
+
+            // Fill left along bottom row
+            if (upperBound <= lowerBound) {
+                for (int j = rightBound; j >= leftBound; j--) {
+                    matrix[lowerBound][j] = num++;
+                }
+                lowerBound--; // Move lower boundary up
+            }
+
+            // Fill up along leftmost column
+            if (leftBound <= rightBound) {
+                for (int i = lowerBound; i >= upperBound; i--) {
+                    matrix[i][leftBound] = num++;
+                }
+                leftBound++; // Move left boundary right
+            }
+        }
+
+        return matrix;
+    }
 }
