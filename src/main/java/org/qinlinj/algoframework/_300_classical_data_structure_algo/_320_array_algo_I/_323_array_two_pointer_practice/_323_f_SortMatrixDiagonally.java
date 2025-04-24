@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_algo_I._323_array_two_pointer_practice;
 
+import java.util.*;
+
 /**
  * Sort the Matrix Diagonally (LeetCode 1329)
  * ========================================
@@ -31,4 +33,62 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * Space Complexity: O(m*n) for storing the diagonals
  */
 public class _323_f_SortMatrixDiagonally {
+    /**
+     * Sorts each diagonal of the matrix in ascending order.
+     *
+     * @param mat The input matrix
+     * @return The matrix with each diagonal sorted
+     */
+    public int[][] diagonalSort(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+
+        // Store all elements of each diagonal in a map
+        // Key: Diagonal ID (row - column), Value: List of elements in that diagonal
+        Map<Integer, List<Integer>> diagonals = new HashMap<>();
+
+        // Collect diagonal elements
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // The diagonal ID is the difference between row and column indices
+                int diagonalId = i - j;
+
+                // Initialize the list if this is the first element in this diagonal
+                diagonals.putIfAbsent(diagonalId, new ArrayList<>());
+
+                // Add the current element to its diagonal list
+                diagonals.get(diagonalId).add(mat[i][j]);
+            }
+        }
+
+        // Sort each diagonal
+        for (List<Integer> diagonal : diagonals.values()) {
+            Collections.sort(diagonal);
+        }
+
+        // Fill the matrix with sorted elements
+        // We'll use the same diagonal ID to place elements back
+        // For each diagonal, we'll use an index to track which element to place next
+        Map<Integer, Integer> indexes = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int diagonalId = i - j;
+
+                // Initialize the index for this diagonal if not already done
+                indexes.putIfAbsent(diagonalId, 0);
+
+                // Get the current index for this diagonal
+                int index = indexes.get(diagonalId);
+
+                // Place the next sorted element from this diagonal
+                mat[i][j] = diagonals.get(diagonalId).get(index);
+
+                // Increment the index for this diagonal
+                indexes.put(diagonalId, index + 1);
+            }
+        }
+
+        return mat;
+    }
 }
