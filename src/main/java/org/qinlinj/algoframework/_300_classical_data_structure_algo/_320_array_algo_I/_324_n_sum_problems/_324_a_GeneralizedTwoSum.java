@@ -18,12 +18,12 @@ import java.util.*;
  * Time Complexity: O(n log n) due to the sorting operation
  * Space Complexity: O(1) for the algorithm itself (excluding output space)
  */
-public class GeneralizedTwoSum {
+public class _324_a_GeneralizedTwoSum {
     /**
      * Demonstration of the Two Sum algorithms.
      */
     public static void main(String[] args) {
-        GeneralizedTwoSum solution = new GeneralizedTwoSum();
+        _324_a_GeneralizedTwoSum solution = new _324_a_GeneralizedTwoSum();
 
         // Basic Two Sum example
         int[] nums1 = {1, 3, 5, 6};

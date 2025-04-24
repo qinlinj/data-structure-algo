@@ -22,13 +22,13 @@ import java.util.*;
  * Time Complexity: O(n³) where n is the length of the array
  * Space Complexity: O(1) excluding the output space
  */
-public class FourSumSolution {
+public class _324_c_FourSumSolution {
 
     /**
      * Demonstration of the four sum algorithms.
      */
     public static void main(String[] args) {
-        FourSumSolution solution = new FourSumSolution();
+        _324_c_FourSumSolution solution = new _324_c_FourSumSolution();
 
         // Example 1
         int[] nums1 = {1, 0, -1, 0, -2, 2};

@@ -21,13 +21,13 @@ import java.util.*;
  * Time Complexity: O(n²) where n is the length of the array
  * Space Complexity: O(1) excluding the output space
  */
-public class ThreeSumSolution {
+public class _324_b_ThreeSumSolution {
 
     /**
      * Demonstration of the three sum algorithms.
      */
     public static void main(String[] args) {
-        ThreeSumSolution solution = new ThreeSumSolution();
+        _324_b_ThreeSumSolution solution = new _324_b_ThreeSumSolution();
 
         // Example 1
         int[] nums1 = {-1, 0, 1, 2, -1, -4};
