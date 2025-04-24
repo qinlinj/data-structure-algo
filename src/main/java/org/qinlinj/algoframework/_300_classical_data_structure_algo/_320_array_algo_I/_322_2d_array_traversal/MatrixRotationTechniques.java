@@ -27,6 +27,56 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class MatrixRotationTechniques {
     /**
+     * Demonstration of matrix rotation techniques.
+     */
+    public static void main(String[] args) {
+        MatrixRotationTechniques demo = new MatrixRotationTechniques();
+
+        // Example 1 from the problem
+        int[][] matrix1 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        System.out.println("Original matrix:");
+        demo.printMatrix(matrix1);
+
+        demo.rotateClockwise(matrix1);
+        System.out.println("After clockwise rotation:");
+        demo.printMatrix(matrix1);
+
+        // Example 2 from the problem
+        int[][] matrix2 = {
+                {5, 1, 9, 11},
+                {2, 4, 8, 10},
+                {13, 3, 6, 7},
+                {15, 14, 12, 16}
+        };
+
+        System.out.println("Original matrix:");
+        demo.printMatrix(matrix2);
+
+        demo.rotateClockwise(matrix2);
+        System.out.println("After clockwise rotation:");
+        demo.printMatrix(matrix2);
+
+        // Demonstrate counter-clockwise rotation
+        int[][] matrix3 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        System.out.println("Original matrix:");
+        demo.printMatrix(matrix3);
+
+        demo.rotateCounterClockwise(matrix3);
+        System.out.println("After counter-clockwise rotation:");
+        demo.printMatrix(matrix3);
+    }
+
+    /**
      * Rotates a matrix 90 degrees clockwise in-place.
      * <p>
      * The algorithm works in two steps:
@@ -106,5 +156,24 @@ public class MatrixRotationTechniques {
             i++;
             j--;
         }
+    }
+
+    /**
+     * Prints a matrix for visualization.
+     *
+     * @param matrix matrix to print
+     */
+    public void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            System.out.print("[");
+            for (int i = 0; i < row.length; i++) {
+                System.out.print(row[i]);
+                if (i < row.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+        System.out.println();
     }
 }
