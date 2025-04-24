@@ -57,4 +57,30 @@ public class _323_e_SortedSquares {
 
         return result;
     }
+
+    /**
+     * Alternative implementation that matches the provided solution exactly.
+     */
+    public int[] sortedSquaresAlt(int[] nums) {
+        int n = nums.length;
+        // Two pointers for the elements with potentially largest absolute values
+        int i = 0, j = n - 1;
+        // Position to place the next largest square (from back to front)
+        int p = n - 1;
+        int[] res = new int[n];
+
+        // Execute the logic of merging two sorted arrays
+        while (i <= j) {
+            if (Math.abs(nums[i]) > Math.abs(nums[j])) {
+                res[p] = nums[i] * nums[i];
+                i++;
+            } else {
+                res[p] = nums[j] * nums[j];
+                j--;
+            }
+            p--;
+        }
+
+        return res;
+    }
 }
