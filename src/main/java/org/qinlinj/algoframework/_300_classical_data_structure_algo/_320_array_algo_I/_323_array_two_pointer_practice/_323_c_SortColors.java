@@ -35,6 +35,52 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class _323_c_SortColors {
     /**
+     * Demonstration of the sorting algorithms.
+     */
+    public static void main(String[] args) {
+        _323_c_SortColors solution = new _323_c_SortColors();
+
+        // Example 1
+        int[] nums1 = {2, 0, 2, 1, 1, 0};
+        System.out.println("Example 1:");
+        System.out.print("Before sorting: ");
+        solution.printArray(nums1);
+        solution.sortColors(nums1);
+        System.out.print("After sorting:  ");
+        solution.printArray(nums1);
+        System.out.println();
+
+        // Example 2
+        int[] nums2 = {2, 0, 1};
+        System.out.println("Example 2:");
+        System.out.print("Before sorting: ");
+        solution.printArray(nums2);
+        solution.sortColors(nums2);
+        System.out.print("After sorting:  ");
+        solution.printArray(nums2);
+        System.out.println();
+
+        // Example with all types of colors
+        int[] nums3 = {1, 2, 0, 1, 2, 0, 0, 1, 2, 1, 0};
+        System.out.println("Example 3 (mixed colors):");
+        System.out.print("Before sorting: ");
+        solution.printArray(nums3);
+        solution.sortColors(nums3);
+        System.out.print("After sorting:  ");
+        solution.printArray(nums3);
+        System.out.println();
+
+        // Example with repeated colors
+        int[] nums4 = {2, 2, 2, 1, 1, 0, 0};
+        System.out.println("Example 4 (repeated colors):");
+        System.out.print("Before sorting: ");
+        solution.printArray(nums4);
+        solution.sortColors(nums4);
+        System.out.print("After sorting:  ");
+        solution.printArray(nums4);
+    }
+
+    /**
      * Sorts an array containing only 0s, 1s, and 2s in a single pass.
      *
      * @param nums Array to sort, containing only values 0, 1, and 2
