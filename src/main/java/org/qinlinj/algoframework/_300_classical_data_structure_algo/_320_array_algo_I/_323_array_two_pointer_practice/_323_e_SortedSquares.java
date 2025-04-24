@@ -83,4 +83,22 @@ public class _323_e_SortedSquares {
 
         return res;
     }
+
+    /**
+     * A naive implementation that squares each element and then sorts.
+     * This is O(n log n) due to the sorting step.
+     */
+    public int[] sortedSquaresNaive(int[] nums) {
+        int[] result = new int[nums.length];
+
+        // Square each number
+        for (int i = 0; i < nums.length; i++) {
+            result[i] = nums[i] * nums[i];
+        }
+
+        // Sort the resulting array
+        java.util.Arrays.sort(result);
+
+        return result;
+    }
 }
