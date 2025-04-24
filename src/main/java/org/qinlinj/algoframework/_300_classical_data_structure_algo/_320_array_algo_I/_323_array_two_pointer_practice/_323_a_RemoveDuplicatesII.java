@@ -69,4 +69,41 @@ public class _323_a_RemoveDuplicatesII {
         // Return length (index + 1)
         return slow + 1;
     }
+
+    /**
+     * Alternative implementation that more closely matches the provided solution.
+     * This version resets the count when a new element is encountered.
+     */
+    public int removeDuplicatesAlt(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        int slow = 0, fast = 0;
+        int count = 0;
+
+        while (fast < nums.length) {
+            if (nums[fast] != nums[slow]) {
+                // This is a new element, add it to the result
+                slow++;
+                nums[slow] = nums[fast];
+            } else if (slow < fast && count < 2) {
+                // Element is the same but has appeared fewer than twice
+                slow++;
+                nums[slow] = nums[fast];
+            }
+
+            fast++;
+            count++;
+
+            // Reset count when we encounter a new element
+            if (fast < nums.length && nums[fast] != nums[fast - 1]) {
+                count = 0;
+            }
+        }
+
+        return slow + 1;
+    }
+
+    
 }
