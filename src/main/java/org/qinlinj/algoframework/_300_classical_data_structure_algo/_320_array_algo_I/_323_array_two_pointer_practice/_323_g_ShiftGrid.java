@@ -35,6 +35,62 @@ import java.util.*;
  */
 public class _323_g_ShiftGrid {
     /**
+     * Demonstration of the grid shifting algorithm.
+     */
+    public static void main(String[] args) {
+        _323_g_ShiftGrid solution = new _323_g_ShiftGrid();
+
+        // Example 1
+        int[][] grid1 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        int k1 = 1;
+
+        System.out.println("Example 1:");
+        System.out.println("Original grid:");
+        solution.printGrid(solution.gridToList(grid1));
+
+        List<List<Integer>> result1 = solution.shiftGrid(grid1, k1);
+        System.out.println("After " + k1 + " shift(s):");
+        solution.printGrid(result1);
+
+        // Example 2
+        int[][] grid2 = {
+                {3, 8, 1, 9},
+                {19, 7, 2, 5},
+                {4, 6, 11, 10},
+                {12, 0, 21, 13}
+        };
+        int k2 = 4;
+
+        System.out.println("Example 2:");
+        System.out.println("Original grid:");
+        solution.printGrid(solution.gridToList(grid2));
+
+        List<List<Integer>> result2 = solution.shiftGrid(grid2, k2);
+        System.out.println("After " + k2 + " shift(s):");
+        solution.printGrid(result2);
+
+        // Example 3
+        int[][] grid3 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        int k3 = 9;
+
+        System.out.println("Example 3:");
+        System.out.println("Original grid:");
+        solution.printGrid(solution.gridToList(grid3));
+
+        List<List<Integer>> result3 = solution.shiftGrid(grid3, k3);
+        System.out.println("After " + k3 + " shift(s):");
+        solution.printGrid(result3);
+    }
+
+    /**
      * Shifts a 2D grid k times.
      *
      * @param grid The input 2D grid
@@ -167,5 +223,22 @@ public class _323_g_ShiftGrid {
         }
 
         return gridToList(result);
+    }
+
+    /**
+     * Prints a 2D grid for visualization.
+     */
+    public void printGrid(List<List<Integer>> grid) {
+        for (List<Integer> row : grid) {
+            System.out.print("[");
+            for (int i = 0; i < row.size(); i++) {
+                System.out.print(row.get(i));
+                if (i < row.size() - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+        System.out.println();
     }
 }
