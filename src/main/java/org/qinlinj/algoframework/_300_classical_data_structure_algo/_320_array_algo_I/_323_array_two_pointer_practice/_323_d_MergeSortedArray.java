@@ -30,6 +30,28 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class _323_d_MergeSortedArray {
     /**
+     * Alternative implementation with a slightly different approach.
+     * This approach directly places elements from the end, focusing on the comparison
+     * between nums1[i] and nums2[j] when both indices are valid.
+     */
+    public void mergeAlt(int[] nums1, int m, int[] nums2, int n) {
+        int p = m + n - 1;  // Position to insert next element
+        int i = m - 1;      // Pointer for nums1
+        int j = n - 1;      // Pointer for nums2
+
+        // Keep going until we've processed all elements from nums2
+        while (j >= 0) {
+            // If nums1 still has elements and the current element is larger than nums2's
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[p--] = nums1[i--];
+            } else {
+                // Either nums1 is exhausted or nums2's element is larger
+                nums1[p--] = nums2[j--];
+            }
+        }
+    }
+
+    /**
      * Merge Sorted Array (LeetCode 88)
      * ===============================
      * <p>
