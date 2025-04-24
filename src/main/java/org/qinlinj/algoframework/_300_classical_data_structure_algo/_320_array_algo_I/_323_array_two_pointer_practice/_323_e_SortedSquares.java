@@ -29,6 +29,56 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class _323_e_SortedSquares {
     /**
+     * Demonstration of the algorithm.
+     */
+    public static void main(String[] args) {
+        _323_e_SortedSquares solution = new _323_e_SortedSquares();
+
+        // Example 1
+        int[] nums1 = {-4, -1, 0, 3, 10};
+        System.out.println("Example 1:");
+        System.out.print("Input array: ");
+        solution.printArray(nums1);
+
+        int[] result1 = solution.sortedSquares(nums1);
+        System.out.print("Squared and sorted: ");
+        solution.printArray(result1);
+        System.out.println();
+
+        // Example 2
+        int[] nums2 = {-7, -3, 2, 3, 11};
+        System.out.println("Example 2:");
+        System.out.print("Input array: ");
+        solution.printArray(nums2);
+
+        int[] result2 = solution.sortedSquares(nums2);
+        System.out.print("Squared and sorted: ");
+        solution.printArray(result2);
+        System.out.println();
+
+        // Example with all negative numbers
+        int[] nums3 = {-10, -5, -3, -2, -1};
+        System.out.println("Example with all negative numbers:");
+        System.out.print("Input array: ");
+        solution.printArray(nums3);
+
+        int[] result3 = solution.sortedSquares(nums3);
+        System.out.print("Squared and sorted: ");
+        solution.printArray(result3);
+        System.out.println();
+
+        // Example with all positive numbers
+        int[] nums4 = {1, 2, 3, 5, 10};
+        System.out.println("Example with all positive numbers:");
+        System.out.print("Input array: ");
+        solution.printArray(nums4);
+
+        int[] result4 = solution.sortedSquares(nums4);
+        System.out.print("Squared and sorted: ");
+        solution.printArray(result4);
+    }
+
+    /**
      * Returns a new array containing the squares of the input array elements,
      * sorted in non-decreasing order.
      *
@@ -100,5 +150,19 @@ public class _323_e_SortedSquares {
         java.util.Arrays.sort(result);
 
         return result;
+    }
+
+    /**
+     * Utility method to print an array.
+     */
+    public void printArray(int[] nums) {
+        System.out.print("[");
+        for (int i = 0; i < nums.length; i++) {
+            System.out.print(nums[i]);
+            if (i < nums.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
     }
 }
