@@ -105,5 +105,29 @@ public class _323_a_RemoveDuplicatesII {
         return slow + 1;
     }
 
-    
+    /**
+     * A cleaner implementation that may be easier to understand.
+     * This uses a slightly different approach to count duplicates.
+     */
+    public int removeDuplicatesClean(int[] nums) {
+        // Edge case
+        if (nums.length <= 2) {
+            return nums.length;
+        }
+
+        // Position for next insertion
+        int index = 2;
+
+        // Start from the third element
+        for (int i = 2; i < nums.length; i++) {
+            // If the current element is different from the element
+            // two positions back in the result array, it's valid to keep
+            if (nums[i] != nums[index - 2]) {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        return index;
+    }
 }
