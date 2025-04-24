@@ -57,6 +57,54 @@ public class MatrixRotationTechniques {
         }
     }
 
-    private void reverse(int[] row) {
+    /**
+     * Rotates a matrix 90 degrees counter-clockwise in-place.
+     * <p>
+     * The algorithm works in two steps:
+     * 1. Transpose the matrix along the anti-diagonal
+     * 2. Reverse each row
+     * <p>
+     * Time Complexity: O(n²) where n is the side length of the matrix
+     * Space Complexity: O(1) - in-place operation
+     *
+     * @param matrix an n×n square matrix
+     */
+    public void rotateCounterClockwise(int[][] matrix) {
+        int n = matrix.length;
+
+        // Step 1: Transpose the matrix along the anti-diagonal
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i; j++) {
+                // Swap matrix[i][j] with matrix[n-j-1][n-i-1]
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n - j - 1][n - i - 1];
+                matrix[n - j - 1][n - i - 1] = temp;
+            }
+        }
+
+        // Step 2: Reverse each row
+        for (int[] row : matrix) {
+            reverse(row);
+        }
+    }
+
+    /**
+     * Helper method to reverse an array in-place.
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     *
+     * @param arr array to reverse
+     */
+    private void reverse(int[] arr) {
+        int i = 0, j = arr.length - 1;
+        while (i < j) {
+            // Swap arr[i] and arr[j]
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
     }
 }
