@@ -3,51 +3,93 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
 /**
  * Double Pointer Techniques in Arrays and Linked Lists
  * ===================================================
- *
+ * <p>
  * This class demonstrates various double pointer techniques commonly used in array and linked list algorithms.
  * Double pointer techniques can be classified into two main categories:
- *
+ * <p>
  * 1. Fast-Slow Pointers: Two pointers moving in the same direction at different speeds
  * 2. Left-Right Pointers: Two pointers moving toward or away from each other
- *
+ * <p>
  * FAST-SLOW POINTER TECHNIQUES:
  * -----------------------------
  * 1. In-place Array Modification:
- *    - Used when we need to modify arrays without using extra space
- *    - Common operations include removing duplicates, removing specific elements
- *    - Slow pointer maintains the boundary of the processed section
- *    - Fast pointer scans through the entire array
- *
+ * - Used when we need to modify arrays without using extra space
+ * - Common operations include removing duplicates, removing specific elements
+ * - Slow pointer maintains the boundary of the processed section
+ * - Fast pointer scans through the entire array
+ * <p>
  * 2. Sliding Window:
- *    - Used for finding subarrays that satisfy certain conditions
- *    - Two pointers define the boundaries of the window
- *    - Window expands/contracts based on specific conditions
- *
+ * - Used for finding subarrays that satisfy certain conditions
+ * - Two pointers define the boundaries of the window
+ * - Window expands/contracts based on specific conditions
+ * <p>
  * LEFT-RIGHT POINTER TECHNIQUES:
  * -----------------------------
  * 1. Binary Search:
- *    - Efficient search in sorted arrays
- *    - Left and right pointers define the search space
- *
+ * - Efficient search in sorted arrays
+ * - Left and right pointers define the search space
+ * <p>
  * 2. Two Sum (and n-Sum):
- *    - Finding elements that sum to a target in a sorted array
- *    - Two pointers move toward each other
- *
+ * - Finding elements that sum to a target in a sorted array
+ * - Two pointers move toward each other
+ * <p>
  * 3. Array Reversal:
- *    - Swapping elements from opposite ends
- *
+ * - Swapping elements from opposite ends
+ * <p>
  * 4. Palindrome Detection:
- *    - Check if a string reads the same backward as forward
- *    - Two pointers moving from outside to inside or inside to outside
+ * - Check if a string reads the same backward as forward
+ * - Two pointers moving from outside to inside or inside to outside
  */
 
 public class DoublePointerTechniques {
 
-    // Definition for singly-linked list node
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
+    /**
+     * Demo method showing different double pointer techniques
+     */
+    public static void main(String[] args) {
+        DoublePointerTechniques solution = new DoublePointerTechniques();
+
+        // Example for removeDuplicates
+        int[] nums1 = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        int len = solution.removeDuplicates(nums1);
+        System.out.println("After removing duplicates, length = " + len);
+        System.out.print("Array: ");
+        for (int i = 0; i < len; i++) {
+            System.out.print(nums1[i] + " ");
+        }
+        System.out.println();
+
+        // Example for removeElement
+        int[] nums2 = {3, 2, 2, 3};
+        len = solution.removeElement(nums2, 3);
+        System.out.println("After removing value 3, length = " + len);
+        System.out.print("Array: ");
+        for (int i = 0; i < len; i++) {
+            System.out.print(nums2[i] + " ");
+        }
+        System.out.println();
+
+        // Example for moveZeroes
+        int[] nums3 = {0, 1, 0, 3, 12};
+        solution.moveZeroes(nums3);
+        System.out.print("After moving zeroes: ");
+        for (int num : nums3) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Example for twoSum
+        int[] nums4 = {2, 7, 11, 15};
+        int[] result = solution.twoSum(nums4, 9);
+        System.out.println("Indices of two numbers that add up to 9: [" + result[0] + ", " + result[1] + "]");
+
+        // Example for isPalindrome
+        String s1 = "racecar";
+        System.out.println("Is '" + s1 + "' a palindrome? " + solution.isPalindrome(s1));
+
+        // Example for longestPalindrome
+        String s2 = "babad";
+        System.out.println("Longest palindromic substring in '" + s2 + "': " + solution.longestPalindrome(s2));
     }
 
     /*** FAST-SLOW POINTER TECHNIQUES ***/
@@ -135,20 +177,20 @@ public class DoublePointerTechniques {
      * Space Complexity: Depends on window data structure
      */
     public void slidingWindowTemplate(int[] nums) {
-        int left = 0, right = 0;
-
-        while (right < nums.length) {
-            // Expand the window
-            // window.add(nums[right]);
-            right++;
-
-            // When the window needs to shrink
-            while (/* condition to shrink window */) {
-                // Shrink the window
-                // window.remove(nums[left]);
-                left++;
-            }
-        }
+//        int left = 0, right = 0;
+//
+//        while (right < nums.length) {
+//            // Expand the window
+//            // window.add(nums[right]);
+//            right++;
+//
+//            // When the window needs to shrink
+//            while (/* condition to shrink window */) {
+//                // Shrink the window
+//                // window.remove(nums[left]);
+//                left++;
+//            }
+//        }
     }
 
     /*** LEFT-RIGHT POINTER TECHNIQUES ***/
@@ -266,52 +308,13 @@ public class DoublePointerTechniques {
         return s.substring(left + 1, right);
     }
 
-    /**
-     * Demo method showing different double pointer techniques
-     */
-    public static void main(String[] args) {
-        DoublePointerTechniques solution = new DoublePointerTechniques();
+    // Definition for singly-linked list node
+    static class ListNode {
+        int val;
+        ListNode next;
 
-        // Example for removeDuplicates
-        int[] nums1 = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        int len = solution.removeDuplicates(nums1);
-        System.out.println("After removing duplicates, length = " + len);
-        System.out.print("Array: ");
-        for (int i = 0; i < len; i++) {
-            System.out.print(nums1[i] + " ");
+        ListNode(int x) {
+            val = x;
         }
-        System.out.println();
-
-        // Example for removeElement
-        int[] nums2 = {3, 2, 2, 3};
-        len = solution.removeElement(nums2, 3);
-        System.out.println("After removing value 3, length = " + len);
-        System.out.print("Array: ");
-        for (int i = 0; i < len; i++) {
-            System.out.print(nums2[i] + " ");
-        }
-        System.out.println();
-
-        // Example for moveZeroes
-        int[] nums3 = {0, 1, 0, 3, 12};
-        solution.moveZeroes(nums3);
-        System.out.print("After moving zeroes: ");
-        for (int num : nums3) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-
-        // Example for twoSum
-        int[] nums4 = {2, 7, 11, 15};
-        int[] result = solution.twoSum(nums4, 9);
-        System.out.println("Indices of two numbers that add up to 9: [" + result[0] + ", " + result[1] + "]");
-
-        // Example for isPalindrome
-        String s1 = "racecar";
-        System.out.println("Is '" + s1 + "' a palindrome? " + solution.isPalindrome(s1));
-
-        // Example for longestPalindrome
-        String s2 = "babad";
-        System.out.println("Longest palindromic substring in '" + s2 + "': " + solution.longestPalindrome(s2));
     }
 }
