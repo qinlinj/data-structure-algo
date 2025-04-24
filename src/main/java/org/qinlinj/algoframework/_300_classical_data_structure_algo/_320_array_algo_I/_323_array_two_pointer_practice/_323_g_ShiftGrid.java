@@ -68,10 +68,69 @@ public class _323_g_ShiftGrid {
         return gridToList(grid);
     }
 
-    private void reverse(int[][] grid, int i, int i1) {
+    /**
+     * Converts a 2D array to a List of Lists.
+     *
+     * @param grid The 2D array to convert
+     * @return A List of Lists representation of the grid
+     */
+    private List<List<Integer>> gridToList(int[][] grid) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int[] row : grid) {
+            List<Integer> rowList = new ArrayList<>();
+            for (int cell : row) {
+                rowList.add(cell);
+            }
+            result.add(rowList);
+        }
+
+        return result;
     }
 
-    private List<List<Integer>> gridToList(int[][] grid) {
-        return null;
+    /**
+     * Reverses elements in the grid from index start to index end (inclusive),
+     * treating the grid as a 1D array.
+     *
+     * @param grid  The 2D grid
+     * @param start The starting index (in 1D representation)
+     * @param end   The ending index (in 1D representation)
+     */
+    private void reverse(int[][] grid, int start, int end) {
+        while (start < end) {
+            int temp = get(grid, start);
+            set(grid, start, get(grid, end));
+            set(grid, end, temp);
+            start++;
+            end--;
+        }
+    }
+
+    /**
+     * Gets an element from the grid using a 1D array index.
+     *
+     * @param grid  The 2D grid
+     * @param index The 1D index
+     * @return The value at the corresponding position
+     */
+    private int get(int[][] grid, int index) {
+        int n = grid[0].length;
+        int row = index / n;
+        int col = index % n;
+        return grid[row][col];
+    }
+
+    /**
+     * Sets an element in the grid using a 1D array index.
+     *
+     * @param grid  The 2D grid
+     * @param index The 1D index
+     * @param value The value to set
+     */
+    private void set(int[][] grid, int index, int value) {
+        int n = grid[0].length;
+        int row = index / n;
+        int col = index % n;
+        grid[row][col] = value;
     }
 }
