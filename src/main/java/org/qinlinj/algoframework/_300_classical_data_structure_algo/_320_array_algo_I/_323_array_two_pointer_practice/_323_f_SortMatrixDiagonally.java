@@ -28,6 +28,7 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 3. Put the sorted elements back into the matrix.
  * <p>
  * Time Complexity: O(m*n*log(min(m,n))) where m and n are the dimensions of the matrix
- * <p>
- * public class _323_f_SortMatrixDiagonally {
- * }
+ * Space Complexity: O(m*n) for storing the diagonals
+ */
+public class _323_f_SortMatrixDiagonally {
+}
