@@ -79,4 +79,24 @@ public class _323_c_SortColors {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
+    /**
+     * A traditional two-pass approach using the counting sort algorithm.
+     * This is more straightforward but doesn't meet the one-pass requirement.
+     */
+    public void sortColorsTwoPass(int[] nums) {
+        // Count the number of 0s, 1s, and 2s
+        int[] count = new int[3];
+        for (int num : nums) {
+            count[num]++;
+        }
+
+        // Overwrite the array with the correct number of each color
+        int index = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                nums[index++] = i;
+            }
+        }
+    }
 }
