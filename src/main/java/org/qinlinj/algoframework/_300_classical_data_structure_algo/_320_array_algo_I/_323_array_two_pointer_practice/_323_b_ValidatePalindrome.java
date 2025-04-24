@@ -29,6 +29,56 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class _323_b_ValidatePalindrome {
     /**
+     * Demonstration of the palindrome validation algorithms.
+     */
+    public static void main(String[] args) {
+        _323_b_ValidatePalindrome solution = new _323_b_ValidatePalindrome();
+
+        // Test cases
+        String[] testCases = {
+                "A man, a plan, a canal: Panama",
+                "race a car",
+                " ",
+                "Madam, I'm Adam.",
+                "Was it a car or a cat I saw?",
+                "No 'x' in Nixon",
+                "12321",
+                "Not a palindrome"
+        };
+
+        System.out.println("Testing isPalindrome method:");
+        for (String test : testCases) {
+            boolean result = solution.isPalindrome(test);
+            System.out.println("\"" + test + "\" -> " + result);
+        }
+
+        System.out.println("\nTesting isPalindromeOptimized method:");
+        for (String test : testCases) {
+            boolean result = solution.isPalindromeOptimized(test);
+            System.out.println("\"" + test + "\" -> " + result);
+        }
+
+        // Performance comparison for large inputs
+        StringBuilder largeSb = new StringBuilder();
+        for (int i = 0; i < 100000; i++) {
+            largeSb.append('a');
+        }
+        String largeString = largeSb.toString();
+
+        System.out.println("\nPerformance test with large palindrome:");
+
+        long startTime = System.nanoTime();
+        boolean result1 = solution.isPalindrome(largeString);
+        long endTime = System.nanoTime();
+        System.out.println("isPalindrome: " + result1 + " (Time: " + (endTime - startTime) / 1000000 + " ms)");
+
+        startTime = System.nanoTime();
+        boolean result2 = solution.isPalindromeOptimized(largeString);
+        endTime = System.nanoTime();
+        System.out.println("isPalindromeOptimized: " + result2 + " (Time: " + (endTime - startTime) / 1000000 + " ms)");
+    }
+
+    /**
      * Determines if a string is a palindrome considering only alphanumeric characters
      * and ignoring case.
      *
