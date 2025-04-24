@@ -28,4 +28,33 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * Space Complexity: O(n) for the result array
  */
 public class _323_e_SortedSquares {
+    /**
+     * Returns a new array containing the squares of the input array elements,
+     * sorted in non-decreasing order.
+     *
+     * @param nums The input array sorted in non-decreasing order
+     * @return A new array of squares sorted in non-decreasing order
+     */
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+
+        // Two pointers approaching from both ends
+        int left = 0;
+        int right = n - 1;
+
+        // We fill the result array from back to front (largest to smallest)
+        for (int i = n - 1; i >= 0; i--) {
+            // Compare absolute values to determine which element's square is larger
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                result[i] = nums[left] * nums[left];
+                left++;
+            } else {
+                result[i] = nums[right] * nums[right];
+                right--;
+            }
+        }
+
+        return result;
+    }
 }
