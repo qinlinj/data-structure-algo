@@ -89,4 +89,36 @@ public class GeneralizedTwoSum {
 
         return result;
     }
+
+    /**
+     * Alternative implementation without duplicate skipping in the sum < target
+     * and sum > target branches. This version is more straightforward but less efficient.
+     */
+    public List<List<Integer>> twoSumTargetSimple(int[] nums, int target) {
+        // Sort the array
+        Arrays.sort(nums);
+
+        List<List<Integer>> result = new ArrayList<>();
+        int lo = 0, hi = nums.length - 1;
+
+        while (lo < hi) {
+            int sum = nums[lo] + nums[hi];
+
+            if (sum < target) {
+                lo++;
+            } else if (sum > target) {
+                hi--;
+            } else {
+                // Found a valid pair
+                result.add(Arrays.asList(nums[lo], nums[hi]));
+
+                // Skip all duplicates to avoid adding the same pair again
+                int left = nums[lo], right = nums[hi];
+                while (lo < hi && nums[lo] == left) lo++;
+                while (lo < hi && nums[hi] == right) hi--;
+            }
+        }
+
+        return result;
+    }
 }
