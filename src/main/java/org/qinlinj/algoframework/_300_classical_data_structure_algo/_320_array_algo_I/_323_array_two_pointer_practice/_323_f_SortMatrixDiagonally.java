@@ -91,4 +91,42 @@ public class _323_f_SortMatrixDiagonally {
 
         return mat;
     }
+
+    /**
+     * Alternative implementation that more closely matches the provided solution.
+     * Uses reverse sorting and removes elements from the end of the list for efficiency.
+     */
+    public int[][] diagonalSortAlt(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+
+        // Store all elements of each diagonal
+        HashMap<Integer, ArrayList<Integer>> diagonals = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // The diagonal ID is the difference between row and column indices
+                int diagonalId = i - j;
+
+                diagonals.putIfAbsent(diagonalId, new ArrayList<>());
+                diagonals.get(diagonalId).add(mat[i][j]);
+            }
+        }
+
+        // Sort each diagonal in reverse order for efficient removal from the end
+        for (ArrayList<Integer> diagonal : diagonals.values()) {
+            Collections.sort(diagonal, Collections.reverseOrder());
+        }
+
+        // Fill the matrix with sorted elements
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                ArrayList<Integer> diagonal = diagonals.get(i - j);
+                // Remove from the end of the list (more efficient)
+                mat[i][j] = diagonal.remove(diagonal.size() - 1);
+            }
+        }
+
+        return mat;
+    }
 }
