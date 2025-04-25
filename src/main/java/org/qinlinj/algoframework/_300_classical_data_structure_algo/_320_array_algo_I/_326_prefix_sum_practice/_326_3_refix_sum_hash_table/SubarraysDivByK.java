@@ -14,6 +14,27 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class SubarraysDivByK {
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        SubarraysDivByK solution = new SubarraysDivByK();
+
+        // Example 1: [4, 5, 0, -2, -3, 1], k = 5
+        int[] nums1 = {4, 5, 0, -2, -3, 1};
+        int k1 = 5;
+        System.out.println("Example 1: " + solution.subarraysDivByK(nums1, k1));  // Expected: 7
+        System.out.println("Example 1 (optimized): " + solution.subarraysDivByKOptimized(nums1, k1));  // Expected: 7
+        System.out.println("Example 1 (array optimized): " + solution.subarraysDivByKArrayOptimized(nums1, k1));  // Expected: 7
+
+        // Example 2: [5], k = 9
+        int[] nums2 = {5};
+        int k2 = 9;
+        System.out.println("Example 2: " + solution.subarraysDivByK(nums2, k2));  // Expected: 0
+        System.out.println("Example 2 (optimized): " + solution.subarraysDivByKOptimized(nums2, k2));  // Expected: 0
+        System.out.println("Example 2 (array optimized): " + solution.subarraysDivByKArrayOptimized(nums2, k2));  // Expected: 0
+    }
+
+    /**
      * Counts the number of continuous subarrays with sum divisible by k
      *
      * @param nums Array of integers
