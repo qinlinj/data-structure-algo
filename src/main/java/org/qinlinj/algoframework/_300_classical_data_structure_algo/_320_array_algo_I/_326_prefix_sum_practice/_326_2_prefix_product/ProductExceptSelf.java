@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_algo_I._326_prefix_sum_practice._326_1_prefix_sum;
+package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_algo_I._326_prefix_sum_practice._326_2_prefix_product;
 
 /**
  * Product of Array Except Self (LeetCode 238)
