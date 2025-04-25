@@ -150,4 +150,27 @@ public class SubarraysDivByK {
 
         return result;
     }
+
+    /**
+     * Solution explanation:
+     *
+     * 1. The key insight: For subarrays nums[i+1..j] with sum divisible by k:
+     *    - (preSum[j] - preSum[i]) % k = 0
+     *    - preSum[j] % k = preSum[i] % k
+     *
+     * 2. This means if we find two prefix sums with the same remainder when divided by k,
+     *    the subarray between them has a sum divisible by k
+     *
+     * 3. We use a hash map (or array for further optimization) to count occurrences of each remainder
+     *
+     * 4. For each position, we check how many previous positions had the same remainder
+     *    Each such position forms a valid subarray with the current position
+     *
+     * 5. Special care is needed for negative remainders in Java:
+     *    - Java's modulo operator preserves the sign: -1 % 5 = -1
+     *    - But we need a positive remainder in the range [0, k-1]
+     *    - Therefore, we add k to negative remainders
+     *
+     * 6. The array optimization further improves space efficiency since there are at most k different remainders
+     */
 }
