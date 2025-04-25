@@ -13,4 +13,44 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 7. Can be further optimized to use O(1) extra space by reusing the output array
  */
 public class ProductExceptSelf {
+    /**
+     * Calculates an array where each element is the product of all elements
+     * in the input array except the element at that position
+     *
+     * @param nums Input array
+     * @return Array of products
+     */
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+
+        // From left to right prefix product
+        // prefix[i] is the product of nums[0..i]
+        int[] prefix = new int[n];
+        prefix[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] * nums[i];
+        }
+
+        // From right to left prefix product
+        // suffix[i] is the product of nums[i..n-1]
+        int[] suffix = new int[n];
+        suffix[n - 1] = nums[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            suffix[i] = suffix[i + 1] * nums[i];
+        }
+
+        // Result array
+        int[] result = new int[n];
+
+        // Handle edge cases (first and last elements)
+        result[0] = suffix[1];
+        result[n - 1] = prefix[n - 2];
+
+        // For middle elements, multiply left product with right product
+        for (int i = 1; i < n - 1; i++) {
+            result[i] = prefix[i - 1] * suffix[i + 1];
+        }
+
+        return result;
+    }
 }
