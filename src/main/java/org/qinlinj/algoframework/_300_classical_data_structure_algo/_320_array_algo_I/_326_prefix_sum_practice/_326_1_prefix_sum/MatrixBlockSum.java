@@ -13,6 +13,37 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class MatrixBlockSum {
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        int[][] mat = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int k = 1;
+
+        MatrixBlockSum solution = new MatrixBlockSum();
+        int[][] result = solution.matrixBlockSum(mat, k);
+
+        System.out.println("Original Matrix:");
+        printMatrix(mat);
+
+        System.out.println("\nBlock Sum Matrix (k=" + k + "):");
+        printMatrix(result);
+        // Expected: [[12,21,16],[27,45,33],[24,39,28]]
+    }
+
+    private static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            System.out.print("[");
+            for (int j = 0; j < row.length; j++) {
+                System.out.print(row[j]);
+                if (j < row.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+    }
+
+    /**
      * Calculates a matrix where each element is the sum of elements in the original matrix
      * that are at most k positions away (Manhattan distance)
      *
