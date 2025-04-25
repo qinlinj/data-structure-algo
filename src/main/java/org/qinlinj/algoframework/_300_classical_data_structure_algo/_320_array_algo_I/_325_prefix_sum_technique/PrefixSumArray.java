@@ -17,4 +17,37 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * - Finding subarrays with specific sum properties
  */
 public class PrefixSumArray {
+    /**
+     * Implementation of LeetCode 303: Range Sum Query - Immutable
+     * Uses the prefix sum technique to efficiently answer range sum queries
+     */
+    static class NumArray {
+        // Prefix sum array
+        private int[] prefixSum;
+
+        /**
+         * Initialize the prefix sum array from the input array
+         * Time complexity: O(n)
+         * Space complexity: O(n)
+         */
+        public NumArray(int[] nums) {
+            // prefixSum[0] = 0 to simplify calculations
+            prefixSum = new int[nums.length + 1];
+
+            // Calculate cumulative sum
+            for (int i = 1; i < prefixSum.length; i++) {
+                prefixSum[i] = prefixSum[i - 1] + nums[i - 1];
+            }
+        }
+
+        /**
+         * Returns the sum of elements in the range [left, right] inclusive
+         * Time complexity: O(1)
+         * Space complexity: O(1)
+         */
+        public int sumRange(int left, int right) {
+            // Subtract prefix sum at left from prefix sum at right+1
+            return prefixSum[right + 1] - prefixSum[left];
+        }
+    }
 }
