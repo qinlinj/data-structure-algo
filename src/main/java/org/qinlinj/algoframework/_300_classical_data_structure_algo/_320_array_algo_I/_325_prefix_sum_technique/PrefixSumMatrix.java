@@ -83,4 +83,22 @@ public class PrefixSumMatrix {
             return prefixSum[row2 + 1][col2 + 1] - prefixSum[row1][col2 + 1] - prefixSum[row2 + 1][col1] + prefixSum[row1][col1];
         }
     }
+
+    /**
+     * Visual explanation of how the 2D prefix sum calculation works:
+     *
+     * For a submatrix from (row1,col1) to (row2,col2), we calculate:
+     *
+     *    D = prefixSum[row2+1][col2+1]  (sum of entire submatrix from (0,0) to (row2,col2))
+     *    B = prefixSum[row1][col2+1]    (sum of submatrix from (0,0) to (row1-1,col2))
+     *    C = prefixSum[row2+1][col1]    (sum of submatrix from (0,0) to (row2,col1-1))
+     *    A = prefixSum[row1][col1]      (sum of submatrix from (0,0) to (row1-1,col1-1))
+     *
+     * The formula is: D - B - C + A
+     *
+     * This works because:
+     * - D includes the entire target region plus some extra areas
+     * - B and C represent the extra areas above and to the left
+     * - A is the intersection of B and C, which gets subtracted twice, so we add it back once
+     */
 }
