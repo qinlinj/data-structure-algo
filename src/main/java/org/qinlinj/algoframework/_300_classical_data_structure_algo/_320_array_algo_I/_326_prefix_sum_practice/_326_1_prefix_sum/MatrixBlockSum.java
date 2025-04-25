@@ -12,4 +12,63 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 6. Uses Math.min/max to elegantly handle boundary conditions
  */
 public class MatrixBlockSum {
+    /**
+     * Calculates a matrix where each element is the sum of elements in the original matrix
+     * that are at most k positions away (Manhattan distance)
+     *
+     * @param mat Original matrix
+     * @param k   Distance parameter
+     * @return Result matrix with block sums
+     */
+    public int[][] matrixBlockSum(int[][] mat, int k) {
+        int m = mat.length, n = mat[0].length;
+        NumMatrix numMatrix = new NumMatrix(mat);
+        int[][] res = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // Calculate top-left corner coordinates
+                int x1 = Math.max(i - k, 0);
+                int y1 = Math.max(j - k, 0);
+
+                // Calculate bottom-right corner coordinates
+                int x2 = Math.min(i + k, m - 1);
+                int y2 = Math.min(j + k, n - 1);
+
+                // Use the NumMatrix helper to calculate the block sum
+                res[i][j] = numMatrix.sumRegion(x1, y1, x2, y2);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Helper class for efficient submatrix sum queries using prefix sum technique
+     */
+    static class NumMatrix {
+        // preSum[i][j] represents the sum of elements in submatrix from (0,0) to (i-1,j-1)
+        private int[][] preSum;
+
+        public NumMatrix(int[][] matrix) {
+            int m = matrix.length, n = matrix[0].length;
+            if (m == 0 || n == 0) return;
+
+            // Construct prefix sum matrix
+            preSum = new int[m + 1][n + 1];
+            for (int i = 1; i <= m; i++) {
+                for (int j = 1; j <= n; j++) {
+                    // Calculate the sum of submatrix (0,0) to (i-1,j-1)
+                    preSum[i][j] = preSum[i - 1][j] + preSum[i][j - 1] + matrix[i - 1][j - 1] - preSum[i - 1][j - 1];
+                }
+            }
+        }
+
+        /**
+         * Calculate the sum of elements in submatrix from (x1,y1) to (x2,y2) inclusive
+         */
+        public int sumRegion(int x1, int y1, int x2, int y2) {
+            // Apply inclusion-exclusion principle using prefix sums
+            return preSum[x2 + 1][y2 + 1] - preSum[x1][y2 + 1] - preSum[x2 + 1][y1] + preSum[x1][y1];
+        }
+    }
 }
