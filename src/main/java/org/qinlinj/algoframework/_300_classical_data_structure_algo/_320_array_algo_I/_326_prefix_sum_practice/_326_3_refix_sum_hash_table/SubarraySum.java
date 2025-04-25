@@ -13,4 +13,42 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 7. Demonstrates the power of prefix sums for solving subarray sum problems
  */
 public class SubarraySum {
+    /**
+     * Counts the number of continuous subarrays that sum to k
+     *
+     * @param nums Array of integers (may contain negative numbers)
+     * @param k    Target sum
+     * @return Number of subarrays with sum k
+     */
+    public int subarraySum(int[] nums, int k) {
+        int n = nums.length;
+
+        // Prefix sum array
+        int[] preSum = new int[n + 1];
+        preSum[0] = 0;
+
+        // Map to count occurrences of each prefix sum
+        java.util.HashMap<Integer, Integer> count = new java.util.HashMap<>();
+        count.put(0, 1);  // Empty subarray has sum 0
+
+        int result = 0;
+
+        // Calculate prefix sums and count subarrays
+        for (int i = 1; i <= n; i++) {
+            preSum[i] = preSum[i - 1] + nums[i - 1];
+
+            // For current sum preSum[i], find how many previous prefix sums were (preSum[i] - k)
+            // Each such prefix sum creates a subarray with sum k
+            int need = preSum[i] - k;
+
+            if (count.containsKey(need)) {
+                result += count.get(need);
+            }
+
+            // Update the count of current prefix sum
+            count.put(preSum[i], count.getOrDefault(preSum[i], 0) + 1);
+        }
+
+        return result;
+    }
 }
