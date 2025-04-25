@@ -27,6 +27,33 @@ public class ProductOfNumbers {
     }
 
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        // Example from the problem
+        ProductOfNumbers productOfNumbers = new ProductOfNumbers();
+        productOfNumbers.add(3);        // [3]
+        productOfNumbers.add(0);        // [3,0]
+        productOfNumbers.add(2);        // [3,0,2]
+        productOfNumbers.add(5);        // [3,0,2,5]
+        productOfNumbers.add(4);        // [3,0,2,5,4]
+
+        System.out.println("Product of last 2 numbers: " +
+                productOfNumbers.getProduct(2));  // Expected: 20 (5 * 4)
+
+        System.out.println("Product of last 3 numbers: " +
+                productOfNumbers.getProduct(3));  // Expected: 40 (2 * 5 * 4)
+
+        System.out.println("Product of last 4 numbers: " +
+                productOfNumbers.getProduct(4));  // Expected: 0 (0 * 2 * 5 * 4)
+
+        productOfNumbers.add(8);        // [3,0,2,5,4,8]
+
+        System.out.println("Product of last 2 numbers after adding 8: " +
+                productOfNumbers.getProduct(2));  // Expected: 32 (4 * 8)
+    }
+
+    /**
      * Adds a number to the data structure
      *
      * @param num The number to add
@@ -64,4 +91,22 @@ public class ProductOfNumbers {
         // preProduct[n-1] / preProduct[n-k-1] gives the product of elements [n-k, n-1]
         return preProduct.get(n - 1) / preProduct.get(n - k - 1);
     }
+
+    /**
+     * Optimal implementation explanation:
+     *
+     * 1. We maintain a list of prefix products, where each element is the product of all numbers seen so far
+     *
+     * 2. When we add a number:
+     *    - If the number is 0, we reset our list (since any product with 0 is 0)
+     *    - Otherwise, we add (previous prefix product * new number) to our list
+     *
+     * 3. When we query for the product of the last k numbers:
+     *    - If k is larger than our current list size (minus the initial 1), return 0
+     *      (this means there was a 0 in the sequence)
+     *    - Otherwise, we use the division: preProduct[n-1] / preProduct[n-k-1]
+     *      This gives us the product of elements from index (n-k) to (n-1)
+     *
+     * This approach ensures O(1) time complexity for both operations.
+     */
 }
