@@ -41,6 +41,24 @@ public class PrefixSumArray {
     }
 
     /**
+     * Demonstrates using the NumArray class for range sum queries
+     */
+    public static void main(String[] args) {
+        // Example from LeetCode 303
+        int[] nums = {-2, 0, 3, -5, 2, -1};
+        NumArray numArray = new NumArray(nums);
+
+        System.out.println("Sum of range [0, 2]: " + numArray.sumRange(0, 2));  // Should return 1
+        System.out.println("Sum of range [2, 5]: " + numArray.sumRange(2, 5));  // Should return -1
+        System.out.println("Sum of range [0, 5]: " + numArray.sumRange(0, 5));  // Should return -3
+
+        // Example of score range counting
+        int[] scores = {65, 75, 85, 95, 85, 75, 65, 95, 85, 75};
+        System.out.println("Students with scores between 80 and 90: " +
+                countStudentsInScoreRange(scores, 80, 90));  // Should return 3
+    }
+
+    /**
      * Implementation of LeetCode 303: Range Sum Query - Immutable
      * Uses the prefix sum technique to efficiently answer range sum queries
      */
