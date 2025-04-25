@@ -51,4 +51,32 @@ public class SubarraySum {
 
         return result;
     }
+
+    /**
+     * Optimized version that eliminates the prefix sum array
+     * Uses a running sum variable instead
+     */
+    public int subarraySumOptimized(int[] nums, int k) {
+        // Map to count occurrences of each running sum
+        java.util.HashMap<Integer, Integer> count = new java.util.HashMap<>();
+        count.put(0, 1);  // Empty subarray has sum 0
+
+        int result = 0;
+        int sum = 0;
+
+        for (int num : nums) {
+            // Update running sum
+            sum += num;
+
+            // Check if there are any previous running sums that would create a subarray with sum k
+            if (count.containsKey(sum - k)) {
+                result += count.get(sum - k);
+            }
+
+            // Update the count of current running sum
+            count.put(sum, count.getOrDefault(sum, 0) + 1);
+        }
+
+        return result;
+    }
 }
