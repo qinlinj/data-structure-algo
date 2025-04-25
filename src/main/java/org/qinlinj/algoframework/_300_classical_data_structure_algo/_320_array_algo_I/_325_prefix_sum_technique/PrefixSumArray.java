@@ -18,6 +18,29 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class PrefixSumArray {
     /**
+     * Example usage of the score range counting problem
+     * Counts students with scores in given ranges
+     */
+    public static int countStudentsInScoreRange(int[] scores, int minScore, int maxScore) {
+        // Assuming scores are between 0 and 100
+        int[] countByScore = new int[101];
+
+        // Count students for each score
+        for (int score : scores) {
+            countByScore[score]++;
+        }
+
+        // Convert to prefix sum array
+        for (int i = 1; i < countByScore.length; i++) {
+            countByScore[i] += countByScore[i - 1];
+        }
+
+        // Query the range [minScore, maxScore]
+        // Note: Need to handle edge case for minScore = 0
+        return minScore == 0 ? countByScore[maxScore] : countByScore[maxScore] - countByScore[minScore - 1];
+    }
+
+    /**
      * Implementation of LeetCode 303: Range Sum Query - Immutable
      * Uses the prefix sum technique to efficiently answer range sum queries
      */
