@@ -47,4 +47,33 @@ public class FindMaxLength {
 
         return maxLength;
     }
+
+    /**
+     * Optimized version that eliminates the prefix sum array
+     * Uses a running sum variable instead
+     */
+    public int findMaxLengthOptimized(int[] nums) {
+        int maxLength = 0;
+        int sum = 0;
+
+        // Map to store running sum -> index
+        java.util.HashMap<Integer, Integer> valToIndex = new java.util.HashMap<>();
+        // Initialize with sum 0 at index -1 (before array starts)
+        valToIndex.put(0, -1);
+
+        for (int i = 0; i < nums.length; i++) {
+            // Update running sum (treat 0 as -1, 1 as 1)
+            sum += (nums[i] == 0) ? -1 : 1;
+
+            // If we've seen this sum before, we found a zero-sum subarray
+            if (valToIndex.containsKey(sum)) {
+                maxLength = Math.max(maxLength, i - valToIndex.get(sum));
+            } else {
+                // First occurrence of this sum
+                valToIndex.put(sum, i);
+            }
+        }
+
+        return maxLength;
+    }
 }
