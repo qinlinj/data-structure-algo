@@ -11,6 +11,30 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 5. Space Complexity: O(n) for the difference array
  */
 public class RangeAddition {
+
+    /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        RangeAddition solution = new RangeAddition();
+
+        // Example: length = 5, updates = [[1,3,2],[2,4,3],[0,2,-2]]
+        int length = 5;
+        int[][] updates = {
+                {1, 3, 2},  // Add 2 to range [1, 3]
+                {2, 4, 3},  // Add 3 to range [2, 4]
+                {0, 2, -2}  // Subtract 2 from range [0, 2]
+        };
+
+        int[] result = solution.getModifiedArray(length, updates);
+
+        System.out.println("Final array after all operations:");
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i] + " ");
+        }
+        // Expected output: [-2, 0, 3, 5, 3]
+    }
+
     /**
      * LeetCode 370: Range Addition
      * <p>
@@ -93,4 +117,20 @@ public class RangeAddition {
             return res;
         }
     }
+
+    /**
+     * Implementation Notes:
+     *
+     * 1. This problem is a direct application of the difference array technique.
+     *
+     * 2. For each update operation [start, end, inc]:
+     *    - We add inc to diff[start] to increase values from start onwards
+     *    - We subtract inc from diff[end+1] to stop the effect after end
+     *
+     * 3. After applying all operations to the difference array, we reconstruct
+     *    the final array by calculating the prefix sum of the difference array.
+     *
+     * 4. Since the array is initialized with zeros, we don't need to handle
+     *    special initialization cases in the difference array.
+     */
 }
