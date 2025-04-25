@@ -14,6 +14,28 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class FindMaxLength {
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        FindMaxLength solution = new FindMaxLength();
+
+        // Example 1: [0, 1]
+        int[] nums1 = {0, 1};
+        System.out.println("Example 1: " + solution.findMaxLength(nums1));  // Expected: 2
+        System.out.println("Example 1 (optimized): " + solution.findMaxLengthOptimized(nums1));  // Expected: 2
+
+        // Example 2: [0, 1, 0]
+        int[] nums2 = {0, 1, 0};
+        System.out.println("Example 2: " + solution.findMaxLength(nums2));  // Expected: 2
+        System.out.println("Example 2 (optimized): " + solution.findMaxLengthOptimized(nums2));  // Expected: 2
+
+        // Additional example: [0, 0, 1, 0, 0, 0, 1, 1]
+        int[] nums3 = {0, 0, 1, 0, 0, 0, 1, 1};
+        System.out.println("Additional example: " + solution.findMaxLength(nums3));  // Expected: 6
+        System.out.println("Additional example (optimized): " + solution.findMaxLengthOptimized(nums3));  // Expected: 6
+    }
+
+    /**
      * Finds the length of the longest contiguous subarray with an equal number of 0's and 1's
      *
      * @param nums Binary array containing only 0's and 1's
@@ -76,4 +98,23 @@ public class FindMaxLength {
 
         return maxLength;
     }
+
+    /**
+     * Solution explanation:
+     *
+     * 1. We transform the problem by treating 0's as -1 and 1's as 1
+     *    This way, a subarray with equal number of 0's and 1's will have a sum of 0
+     *
+     * 2. We use a prefix sum approach to track the running sum at each position
+     *
+     * 3. Key insight: If we see the same prefix sum twice, the subarray between these positions has a sum of 0
+     *    (which means equal number of 0's and 1's in the original array)
+     *
+     * 4. We use a hash map to store the first occurrence of each prefix sum
+     *    When we see a prefix sum again, we calculate the length of the zero-sum subarray
+     *    and update our maximum length if needed
+     *
+     * 5. The optimized version eliminates the prefix sum array by using a running sum variable
+     *    and initializes the map with sum 0 at index -1 to handle subarrays starting from index 0
+     */
 }
