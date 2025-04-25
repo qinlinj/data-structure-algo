@@ -13,6 +13,28 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class PivotIndex {
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        PivotIndex solution = new PivotIndex();
+
+        // Example 1: [1, 7, 3, 6, 5, 6]
+        int[] nums1 = {1, 7, 3, 6, 5, 6};
+        System.out.println("Example 1: " + solution.pivotIndex(nums1));  // Expected: 3
+        System.out.println("Example 1 (optimized): " + solution.pivotIndexOptimized(nums1));  // Expected: 3
+
+        // Example 2: [1, 2, 3]
+        int[] nums2 = {1, 2, 3};
+        System.out.println("Example 2: " + solution.pivotIndex(nums2));  // Expected: -1
+        System.out.println("Example 2 (optimized): " + solution.pivotIndexOptimized(nums2));  // Expected: -1
+
+        // Example 3: [2, 1, -1]
+        int[] nums3 = {2, 1, -1};
+        System.out.println("Example 3: " + solution.pivotIndex(nums3));  // Expected: 0
+        System.out.println("Example 3 (optimized): " + solution.pivotIndexOptimized(nums3));  // Expected: 0
+    }
+
+    /**
      * Finds the leftmost pivot index in the array
      * A pivot index has the property that the sum of elements to its left
      * equals the sum of elements to its right
