@@ -12,6 +12,45 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 6. Space Complexity: O(n) for the difference array
  */
 public class CarPooling {
+
+    /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        CarPooling solution = new CarPooling();
+
+        // Example 1: trips = [[2,1,5],[3,3,7]], capacity = 4
+        int[][] trips1 = {
+                {2, 1, 5},  // 2 passengers, from stop 1 to stop 5
+                {3, 3, 7}   // 3 passengers, from stop 3 to stop 7
+        };
+        int capacity1 = 4;
+
+        boolean result1 = solution.carPooling(trips1, capacity1);
+        System.out.println("Example 1: " + result1);  // Expected: false
+
+        // Example 2: trips = [[2,1,5],[3,3,7]], capacity = 5
+        int[][] trips2 = {
+                {2, 1, 5},  // 2 passengers, from stop 1 to stop 5
+                {3, 3, 7}   // 3 passengers, from stop 3 to stop 7
+        };
+        int capacity2 = 5;
+
+        boolean result2 = solution.carPooling(trips2, capacity2);
+        System.out.println("Example 2: " + result2);  // Expected: true
+
+        // Additional example: trips = [[3,2,7],[3,7,9],[8,3,9]], capacity = 11
+        int[][] trips3 = {
+                {3, 2, 7},   // 3 passengers, from stop 2 to stop 7
+                {3, 7, 9},   // 3 passengers, from stop 7 to stop 9
+                {8, 3, 9}    // 8 passengers, from stop 3 to stop 9
+        };
+        int capacity3 = 11;
+
+        boolean result3 = solution.carPooling(trips3, capacity3);
+        System.out.println("Additional example: " + result3);  // Expected: true
+    }
+
     /**
      * LeetCode 1094: Car Pooling
      * <p>
@@ -109,4 +148,26 @@ public class CarPooling {
             return res;
         }
     }
+
+    /**
+     * Implementation Notes:
+     *
+     * 1. The key insight is that this problem can be modeled using a difference array:
+     *    - At location 'from', numPassengers get on the car (increment)
+     *    - At location 'to', numPassengers get off the car (decrement)
+     *
+     * 2. The difference array tracks the changes in passenger count at each location:
+     *    - diff[i] represents the change in passengers at location i
+     *
+     * 3. After processing all trips, we reconstruct the original array:
+     *    - result[i] represents the total number of passengers in the car at location i
+     *
+     * 4. If at any location, the passenger count exceeds capacity, return false
+     *
+     * 5. The problem states that locations are at most 1000, so we use an array of size 1001
+     *    to handle all possible locations (0 to 1000)
+     *
+     * 6. A subtle point: passengers are in the car from 'from' to 'to-1', not 'to'
+     *    This is because at location 'to', they get off the car
+     */
 }
