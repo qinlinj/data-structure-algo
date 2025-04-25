@@ -53,4 +53,31 @@ public class ProductExceptSelf {
 
         return result;
     }
+
+    /**
+     * Optimized solution with O(1) extra space (not counting output array)
+     * Uses the output array to store the left products, then computes right products on-the-fly
+     *
+     * @param nums Input array
+     * @return Array of products
+     */
+    public int[] productExceptSelfOptimized(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+
+        // Calculate left products and store in result array
+        result[0] = 1; // There's no element to the left of first element
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
+        }
+
+        // Calculate right products on-the-fly and multiply with left products
+        int rightProduct = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] *= rightProduct;
+            rightProduct *= nums[i];
+        }
+
+        return result;
+    }
 }
