@@ -13,4 +13,42 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 7. Demonstrates how prefix sums can be used with modular arithmetic
  */
 public class CheckSubarraySum {
+    /**
+     * Checks if there exists a subarray of length at least 2 with a sum that is a multiple of k
+     *
+     * @param nums Array of integers
+     * @param k    The divisor
+     * @return True if a valid subarray exists, false otherwise
+     */
+    public boolean checkSubarraySum(int[] nums, int k) {
+        int n = nums.length;
+
+        // Calculate prefix sum array
+        int[] preSum = new int[n + 1];
+        preSum[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            preSum[i] = preSum[i - 1] + nums[i - 1];
+        }
+
+        // Map to store remainder -> index
+        // We only need to keep track of the first occurrence of each remainder
+        java.util.HashMap<Integer, Integer> valToIndex = new java.util.HashMap<>();
+
+        for (int i = 0; i < preSum.length; i++) {
+            // Calculate remainder when divided by k
+            int val = k == 0 ? preSum[i] : preSum[i] % k;
+
+            // If this remainder hasn't been seen before, record its index
+            if (!valToIndex.containsKey(val)) {
+                valToIndex.put(val, i);
+            }
+            // If we've seen this remainder before and the distance between indices is at least 2
+            else if (i - valToIndex.get(val) >= 2) {
+                return true;
+            }
+            // Otherwise, we keep the original index (to maximize the potential subarray length)
+        }
+
+        return false;
+    }
 }
