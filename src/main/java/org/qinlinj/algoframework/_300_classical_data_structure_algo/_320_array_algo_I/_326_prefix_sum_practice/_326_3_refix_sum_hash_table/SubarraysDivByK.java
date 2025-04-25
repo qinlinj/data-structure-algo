@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_algo_I._326_prefix_sum_practice._326_3_refix_sum_hash_table;
+
+public class SubarraysDivByK {
+}
