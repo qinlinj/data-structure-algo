@@ -13,4 +13,50 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  * 7. Demonstrates how prefix sums can be combined with modular arithmetic
  */
 public class SubarraysDivByK {
+    /**
+     * Counts the number of continuous subarrays with sum divisible by k
+     *
+     * @param nums Array of integers
+     * @param k    Divisor
+     * @return Number of subarrays with sum divisible by k
+     */
+    public int subarraysDivByK(int[] nums, int k) {
+        int n = nums.length;
+
+        // Prefix sum array (not strictly necessary but helps with explanation)
+        int[] preSum = new int[n + 1];
+        preSum[0] = 0;
+
+        // Map to count occurrences of each remainder
+        java.util.HashMap<Integer, Integer> remainderToCount = new java.util.HashMap<>();
+        remainderToCount.put(0, 1);  // Empty subarray has sum 0, which is divisible by any k
+
+        int result = 0;
+
+        // Calculate prefix sums and count subarrays
+        for (int i = 0; i < n; i++) {
+            // Calculate current prefix sum
+            preSum[i + 1] = preSum[i] + nums[i];
+
+            // Calculate remainder when divided by k
+            int curRemainder = preSum[i + 1] % k;
+
+            // Handle negative remainders (Java's % operator preserves the sign)
+            if (curRemainder < 0) {
+                curRemainder += k;
+            }
+
+            // If we've seen this remainder before, it means there are subarrays divisible by k
+            if (remainderToCount.containsKey(curRemainder)) {
+                int count = remainderToCount.get(curRemainder);
+                result += count;
+                remainderToCount.put(curRemainder, count + 1);
+            } else {
+                // First occurrence of this remainder
+                remainderToCount.put(curRemainder, 1);
+            }
+        }
+
+        return result;
+    }
 }
