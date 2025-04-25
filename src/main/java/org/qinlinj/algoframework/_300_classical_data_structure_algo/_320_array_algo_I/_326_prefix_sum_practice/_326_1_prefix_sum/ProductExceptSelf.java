@@ -14,6 +14,44 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class ProductExceptSelf {
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        ProductExceptSelf solution = new ProductExceptSelf();
+
+        // Example 1: [1, 2, 3, 4]
+        int[] nums1 = {1, 2, 3, 4};
+        int[] result1 = solution.productExceptSelf(nums1);
+        System.out.println("Example 1:");
+        printArray(result1);  // Expected: [24, 12, 8, 6]
+
+        int[] result1Optimized = solution.productExceptSelfOptimized(nums1);
+        System.out.println("Example 1 (optimized):");
+        printArray(result1Optimized);  // Expected: [24, 12, 8, 6]
+
+        // Example 2: [-1, 1, 0, -3, 3]
+        int[] nums2 = {-1, 1, 0, -3, 3};
+        int[] result2 = solution.productExceptSelf(nums2);
+        System.out.println("Example 2:");
+        printArray(result2);  // Expected: [0, 0, 9, 0, 0]
+
+        int[] result2Optimized = solution.productExceptSelfOptimized(nums2);
+        System.out.println("Example 2 (optimized):");
+        printArray(result2Optimized);  // Expected: [0, 0, 9, 0, 0]
+    }
+
+    private static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+
+    /**
      * Calculates an array where each element is the product of all elements
      * in the input array except the element at that position
      *
