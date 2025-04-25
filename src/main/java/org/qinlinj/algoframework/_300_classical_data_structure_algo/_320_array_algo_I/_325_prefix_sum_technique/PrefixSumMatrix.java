@@ -17,6 +17,32 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class PrefixSumMatrix {
     /**
+     * Demonstrates using the NumMatrix class for submatrix sum queries
+     */
+    public static void main(String[] args) {
+        // Example from LeetCode 304
+        int[][] matrix = {
+                {3, 0, 1, 4, 2},
+                {5, 6, 3, 2, 1},
+                {1, 2, 0, 1, 5},
+                {4, 1, 0, 1, 7},
+                {1, 0, 3, 0, 5}
+        };
+
+        NumMatrix numMatrix = new NumMatrix(matrix);
+
+        // Test cases from the problem
+        System.out.println("Sum of submatrix (2,1) to (4,3): " + numMatrix.sumRegion(2, 1, 4, 3));  // Should return 8
+        System.out.println("Sum of submatrix (1,1) to (2,2): " + numMatrix.sumRegion(1, 1, 2, 2));  // Should return 11
+        System.out.println("Sum of submatrix (1,2) to (2,4): " + numMatrix.sumRegion(1, 2, 2, 4));  // Should return 12
+
+        // Additional example showing how to calculate a specific cell's value
+        int row = 2, col = 3;
+        System.out.println("Value at cell (" + row + "," + col + "): " +
+                (numMatrix.sumRegion(row, col, row, col)));  // Should return the value at matrix[2][3] = 1
+    }
+
+    /**
      * Implementation of LeetCode 304: Range Sum Query 2D - Immutable
      * Uses the 2D prefix sum technique to efficiently answer submatrix sum queries
      */
