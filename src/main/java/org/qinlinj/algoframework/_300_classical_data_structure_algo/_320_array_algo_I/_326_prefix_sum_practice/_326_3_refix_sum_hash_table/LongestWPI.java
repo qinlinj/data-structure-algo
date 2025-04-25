@@ -59,4 +59,40 @@ public class LongestWPI {
 
         return maxLength;
     }
+
+    /**
+     * Optimized version that eliminates the prefix sum array
+     * Uses a running sum variable instead
+     */
+    public int longestWPIOptimized(int[] hours) {
+        // Map to store the first occurrence index of each running sum
+        java.util.HashMap<Integer, Integer> valToIndex = new java.util.HashMap<>();
+
+        int maxLength = 0;
+        int sum = 0;
+
+        for (int i = 0; i < hours.length; i++) {
+            // Update running sum
+            sum += (hours[i] > 8 ? 1 : -1);
+
+            // Case 1: If current sum is positive, the entire subarray [0, i] is well-performing
+            if (sum > 0) {
+                maxLength = Math.max(maxLength, i + 1);
+            }
+            // Case 2: Check if we can find a previous sum that creates a well-performing interval
+            else {
+                // First encounter of this sum, record the index
+                if (!valToIndex.containsKey(sum)) {
+                    valToIndex.put(sum, i);
+                }
+
+                // Look for a position where sum was (current sum - 1)
+                if (valToIndex.containsKey(sum - 1)) {
+                    maxLength = Math.max(maxLength, i - valToIndex.get(sum - 1));
+                }
+            }
+        }
+
+        return maxLength;
+    }
 }
