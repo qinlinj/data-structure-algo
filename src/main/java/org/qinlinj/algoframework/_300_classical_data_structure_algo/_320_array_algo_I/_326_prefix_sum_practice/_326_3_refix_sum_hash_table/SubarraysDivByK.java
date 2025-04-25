@@ -59,4 +59,40 @@ public class SubarraysDivByK {
 
         return result;
     }
+
+    /**
+     * Optimized version that eliminates the prefix sum array
+     * Uses a running sum variable instead
+     */
+    public int subarraysDivByKOptimized(int[] nums, int k) {
+        // Map to count occurrences of each remainder
+        java.util.HashMap<Integer, Integer> remainderToCount = new java.util.HashMap<>();
+        remainderToCount.put(0, 1);  // Empty subarray has sum 0
+
+        int result = 0;
+        int sum = 0;
+
+        for (int num : nums) {
+            // Update running sum
+            sum += num;
+
+            // Calculate remainder when divided by k
+            int remainder = sum % k;
+
+            // Handle negative remainders
+            if (remainder < 0) {
+                remainder += k;
+            }
+
+            // If we've seen this remainder before, add to result
+            if (remainderToCount.containsKey(remainder)) {
+                result += remainderToCount.get(remainder);
+            }
+
+            // Update the count of current remainder
+            remainderToCount.put(remainder, remainderToCount.getOrDefault(remainder, 0) + 1);
+        }
+
+        return result;
+    }
 }
