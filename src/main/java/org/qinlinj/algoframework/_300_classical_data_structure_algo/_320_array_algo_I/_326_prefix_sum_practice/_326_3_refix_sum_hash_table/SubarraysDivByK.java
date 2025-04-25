@@ -95,4 +95,38 @@ public class SubarraysDivByK {
 
         return result;
     }
+
+    /**
+     * Further optimized version using an array instead of a hash map
+     * Since remainders are limited to range [0, k-1]
+     */
+    public int subarraysDivByKArrayOptimized(int[] nums, int k) {
+        // Array to count occurrences of each remainder
+        int[] remainderCounts = new int[k];
+        remainderCounts[0] = 1;  // Empty subarray has sum 0
+
+        int result = 0;
+        int sum = 0;
+
+        for (int num : nums) {
+            // Update running sum
+            sum += num;
+
+            // Calculate remainder when divided by k
+            int remainder = sum % k;
+
+            // Handle negative remainders
+            if (remainder < 0) {
+                remainder += k;
+            }
+
+            // Add current count of this remainder to result
+            result += remainderCounts[remainder];
+
+            // Update the count of current remainder
+            remainderCounts[remainder]++;
+        }
+
+        return result;
+    }
 }
