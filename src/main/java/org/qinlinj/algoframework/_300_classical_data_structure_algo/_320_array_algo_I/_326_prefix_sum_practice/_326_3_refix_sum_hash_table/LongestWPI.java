@@ -14,6 +14,31 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._320_array_
  */
 public class LongestWPI {
     /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        LongestWPI solution = new LongestWPI();
+
+        // Example 1: [9, 9, 6, 0, 6, 6, 9]
+        int[] hours1 = {9, 9, 6, 0, 6, 6, 9};
+        System.out.println("Example 1: " + solution.longestWPI(hours1));  // Expected: 3
+        System.out.println("Example 1 (optimized): " + solution.longestWPIOptimized(hours1));  // Expected: 3
+        System.out.println("Example 1 (further optimized): " + solution.longestWPIOptimizedFurther(hours1));  // Expected: 3
+
+        // Example 2: [6, 6, 6]
+        int[] hours2 = {6, 6, 6};
+        System.out.println("Example 2: " + solution.longestWPI(hours2));  // Expected: 0
+        System.out.println("Example 2 (optimized): " + solution.longestWPIOptimized(hours2));  // Expected: 0
+        System.out.println("Example 2 (further optimized): " + solution.longestWPIOptimizedFurther(hours2));  // Expected: 0
+
+        // Additional example: [9, 6, 9, 9, 6, 9, 6, 9, 6]
+        int[] hours3 = {9, 6, 9, 9, 6, 9, 6, 9, 6};
+        System.out.println("Additional example: " + solution.longestWPI(hours3));  // Expected: 7
+        System.out.println("Additional example (optimized): " + solution.longestWPIOptimized(hours3));  // Expected: 7
+        System.out.println("Additional example (further optimized): " + solution.longestWPIOptimizedFurther(hours3));  // Expected: 7
+    }
+
+    /**
      * Finds the length of the longest well-performing interval
      * A well-performing interval has more days with hours > 8 than days with hours ≤ 8
      *
@@ -133,4 +158,29 @@ public class LongestWPI {
 
         return maxLength;
     }
+
+    /**
+     * Solution explanation:
+     *
+     * 1. We transform the problem by replacing each hour with:
+     *    - +1 if the hour is > 8 (tiring day)
+     *    - -1 if the hour is ≤ 8 (not tiring day)
+     *
+     * 2. With this transformation, a "well-performing interval" is a subarray with more +1s than -1s,
+     *    which means a subarray with a positive sum
+     *
+     * 3. For any position i, we need to find the longest subarray ending at i with a positive sum
+     *
+     * 4. There are two cases to consider:
+     *    - If preSum[i] > 0, the entire subarray [0, i-1] is well-performing
+     *    - Otherwise, we need to find the earliest j such that preSum[i] - preSum[j] > 0
+     *      This simplifies to finding the earliest j such that preSum[j] = preSum[i] - 1
+     *
+     * 5. We use a hash map to track the first occurrence of each prefix sum
+     *
+     * 6. The optimized versions eliminate the prefix sum array and improve readability
+     *
+     * 7. A subtle optimization: we only need to check for (sum-1) in the hash map,
+     *    not for all values less than the current sum
+     */
 }
