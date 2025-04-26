@@ -20,9 +20,9 @@ import java.util.*;
  * Input: s1 = "ab", s2 = "eidbaooo"
  * Output: true (s2 contains "ba", which is a permutation of s1)
  */
-public class PermutationInString {
+public class _331_c_PermutationInString {
     public static void main(String[] args) {
-        PermutationInString solution = new PermutationInString();
+        _331_c_PermutationInString solution = new _331_c_PermutationInString();
 
         // Test cases
         String s1_1 = "ab";
