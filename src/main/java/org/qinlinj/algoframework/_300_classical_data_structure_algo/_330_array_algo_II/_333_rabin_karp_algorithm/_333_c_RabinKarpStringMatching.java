@@ -13,7 +13,7 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  * 3. Handles hash collisions with character-by-character verification
  * 4. Achieves O(N+L) average time complexity where N is text length and L is pattern length
  */
-public class RabinKarpStringMatching {
+public class _333_c_RabinKarpStringMatching {
 
     /**
      * Finds the first occurrence of the pattern string in the text

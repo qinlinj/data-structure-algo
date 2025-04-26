@@ -19,10 +19,10 @@ import java.util.*;
  * Space Complexity: O(N) for storing the seen hashes and result sequences
  */
 
-public class RepeatedDnaSequences {
+public class _333_b_RepeatedDnaSequences {
 
     public static void main(String[] args) {
-        RepeatedDnaSequences solution = new RepeatedDnaSequences();
+        _333_b_RepeatedDnaSequences solution = new _333_b_RepeatedDnaSequences();
 
         // Test cases
         String s1 = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";

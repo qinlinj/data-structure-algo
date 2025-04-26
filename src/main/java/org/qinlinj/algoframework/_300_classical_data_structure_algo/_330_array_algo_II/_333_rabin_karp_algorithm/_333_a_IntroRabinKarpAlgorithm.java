@@ -20,7 +20,7 @@ import java.util.*;
  * Space complexity: O(1) as we only store hash values and constants
  */
 
-public class IntroRabinKarpAlgorithm {
+public class _333_a_IntroRabinKarpAlgorithm {
 
     // Base value for hash calculation (usually a prime number)
     private static final int R = 256; // ASCII character set size
