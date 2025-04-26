@@ -2,6 +2,26 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
 
 import java.util.*;
 
+/**
+ * Find All Anagrams in a String (LeetCode 438)
+ * <p>
+ * Problem Description:
+ * Given two strings s and p, find all the start indices of p's anagrams in s.
+ * Return these indices in any order.
+ * An anagram is a string formed by rearranging the letters of a different string,
+ * using all the original letters exactly once.
+ * <p>
+ * Key Concepts:
+ * 1. This is a fixed-length sliding window problem
+ * 2. Window size must equal the length of p
+ * 3. Use counter/HashMap to track character frequencies
+ * 4. Add the start index to result list whenever a valid anagram is found
+ * 5. Time complexity: O(N), where N is the length of s
+ * <p>
+ * Example:
+ * Input: s = "cbaebabacd", p = "abc"
+ * Output: [0, 6] (Starting indices of "cba" and "bac")
+ */
 public class FindAllAnagrams {
     public static void main(String[] args) {
         FindAllAnagrams solution = new FindAllAnagrams();
