@@ -27,6 +27,73 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
 
 public class _332_d_LongestRepeatingCharacterReplacement {
 
+    /**
+     * Visual representation of the sliding window algorithm:
+     * <p>
+     * Example: s = "AABABBA", k = 1
+     * <p>
+     * Iteration steps:
+     * <p>
+     * Initialize: charCount=[0,0,...], maxFrequency=0, left=0, maxLength=0
+     * <p>
+     * 1. right=0, Add s[0]='A': charCount[A]=1, maxFrequency=1, window="A"
+     * replacements needed = 1-1 = 0 <= k(1), valid window
+     * maxLength = max(0, 1) = 1
+     * <p>
+     * 2. right=1, Add s[1]='A': charCount[A]=2, maxFrequency=2, window="AA"
+     * replacements needed = 2-2 = 0 <= k(1), valid window
+     * maxLength = max(1, 2) = 2
+     * <p>
+     * 3. right=2, Add s[2]='B': charCount[B]=1, maxFrequency=2, window="AAB"
+     * replacements needed = 3-2 = 1 <= k(1), valid window
+     * maxLength = max(2, 3) = 3
+     * <p>
+     * 4. right=3, Add s[3]='A': charCount[A]=3, maxFrequency=3, window="AABA"
+     * replacements needed = 4-3 = 1 <= k(1), valid window
+     * maxLength = max(3, 4) = 4
+     * <p>
+     * 5. right=4, Add s[4]='B': charCount[B]=2, maxFrequency=3, window="AABAB"
+     * replacements needed = 5-3 = 2 > k(1), invalid window
+     * Shrink: remove s[0]='A', charCount[A]=2, window="ABAB"
+     * replacements needed = 4-2 = 2 > k(1), still invalid
+     * Shrink: remove s[1]='A', charCount[A]=1, window="BAB"
+     * replacements needed = 3-2 = 1 <= k(1), valid window
+     * maxLength = max(4, 3) = 4
+     * <p>
+     * 6. Continue this process...
+     * <p>
+     * Final maxLength = 4
+     * The optimal substring is "AABA" (or "ABBB" after replacement)
+     */
+
+    public static void main(String[] args) {
+        _332_d_LongestRepeatingCharacterReplacement solution = new _332_d_LongestRepeatingCharacterReplacement();
+
+        // Example 1
+        String s1 = "ABAB";
+        int k1 = 2;
+        System.out.println("Example 1:");
+        System.out.println("Input: s = \"" + s1 + "\", k = " + k1);
+        System.out.println("Output: " + solution.characterReplacement(s1, k1)); // Expected: 4
+        System.out.println("Intuitive Output: " + solution.characterReplacementIntuitive(s1, k1)); // Expected: 4
+
+        // Example 2
+        String s2 = "AABABBA";
+        int k2 = 1;
+        System.out.println("\nExample 2:");
+        System.out.println("Input: s = \"" + s2 + "\", k = " + k2);
+        System.out.println("Output: " + solution.characterReplacement(s2, k2)); // Expected: 4
+        System.out.println("Intuitive Output: " + solution.characterReplacementIntuitive(s2, k2)); // Expected: 4
+
+        // Additional example
+        String s3 = "AAAA";
+        int k3 = 0;
+        System.out.println("\nAdditional example:");
+        System.out.println("Input: s = \"" + s3 + "\", k = " + k3);
+        System.out.println("Output: " + solution.characterReplacement(s3, k3)); // Expected: 4
+        System.out.println("Intuitive Output: " + solution.characterReplacementIntuitive(s3, k3)); // Expected: 4
+    }
+
     public int characterReplacement(String s, int k) {
         int[] charCount = new int[26]; // Count of each uppercase letter (A-Z)
         int maxFrequency = 0;          // Max frequency of any character in current window
