@@ -25,7 +25,7 @@ import java.util.*;
  * 3. Shrink the window from the left when the product exceeds or equals k
  */
 public class _332_b_SubarrayProductLessThanK {
-    
+
     /**
      * Visual representation of the sliding window algorithm:
      * <p>
