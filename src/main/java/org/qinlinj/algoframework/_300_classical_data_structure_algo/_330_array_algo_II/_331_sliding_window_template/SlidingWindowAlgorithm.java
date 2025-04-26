@@ -27,4 +27,57 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  * - It intelligently prunes the search space
  */
 public class SlidingWindowAlgorithm {
+    /**
+     * General sliding window algorithm framework
+     * This demonstrates the basic pattern used in sliding window problems
+     */
+    public static void slidingWindowFramework(String s) {
+        // Use appropriate data structure to track window data
+        // For this example, we'll use a simple counter
+        int[] window = new int[128]; // Assuming ASCII characters
+
+        // Initialize window pointers
+        int left = 0, right = 0;
+
+        // Expand window until we reach the end of the input
+        while (right < s.length()) {
+            // Get character that will enter the window
+            char c = s.charAt(right);
+            // Add it to our window data structure
+            window[c]++;
+            // Expand window
+            right++;
+
+            // Perform window data updates
+            // (Specific logic depends on the problem)
+
+            // Debug output (remove in final solution)
+            System.out.printf("Window: [%d, %d), Current char: %c\n", left, right, c);
+
+            // Check if window needs to shrink
+            // (Condition depends on the problem)
+            while (left < right && windowNeedsShrink(window)) {
+                // Get character that will exit the window
+                char d = s.charAt(left);
+                // Remove it from our window data structure
+                window[d]--;
+                // Shrink window
+                left++;
+
+                // Perform window data updates after shrinking
+                // (Specific logic depends on the problem)
+            }
+
+            // Update result if needed
+            // (Specific logic depends on the problem)
+        }
+    }
+
+    // Placeholder for window shrinking condition
+    private static boolean windowNeedsShrink(int[] window) {
+        // Implement specific condition based on the problem
+        return false;
+    }
+
+    
 }
