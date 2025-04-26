@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._331_sliding_window_template;
 
+import java.util.*;
+
 /**
  * Sliding Window Algorithm Framework and Examples
  * <p>
@@ -79,5 +81,76 @@ public class SlidingWindowAlgorithm {
         return false;
     }
 
-    
+    /**
+     * Example 1: Find the length of the longest substring without repeating characters
+     * LeetCode Problem 3
+     */
+    public static int lengthOfLongestSubstring(String s) {
+        // Track character frequency in the current window
+        int[] window = new int[128];
+
+        int left = 0, right = 0;
+        int maxLength = 0;
+
+        while (right < s.length()) {
+            // Expand window
+            char c = s.charAt(right);
+            window[c]++;
+            right++;
+
+            // Shrink window if we have a repeating character
+            while (window[c] > 1) {
+                char d = s.charAt(left);
+                window[d]--;
+                left++;
+            }
+
+            // Update result - current window size is a candidate
+            maxLength = Math.max(maxLength, right - left);
+        }
+
+        return maxLength;
+    }
+
+    /**
+     * Example 2: Find all anagrams in a string
+     * LeetCode Problem 438
+     */
+    public static List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+        if (s.length() < p.length()) return result;
+
+        // Track character counts for pattern and current window
+        int[] pCount = new int[26];
+        int[] window = new int[26];
+
+        // Initialize pattern frequency count
+        for (char c : p.toCharArray()) {
+            pCount[c - 'a']++;
+        }
+
+        int left = 0, right = 0;
+
+        while (right < s.length()) {
+            // Expand window
+            char c = s.charAt(right);
+            window[c - 'a']++;
+            right++;
+
+            // When window size equals pattern length, check for match
+            if (right - left == p.length()) {
+                // If window matches pattern frequency, we found an anagram
+                if (Arrays.equals(window, pCount)) {
+                    result.add(left);
+                }
+
+                // Shrink window from left to maintain fixed size
+                char d = s.charAt(left);
+                window[d - 'a']--;
+                left++;
+            }
+        }
+
+        return result;
+    }
 }
