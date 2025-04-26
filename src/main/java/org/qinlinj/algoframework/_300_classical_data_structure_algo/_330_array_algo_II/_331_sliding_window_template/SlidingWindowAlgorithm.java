@@ -153,4 +153,54 @@ public class SlidingWindowAlgorithm {
 
         return result;
     }
+
+    /**
+     * Example 3: Minimum Size Subarray Sum
+     * LeetCode Problem 209
+     */
+    public static int minSubArrayLen(int target, int[] nums) {
+        int left = 0, right = 0;
+        int sum = 0;
+        int minLength = Integer.MAX_VALUE;
+
+        while (right < nums.length) {
+            // Expand window
+            sum += nums[right];
+            right++;
+
+            // Shrink window as long as sum is greater than or equal to target
+            while (sum >= target) {
+                // Update result - current window is a candidate
+                minLength = Math.min(minLength, right - left);
+
+                // Shrink window
+                sum -= nums[left];
+                left++;
+            }
+        }
+
+        return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+
+    /**
+     * Main method with example usage
+     */
+    public static void main(String[] args) {
+        // Example 1: Longest substring without repeating characters
+        String s1 = "abcabcbb";
+        System.out.println("Longest substring without repeating characters in '" + s1 + "': "
+                + lengthOfLongestSubstring(s1)); // Output: 3 ("abc")
+
+        // Example 2: Find all anagrams
+        String s2 = "cbaebabacd";
+        String p2 = "abc";
+        System.out.println("Anagrams of '" + p2 + "' in '" + s2 + "': "
+                + findAnagrams(s2, p2)); // Output: [0, 6]
+
+        // Example 3: Minimum size subarray sum
+        int[] nums = {2, 3, 1, 2, 4, 3};
+        int target = 7;
+        System.out.println("Minimum length subarray with sum >= " + target + ": "
+                + minSubArrayLen(target, nums)); // Output: 2 (subarray [4,3])
+    }
 }
