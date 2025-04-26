@@ -28,7 +28,7 @@ import java.util.*;
  * - Sliding window does NOT enumerate all possible subarrays
  * - It intelligently prunes the search space
  */
-public class SlidingWindowAlgorithm {
+public class _331_a_SlidingWindowAlgorithm {
     /**
      * General sliding window algorithm framework
      * This demonstrates the basic pattern used in sliding window problems
