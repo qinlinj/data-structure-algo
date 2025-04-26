@@ -20,6 +20,67 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
 
 public class _332_h_LongestSubstringWithKRepeatingChars {
 
+    /**
+     * Visual representation of the sliding window algorithm:
+     * <p>
+     * Example: s = "aaabb", k = 3, uniqueTarget = 2
+     * <p>
+     * Iteration steps:
+     * <p>
+     * Initialize: charCount=[0,0,...], uniqueChars=0, charsWithKFreq=0, left=0, maxLength=0
+     * <p>
+     * 1. right=0, Add s[0]='a': charCount[a]=1, uniqueChars=1, window="a"
+     * uniqueChars(1) < uniqueTarget(2), continue
+     * <p>
+     * 2. right=1, Add s[1]='a': charCount[a]=2, uniqueChars=1, window="aa"
+     * uniqueChars(1) < uniqueTarget(2), continue
+     * <p>
+     * 3. right=2, Add s[2]='a': charCount[a]=3, uniqueChars=1, charsWithKFreq=1, window="aaa"
+     * uniqueChars(1) < uniqueTarget(2), continue
+     * <p>
+     * 4. right=3, Add s[3]='b': charCount[b]=1, uniqueChars=2, window="aaab"
+     * uniqueChars(2) == uniqueTarget(2), but charsWithKFreq(1) < uniqueChars(2), continue
+     * <p>
+     * 5. right=4, Add s[4]='b': charCount[b]=2, uniqueChars=2, window="aaabb"
+     * uniqueChars(2) == uniqueTarget(2), but charsWithKFreq(1) < uniqueChars(2), continue
+     * <p>
+     * Final result for uniqueTarget=2: maxLength=0 (no valid substring)
+     * <p>
+     * When uniqueTarget=1:
+     * - We get valid substring "aaa" with uniqueChars=1, charsWithKFreq=1
+     * - maxLength = 3
+     * <p>
+     * Overall maxLength = 3
+     */
+
+    public static void main(String[] args) {
+        _332_h_LongestSubstringWithKRepeatingChars solution = new _332_h_LongestSubstringWithKRepeatingChars();
+
+        // Example 1
+        String s1 = "aaabb";
+        int k1 = 3;
+        System.out.println("Example 1:");
+        System.out.println("Input: s = \"" + s1 + "\", k = " + k1);
+        System.out.println("Output: " + solution.longestSubstring(s1, k1)); // Expected: 3
+        System.out.println("Divide-and-Conquer Output: " + solution.longestSubstringDivideAndConquer(s1, k1)); // Expected: 3
+
+        // Example 2
+        String s2 = "ababbc";
+        int k2 = 2;
+        System.out.println("\nExample 2:");
+        System.out.println("Input: s = \"" + s2 + "\", k = " + k2);
+        System.out.println("Output: " + solution.longestSubstring(s2, k2)); // Expected: 5
+        System.out.println("Divide-and-Conquer Output: " + solution.longestSubstringDivideAndConquer(s2, k2)); // Expected: 5
+
+        // Additional example
+        String s3 = "abcdef";
+        int k3 = 2;
+        System.out.println("\nAdditional example:");
+        System.out.println("Input: s = \"" + s3 + "\", k = " + k3);
+        System.out.println("Output: " + solution.longestSubstring(s3, k3)); // Expected: 0
+        System.out.println("Divide-and-Conquer Output: " + solution.longestSubstringDivideAndConquer(s3, k3)); // Expected: 0
+    }
+
     public int longestSubstring(String s, int k) {
         // Try all possible counts of unique characters (1 to 26)
         int maxLength = 0;
