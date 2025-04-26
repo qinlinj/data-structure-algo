@@ -26,4 +26,38 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  */
 
 public class _332_d_LongestRepeatingCharacterReplacement {
+
+    public int characterReplacement(String s, int k) {
+        int[] charCount = new int[26]; // Count of each uppercase letter (A-Z)
+        int maxFrequency = 0;          // Max frequency of any character in current window
+        int left = 0;                  // Left pointer for sliding window
+        int maxLength = 0;             // Result: max length of valid substring
+
+        for (int right = 0; right < s.length(); right++) {
+            // Expand window and update character frequency
+            char currentChar = s.charAt(right);
+            charCount[currentChar - 'A']++;
+
+            // Update max frequency within current window
+            maxFrequency = Math.max(maxFrequency, charCount[currentChar - 'A']);
+
+            // Current window size is (right - left + 1)
+            // Number of characters to replace = window size - max frequency
+            // If number of replacements needed exceeds k, shrink window
+            if (right - left + 1 - maxFrequency > k) {
+                // Shrink window from left
+                charCount[s.charAt(left) - 'A']--;
+                left++;
+
+                // Note: We don't need to update maxFrequency when shrinking
+                // This is an optimization that doesn't affect correctness
+                // The key insight is that maxFrequency can only increase as window grows
+            }
+
+            // Update max length (current window is always valid after shrinking)
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
 }
