@@ -22,9 +22,9 @@ import java.util.*;
  * Input: s = "cbaebabacd", p = "abc"
  * Output: [0, 6] (Starting indices of "cba" and "bac")
  */
-public class FindAllAnagrams {
+public class _331_d_FindAllAnagrams {
     public static void main(String[] args) {
-        FindAllAnagrams solution = new FindAllAnagrams();
+        _331_d_FindAllAnagrams solution = new _331_d_FindAllAnagrams();
 
         // Test cases
         String s1 = "cbaebabacd";
