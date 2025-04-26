@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._332_sliding_window_practice;
 
+import java.util.*;
+
 /**
  * LeetCode 1658: Minimum Operations to Reduce X to Zero
  * <p>
@@ -23,6 +25,70 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  * 3. Return (array_length - subarray_length) as the minimum operations needed
  */
 public class _332_a_MinOperationsToReduceXToZero {
+
+    /**
+     * Visual representation of the sliding window algorithm:
+     * <p>
+     * Example: nums = [1,1,4,2,3], x = 5
+     * <p>
+     * Total sum = 11
+     * Target = 11 - 5 = 6 (we need to find a subarray with sum 6)
+     * <p>
+     * Iteration steps:
+     * <p>
+     * Initialize: left=0, right=0, currentSum=0, maxLength=MIN_VALUE
+     * <p>
+     * 1. Add nums[0]=1: currentSum=1, window=[1]
+     * currentSum(1) < target(6), continue
+     * <p>
+     * 2. Add nums[1]=1: currentSum=2, window=[1,1]
+     * currentSum(2) < target(6), continue
+     * <p>
+     * 3. Add nums[2]=4: currentSum=6, window=[1,1,4]
+     * currentSum(6) == target(6)
+     * maxLength = max(MIN_VALUE, 3) = 3
+     * <p>
+     * 4. Add nums[3]=2: currentSum=8, window=[1,1,4,2]
+     * currentSum(8) > target(6)
+     * Remove nums[0]=1: currentSum=7, window=[1,4,2]
+     * Remove nums[1]=1: currentSum=6, window=[4,2]
+     * currentSum(6) == target(6)
+     * maxLength = max(3, 2) = 3
+     * <p>
+     * 5. Add nums[4]=3: currentSum=9, window=[4,2,3]
+     * currentSum(9) > target(6)
+     * Remove nums[2]=4: currentSum=5, window=[2,3]
+     * currentSum(5) < target(6), continue
+     * <p>
+     * Final maxLength = 3
+     * Result = nums.length - maxLength = 5 - 3 = 2 operations
+     */
+
+    public static void main(String[] args) {
+        _332_a_MinOperationsToReduceXToZero solution = new _332_a_MinOperationsToReduceXToZero();
+
+        // Example 1
+        int[] nums1 = {1, 1, 4, 2, 3};
+        int x1 = 5;
+        System.out.println("Example 1:");
+        System.out.println("Input: nums = " + Arrays.toString(nums1) + ", x = " + x1);
+        System.out.println("Output: " + solution.minOperations(nums1, x1)); // Expected: 2
+
+        // Example 2
+        int[] nums2 = {5, 6, 7, 8, 9};
+        int x2 = 4;
+        System.out.println("\nExample 2:");
+        System.out.println("Input: nums = " + Arrays.toString(nums2) + ", x = " + x2);
+        System.out.println("Output: " + solution.minOperations(nums2, x2)); // Expected: -1
+
+        // Example 3
+        int[] nums3 = {3, 2, 20, 1, 1, 3};
+        int x3 = 10;
+        System.out.println("\nExample 3:");
+        System.out.println("Input: nums = " + Arrays.toString(nums3) + ", x = " + x3);
+        System.out.println("Output: " + solution.minOperations(nums3, x3)); // Expected: 5
+    }
+
     public int minOperations(int[] nums, int x) {
         // Calculate total sum of the array
         int totalSum = 0;
