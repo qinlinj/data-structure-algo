@@ -19,4 +19,65 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  */
 
 public class _332_h_LongestSubstringWithKRepeatingChars {
+
+    public int longestSubstring(String s, int k) {
+        // Try all possible counts of unique characters (1 to 26)
+        int maxLength = 0;
+
+        // For each unique character count constraint
+        for (int uniqueTarget = 1; uniqueTarget <= 26; uniqueTarget++) {
+            maxLength = Math.max(maxLength, longestSubstringWithNUniqueChars(s, k, uniqueTarget));
+        }
+
+        return maxLength;
+    }
+
+    /**
+     * Helper method: Find the longest substring with exactly uniqueTarget unique characters,
+     * each appearing at least k times.
+     */
+    private int longestSubstringWithNUniqueChars(String s, int k, int uniqueTarget) {
+        int[] charCount = new int[26]; // Count of each character in the current window
+        int left = 0, right = 0;
+        int uniqueChars = 0;     // Count of unique characters in window
+        int charsWithKFreq = 0;  // Count of characters with at least k frequency
+        int maxLength = 0;
+
+        while (right < s.length()) {
+            // Expand window
+            char c = s.charAt(right);
+            if (charCount[c - 'a'] == 0) {
+                uniqueChars++; // New unique character
+            }
+            charCount[c - 'a']++;
+
+            if (charCount[c - 'a'] == k) {
+                charsWithKFreq++; // Character now has frequency k
+            }
+
+            right++;
+
+            // Shrink window while we have more unique characters than our target
+            while (uniqueChars > uniqueTarget) {
+                char d = s.charAt(left);
+                if (charCount[d - 'a'] == k) {
+                    charsWithKFreq--; // Character no longer has frequency k
+                }
+
+                charCount[d - 'a']--;
+                if (charCount[d - 'a'] == 0) {
+                    uniqueChars--; // Character removed from window
+                }
+
+                left++;
+            }
+
+            // Update max length if all characters in window have frequency >= k
+            if (uniqueChars == uniqueTarget && charsWithKFreq == uniqueTarget) {
+                maxLength = Math.max(maxLength, right - left);
+            }
+        }
+
+        return maxLength;
+    }
 }
