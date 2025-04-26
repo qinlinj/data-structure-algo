@@ -1,5 +1,27 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._332_sliding_window_practice;
 
+/**
+ * LeetCode 1658: Minimum Operations to Reduce X to Zero
+ * <p>
+ * Problem Description:
+ * Given an integer array nums and an integer x, you can either remove the leftmost or the rightmost
+ * element from nums and subtract its value from x. The goal is to reduce x to exactly 0
+ * with the minimum number of operations. Return the minimum number of operations needed,
+ * or -1 if it's not possible.
+ * <p>
+ * Key Insight:
+ * Instead of directly thinking about removing elements from both ends, we can transform this into
+ * finding the longest subarray with sum equal to (total_sum - x). This is because removing elements
+ * from both ends to sum to x is equivalent to finding the middle subarray whose sum is (total_sum - x).
+ * <p>
+ * Time Complexity: O(n) where n is the length of the array
+ * Space Complexity: O(1) as we only use a constant amount of extra space
+ * <p>
+ * Sliding Window Approach:
+ * 1. Calculate the target sum = sum(nums) - x
+ * 2. Use sliding window to find the longest subarray with sum equal to target
+ * 3. Return (array_length - subarray_length) as the minimum operations needed
+ */
 public class _332_a_MinOperationsToReduceXToZero {
     public int minOperations(int[] nums, int x) {
         // Calculate total sum of the array
