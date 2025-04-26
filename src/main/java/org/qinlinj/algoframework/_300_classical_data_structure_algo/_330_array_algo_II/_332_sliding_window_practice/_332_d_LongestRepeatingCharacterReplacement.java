@@ -60,4 +60,44 @@ public class _332_d_LongestRepeatingCharacterReplacement {
 
         return maxLength;
     }
+
+    /**
+     * More intuitive implementation that recalculates maxFrequency after each window change.
+     * This is less efficient but easier to understand.
+     */
+    public int characterReplacementIntuitive(String s, int k) {
+        int[] charCount = new int[26];
+        int left = 0;
+        int maxLength = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            // Expand window
+            char currentChar = s.charAt(right);
+            charCount[currentChar - 'A']++;
+
+            // Calculate max frequency in current window
+            int maxFrequency = getMaxFrequency(charCount);
+
+            // If window invalid, shrink from left
+            while (right - left + 1 - maxFrequency > k) {
+                charCount[s.charAt(left) - 'A']--;
+                left++;
+                maxFrequency = getMaxFrequency(charCount);
+            }
+
+            // Update max length
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+
+    // Helper method to find maximum frequency in the count array
+    private int getMaxFrequency(int[] counts) {
+        int max = 0;
+        for (int count : counts) {
+            max = Math.max(max, count);
+        }
+        return max;
+    }
 }
