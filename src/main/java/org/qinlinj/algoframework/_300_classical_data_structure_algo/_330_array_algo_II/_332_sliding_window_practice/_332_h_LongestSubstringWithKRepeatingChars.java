@@ -80,4 +80,58 @@ public class _332_h_LongestSubstringWithKRepeatingChars {
 
         return maxLength;
     }
+
+    /**
+     * Alternative recursive divide-and-conquer solution.
+     * While not a sliding window approach, it's included for comparison.
+     */
+    public int longestSubstringDivideAndConquer(String s, int k) {
+        return divideAndConquer(s, 0, s.length(), k);
+    }
+
+    private int divideAndConquer(String s, int start, int end, int k) {
+        // Base case: string too short to have any valid character
+        if (end - start < k) {
+            return 0;
+        }
+
+        // Count character frequencies
+        int[] count = new int[26];
+        for (int i = start; i < end; i++) {
+            count[s.charAt(i) - 'a']++;
+        }
+
+        // Check if the current substring already satisfies the condition
+        boolean allAtLeastK = true;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] > 0 && count[i] < k) {
+                allAtLeastK = false;
+                break;
+            }
+        }
+
+        if (allAtLeastK) {
+            return end - start;
+        }
+
+        // Find a character with frequency < k to split on
+        int maxLength = 0;
+        int splitIndex = start;
+        for (int i = start; i < end; i++) {
+            if (count[s.charAt(i) - 'a'] < k) {
+                // Split the string and recur on both sides
+                if (i > splitIndex) {
+                    maxLength = Math.max(maxLength, divideAndConquer(s, splitIndex, i, k));
+                }
+                splitIndex = i + 1;
+            }
+        }
+
+        // Handle the last segment
+        if (splitIndex < end) {
+            maxLength = Math.max(maxLength, divideAndConquer(s, splitIndex, end, k));
+        }
+
+        return maxLength;
+    }
 }
