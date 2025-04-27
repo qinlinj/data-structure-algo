@@ -23,4 +23,31 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  * - When you need to find the leftmost or rightmost occurrence, use specialized binary search variants.
  */
 public class _334_b_BinarySearchStandard {
+    /**
+     * Standard binary search implementation.
+     * Searches for target in a sorted array and returns its index if found, -1 otherwise.
+     *
+     * @param nums   A sorted array of integers
+     * @param target The value to search for
+     * @return The index of target if found, -1 otherwise
+     */
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;  // Closed interval [left, right]
+
+        while (left <= right) {  // Continue while the interval is not empty
+            int mid = left + (right - left) / 2;  // Prevent integer overflow
+
+            if (nums[mid] == target) {
+                return mid;  // Target found, return index immediately
+            } else if (nums[mid] < target) {
+                left = mid + 1;  // Target is in the right half
+            } else if (nums[mid] > target) {
+                right = mid - 1;  // Target is in the left half
+            }
+        }
+
+        return -1;  // Target not found in the array
+    }
+
 }
