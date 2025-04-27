@@ -145,4 +145,99 @@ public class _334_f_BinarySearchUnified {
         result[1] = rightBound(nums, target);
         return result;
     }
+
+    /**
+     * Return information about return values when targets don't exist
+     */
+    private static void explainMissingTargetBehavior(int[] nums, int target) {
+        // Skip if array is empty
+        if (nums == null || nums.length == 0) {
+            System.out.println("Array is empty");
+            return;
+        }
+
+        int standardResult = binarySearch(nums, target);
+        int leftResult = leftBound(nums, target);
+        int rightResult = rightBound(nums, target);
+
+        System.out.println("Target " + target + " not found in array");
+        System.out.println("Standard search returns: " + standardResult);
+
+        // Custom behavior explanation for left bound
+        if (leftResult == -1) {
+            // Target could be outside array bounds
+            if (target < nums[0]) {
+                System.out.println("Left bound would be before index 0 (target < all elements)");
+            } else if (target > nums[nums.length - 1]) {
+                System.out.println("Left bound would be after last index (target > all elements)");
+            } else {
+                // This case should actually never happen with proper implementation
+                System.out.println("Target should be in range but not found");
+            }
+        } else {
+            System.out.println("Left bound returns: " + leftResult +
+                    " (index of smallest element >= target)");
+        }
+
+        // Custom behavior explanation for right bound
+        if (rightResult == -1) {
+            // Target could be outside array bounds
+            if (target < nums[0]) {
+                System.out.println("Right bound would be before index 0 (target < all elements)");
+            } else if (target > nums[nums.length - 1]) {
+                System.out.println("Right bound would be after last index (target > all elements)");
+            } else {
+                // This case should actually never happen with proper implementation
+                System.out.println("Target should be in range but not found");
+            }
+        } else {
+            System.out.println("Right bound returns: " + rightResult +
+                    " (index of largest element <= target)");
+        }
+    }
+
+    /**
+     * Demonstrate unified binary search with examples
+     */
+    public static void main(String[] args) {
+        // Example 1: Target exists multiple times
+        int[] nums1 = {1, 2, 2, 2, 3, 4};
+        int target1 = 2;
+        System.out.println("Example 1: Target exists multiple times");
+        System.out.println("Array: [1, 2, 2, 2, 3, 4], Target: " + target1);
+        System.out.println("Standard search: " + binarySearch(nums1, target1));
+        System.out.println("Left bound: " + leftBound(nums1, target1));
+        System.out.println("Right bound: " + rightBound(nums1, target1));
+
+        int[] range1 = searchRange(nums1, target1);
+        System.out.println("Range: [" + range1[0] + ", " + range1[1] + "]");
+
+        // Example 2: Target exists once
+        int[] nums2 = {1, 3, 5, 7, 9};
+        int target2 = 5;
+        System.out.println("\nExample 2: Target exists once");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target2);
+        System.out.println("Standard search: " + binarySearch(nums2, target2));
+        System.out.println("Left bound: " + leftBound(nums2, target2));
+        System.out.println("Right bound: " + rightBound(nums2, target2));
+
+        // Example 3: Target doesn't exist but within range
+        int[] nums3 = {1, 3, 5, 7, 9};
+        int target3 = 6;
+        System.out.println("\nExample 3: Target doesn't exist but within range");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target3);
+        explainMissingTargetBehavior(nums3, target3);
+
+        // Example 4: Target is smaller than all elements
+        int target4 = 0;
+        System.out.println("\nExample 4: Target is smaller than all elements");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target4);
+        explainMissingTargetBehavior(nums3, target4);
+
+        // Example 5: Target is larger than all elements
+        int target5 = 10;
+        System.out.println("\nExample 5: Target is larger than all elements");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target5);
+        explainMissingTargetBehavior(nums3, target5);
+    }
 }
