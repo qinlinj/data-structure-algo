@@ -145,5 +145,50 @@ public class _334_c_BinarySearchLeftBound {
         // right will point to the largest element less than target
         return right >= 0 ? right : -1;
     }
-    
+
+    /**
+     * Demonstrate left-bound binary search with examples
+     */
+    public static void main(String[] args) {
+        // Example 1: Target exists multiple times (should find leftmost)
+        int[] nums1 = {1, 2, 2, 2, 3, 4};
+        int target1 = 2;
+        System.out.println("Example 1: Target exists multiple times");
+        System.out.println("Array: [1, 2, 2, 2, 3, 4], Target: " + target1);
+        System.out.println("Expected: 1, Actual (closed): " + leftBoundClosedInterval(nums1, target1));
+        System.out.println("Expected: 1, Actual (half-open): " + leftBoundHalfOpenInterval(nums1, target1));
+
+        // Example 2: Target exists once
+        int[] nums2 = {1, 3, 5, 7, 9};
+        int target2 = 5;
+        System.out.println("\nExample 2: Target exists once");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target2);
+        System.out.println("Expected: 2, Actual (closed): " + leftBoundClosedInterval(nums2, target2));
+        System.out.println("Expected: 2, Actual (half-open): " + leftBoundHalfOpenInterval(nums2, target2));
+
+        // Example 3: Target doesn't exist
+        int[] nums3 = {1, 3, 5, 7, 9};
+        int target3 = 6;
+        System.out.println("\nExample 3: Target doesn't exist");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target3);
+        System.out.println("Expected: -1, Actual (closed): " + leftBoundClosedInterval(nums3, target3));
+        System.out.println("Expected: -1, Actual (half-open): " + leftBoundHalfOpenInterval(nums3, target3));
+
+        // Example 4: Floor function demo
+        int[] nums4 = {1, 3, 5, 7, 9};
+        int target4 = 6;
+        System.out.println("\nExample 4: Floor function for non-existent target");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target4);
+        int floorIndex = floor(nums4, target4);
+        System.out.println("Floor index: " + floorIndex + ", Floor value: " +
+                (floorIndex != -1 ? nums4[floorIndex] : "N/A"));
+
+        // Example 5: Floor function with existing target
+        int target5 = 5;
+        System.out.println("\nExample 5: Floor function for existing target");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target5);
+        floorIndex = floor(nums4, target5);
+        System.out.println("Floor index: " + floorIndex + ", Floor value: " +
+                (floorIndex != -1 ? nums4[floorIndex] : "N/A"));
+    }
 }
