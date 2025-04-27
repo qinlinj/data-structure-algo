@@ -1,67 +1,67 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._334_binary_search_template;
 
 /**
- * Binary Search Algorithm Framework
+ * Binary Search Framework
  * <p>
- * This class provides a basic framework for binary search algorithms.
+ * This class demonstrates the fundamental framework of binary search algorithms.
+ * Key points about the binary search approach:
  * <p>
- * Key points:
- * 1. Binary search is an efficient O(log n) algorithm for finding elements in sorted arrays
- * 2. To avoid overflow when calculating mid index: use left + (right - left) / 2 instead of (left + right) / 2
- * 3. Using else-if structure instead of else makes the code logic clearer
- * 4. Understanding search space boundaries (closed vs open intervals) is crucial
- * 5. Search interval representation:
- * - [left, right] (closed on both sides)
- * - [left, right) (closed on left, open on right)
+ * 1. Binary search is an efficient algorithm for finding a target value in a sorted array.
+ * 2. The core idea is to divide the search interval in half repeatedly.
+ * 3. The time complexity is O(log n), where n is the number of elements in the array.
+ * 4. When implementing, use mid = left + (right - left) / 2 to prevent integer overflow.
+ * 5. For clarity, use "else if" for all conditions rather than "else" to make the logic explicit.
+ * 6. Binary search variants include:
+ * - Standard binary search (finding if a target exists)
+ * - Left bound binary search (finding the leftmost occurrence of target)
+ * - Right bound binary search (finding the rightmost occurrence of target)
  * <p>
- * This framework class provides the structure for three main types of binary search:
- * - Standard binary search (find any occurrence)
- * - Left boundary search (find leftmost occurrence)
- * - Right boundary search (find rightmost occurrence)
+ * The search interval concept is critical - it can be implemented as:
+ * - Closed interval [left, right]
+ * - Half-open interval [left, right)
+ * <p>
+ * This choice affects:
+ * - How you initialize variables (particularly right)
+ * - Your loop condition (< or <=)
+ * - How you update left and right
+ * - The final return value and boundary checks
  */
 public class _334_a_BinarySearchFramework {
 
-    /**
-     * Main method to test the binary search implementation
-     */
     public static void main(String[] args) {
-        _334_a_BinarySearchFramework bs = new _334_a_BinarySearchFramework();
-
-        int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int target = 6;
-
-        int result = bs.binarySearch(nums, target);
-
-        System.out.println("Target " + target + " found at index: " + result);
+        System.out.println("Binary Search Framework - see specific implementations in other classes.");
     }
 
     /**
-     * Binary search framework method (template)
-     *
-     * @param nums   sorted array to search in
-     * @param target element to find
-     * @return index of target if found, -1 otherwise
+     * Generic binary search framework (template)
+     * This template shows the general structure - implementations will vary
+     * based on the specific use case.
      */
     public int binarySearch(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;  // Note: This defines a closed interval [left, right]
+        // Define the search space boundaries
+        int left = 0, right = nums.length - 1;  // or nums.length for half-open interval
 
-        while (left <= right) {  // Note: <= for closed interval
-            int mid = left + (right - left) / 2;  // Avoid overflow
+        // Continue while there are elements to search
+        while (left <= right) {  // or left < right for half-open interval
+            // Calculate middle index (prevent integer overflow)
+            int mid = left + (right - left) / 2;
 
+            // Three possible conditions
             if (nums[mid] == target) {
-                // Target found, specific action depends on search type
-                return mid;  // For standard search, return immediately
+                // Target found - action depends on variant
+                return mid;  // for standard search
+                // Or adjust boundaries for leftmost/rightmost search
             } else if (nums[mid] < target) {
-                // Target is on the right side
+                // Target is in right half
                 left = mid + 1;
             } else if (nums[mid] > target) {
-                // Target is on the left side
-                right = mid - 1;
+                // Target is in left half
+                right = mid - 1;  // or mid for half-open interval
             }
         }
 
-        // Target not found
-        return -1;
+        // Return appropriate value based on search variant
+        return -1;  // for standard search
+        // For bound searches, additional checks may be needed
     }
 }

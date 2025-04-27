@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._334_binary_search_template;
+
+public class _334_b_BinarySearchStandard {
+}
