@@ -36,4 +36,65 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  */
 
 public class _334_e_BinarySearchApplications {
+    /**
+     * LeetCode #34: Find First and Last Position of Element in Sorted Array
+     * Returns an array containing the starting and ending position of target
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to search for
+     * @return Array with [first, last] indices or [-1, -1] if not found
+     */
+    public static int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+
+        // Edge case: empty array
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+
+        // Find left boundary
+        int left = 0;
+        int right = nums.length - 1;
+
+        // First pass: find leftmost occurrence
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                right = mid - 1;  // Continue searching on left side
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // Check if target exists
+        if (left >= nums.length || nums[left] != target) {
+            return result;  // Target not found
+        }
+
+        result[0] = left;  // Store leftmost position
+
+        // Reset boundaries for right search
+        left = 0;
+        right = nums.length - 1;
+
+        // Second pass: find rightmost occurrence
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                left = mid + 1;  // Continue searching on right side
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        result[1] = right;  // Store rightmost position
+
+        return result;
+    }
 }
