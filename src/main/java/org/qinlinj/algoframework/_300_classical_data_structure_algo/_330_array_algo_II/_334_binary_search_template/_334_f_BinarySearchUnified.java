@@ -28,4 +28,80 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  * - Right-bound search: check nums[right] == target
  */
 public class _334_f_BinarySearchUnified {
+
+    // Search type constants
+    public static final int STANDARD = 0;
+    public static final int LEFT_BOUND = 1;
+    public static final int RIGHT_BOUND = 2;
+
+    /**
+     * Unified binary search implementation that can perform all three types of search
+     *
+     * @param nums       Sorted array to search in
+     * @param target     Value to search for
+     * @param searchType Type of search: STANDARD, LEFT_BOUND, or RIGHT_BOUND
+     * @return Index based on search type or -1 if not found
+     */
+    public static int binarySearch(int[] nums, int target, int searchType) {
+        // Edge case: empty array
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        // Initialize boundaries for closed interval [left, right]
+        int left = 0;
+        int right = nums.length - 1;
+
+        // Main binary search loop
+        while (left <= right) {
+            // Calculate middle index (avoid potential integer overflow)
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] < target) {
+                // Target is in the right half for all search types
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                // Target is in the left half for all search types
+                right = mid - 1;
+            } else {
+                // nums[mid] == target
+                // The behavior depends on search type
+                switch (searchType) {
+                    case STANDARD:
+                        return mid;  // Standard: return immediately when found
+                    case LEFT_BOUND:
+                        right = mid - 1;  // Left bound: move right boundary
+                        break;
+                    case RIGHT_BOUND:
+                        left = mid + 1;   // Right bound: move left boundary
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid search type");
+                }
+            }
+        }
+
+        // Return logic varies by search type
+        switch (searchType) {
+            case STANDARD:
+                return -1;  // Standard: target not found
+
+            case LEFT_BOUND:
+                // Left bound: check if left index is valid and equals target
+                if (left < 0 || left >= nums.length || nums[left] != target) {
+                    return -1;
+                }
+                return left;
+
+            case RIGHT_BOUND:
+                // Right bound: check if right index is valid and equals target
+                if (right < 0 || right >= nums.length || nums[right] != target) {
+                    return -1;
+                }
+                return right;
+
+            default:
+                throw new IllegalArgumentException("Invalid search type");
+        }
+    }
 }
