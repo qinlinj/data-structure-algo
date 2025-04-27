@@ -171,5 +171,56 @@ public class _334_d_BinarySearchRightBound {
         return result;
     }
 
-\
+    /**
+     * Demonstrate right-bound binary search with examples
+     */
+    public static void main(String[] args) {
+        // Example 1: Target exists multiple times (should find rightmost)
+        int[] nums1 = {1, 2, 2, 2, 3, 4};
+        int target1 = 2;
+        System.out.println("Example 1: Target exists multiple times");
+        System.out.println("Array: [1, 2, 2, 2, 3, 4], Target: " + target1);
+        System.out.println("Expected: 3, Actual (closed): " + rightBoundClosedInterval(nums1, target1));
+        System.out.println("Expected: 3, Actual (half-open): " + rightBoundHalfOpenInterval(nums1, target1));
+
+        // Example 2: Target exists once
+        int[] nums2 = {1, 3, 5, 7, 9};
+        int target2 = 5;
+        System.out.println("\nExample 2: Target exists once");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target2);
+        System.out.println("Expected: 2, Actual (closed): " + rightBoundClosedInterval(nums2, target2));
+        System.out.println("Expected: 2, Actual (half-open): " + rightBoundHalfOpenInterval(nums2, target2));
+
+        // Example 3: Target doesn't exist
+        int[] nums3 = {1, 3, 5, 7, 9};
+        int target3 = 6;
+        System.out.println("\nExample 3: Target doesn't exist");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target3);
+        System.out.println("Expected: -1, Actual (closed): " + rightBoundClosedInterval(nums3, target3));
+        System.out.println("Expected: -1, Actual (half-open): " + rightBoundHalfOpenInterval(nums3, target3));
+
+        // Example 4: Ceiling function demo
+        int[] nums4 = {1, 3, 5, 7, 9};
+        int target4 = 6;
+        System.out.println("\nExample 4: Ceiling function for non-existent target");
+        System.out.println("Array: [1, 3, 5, 7, 9], Target: " + target4);
+        int ceilingIndex = ceiling(nums4, target4);
+        System.out.println("Ceiling index: " + ceilingIndex + ", Ceiling value: " +
+                (ceilingIndex != -1 ? nums4[ceilingIndex] : "N/A"));
+
+        // Example 5: Find range demo
+        int[] nums5 = {1, 2, 2, 2, 3, 4};
+        int target5 = 2;
+        System.out.println("\nExample 5: Search range for target with multiple occurrences");
+        System.out.println("Array: [1, 2, 2, 2, 3, 4], Target: " + target5);
+        int[] range = searchRange(nums5, target5);
+        System.out.println("Expected range: [1, 3], Actual range: [" + range[0] + ", " + range[1] + "]");
+
+        // Example 6: Find range when target doesn't exist
+        int target6 = 6;
+        System.out.println("\nExample 6: Search range for non-existent target");
+        System.out.println("Array: [1, 2, 2, 2, 3, 4], Target: " + target6);
+        range = searchRange(nums5, target6);
+        System.out.println("Expected range: [-1, -1], Actual range: [" + range[0] + ", " + range[1] + "]");
+    }
 }
