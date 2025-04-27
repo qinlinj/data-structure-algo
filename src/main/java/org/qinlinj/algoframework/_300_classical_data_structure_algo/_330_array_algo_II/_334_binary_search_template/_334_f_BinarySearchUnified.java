@@ -104,4 +104,25 @@ public class _334_f_BinarySearchUnified {
                 throw new IllegalArgumentException("Invalid search type");
         }
     }
+
+    /**
+     * Convenience method for standard binary search
+     */
+    public static int binarySearch(int[] nums, int target) {
+        return binarySearch(nums, target, STANDARD);
+    }
+
+    /**
+     * Convenience method for left-bound binary search
+     */
+    public static int leftBound(int[] nums, int target) {
+        return binarySearch(nums, target, LEFT_BOUND);
+    }
+
+    /**
+     * Convenience method for right-bound binary search
+     */
+    public static int rightBound(int[] nums, int target) {
+        return binarySearch(nums, target, RIGHT_BOUND);
+    }
 }
