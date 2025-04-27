@@ -1,15 +1,61 @@
 package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._334_binary_search_template;
 
 /**
- * _334_f_BinarySearchUnified.java
+ * ===============================================================================
+ * BINARY SEARCH TYPES COMPARISON:
+ * ===============================================================================
  * <p>
- * This class provides a unified framework for all three types of binary search:
- * - Standard binary search: Find any occurrence of target
- * - Left-bound binary search: Find leftmost occurrence of target
- * - Right-bound binary search: Find rightmost occurrence of target
+ * 1. STANDARD BINARY SEARCH:
+ * - Purpose: Find any occurrence of the target in a sorted array
+ * - Key behavior: Return immediately when target is found
+ * - When target equals mid: return mid
+ * - Return value: Any valid index of target or -1 if not found
+ * - Problem types it solves:
+ * * Check if element exists in sorted array
+ * * Find any occurrence of a value
+ * * Implement sets/maps with O(log n) lookup
+ * * Quick existence checks in sorted data
  * <p>
+ * 2. LEFT-BOUND BINARY SEARCH:
+ * - Purpose: Find the leftmost/first occurrence of target
+ * - Key behavior: Continue searching left side even when target is found
+ * - When target equals mid: right = mid - 1
+ * - Return value: Leftmost index of target or -1 if not found
+ * - When target not found: Returns index of smallest element > target
+ * - Problem types it solves:
+ * * Find first occurrence in array with duplicates
+ * * Find insertion position for maintaining sorted order
+ * * Implement lower_bound function (smallest element >= target)
+ * * Find element not smaller than target (ceiling function)
+ * * Count elements smaller than target
+ * * Find the smallest element that satisfies a condition
+ * <p>
+ * 3. RIGHT-BOUND BINARY SEARCH:
+ * - Purpose: Find the rightmost/last occurrence of target
+ * - Key behavior: Continue searching right side even when target is found
+ * - When target equals mid: left = mid + 1
+ * - Return value: Rightmost index of target or -1 if not found
+ * - When target not found: Returns index of largest element < target
+ * - Problem types it solves:
+ * * Find last occurrence in array with duplicates
+ * * Implement upper_bound function (smallest element > target)
+ * * Find element not greater than target (floor function)
+ * * Count elements less than or equal to target
+ * * Find the largest element that satisfies a condition
+ * <p>
+ * 4. APPLICATIONS USING COMBINATIONS:
+ * - Find number of occurrences of an element (right_bound - left_bound + 1)
+ * - Find range of indices for a target (first and last position)
+ * - Binary search on answer (min/max problems using binary search)
+ * - Search in rotated sorted arrays
+ * - Find peak in mountain arrays
+ * - Find kth smallest element using binary search on value
+ * - Find median of two sorted arrays
+ * <p>
+ * ===============================================================================
  * UNIFIED BINARY SEARCH FRAMEWORK:
- * ------------------------------
+ * ===============================================================================
+ * <p>
  * 1. All implementations use a closed interval [left, right]
  * <p>
  * 2. All implementations share the same initialization and loop structure:
