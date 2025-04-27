@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_algo_II._335_binary_search_framework;
+
+public class _335_c_ShippingPackages {
+}
