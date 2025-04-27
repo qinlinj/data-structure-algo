@@ -146,4 +146,35 @@ public class _334_e_BinarySearchApplications {
 
         return -1;  // Target not found
     }
+
+    /**
+     * Find peak element in a mountain array (LeetCode #852)
+     * A mountain array increases then decreases
+     *
+     * @param nums Mountain array
+     * @return Index of the peak element
+     */
+    public static int peakIndexInMountainArray(int[] nums) {
+        if (nums == null || nums.length < 3) {
+            return -1;  // Invalid mountain array
+        }
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] < nums[mid + 1]) {
+                // Still ascending, peak is to the right
+                left = mid + 1;
+            } else {
+                // Descending, peak is at mid or to the left
+                right = mid;
+            }
+        }
+
+        // When left == right, we've found the peak
+        return left;
+    }
 }
