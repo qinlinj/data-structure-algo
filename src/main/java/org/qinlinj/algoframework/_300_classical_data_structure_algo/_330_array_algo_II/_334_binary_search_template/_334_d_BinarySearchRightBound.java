@@ -111,5 +111,65 @@ public class _334_d_BinarySearchRightBound {
         return left - 1;
     }
 
+    /**
+     * Implementation of ceiling function using binary search
+     * Returns the smallest element that is greater than or equal to target
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to find ceiling of
+     * @return Index of ceiling element or -1 if no such element exists
+     */
+    public static int ceiling(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
 
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                // Found exact match, this is the ceiling
+                return mid;
+            } else if (nums[mid] < target) {
+                // Move right to find larger elements
+                left = mid + 1;
+            } else {
+                // Move left to find smaller elements
+                right = mid - 1;
+            }
+        }
+
+        // left will point to the smallest element greater than target
+        return (left < nums.length) ? left : -1;
+    }
+
+    /**
+     * Find the range (first and last occurrence) of target in a sorted array
+     * Uses both left and right bound binary search
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to search for
+     * @return Array with [first, last] indices or [-1, -1] if not found
+     */
+    public static int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+
+        // Use left bound search to find first occurrence
+        result[0] = _334_c_BinarySearchLeftBound.leftBoundClosedInterval(nums, target);
+
+        // If target not found, return [-1, -1]
+        if (result[0] == -1) {
+            return result;
+        }
+
+        // Use right bound search to find last occurrence
+        result[1] = rightBoundClosedInterval(nums, target);
+
+        return result;
+    }
+
+\
 }
