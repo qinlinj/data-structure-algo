@@ -125,4 +125,24 @@ public class _334_f_BinarySearchUnified {
     public static int rightBound(int[] nums, int target) {
         return binarySearch(nums, target, RIGHT_BOUND);
     }
+
+    /**
+     * Find the range (first and last occurrence) of target in a sorted array
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to search for
+     * @return Array with [first, last] indices or [-1, -1] if not found
+     */
+    public static int[] searchRange(int[] nums, int target) {
+        int[] result = new int[2];
+
+        result[0] = leftBound(nums, target);
+        if (result[0] == -1) {
+            result[1] = -1;
+            return result;
+        }
+
+        result[1] = rightBound(nums, target);
+        return result;
+    }
 }
