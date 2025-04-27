@@ -67,5 +67,49 @@ public class _334_c_BinarySearchLeftBound {
         return left;
     }
 
+    /**
+     * Left-bound binary search with half-open interval [left, right)
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to search for
+     * @return Index of the leftmost occurrence or -1 if not found
+     */
+    public static int leftBoundHalfOpenInterval(int[] nums, int target) {
+        // Edge case: empty array
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        // Initialize search boundaries for half-open interval [left, right)
+        int left = 0;
+        int right = nums.length;
+
+        // Search while the interval is valid
+        while (left < right) {
+            // Calculate middle index (avoid potential integer overflow)
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                // Target found, but don't return immediately
+                // Instead, narrow the right boundary to search left half
+                right = mid;
+            } else if (nums[mid] < target) {
+                // Target is in the right half
+                left = mid + 1;
+            } else {
+                // Target is in the left half
+                right = mid;
+            }
+        }
+
+        // Check if target exists in the array
+        // After the loop, left is the potential insertion position
+        if (left >= nums.length || nums[left] != target) {
+            return -1;
+        }
+
+        return left;
+    }
+
 
 }
