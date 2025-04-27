@@ -67,5 +67,49 @@ public class _334_d_BinarySearchRightBound {
         return right;
     }
 
+    /**
+     * Right-bound binary search with half-open interval [left, right)
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to search for
+     * @return Index of the rightmost occurrence or -1 if not found
+     */
+    public static int rightBoundHalfOpenInterval(int[] nums, int target) {
+        // Edge case: empty array
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        // Initialize search boundaries for half-open interval [left, right)
+        int left = 0;
+        int right = nums.length;
+
+        // Search while the interval is valid
+        while (left < right) {
+            // Calculate middle index (avoid potential integer overflow)
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                // Target found, but don't return immediately
+                // Instead, narrow the left boundary to search right half
+                left = mid + 1;
+            } else if (nums[mid] < target) {
+                // Target is in the right half
+                left = mid + 1;
+            } else {
+                // Target is in the left half
+                right = mid;
+            }
+        }
+
+        // After the loop, left-1 points to the potential rightmost occurrence
+        // Check if target exists in the array
+        if (left - 1 < 0 || left - 1 >= nums.length || nums[left - 1] != target) {
+            return -1;
+        }
+
+        return left - 1;
+    }
+
 
 }
