@@ -34,8 +34,8 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._330_array_
  * - Boundary updates: mid+1, mid-1, or just mid
  * - Edge case handling: empty arrays, targets not present, etc.
  */
-
 public class _334_e_BinarySearchApplications {
+
     /**
      * LeetCode #34: Find First and Last Position of Element in Sorted Array
      * Returns an array containing the starting and ending position of target
@@ -176,5 +176,71 @@ public class _334_e_BinarySearchApplications {
 
         // When left == right, we've found the peak
         return left;
+    }
+
+    /**
+     * Implement a binary search to solve square root (LeetCode #69)
+     * Find the largest integer whose square is less than or equal to x
+     *
+     * @param x Non-negative integer
+     * @return Integer square root of x
+     */
+    public static int mySqrt(int x) {
+        if (x <= 1) {
+            return x;
+        }
+
+        int left = 1;
+        int right = x / 2;  // Square root is at most x/2 for x > 1
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            // Use long to avoid integer overflow
+            long square = (long) mid * mid;
+
+            if (square == x) {
+                return mid;
+            } else if (square < x) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // When loop ends, right is the largest integer whose square is <= x
+        return right;
+    }
+
+    /**
+     * Demonstrate the binary search applications with examples
+     */
+    public static void main(String[] args) {
+        // Example 1: Find Range (LeetCode #34)
+        int[] nums1 = {5, 7, 7, 8, 8, 10};
+        int target1 = 8;
+        int[] range = searchRange(nums1, target1);
+        System.out.println("Example 1: Find Range of Target");
+        System.out.println("Array: [5, 7, 7, 8, 8, 10], Target: " + target1);
+        System.out.println("Expected: [3, 4], Actual: [" + range[0] + ", " + range[1] + "]");
+
+        // Example 2: Search in Rotated Sorted Array (LeetCode #33)
+        int[] nums2 = {4, 5, 6, 7, 0, 1, 2};
+        int target2 = 0;
+        System.out.println("\nExample 2: Search in Rotated Sorted Array");
+        System.out.println("Array: [4, 5, 6, 7, 0, 1, 2], Target: " + target2);
+        System.out.println("Expected: 4, Actual: " + searchInRotatedArray(nums2, target2));
+
+        // Example 3: Find Peak in Mountain Array (LeetCode #852)
+        int[] nums3 = {1, 3, 5, 4, 2};
+        System.out.println("\nExample 3: Find Peak Index in Mountain Array");
+        System.out.println("Array: [1, 3, 5, 4, 2]");
+        System.out.println("Expected: 2, Actual: " + peakIndexInMountainArray(nums3));
+
+        // Example 4: Square Root (LeetCode #69)
+        int x = 8;
+        System.out.println("\nExample 4: Find Integer Square Root");
+        System.out.println("Number: " + x);
+        System.out.println("Expected: 2, Actual: " + mySqrt(x));
     }
 }
