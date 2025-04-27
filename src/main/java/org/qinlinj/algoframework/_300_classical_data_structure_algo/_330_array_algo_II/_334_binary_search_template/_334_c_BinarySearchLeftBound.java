@@ -111,5 +111,39 @@ public class _334_c_BinarySearchLeftBound {
         return left;
     }
 
+    /**
+     * Implementation of floor function using left bound binary search
+     * Returns the largest element that is less than or equal to target
+     *
+     * @param nums   Sorted array to search in
+     * @param target Value to find floor of
+     * @return Index of floor element or -1 if no such element exists
+     */
+    public static int floor(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
 
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                // Found exact match, this is the floor
+                return mid;
+            } else if (nums[mid] < target) {
+                // Move right to find larger elements
+                left = mid + 1;
+            } else {
+                // Move left to find smaller elements
+                right = mid - 1;
+            }
+        }
+
+        // right will point to the largest element less than target
+        return right >= 0 ? right : -1;
+    }
+    
 }
