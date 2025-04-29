@@ -1,3 +1,5 @@
+package org.qinlinj.algoframework._300_classical_data_structure_algo._340_stack_queue_algo._343_parentheses_problems;
+
 /**
  * Bracket Problems Summary
  * <p>
@@ -27,6 +29,25 @@
  * 3. Every close bracket has a corresponding open bracket of the same type.
  */
 class _343_a_ValidParentheses {
+
+    public static void main(String[] args) {
+        // Test valid parentheses
+        _343_a_ValidParentheses validChecker = new _343_a_ValidParentheses();
+        System.out.println("'()' is valid: " + validChecker.isValid("()"));
+        System.out.println("'()[]{}' is valid: " + validChecker.isValid("()[]{}"));
+        System.out.println("'(]' is valid: " + validChecker.isValid("(]"));
+
+        // Test minimum add to make valid
+        _343_b_MinAddToMakeValid minAddChecker = new _343_b_MinAddToMakeValid();
+        System.out.println("Minimum insertions for '())': " + minAddChecker.minAddToMakeValid("())"));
+        System.out.println("Minimum insertions for '(((': " + minAddChecker.minAddToMakeValid("((("));
+
+        // Test minimum insertions to balance (1:2 matching rule)
+        _343_c_MinInsertionsToBalance minInsertChecker = new _343_c_MinInsertionsToBalance();
+        System.out.println("Minimum insertions for '(()))': " + minInsertChecker.minInsertions("(()))"));
+        System.out.println("Minimum insertions for '())))(': " + minInsertChecker.minInsertions("())))("));
+        System.out.println("Minimum insertions for '((((((': " + minInsertChecker.minInsertions("(((((("));
+    }
 
     /**
      * Simple approach for just one type of brackets
