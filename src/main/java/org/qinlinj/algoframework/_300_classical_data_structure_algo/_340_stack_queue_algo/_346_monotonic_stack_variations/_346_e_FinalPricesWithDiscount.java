@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._300_classical_data_structure_algo._340_stack_queue_algo._346_monotonic_stack_variations;
+
+public class _346_e_FinalPricesWithDiscount {
+}
