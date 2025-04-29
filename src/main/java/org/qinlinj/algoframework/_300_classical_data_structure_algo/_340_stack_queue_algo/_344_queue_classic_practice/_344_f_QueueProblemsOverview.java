@@ -36,7 +36,7 @@ package org.qinlinj.algoframework._300_classical_data_structure_algo._340_stack_
  * - Balancing strategies for specialized queue operations
  */
 
-public class QueueProblemsOverview {
+public class _344_f_QueueProblemsOverview {
 
     public static void main(String[] args) {
         System.out.println("--- Queue Classic Problems Overview ---");
