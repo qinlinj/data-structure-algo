@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._415_binary_search_tree_properties;
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._415_binary_search_tree_serialization;
 
 /**
  * BINARY TREE SERIALIZATION - LEVEL ORDER APPROACH
@@ -41,7 +41,7 @@ package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_gu
 import java.util.*;
 
 public class _415_d_BinaryTreeLevelOrderSerialization {
-    
+
     private static final String NULL_MARKER = "#";
     private static final String SEPARATOR = ",";
 

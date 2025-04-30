@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._412_binary_tree_construction;
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._412_binary_tree_approaches;
 
 /**
  * POPULATE NEXT RIGHT POINTERS IN BINARY TREE

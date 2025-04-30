@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._414_binary_tree_serialization;
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._414_binary_tree_post_order;
 
 /**
  * POST-ORDER TRAVERSAL INSIGHTS AND APPLICATIONS

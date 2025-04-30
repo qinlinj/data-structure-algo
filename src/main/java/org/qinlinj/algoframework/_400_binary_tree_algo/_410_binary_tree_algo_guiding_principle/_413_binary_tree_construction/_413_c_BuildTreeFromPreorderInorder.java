@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._413_binary_tree_postorder;
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._413_binary_tree_construction;
 
 /**
  * BINARY TREE CONSTRUCTION FROM PREORDER AND INORDER TRAVERSALS
@@ -127,12 +127,12 @@ public class _413_c_BuildTreeFromPreorderInorder {
     /**
      * Helper method to recursively build the binary tree
      *
-     * @param preorder The preorder traversal array
-     * @param preStart Start index of current segment in preorder array
-     * @param preEnd End index of current segment in preorder array
-     * @param inorder The inorder traversal array
-     * @param inStart Start index of current segment in inorder array
-     * @param inEnd End index of current segment in inorder array
+     * @param preorder   The preorder traversal array
+     * @param preStart   Start index of current segment in preorder array
+     * @param preEnd     End index of current segment in preorder array
+     * @param inorder    The inorder traversal array
+     * @param inStart    Start index of current segment in inorder array
+     * @param inEnd      End index of current segment in inorder array
      * @param valToIndex Map of value to index in inorder array
      * @return The root of the constructed binary tree
      */

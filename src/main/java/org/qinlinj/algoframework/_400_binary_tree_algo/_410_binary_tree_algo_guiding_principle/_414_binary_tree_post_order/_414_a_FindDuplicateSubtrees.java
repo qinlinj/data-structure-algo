@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._414_binary_tree_serialization;
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._414_binary_tree_post_order;
 
 /**
  * FINDING DUPLICATE SUBTREES - LEVERAGING POST-ORDER TRAVERSAL
@@ -175,6 +175,7 @@ public class _414_a_FindDuplicateSubtrees {
 
     /**
      * Main method to find duplicate subtrees
+     *
      * @param root The root of the binary tree
      * @return List of root nodes of duplicate subtrees
      */
@@ -191,9 +192,10 @@ public class _414_a_FindDuplicateSubtrees {
 
     /**
      * Helper method that performs post-order traversal and serialization
-     * @param root The current node being processed
+     *
+     * @param root       The current node being processed
      * @param subtreeMap Map to track subtree serializations and their frequencies
-     * @param result List to store the result nodes
+     * @param result     List to store the result nodes
      * @return Serialized representation of the subtree rooted at this node
      */
     private String serialize(TreeNode root, HashMap<String, Integer> subtreeMap, LinkedList<TreeNode> result) {

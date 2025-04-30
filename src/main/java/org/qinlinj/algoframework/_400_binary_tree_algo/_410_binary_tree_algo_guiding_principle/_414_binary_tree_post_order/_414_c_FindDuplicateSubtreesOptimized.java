@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._414_binary_tree_serialization;
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._414_binary_tree_post_order;
 
 /**
  * FINDING DUPLICATE SUBTREES - OPTIMIZED SOLUTION
@@ -189,6 +189,7 @@ public class _414_c_FindDuplicateSubtreesOptimized {
 
     /**
      * Main method to find duplicate subtrees using the optimized approach
+     *
      * @param root The root of the binary tree
      * @return List of root nodes of duplicate subtrees
      */
@@ -207,10 +208,11 @@ public class _414_c_FindDuplicateSubtreesOptimized {
 
     /**
      * Helper method that performs post-order traversal and assigns unique IDs to subtrees
-     * @param node The current node being processed
+     *
+     * @param node        The current node being processed
      * @param tripletToID Map from subtree triplet representation to ID
-     * @param idToCount Map to track the frequency of each subtree ID
-     * @param result List to store the result nodes
+     * @param idToCount   Map to track the frequency of each subtree ID
+     * @param result      List to store the result nodes
      * @return The ID assigned to the current subtree
      */
     private int assignIDs(TreeNode node,
