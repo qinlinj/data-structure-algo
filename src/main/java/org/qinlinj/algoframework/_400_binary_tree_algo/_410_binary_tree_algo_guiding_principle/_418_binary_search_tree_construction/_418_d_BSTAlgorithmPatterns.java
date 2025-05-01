@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._400_binary_tree_algo._410_binary_tree_algo_guiding_principle._418_binary_search_tree_construction;
+
+public class _418_d_BSTAlgorithmPatterns {
+}
