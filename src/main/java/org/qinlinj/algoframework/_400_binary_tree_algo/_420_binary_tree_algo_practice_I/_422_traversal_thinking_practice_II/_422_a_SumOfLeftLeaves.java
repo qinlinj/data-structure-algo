@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._400_binary_tree_algo._420_binary_tree_algo_practice_I._422_traversal_thinking_practice_II;
+
+public class _422_a_SumOfLeftLeaves {
+}
