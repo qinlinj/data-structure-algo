@@ -106,6 +106,13 @@ public class _426_f_RangeSumBST {
                 rangeSumBSTDivideConquer(root.right, low, high);
     }
 
+    /**
+     * Alternative solution using explicit traversal with a sum variable
+     */
+    public int rangeSumBSTExplicit(TreeNode root, int low, int high) {
+        return new RangeSumHelper(low, high).computeSum(root);
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
@@ -126,5 +133,40 @@ public class _426_f_RangeSumBST {
         }
     }
 
+    private class RangeSumHelper {
+        private final int low;
+        private final int high;
+        private int sum = 0;
 
+        public RangeSumHelper(int low, int high) {
+            this.low = low;
+            this.high = high;
+        }
+
+        public int computeSum(TreeNode root) {
+            traverseWithSum(root);
+            return sum;
+        }
+
+        private void traverseWithSum(TreeNode node) {
+            if (node == null) {
+                return;
+            }
+
+            // If value is in range, add to sum
+            if (node.val >= low && node.val <= high) {
+                sum += node.val;
+            }
+
+            // Only traverse left if it could contain values in range
+            if (node.val > low) {
+                traverseWithSum(node.left);
+            }
+
+            // Only traverse right if it could contain values in range
+            if (node.val < high) {
+                traverseWithSum(node.right);
+            }
+        }
+    }
 }
