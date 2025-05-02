@@ -57,6 +57,35 @@ public class _426_b_PathSum {
         return new TraversalHelper(targetSum).hasPathSum(root);
     }
 
+    /**
+     * Alternative solution using explicit argument passing instead of instance variables
+     */
+    public boolean hasPathSumAlt(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+
+        return findPath(root, 0, targetSum);
+    }
+
+    private boolean findPath(TreeNode node, int sumSoFar, int targetSum) {
+        if (node == null) {
+            return false;
+        }
+
+        // Update sum with current node's value
+        sumSoFar += node.val;
+
+        // Check if leaf node and sum equals target
+        if (node.left == null && node.right == null) {
+            return sumSoFar == targetSum;
+        }
+
+        // Check both subtrees
+        return findPath(node.left, sumSoFar, targetSum) ||
+                findPath(node.right, sumSoFar, targetSum);
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
@@ -121,6 +150,4 @@ public class _426_b_PathSum {
             currentSum -= node.val;
         }
     }
-
-
 }
