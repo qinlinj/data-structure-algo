@@ -126,6 +126,38 @@ public class _426_c_PathSumII {
         return result;
     }
 
+    /**
+     * Alternative implementation combining both approaches
+     * Uses recursive traversal but with return values similar to divide and conquer
+     */
+    public List<List<Integer>> pathSumHybrid(TreeNode root, int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        findPathsHybrid(root, targetSum, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void findPathsHybrid(TreeNode node, int remainingSum, List<Integer> path,
+                                 List<List<Integer>> result) {
+        if (node == null) {
+            return;
+        }
+
+        // Add current node to path
+        path.add(node.val);
+
+        // Check if leaf and sum matches
+        if (node.left == null && node.right == null && remainingSum == node.val) {
+            result.add(new ArrayList<>(path));
+        } else {
+            // Not a leaf, continue search in subtrees
+            findPathsHybrid(node.left, remainingSum - node.val, path, result);
+            findPathsHybrid(node.right, remainingSum - node.val, path, result);
+        }
+
+        // Backtrack
+        path.remove(path.size() - 1);
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
@@ -145,6 +177,4 @@ public class _426_c_PathSumII {
             this.right = right;
         }
     }
-
-
 }
