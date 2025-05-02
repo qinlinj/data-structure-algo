@@ -33,6 +33,25 @@ public class _423_a_PathSumIII {
     // Result counter
     private int result = 0;
 
+    public static void main(String[] args) {
+        _423_a_PathSumIII solver = new _423_a_PathSumIII();
+
+        TreeNode root = solver.new TreeNode(10);
+        root.left = solver.new TreeNode(5);
+        root.right = solver.new TreeNode(-3);
+        root.left.left = solver.new TreeNode(3);
+        root.left.right = solver.new TreeNode(2);
+        root.right.right = solver.new TreeNode(11);
+        root.left.left.left = solver.new TreeNode(3);
+        root.left.left.right = solver.new TreeNode(-2);
+        root.left.right.right = solver.new TreeNode(1);
+
+        int targetSum = 8;
+        int result = solver.pathSum(root, targetSum);
+        System.out.println("Number of paths summing to " + targetSum + ": " + result);
+    }
+
+
     public int pathSum(TreeNode root, int targetSum) {
         if (root == null) {
             return 0;
