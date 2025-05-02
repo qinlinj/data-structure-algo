@@ -131,6 +131,31 @@ public class _426_e_IncreasingOrderSearchTree {
         inOrder(node.right);
     }
 
+    /**
+     * Alternative solution with in-place transformation
+     * This minimizes memory usage by reusing existing nodes
+     */
+    public TreeNode increasingBSTInPlace(TreeNode root) {
+        return increasingBSTInPlace(root, null);
+    }
+
+    private TreeNode increasingBSTInPlace(TreeNode root, TreeNode tail) {
+        if (root == null) {
+            return tail;
+        }
+
+        // Recursively process the left subtree and make it point to current node
+        TreeNode result = increasingBSTInPlace(root.left, root);
+
+        // Disconnect left subtree
+        root.left = null;
+
+        // Right child points to processed right subtree
+        root.right = increasingBSTInPlace(root.right, tail);
+
+        return result;
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
