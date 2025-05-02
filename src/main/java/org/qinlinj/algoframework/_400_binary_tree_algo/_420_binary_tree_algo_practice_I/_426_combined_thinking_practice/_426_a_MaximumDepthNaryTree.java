@@ -45,6 +45,55 @@ public class _426_a_MaximumDepthNaryTree {
         return 1 + maxChildDepth;
     }
 
+    /**
+     * Solution 2: Traversal Approach
+     * <p>
+     * With this approach, we traverse the tree while tracking depth:
+     * - Maintain a current depth as we traverse
+     * - Update the maximum depth whenever we go deeper
+     */
+    public int maxDepthTraversal(Node root) {
+        // Initialize result and current depth trackers
+        int[] result = {0};  // Using an array to simulate pass-by-reference
+        traverseWithDepth(root, 0, result);
+        return result[0];
+    }
+
+    /**
+     * Helper method for traversal approach
+     *
+     * @param node         Current node being visited
+     * @param currentDepth Current depth in the traversal
+     * @param maxDepth     Reference to the maximum depth found so far
+     */
+    private void traverseWithDepth(Node node, int currentDepth, int[] maxDepth) {
+        if (node == null) {
+            return;
+        }
+
+        // Increment depth when visiting this node
+        currentDepth++;
+
+        // Update maximum depth if needed
+        maxDepth[0] = Math.max(maxDepth[0], currentDepth);
+
+        // Recursively traverse all children
+        for (Node child : node.children) {
+            traverseWithDepth(child, currentDepth, maxDepth);
+        }
+
+        // Note: We don't decrement currentDepth here because each recursive call
+        // gets its own copy of currentDepth, so backtracking happens automatically
+    }
+
+    /**
+     * Alternative implementation of traversal approach
+     * This version explicitly handles the backtracking using depth variable
+     */
+    public int maxDepthExplicitTraversal(Node root) {
+        return new TraversalHelper().maxDepth(root);
+    }
+
     // Definition for a Node in N-ary Tree
     class Node {
         public int val;
@@ -63,5 +112,37 @@ public class _426_a_MaximumDepthNaryTree {
         }
     }
 
+    private class TraversalHelper {
+        // Current depth in traversal
+        private int depth = 0;
+        // Maximum depth found
+        private int maxDepth = 0;
 
+        public int maxDepth(Node root) {
+            if (root == null) {
+                return 0;
+            }
+
+            traverse(root);
+            return maxDepth;
+        }
+
+        private void traverse(Node node) {
+            if (node == null) {
+                return;
+            }
+
+            // Preorder: increment depth when entering node
+            depth++;
+            maxDepth = Math.max(maxDepth, depth);
+
+            // Traverse all children
+            for (Node child : node.children) {
+                traverse(child);
+            }
+
+            // Postorder: decrement depth when leaving node
+            depth--;
+        }
+    }
 }
