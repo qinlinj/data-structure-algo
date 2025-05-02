@@ -70,6 +70,39 @@ public class _426_g_FindNodeInClonedTree {
         traverse(original.right, cloned.right, target, result);
     }
 
+    /**
+     * Solution 2: Divide and Conquer Approach
+     * <p>
+     * In this approach, we:
+     * - Define a function that returns the corresponding node if found in the subtree
+     * - Recursively check left and right subtrees
+     *
+     * @param original Root of the original binary tree
+     * @param cloned   Root of the cloned binary tree
+     * @param target   Reference to a node in the original tree
+     * @return Reference to the corresponding node in the cloned tree
+     */
+    public final TreeNode getTargetCopyDivideConquer(final TreeNode original, final TreeNode cloned, final TreeNode target) {
+        // Base case: empty tree
+        if (original == null) {
+            return null;
+        }
+
+        // Check if current node is the target
+        if (original == target) {
+            return cloned;
+        }
+
+        // Check left subtree first
+        TreeNode leftResult = getTargetCopyDivideConquer(original.left, cloned.left, target);
+        if (leftResult != null) {
+            return leftResult;
+        }
+
+        // If not found in left subtree, check right subtree
+        return getTargetCopyDivideConquer(original.right, cloned.right, target);
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
