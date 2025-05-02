@@ -110,6 +110,32 @@ public class _426_d_MergeBinaryTrees {
         traverse(root1.right, root2.right);
     }
 
+    /**
+     * Alternative solution that creates a completely new tree
+     * instead of modifying one of the existing trees
+     */
+    public TreeNode mergeTreesNewTree(TreeNode root1, TreeNode root2) {
+        // Base cases
+        if (root1 == null && root2 == null) {
+            return null;
+        }
+        if (root1 == null) {
+            return new TreeNode(root2.val,
+                    mergeTreesNewTree(null, root2.left),
+                    mergeTreesNewTree(null, root2.right));
+        }
+        if (root2 == null) {
+            return new TreeNode(root1.val,
+                    mergeTreesNewTree(root1.left, null),
+                    mergeTreesNewTree(root1.right, null));
+        }
+
+        // Both nodes exist, create a new node with combined value
+        return new TreeNode(root1.val + root2.val,
+                mergeTreesNewTree(root1.left, root2.left),
+                mergeTreesNewTree(root1.right, root2.right));
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
@@ -129,6 +155,4 @@ public class _426_d_MergeBinaryTrees {
             this.right = right;
         }
     }
-
-
 }
