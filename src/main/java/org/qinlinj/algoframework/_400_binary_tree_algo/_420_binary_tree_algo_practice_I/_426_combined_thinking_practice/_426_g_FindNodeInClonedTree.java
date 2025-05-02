@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._400_binary_tree_algo._420_binary_tree_algo_practice_I._426_combined_thinking_practice;
 
+import java.util.*;
+
 /**
  * Problem 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree
  * <p>
@@ -103,6 +105,81 @@ public class _426_g_FindNodeInClonedTree {
         return getTargetCopyDivideConquer(original.right, cloned.right, target);
     }
 
+    /**
+     * Solution for follow-up: What if repeated values exist in the tree?
+     * <p>
+     * If the tree can have repeated values, we can't rely on values to identify the node.
+     * We need to find the exact corresponding position in the cloned tree.
+     * <p>
+     * This solution uses a path encoding approach:
+     * 1. First find the path from root to target in the original tree
+     * 2. Then follow the same path in the cloned tree
+     */
+    public final TreeNode getTargetCopyWithRepeatedValues(final TreeNode original, final TreeNode cloned, final TreeNode target) {
+        // Find path from root to target in original tree
+        List<Character> path = new ArrayList<>();
+        findPath(original, target, path);
+
+        // Follow the path in cloned tree
+        return followPath(cloned, path);
+    }
+
+    /**
+     * Find path from root to target node
+     * Encodes left child as 'L' and right child as 'R'
+     *
+     * @param node   Current node in original tree
+     * @param target Target node to find
+     * @param path   List to store the path
+     * @return true if target is found, false otherwise
+     */
+    private boolean findPath(TreeNode node, TreeNode target, List<Character> path) {
+        if (node == null) {
+            return false;
+        }
+
+        if (node == target) {
+            return true;
+        }
+
+        // Try left subtree
+        path.add('L');
+        if (findPath(node.left, target, path)) {
+            return true;
+        }
+        path.remove(path.size() - 1);
+
+        // Try right subtree
+        path.add('R');
+        if (findPath(node.right, target, path)) {
+            return true;
+        }
+        path.remove(path.size() - 1);
+
+        return false;
+    }
+
+    /**
+     * Follow the path in cloned tree to find corresponding node
+     *
+     * @param node Current node in cloned tree
+     * @param path Path to follow
+     * @return Reference to the corresponding node
+     */
+    private TreeNode followPath(TreeNode node, List<Character> path) {
+        TreeNode current = node;
+
+        for (char direction : path) {
+            if (direction == 'L') {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+
+        return current;
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
@@ -130,6 +207,4 @@ public class _426_g_FindNodeInClonedTree {
     private class TreeNodeRef {
         TreeNode node = null;
     }
-
-
 }
