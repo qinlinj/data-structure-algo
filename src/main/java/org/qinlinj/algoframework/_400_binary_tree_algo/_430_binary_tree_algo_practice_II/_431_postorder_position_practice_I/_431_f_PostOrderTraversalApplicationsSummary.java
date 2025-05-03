@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._400_binary_tree_algo._430_binary_tree_algo_practice_II._431_postorder_position_practice_I;
 
+import java.util.*;
+
 /**
  * Post-Order Traversal Applications: Summary
  * <p>
@@ -119,10 +121,116 @@ public class _431_f_PostOrderTraversalApplicationsSummary {
         return root;
     }
 
+    /**
+     * Example of using NodeInfo to compute multiple properties at once
+     */
+    private NodeInfo calculateNodeInfo(TreeNode node, int target) {
+        if (node == null) {
+            return new NodeInfo(0, 0, Integer.MIN_VALUE, false);
+        }
+
+        // Process left and right subtrees
+        NodeInfo leftInfo = calculateNodeInfo(node.left, target);
+        NodeInfo rightInfo = calculateNodeInfo(node.right, target);
+
+        // Post-order position: combine results
+        int sum = node.val + leftInfo.sum + rightInfo.sum;
+        int count = 1 + leftInfo.count + rightInfo.count;
+        int max = Math.max(node.val, Math.max(leftInfo.max, rightInfo.max));
+        boolean containsTarget = (node.val == target) ||
+                leftInfo.containsTarget ||
+                rightInfo.containsTarget;
+
+        return new NodeInfo(sum, count, max, containsTarget);
+    }
+
+    /**
+     * Example 5: Finding most frequent subtree sum
+     * Shows how post-order traversal can track frequencies
+     */
+    public int[] findFrequentTreeSum(TreeNode root) {
+        Map<Integer, Integer> sumFrequencies = new HashMap<>();
+        calculateSubtreeSum(root, sumFrequencies);
+
+        // Find maximum frequency
+        int maxFreq = 0;
+        for (int freq : sumFrequencies.values()) {
+            maxFreq = Math.max(maxFreq, freq);
+        }
+
+        // Collect sums with maximum frequency
+        List<Integer> result = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : sumFrequencies.entrySet()) {
+            if (entry.getValue() == maxFreq) {
+                result.add(entry.getKey());
+            }
+        }
+
+        // Convert to array
+        return result.stream().mapToInt(i -> i).toArray();
+    }
+
+    /**
+     * Helper method for finding subtree sums
+     */
+    private int calculateSubtreeSum(TreeNode node, Map<Integer, Integer> sumFrequencies) {
+        if (node == null) {
+            return 0;
+        }
+
+        // Calculate subtree sums
+        int leftSum = calculateSubtreeSum(node.left, sumFrequencies);
+        int rightSum = calculateSubtreeSum(node.right, sumFrequencies);
+        int totalSum = node.val + leftSum + rightSum;
+
+        // Post-order position: update frequency map
+        sumFrequencies.put(totalSum, sumFrequencies.getOrDefault(totalSum, 0) + 1);
+
+        return totalSum;
+    }
+
     // Definition for a binary tree node
     public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
     }
+
+    /**
+     * Example 4: Using a helper class for complex calculations
+     * Shows how to track multiple values during traversal
+     */
+    private class NodeInfo {
+        int sum;      // Sum of node values in subtree
+        int count;    // Count of nodes in subtree
+        int max;      // Maximum value in subtree
+        boolean containsTarget; // Whether subtree contains a target value
+
+        NodeInfo(int sum, int count, int max, boolean containsTarget) {
+            this.sum = sum;
+            this.count = count;
+            this.max = max;
+            this.containsTarget = containsTarget;
+        }
+    }
+
+    /**
+     * Key Insights for Post-Order Traversal Applications:
+     *
+     * 1. When to use post-order traversal:
+     *    - When you need information from subtrees to make decisions about parent nodes
+     *    - For bottom-up computations where child results inform parent calculations
+     *    - For tree transformations where structure changes depend on subtree properties
+     *
+     * 2. Common post-order patterns:
+     *    - Compute and return: Calculate properties, return to parent
+     *    - Compute and modify: Calculate properties, modify tree structure
+     *    - Compute and track: Calculate properties, track in global state
+     *
+     * 3. Benefits of post-order approach:
+     *    - Efficient single-pass algorithms
+     *    - Clean separation of concerns
+     *    - Natural alignment with recursive tree structure
+     *    - Effective for transformations that must process leaves first
+     */
 }
