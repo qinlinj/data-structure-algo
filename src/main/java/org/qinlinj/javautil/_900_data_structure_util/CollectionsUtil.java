@@ -1,4 +1,4 @@
-package org.qinlinj.util;
+package org.qinlinj.javautil._900_data_structure_util;
 
 import java.util.*;
 
