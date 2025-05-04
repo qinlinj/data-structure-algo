@@ -20,7 +20,6 @@ import java.util.*;
  * iterative one while preserving the logical flow of the original algorithm.
  */
 public class _446_RecursiveToIterativeTreeTraversal {
-    TreeNode lastVisited = null;
 
     /**
      * Demo method to compare recursive and iterative approaches
@@ -119,33 +118,37 @@ public class _446_RecursiveToIterativeTreeTraversal {
         Stack<TreeNode> stack = new Stack<>();
 
         // Tracks the last fully processed node (for determining traversal state)
-        TreeNode visited = new TreeNode(-1); // Special value to avoid conflicts
+        TreeNode lastVisited = null; // Use null instead of a special node
 
         // Start by pushing all left nodes onto the stack
         pushLeftBranch(root, stack, preorder);
 
         while (!stack.isEmpty()) {
+            // Peek at the top node without removing it
             TreeNode p = stack.peek();
 
-            // If left subtree is not processed yet
-            if (p.left != null && lastVisited != p.left && lastVisited != p.right) {
-                pushLeftBranch(p.left, stack, preorder);
-            }
-            // If left is done, but right is not
-            else if (p.right != null && lastVisited != p.right) {
+            // Case 1: Left subtree is fully traversed (either p.left is null or we just came back from p.left),
+            // and we haven't started or finished with the right subtree
+            if ((p.left == null || lastVisited == p.left) && lastVisited != p.right) {
+                // In-order position - after processing left subtree, before right subtree
                 inorder.add(p.val);
-                pushLeftBranch(p.right, stack, preorder);
-            }
-            // If both subtrees are done
-            else {
-                postorder.add(p.val);
-                lastVisited = p;
-                stack.pop();
 
-                // If this was a right child, also need to add inorder for parent
-                if (stack.isEmpty() || p != stack.peek().right) {
-                    inorder.add(p.val);
+                // If there's a right child, start traversing right subtree
+                if (p.right != null) {
+                    pushLeftBranch(p.right, stack, preorder);
+                } else {
+                    // No right child, so we can complete this node
+                    postorder.add(p.val);  // Post-order position
+                    lastVisited = stack.pop();
                 }
+            }
+            // Case 2: Both subtrees have been fully traversed (we just came back from p.right)
+            else if (lastVisited == p.right) {
+                // Post-order position - after processing both subtrees
+                postorder.add(p.val);
+
+                // Pop the node as we're done with it
+                lastVisited = stack.pop();
             }
         }
     }
@@ -227,14 +230,14 @@ public class _446_RecursiveToIterativeTreeTraversal {
 
     /**
      * Specific implementation for post-order traversal
-     * Directly using the universal framework
+     * Using a modified version of the universal framework
      */
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) return result;
 
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode visited = new TreeNode(-1);
+        TreeNode lastVisited = null;  // Track the last visited node instead of using a special node
 
         // Start by pushing all left nodes
         pushLeftBranchPostorder(root, stack);
@@ -243,12 +246,13 @@ public class _446_RecursiveToIterativeTreeTraversal {
             TreeNode p = stack.peek();
 
             // If right child exists and hasn't been visited yet
-            if (p.right != null && p.right != visited) {
+            if (p.right != null && p.right != lastVisited) {
                 pushLeftBranchPostorder(p.right, stack);
             } else {
                 // Process node after both subtrees
                 result.add(p.val);  // Post-order position
-                visited = stack.pop();
+                lastVisited = p;
+                stack.pop();
             }
         }
 
@@ -290,7 +294,7 @@ public class _446_RecursiveToIterativeTreeTraversal {
 
         int sum = 0;
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode visited = new TreeNode(-1);
+        TreeNode lastVisited = null;  // Use null instead of a special node
 
         // Push all left nodes
         TreeNode current = root;
@@ -303,19 +307,30 @@ public class _446_RecursiveToIterativeTreeTraversal {
         while (!stack.isEmpty()) {
             TreeNode p = stack.peek();
 
-            if ((p.left == null || p.left == visited) && p.right != visited) {
+            // Left subtree processed, ready to handle right subtree
+            if ((p.left == null || lastVisited == p.left) && lastVisited != p.right) {
                 // No operation in in-order position for this algorithm
 
-                // Start traversing right subtree
-                current = p.right;
-                while (current != null) {
-                    stack.push(current);
-                    current = current.left;
+                // If there's a right child, traverse it
+                if (p.right != null) {
+                    current = p.right;
+                    while (current != null) {
+                        stack.push(current);
+                        current = current.left;
+                    }
+                } else {
+                    // No right child, so we can process this node
+                    sum += p.val;  // Post-order: Add node value to sum
+                    lastVisited = p;
+                    stack.pop();
                 }
-            } else if (p.right == null || p.right == visited) {
+            }
+            // Both subtrees processed
+            else if (lastVisited == p.right) {
                 // Post-order position: Add node value to sum
                 sum += p.val;
-                visited = stack.pop();
+                lastVisited = p;
+                stack.pop();
             }
         }
 
