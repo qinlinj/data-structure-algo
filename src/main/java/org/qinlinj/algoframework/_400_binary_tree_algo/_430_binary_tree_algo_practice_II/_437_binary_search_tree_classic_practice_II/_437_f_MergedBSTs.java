@@ -1,4 +1,5 @@
 package org.qinlinj.algoframework._400_binary_tree_algo._430_binary_tree_algo_practice_II._437_binary_search_tree_classic_practice_II; /**
+ * /**
  * Problem 1305: All Elements in Two Binary Search Trees (Medium)
  * <p>
  * Problem Description:
@@ -38,9 +39,71 @@ class _437_f_MergedBSTs {
         System.out.println("Example 1:");
         System.out.println("Tree 1 Structure:");
         solution.printTree(root1, "", false);
-        System.out.println("Tree 2 Structure:");
+        System.out.println("\nTree 1 Inorder Traversal:");
+        solution.printInorder(root1);
+        System.out.println();
+
+        System.out.println("\nTree 2 Structure:");
         solution.printTree(root2, "", false);
-        System.out.println(Arrays.toString(solution.getAllElements(root1, root2).toArray()));
+        System.out.println("\nTree 2 Inorder Traversal:");
+        solution.printInorder(root2);
+        System.out.println();
+
+        // Test Simple approach
+        List<Integer> result1 = solution.getAllElements_Simple(root1, root2);
+        System.out.println("\nMerged Elements (Simple Approach):");
+        System.out.println(result1);
+
+        // Test Iterator approach
+        List<Integer> result2 = solution.getAllElements(root1, root2);
+        System.out.println("\nMerged Elements (Iterator Approach):");
+        System.out.println(result2);
+
+        // Example 2: root1 = [1,null,8], root2 = [8,1]
+        TreeNode root3 = solution.new TreeNode(1);
+        root3.right = solution.new TreeNode(8);
+
+        TreeNode root4 = solution.new TreeNode(8);
+        root4.left = solution.new TreeNode(1);
+
+        System.out.println("\n\nExample 2:");
+        System.out.println("Tree 1 Structure:");
+        solution.printTree(root3, "", false);
+        System.out.println("\nTree 1 Inorder Traversal:");
+        solution.printInorder(root3);
+        System.out.println();
+
+        System.out.println("\nTree 2 Structure:");
+        solution.printTree(root4, "", false);
+        System.out.println("\nTree 2 Inorder Traversal:");
+        solution.printInorder(root4);
+        System.out.println();
+
+        // Test with second example
+        List<Integer> result3 = solution.getAllElements(root3, root4);
+        System.out.println("\nMerged Elements:");
+        System.out.println(result3);
+
+        // Example 3: Large trees
+        int[] array1 = {2, 4, 6, 8, 10, 12};
+        int[] array2 = {1, 3, 5, 7, 9, 11};
+
+        TreeNode root5 = solution.createBSTFromSortedArray(array1, 0, array1.length - 1);
+        TreeNode root6 = solution.createBSTFromSortedArray(array2, 0, array2.length - 1);
+
+        System.out.println("\n\nExample 3 (Larger Trees):");
+        System.out.println("Tree 1 Inorder Traversal:");
+        solution.printInorder(root5);
+        System.out.println();
+
+        System.out.println("\nTree 2 Inorder Traversal:");
+        solution.printInorder(root6);
+        System.out.println();
+
+        // Test with larger example
+        List<Integer> result4 = solution.getAllElements(root5, root6);
+        System.out.println("\nMerged Elements:");
+        System.out.println(result4);
     }
 
     /**
