@@ -1,4 +1,5 @@
 package org.qinlinj.algoframework._400_binary_tree_algo._440_binary_tree_algo_extension._444_merge_sort_details_and_applications;
 
 public class _444_c_CountOfSmallerNumberAfterSelf {
+
 }
