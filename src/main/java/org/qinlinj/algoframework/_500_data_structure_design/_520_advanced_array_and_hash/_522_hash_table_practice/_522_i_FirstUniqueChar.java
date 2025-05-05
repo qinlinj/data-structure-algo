@@ -47,7 +47,7 @@ public class _522_i_FirstUniqueChar {
         System.out.println("Example 3: " + result3);
         // Expected output: -1 (there are no unique characters)
     }
-    
+
     public int firstUniqChar(String s) {
         // Create frequency counter for lowercase English letters
         int[] charCount = new int[26];
