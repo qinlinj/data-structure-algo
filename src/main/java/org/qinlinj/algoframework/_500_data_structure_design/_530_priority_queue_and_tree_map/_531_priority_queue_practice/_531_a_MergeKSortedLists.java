@@ -21,25 +21,8 @@ package org.qinlinj.algoframework._500_data_structure_design._530_priority_queue
 
 import java.util.*;
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
-}
 
 public class _531_a_MergeKSortedLists {
-
     // Helper method to print a linked list
     private static void printList(ListNode head) {
         ListNode current = head;
@@ -48,19 +31,6 @@ public class _531_a_MergeKSortedLists {
             current = current.next;
         }
         System.out.println("null");
-    }
-
-    // Helper method to create a linked list from an array
-    private static ListNode createList(int[] values) {
-        ListNode dummy = new ListNode(-1);
-        ListNode current = dummy;
-
-        for (int val : values) {
-            current.next = new ListNode(val);
-            current = current.next;
-        }
-
-        return dummy.next;
     }
 
     public static void main(String[] args) {
@@ -82,6 +52,19 @@ public class _531_a_MergeKSortedLists {
         System.out.println("Merged list:");
         printList(merged);
         // Expected output: 1 -> 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 6 -> null
+    }
+
+    // Helper method to create a linked list from an array
+    private static ListNode createList(int[] values) {
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        for (int val : values) {
+            current.next = new ListNode(val);
+            current = current.next;
+        }
+
+        return dummy.next;
     }
 
     public ListNode mergeKLists(ListNode[] lists) {
@@ -119,5 +102,22 @@ public class _531_a_MergeKSortedLists {
         }
 
         return dummy.next;
+    }
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 }
