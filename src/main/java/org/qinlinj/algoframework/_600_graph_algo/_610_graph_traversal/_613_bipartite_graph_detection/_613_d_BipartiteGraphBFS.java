@@ -25,6 +25,94 @@ import java.util.*;
 public class _613_d_BipartiteGraphBFS {
 
     /**
+     * Main method to demonstrate the bipartite checking with BFS
+     */
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        System.out.println("BIPARTITE GRAPH DETECTION USING BFS");
+        System.out.println("===================================");
+
+        // Example 1: A bipartite graph
+        // Can be colored as [0, 1, 0, 1] where 0 and 1 represent different colors
+        int[][] graph1 = {
+                {1, 3},
+                {0, 2},
+                {1, 3},
+                {0, 2}
+        };
+
+        System.out.println("\nExample 1: Bipartite Graph");
+        System.out.println("Graph structure:");
+        System.out.println("0 -- 1");
+        System.out.println("|    |");
+        System.out.println("3 -- 2");
+        System.out.println();
+
+        boolean result1 = solution.isBipartite(graph1);
+        System.out.println("Is bipartite? " + result1);
+        System.out.println("This graph can be colored with two colors where nodes [0,2] have one color");
+        System.out.println("and nodes [1,3] have another color.");
+
+        // Reset solution for next example
+        solution = new Solution();
+
+        // Example 2: A non-bipartite graph with a triangle (odd cycle)
+        int[][] graph2 = {
+                {1, 2, 3},
+                {0, 2},
+                {0, 1, 3},
+                {0, 2}
+        };
+
+        System.out.println("\nExample 2: Non-Bipartite Graph (Contains a Triangle)");
+        System.out.println("Graph structure:");
+        System.out.println("    0");
+        System.out.println("   /|\\");
+        System.out.println("  / | \\");
+        System.out.println(" 1--2  3");
+        System.out.println();
+
+        boolean result2 = solution.isBipartite(graph2);
+        System.out.println("Is bipartite? " + result2);
+        System.out.println("This graph cannot be bipartite because it contains an odd cycle (triangle 0-1-2).");
+
+        // Reset solution for next example
+        solution = new Solution();
+
+        // Example 3: A disconnected bipartite graph with multiple components
+        int[][] graph3 = {
+                {4, 7},
+                {5, 6},
+                {5, 6},
+                {7},
+                {0},
+                {1, 2},
+                {1, 2},
+                {0, 3}
+        };
+
+        System.out.println("\nExample 3: Disconnected Bipartite Graph");
+        System.out.println("Graph structure (3 components):");
+        System.out.println("0 -- 4    1 -- 5 -- 2    3 -- 7");
+        System.out.println("|              |              |");
+        System.out.println("7              6              0");
+        System.out.println();
+
+        boolean result3 = solution.isBipartite(graph3);
+        System.out.println("Is bipartite? " + result3);
+        System.out.println("This is a bipartite graph because each component can be properly two-colored.");
+
+        System.out.println("\nComparing BFS vs DFS for Bipartite Checking:");
+        System.out.println("1. Both have the same time complexity: O(V + E)");
+        System.out.println("2. Both have the same space complexity: O(V)");
+        System.out.println("3. BFS explores level-by-level, which may be more intuitive for 'coloring'");
+        System.out.println("4. DFS uses recursion which may be cleaner to implement in some cases");
+        System.out.println("5. For detecting odd cycles (which make a graph non-bipartite), either approach works");
+        System.out.println("6. BFS might detect conflicts earlier in some cases by exploring 'nearer' nodes first");
+    }
+
+    /**
      * Solution class implementing the BFS-based bipartite check
      */
     public static class Solution {
@@ -98,6 +186,4 @@ public class _613_d_BipartiteGraphBFS {
             }
         }
     }
-
-
 }
