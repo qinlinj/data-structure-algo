@@ -17,6 +17,69 @@ import java.util.*;
 public class _613_b_BipartiteGraphTraversal {
 
     /**
+     * Demo of how to use these traversal algorithms
+     */
+    public static void main(String[] args) {
+        // Create a simple undirected graph
+        // 0 -- 1 -- 2
+        // |    |
+        // 3 -- 4
+        List<Integer>[] exampleGraph = buildExampleGraph(5);
+
+        System.out.println("GRAPH TRAVERSAL ALGORITHMS");
+        System.out.println("=========================");
+        System.out.println("\nExample Graph:");
+        System.out.println("0 -- 1 -- 2");
+        System.out.println("|    |");
+        System.out.println("3 -- 4");
+        System.out.println();
+
+        System.out.println("Basic DFS Traversal:");
+        BasicDFSTraversal dfs = new BasicDFSTraversal();
+        dfs.traverseGraph(exampleGraph);
+
+        System.out.println("\nAlternative DFS Traversal:");
+        AlternativeDFSTraversal altDfs = new AlternativeDFSTraversal();
+        altDfs.traverseGraph(exampleGraph);
+
+        System.out.println("\nBFS Traversal:");
+        BFSTraversal bfs = new BFSTraversal();
+        bfs.traverseGraph(exampleGraph);
+
+        System.out.println("\nFor bipartite graph checking, we would need to:");
+        System.out.println("1. Color each node as we visit it");
+        System.out.println("2. Ensure adjacent nodes have different colors");
+        System.out.println("3. Check for color conflicts during traversal");
+
+        System.out.println("\nThis traversal framework can be adapted to solve many graph problems,");
+        System.out.println("including bipartite checking, as we'll see in the following implementations.");
+    }
+
+    /**
+     * Helper method to build an example undirected graph
+     */
+    private static List<Integer>[] buildExampleGraph(int n) {
+        List<Integer>[] graph = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        // Add edges (undirected)
+        addUndirectedEdge(graph, 0, 1);
+        addUndirectedEdge(graph, 1, 2);
+        addUndirectedEdge(graph, 0, 3);
+        addUndirectedEdge(graph, 1, 4);
+        addUndirectedEdge(graph, 3, 4);
+
+        return graph;
+    }
+
+    private static void addUndirectedEdge(List<Integer>[] graph, int u, int v) {
+        graph[u].add(v);
+        graph[v].add(u);
+    }
+
+    /**
      * Basic DFS graph traversal template
      */
     public static class BasicDFSTraversal {
