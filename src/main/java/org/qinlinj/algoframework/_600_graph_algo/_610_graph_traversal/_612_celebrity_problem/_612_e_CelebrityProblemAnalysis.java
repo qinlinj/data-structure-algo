@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._600_graph_algo._610_graph_traversal._611_cycle_detection_and_topological_sort;
+package org.qinlinj.algoframework._600_graph_algo._610_graph_traversal._612_celebrity_problem;
 
 /**
  * Analysis of the Celebrity Problem Solutions
