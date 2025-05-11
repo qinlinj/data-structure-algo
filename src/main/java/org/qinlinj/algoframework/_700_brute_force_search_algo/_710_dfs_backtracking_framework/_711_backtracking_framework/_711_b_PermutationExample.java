@@ -23,4 +23,39 @@ public class _711_b_PermutationExample {
 
         return result;
     }
+
+    /**
+     * Backtracking function to build permutations
+     *
+     * @param nums  Input array of integers
+     * @param track Current path (partial permutation)
+     * @param used  Array marking which numbers have been used
+     */
+    private void backtrack(int[] nums, LinkedList<Integer> track, boolean[] used) {
+        // End condition: if the path contains all numbers
+        if (track.size() == nums.length) {
+            // Add a copy of the current permutation to results
+            result.add(new LinkedList<>(track));
+            return;
+        }
+
+        // Try each number as the next element in the permutation
+        for (int i = 0; i < nums.length; i++) {
+            // Skip if this number is already used
+            if (used[i]) {
+                continue;
+            }
+
+            // 1. Make choice - add number to path and mark as used
+            track.add(nums[i]);
+            used[i] = true;
+
+            // 2. Explore further with this choice
+            backtrack(nums, track, used);
+
+            // 3. Undo choice (backtrack)
+            track.removeLast();
+            used[i] = false;
+        }
+    }
 }
