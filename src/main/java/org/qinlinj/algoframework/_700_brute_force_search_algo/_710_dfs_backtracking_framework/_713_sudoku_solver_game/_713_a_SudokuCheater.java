@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._700_brute_force_search_algo._710_dfs_backtracking_framework._713_sudoku_solver_game;
+
+public class _713_a_SudokuCheater {
+}
