@@ -2,7 +2,40 @@ package org.qinlinj.algoframework._700_brute_force_search_algo._710_dfs_backtrac
 
 import java.util.*;
 
+/**
+ * DECISION TREE VISUALIZATION IN BACKTRACKING
+ * ===========================================
+ * <p>
+ * Key Concepts:
+ * 1. Backtracking algorithm traverses a decision tree
+ * 2. Each node in the tree represents a state in the problem-solving process
+ * 3. Each node has attributes:
+ * - Path: Choices already made to reach this node
+ * - Choice list: Available options at this node
+ * <p>
+ * Decision Tree Properties:
+ * - Root: Starting point with empty path and all choices available
+ * - Internal nodes: Partial solutions with some choices made
+ * - Leaf nodes: Complete solutions (paths that satisfy end conditions)
+ * <p>
+ * Traversal Timing:
+ * - "Pre-order" position: Before exploring a node's children (when making a choice)
+ * - "Post-order" position: After exploring a node's children (when undoing a choice)
+ * <p>
+ * This class provides a visual representation of how the decision tree
+ * for the permutation problem would look like, and how the backtracking
+ * algorithm traverses this tree.
+ */
 public class _711_c_DecisionTreeVisualization {
+
+    /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        _711_c_DecisionTreeVisualization visualization = new _711_c_DecisionTreeVisualization();
+        visualization.visualizeDecisionTree();
+    }
+
     /**
      * This method simulates the traversal of a decision tree for [1,2,3] permutation
      * with console output to visualize the process
@@ -75,6 +108,15 @@ public class _711_c_DecisionTreeVisualization {
     private void printIndent(int depth) {
         for (int i = 0; i < depth; i++) {
             System.out.print("    ");
+        }
+    }
+
+    // Helper class to simulate LinkedList for the example
+    private static class LinkedList<E> extends ArrayList<E> {
+        public void removeLast() {
+            if (!isEmpty()) {
+                remove(size() - 1);
+            }
         }
     }
 }
