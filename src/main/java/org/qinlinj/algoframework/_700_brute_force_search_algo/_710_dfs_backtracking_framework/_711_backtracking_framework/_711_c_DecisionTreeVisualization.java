@@ -68,4 +68,13 @@ public class _711_c_DecisionTreeVisualization {
             used[i] = false;
         }
     }
+
+    /**
+     * Helper method to print indentation based on depth
+     */
+    private void printIndent(int depth) {
+        for (int i = 0; i < depth; i++) {
+            System.out.print("    ");
+        }
+    }
 }
