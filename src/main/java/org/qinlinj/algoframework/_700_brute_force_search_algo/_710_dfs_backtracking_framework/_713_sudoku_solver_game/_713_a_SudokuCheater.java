@@ -67,7 +67,39 @@ public class _713_a_SudokuCheater {
         }
     }
 
-    private boolean isValid(int i, int j, int digit) {
+    /**
+     * Check if placing digit at position (row, col) is valid
+     *
+     * @return true if the placement is valid, false otherwise
+     */
+    private boolean isValid(int row, int col, int digit) {
+        // Check the entire row
+        for (int c = 0; c < 9; c++) {
+            if (boardHandler.get(row, c) != null && boardHandler.get(row, c) == digit) {
+                return false;
+            }
+        }
+
+        // Check the entire column
+        for (int r = 0; r < 9; r++) {
+            if (boardHandler.get(r, col) != null && boardHandler.get(r, col) == digit) {
+                return false;
+            }
+        }
+
+        // Check the 3x3 box
+        int boxRow = (row / 3) * 3;
+        int boxCol = (col / 3) * 3;
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                if (boardHandler.get(boxRow + r, boxCol + c) != null &&
+                        boardHandler.get(boxRow + r, boxCol + c) == digit) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
