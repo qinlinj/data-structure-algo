@@ -1,10 +1,64 @@
 package org.qinlinj.algoframework._700_brute_force_search_algo._710_dfs_backtracking_framework._713_sudoku_solver_game;
 
+/**
+ * SUDOKU CHEATER IMPLEMENTATION
+ * =============================
+ * <p>
+ * This class implements a Sudoku solver that can automatically solve any valid Sudoku puzzle
+ * using the backtracking algorithm. It's effectively a "cheater" for Sudoku games.
+ * <p>
+ * Key Features:
+ * 1. Uses backtracking to try different numbers in each empty cell
+ * 2. Respects preset numbers (non-editable cells)
+ * 3. Validates row, column, and 3x3 box constraints
+ * 4. Stops once a valid solution is found
+ * <p>
+ * The algorithm works by:
+ * - Traversing the board cell by cell
+ * - For each empty cell, trying each digit 1-9
+ * - Validating the placement against Sudoku rules
+ * - Backtracking when an invalid state is reached
+ * <p>
+ * Time Complexity: Depends on the input board, but much less than O(9^81) due to constraints
+ * Space Complexity: O(1) as the board size is fixed at 9x9 (plus recursion stack depth of 81)
+ */
 public class _713_a_SudokuCheater {
+
     // Flag to indicate if a solution has been found
     private boolean found = false;
     // The board handler instance
     private BoardHandler boardHandler;
+
+    /**
+     * Main method to demonstrate the Sudoku solver
+     */
+    public static void main(String[] args) {
+        // Example Sudoku puzzle (null represents empty cells)
+        Integer[][] initialBoard = {
+                {5, 3, null, null, 7, null, null, null, null},
+                {6, null, null, 1, 9, 5, null, null, null},
+                {null, 9, 8, null, null, null, null, 6, null},
+                {8, null, null, null, 6, null, null, null, 3},
+                {4, null, null, 8, null, 3, null, null, 1},
+                {7, null, null, null, 2, null, null, null, 6},
+                {null, 6, null, null, null, null, 2, 8, null},
+                {null, null, null, 4, 1, 9, null, null, 5},
+                {null, null, null, null, 8, null, null, 7, 9}
+        };
+
+        // Create a sample board handler
+        SampleBoardHandler boardHandler = new SampleBoardHandler(initialBoard);
+
+        System.out.println("Initial Sudoku Board:");
+        boardHandler.printBoard();
+
+        // Create and use the Sudoku solver
+        _713_a_SudokuCheater solver = new _713_a_SudokuCheater();
+        solver.solveSudoku(boardHandler);
+
+        System.out.println("\nSolved Sudoku Board:");
+        boardHandler.printBoard();
+    }
 
     /**
      * Solve the Sudoku puzzle
@@ -127,5 +181,59 @@ public class _713_a_SudokuCheater {
          * @return true if the cell can be modified, false if it's a preset value
          */
         boolean isEditable(int row, int col);
+    }
+
+    /**
+     * Sample implementation of the BoardHandler for testing
+     */
+    public static class SampleBoardHandler implements BoardHandler {
+        private Integer[][] board;
+        private boolean[][] editable;
+
+        public SampleBoardHandler(Integer[][] initialBoard) {
+            this.board = new Integer[9][9];
+            this.editable = new boolean[9][9];
+
+            // Copy the initial board and mark which cells are editable
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    this.board[i][j] = initialBoard[i][j];
+                    this.editable[i][j] = (initialBoard[i][j] == null);
+                }
+            }
+        }
+
+        @Override
+        public Integer get(int row, int col) {
+            return board[row][col];
+        }
+
+        @Override
+        public void set(int row, int col, Integer value) {
+            board[row][col] = value;
+        }
+
+        @Override
+        public boolean isEditable(int row, int col) {
+            return editable[row][col];
+        }
+
+        /**
+         * Print the current state of the board
+         */
+        public void printBoard() {
+            for (int i = 0; i < 9; i++) {
+                if (i % 3 == 0 && i > 0) {
+                    System.out.println("------+-------+------");
+                }
+                for (int j = 0; j < 9; j++) {
+                    if (j % 3 == 0 && j > 0) {
+                        System.out.print("| ");
+                    }
+                    System.out.print(board[i][j] == null ? ". " : board[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
     }
 }
