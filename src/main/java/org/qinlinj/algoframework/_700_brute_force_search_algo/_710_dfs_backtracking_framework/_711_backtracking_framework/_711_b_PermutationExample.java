@@ -2,8 +2,57 @@ package org.qinlinj.algoframework._700_brute_force_search_algo._710_dfs_backtrac
 
 import java.util.*;
 
+/**
+ * PERMUTATION PROBLEM USING BACKTRACKING
+ * ======================================
+ * <p>
+ * Problem: Given an array of distinct integers, return all possible permutations.
+ * Example: Input: [1,2,3] → Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
+ * <p>
+ * Decision Tree Analysis:
+ * - Each node represents a state in building a permutation
+ * - Branches represent choices of which number to place next
+ * - The path from root to current node represents numbers already chosen
+ * - Available choices are numbers not yet chosen
+ * - Leaf nodes (at depth n) represent complete permutations
+ * <p>
+ * Backtracking Implementation:
+ * 1. Use a "track" list to record the current path (numbers selected so far)
+ * 2. Use a "used" array to mark which numbers have been used
+ * 3. When track.size() equals nums.length, we have a complete permutation
+ * 4. For each recursive call, try all unused numbers
+ * 5. After exploring each choice, backtrack (undo the choice) to try others
+ * <p>
+ * Time Complexity: O(n!), where n is the length of the input array
+ * - Cannot be optimized further as we must enumerate all n! permutations
+ * - This is characteristic of backtracking algorithms: pure brute force enumeration
+ */
 public class _711_b_PermutationExample {
+
     private List<List<Integer>> result = new LinkedList<>();
+
+    /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        _711_b_PermutationExample solution = new _711_b_PermutationExample();
+        int[] nums = {1, 2, 3};
+
+        List<List<Integer>> permutations = solution.permute(nums);
+
+        System.out.println("All permutations of [1,2,3]:");
+        for (List<Integer> perm : permutations) {
+            System.out.println(perm);
+        }
+
+        // Expected output:
+        // [1, 2, 3]
+        // [1, 3, 2]
+        // [2, 1, 3]
+        // [2, 3, 1]
+        // [3, 1, 2]
+        // [3, 2, 1]
+    }
 
     /**
      * Main function to compute all permutations of a given array
