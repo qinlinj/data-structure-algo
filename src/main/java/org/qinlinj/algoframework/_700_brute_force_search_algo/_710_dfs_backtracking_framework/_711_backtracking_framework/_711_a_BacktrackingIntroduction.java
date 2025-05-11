@@ -42,4 +42,11 @@ public class _711_a_BacktrackingIntroduction {
         return false;
     }
 
+    /**
+     * Save the current path as a result
+     */
+    private void saveResult(List<Object> path) {
+        // Implementation depends on the specific problem
+    }
+
 }
