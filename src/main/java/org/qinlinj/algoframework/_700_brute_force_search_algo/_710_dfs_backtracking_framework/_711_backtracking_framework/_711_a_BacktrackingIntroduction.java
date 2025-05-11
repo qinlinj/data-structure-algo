@@ -2,7 +2,40 @@ package org.qinlinj.algoframework._700_brute_force_search_algo._710_dfs_backtrac
 
 import java.util.*;
 
+/**
+ * BACKTRACKING ALGORITHM INTRODUCTION
+ * ===================================
+ * <p>
+ * Prerequisites:
+ * - Binary tree structure basics
+ * - Binary tree traversal framework
+ * - Multi-way tree structure and traversal framework
+ * <p>
+ * Key Concepts:
+ * 1. Backtracking algorithm is essentially the same as DFS (Depth-First Search)
+ * 2. Solving a backtracking problem means traversing a decision tree
+ * 3. Each leaf node of the decision tree contains a valid answer
+ * <p>
+ * Three Key Elements of Backtracking:
+ * 1. Path: Choices already made
+ * 2. Choice List: Choices currently available
+ * 3. End Condition: Criteria for reaching the bottom of the decision tree
+ * <p>
+ * Core Framework:
+ * - At each node of the decision tree, make a choice
+ * - Recursively explore the subtree
+ * - Undo the choice (backtrack) to explore other possibilities
+ */
 public class _711_a_BacktrackingIntroduction {
+
+    /**
+     * Main method for demonstration
+     */
+    public static void main(String[] args) {
+        System.out.println("Backtracking is essentially a DFS traversal of a decision tree.");
+        System.out.println("At each node, we make a choice, explore, then backtrack to try other choices.");
+    }
+
     /**
      * Generic backtracking algorithm framework
      *
@@ -48,5 +81,4 @@ public class _711_a_BacktrackingIntroduction {
     private void saveResult(List<Object> path) {
         // Implementation depends on the specific problem
     }
-
 }
