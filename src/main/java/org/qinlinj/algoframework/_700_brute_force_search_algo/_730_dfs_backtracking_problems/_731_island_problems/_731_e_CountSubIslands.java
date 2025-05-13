@@ -23,6 +23,19 @@ public class _731_e_CountSubIslands {
                 }
             }
         }
-        return 0;
+        // Step 2: Count remaining islands in grid2 (these are all sub-islands)
+        int subIslandCount = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid2[i][j] == 1) {
+                    // Found a sub-island
+                    subIslandCount++;
+                    // Sink this island so we don't count it again
+                    dfs(grid2, i, j);
+                }
+            }
+        }
+
+        return subIslandCount;
     }
 }
