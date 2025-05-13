@@ -1,5 +1,32 @@
 package org.qinlinj.algoframework._700_brute_force_search_algo._730_dfs_backtracking_problems._734_set_partition;
 
+/**
+ * Partition to K Equal Sum Subsets - Introduction
+ * <p>
+ * This class introduces the "Partition to K Equal Sum Subsets" problem (LeetCode 698).
+ * <p>
+ * Problem:
+ * Given an array of integers nums and an integer k, determine if it's possible to divide
+ * the array into k non-empty subsets whose sums are all equal.
+ * <p>
+ * Key concepts:
+ * - This is a classic backtracking problem where we need to explore different ways to
+ * distribute elements into k groups
+ * - We can think of this as putting n numbers into k "buckets" where each bucket must
+ * have the same sum
+ * - There are two main perspectives we can use to approach this problem:
+ * 1. From the elements' perspective: decide which bucket each element goes into
+ * 2. From the buckets' perspective: decide which elements to put in each bucket
+ * <p>
+ * Why we need backtracking:
+ * - Unlike the "Partition Equal Subset Sum" problem (dividing into 2 equal subsets),
+ * this problem with k subsets can't be efficiently solved with dynamic programming
+ * - When k = 2, we can use DP because we only need to find one subset with sum = totalSum/2,
+ * and the other subset automatically satisfies the condition
+ * - When k > 2, we need to track multiple subsets simultaneously, making it harder to define
+ * a clear DP state, so we use backtracking to explore all possibilities
+ */
+
 import java.util.*;
 
 public class _734_a_PartitionKSubsetsIntro {
