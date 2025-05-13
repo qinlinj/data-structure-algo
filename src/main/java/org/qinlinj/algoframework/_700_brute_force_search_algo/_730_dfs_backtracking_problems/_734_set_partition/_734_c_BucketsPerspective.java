@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._700_brute_force_search_algo._730_dfs_backtracking_problems._734_set_partition;
+
+public class _734_c_BucketsPerspective {
+}
