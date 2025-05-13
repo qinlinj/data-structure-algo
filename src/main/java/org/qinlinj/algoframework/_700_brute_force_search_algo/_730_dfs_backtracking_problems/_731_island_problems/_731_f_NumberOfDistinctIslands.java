@@ -33,4 +33,43 @@ public class _731_f_NumberOfDistinctIslands {
         // The number of distinct islands is the size of the HashSet
         return distinctIslands.size();
     }
+
+    /**
+     * DFS function to generate a path signature for an island
+     *
+     * @param grid - the input grid
+     * @param i,   j - current position
+     * @param sb   - StringBuilder to build the path signature
+     * @param dir  - direction from which we arrived at current position
+     */
+    private void dfs(int[][] grid, int i, int j, StringBuilder sb, char dir) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        // Check boundary conditions
+        if (i < 0 || j < 0 || i >= m || j >= n) {
+            return;
+        }
+
+        // If current cell is not land, return
+        if (grid[i][j] == 0) {
+            return;
+        }
+
+        // Mark current cell as visited
+        grid[i][j] = 0;
+
+        // Append the current direction to the path signature
+        sb.append(dir);
+
+        // Explore in all four directions with distinct direction codes
+        dfs(grid, i - 1, j, sb, 'u'); // Up
+        dfs(grid, i + 1, j, sb, 'd'); // Down
+        dfs(grid, i, j - 1, sb, 'l'); // Left
+        dfs(grid, i, j + 1, sb, 'r'); // Right
+
+        // Append a backtrack marker
+        // This is crucial for distinguishing different shapes
+        sb.append('b'); // Backtrack
+    }
 }
