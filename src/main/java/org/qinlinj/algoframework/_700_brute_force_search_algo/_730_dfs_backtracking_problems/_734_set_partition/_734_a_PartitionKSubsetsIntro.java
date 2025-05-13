@@ -27,4 +27,44 @@ public class _734_a_PartitionKSubsetsIntro {
         // Start the backtracking process
         return canPartition(nums, 0, buckets, targetSum);
     }
+
+    /**
+     * Simple backtracking approach from the elements' perspective
+     * This method attempts to assign each element to one of k buckets
+     */
+    private boolean canPartition(int[] nums, int index, int[] buckets, int targetSum) {
+        // Base case: all elements have been placed in buckets
+        if (index == nums.length) {
+            // Check if all buckets have the target sum
+            for (int bucket : buckets) {
+                if (bucket != targetSum) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Try to place the current element in each bucket
+        for (int i = 0; i < buckets.length; i++) {
+            // Skip if adding the current element would exceed the target sum
+            if (buckets[i] + nums[index] > targetSum) {
+                continue;
+            }
+
+            // Place the element in the current bucket
+            buckets[i] += nums[index];
+
+            // Recursively try to place the next element
+            if (canPartition(nums, index + 1, buckets, targetSum)) {
+                return true;
+            }
+
+            // Backtrack: remove the element from the current bucket
+            buckets[i] -= nums[index];
+        }
+
+        // Cannot partition the array with the current arrangement
+        return false;
+    }
+
 }
