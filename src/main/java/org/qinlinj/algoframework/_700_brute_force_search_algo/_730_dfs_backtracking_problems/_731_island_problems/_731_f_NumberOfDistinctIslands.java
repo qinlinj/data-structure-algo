@@ -1,8 +1,62 @@
 package org.qinlinj.algoframework._700_brute_force_search_algo._730_dfs_backtracking_problems._731_island_problems;
 
+/**
+ * Number of Distinct Islands (LeetCode 694)
+ * <p>
+ * Problem:
+ * Given a 2D grid where 1 represents land and 0 represents water, count the number of distinct
+ * islands. Islands are considered distinct if their shapes are different (not just rotations or
+ * reflections of each other).
+ * <p>
+ * Key insight:
+ * We need a way to encode the shape of each island so we can identify duplicates.
+ * The traversal path of DFS can serve as a unique signature for an island's shape.
+ * <p>
+ * Algorithm:
+ * 1. Traverse the grid and for each island, generate a path signature using DFS
+ * 2. Store the signatures in a HashSet to eliminate duplicates
+ * 3. The size of the HashSet represents the number of distinct islands
+ * <p>
+ * The path signature:
+ * - We record the direction of each move in the DFS (up, down, left, right)
+ * - We also record when we backtrack from each direction
+ * - This creates a unique "path signature" for islands of the same shape
+ * <p>
+ * Time Complexity: O(m*n) where m is the number of rows and n is the number of columns
+ * Space Complexity: O(m*n) for storing the path signatures
+ */
+
 import java.util.*;
 
 public class _731_f_NumberOfDistinctIslands {
+
+    /**
+     * Example usage
+     */
+    public static void main(String[] args) {
+        _731_f_NumberOfDistinctIslands solution = new _731_f_NumberOfDistinctIslands();
+
+        // Example 1: Grid with islands of 3 distinct shapes
+        int[][] grid1 = {
+                {1, 1, 0, 0, 0},
+                {1, 1, 0, 0, 0},
+                {0, 0, 0, 1, 1},
+                {0, 0, 0, 1, 1}
+        };
+
+        System.out.println("Number of distinct islands in grid1: " + solution.numDistinctIslands(grid1));
+
+        // Example 2: Grid with islands of different shapes
+        int[][] grid2 = {
+                {1, 1, 0, 1, 1},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1},
+                {1, 1, 0, 1, 1}
+        };
+
+        System.out.println("Number of distinct islands in grid2: " + solution.numDistinctIslandsAlt(grid2));
+    }
+
     /**
      * Main function to count the number of distinct islands
      */
@@ -38,9 +92,9 @@ public class _731_f_NumberOfDistinctIslands {
      * DFS function to generate a path signature for an island
      *
      * @param grid - the input grid
-     * @param i,   j - current position
-     * @param sb   - StringBuilder to build the path signature
-     * @param dir  - direction from which we arrived at current position
+     * @param i, j - current position
+     * @param sb - StringBuilder to build the path signature
+     * @param dir - direction from which we arrived at current position
      */
     private void dfs(int[][] grid, int i, int j, StringBuilder sb, char dir) {
         int m = grid.length;
