@@ -72,4 +72,30 @@ public class _731_f_NumberOfDistinctIslands {
         // This is crucial for distinguishing different shapes
         sb.append('b'); // Backtrack
     }
+
+    /**
+     * Alternative implementation using a direction array and numeric codes
+     */
+    public int numDistinctIslandsAlt(int[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+
+        int m = grid.length;
+        int n = grid[0].length;
+        HashSet<String> islands = new HashSet<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    StringBuilder sb = new StringBuilder();
+                    // Use a numeric code (666 is arbitrary)
+                    dfsAlt(grid, i, j, sb, 666);
+                    islands.add(sb.toString());
+                }
+            }
+        }
+
+        return islands.size();
+    }
 }
