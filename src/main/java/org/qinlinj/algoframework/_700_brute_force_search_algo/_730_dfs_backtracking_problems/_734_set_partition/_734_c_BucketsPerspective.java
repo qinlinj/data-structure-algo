@@ -76,4 +76,26 @@ public class _734_c_BucketsPerspective {
         // Cannot fill the current bucket with the available elements
         return false;
     }
+
+    /**
+     * Optimized version with memoization to avoid redundant calculations
+     */
+    public boolean canPartitionKSubsetsOptimized(int[] nums, int k) {
+        // Basic validation
+        if (k > nums.length) return false;
+
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        if (sum % k != 0) return false;
+
+        int target = sum / k;
+
+        // Using bit manipulation to represent the 'used' state
+        // Instead of boolean[] used, we use an integer where each bit represents
+        // whether an element is used or not
+        return backtrackWithMemo(k, 0, nums, 0, 0, target, new HashMap<>());
+    }
 }
