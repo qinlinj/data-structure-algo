@@ -98,4 +98,25 @@ public class _731_f_NumberOfDistinctIslands {
 
         return islands.size();
     }
+
+    private void dfsAlt(int[][] grid, int i, int j, StringBuilder sb, int dir) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] == 0) {
+            return;
+        }
+
+        grid[i][j] = 0;
+        sb.append(dir).append(',');
+
+        // Direction codes: 1 = up, 2 = down, 3 = left, 4 = right
+        dfsAlt(grid, i - 1, j, sb, 1); // Up
+        dfsAlt(grid, i + 1, j, sb, 2); // Down
+        dfsAlt(grid, i, j - 1, sb, 3); // Left
+        dfsAlt(grid, i, j + 1, sb, 4); // Right
+
+        // Important: record backtracking with negative direction
+        sb.append(-dir).append(',');
+    }
 }
