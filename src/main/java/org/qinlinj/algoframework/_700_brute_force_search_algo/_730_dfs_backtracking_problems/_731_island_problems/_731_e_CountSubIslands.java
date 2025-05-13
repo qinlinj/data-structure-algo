@@ -38,4 +38,31 @@ public class _731_e_CountSubIslands {
 
         return subIslandCount;
     }
+
+    /**
+     * DFS function to "sink" an island by changing all connected 1's to 0's
+     */
+    private void dfs(int[][] grid, int i, int j) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        // Check boundary conditions
+        if (i < 0 || j < 0 || i >= m || j >= n) {
+            return;
+        }
+
+        // If current cell is not land, return
+        if (grid[i][j] == 0) {
+            return;
+        }
+
+        // Mark current cell as visited by changing it to water
+        grid[i][j] = 0;
+
+        // Recursively check all adjacent cells
+        dfs(grid, i + 1, j); // Down
+        dfs(grid, i - 1, j); // Up
+        dfs(grid, i, j + 1); // Right
+        dfs(grid, i, j - 1); // Left
+    }
 }
