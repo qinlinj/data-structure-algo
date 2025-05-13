@@ -101,4 +101,28 @@ public class _734_b_ElementsPerspective {
             right--;
         }
     }
+
+    /**
+     * Helper method to demonstrate the solution with examples
+     */
+    public void runExamples() {
+        // Example 1
+        int[] nums1 = {4, 3, 2, 3, 5, 2, 1};
+        int k1 = 4;
+        System.out.println("Example 1: " + Arrays.toString(nums1) + ", k = " + k1);
+        System.out.println("Can partition: " + canPartitionKSubsets(nums1, k1));
+
+        // Example 2
+        int[] nums2 = {1, 2, 3, 4};
+        int k2 = 3;
+        System.out.println("Example 2: " + Arrays.toString(nums2) + ", k = " + k2);
+        System.out.println("Can partition: " + canPartitionKSubsets(nums2, k2));
+
+        // Example 3 - this will be more challenging
+        int[] nums3 = {2, 2, 2, 2, 3, 4, 5};
+        int k3 = 4;
+        System.out.println("Example 3: " + Arrays.toString(nums3) + ", k = " + k3);
+        System.out.println("Can partition: " + canPartitionKSubsets(nums3, k3));
+    }
+
 }
