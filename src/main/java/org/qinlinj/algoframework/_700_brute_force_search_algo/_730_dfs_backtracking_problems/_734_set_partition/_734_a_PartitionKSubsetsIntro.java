@@ -3,6 +3,28 @@ package org.qinlinj.algoframework._700_brute_force_search_algo._730_dfs_backtrac
 import java.util.*;
 
 public class _734_a_PartitionKSubsetsIntro {
+
+    /**
+     * Main method to demonstrate the problem
+     */
+    public static void main(String[] args) {
+        _734_a_PartitionKSubsetsIntro solution = new _734_a_PartitionKSubsetsIntro();
+
+        System.out.println("Partition to K Equal Sum Subsets Problem (LeetCode 698)");
+        System.out.println("=======================================================");
+        System.out.println("Given an array of integers and a number k, determine if it's possible");
+        System.out.println("to divide the array into k non-empty subsets with equal sums.\n");
+
+        solution.demonstrateExample();
+
+        System.out.println("\nApproaches to solve this problem:");
+        System.out.println("1. Element's perspective: decide which bucket each element goes into");
+        System.out.println("2. Bucket's perspective: decide which elements to include in each bucket");
+        System.out.println("\nBoth approaches use backtracking, but with different time complexities:");
+        System.out.println("- Element's perspective: O(k^n) - each of n elements has k choices");
+        System.out.println("- Bucket's perspective: O(k*2^n) - for each of k buckets, each element is either included or not");
+    }
+
     /**
      * Basic implementation of canPartitionKSubsets to validate if an array
      * can be divided into k subsets with equal sum
@@ -101,5 +123,4 @@ public class _734_a_PartitionKSubsetsIntro {
         System.out.println("Can partition into " + k2 + " equal subsets? " +
                 canPartitionKSubsets(example2, k2));
     }
-
 }
