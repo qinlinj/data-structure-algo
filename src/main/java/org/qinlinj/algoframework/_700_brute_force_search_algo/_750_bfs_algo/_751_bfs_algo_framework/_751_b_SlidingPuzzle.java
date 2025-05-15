@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_framework._751_bfs_algo; /**
+package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_algo._751_bfs_algo_framework; /**
  * Sliding Puzzle Problem (LeetCode 773)
  * --------------------------------------
  * <p>
@@ -42,6 +42,7 @@ public class _751_b_SlidingPuzzle {
 
     /**
      * Solves the sliding puzzle using BFS to find minimum number of moves
+     *
      * @param board The initial state of the puzzle as a 2x3 array
      * @return Minimum number of moves to solve or -1 if impossible
      */
@@ -95,6 +96,7 @@ public class _751_b_SlidingPuzzle {
 
     /**
      * Get all possible next states by moving the empty space
+     *
      * @param board Current state as a string
      * @return List of possible next states
      */
@@ -125,9 +127,10 @@ public class _751_b_SlidingPuzzle {
 
     /**
      * Swap two characters in a string
+     *
      * @param chars String as char array
-     * @param i First position
-     * @param j Second position
+     * @param i     First position
+     * @param j     Second position
      * @return New string after swapping
      */
     private String swap(char[] chars, int i, int j) {

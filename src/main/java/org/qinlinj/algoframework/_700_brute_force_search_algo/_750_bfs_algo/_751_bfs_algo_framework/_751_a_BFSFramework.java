@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_framework._751_bfs_algo; /**
+package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_algo._751_bfs_algo_framework; /**
  * BFS Algorithm Framework
  * ----------------------
  * <p>
@@ -65,7 +65,8 @@ public class _751_a_BFSFramework {
 
     /**
      * Standard BFS framework to find the shortest path from start to target
-     * @param start The starting node
+     *
+     * @param start  The starting node
      * @param target The target node we're searching for
      * @return The shortest distance (number of steps) or -1 if not found
      */

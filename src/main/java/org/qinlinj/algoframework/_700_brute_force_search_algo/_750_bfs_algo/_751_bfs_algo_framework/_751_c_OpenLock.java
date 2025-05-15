@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_framework._751_bfs_algo; /**
+package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_algo._751_bfs_algo_framework; /**
  * Open Lock Problem (LeetCode 752)
  * --------------------------------
  * <p>
@@ -45,8 +45,9 @@ public class _751_c_OpenLock {
 
     /**
      * Finds the minimum number of moves to open the lock
+     *
      * @param deadends Combinations that will lock the lock permanently
-     * @param target The target combination to reach
+     * @param target   The target combination to reach
      * @return Minimum number of moves or -1 if impossible
      */
     public int openLock(String[] deadends, String target) {
@@ -99,6 +100,7 @@ public class _751_c_OpenLock {
 
     /**
      * Get all possible combinations by rotating one digit
+     *
      * @param combination Current lock combination
      * @return List of all possible next combinations
      */
@@ -118,6 +120,7 @@ public class _751_c_OpenLock {
 
     /**
      * Rotate the digit at position j upward (9 -> 0)
+     *
      * @param s Current combination
      * @param j Position to rotate
      * @return New combination after rotation
@@ -136,6 +139,7 @@ public class _751_c_OpenLock {
 
     /**
      * Rotate the digit at position j downward (0 -> 9)
+     *
      * @param s Current combination
      * @param j Position to rotate
      * @return New combination after rotation

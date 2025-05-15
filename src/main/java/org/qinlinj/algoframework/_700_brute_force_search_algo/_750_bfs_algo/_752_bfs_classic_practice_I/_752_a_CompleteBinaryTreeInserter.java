@@ -1,4 +1,4 @@
-package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_framework._752_bfs_algo_framework; /**
+package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_algo._752_bfs_classic_practice_I; /**
  * Complete Binary Tree Inserter (LeetCode 919)
  * -------------------------------------------
  * <p>
@@ -56,6 +56,7 @@ public class _752_a_CompleteBinaryTreeInserter {
 
     /**
      * Initialize the CBTInserter with the root of a complete binary tree
+     *
      * @param root The root of a complete binary tree
      */
     public _752_a_CompleteBinaryTreeInserter(TreeNode root) {
@@ -123,6 +124,7 @@ public class _752_a_CompleteBinaryTreeInserter {
 
     /**
      * Insert a new node with the given value
+     *
      * @param val Value of the new node to insert
      * @return The value of the parent node of the inserted node
      */
@@ -149,6 +151,7 @@ public class _752_a_CompleteBinaryTreeInserter {
 
     /**
      * Get the root of the tree
+     *
      * @return The root node of the tree
      */
     public TreeNode get_root() {

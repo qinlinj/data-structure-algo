@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_framework._751_bfs_algo; /**
+package org.qinlinj.algoframework._700_brute_force_search_algo._750_bfs_algo._751_bfs_algo_framework;
+
+/**
  * BFS Algorithm Summary
  * --------------------
  * <p>
