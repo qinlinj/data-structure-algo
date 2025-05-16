@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._810_dp_basic_techniques._812_longest_increasing_subsequence;
+
+public class _812_d_DPProblemSolvingTechniques {
+}
