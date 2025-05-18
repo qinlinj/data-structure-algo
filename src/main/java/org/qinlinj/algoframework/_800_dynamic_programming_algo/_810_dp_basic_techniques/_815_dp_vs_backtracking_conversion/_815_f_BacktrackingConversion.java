@@ -2,6 +2,38 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._810_dp_basic_te
 
 import java.util.*;
 
+/**
+ * Main Class to Demonstrate All Concepts and Implementations
+ * <p>
+ * This class ties together all the concepts covered in the previous classes,
+ * providing a unified entry point to understand the relationships between the
+ * different approaches to recursive problem-solving.
+ * <p>
+ * The class demonstrates:
+ * 1. How to approach the same problem using different recursive paradigms
+ * 2. Performance comparisons between different approaches
+ * 3. Guidelines for selecting the appropriate algorithm based on problem characteristics
+ * <p>
+ * Key Takeaways:
+ * <p>
+ * - Recursive problem-solving can be approached using either "traversal" (backtracking)
+ * or "problem decomposition" (dynamic programming) techniques
+ * <p>
+ * - Backtracking follows a state-space tree traversal approach, exploring all possible
+ * combinations by making choices at each step and undoing them when backtracking
+ * <p>
+ * - Dynamic Programming breaks down problems into smaller subproblems and uses memoization
+ * to avoid redundant calculations of overlapping subproblems
+ * <p>
+ * - The Word Break problems illustrate how these approaches can be applied to the same problem:
+ * - Word Break I: Determine if a string can be segmented into dictionary words
+ * - Word Break II: Find all possible ways to segment a string
+ * <p>
+ * - For problems requiring all possible solutions, backtracking is often more intuitive,
+ * while DP can be more efficient for problems with optimal substructure and overlapping subproblems
+ * <p>
+ * - Hybrid approaches that combine elements of both techniques can sometimes offer the best solution
+ */
 public class _815_f_BacktrackingConversion {
     public static void main(String[] args) {
         System.out.println("Recursive Problem-Solving Techniques Demonstration");
