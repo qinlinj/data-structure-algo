@@ -1,27 +1,68 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._810_dp_basic_techniques._817_optimal_substructure_and_traversal_direction;
 
 /**
- * Class: Identifying Overlapping Subproblems
+ * IDENTIFYING OVERLAPPING SUBPROBLEMS IN DYNAMIC PROGRAMMING
  * <p>
  * Key Points:
- * 1. Overlapping subproblems occur when the same subproblem is solved multiple times.
- * 2. Methods to identify overlapping subproblems:
- * a. Drawing the recursion tree to visually see repeated calculations
- * b. Analyzing the recursive framework to find multiple paths to the same state
- * 3. If multiple paths lead to the same state, overlapping subproblems exist.
- * 4. When overlapping subproblems are identified, memoization or tabulation can be used for optimization.
+ * <p>
+ * 1. Overlapping subproblems occur when the same subproblem needs to be solved multiple times
+ * in a recursive solution.
+ * <p>
+ * 2. Techniques to identify overlapping subproblems:
+ * - Drawing the recursion tree to visualize repeated calculations
+ * - Analyzing the recursive framework of the solution
+ * <p>
+ * 3. Analyzing the recursive framework:
+ * - Strip away the code details to focus on state transitions
+ * - If there are multiple paths to reach the same state, overlapping subproblems exist
+ * <p>
+ * 4. Examples:
+ * - Fibonacci sequence: F(5) requires calculating F(3) multiple times
+ * - Minimum path sum: Multiple paths can lead to the same cell (i,j)
+ * - Regular expression matching: Multiple paths can lead to the same state (i,j)
+ * <p>
+ * 5. When overlapping subproblems are identified, memoization (top-down) or tabulation (bottom-up)
+ * can be used to optimize the solution.
  */
 public class _817_b_OverlappingSubproblems {
 
-    // Example 1: Fibonacci sequence (classic example of overlapping subproblems)
-    public int fibonacci(int n) {
+    /**
+     * Example 1: Fibonacci Sequence
+     * Classic example of overlapping subproblems.
+     * Without memoization, F(5) will recalculate F(3) multiple times.
+     */
+    public static int fibonacci(int n) {
+        // Base cases
         if (n <= 1) return n;
-        // Two recursive calls that will create overlapping subproblems
+
+        // Recursive case with overlapping subproblems
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
-    // Example 2: Minimum Path Sum problem (has overlapping subproblems)
-    public int minPathSum(int[][] grid, int i, int j) {
+    /**
+     * Example 1 (Optimized): Fibonacci with memoization
+     * Avoids recalculating the same subproblems.
+     */
+    public static int fibonacciMemo(int n, Integer[] memo) {
+        // Base cases
+        if (n <= 1) return n;
+
+        // If already calculated, return from memo
+        if (memo[n] != null) return memo[n];
+
+        // Calculate and store in memo
+        memo[n] = fibonacciMemo(n - 1, memo) + fibonacciMemo(n - 2, memo);
+        return memo[n];
+    }
+
+    /**
+     * Example 2: Minimum Path Sum
+     * Recursive solution with overlapping subproblems.
+     * The abstract recursive framework is:
+     * dp(i,j) = min(dp(i-1,j), dp(i,j-1)) + grid[i][j]
+     */
+    public static int minPathSum(int[][] grid, int i, int j) {
+        // Base case
         if (i == 0 && j == 0) {
             return grid[0][0];
         }
@@ -29,79 +70,74 @@ public class _817_b_OverlappingSubproblems {
             return Integer.MAX_VALUE;
         }
 
-        // Analysis of recursive framework:
-        // Multiple paths can reach state (i-1, j-1):
-        // Path 1: (i,j) -> (i-1,j) -> (i-1,j-1)
-        // Path 2: (i,j) -> (i,j-1) -> (i-1,j-1)
-        // This indicates overlapping subproblems
+        // Recursive case with overlapping subproblems
         return Math.min(
-                minPathSum(grid, i - 1, j),  // Path 1
-                minPathSum(grid, i, j - 1)   // Path 2
+                minPathSum(grid, i - 1, j),
+                minPathSum(grid, i, j - 1)
         ) + grid[i][j];
     }
 
-    // Example 3: Optimized Minimum Path Sum with memoization
-    public int minPathSumMemoized(int[][] grid) {
-        int m = grid.length, n = grid[0].length;
-        Integer[][] memo = new Integer[m][n];
-        return dpMinPath(grid, m - 1, n - 1, memo);
-    }
+    /**
+     * Example 2 (Optimized): Minimum Path Sum with memoization
+     */
+    public static int minPathSumMemo(int[][] grid, int i, int j, Integer[][] memo) {
+        // Base case
+        if (i == 0 && j == 0) {
+            return grid[0][0];
+        }
+        if (i < 0 || j < 0) {
+            return Integer.MAX_VALUE;
+        }
 
-    private int dpMinPath(int[][] grid, int i, int j, Integer[][] memo) {
-        if (i == 0 && j == 0) return grid[0][0];
-        if (i < 0 || j < 0) return Integer.MAX_VALUE;
-
-        // If we've already calculated this state, return it
+        // If already calculated, return from memo
         if (memo[i][j] != null) return memo[i][j];
 
-        // Calculate and store the result for this state
+        // Calculate and store in memo
         memo[i][j] = Math.min(
-                dpMinPath(grid, i - 1, j, memo),
-                dpMinPath(grid, i, j - 1, memo)
+                minPathSumMemo(grid, i - 1, j, memo),
+                minPathSumMemo(grid, i, j - 1, memo)
         ) + grid[i][j];
 
         return memo[i][j];
     }
 
-    // Example 4: Regular expression matching (complex example with overlapping subproblems)
-    public boolean isMatch(String s, String p) {
-        return dp(s, 0, p, 0);
+    /**
+     * Example 3: Abstract framework of regular expression matching
+     * Simplified version to demonstrate the state transition framework
+     * Actual implementation would be more complex
+     */
+    public static void demonstrateRegexFramework() {
+        System.out.println("Regular Expression Matching Framework:");
+        System.out.println("boolean dp(String s, int i, String p, int j) {");
+        System.out.println("    dp(s, i, p, j + 2);     // #1");
+        System.out.println("    dp(s, i + 1, p, j);     // #2");
+        System.out.println("    dp(s, i + 1, p, j + 1); // #3");
+        System.out.println("}");
+        System.out.println("Multiple paths to reach (i+2, j+2):");
+        System.out.println("Path 1: (i,j) -> #1 -> #2 -> #2");
+        System.out.println("Path 2: (i,j) -> #3 -> #3");
+        System.out.println("This proves overlapping subproblems exist!");
     }
 
-    private boolean dp(String s, int i, String p, int j) {
-        int m = s.length(), n = p.length();
+    public static void main(String[] args) {
+        // Example 1: Fibonacci
+        int n = 10;
+        System.out.println("Fibonacci(" + n + ") without memo: " + fibonacci(n));
+        System.out.println("Fibonacci(" + n + ") with memo: " + fibonacciMemo(n, new Integer[n + 1]));
 
-        // Base cases
-        if (j == n) return i == m;
-        if (i == m) {
-            if ((n - j) % 2 == 1) return false;
-            for (; j + 1 < n; j += 2) {
-                if (p.charAt(j + 1) != '*') return false;
-            }
-            return true;
-        }
+        // Example 2: Minimum Path Sum
+        int[][] grid = {
+                {1, 3, 1},
+                {1, 5, 1},
+                {4, 2, 1}
+        };
+        int m = grid.length;
+        n = grid[0].length;
+        System.out.println("Minimum Path Sum without memo: " + minPathSum(grid, m - 1, n - 1));
+        System.out.println("Minimum Path Sum with memo: " + minPathSumMemo(grid, m - 1, n - 1, new Integer[m][n]));
 
-        // Recursive framework:
-        // Multiple paths can reach state (i+2, j+2):
-        // Path 1: (i,j) -> (i,j+2) -> (i+1,j+2) -> (i+2,j+2)
-        // Path 2: (i,j) -> (i+1,j+1) -> (i+2,j+2)
-        // This indicates overlapping subproblems
-
-        boolean res = false;
-        if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.') {
-            if (j < n - 1 && p.charAt(j + 1) == '*') {
-                res = dp(s, i, p, j + 2) || dp(s, i + 1, p, j);
-            } else {
-                res = dp(s, i + 1, p, j + 1);
-            }
-        } else {
-            if (j < n - 1 && p.charAt(j + 1) == '*') {
-                res = dp(s, i, p, j + 2);
-            } else {
-                res = false;
-            }
-        }
-
-        return res;
+        // Example 3: Regular Expression Framework
+        demonstrateRegexFramework();
     }
 }
+
