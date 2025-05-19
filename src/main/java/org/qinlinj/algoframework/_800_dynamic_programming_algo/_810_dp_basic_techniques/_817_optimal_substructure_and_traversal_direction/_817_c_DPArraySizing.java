@@ -9,7 +9,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._810_dp_basic_te
  * 3. The index offset allows us to use index 0 for representing empty states.
  * 4. The definition of what dp[i][j] represents should be clear and consistent.
  */
-public class _817_c_DPArraySizeSetting {
+public class _817_c_DPArraySizing {
 
     // Example: Edit Distance problem 
     // Recursive solution (top-down)
