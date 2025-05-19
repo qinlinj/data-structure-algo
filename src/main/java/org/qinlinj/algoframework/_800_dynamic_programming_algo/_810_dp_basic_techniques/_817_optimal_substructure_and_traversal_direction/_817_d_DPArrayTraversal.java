@@ -17,7 +17,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._810_dp_basic_te
  * c. Dependencies between states in the state transition equation
  * 4. Sometimes multiple traversal directions can yield correct results.
  */
-public class _817_d_DPArrayTraversalDirection {
+public class _817_d_DPArrayTraversal {
 
     // Example 1: Edit Distance - Forward Traversal
     // Base cases are dp[0][j] and dp[i][0]
