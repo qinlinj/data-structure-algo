@@ -216,10 +216,10 @@ public class _821_f_EditDistanceSummary {
 
         // Space complexity comparison
         System.out.println("\nSpace Complexity Comparison:");
-        System.out.println("Basic DP solution: O(m×n) = O(" + m * n + ")");
-        System.out.println("Space-optimized (two rows): O(2×min(m,n)) = O(" + 2 * Math.min(m, n) + ")");
-        System.out.println("Space-optimized (single row): O(min(m,n)) = O(" + Math.min(m, n) + ")");
-        System.out.println("Operation tracking: O(m×n) = O(" + m * n + ")");
+        System.out.println("Basic DP solution: O(m×n) = O( + m * n + )");
+        System.out.println("Space-optimized (two rows): O(2×min(m,n)) = O( + 2 * Math.min(m, n) + )");
+        System.out.println("Space-optimized (single row): O(min(m,n)) = O( + Math.min(m, n) + )");
+        System.out.println("Operation tracking: O(m×n) = O( + m * n + )");
     }
 
     /**
