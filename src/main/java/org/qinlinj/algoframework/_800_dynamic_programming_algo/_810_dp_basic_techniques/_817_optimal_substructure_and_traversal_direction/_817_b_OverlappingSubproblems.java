@@ -11,7 +11,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._810_dp_basic_te
  * 3. If multiple paths lead to the same state, overlapping subproblems exist.
  * 4. When overlapping subproblems are identified, memoization or tabulation can be used for optimization.
  */
-public class _817_b_IdentifyingOverlappingSubproblems {
+public class _817_b_OverlappingSubproblems {
 
     // Example 1: Fibonacci sequence (classic example of overlapping subproblems)
     public int fibonacci(int n) {
