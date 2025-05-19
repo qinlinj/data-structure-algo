@@ -1,46 +1,35 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._820_subsequence_problems._821_edit_distance;
 
- *
-         * Key Points:
-        *
-        * 1. Beyond minimum edit distance, we often need to know the exact operations required
- *    for the transformation.
-        *
-        * 2. Operation tracking approach:
-        *    - Extend the DP table to store both the distance value and the operation type
- *    - Operation types: Skip (0), Insert (1), Delete (2), Replace (3)
-        *    - After filling the DP table, backtrack from the bottom-right to determine the sequence
- *      of operations
- *
-         * 3. Backtracking process:
-        *    - Start from dp[m][n] (bottom-right cell)
-        *    - For each cell, check its operation type
- *    - Move to the previous cell based on the operation type
- *    - Continue until reaching dp[0][0]
-        *
-        * 4. Real-world applications:
-        *    - Text diff tools showing exact changes between versions
- *    - Spell checkers suggesting specific corrections
- *    - DNA sequence alignment tools highlighting mutations
- *    - Text editing tools with "track changes" functionality
- *
-         * 5. This enhanced version maintains the same O(m×n) time and space complexity
- *    as the basic DP solution, but provides much more practical information.
-        */
+/**
+ * EDIT DISTANCE - OPERATION TRACKING AND PRACTICAL APPLICATION
+ * <p>
+ * Key Points:
+ * <p>
+ * 1. Beyond minimum edit distance, we often need to know the exact operations required
+ * for the transformation.
+ * <p>
+ * 2. Operation tracking approach:
+ * - Extend the DP table to store both the distance value and the operation type
+ * - Operation types: Skip (0), Insert (1), Delete (2), Replace (3)
+ * - After filling the DP table, backtrack from the bottom-right to determine the sequence
+ * of operations
+ * <p>
+ * 3. Backtracking process:
+ * - Start from dp[m][n] (bottom-right cell)
+ * - For each cell, check its operation type
+ * - Move to the previous cell based on the operation type
+ * - Continue until reaching dp[0][0]
+ * <p>
+ * 4. Real-world applications:
+ * - Text diff tools showing exact changes between versions
+ * - Spell checkers suggesting specific corrections
+ * - DNA sequence alignment tools highlighting mutations
+ * - Text editing tools with "track changes" functionality
+ * <p>
+ * 5. This enhanced version maintains the same O(m×n) time and space complexity
+ * as the basic DP solution, but provides much more practical information.
+ */
 public class _821_e_EditDistanceOperationTracking {
-
-    /**
-     * Node class to store both value and operation in the DP table
-     */
-    static class Node {
-        int val;     // Edit distance value
-        int choice;  // Operation code: 0=skip, 1=insert, 2=delete, 3=replace
-
-        public Node(int val, int choice) {
-            this.val = val;
-            this.choice = choice;
-        }
-    }
 
     /**
      * Calculates minimum edit distance and tracks operations
@@ -194,7 +183,8 @@ public class _821_e_EditDistanceOperationTracking {
             switch (choice) {
                 case 0:
                     operations.add("Skip '" + c1 + "'");
-                    i--; j--;
+                    i--;
+                    j--;
                     break;
                 case 1:
                     operations.add("Insert '" + c2 + "'");
@@ -206,7 +196,8 @@ public class _821_e_EditDistanceOperationTracking {
                     break;
                 case 3:
                     operations.add("Replace '" + c1 + "' with '" + c2 + "'");
-                    i--; j--;
+                    i--;
+                    j--;
                     break;
             }
         }
@@ -263,5 +254,18 @@ public class _821_e_EditDistanceOperationTracking {
         System.out.println("2. Version control systems to visualize differences between files");
         System.out.println("3. DNA sequence alignment to identify mutations");
         System.out.println("4. Spell checkers to suggest corrections");
+    }
+
+    /**
+     * Node class to store both value and operation in the DP table
+     */
+    static class Node {
+        int val;     // Edit distance value
+        int choice;  // Operation code: 0=skip, 1=insert, 2=delete, 3=replace
+
+        public Node(int val, int choice) {
+            this.val = val;
+            this.choice = choice;
+        }
     }
 }
