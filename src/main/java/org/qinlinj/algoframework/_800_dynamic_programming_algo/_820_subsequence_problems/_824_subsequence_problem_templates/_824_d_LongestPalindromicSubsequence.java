@@ -117,4 +117,35 @@ public class _824_d_LongestPalindromicSubsequence {
             System.out.println();
         }
     }
+
+    /**
+     * Reconstructs the longest palindromic subsequence from the DP matrix
+     */
+    private static void reconstructLPS(int[][] dp, String s, int i, int j, StringBuilder result) {
+        // Base case: if only one character
+        if (i == j) {
+            result.append(s.charAt(i));
+            return;
+        }
+
+        // Base case: if only two characters and they are equal
+        if (i + 1 == j && s.charAt(i) == s.charAt(j)) {
+            result.append(s.charAt(i));
+            result.append(s.charAt(j));
+            return;
+        }
+
+        // If the first and last characters are the same
+        if (s.charAt(i) == s.charAt(j)) {
+            result.append(s.charAt(i));
+            reconstructLPS(dp, s, i + 1, j - 1, result);
+            result.append(s.charAt(j));
+        }
+        // If the first and last characters are different
+        else if (dp[i][j] == dp[i + 1][j]) {
+            reconstructLPS(dp, s, i + 1, j, result);
+        } else {
+            reconstructLPS(dp, s, i, j - 1, result);
+        }
+    }
 }
