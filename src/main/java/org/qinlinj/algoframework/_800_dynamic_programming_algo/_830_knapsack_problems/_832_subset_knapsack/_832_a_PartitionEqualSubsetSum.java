@@ -1,6 +1,23 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._832_subset_knapsack;
 
 public class _832_a_PartitionEqualSubsetSum {
+    public static void main(String[] args) {
+        // Example 1: Can be partitioned into [1,5,5] and [11]
+        int[] nums1 = {1, 5, 11, 5};
+        System.out.println("Example 1: " + canPartition(nums1));
+
+        // Example 2: Cannot be partitioned equally
+        int[] nums2 = {1, 3, 2, 5};
+        System.out.println("Example 2: " + canPartition(nums2));
+
+        // Example 3: Another example
+        int[] nums3 = {1, 2, 3, 4, 5, 6, 7};
+        System.out.println("Example 3: " + canPartition(nums3));
+
+        // Let's demonstrate the thought process for example 1
+        analyzeExample(nums1);
+    }
+    
     /**
      * Simple implementation to check if array can be partitioned into two equal sum subsets
      * This is just to demonstrate the problem - detailed implementation in later classes
