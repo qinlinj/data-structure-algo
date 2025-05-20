@@ -62,4 +62,44 @@ public class _823_b_LongestCommonSubsequence {
 
         return memo[i][j];
     }
+
+    /**
+     * Bottom-up approach using tabulation
+     */
+    public int minimumDeleteSumBottomUp(String s1, String s2) {
+        int m = s1.length();
+        int n = s2.length();
+
+        // dp[i][j] = minimum ASCII sum of deleted chars to make s1[0...i-1] and s2[0...j-1] equal
+        int[][] dp = new int[m + 1][n + 1];
+
+        // Base case: delete all characters from s1
+        for (int i = 1; i <= m; i++) {
+            dp[i][0] = dp[i - 1][0] + s1.charAt(i - 1);
+        }
+
+        // Base case: delete all characters from s2
+        for (int j = 1; j <= n; j++) {
+            dp[0][j] = dp[0][j - 1] + s2.charAt(j - 1);
+        }
+
+        // Fill the DP table
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    // Characters match, no need to delete
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    // Choose the minimum between deleting from s1 or s2
+                    dp[i][j] = Math.min(
+                            s1.charAt(i - 1) + dp[i - 1][j],  // Delete from s1
+                            s2.charAt(j - 1) + dp[i][j - 1]   // Delete from s2
+                    );
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+
 }
