@@ -90,4 +90,31 @@ public class _824_d_LongestPalindromicSubsequence {
         reconstructLPS(dp, s, 0, n - 1, lps);
         System.out.println("One possible longest palindromic subsequence: " + lps.toString());
     }
+
+    /**
+     * Helper method to print the DP matrix
+     */
+    private static void printDPMatrix(int[][] dp, String s) {
+        int n = s.length();
+
+        // Print column headers
+        System.out.print("    ");
+        for (int j = 0; j < n; j++) {
+            System.out.print(s.charAt(j) + " ");
+        }
+        System.out.println();
+
+        // Print the dp matrix
+        for (int i = 0; i < n; i++) {
+            System.out.print(s.charAt(i) + "   ");
+            for (int j = 0; j < n; j++) {
+                if (j < i) {
+                    System.out.print("- "); // Lower triangle is not used
+                } else {
+                    System.out.print(dp[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
