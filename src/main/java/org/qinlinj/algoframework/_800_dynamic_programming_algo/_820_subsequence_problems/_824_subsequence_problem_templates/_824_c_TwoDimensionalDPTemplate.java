@@ -89,4 +89,26 @@ public class _824_c_TwoDimensionalDPTemplate {
         System.out.println("Length: " + dp[m][n]);
     }
 
+    /**
+     * Print the dp array for visualization
+     */
+    private static void printDP(int[][] dp, String s) {
+        int n = s.length();
+
+        // Print column headers
+        System.out.print("    ");
+        for (int j = 0; j < n; j++) {
+            System.out.print(s.charAt(j) + " ");
+        }
+        System.out.println();
+
+        // Print the dp array
+        for (int i = 0; i < n; i++) {
+            System.out.print(s.charAt(i) + " ");
+            for (int j = 0; j < n; j++) {
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 }
