@@ -42,7 +42,7 @@ public class _832_a_PartitionEqualSubsetSum {
         // Let's demonstrate the thought process for example 1
         analyzeExample(nums1);
     }
-    
+
     /**
      * Simple implementation to check if array can be partitioned into two equal sum subsets
      * This is just to demonstrate the problem - detailed implementation in later classes
