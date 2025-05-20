@@ -185,4 +185,70 @@ public class _832_c_OptimizedSolution {
         }
         System.out.println();
     }
+
+    /**
+     * Attempts to find one possible partition by working backward from target
+     * This is more complex with 1D DP since we don't store the full state history
+     */
+    private static void findPartition(int[] nums, int target) {
+        // Re-run the algorithm to check if partition is possible
+        boolean[] dp = new boolean[target + 1];
+        dp[0] = true;
+
+        // Store which items contribute to each sum
+        // This is a map from sum -> item index that was added to achieve this sum
+        int[][] contributors = new int[target + 1][nums.length];
+        int[] contributorCounts = new int[target + 1];
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = target; j >= nums[i]; j--) {
+                if (!dp[j] && dp[j - nums[i]]) {
+                    dp[j] = true;
+
+                    // Record that item i contributed to sum j
+                    contributors[j][contributorCounts[j]] = i;
+                    contributorCounts[j]++;
+                }
+            }
+        }
+
+        if (!dp[target]) {
+            System.out.println("No solution found.");
+            return;
+        }
+
+        // Trace back from target to find one subset
+        boolean[] included = new boolean[nums.length];
+        int remainingTarget = target;
+
+        while (remainingTarget > 0) {
+            // Get the last item that contributed to this sum
+            int itemIdx = contributors[remainingTarget][contributorCounts[remainingTarget] - 1];
+            included[itemIdx] = true;
+            remainingTarget -= nums[itemIdx];
+        }
+
+        // Print the two subsets
+        System.out.print("Subset 1: [");
+        boolean first = true;
+        for (int i = 0; i < nums.length; i++) {
+            if (included[i]) {
+                if (!first) System.out.print(", ");
+                System.out.print(nums[i]);
+                first = false;
+            }
+        }
+        System.out.println("]");
+
+        System.out.print("Subset 2: [");
+        first = true;
+        for (int i = 0; i < nums.length; i++) {
+            if (!included[i]) {
+                if (!first) System.out.print(", ");
+                System.out.print(nums[i]);
+                first = false;
+            }
+        }
+        System.out.println("]");
+    }
 }
