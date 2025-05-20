@@ -37,4 +37,57 @@ public class _824_d_LongestPalindromicSubsequence {
         // The answer is in dp[0][n-1], representing the entire string
         return dp[0][n - 1];
     }
+
+    /**
+     * Visualizes the DP process for finding the longest palindromic subsequence
+     */
+    public static void visualizeLPS(String s) {
+        int n = s.length();
+        int[][] dp = new int[n][n];
+
+        System.out.println("String: " + s);
+        System.out.println("\nStep-by-step DP calculation:");
+        System.out.println("----------------------------");
+
+        // Initialize the base case
+        System.out.println("Base case: Single characters are palindromes of length 1");
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+
+        System.out.println("\nInitial DP matrix:");
+        printDPMatrix(dp, s);
+
+        // Fill the DP array
+        for (int len = 2; len <= n; len++) {
+            System.out.println("\nProcessing substrings of length " + len + ":");
+
+            for (int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+
+                System.out.println("  Substring s[" + i + "..." + j + "] = \"" + s.substring(i, j + 1) + "\"");
+
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                    System.out.println("    s[" + i + "] = s[" + j + "] = '" + s.charAt(i) + "', adding 2 to inner substring");
+                    System.out.println("    dp[" + i + "][" + j + "] = dp[" + (i + 1) + "][" + (j - 1) + "] + 2 = " + dp[i + 1][j - 1] + " + 2 = " + dp[i][j]);
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                    System.out.println("    s[" + i + "] = '" + s.charAt(i) + "' != s[" + j + "] = '" + s.charAt(j) + "', taking max");
+                    System.out.println("    dp[" + i + "][" + j + "] = max(dp[" + (i + 1) + "][" + j + "], dp[" + i + "][" + (j - 1) + "]) = max(" + dp[i + 1][j] + ", " + dp[i][j - 1] + ") = " + dp[i][j]);
+                }
+            }
+
+            System.out.println("\n  DP matrix after processing length " + len + ":");
+            printDPMatrix(dp, s);
+        }
+
+        System.out.println("\nFinal result: dp[0][" + (n - 1) + "] = " + dp[0][n - 1]);
+        System.out.println("The longest palindromic subsequence has length " + dp[0][n - 1]);
+
+        // Reconstruct the LPS
+        StringBuilder lps = new StringBuilder();
+        reconstructLPS(dp, s, 0, n - 1, lps);
+        System.out.println("One possible longest palindromic subsequence: " + lps.toString());
+    }
 }
