@@ -130,4 +130,31 @@ public class _824_e_MinInsertionsToPalindrome {
         System.out.println("Original: " + s);
         System.out.println("Palindrome: " + result.toString());
     }
+
+    /**
+     * Helper method to print a matrix
+     */
+    private static void printMatrix(int[][] matrix, String s) {
+        int n = s.length();
+
+        // Print column headers
+        System.out.print("    ");
+        for (int j = 0; j < n; j++) {
+            System.out.print(s.charAt(j) + " ");
+        }
+        System.out.println();
+
+        // Print the matrix
+        for (int i = 0; i < n; i++) {
+            System.out.print(s.charAt(i) + "   ");
+            for (int j = 0; j < n; j++) {
+                if (j < i) {
+                    System.out.print("- "); // Lower triangle is not used
+                } else {
+                    System.out.print(matrix[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
