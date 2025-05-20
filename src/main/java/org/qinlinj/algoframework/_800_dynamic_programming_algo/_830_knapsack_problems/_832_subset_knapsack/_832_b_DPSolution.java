@@ -1,6 +1,48 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._832_subset_knapsack;
 
+/**
+ * PARTITION EQUAL SUBSET SUM - DYNAMIC PROGRAMMING SOLUTION
+ * <p>
+ * This class implements the dynamic programming solution to the "Partition Equal Subset Sum"
+ * problem using the framework from the 0-1 Knapsack problem.
+ * <p>
+ * Key Concepts:
+ * <p>
+ * 1. State Definition:
+ * - Two states needed: "current capacity" and "items considered so far"
+ * <p>
+ * 2. DP Array Definition:
+ * - dp[i][j] = true if a subset of the first i items can sum up to j
+ * - dp[i][j] = false otherwise
+ * <p>
+ * 3. State Transition Logic:
+ * - If we don't include current item: dp[i][j] = dp[i-1][j]
+ * - If we include current item: dp[i][j] = dp[i-1][j-nums[i-1]]
+ * - The final value is dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i-1]]
+ * <p>
+ * 4. Base Case:
+ * - dp[i][0] = true (we can always form a sum of 0 by not selecting any element)
+ * - dp[0][j] = false for j > 0 (impossible to form a positive sum with no elements)
+ * <p>
+ * Time Complexity: O(n * sum) where n is the number of items and sum is the target sum
+ * Space Complexity: O(n * sum) for the DP table
+ */
+
 public class _832_b_DPSolution {
+
+    public static void main(String[] args) {
+        // Example 1: Can be partitioned into [1,5,5] and [11]
+        int[] nums1 = {1, 5, 11, 5};
+        System.out.println("Example 1: " + canPartition(nums1));
+
+        // Example 2: Cannot be partitioned equally
+        int[] nums2 = {1, 3, 2, 5};
+        System.out.println("Example 2: " + canPartition(nums2));
+
+        // Let's visualize the DP table for Example 1
+        visualizeDPTable(nums1);
+    }
+
     /**
      * Determines if the array can be partitioned into two equal sum subsets
      * using a 2D dynamic programming approach
