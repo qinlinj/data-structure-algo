@@ -2,6 +2,32 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._820_subsequence
 
 public class _823_c_DeleteOperationForTwoStrings {
     /**
+     * Main method to demonstrate the algorithm
+     */
+    public static void main(String[] args) {
+        _823_c_DeleteOperationForTwoStrings solution = new _823_c_DeleteOperationForTwoStrings();
+
+        // Example 1 from LeetCode
+        String s1 = "sea";
+        String s2 = "eat";
+
+        int result = solution.minDistance(s1, s2);
+        System.out.println("Minimum deletions required: " + result);
+
+        // Detailed explanation
+        System.out.println("\n--- Detailed Explanation ---");
+        solution.explainWithExample(s1, s2);
+
+        // Another example
+        System.out.println("\n\n--- Another Example ---");
+        s1 = "delete";
+        s2 = "leet";
+        result = solution.minDistance(s1, s2);
+        System.out.println("Minimum deletions required: " + result);
+        solution.explainWithExample(s1, s2);
+    }
+
+    /**
      * Calculate the minimum number of deletions required
      */
     public int minDistance(String s1, String s2) {
