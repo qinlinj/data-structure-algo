@@ -1,6 +1,28 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._820_subsequence_problems._823_longest_common_subsequence;
 
+/**
+ * Delete Operation for Two Strings - LeetCode Problem 583
+ * <p>
+ * Problem Description:
+ * Given two strings s1 and s2, return the minimum number of steps required to make s1 and s2 the same.
+ * In each step, you can delete one character from either string.
+ * <p>
+ * Example:
+ * Input: s1 = "sea", s2 = "eat"
+ * Output: 2
+ * Explanation: You need one step to make "sea" to "ea" and another step to make "eat" to "ea".
+ * <p>
+ * Key Insight:
+ * After all the deletions, both strings will become their longest common subsequence (LCS).
+ * Therefore, the minimum number of deletions is:
+ * - From s1: (length of s1) - (length of LCS)
+ * - From s2: (length of s2) - (length of LCS)
+ * <p>
+ * This problem leverages the solution to the Longest Common Subsequence problem,
+ * demonstrating how subsequence problems are often related and can build upon each other.
+ */
 public class _823_c_DeleteOperationForTwoStrings {
+
     /**
      * Main method to demonstrate the algorithm
      */
