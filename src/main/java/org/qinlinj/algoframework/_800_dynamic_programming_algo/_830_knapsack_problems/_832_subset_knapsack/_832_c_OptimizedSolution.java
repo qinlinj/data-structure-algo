@@ -1,6 +1,51 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._832_subset_knapsack;
 
+/**
+ * PARTITION EQUAL SUBSET SUM - OPTIMIZED SOLUTION
+ * <p>
+ * This class presents an optimized solution to the "Partition Equal Subset Sum" problem
+ * by reducing the space complexity from O(n*sum) to O(sum) using a 1D DP array.
+ * <p>
+ * Key Optimizations:
+ * <p>
+ * 1. Space Dimension Reduction:
+ * - Notice that dp[i][j] only depends on values from the previous row (dp[i-1][...])
+ * - This allows us to use a single 1D array instead of a 2D array
+ * <p>
+ * 2. 1D DP Array Definition:
+ * - dp[j] = true if a subset of the current items can sum up to j
+ * - dp[j] = false otherwise
+ * <p>
+ * 3. Critical Implementation Detail:
+ * - Must iterate j from target down to nums[i] (right to left)
+ * - This prevents using the same item multiple times
+ * - If we processed from left to right, we might use an item's result
+ * to update a state that would then be used again for the same item
+ * <p>
+ * Time Complexity: O(n * sum) - same as the 2D solution
+ * Space Complexity: O(sum) - significantly reduced from O(n * sum)
+ */
+
 public class _832_c_OptimizedSolution {
+
+    public static void main(String[] args) {
+        // Example 1: Can be partitioned into [1,5,5] and [11]
+        int[] nums1 = {1, 5, 11, 5};
+        System.out.println("Example 1: " + canPartition(nums1));
+        System.out.println("Example 1 (optimized): " + canPartitionOptimized(nums1));
+
+        // Example 2: Cannot be partitioned equally
+        int[] nums2 = {1, 3, 2, 5};
+        System.out.println("Example 2: " + canPartition(nums2));
+        System.out.println("Example 2 (optimized): " + canPartitionOptimized(nums2));
+
+        // Compare memory usage of both solutions
+        compareMemoryUsage(nums1);
+
+        // Visualize the 1D DP array updates for better understanding
+        visualize1DDP(nums1);
+    }
+
     /**
      * Original 2D DP solution (for comparison)
      */
