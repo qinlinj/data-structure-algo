@@ -1,6 +1,31 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._832_subset_knapsack;
 
+/**
+ * PARTITION EQUAL SUBSET SUM - PROBLEM ANALYSIS
+ * <p>
+ * This class demonstrates how to apply the 0-1 Knapsack problem approach to solve the
+ * "Partition Equal Subset Sum" problem (LeetCode 416).
+ * <p>
+ * Problem Statement:
+ * Given a non-empty array of positive integers nums, determine if the array can be
+ * partitioned into two subsets such that the sum of elements in both subsets is equal.
+ * <p>
+ * Key Insight:
+ * This problem can be transformed into a 0-1 Knapsack problem:
+ * 1. Calculate the total sum of the array
+ * 2. If the sum is odd, return false (impossible to divide equally)
+ * 3. Our target becomes finding a subset with sum = totalSum/2
+ * 4. This is equivalent to: "Can we fill a knapsack of capacity sum/2 using some of the given numbers?"
+ * <p>
+ * Connection to 0-1 Knapsack:
+ * - Items: The numbers in the array
+ * - Item weights: The value of each number
+ * - Knapsack capacity: sum/2
+ * - Goal: Determine if we can exactly fill the knapsack
+ */
+
 public class _832_a_PartitionEqualSubsetSum {
+
     public static void main(String[] args) {
         // Example 1: Can be partitioned into [1,5,5] and [11]
         int[] nums1 = {1, 5, 11, 5};
