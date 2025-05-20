@@ -251,4 +251,54 @@ public class _832_c_OptimizedSolution {
         }
         System.out.println("]");
     }
+
+    /**
+     * Another way to implement the optimized solution with cleaner code
+     * and additional early termination optimizations
+     */
+    public static boolean canPartitionOptimizedCleaner(int[] nums) {
+        // Calculate sum of array elements
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        // If sum is odd, return false
+        if (sum % 2 != 0) {
+            return false;
+        }
+
+        int target = sum / 2;
+
+        // Early termination: if max element is greater than target, can't partition
+        int maxNum = 0;
+        for (int num : nums) {
+            maxNum = Math.max(maxNum, num);
+            if (maxNum > target) {
+                return false;
+            }
+        }
+
+        // Early termination: if max element equals target, we found a partition
+        if (maxNum == target) {
+            return true;
+        }
+
+        // 1D DP array
+        boolean[] dp = new boolean[target + 1];
+        dp[0] = true;
+
+        for (int num : nums) {
+            for (int j = target; j >= num; j--) {
+                dp[j] = dp[j] || dp[j - num];
+            }
+
+            // Early termination: if we can already achieve the target, return true
+            if (dp[target]) {
+                return true;
+            }
+        }
+
+        return dp[target];
+    }
 }
