@@ -39,4 +39,92 @@ public class _823_c_DeleteOperationForTwoStrings {
 
         return dp[m][n];
     }
+
+    /**
+     * Visual demonstration of the solution process
+     */
+    public void explainWithExample(String s1, String s2) {
+        int m = s1.length();
+        int n = s2.length();
+
+        // Step 1: Calculate LCS using the dp approach
+        int[][] dp = new int[m + 1][n + 1];
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        int lcsLength = dp[m][n];
+
+        // Step 2: Reconstruct the LCS
+        StringBuilder lcs = new StringBuilder();
+        int i = m, j = n;
+        while (i > 0 && j > 0) {
+            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                lcs.append(s1.charAt(i - 1));
+                i--;
+                j--;
+            } else if (dp[i - 1][j] > dp[i][j - 1]) {
+                i--;
+            } else {
+                j--;
+            }
+        }
+        String lcsString = lcs.reverse().toString();
+
+        // Step 3: Calculate the deletions
+        int deletionsFromS1 = m - lcsLength;
+        int deletionsFromS2 = n - lcsLength;
+        int totalDeletions = deletionsFromS1 + deletionsFromS2;
+
+        // Display the explanation
+        System.out.println("Given strings:");
+        System.out.println("s1 = \"" + s1 + "\" (length: " + m + ")");
+        System.out.println("s2 = \"" + s2 + "\" (length: " + n + ")");
+
+        System.out.println("\nStep 1: Find the Longest Common Subsequence (LCS)");
+        System.out.println("LCS = \"" + lcsString + "\" (length: " + lcsLength + ")");
+
+        System.out.println("\nStep 2: Calculate minimum deletions");
+        System.out.println("Characters to delete from s1: " + deletionsFromS1 + " (s1.length - LCS.length)");
+        System.out.println("Characters to delete from s2: " + deletionsFromS2 + " (s2.length - LCS.length)");
+        System.out.println("Total deletions required: " + totalDeletions);
+
+        // Show which characters are deleted and which remain
+        System.out.println("\nVisual Representation:");
+
+        // Mark characters in s1
+        System.out.print("s1: ");
+        int lcsIndex = 0;
+        for (i = 0; i < m; i++) {
+            char c = s1.charAt(i);
+            if (lcsIndex < lcsString.length() && c == lcsString.charAt(lcsIndex)) {
+                System.out.print("[" + c + "]"); // Keep
+                lcsIndex++;
+            } else {
+                System.out.print("(" + c + ")"); // Delete
+            }
+        }
+
+        // Reset LCS index for s2
+        lcsIndex = 0;
+        System.out.print("\ns2: ");
+        for (j = 0; j < n; j++) {
+            char c = s2.charAt(j);
+            if (lcsIndex < lcsString.length() && c == lcsString.charAt(lcsIndex)) {
+                System.out.print("[" + c + "]"); // Keep
+                lcsIndex++;
+            } else {
+                System.out.print("(" + c + ")"); // Delete
+            }
+        }
+
+        System.out.println("\n\nWhere: [x] = keep this character, (x) = delete this character");
+    }
 }
