@@ -157,4 +157,31 @@ public class _824_e_MinInsertionsToPalindrome {
             System.out.println();
         }
     }
+
+    /**
+     * Recursively reconstructs one possible palindrome with minimum insertions
+     */
+    private static void reconstructPalindrome(String s, int[][] dp, int i, int j, StringBuilder result, int offset) {
+        // Base case: if only one character or no character
+        if (i >= j) {
+            return;
+        }
+
+        // If characters match, no insertion needed
+        if (s.charAt(i) == s.charAt(j)) {
+            reconstructPalindrome(s, dp, i + 1, j - 1, result, offset + 1);
+        }
+        // If inserting at the end is optimal
+        else if (dp[i][j] == dp[i][j - 1] + 1) {
+            // Insert the character at position i at the end
+            result.insert(j + offset, s.charAt(i));
+            reconstructPalindrome(s, dp, i + 1, j, result, offset + 1);
+        }
+        // Otherwise, inserting at the beginning is optimal
+        else {
+            // Insert the character at position j at the beginning
+            result.insert(i + offset, s.charAt(j));
+            reconstructPalindrome(s, dp, i, j - 1, result, offset + 1);
+        }
+    }
 }
