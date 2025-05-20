@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._820_subsequence_problems._824_subsequence_problem_templates;
+
+public class _824_f_SubsequenceProblemsSummary {
+}
