@@ -37,4 +37,41 @@ public class _832_c_OptimizedSolution {
         return dp[n][target];
     }
 
+    /**
+     * Optimized 1D DP solution with reduced space complexity
+     */
+    public static boolean canPartitionOptimized(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        // If sum is odd, return false
+        if (sum % 2 != 0) {
+            return false;
+        }
+
+        int target = sum / 2;
+
+        // Create 1D DP array
+        boolean[] dp = new boolean[target + 1];
+
+        // Base case: can make sum=0 with empty subset
+        dp[0] = true;
+
+        // Process each item
+        for (int i = 0; i < nums.length; i++) {
+            // IMPORTANT: Iterate from target down to nums[i]
+            // This ensures we don't use the same item multiple times
+            for (int j = target; j >= nums[i]; j--) {
+                // dp[j] = can make sum j without current item
+                // dp[j-nums[i]] = can make sum (j-nums[i]) without current item
+                // If we can make (j-nums[i]) without the current item,
+                // then we can make j by including the current item
+                dp[j] = dp[j] || dp[j - nums[i]];
+            }
+        }
+
+        return dp[target];
+    }
 }
