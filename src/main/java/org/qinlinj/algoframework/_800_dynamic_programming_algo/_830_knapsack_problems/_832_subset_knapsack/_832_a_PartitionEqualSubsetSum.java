@@ -40,4 +40,41 @@ public class _832_a_PartitionEqualSubsetSum {
         // See _832_b_DPSolution class for the actual implementation
         return false;
     }
+
+    /**
+     * Demonstrates the analysis process for the example
+     */
+    private static void analyzeExample(int[] nums) {
+        System.out.println("\nAnalyzing example: " + java.util.Arrays.toString(nums));
+
+        // Calculate total sum
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        System.out.println("Total sum: " + sum);
+
+        // Check if sum is even
+        if (sum % 2 != 0) {
+            System.out.println("Sum is odd, cannot be partitioned into equal subsets.");
+            return;
+        }
+
+        // Calculate target sum for each subset
+        int target = sum / 2;
+        System.out.println("Target sum for each subset: " + target);
+
+        // Explain the transformation to knapsack problem
+        System.out.println("\nThis problem is equivalent to:");
+        System.out.println("- Having a knapsack with capacity = " + target);
+        System.out.println("- Having items with weights: " + java.util.Arrays.toString(nums));
+        System.out.println("- Determining if we can exactly fill the knapsack");
+
+        // For this example, show a valid partition
+        if (java.util.Arrays.equals(nums, new int[]{1, 5, 11, 5})) {
+            System.out.println("\nOne valid partition is:");
+            System.out.println("Subset 1: [11] with sum = 11");
+            System.out.println("Subset 2: [1, 5, 5] with sum = 11");
+        }
+    }
 }
