@@ -4,6 +4,49 @@ import java.util.*;
 
 public class _823_b_LongestCommonSubsequence {
     /**
+     * Provide practical tips for solving subsequence problems
+     */
+    public static void practicalTips() {
+        System.out.println("Practical Tips for Solving Subsequence Problems:");
+        System.out.println("---------------------------------------------");
+        System.out.println("1. Start by defining what your dp state represents precisely");
+        System.out.println("2. Think about the decision at each step (e.g., include or skip a character)");
+        System.out.println("3. Draw small examples and trace through the algorithm manually");
+        System.out.println("4. Pay special attention to base cases and boundary conditions");
+        System.out.println("5. Consider space optimization if needed (usually only keeping the last row/two rows)");
+        System.out.println("6. For complex problems, start with the recursive solution, then add memoization");
+        System.out.println("7. Convert to bottom-up only after understanding the solution completely");
+        System.out.println();
+    }
+
+    /**
+     * Demonstrate a simple application of the pattern to another problem
+     */
+    public static int longestPalindromicSubsequence(String s) {
+        int n = s.length();
+        int[][] dp = new int[n][n];
+
+        // Base case: single characters are palindromes of length 1
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+
+        // Fill the dp table for substrings of length 2 and more
+        for (int len = 2; len <= n; len++) {
+            for (int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = 2 + (len > 2 ? dp[i + 1][j - 1] : 0);
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return dp[0][n - 1];
+    }
+
+    /**
      * Top-down approach with memoization
      */
     public int minimumDeleteSum(String s1, String s2) {
