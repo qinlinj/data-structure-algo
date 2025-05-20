@@ -1,6 +1,32 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._820_subsequence_problems._824_subsequence_problem_templates;
 
+/**
+ * Longest Palindromic Subsequence - LeetCode Problem 516
+ * <p>
+ * Key Concepts:
+ * 1. This problem demonstrates using the 2D DP template for a single sequence
+ * where dp[i][j] represents the solution for a specific range (i to j).
+ * 2. A palindromic subsequence reads the same forward and backward.
+ * 3. The problem asks for the length of the longest palindromic subsequence in a string.
+ * <p>
+ * DP State Definition:
+ * - dp[i][j] = length of the longest palindromic subsequence in the substring s[i...j]
+ * <p>
+ * State Transitions:
+ * 1. If s[i] == s[j]:
+ * The characters at both ends match, so they can be part of the palindrome
+ * dp[i][j] = dp[i+1][j-1] + 2
+ * 2. If s[i] != s[j]:
+ * The characters don't match, so either skip the left or right character
+ * dp[i][j] = max(dp[i+1][j], dp[i][j-1])
+ * <p>
+ * Base Case:
+ * - dp[i][i] = 1 (single character is a palindrome of length 1)
+ * <p>
+ * Time and Space Complexity: O(n²)
+ */
 public class _824_d_LongestPalindromicSubsequence {
+
     /**
      * Finds the length of the longest palindromic subsequence in a string
      * using dynamic programming
@@ -147,5 +173,41 @@ public class _824_d_LongestPalindromicSubsequence {
         } else {
             reconstructLPS(dp, s, i, j - 1, result);
         }
+    }
+
+    /**
+     * Main method to demonstrate the Longest Palindromic Subsequence algorithm
+     */
+    public static void main(String[] args) {
+        System.out.println("=== LONGEST PALINDROMIC SUBSEQUENCE ===\n");
+
+        System.out.println("Problem: Given a string, find the length of its longest palindromic subsequence");
+        System.out.println("A palindromic subsequence is a subsequence that reads the same backward as forward");
+
+        // Example 1
+        String s1 = "bbbab";
+        int length1 = longestPalindromeSubseq(s1);
+        System.out.println("\nExample 1:");
+        System.out.println("Input: \"" + s1 + "\"");
+        System.out.println("Output: " + length1);
+        System.out.println("Explanation: The LPS is \"bbbb\", with length " + length1);
+
+        // Example 2
+        String s2 = "cbbd";
+        int length2 = longestPalindromeSubseq(s2);
+        System.out.println("\nExample 2:");
+        System.out.println("Input: \"" + s2 + "\"");
+        System.out.println("Output: " + length2);
+        System.out.println("Explanation: The LPS is \"bb\", with length " + length2);
+
+        // Visualization for a small example
+        System.out.println("\n=== VISUALIZATION ===");
+        visualizeLPS("aecda");
+
+        System.out.println("\nKey Insight:");
+        System.out.println("- This problem demonstrates how to use a 2D DP array for a single sequence");
+        System.out.println("- The dp[i][j] represents the LPS length in the substring s[i...j]");
+        System.out.println("- We process the matrix either diagonally or from bottom to top");
+        System.out.println("- The traversal order is crucial to ensure dependencies are calculated first");
     }
 }
