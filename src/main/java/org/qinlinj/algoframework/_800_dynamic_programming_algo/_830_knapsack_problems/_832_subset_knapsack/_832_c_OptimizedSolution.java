@@ -168,4 +168,21 @@ public class _832_c_OptimizedSolution {
             System.out.println("The array cannot be partitioned into two equal sum subsets.");
         }
     }
+
+    /**
+     * Helper method to print the 1D DP array
+     */
+    private static void printDPArray(boolean[] dp) {
+        System.out.print("Sum: ");
+        for (int j = 0; j < dp.length; j++) {
+            System.out.printf("%3d ", j);
+        }
+        System.out.println();
+
+        System.out.print("    ");
+        for (int j = 0; j < dp.length; j++) {
+            System.out.printf("%3s ", dp[j] ? "T" : "F");
+        }
+        System.out.println();
+    }
 }
