@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._831_zero_one_knapsack;
+
+public class _831_c_KnapsackImplementation {
+}
