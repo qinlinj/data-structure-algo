@@ -102,4 +102,14 @@ public class _823_b_LongestCommonSubsequence {
         return dp[m][n];
     }
 
+    /**
+     * Helper method to calculate ASCII sum of a string
+     */
+    private int calcASCIISum(String s) {
+        int sum = 0;
+        for (char c : s.toCharArray()) {
+            sum += c;
+        }
+        return sum;
+    }
 }
