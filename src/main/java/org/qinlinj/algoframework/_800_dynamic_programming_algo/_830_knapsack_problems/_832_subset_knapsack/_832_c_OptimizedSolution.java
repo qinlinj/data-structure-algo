@@ -104,4 +104,68 @@ public class _832_c_OptimizedSolution {
         System.out.println("Memory reduction: " + (100 - (memory1D * 100.0 / memory2D)) + "%");
     }
 
+    /**
+     * Visualizes the 1D DP array updates during the algorithm execution
+     */
+    private static void visualize1DDP(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        if (sum % 2 != 0) {
+            System.out.println("\nSum is odd, cannot be partitioned into equal subsets.");
+            return;
+        }
+
+        int target = sum / 2;
+
+        // Create 1D DP array
+        boolean[] dp = new boolean[target + 1];
+
+        // Base case
+        dp[0] = true;
+
+        System.out.println("\n1D DP Array Visualization for " + java.util.Arrays.toString(nums) + ":");
+        System.out.println("Target sum = " + target);
+
+        System.out.println("\nInitial DP array (after setting base case dp[0] = true):");
+        printDPArray(dp);
+
+        // Process each item and visualize
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println("\nProcessing item " + (i + 1) + " with value " + nums[i] + ":");
+
+            // Important: We need to create a copy of dp for visualization purposes
+            // In the actual algorithm, we directly update the array
+            boolean[] dpCopy = dp.clone();
+
+            // Iterate from target down to nums[i]
+            for (int j = target; j >= nums[i]; j--) {
+                if (!dp[j] && dp[j - nums[i]]) {
+                    dpCopy[j] = true;
+                    System.out.printf("dp[%d] = true (can make sum %d by adding %d to sum %d)\n",
+                            j, j, nums[i], j - nums[i]);
+                }
+            }
+
+            // Update dp array
+            dp = dpCopy;
+
+            System.out.println("\nDP array after processing item " + (i + 1) + ":");
+            printDPArray(dp);
+        }
+
+        System.out.println("\nFinal result: dp[" + target + "] = " + dp[target]);
+
+        if (dp[target]) {
+            System.out.println("The array can be partitioned into two equal sum subsets!");
+
+            // Find one possible partition (this is more complex with 1D DP)
+            // We'll need to work backward from the result
+            findPartition(nums, target);
+        } else {
+            System.out.println("The array cannot be partitioned into two equal sum subsets.");
+        }
+    }
 }
