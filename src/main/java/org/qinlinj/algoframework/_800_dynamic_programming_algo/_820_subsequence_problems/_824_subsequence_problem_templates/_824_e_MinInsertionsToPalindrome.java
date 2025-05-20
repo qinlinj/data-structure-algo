@@ -1,6 +1,32 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._820_subsequence_problems._824_subsequence_problem_templates;
 
+/**
+ * Minimum Insertions to Make a String Palindrome - LeetCode Problem 1312
+ * <p>
+ * Key Concepts:
+ * 1. This problem extends the Longest Palindromic Subsequence (LPS) concept
+ * to find the minimum number of characters to insert to make a string palindromic.
+ * 2. The key insight is that the characters NOT in the LPS must be inserted.
+ * 3. Specifically, the minimum number of insertions equals (length of string - length of LPS).
+ * <p>
+ * DP State Definition:
+ * - dp[i][j] = minimum number of insertions needed to make substring s[i...j] a palindrome
+ * <p>
+ * State Transitions:
+ * 1. If s[i] == s[j]:
+ * No need to insert characters between these matching characters
+ * dp[i][j] = dp[i+1][j-1]
+ * 2. If s[i] != s[j]:
+ * We need to insert at least one character
+ * dp[i][j] = min(dp[i+1][j], dp[i][j-1]) + 1
+ * <p>
+ * Alternative (simpler) solution:
+ * minInsertions = length of string - length of LPS
+ * <p>
+ * Time and Space Complexity: O(n²)
+ */
 public class _824_e_MinInsertionsToPalindrome {
+
     /**
      * Direct approach: Minimum insertions equals length of string minus length of LPS
      */
@@ -183,5 +209,47 @@ public class _824_e_MinInsertionsToPalindrome {
             result.insert(i + offset, s.charAt(j));
             reconstructPalindrome(s, dp, i, j - 1, result, offset + 1);
         }
+    }
+
+    /**
+     * Main method to demonstrate the Minimum Insertions algorithm
+     */
+    public static void main(String[] args) {
+        System.out.println("=== MINIMUM INSERTIONS TO MAKE A STRING PALINDROME ===\n");
+
+        System.out.println("Problem: Given a string, find the minimum number of characters");
+        System.out.println("that need to be inserted to make it a palindrome.\n");
+
+        // Example 1
+        String s1 = "abcea";
+        int min1 = minInsertions(s1);
+        int min1DP = minInsertionsDP(s1);
+
+        System.out.println("Example 1:");
+        System.out.println("Input: \"" + s1 + "\"");
+        System.out.println("Output (using LPS): " + min1);
+        System.out.println("Output (using direct DP): " + min1DP);
+        System.out.println("Possible palindromes after insertion: \"abeceba\" or \"aebcbea\"");
+
+        // Example 2
+        String s2 = "aba";
+        int min2 = minInsertions(s2);
+        int min2DP = minInsertionsDP(s2);
+
+        System.out.println("\nExample 2:");
+        System.out.println("Input: \"" + s2 + "\"");
+        System.out.println("Output (using LPS): " + min2);
+        System.out.println("Output (using direct DP): " + min2DP);
+        System.out.println("The string is already a palindrome, so no insertions needed");
+
+        // Visualization for a small example
+        System.out.println("\n=== VISUALIZATION ===");
+        visualizeMinInsertions("abcea");
+
+        System.out.println("\nKey Insights:");
+        System.out.println("1. Every character not in the LPS must be inserted somewhere");
+        System.out.println("2. The minimum number of insertions = length of string - length of LPS");
+        System.out.println("3. This problem builds directly on the LPS problem, showing how");
+        System.out.println("   understanding one DP problem can help solve related problems");
     }
 }
