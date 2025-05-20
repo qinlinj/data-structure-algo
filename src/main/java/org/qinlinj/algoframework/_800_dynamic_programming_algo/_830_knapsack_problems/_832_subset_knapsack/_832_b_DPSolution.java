@@ -116,4 +116,81 @@ public class _832_b_DPSolution {
             traceSubset(dp, nums, target);
         }
     }
+
+    /**
+     * Helper method to print the DP table
+     */
+    private static void printDPTable(boolean[][] dp, int n, int target, int[] nums) {
+        System.out.print("      ");
+        for (int j = 0; j <= target; j++) {
+            System.out.printf("%3d ", j);
+        }
+        System.out.println("\n      " + "----".repeat(target + 1));
+
+        for (int i = 0; i <= n; i++) {
+            if (i == 0) {
+                System.out.printf("  [] | ");
+            } else {
+                System.out.printf(" %2d  | ", nums[i - 1]);
+            }
+
+            for (int j = 0; j <= target; j++) {
+                System.out.printf("%3s ", dp[i][j] ? "T" : "F");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * Traces back through the DP table to find one possible partition
+     */
+    private static void traceSubset(boolean[][] dp, int[] nums, int target) {
+        int n = nums.length;
+        boolean[] included = new boolean[n];
+
+        int remainingSum = target;
+
+        // Start from the bottom-right cell of the DP table
+        for (int i = n; i > 0; i--) {
+            // If the result is still true after excluding the current item,
+            // it means we can achieve the sum without this item
+            if (dp[i - 1][remainingSum]) {
+                // Skip this item
+                included[i - 1] = false;
+            } else {
+                // Include this item
+                included[i - 1] = true;
+                remainingSum -= nums[i - 1];
+            }
+
+            // If we've reached a sum of 0, we've identified one subset
+            if (remainingSum == 0) {
+                break;
+            }
+        }
+
+        // Print the two subsets
+        System.out.print("Subset 1: [");
+        boolean first = true;
+        for (int i = 0; i < n; i++) {
+            if (included[i]) {
+                if (!first) System.out.print(", ");
+                System.out.print(nums[i]);
+                first = false;
+            }
+        }
+        System.out.println("]");
+
+        System.out.print("Subset 2: [");
+        first = true;
+        for (int i = 0; i < n; i++) {
+            if (!included[i]) {
+                if (!first) System.out.print(", ");
+                System.out.print(nums[i]);
+                first = false;
+            }
+        }
+        System.out.println("]");
+    }
 }
