@@ -80,4 +80,28 @@ public class _834_c_DPWithMemoization {
 
         return dp2DArray(nums, 0, target, memo2D, offset);
     }
+
+    private static int dp2DArray(int[] nums, int i, int remain, Integer[][] memo, int offset) {
+        // Base case
+        if (i == nums.length) {
+            return remain == 0 ? 1 : 0;
+        }
+
+        // Check for out of bounds
+        if (Math.abs(remain) > offset) {
+            return 0;
+        }
+
+        // Check if already computed
+        if (memo[i][remain + offset] != null) {
+            return memo[i][remain + offset];
+        }
+
+        // Calculate and memoize result
+        int result = dp2DArray(nums, i + 1, remain - nums[i], memo, offset) +
+                dp2DArray(nums, i + 1, remain + nums[i], memo, offset);
+
+        memo[i][remain + offset] = result;
+        return result;
+    }
 }
