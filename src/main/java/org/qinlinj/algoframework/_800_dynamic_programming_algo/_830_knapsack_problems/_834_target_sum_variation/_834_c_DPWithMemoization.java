@@ -104,4 +104,41 @@ public class _834_c_DPWithMemoization {
         memo[i][remain + offset] = result;
         return result;
     }
+
+    /**
+     * Demonstration of the DP with memoization approach
+     */
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 1, 1, 1};
+        int target = 3;
+
+        System.out.println("=== Dynamic Programming with Memoization ===");
+        System.out.println("Input: [1, 1, 1, 1, 1], target = 3");
+
+        // Using HashMap memoization
+        int ways = findTargetSumWays(nums, target);
+        System.out.println("Number of ways (HashMap memo): " + ways);
+
+        // Using 2D array memoization
+        ways = findTargetSumWays2DArray(nums, target);
+        System.out.println("Number of ways (2D array memo): " + ways);
+
+        // Example with repeated calculations
+        int[] repeatedCalcExample = {0, 0, 0, 0, 0, 0, 0, 1};
+        int repeatedTarget = 1;
+
+        System.out.println("\nExample with potential repeated calculations:");
+        System.out.println("Input: [0, 0, 0, 0, 0, 0, 0, 1], target = 1");
+
+        // Reset memo for new example
+        memo = new java.util.HashMap<>();
+        ways = findTargetSumWays(repeatedCalcExample, repeatedTarget);
+        System.out.println("Number of ways: " + ways);
+        System.out.println("Memoization cache size: " + memo.size());
+        System.out.println("Without memoization, this would require 2^8 = 256 recursive calls.");
+        System.out.println("With memoization, we significantly reduced the number of calculations.");
+
+        System.out.println("\nTime complexity: O(n*sum) where sum is the sum of all numbers");
+        System.out.println("Space complexity: O(n*sum) for the memoization cache");
+    }
 }
