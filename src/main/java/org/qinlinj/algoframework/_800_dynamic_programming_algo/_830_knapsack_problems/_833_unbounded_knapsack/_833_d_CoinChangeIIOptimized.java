@@ -26,4 +26,30 @@ public class _833_d_CoinChangeIIOptimized {
 
         return dp[amount];
     }
+
+    /**
+     * Helper method to visualize the DP array updates for each coin
+     */
+    public static void visualizeOptimizedDP(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+
+        System.out.println("Visualization of 1D DP array updates:");
+        System.out.print("Initial: ");
+        printDPArray(dp);
+
+        for (int i = 0; i < coins.length; i++) {
+            int coin = coins[i];
+
+            // Update dp array for this coin
+            for (int j = coin; j <= amount; j++) {
+                dp[j] += dp[j - coin];
+            }
+
+            System.out.print("After using coin " + coin + ": ");
+            printDPArray(dp);
+        }
+
+        System.out.println("Final result: " + dp[amount]);
+    }
 }
