@@ -62,4 +62,29 @@ public class _834_d_KnapsackApproach {
 
         return dp[n][sum];
     }
+
+    /**
+     * Optimized 1D dynamic programming approach to count subsets with a given sum
+     *
+     * @param nums array of non-negative integers
+     * @param sum  the target subset sum
+     * @return number of ways to form the subset sum
+     */
+    private static int countSubsetSumOptimized(int[] nums, int sum) {
+        // dp[j] = number of ways to make sum j
+        int[] dp = new int[sum + 1];
+
+        // Base case
+        dp[0] = 1;
+
+        // Fill the dp array
+        for (int i = 0; i < nums.length; i++) {
+            // Important: traverse from right to left to avoid counting the same element multiple times
+            for (int j = sum; j >= nums[i]; j--) {
+                dp[j] += dp[j - nums[i]];
+            }
+        }
+
+        return dp[sum];
+    }
 }
