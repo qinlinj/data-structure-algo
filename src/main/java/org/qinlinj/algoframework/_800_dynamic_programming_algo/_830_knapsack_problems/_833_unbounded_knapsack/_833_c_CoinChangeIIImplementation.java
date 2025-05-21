@@ -1,6 +1,19 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._833_unbounded_knapsack;
 
+/**
+ * Implementation of the Coin Change II Problem
+ * <p>
+ * Key Points:
+ * - 2D dynamic programming solution
+ * - Time Complexity: O(N * amount) where N is the number of coin denominations
+ * - Space Complexity: O(N * amount) for the 2D DP array
+ * - The solution handles edge cases like zero amount and no coins
+ * - Implements the state transition logic based on the DP recurrence relation
+ * - For each coin, we decide whether to use it or skip it
+ * - Since coins can be reused, we reference dp[i][j-coins[i-1]] (same row) rather than dp[i-1][j-coins[i-1]]
+ */
 public class _833_c_CoinChangeIIImplementation {
+
     /**
      * Complete solution for the Coin Change II problem using 2D DP array
      *
@@ -83,5 +96,32 @@ public class _833_c_CoinChangeIIImplementation {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        // Example 1
+        int amount1 = 5;
+        int[] coins1 = {1, 2, 5};
+        System.out.println("Example 1:");
+        System.out.println("Number of ways: " + change(amount1, coins1));
+        printDPTable(amount1, coins1);
+
+        System.out.println("\n-----------------------------------\n");
+
+        // Example 2
+        int amount2 = 3;
+        int[] coins2 = {2};
+        System.out.println("Example 2:");
+        System.out.println("Number of ways: " + change(amount2, coins2));
+        printDPTable(amount2, coins2);
+
+        System.out.println("\n-----------------------------------\n");
+
+        // Example 3
+        int amount3 = 10;
+        int[] coins3 = {10};
+        System.out.println("Example 3:");
+        System.out.println("Number of ways: " + change(amount3, coins3));
+        printDPTable(amount3, coins3);
     }
 }
