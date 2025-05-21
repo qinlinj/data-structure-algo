@@ -54,4 +54,30 @@ public class _834_c_DPWithMemoization {
         memo.put(key, result);
         return result;
     }
+
+    /**
+     * Alternative implementation using a 2D array for memoization
+     * This requires handling negative remaining values by using an offset
+     */
+    public static int findTargetSumWays2DArray(int[] nums, int target) {
+        if (nums.length == 0) return 0;
+
+        // Calculate sum to determine the range of possible values
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        // If target is beyond possible range or sum+target is odd, no solution exists
+        if (Math.abs(target) > sum || (sum + target) % 2 != 0) {
+            return 0;
+        }
+
+        // Range for 'remain' will be [-sum, sum]
+        // Use offset to handle negative values in array indices
+        int offset = sum;
+        Integer[][] memo2D = new Integer[nums.length][2 * sum + 1];
+
+        return dp2DArray(nums, 0, target, memo2D, offset);
+    }
 }
