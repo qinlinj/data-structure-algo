@@ -104,4 +104,48 @@ public class _834_d_KnapsackApproach {
         int subsetSum = (sum + target) / 2;
         return countSubsetSumOptimized(nums, subsetSum);
     }
+
+    /**
+     * Helper method to print the 2D DP table for visualization
+     */
+    private static void printDPTable(int[] nums, int sum) {
+        int n = nums.length;
+        int[][] dp = new int[n + 1][sum + 1];
+
+        // Initialize
+        dp[0][0] = 1;
+
+        System.out.println("DP Table Calculation:");
+        System.out.println("nums = " + java.util.Arrays.toString(nums));
+        System.out.println("target subset sum = " + sum);
+
+        // Print initial state
+        System.out.println("\nInitial DP Table:");
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= sum; j++) {
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // Fill and print each step
+        for (int i = 1; i <= n; i++) {
+            System.out.println("\nAfter processing nums[" + (i - 1) + "] = " + nums[i - 1] + ":");
+
+            for (int j = 0; j <= sum; j++) {
+                // Don't include current element
+                dp[i][j] = dp[i - 1][j];
+
+                // Include current element if possible
+                if (j >= nums[i - 1]) {
+                    dp[i][j] += dp[i - 1][j - nums[i - 1]];
+                }
+
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("\nFinal result: " + dp[n][sum]);
+    }
 }
