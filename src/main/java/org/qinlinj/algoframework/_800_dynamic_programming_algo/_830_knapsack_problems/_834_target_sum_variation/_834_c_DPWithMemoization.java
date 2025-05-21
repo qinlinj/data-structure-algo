@@ -22,4 +22,36 @@ public class _834_c_DPWithMemoization {
 
         return dp(nums, 0, target);
     }
+
+    /**
+     * DP function with memoization
+     * Definition: dp(i, remain) = number of ways to form target sum using nums[i..n-1]
+     *
+     * @param nums   array of non-negative integers
+     * @param i      current index in the array
+     * @param remain remaining value to reach zero
+     * @return number of ways to reach target from this state
+     */
+    private static int dp(int[] nums, int i, int remain) {
+        // Base case: processed all numbers
+        if (i == nums.length) {
+            return remain == 0 ? 1 : 0;
+        }
+
+        // Create key for memoization
+        String key = i + "," + remain;
+
+        // Check if we've already computed this state
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+
+        // Calculate result by combining both choices (+ and -)
+        int result = dp(nums, i + 1, remain - nums[i]) + // using +
+                dp(nums, i + 1, remain + nums[i]);  // using -
+
+        // Store result in memo before returning
+        memo.put(key, result);
+        return result;
+    }
 }
