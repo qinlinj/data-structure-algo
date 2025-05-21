@@ -60,4 +60,29 @@ public class _834_b_BacktrackingApproach {
         // Return total ways by summing both choices
         return minusCount + plusCount;
     }
+
+    /**
+     * Alternative backtracking method using a class variable
+     * This follows the typical backtracking template more closely
+     */
+    private static void backtrackWithClassVar(int[] nums, int index, int remain) {
+        // Base case: we've processed all numbers
+        if (index == nums.length) {
+            if (remain == 0) {
+                // Found a valid combination
+                result++;
+            }
+            return;
+        }
+
+        // Choose minus sign
+        remain += nums[index];
+        backtrackWithClassVar(nums, index + 1, remain);
+        remain -= nums[index]; // Undo choice
+
+        // Choose plus sign
+        remain -= nums[index];
+        backtrackWithClassVar(nums, index + 1, remain);
+        remain += nums[index]; // Undo choice
+    }
 }
