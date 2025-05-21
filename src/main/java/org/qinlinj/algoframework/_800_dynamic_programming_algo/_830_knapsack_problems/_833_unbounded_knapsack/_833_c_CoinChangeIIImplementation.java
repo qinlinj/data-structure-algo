@@ -39,4 +39,49 @@ public class _833_c_CoinChangeIIImplementation {
         // Return the number of ways to make the target amount
         return dp[n][amount];
     }
+
+    /**
+     * Helper method to print the filled DP table for visualization
+     */
+    public static void printDPTable(int amount, int[] coins) {
+        int n = coins.length;
+        int[][] dp = new int[n + 1][amount + 1];
+
+        // Base case
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 1;
+        }
+
+        // Fill the dp array
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= amount; j++) {
+                if (j - coins[i - 1] >= 0) {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+
+        // Print the DP table
+        System.out.println("DP Table for amount = " + amount + " and coins = " + java.util.Arrays.toString(coins));
+        System.out.print("   | ");
+        for (int j = 0; j <= amount; j++) {
+            System.out.printf("%2d ", j);
+        }
+        System.out.println("\n---+-" + "---".repeat(amount + 1));
+
+        for (int i = 0; i <= n; i++) {
+            System.out.printf("%2d | ", i);
+            for (int j = 0; j <= amount; j++) {
+                System.out.printf("%2d ", dp[i][j]);
+            }
+            if (i > 0) {
+                System.out.printf(" (coin: %d)", coins[i - 1]);
+            } else {
+                System.out.print(" (no coins)");
+            }
+            System.out.println();
+        }
+    }
 }
