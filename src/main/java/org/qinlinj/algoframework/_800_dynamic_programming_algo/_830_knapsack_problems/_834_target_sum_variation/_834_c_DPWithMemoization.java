@@ -1,6 +1,19 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._830_knapsack_problems._834_target_sum_variation;
 
+/**
+ * Dynamic Programming with Memoization Approach to Target Sum Problem
+ * <p>
+ * Key Points:
+ * - This approach improves the backtracking solution by avoiding redundant calculations
+ * - Overlapping subproblems occur when the same state (index, remain) is visited multiple times
+ * - Memoization stores results of subproblems to avoid recomputing them
+ * - A state is defined by two parameters: current index and remaining target
+ * - Time complexity improves from O(2^n) to O(n*sum) where sum is the sum of all numbers
+ * - Space complexity is O(n*sum) for the memoization table
+ * - The core recursive structure remains similar to backtracking, but becomes more efficient
+ */
 public class _834_c_DPWithMemoization {
+
     /**
      * HashMap to serve as a memoization cache
      * Key is "index,remain" and value is the number of ways to reach target from that state
