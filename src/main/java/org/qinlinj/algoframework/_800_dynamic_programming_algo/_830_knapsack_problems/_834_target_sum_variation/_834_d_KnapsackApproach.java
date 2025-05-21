@@ -87,4 +87,21 @@ public class _834_d_KnapsackApproach {
 
         return dp[sum];
     }
+
+    /**
+     * Optimized solution using the 1D approach
+     */
+    public static int findTargetSumWaysOptimized(int[] nums, int target) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        if (sum < Math.abs(target) || (sum + target) % 2 != 0) {
+            return 0;
+        }
+
+        int subsetSum = (sum + target) / 2;
+        return countSubsetSumOptimized(nums, subsetSum);
+    }
 }
