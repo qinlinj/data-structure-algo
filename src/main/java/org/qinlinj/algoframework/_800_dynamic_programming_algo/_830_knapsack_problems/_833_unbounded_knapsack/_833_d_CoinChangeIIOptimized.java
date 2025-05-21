@@ -52,4 +52,18 @@ public class _833_d_CoinChangeIIOptimized {
 
         System.out.println("Final result: " + dp[amount]);
     }
+
+    /**
+     * Print helper for the DP array
+     */
+    private static void printDPArray(int[] dp) {
+        System.out.print("[");
+        for (int i = 0; i < dp.length; i++) {
+            System.out.print(dp[i]);
+            if (i < dp.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
 }
