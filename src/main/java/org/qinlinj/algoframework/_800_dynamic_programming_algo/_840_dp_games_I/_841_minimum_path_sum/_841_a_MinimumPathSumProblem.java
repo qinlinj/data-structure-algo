@@ -25,4 +25,26 @@ public class _841_a_MinimumPathSumProblem {
         // Implementation will be shown step by step in following classes
         return 0;
     }
+
+    /**
+     * Problem Analysis Method
+     * This method demonstrates how to think about the problem
+     */
+    public void analyzeProblem() {
+        System.out.println("=== MINIMUM PATH SUM PROBLEM ANALYSIS ===");
+        System.out.println("1. Problem Type: 2D Grid Optimization");
+        System.out.println("2. Constraints: Only move right or down");
+        System.out.println("3. Goal: Minimize path sum from top-left to bottom-right");
+        System.out.println("4. Approach: Dynamic Programming");
+        System.out.println("5. Key Insight: Optimal path to (i,j) depends on optimal paths to (i-1,j) and (i,j-1)");
+
+        // Visual representation of the problem
+        int[][] exampleGrid = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
+        System.out.println("\nExample Grid:");
+        printGrid(exampleGrid);
+        System.out.println("Optimal Path: 1→3→1→1→1 = 7");
+    }
+
+    private void printGrid(int[][] exampleGrid) {
+    }
 }
