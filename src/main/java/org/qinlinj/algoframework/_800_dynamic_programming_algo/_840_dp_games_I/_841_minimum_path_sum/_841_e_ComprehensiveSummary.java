@@ -68,4 +68,21 @@ public class _841_e_ComprehensiveSummary {
             return dp[m - 1];
         }
     }
+
+    /**
+     * Helper method to rotate grid for column-wise processing
+     */
+    private int[][] rotateGrid(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] rotated = new int[n][m];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                rotated[j][i] = grid[i][j];
+            }
+        }
+
+        return rotated;
+    }
 }
