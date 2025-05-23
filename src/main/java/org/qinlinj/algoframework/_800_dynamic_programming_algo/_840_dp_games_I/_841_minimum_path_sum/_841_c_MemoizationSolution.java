@@ -22,4 +22,32 @@ public class _841_c_MemoizationSolution {
 
         return dp(grid, m - 1, n - 1);
     }
+
+    /**
+     * Optimized DP function with memoization
+     */
+    private int dp(int[][] grid, int i, int j) {
+        // Base case: starting position
+        if (i == 0 && j == 0) {
+            return grid[0][0];
+        }
+
+        // Boundary condition: out of bounds
+        if (i < 0 || j < 0) {
+            return Integer.MAX_VALUE;
+        }
+
+        // Check if already computed (memoization check)
+        if (memo[i][j] != -1) {
+            return memo[i][j];
+        }
+
+        // Compute and store result in memo table
+        memo[i][j] = Math.min(
+                dp(grid, i - 1, j),     // path from above
+                dp(grid, i, j - 1)      // path from left
+        ) + grid[i][j];
+
+        return memo[i][j];
+    }
 }
