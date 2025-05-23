@@ -45,6 +45,15 @@ public class _841_a_MinimumPathSumProblem {
         System.out.println("Optimal Path: 1→3→1→1→1 = 7");
     }
 
-    private void printGrid(int[][] exampleGrid) {
+    /**
+     * Helper method to visualize the grid
+     */
+    private void printGrid(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
