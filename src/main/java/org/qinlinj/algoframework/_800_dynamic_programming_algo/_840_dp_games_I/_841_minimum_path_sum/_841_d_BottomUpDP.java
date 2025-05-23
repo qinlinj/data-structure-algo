@@ -96,4 +96,39 @@ public class _841_d_BottomUpDP {
 
         return dp[m - 1][n - 1];
     }
+
+    /**
+     * Space-optimized version using only O(n) space
+     * <p>
+     * Time Complexity: O(m*n)
+     * Space Complexity: O(n) - only store one row at a time
+     */
+    public int minPathSumSpaceOptimized(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        // Use 1D array to represent current row
+        int[] dp = new int[n];
+
+        // Initialize first row
+        dp[0] = grid[0][0];
+        for (int j = 1; j < n; j++) {
+            dp[j] = dp[j - 1] + grid[0][j];
+        }
+
+        // Process each row
+        for (int i = 1; i < m; i++) {
+            // Update first column of current row
+            dp[0] += grid[i][0];
+
+            // Update rest of current row
+            for (int j = 1; j < n; j++) {
+                dp[j] = Math.min(dp[j], dp[j - 1]) + grid[i][j];
+                //      dp[j] represents dp[i-1][j] (from above)
+                //      dp[j-1] represents dp[i][j-1] (from left)
+            }
+        }
+
+        return dp[n - 1];
+    }
 }
