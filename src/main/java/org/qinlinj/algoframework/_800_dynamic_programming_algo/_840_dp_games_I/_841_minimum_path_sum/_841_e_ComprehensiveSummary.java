@@ -20,4 +20,52 @@ public class _841_e_ComprehensiveSummary {
             return minPathSumOptimized(rotateGrid(grid), false); // process by columns
         }
     }
+
+    /**
+     * Space-optimized implementation with O(min(m,n)) space
+     */
+    private int minPathSumOptimized(int[][] grid, boolean byRows) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        if (byRows) {
+            // Process row by row, maintain only one row in memory
+            int[] dp = new int[n];
+
+            // Initialize first row
+            dp[0] = grid[0][0];
+            for (int j = 1; j < n; j++) {
+                dp[j] = dp[j - 1] + grid[0][j];
+            }
+
+            // Process remaining rows
+            for (int i = 1; i < m; i++) {
+                dp[0] += grid[i][0]; // First column: only from above
+                for (int j = 1; j < n; j++) {
+                    dp[j] = Math.min(dp[j], dp[j - 1]) + grid[i][j];
+                }
+            }
+
+            return dp[n - 1];
+        } else {
+            // Process column by column (when m > n)
+            int[] dp = new int[m];
+
+            // Initialize first column
+            dp[0] = grid[0][0];
+            for (int i = 1; i < m; i++) {
+                dp[i] = dp[i - 1] + grid[i][0];
+            }
+
+            // Process remaining columns
+            for (int j = 1; j < n; j++) {
+                dp[0] += grid[0][j]; // First row: only from left
+                for (int i = 1; i < m; i++) {
+                    dp[i] = Math.min(dp[i], dp[i - 1]) + grid[i][j];
+                }
+            }
+
+            return dp[m - 1];
+        }
+    }
 }
