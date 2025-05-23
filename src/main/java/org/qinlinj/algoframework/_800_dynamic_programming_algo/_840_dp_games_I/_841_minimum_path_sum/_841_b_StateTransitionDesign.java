@@ -15,6 +15,27 @@ public class _841_b_StateTransitionDesign {
         return dp(grid, m - 1, n - 1);
     }
 
-    private int dp(int[][] grid, int i, int i1) {
+    /**
+     * Core DP function definition:
+     * dp(grid, i, j) = minimum path sum from (0,0) to (i,j)
+     */
+    private int dp(int[][] grid, int i, int j) {
+        // Base case: reached the starting point
+        if (i == 0 && j == 0) {
+            return grid[0][0];
+        }
+
+        // Boundary condition: if indices are out of bounds,
+        // return a very large value to ensure it won't be chosen in min()
+        if (i < 0 || j < 0) {
+            return Integer.MAX_VALUE;
+        }
+
+        // State transition: choose the minimum path from top or left
+        // and add current cell value
+        return Math.min(
+                dp(grid, i - 1, j),  // came from above
+                dp(grid, i, j - 1)   // came from left
+        ) + grid[i][j];
     }
 }
