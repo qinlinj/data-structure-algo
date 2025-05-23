@@ -47,6 +47,32 @@ public class _841_b_StateTransitionDesign {
         return dpWithLogging(grid, grid.length - 1, grid[0].length - 1, 0);
     }
 
-    private int dpWithLogging(int[][] grid, int i, int i1, int i2) {
+    private int dpWithLogging(int[][] grid, int i, int j, int depth) {
+        // Indentation for visualization
+        String indent = "  ".repeat(depth);
+        System.out.println(indent + "dp(" + i + "," + j + ")");
+
+        // Base case
+        if (i == 0 && j == 0) {
+            System.out.println(indent + "  Base case: grid[0][0] = " + grid[0][0]);
+            return grid[0][0];
+        }
+
+        // Boundary condition
+        if (i < 0 || j < 0) {
+            System.out.println(indent + "  Out of bounds: returning MAX_VALUE");
+            return Integer.MAX_VALUE;
+        }
+
+        // Recursive calls
+        System.out.println(indent + "  Exploring paths from (" + i + "," + j + "):");
+        int fromTop = dpWithLogging(grid, i - 1, j, depth + 1);
+        int fromLeft = dpWithLogging(grid, i, j - 1, depth + 1);
+
+        int result = Math.min(fromTop, fromLeft) + grid[i][j];
+        System.out.println(indent + "  Result for (" + i + "," + j + "): " +
+                "min(" + fromTop + "," + fromLeft + ") + " + grid[i][j] + " = " + result);
+
+        return result;
     }
 }
