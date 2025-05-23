@@ -38,4 +38,15 @@ public class _841_b_StateTransitionDesign {
                 dp(grid, i, j - 1)   // came from left
         ) + grid[i][j];
     }
+
+    /**
+     * Demonstrates the state transition with detailed logging
+     */
+    public int minPathSumWithLogging(int[][] grid) {
+        System.out.println("=== TRACING STATE TRANSITIONS ===");
+        return dpWithLogging(grid, grid.length - 1, grid[0].length - 1, 0);
+    }
+
+    private int dpWithLogging(int[][] grid, int i, int i1, int i2) {
+    }
 }
