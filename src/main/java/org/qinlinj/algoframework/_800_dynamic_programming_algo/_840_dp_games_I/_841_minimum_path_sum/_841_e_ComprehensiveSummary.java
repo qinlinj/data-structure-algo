@@ -85,4 +85,50 @@ public class _841_e_ComprehensiveSummary {
 
         return rotated;
     }
+
+    /**
+     * COMPREHENSIVE SOLUTION TEMPLATE
+     * This template can be adapted for similar 2D DP problems
+     */
+    public class TwoDimensionalDPTemplate {
+
+        /**
+         * Template for 2D grid DP problems
+         *
+         * @param grid           input grid
+         * @param isMinimization true for minimization, false for maximization
+         * @return optimal value
+         */
+        public int solve2DGridDP(int[][] grid, boolean isMinimization) {
+            if (grid == null || grid.length == 0) return 0;
+
+            int m = grid.length;
+            int n = grid[0].length;
+            int[][] dp = new int[m][n];
+
+            // Step 1: Initialize base case
+            dp[0][0] = grid[0][0];
+
+            // Step 2: Initialize first row and column
+            for (int i = 1; i < m; i++) {
+                dp[i][0] = dp[i - 1][0] + grid[i][0]; // Only one way to reach
+            }
+            for (int j = 1; j < n; j++) {
+                dp[0][j] = dp[0][j - 1] + grid[0][j]; // Only one way to reach
+            }
+
+            // Step 3: Fill the DP table
+            for (int i = 1; i < m; i++) {
+                for (int j = 1; j < n; j++) {
+                    if (isMinimization) {
+                        dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+                    } else {
+                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+                    }
+                }
+            }
+
+            return dp[m - 1][n - 1];
+        }
+    }
 }
