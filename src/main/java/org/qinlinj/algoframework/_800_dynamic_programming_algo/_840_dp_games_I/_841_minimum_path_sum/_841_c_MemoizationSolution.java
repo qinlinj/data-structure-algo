@@ -50,4 +50,35 @@ public class _841_c_MemoizationSolution {
 
         return memo[i][j];
     }
+
+    /**
+     * Performance comparison between recursive and memoized versions
+     */
+    public void performanceComparison(int[][] grid) {
+        System.out.println("=== PERFORMANCE COMPARISON ===");
+
+        // Test recursive version (warning: slow for large grids)
+        if (grid.length <= 3 && grid[0].length <= 3) {
+            long start = System.nanoTime();
+            _841_b_StateTransitionDesign recursive = new _841_b_StateTransitionDesign();
+            int recursiveResult = recursive.minPathSumRecursive(grid);
+            long recursiveTime = System.nanoTime() - start;
+
+            System.out.println("Recursive result: " + recursiveResult);
+            System.out.println("Recursive time: " + recursiveTime + " ns");
+        }
+
+        // Test memoized version
+        long start = System.nanoTime();
+        int memoResult = minPathSum(grid);
+        long memoTime = System.nanoTime() - start;
+
+        System.out.println("Memoized result: " + memoResult);
+        System.out.println("Memoized time: " + memoTime + " ns");
+
+        if (grid.length <= 3 && grid[0].length <= 3) {
+            System.out.println("Speedup: " +
+                    (double) (System.nanoTime() - start - memoTime) / memoTime + "x");
+        }
+    }
 }
