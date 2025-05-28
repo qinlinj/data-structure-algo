@@ -230,4 +230,100 @@ public class _843_e_SolutionVariationsOptimizations {
             }
         }
     }
+
+    /**
+     * Performance comparison and analysis
+     */
+    public static class PerformanceComparator {
+
+        public void compareAllSolutions() {
+            System.out.println("=== Solution Performance Comparison ===\n");
+
+            // Test cases of varying complexity
+            String[][] testCases = {
+                    {"godding", "gd"},
+                    {"abcabc", "abc"},
+                    {"caotmcaataijjxi", "oatjiioicitatajtijciocjcaaxaaatmctxjjjjtxjjjjtcaacttaxmaacjcocaja"},
+                    {generateLargeRing(50), generateLargeKey(30)},
+                    {generateLargeRing(100), generateLargeKey(50)}
+            };
+
+            TopDownDPSolution topDown = new TopDownDPSolution();
+            BottomUpDPSolution bottomUp = new BottomUpDPSolution();
+            SpaceOptimizedDPSolution spaceOpt = new SpaceOptimizedDPSolution();
+            BFSAlternativeSolution bfs = new BFSAlternativeSolution();
+
+            for (int i = 0; i < testCases.length; i++) {
+                String ring = testCases[i][0];
+                String key = testCases[i][1];
+
+                System.out.printf("Test Case %d: Ring=%d chars, Key=%d chars\n",
+                        i + 1, ring.length(), key.length());
+
+                // Test all solutions
+                testSolution("Top-Down DP", () -> topDown.findRotateSteps(ring, key));
+                testSolution("Bottom-Up DP", () -> bottomUp.findRotateSteps(ring, key));
+                testSolution("Space Optimized", () -> spaceOpt.findRotateSteps(ring, key));
+
+                // Skip BFS for large test cases (too slow)
+                if (i < 3) {
+                    testSolution("BFS Alternative", () -> bfs.findRotateSteps(ring, key));
+                }
+
+                System.out.println();
+            }
+
+            analyzeComplexities();
+        }
+
+        private void testSolution(String name, java.util.function.Supplier<Integer> solver) {
+            long startTime = System.nanoTime();
+            int result = solver.get();
+            long endTime = System.nanoTime();
+
+            double timeMs = (endTime - startTime) / 1_000_000.0;
+            System.out.printf("  %-20s: %d operations in %.2f ms\n", name, result, timeMs);
+        }
+
+        private String generateLargeRing(int size) {
+            StringBuilder sb = new StringBuilder();
+            Random rand = new Random(42);
+            for (int i = 0; i < size; i++) {
+                sb.append((char) ('a' + rand.nextInt(10))); // Limited alphabet for more duplicates
+            }
+            return sb.toString();
+        }
+
+        private String generateLargeKey(int size) {
+            StringBuilder sb = new StringBuilder();
+            Random rand = new Random(42);
+            for (int i = 0; i < size; i++) {
+                sb.append((char) ('a' + rand.nextInt(10)));
+            }
+            return sb.toString();
+        }
+
+        private void analyzeComplexities() {
+            System.out.println("=== Complexity Analysis ===");
+            System.out.println("┌─────────────────────┬──────────────────┬──────────────────┬─────────────────┐");
+            System.out.println("│ Solution            │ Time Complexity  │ Space Complexity │ Implementation  │");
+            System.out.println("├─────────────────────┼──────────────────┼──────────────────┼─────────────────┤");
+            System.out.println("│ Top-Down DP         │ O(R × K × C)     │ O(R × K)         │ Simple          │");
+            System.out.println("│ Bottom-Up DP        │ O(R × K × C)     │ O(R × K)         │ Medium          │");
+            System.out.println("│ Space Optimized     │ O(R × K × C)     │ O(R)             │ Medium          │");
+            System.out.println("│ BFS Alternative     │ O(R × K × C)     │ O(R × K)         │ Complex         │");
+            System.out.println("└─────────────────────┴──────────────────┴──────────────────┴─────────────────┘");
+
+            System.out.println("\nWhere:");
+            System.out.println("R = Ring length");
+            System.out.println("K = Key length");
+            System.out.println("C = Average character occurrences in ring");
+
+            System.out.println("\nRecommendations:");
+            System.out.println("• Top-Down DP: Best for interviews (clear logic, easy to understand)");
+            System.out.println("• Space Optimized: Best for memory-constrained environments");
+            System.out.println("• Bottom-Up DP: Best for avoiding recursion stack overflow");
+            System.out.println("• BFS: Educational value, demonstrates alternative thinking");
+        }
+    }
 }
