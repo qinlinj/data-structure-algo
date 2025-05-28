@@ -112,4 +112,26 @@ public class _843_a_FreedomTrailIntroduction {
 
         System.out.println("Best choice: position " + bestPos + " with " + minSteps + " steps");
     }
+
+    /**
+     * Key insight: Local optimization vs Global optimization
+     * Sometimes the nearest character is not the best choice when considering
+     * the entire sequence that needs to be spelled.
+     */
+    public static void demonstrateOptimizationDilemma() {
+        System.out.println("\n=== Local vs Global Optimization ===");
+        System.out.println("Consider ring = \"abcde\" and key = \"ae\"");
+        System.out.println("From position 0 (a), to spell 'a' then 'e':");
+        System.out.println("- 'a' at position 0: 0 steps");
+        System.out.println("- 'e' at position 4: 1 step counterclockwise from 'a'");
+        System.out.println("Total: 0 + 1 + 2 button presses = 3 operations");
+
+        System.out.println("\nThis demonstrates that we need to consider the ENTIRE sequence,");
+        System.out.println("not just individual character transitions.");
+    }
+
+    public static void main(String[] args) {
+        demonstrateProblem();
+        demonstrateOptimizationDilemma();
+    }
 }
