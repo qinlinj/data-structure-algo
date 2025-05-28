@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game; /**
  * FREEDOM TRAIL PROBLEM INTRODUCTION
  * <p>
  * Key Concepts:
@@ -26,17 +22,20 @@ import java.util.*;
  * - Demonstrates importance of state-based decision making
  */
 
+import java.util.*;
+
 public class _843_a_FreedomTrailIntroduction {
+
     /**
      * Problem Statement:
      * Given a circular ring of characters and a key string to spell,
      * find the minimum number of operations (rotations + button presses)
      * needed to input the entire key string.
-     * <p>
+     *
      * Example:
      * ring = "godding", key = "gd"
      * - Start at 'g' (position 0), press button (1 operation)
-     * - Rotate counterclockwise 2 steps to 'd' (2 operations)
+     * - Rotate counterclockwise 2 steps to 'd' (2 operations)  
      * - Press button (1 operation)
      * Total: 4 operations
      */
