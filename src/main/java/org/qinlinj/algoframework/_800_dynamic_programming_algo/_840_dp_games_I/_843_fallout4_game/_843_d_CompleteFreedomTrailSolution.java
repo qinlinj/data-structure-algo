@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
 
+import java.util.*;
+
 /**
  * COMPLETE FREEDOM TRAIL SOLUTION WITH COMPREHENSIVE ANALYSIS
  * <p>
@@ -24,4 +26,105 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  */
 
 public class _843_d_CompleteFreedomTrailSolution {
+    /**
+     * Main solution class for Freedom Trail problem
+     */
+    public static class FreedomTrailSolver {
+        // Character to positions mapping for quick lookup
+        private Map<Character, List<Integer>> charToIndex;
+        // Memoization table to store computed results
+        private int[][] memo;
+
+        /**
+         * Main entry point for solving Freedom Trail problem
+         *
+         * @param ring circular ring of characters
+         * @param key  target string to spell
+         * @return minimum operations needed
+         */
+        public int findRotateSteps(String ring, String key) {
+            int m = ring.length();
+            int n = key.length();
+
+            // Initialize memoization table
+            memo = new int[m][n];
+            for (int[] row : memo) {
+                Arrays.fill(row, -1);
+            }
+
+            // Build character to positions mapping
+            buildCharacterMap(ring);
+
+            // Start DP from position 0 (12 o'clock) and key index 0
+            return dp(ring, 0, key, 0);
+        }
+
+        /**
+         * Build mapping from characters to their positions in the ring
+         */
+        private void buildCharacterMap(String ring) {
+            charToIndex = new HashMap<>();
+            for (int i = 0; i < ring.length(); i++) {
+                char c = ring.charAt(i);
+                charToIndex.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+            }
+        }
+
+        /**
+         * DP function with memoization
+         *
+         * @param ring the circular ring string
+         * @param i    current position of pointer on ring
+         * @param key  the target string to spell
+         * @param j    current index in key string
+         * @return minimum operations to spell key[j..] starting from ring[i]
+         */
+        private int dp(String ring, int i, String key, int j) {
+            // Base case: finished spelling the entire key
+            if (j == key.length()) {
+                return 0;
+            }
+
+            // Check memoization table
+            if (memo[i][j] != -1) {
+                return memo[i][j];
+            }
+
+            int n = ring.length();
+            int result = Integer.MAX_VALUE;
+            char targetChar = key.charAt(j);
+
+            // Try all positions where target character appears
+            List<Integer> positions = charToIndex.get(targetChar);
+            for (int k : positions) {
+                // Calculate rotation cost to reach position k from position i
+                int rotationCost = calculateRotationCost(i, k, n);
+
+                // Recursively solve for remaining key string
+                int futureCost = dp(ring, k, key, j + 1);
+
+                // Total cost = rotation + button press + future operations
+                int totalCost = rotationCost + 1 + futureCost;
+                result = Math.min(result, totalCost);
+            }
+
+            // Store result in memoization table
+            memo[i][j] = result;
+            return result;
+        }
+
+        /**
+         * Calculate minimum rotation steps between two positions on circular ring
+         *
+         * @param from     starting position
+         * @param to       target position
+         * @param ringSize size of the ring
+         * @return minimum rotation steps (clockwise or counterclockwise)
+         */
+        private int calculateRotationCost(int from, int to, int ringSize) {
+            int clockwise = Math.abs(to - from);
+            int counterclockwise = ringSize - clockwise;
+            return Math.min(clockwise, counterclockwise);
+        }
+    }
 }
