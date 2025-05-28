@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._842_magic_tower_game;
 
+import java.util.*;
+
 /**
  * COMPLETE DUNGEON GAME SOLUTION WITH COMPREHENSIVE ANALYSIS
  * <p>
@@ -24,4 +26,31 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  */
 
 public class _842_e_CompleteSolutionAnalysis {
+    /**
+     * Main solution class for the Dungeon Game problem
+     */
+    public static class DungeonGameSolver {
+        private int[][] memo;
+
+        /**
+         * Calculates minimum initial health needed for knight to rescue princess
+         *
+         * @param dungeon m x n grid representing the dungeon
+         * @return minimum initial health points required
+         */
+        public int calculateMinimumHP(int[][] dungeon) {
+            if (dungeon == null || dungeon.length == 0) return 1;
+
+            int m = dungeon.length;
+            int n = dungeon[0].length;
+
+            // Initialize memoization table
+            memo = new int[m][n];
+            for (int[] row : memo) {
+                Arrays.fill(row, -1);
+            }
+
+            return dp(dungeon, 0, 0);
+        }
+    }
 }
