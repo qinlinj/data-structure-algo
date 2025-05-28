@@ -16,7 +16,9 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  * <p>
  * This demonstrates why careful problem analysis is crucial before coding.
  */
+
 public class _842_b_WhyMaxPathSumWrong {
+
     /**
      * Counterexample demonstrating why maximum path sum approach fails
      * <p>
@@ -50,5 +52,57 @@ public class _842_b_WhyMaxPathSumWrong {
         System.out.println("- Maximum path sum = 7, but requires initial health = 11");
         System.out.println("- Optimal path sum = -1, but only requires initial health = 1");
         System.out.println("- Key insight: Focus on health survival, not health maximization");
+    }
+
+    private static void simulateMaxSumPath() {
+        System.out.println("Path: (0,0) -> (0,1) -> (0,2) -> (1,2) -> (2,2)");
+
+        int health = 11; // Required initial health
+        int[] pathValues = {1, -3, 3, 1, -3};
+        String[] positions = {"(0,0)", "(0,1)", "(0,2)", "(1,2)", "(2,2)"};
+
+        System.out.println("Health simulation:");
+        for (int i = 0; i < pathValues.length; i++) {
+            System.out.printf("At %s: health %d + %d = %d\n",
+                    positions[i], health, pathValues[i], health + pathValues[i]);
+            health += pathValues[i];
+            if (health <= 0) {
+                System.out.println("  ⚠️  Health dropped to " + health + " - DEATH!");
+                return;
+            }
+        }
+        System.out.println("Path sum: 7, Initial health needed: 11");
+    }
+
+    private static void simulateOptimalPath() {
+        System.out.println("Path: (0,0) -> (1,0) -> (2,0) -> (2,1) -> (2,2)");
+
+        int health = 1; // Minimal initial health
+        int[] pathValues = {1, 0, 0, 0, -3};
+        String[] positions = {"(0,0)", "(1,0)", "(2,0)", "(2,1)", "(2,2)"};
+
+        System.out.println("Health simulation:");
+        for (int i = 0; i < pathValues.length; i++) {
+            System.out.printf("At %s: health %d + %d = %d\n",
+                    positions[i], health, pathValues[i], health + pathValues[i]);
+            health += pathValues[i];
+            if (health <= 0) {
+                System.out.println("  ⚠️  Health dropped to " + health + " - would need more initial health!");
+            }
+        }
+        System.out.println("Path sum: -1, Initial health needed: 1");
+    }
+
+    private static void printGrid(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                System.out.printf("%4d ", grid[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        demonstrateWrongApproach();
     }
 }
