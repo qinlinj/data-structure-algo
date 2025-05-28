@@ -187,7 +187,7 @@ public class _843_d_CompleteFreedomTrailSolution {
 
             return result;
         }
-        
+
         protected int calculateRotationCost(int from, int to, int ringSize) {
             int cost = super.calculateRotationCost(from, to, ringSize);
 
