@@ -20,4 +20,27 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  * Answer: 7 (following path: right -> right -> down -> down)
  */
 public class _842_a_DungeonGameIntroduction {
+    /**
+     * Problem Statement:
+     * Given an m x n grid representing a dungeon, where:
+     * - Negative values represent demons (health loss)
+     * - Positive values represent health potions (health gain)
+     * - Zero values represent empty rooms
+     * <p>
+     * Find the minimum initial health needed for a knight to travel
+     * from top-left to bottom-right and rescue the princess.
+     * <p>
+     * Constraints:
+     * - Knight can only move right or down
+     * - Health must remain > 0 at all times
+     * - m, n <= 200
+     * - Grid values range from -1000 to 1000
+     */
+
+    // Example grid from the problem
+    private static final int[][] EXAMPLE_GRID = {
+            {-2, -3, 3},
+            {-5, -10, 1},
+            {10, 30, -5}
+    };
 }
