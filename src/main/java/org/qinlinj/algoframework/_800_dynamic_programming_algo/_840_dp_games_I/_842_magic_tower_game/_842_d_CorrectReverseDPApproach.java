@@ -20,6 +20,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  */
 
 public class _842_d_CorrectReverseDPApproach {
+
     /**
      * Correct DP Solution using reverse thinking
      * <p>
@@ -28,6 +29,17 @@ public class _842_d_CorrectReverseDPApproach {
      */
 
     private int[][] memo;
+
+    public static void main(String[] args) {
+        _842_d_CorrectReverseDPApproach solution = new _842_d_CorrectReverseDPApproach();
+        solution.demonstrateReverseDPLogic();
+
+        // Test with the example
+        int[][] test = {{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
+        System.out.println("\nTesting both implementations:");
+        System.out.println("Recursive result: " + solution.calculateMinimumHP(test));
+        System.out.println("Iterative result: " + solution.calculateMinimumHPIterative(test));
+    }
 
     public int calculateMinimumHP(int[][] dungeon) {
         int m = dungeon.length;
@@ -86,5 +98,98 @@ public class _842_d_CorrectReverseDPApproach {
         // Store in memo and return
         memo[i][j] = result;
         return result;
+    }
+
+    /**
+     * Demonstrates the reverse DP logic with step-by-step calculation
+     */
+    public void demonstrateReverseDPLogic() {
+        int[][] example = {
+                {-2, -3, 3},
+                {-5, -10, 1},
+                {10, 30, -5}
+        };
+
+        System.out.println("=== Reverse DP Step-by-Step Demonstration ===");
+        System.out.println("Grid:");
+        printGrid(example);
+
+        System.out.println("\nReverse DP Calculation:");
+        System.out.println("Starting from bottom-right, working backwards...");
+
+        // Manual calculation for demonstration
+        System.out.println("\n1. Base case dp(2,2):");
+        System.out.println("   At (-5): need max(1, 0-(-5)) = max(1, 5) = 5");
+
+        System.out.println("\n2. Calculate dp(2,1):");
+        System.out.println("   At (30): need max(1, 5-30) = max(1, -25) = 1");
+
+        System.out.println("\n3. Calculate dp(1,2):");
+        System.out.println("   At (1): need max(1, 5-1) = max(1, 4) = 4");
+
+        System.out.println("\n4. Calculate dp(2,0):");
+        System.out.println("   At (10): need max(1, 1-10) = max(1, -9) = 1");
+
+        System.out.println("\n5. Calculate dp(1,1):");
+        System.out.println("   At (-10): min(dp(1,2), dp(2,1)) = min(4, 1) = 1");
+        System.out.println("   Need max(1, 1-(-10)) = max(1, 11) = 11");
+
+        System.out.println("\n6. Calculate dp(1,0):");
+        System.out.println("   At (-5): min(dp(1,1), dp(2,0)) = min(11, 1) = 1");
+        System.out.println("   Need max(1, 1-(-5)) = max(1, 6) = 6");
+
+        System.out.println("\n7. Calculate dp(0,2):");
+        System.out.println("   At (3): need max(1, 4-3) = max(1, 1) = 1");
+
+        System.out.println("\n8. Calculate dp(0,1):");
+        System.out.println("   At (-3): min(dp(0,2), dp(1,1)) = min(1, 11) = 1");
+        System.out.println("   Need max(1, 1-(-3)) = max(1, 4) = 4");
+
+        System.out.println("\n9. Calculate dp(0,0) - Final Answer:");
+        System.out.println("   At (-2): min(dp(0,1), dp(1,0)) = min(4, 6) = 4");
+        System.out.println("   Need max(1, 4-(-2)) = max(1, 6) = 6");
+
+        int result = calculateMinimumHP(example);
+        System.out.println("\nActual calculation result: " + result);
+    }
+
+    /**
+     * Iterative DP version for comparison
+     */
+    public int calculateMinimumHPIterative(int[][] dungeon) {
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+
+        // DP table: dp[i][j] = min health needed at (i,j) to reach destination
+        int[][] dp = new int[m + 1][n + 1];
+
+        // Initialize boundaries with max value (invalid paths)
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+            }
+        }
+
+        // Base case: positions adjacent to destination
+        dp[m][n - 1] = dp[m - 1][n] = 1;
+
+        // Fill table from bottom-right to top-left
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                int minHealthNeeded = Math.min(dp[i + 1][j], dp[i][j + 1]);
+                dp[i][j] = Math.max(1, minHealthNeeded - dungeon[i][j]);
+            }
+        }
+
+        return dp[0][0];
+    }
+
+    private void printGrid(int[][] grid) {
+        for (int[] row : grid) {
+            for (int val : row) {
+                System.out.printf("%4d ", val);
+            }
+            System.out.println();
+        }
     }
 }
