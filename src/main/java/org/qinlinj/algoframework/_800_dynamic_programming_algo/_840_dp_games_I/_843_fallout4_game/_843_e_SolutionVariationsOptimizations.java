@@ -167,4 +167,67 @@ public class _843_e_SolutionVariationsOptimizations {
             return Math.min(direct, size - direct);
         }
     }
+
+    /**
+     * Alternative state representation using BFS approach
+     */
+    public static class BFSAlternativeSolution {
+        public int findRotateSteps(String ring, String key) {
+            // Build character positions map
+            Map<Character, List<Integer>> charToIndex = new HashMap<>();
+            for (int i = 0; i < ring.length(); i++) {
+                char c = ring.charAt(i);
+                charToIndex.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+            }
+
+            // BFS with state compression
+            Map<String, Integer> visited = new HashMap<>();
+            PriorityQueue<State> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
+
+            pq.offer(new State(0, 0, 0));
+
+            while (!pq.isEmpty()) {
+                State curr = pq.poll();
+
+                // Check if we've completed the key
+                if (curr.keyPos == key.length()) {
+                    return curr.cost;
+                }
+
+                // Create state key for visited check
+                String stateKey = curr.ringPos + "," + curr.keyPos;
+                if (visited.containsKey(stateKey) && visited.get(stateKey) <= curr.cost) {
+                    continue;
+                }
+                visited.put(stateKey, curr.cost);
+
+                // Try all positions of next target character
+                char target = key.charAt(curr.keyPos);
+                for (int nextPos : charToIndex.get(target)) {
+                    int rotationCost = calculateMinRotation(curr.ringPos, nextPos, ring.length());
+                    int newCost = curr.cost + 1 + rotationCost; // +1 for button press
+                    pq.offer(new State(nextPos, curr.keyPos + 1, newCost));
+                }
+            }
+
+            return -1; // Should never reach here for valid inputs
+        }
+
+        private int calculateMinRotation(int from, int to, int size) {
+            int direct = Math.abs(to - from);
+            return Math.min(direct, size - direct);
+        }
+
+        static class State {
+            int ringPos;
+            int keyPos;
+            int cost;
+
+            State(int ringPos, int keyPos, int cost) {
+                this.ringPos = ringPos;
+                this.keyPos = keyPos;
+                this.cost = cost;
+            }
+        }
+    }
 }
