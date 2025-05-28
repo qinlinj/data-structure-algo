@@ -127,4 +127,64 @@ public class _843_d_CompleteFreedomTrailSolution {
             return Math.min(clockwise, counterclockwise);
         }
     }
+
+    /**
+     * Enhanced solution with detailed tracing and analysis
+     */
+    public static class TracingFreedomTrailSolver extends FreedomTrailSolver {
+        private boolean enableTracing = false;
+        private int recursionDepth = 0;
+
+        public TracingFreedomTrailSolver(boolean enableTracing) {
+            this.enableTracing = enableTracing;
+        }
+
+        @Override
+        public int findRotateSteps(String ring, String key) {
+            if (enableTracing) {
+                System.out.println("=== Solving Freedom Trail ===");
+                System.out.println("Ring: \"" + ring + "\"");
+                System.out.println("Key: \"" + key + "\"");
+                System.out.println();
+            }
+            return super.findRotateSteps(ring, key);
+        }
+
+        @Override
+        protected int dp(String ring, int i, String key, int j) {
+            if (enableTracing) {
+                String indent = "  ".repeat(recursionDepth);
+                System.out.println(indent + "dp(i=" + i + ", j=" + j + ") -> " +
+                        "ring[" + i + "]='" + ring.charAt(i) + "', " +
+                        "remaining=\"" + key.substring(j) + "\"");
+            }
+
+            recursionDepth++;
+            int result = super.dp(ring, i, key, j);
+            recursionDepth--;
+
+            if (enableTracing) {
+                String indent = "  ".repeat(recursionDepth);
+                System.out.println(indent + "-> returns " + result);
+            }
+
+            return result;
+        }
+
+        @Override
+        protected int calculateRotationCost(int from, int to, int ringSize) {
+            int cost = super.calculateRotationCost(from, to, ringSize);
+
+            if (enableTracing) {
+                String indent = "  ".repeat(recursionDepth + 1);
+                int clockwise = Math.abs(to - from);
+                int counterclockwise = ringSize - clockwise;
+                String direction = (clockwise <= counterclockwise) ? "clockwise" : "counterclockwise";
+                System.out.println(indent + "Rotate from " + from + " to " + to +
+                        ": " + cost + " steps " + direction);
+            }
+
+            return cost;
+        }
+    }
 }
