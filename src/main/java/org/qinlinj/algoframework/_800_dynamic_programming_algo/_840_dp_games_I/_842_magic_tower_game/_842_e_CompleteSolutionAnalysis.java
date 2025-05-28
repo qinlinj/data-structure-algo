@@ -53,4 +53,36 @@ public class _842_e_CompleteSolutionAnalysis {
             return dp(dungeon, 0, 0);
         }
     }
+
+    /**
+     * Alternative iterative solution for comparison
+     */
+    public int calculateMinimumHPIterative(int[][] dungeon) {
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+
+        // Create DP table with extra row/column for boundary handling
+        int[][] dp = new int[m + 1][n + 1];
+
+        // Initialize boundary values to max (invalid paths)
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+            }
+        }
+
+        // Set base cases: virtual cells adjacent to destination
+        dp[m][n - 1] = dp[m - 1][n] = 1;
+
+        // Fill DP table from bottom-right to top-left
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                int minHealthNeeded = Math.min(dp[i + 1][j], dp[i][j + 1]);
+                dp[i][j] = Math.max(1, minHealthNeeded - dungeon[i][j]);
+            }
+        }
+
+        return dp[0][0];
+    }
+}
 }
