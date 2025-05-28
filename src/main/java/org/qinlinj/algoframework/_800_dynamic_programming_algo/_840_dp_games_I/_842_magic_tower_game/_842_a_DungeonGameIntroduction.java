@@ -19,7 +19,9 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  * Grid: [[-2,-3,3],[-5,-10,1],[10,30,-5]]
  * Answer: 7 (following path: right -> right -> down -> down)
  */
+
 public class _842_a_DungeonGameIntroduction {
+
     /**
      * Problem Statement:
      * Given an m x n grid representing a dungeon, where:
@@ -43,4 +45,34 @@ public class _842_a_DungeonGameIntroduction {
             {-5, -10, 1},
             {10, 30, -5}
     };
+
+    public static void demonstrateProblem() {
+        System.out.println("=== Dungeon Game Problem ===");
+        System.out.println("Grid:");
+        printGrid(EXAMPLE_GRID);
+
+        System.out.println("\nExplanation:");
+        System.out.println("- Knight starts at top-left corner");
+        System.out.println("- Must reach bottom-right corner to save princess");
+        System.out.println("- Can only move right or down");
+        System.out.println("- Health must stay > 0 throughout journey");
+        System.out.println("- Find minimum initial health needed");
+
+        System.out.println("\nOptimal path: right -> right -> down -> down");
+        System.out.println("Health changes: 7 -> 5 -> 2 -> 5 -> 15 -> 45 -> 40");
+        System.out.println("Minimum initial health needed: 7");
+    }
+
+    private static void printGrid(int[][] grid) {
+        for (int[] row : grid) {
+            for (int val : row) {
+                System.out.printf("%4d ", val);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        demonstrateProblem();
+    }
 }
