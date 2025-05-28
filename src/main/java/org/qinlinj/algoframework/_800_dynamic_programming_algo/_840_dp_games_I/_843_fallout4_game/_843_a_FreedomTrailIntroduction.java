@@ -25,4 +25,39 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  */
 
 public class _843_a_FreedomTrailIntroduction {
+    /**
+     * Problem Statement:
+     * Given a circular ring of characters and a key string to spell,
+     * find the minimum number of operations (rotations + button presses)
+     * needed to input the entire key string.
+     * <p>
+     * Example:
+     * ring = "godding", key = "gd"
+     * - Start at 'g' (position 0), press button (1 operation)
+     * - Rotate counterclockwise 2 steps to 'd' (2 operations)
+     * - Press button (1 operation)
+     * Total: 4 operations
+     */
+
+    public static void demonstrateProblem() {
+        String ring = "godding";
+        String key = "gd";
+
+        System.out.println("=== Freedom Trail Problem Demonstration ===");
+        System.out.println("Ring: " + ring);
+        System.out.println("Key to spell: " + key);
+
+        visualizeRing(ring);
+
+        System.out.println("\nStep-by-step solution:");
+        System.out.println("1. Initial position: pointer at '" + ring.charAt(0) + "' (index 0)");
+        System.out.println("2. Target: '" + key.charAt(0) + "' - already at correct position!");
+        System.out.println("3. Press button (1 operation)");
+        System.out.println("4. Target: '" + key.charAt(1) + "' - need to find best 'd' position");
+
+        findBestRotation(ring, 0, 'd');
+
+        System.out.println("5. Press button (1 operation)");
+        System.out.println("Total operations: 4");
+    }
 }
