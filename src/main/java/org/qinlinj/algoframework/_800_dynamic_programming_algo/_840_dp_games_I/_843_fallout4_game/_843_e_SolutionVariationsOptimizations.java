@@ -105,4 +105,66 @@ public class _843_e_SolutionVariationsOptimizations {
             return Math.min(direct, size - direct);
         }
     }
+
+    /**
+     * Space-optimized DP solution
+     * Reduces space complexity from O(m*n) to O(m)
+     */
+    public static class SpaceOptimizedDPSolution {
+        public int findRotateSteps(String ring, String key) {
+            int m = ring.length();
+            int n = key.length();
+
+            // Build character positions map
+            Map<Character, List<Integer>> charToIndex = new HashMap<>();
+            for (int i = 0; i < m; i++) {
+                char c = ring.charAt(i);
+                charToIndex.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+            }
+
+            // Space optimization: only keep previous and current row
+            int[] prev = new int[m];
+            int[] curr = new int[m];
+
+            // Initialize: start at position 0
+            Arrays.fill(prev, Integer.MAX_VALUE);
+            prev[0] = 0;
+
+            // Process each character in key
+            for (int i = 0; i < n; i++) {
+                char target = key.charAt(i);
+                Arrays.fill(curr, Integer.MAX_VALUE);
+
+                // For each possible previous position
+                for (int prevPos = 0; prevPos < m; prevPos++) {
+                    if (prev[prevPos] == Integer.MAX_VALUE) continue;
+
+                    // Try all positions of current target character
+                    for (int currPos : charToIndex.get(target)) {
+                        int rotationCost = calculateMinRotation(prevPos, currPos, m);
+                        int totalCost = prev[prevPos] + 1 + rotationCost;
+                        curr[currPos] = Math.min(curr[currPos], totalCost);
+                    }
+                }
+
+                // Swap arrays for next iteration
+                int[] temp = prev;
+                prev = curr;
+                curr = temp;
+            }
+
+            // Find minimum result
+            int result = Integer.MAX_VALUE;
+            for (int cost : prev) {
+                result = Math.min(result, cost);
+            }
+
+            return result;
+        }
+
+        private int calculateMinRotation(int from, int to, int size) {
+            int direct = Math.abs(to - from);
+            return Math.min(direct, size - direct);
+        }
+    }
 }
