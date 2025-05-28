@@ -20,6 +20,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  */
 
 public class _842_c_WhyForwardDPFails {
+
     /**
      * Demonstrates why forward DP definition fails
      * <p>
@@ -34,6 +35,51 @@ public class _842_c_WhyForwardDPFails {
             {-3, 5},
             {1, -4}
     };
+
+    public static void demonstrateForwardDPProblem() {
+        System.out.println("=== Why Forward DP Definition Fails ===");
+        System.out.println("Grid:");
+        printGrid(PROBLEM_GRID);
+
+        System.out.println("\nForward DP Analysis:");
+        analyzeForwardDP();
+
+        System.out.println("\nThe Problem:");
+        explainInsufficientInformation();
+
+        System.out.println("\nConclusion:");
+        System.out.println("Forward DP definition provides insufficient information");
+        System.out.println("Need to know remaining health, not just minimum initial health");
+        System.out.println("This motivates the reverse (backward) DP approach");
+    }
+
+    private static void analyzeForwardDP() {
+        System.out.println("Wrong DP definition attempt:");
+        System.out.println("dp(i,j) = minimum initial health needed to reach cell (i,j)");
+
+        System.out.println("\nCalculations:");
+        System.out.println("dp(0,0) = max(1, 1-(-3)) = max(1, 4) = 4");
+        System.out.println("dp(0,1) = can reach via (0,0): need initial health to survive -3 then gain 5");
+        System.out.println("dp(1,0) = can reach via (0,0): 4 initial, -3+1 = still need 4 initial");
+        System.out.println("dp(1,1) = ??? Cannot determine correctly");
+
+        System.out.println("\nPath 1: (0,0) -> (0,1) -> (1,1)");
+        System.out.println("- Initial health: 4, after (0,0): 1, after (0,1): 6, can handle -4");
+        System.out.println("Path 2: (0,0) -> (1,0) -> (1,1)");
+        System.out.println("- Initial health: 4, after (0,0): 1, after (1,0): 2, cannot handle -4!");
+    }
+
+    private static void explainInsufficientInformation() {
+        System.out.println("The core problem:");
+        System.out.println("1. We know dp(0,1) = dp(1,0) = 4 (same minimum initial health)");
+        System.out.println("2. But remaining health at (0,1) = 6, at (1,0) = 2");
+        System.out.println("3. Forward DP cannot distinguish between these states");
+        System.out.println("4. Cannot make optimal decision for dp(1,1)");
+
+        System.out.println("\nMissing information:");
+        System.out.println("- Forward DP: \"How much initial health to get here?\"");
+        System.out.println("- What we need: \"How much health do I have when I arrive?\"");
+    }
 
     private static void printGrid(int[][] grid) {
         for (int[] row : grid) {
