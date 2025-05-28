@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
 
+import java.util.*;
+
 /**
  * PIANO FINGERING OPTIMIZATION ANALOGY
  * <p>
@@ -74,4 +76,70 @@ public class _843_b_PianoFingeringAnalogy {
         }
     }
 
+    /**
+     * Piano fingering optimizer using DP principles
+     */
+    public static class PianoFingeringOptimizer {
+        private Map<String, Integer> memo = new HashMap<>();
+
+        /**
+         * Find optimal fingering for a piece
+         *
+         * @param state current piano state
+         * @param piece the piece being played
+         * @return minimum awkwardness cost
+         */
+        public int optimizeFingering(PianoState state, PianoPiece piece) {
+            // Base case: no more notes to play
+            if (!piece.hasMoreNotes()) {
+                return 0;
+            }
+
+            // Create memo key from state
+            String memoKey = createMemoKey(state, piece.currentNoteIndex);
+            if (memo.containsKey(memoKey)) {
+                return memo.get(memoKey);
+            }
+
+            int currentNote = piece.getCurrentNote();
+            int minCost = Integer.MAX_VALUE;
+
+            // Try each finger for the current note
+            for (int finger = 0; finger < 5; finger++) {
+                // Calculate cost of using this finger
+                int transitionCost = state.calculateTransitionCost(finger, currentNote);
+
+                // Create new state after using this finger
+                PianoState newState = simulateFingerPress(state, finger, currentNote);
+                PianoPiece newPiece = new PianoPiece(Arrays.copyOf(piece.notes, piece.notes.length));
+                newPiece.currentNoteIndex = piece.currentNoteIndex + 1;
+
+                // Recursively solve for remaining notes
+                int futureCost = optimizeFingering(newState, newPiece);
+
+                // Update minimum cost
+                minCost = Math.min(minCost, transitionCost + futureCost);
+            }
+
+            memo.put(memoKey, minCost);
+            return minCost;
+        }
+
+        private String createMemoKey(PianoState state, int noteIndex) {
+            return Arrays.toString(state.fingerPositions) + "_" +
+                    Arrays.toString(state.fingersPressed) + "_" + noteIndex;
+        }
+
+        private PianoState simulateFingerPress(PianoState state, int finger, int notePos) {
+            PianoState newState = new PianoState();
+            System.arraycopy(state.fingerPositions, 0, newState.fingerPositions, 0, 5);
+            System.arraycopy(state.fingersPressed, 0, newState.fingersPressed, 0, 5);
+
+            // Update finger position
+            newState.fingerPositions[finger] = notePos;
+            newState.fingersPressed[finger] = true;
+
+            return newState;
+        }
+    }
 }
