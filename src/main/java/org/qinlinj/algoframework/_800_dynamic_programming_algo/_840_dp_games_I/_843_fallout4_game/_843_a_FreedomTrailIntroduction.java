@@ -60,4 +60,19 @@ public class _843_a_FreedomTrailIntroduction {
         System.out.println("5. Press button (1 operation)");
         System.out.println("Total operations: 4");
     }
+
+    private static void visualizeRing(String ring) {
+        System.out.println("\nRing visualization (pointer starts at 12 o'clock):");
+        System.out.println("     " + ring.charAt(0) + " ←(pointer)");
+
+        int n = ring.length();
+        for (int i = 1; i < n; i++) {
+            if (i == 1) System.out.println("   " + ring.charAt(n - 1) + "   " + ring.charAt(i));
+            else if (i == 2) System.out.println(" " + ring.charAt(n - 2) + "       " + ring.charAt(i));
+            else if (i == n - 2) System.out.println(" " + ring.charAt(i) + "       " + ring.charAt(n - 1));
+            else if (i == n - 1) System.out.println("   " + ring.charAt(i) + "   " + ring.charAt(1));
+        }
+
+        System.out.println("     " + ring.charAt(n / 2));
+    }
 }
