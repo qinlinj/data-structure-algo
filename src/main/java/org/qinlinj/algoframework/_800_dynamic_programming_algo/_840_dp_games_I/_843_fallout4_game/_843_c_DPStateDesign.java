@@ -106,4 +106,94 @@ public class _843_c_DPStateDesign {
         }
     }
 
+    /**
+     * Step-by-step DP solution demonstration
+     */
+    public static class DPSolutionDemo {
+        private String ring;
+        private String key;
+        private Map<Character, List<Integer>> charToPositions;
+        private Map<FreedomTrailState, Integer> memo;
+        private int recursionDepth;
+
+        public DPSolutionDemo(String ring, String key) {
+            this.ring = ring;
+            this.key = key;
+            this.charToPositions = buildCharacterMap(ring);
+            this.memo = new HashMap<>();
+            this.recursionDepth = 0;
+        }
+
+        private Map<Character, List<Integer>> buildCharacterMap(String ring) {
+            Map<Character, List<Integer>> map = new HashMap<>();
+            for (int i = 0; i < ring.length(); i++) {
+                char c = ring.charAt(i);
+                map.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+            }
+            return map;
+        }
+
+        public int solve() {
+            System.out.println("=== DP Solution Step-by-Step ===");
+            return dp(0, 0);
+        }
+
+        private int dp(int ringPos, int keyIdx) {
+            // Create state for memoization
+            FreedomTrailState state = new FreedomTrailState(ringPos, keyIdx);
+
+            // Indentation for visualization
+            String indent = "  ".repeat(recursionDepth);
+            System.out.println(indent + "dp(" + ringPos + ", " + keyIdx + ") - " +
+                    "ring[" + ringPos + "]='" + ring.charAt(ringPos) +
+                    "', remaining key=\"" + key.substring(keyIdx) + "\"");
+
+            // Base case
+            if (keyIdx == key.length()) {
+                System.out.println(indent + "  Base case: all characters processed, return 0");
+                return 0;
+            }
+
+            // Check memo
+            if (memo.containsKey(state)) {
+                int result = memo.get(state);
+                System.out.println(indent + "  Memo hit: returning " + result);
+                return result;
+            }
+
+            char targetChar = key.charAt(keyIdx);
+            List<Integer> positions = charToPositions.get(targetChar);
+
+            System.out.println(indent + "  Target: '" + targetChar + "' at positions " + positions);
+
+            int minCost = Integer.MAX_VALUE;
+            recursionDepth++;
+
+            for (int targetPos : positions) {
+                int rotationCost = calculateRotationCost(ringPos, targetPos, ring.length());
+                System.out.println(indent + "  Trying position " + targetPos +
+                        ": rotation cost = " + rotationCost);
+
+                int futureCost = dp(targetPos, keyIdx + 1);
+                int totalCost = 1 + rotationCost + futureCost; // +1 for button press
+
+                System.out.println(indent + "  Total cost via position " + targetPos +
+                        ": " + totalCost + " (1 + " + rotationCost + " + " + futureCost + ")");
+
+                minCost = Math.min(minCost, totalCost);
+            }
+
+            recursionDepth--;
+
+            memo.put(state, minCost);
+            System.out.println(indent + "  Optimal cost: " + minCost);
+            return minCost;
+        }
+
+        private int calculateRotationCost(int from, int to, int ringSize) {
+            int clockwise = Math.abs(to - from);
+            int counterclockwise = ringSize - clockwise;
+            return Math.min(clockwise, counterclockwise);
+        }
+    }
 }
