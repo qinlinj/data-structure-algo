@@ -47,4 +47,62 @@ public class _843_e_SolutionVariationsOptimizations {
             return Math.min(direct, size - direct);
         }
     }
+
+    /**
+     * Bottom-up DP solution (iterative approach)
+     */
+    public static class BottomUpDPSolution {
+        public int findRotateSteps(String ring, String key) {
+            int m = ring.length();
+            int n = key.length();
+
+            // Build character positions map
+            Map<Character, List<Integer>> charToIndex = new HashMap<>();
+            for (int i = 0; i < m; i++) {
+                char c = ring.charAt(i);
+                charToIndex.computeIfAbsent(c, k -> new ArrayList<>()).add(i);
+            }
+
+            // DP table: dp[i][j] = min steps to spell key[0..i-1] ending at ring position j
+            int[][] dp = new int[n + 1][m];
+
+            // Initialize: no characters spelled, can start at any position with 0 cost
+            // But we must start at position 0, so set others to infinity
+            for (int j = 1; j < m; j++) {
+                dp[0][j] = Integer.MAX_VALUE;
+            }
+            dp[0][0] = 0; // Start at position 0
+
+            // Fill DP table
+            for (int i = 1; i <= n; i++) {
+                char target = key.charAt(i - 1);
+                Arrays.fill(dp[i], Integer.MAX_VALUE);
+
+                // For each possible ending position of previous character
+                for (int prevPos = 0; prevPos < m; prevPos++) {
+                    if (dp[i - 1][prevPos] == Integer.MAX_VALUE) continue;
+
+                    // Try all positions of current target character
+                    for (int currPos : charToIndex.get(target)) {
+                        int rotationCost = calculateMinRotation(prevPos, currPos, m);
+                        int totalCost = dp[i - 1][prevPos] + 1 + rotationCost;
+                        dp[i][currPos] = Math.min(dp[i][currPos], totalCost);
+                    }
+                }
+            }
+
+            // Find minimum among all possible ending positions
+            int result = Integer.MAX_VALUE;
+            for (int j = 0; j < m; j++) {
+                result = Math.min(result, dp[n][j]);
+            }
+
+            return result;
+        }
+
+        private int calculateMinRotation(int from, int to, int size) {
+            int direct = Math.abs(to - from);
+            return Math.min(direct, size - direct);
+        }
+    }
 }
