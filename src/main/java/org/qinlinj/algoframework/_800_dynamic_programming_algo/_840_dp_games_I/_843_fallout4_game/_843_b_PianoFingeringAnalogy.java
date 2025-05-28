@@ -52,4 +52,26 @@ public class _843_b_PianoFingeringAnalogy {
             return distance / fingerFlexibility[finger];
         }
     }
+
+    /**
+     * Simplified piano piece representation
+     */
+    static class PianoPiece {
+        int[] notes; // Sequence of note positions (0-87 for 88-key piano)
+        int currentNoteIndex;
+
+        public PianoPiece(int[] notes) {
+            this.notes = notes;
+            this.currentNoteIndex = 0;
+        }
+
+        public boolean hasMoreNotes() {
+            return currentNoteIndex < notes.length;
+        }
+
+        public int getCurrentNote() {
+            return hasMoreNotes() ? notes[currentNoteIndex] : -1;
+        }
+    }
+
 }
