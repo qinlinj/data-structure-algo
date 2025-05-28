@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
 
+import java.util.*;
+
 /**
  * FREEDOM TRAIL PROBLEM INTRODUCTION
  * <p>
@@ -74,5 +76,40 @@ public class _843_a_FreedomTrailIntroduction {
         }
 
         System.out.println("     " + ring.charAt(n / 2));
+    }
+
+    private static void findBestRotation(String ring, int currentPos, char target) {
+        System.out.println("\nFinding best rotation for '" + target + "':");
+
+        List<Integer> positions = new ArrayList<>();
+        for (int i = 0; i < ring.length(); i++) {
+            if (ring.charAt(i) == target) {
+                positions.add(i);
+            }
+        }
+
+        System.out.println("'" + target + "' found at positions: " + positions);
+
+        for (int pos : positions) {
+            int clockwise = Math.abs(pos - currentPos);
+            int counterclockwise = ring.length() - clockwise;
+            int minSteps = Math.min(clockwise, counterclockwise);
+            String direction = (clockwise <= counterclockwise) ? "clockwise" : "counterclockwise";
+
+            System.out.printf("Position %d: %d steps %s\n", pos, minSteps, direction);
+        }
+
+        // Find minimum
+        int bestPos = positions.get(0);
+        int minSteps = Integer.MAX_VALUE;
+        for (int pos : positions) {
+            int steps = Math.min(Math.abs(pos - currentPos), ring.length() - Math.abs(pos - currentPos));
+            if (steps < minSteps) {
+                minSteps = steps;
+                bestPos = pos;
+            }
+        }
+
+        System.out.println("Best choice: position " + bestPos + " with " + minSteps + " steps");
     }
 }
