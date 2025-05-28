@@ -24,4 +24,32 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
  */
 
 public class _843_b_PianoFingeringAnalogy {
+    /**
+     * Piano fingering state representation
+     * In reality, this would be much more complex with hand positions,
+     * but simplified here for educational purposes
+     */
+    static class PianoState {
+        int[] fingerPositions; // Position of each finger (5 fingers)
+        boolean[] fingersPressed; // Which fingers are currently pressed
+
+        public PianoState() {
+            fingerPositions = new int[5]; // 0=thumb, 1=index, ..., 4=pinky
+            fingersPressed = new boolean[5];
+        }
+
+        /**
+         * Calculate "awkwardness" cost of using finger for next note
+         */
+        public int calculateTransitionCost(int finger, int notePosition) {
+            // Simplified cost function - in reality much more complex
+            int currentPos = fingerPositions[finger];
+            int distance = Math.abs(notePosition - currentPos);
+
+            // Different fingers have different flexibility
+            int[] fingerFlexibility = {3, 4, 3, 2, 1}; // thumb most flexible
+
+            return distance / fingerFlexibility[finger];
+        }
+    }
 }
