@@ -27,34 +27,6 @@ import java.util.*;
 
 public class _842_e_CompleteSolutionAnalysis {
     /**
-     * Main solution class for the Dungeon Game problem
-     */
-    public static class DungeonGameSolver {
-        private int[][] memo;
-
-        /**
-         * Calculates minimum initial health needed for knight to rescue princess
-         *
-         * @param dungeon m x n grid representing the dungeon
-         * @return minimum initial health points required
-         */
-        public int calculateMinimumHP(int[][] dungeon) {
-            if (dungeon == null || dungeon.length == 0) return 1;
-
-            int m = dungeon.length;
-            int n = dungeon[0].length;
-
-            // Initialize memoization table
-            memo = new int[m][n];
-            for (int[] row : memo) {
-                Arrays.fill(row, -1);
-            }
-
-            return dp(dungeon, 0, 0);
-        }
-    }
-
-    /**
      * Alternative iterative solution for comparison
      */
     public int calculateMinimumHPIterative(int[][] dungeon) {
@@ -84,5 +56,97 @@ public class _842_e_CompleteSolutionAnalysis {
 
         return dp[0][0];
     }
-}
+
+    /**
+     * Main solution class for the Dungeon Game problem
+     */
+    public static class DungeonGameSolver {
+        private int[][] memo;
+
+        /**
+         * Calculates minimum initial health needed for knight to rescue princess
+         *
+         * @param dungeon m x n grid representing the dungeon
+         * @return minimum initial health points required
+         */
+        public int calculateMinimumHP(int[][] dungeon) {
+            if (dungeon == null || dungeon.length == 0) return 1;
+
+            int m = dungeon.length;
+            int n = dungeon[0].length;
+
+            // Initialize memoization table
+            memo = new int[m][n];
+            for (int[] row : memo) {
+                Arrays.fill(row, -1);
+            }
+
+            return dp(dungeon, 0, 0);
+        }
+    }
+
+    /**
+     * Comprehensive test suite and analysis
+     */
+    public static class TestSuite {
+        private DungeonGameSolver solver = new DungeonGameSolver();
+
+        public void runAllTests() {
+            System.out.println("=== DUNGEON GAME COMPLETE SOLUTION ANALYSIS ===\n");
+
+            testBasicExample();
+            testEdgeCases();
+            testPerformanceComparison();
+            analyzeAlgorithmComplexity();
+        }
+
+        private void testBasicExample() {
+            System.out.println("1. BASIC EXAMPLE TEST");
+            System.out.println("-------------------");
+
+            int[][] dungeon = {
+                    {-2, -3, 3},
+                    {-5, -10, 1},
+                    {10, 30, -5}
+            };
+
+            System.out.println("Grid:");
+            printGrid(dungeon);
+
+            int result1 = solver.calculateMinimumHP(dungeon);
+            int result2 = solver.calculateMinimumHPIterative(dungeon);
+
+            System.out.println("Recursive solution: " + result1);
+            System.out.println("Iterative solution: " + result2);
+            System.out.println("Expected: 7");
+            System.out.println("Test passed: " + (result1 == 7 && result2 == 7));
+
+            // Trace the optimal path
+            traceOptimalPath(dungeon, result1);
+            System.out.println();
+        }
+
+        private void testEdgeCases() {
+            System.out.println("2. EDGE CASES TEST");
+            System.out.println("------------------");
+
+            // Single cell with positive value
+            testCase("Single positive cell", new int[][]{{5}}, 1);
+
+            // Single cell with negative value
+            testCase("Single negative cell", new int[][]{{-3}}, 4);
+
+            // All positive values
+            testCase("All positive", new int[][]{{1, 2}, {3, 4}}, 1);
+
+            // All negative values
+            testCase("All negative", new int[][]{{-1, -2}, {-3, -4}}, 7);
+
+            // Mixed with zeros
+            testCase("Mixed with zeros", new int[][]{{0, -3}, {1, 0}}, 4);
+
+            System.out.println();
+        }
+    }
+
 }
