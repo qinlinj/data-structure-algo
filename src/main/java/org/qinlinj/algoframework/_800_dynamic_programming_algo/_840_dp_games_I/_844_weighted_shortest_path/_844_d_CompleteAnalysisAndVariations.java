@@ -181,6 +181,26 @@ public class _844_d_CompleteAnalysisAndVariations {
             }
             return results;
         }
+
+        // Variation 3: Find all paths within budget
+        public List<List<Integer>> findAllPathsWithinBudget(
+                int n, int[][] flights, int src, int dst, int budget, int maxStops) {
+
+            Map<Integer, List<int[]>> graph = new HashMap<>();
+            for (int[] flight : flights) {
+                graph.computeIfAbsent(flight[0], k -> new ArrayList<>())
+                        .add(new int[]{flight[1], flight[2]});
+            }
+
+            List<List<Integer>> allPaths = new ArrayList<>();
+            List<Integer> currentPath = new ArrayList<>();
+            currentPath.add(src);
+
+            dfsAllPaths(src, dst, budget, maxStops, 0, 0,
+                    graph, currentPath, allPaths);
+
+            return allPaths;
+        }
     }
 }
 
