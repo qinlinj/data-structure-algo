@@ -3,6 +3,28 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I.
 import java.util.*;
 
 public class _844_a_BFSApproach {
+    public static void main(String[] args) {
+        WeightedGraphExample.demonstrateWeightedGraphIssue();
+
+        System.out.println("\n=== Testing Dijkstra Approach ===");
+
+        // Test case 1: Example from the problem
+        int n1 = 3;
+        int[][] flights1 = {{0, 1, 100}, {1, 2, 100}, {0, 2, 500}};
+        int src1 = 0, dst1 = 2, k1 = 1;
+
+        int result1 = WeightedGraphExample.findCheapestFlightDijkstra(n1, flights1, src1, dst1, k1);
+        System.out.println("Test 1 - Expected: 200, Got: " + result1);
+
+        // Test case 2: Direct path only
+        int k2 = 0;
+        int result2 = WeightedGraphExample.findCheapestFlightDijkstra(n1, flights1, src1, dst1, k2);
+        System.out.println("Test 2 - Expected: 500, Got: " + result2);
+
+        System.out.println("\nKey Insight: Priority queue ensures we always process the cheapest path first,");
+        System.out.println("which is essential for finding optimal solutions in weighted graphs.");
+    }
+
     /**
      * Demonstrates why regular BFS doesn't work for weighted graphs
      * and why we need priority queue (Dijkstra's algorithm)
