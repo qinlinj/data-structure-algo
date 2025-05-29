@@ -52,6 +52,23 @@ public class _844_d_CompleteAnalysisAndVariations {
         System.out.println("✓ Self-loop test passed");
     }
 
+    private static void testLargeInputs() {
+        System.out.println("\n--- Large Input Tests ---");
+
+        // Generate large test case
+        List<int[]> flights = new ArrayList<>();
+        int n = 100;
+        for (int i = 0; i < n - 1; i++) {
+            flights.add(new int[]{i, i + 1, 100});
+            if (i > 0) flights.add(new int[]{i, i - 1, 100});
+        }
+
+        MasterSolution solver = new MasterSolution();
+        int result = solver.solveBottomUpDP(n, flights.toArray(new int[0][]), 0, n - 1, n);
+        assert result > 0;
+        System.out.println("✓ Large input test passed (result: " + result + ")");
+    }
+
     /**
      * Master solution class with all approaches
      */
@@ -397,6 +414,7 @@ public class _844_d_CompleteAnalysisAndVariations {
             testProblemVariations();
         }
     }
+
 
 }
 
