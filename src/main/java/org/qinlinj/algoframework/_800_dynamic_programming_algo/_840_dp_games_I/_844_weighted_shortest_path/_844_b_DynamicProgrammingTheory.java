@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
 
+import java.util.*;
+
 public class _844_b_DynamicProgrammingTheory {
     /**
      * Demonstrates the theoretical foundation of DP approach
@@ -69,4 +71,62 @@ public class _844_b_DynamicProgrammingTheory {
         }
     }
 
+    /**
+     * Simple recursive solution without memoization to show the basic structure
+     */
+    public static class BasicRecursiveSolution {
+        private Map<Integer, List<int[]>> indegree;
+        private int source;
+
+        public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+            this.source = src;
+            buildIndegreeGraph(flights);
+            return dp(dst, k + 1); // k+1 because k is number of stops, we need edges
+        }
+
+        private void buildIndegreeGraph(int[][] flights) {
+            indegree = new HashMap<>();
+            for (int[] flight : flights) {
+                int from = flight[0], to = flight[1], price = flight[2];
+                indegree.computeIfAbsent(to, key -> new ArrayList<>())
+                        .add(new int[]{from, price});
+            }
+        }
+
+        /**
+         * Recursive DP function
+         *
+         * @param city  current city
+         * @param steps remaining steps
+         * @return minimum cost to reach city from source in steps
+         */
+        private int dp(int city, int steps) {
+            // Base case 1: reached source
+            if (city == source) {
+                return 0;
+            }
+
+            // Base case 2: no steps left
+            if (steps == 0) {
+                return -1; // impossible
+            }
+
+            int minCost = Integer.MAX_VALUE;
+
+            // Try all incoming edges
+            if (indegree.containsKey(city)) {
+                for (int[] edge : indegree.get(city)) {
+                    int fromCity = edge[0];
+                    int price = edge[1];
+
+                    int subproblemCost = dp(fromCity, steps - 1);
+                    if (subproblemCost != -1) {
+                        minCost = Math.min(minCost, subproblemCost + price);
+                    }
+                }
+            }
+
+            return minCost == Integer.MAX_VALUE ? -1 : minCost;
+        }
+    }
 }
