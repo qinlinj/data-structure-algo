@@ -60,5 +60,17 @@ public class _844_d_CompleteAnalysisAndVariations {
             }
             return -1;
         }
+
+        // Approach 2: Top-down DP with memoization
+        public int solveTopDownDP(int n, int[][] flights, int src, int dst, int k) {
+            Map<Integer, List<int[]>> indegree = new HashMap<>();
+            for (int[] flight : flights) {
+                indegree.computeIfAbsent(flight[1], key -> new ArrayList<>())
+                        .add(new int[]{flight[0], flight[2]});
+            }
+
+            Integer[][] memo = new Integer[n][k + 2];
+            return dpHelper(dst, k + 1, src, indegree, memo);
+        }
     }
 }
