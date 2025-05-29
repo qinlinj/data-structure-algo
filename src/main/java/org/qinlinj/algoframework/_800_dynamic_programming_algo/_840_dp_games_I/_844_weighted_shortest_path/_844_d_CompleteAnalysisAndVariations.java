@@ -129,4 +129,32 @@ public class _844_d_CompleteAnalysisAndVariations {
             return dist[dst] == Integer.MAX_VALUE ? -1 : dist[dst];
         }
     }
+
+    /**
+     * Problem variations and extensions
+     */
+    public static class ProblemVariations {
+
+        // Variation 1: Find path with exactly K stops
+        public int findCheapestPriceExactlyKStops(int n, int[][] flights, int src, int dst, int k) {
+            int[] dp = new int[n];
+            Arrays.fill(dp, Integer.MAX_VALUE);
+            dp[src] = 0;
+
+            for (int step = 0; step < k; step++) {
+                int[] temp = new int[n];
+                Arrays.fill(temp, Integer.MAX_VALUE);
+
+                for (int[] flight : flights) {
+                    int from = flight[0], to = flight[1], price = flight[2];
+                    if (dp[from] != Integer.MAX_VALUE) {
+                        temp[to] = Math.min(temp[to], dp[from] + price);
+                    }
+                }
+                dp = temp;
+            }
+            return dp[dst] == Integer.MAX_VALUE ? -1 : dp[dst];
+        }
+    }
 }
+
