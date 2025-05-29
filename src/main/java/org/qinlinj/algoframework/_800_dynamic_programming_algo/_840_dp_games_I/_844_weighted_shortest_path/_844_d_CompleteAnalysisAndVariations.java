@@ -37,6 +37,21 @@ public class _844_d_CompleteAnalysisAndVariations {
         System.out.println("✓ Direct path test passed");
     }
 
+    private static void testEdgeCases() {
+        System.out.println("\n--- Edge Case Tests ---");
+        MasterSolution solver = new MasterSolution();
+
+        // Test: No path exists
+        int[][] noPath = {{0, 1, 100}, {2, 3, 100}};
+        assert solver.solveBottomUpDP(4, noPath, 0, 3, 5) == -1;
+        System.out.println("✓ No path test passed");
+
+        // Test: Self-loop (src == dst)
+        int[][] selfLoop = {{0, 1, 100}};
+        assert solver.solveBottomUpDP(2, selfLoop, 0, 0, 0) == 0;
+        System.out.println("✓ Self-loop test passed");
+    }
+
     /**
      * Master solution class with all approaches
      */
@@ -382,5 +397,6 @@ public class _844_d_CompleteAnalysisAndVariations {
             testProblemVariations();
         }
     }
+
 }
 
