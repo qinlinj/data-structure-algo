@@ -1,8 +1,28 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path; /**
+ * BFS Algorithm Approach for Cheapest Flights Problem
+ * <p>
+ * Key Concepts:
+ * 1. BFS (Breadth-First Search) naturally finds shortest paths in unweighted graphs
+ * 2. For weighted graphs, we need Priority Queue (Dijkstra's algorithm) instead of regular queue
+ * 3. BFS expands layer by layer from source, guaranteeing shortest path when destination is reached
+ * 4. Regular queue works for unweighted graphs because each edge has weight 1
+ * 5. Priority queue ensures nodes with smaller path weights are processed first
+ * <p>
+ * Problem Context:
+ * - Find cheapest flight path from source to destination
+ * - Maximum K intermediate stops allowed
+ * - This is a weighted directed graph shortest path problem
+ * <p>
+ * Why Priority Queue is needed:
+ * - In weighted graphs, fewer edges doesn't guarantee smaller total weight
+ * - Some paths may have few edges but high individual weights
+ * - Priority queue automatically sorts by path weight, not edge count
+ */
 
 import java.util.*;
 
 public class _844_a_BFSApproach {
+
     public static void main(String[] args) {
         WeightedGraphExample.demonstrateWeightedGraphIssue();
 
