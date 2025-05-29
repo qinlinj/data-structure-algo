@@ -230,5 +230,60 @@ public class _844_d_CompleteAnalysisAndVariations {
             }
         }
     }
+
+    /**
+     * Real-world application simulator
+     */
+    public static class FlightBookingSimulator {
+        private Random random = new Random(42);
+
+        // Generate realistic flight network
+        public int[][] generateRealisticFlightNetwork(int numCities, double connectivity) {
+            List<int[]> flights = new ArrayList<>();
+
+            // Add hub-and-spoke structure (realistic for airlines)
+            int[] hubs = {0, numCities / 4, numCities / 2, 3 * numCities / 4};
+
+            // Connect hubs to each other (expensive)
+            for (int i = 0; i < hubs.length; i++) {
+                for (int j = i + 1; j < hubs.length; j++) {
+                    int price1 = 200 + random.nextInt(300);
+                    int price2 = 200 + random.nextInt(300);
+                    flights.add(new int[]{hubs[i], hubs[j], price1});
+                    flights.add(new int[]{hubs[j], hubs[i], price2});
+                }
+            }
+
+            // Connect each city to nearest hub (cheaper)
+            for (int city = 0; city < numCities; city++) {
+                if (Arrays.stream(hubs).anyMatch(h -> h == city)) continue;
+
+                int nearestHub = hubs[0];
+                for (int hub : hubs) {
+                    if (Math.abs(city - hub) < Math.abs(city - nearestHub)) {
+                        nearestHub = hub;
+                    }
+                }
+
+                int priceToHub = 50 + random.nextInt(150);
+                int priceFromHub = 50 + random.nextInt(150);
+                flights.add(new int[]{city, nearestHub, priceToHub});
+                flights.add(new int[]{nearestHub, city, priceFromHub});
+            }
+
+            // Add some direct connections between non-hub cities
+            for (int i = 0; i < numCities * connectivity; i++) {
+                int from = random.nextInt(numCities);
+                int to = random.nextInt(numCities);
+                if (from != to) {
+                    int price = 100 + random.nextInt(200);
+                    flights.add(new int[]{from, to, price});
+                }
+            }
+
+            return flights.toArray(new int[0][]);
+        }
+        
+    }
 }
 
