@@ -283,7 +283,39 @@ public class _844_d_CompleteAnalysisAndVariations {
 
             return flights.toArray(new int[0][]);
         }
-        
+
+        // Simulate booking scenarios
+        public void simulateBookingScenarios() {
+            System.out.println("\n=== Flight Booking Simulation ===");
+
+            int numCities = 20;
+            int[][] flights = generateRealisticFlightNetwork(numCities, 0.3);
+
+            MasterSolution solver = new MasterSolution();
+            ProblemVariations variations = new ProblemVariations();
+
+            // Scenario 1: Budget traveler (flexible dates, more stops allowed)
+            System.out.println("Scenario 1: Budget Traveler");
+            int budgetPrice = solver.solveBottomUpDP(numCities, flights, 1, 15, 3);
+            System.out.println("Cheapest price with up to 3 stops: $" + budgetPrice);
+
+            // Scenario 2: Business traveler (fewer stops, time-sensitive)
+            System.out.println("\nScenario 2: Business Traveler");
+            int businessPrice = solver.solveBottomUpDP(numCities, flights, 1, 15, 1);
+            System.out.println("Cheapest price with up to 1 stop: $" + businessPrice);
+
+            // Scenario 3: Multi-destination trip
+            System.out.println("\nScenario 3: Multi-destination Trip");
+            Set<Integer> destinations = Set.of(8, 12, 18);
+            Map<Integer, Integer> multiDestPrices = variations.findCheapestToMultipleDestinations(
+                    numCities, flights, 1, destinations, 2);
+            multiDestPrices.forEach((dest, price) ->
+                    System.out.println("To city " + dest + ": $" + price));
+
+            // Performance analysis
+            performanceAnalysis(numCities, flights, solver);
+        }
+
     }
 }
 
