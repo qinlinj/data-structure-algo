@@ -1,8 +1,48 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path; /**
+ * Dynamic Programming Theory for Cheapest Flights Problem
+ * <p>
+ * Core DP Concepts:
+ * 1. Optimal Substructure: Optimal solution contains optimal solutions to subproblems
+ * 2. Overlapping Subproblems: Same subproblems are solved multiple times
+ * 3. State Definition: dp(s, k) = minimum cost to reach city s within k steps from source
+ * 4. State Transition: dp(dst, k) = min(dp(neighbor, k-1) + edge_weight) for all neighbors
+ * 5. Base Cases: dp(src, any_k) = 0, dp(any_city, 0) = -1 (impossible except source)
+ * <p>
+ * Problem Decomposition Strategy:
+ * - Break down "src to dst in k steps" into smaller subproblems
+ * - Use inbound edges (indegree) to build solution bottom-up
+ * - Memoization prevents recalculating same (city, steps) combinations
+ * <p>
+ * Why DP Works Here:
+ * - Shortest path problems often have optimal substructure
+ * - Adding step constraint (k) creates clear state space
+ * - Recursive relation naturally emerges from graph structure
+ */
 
 import java.util.*;
 
 public class _844_b_DynamicProgrammingTheory {
+
+    public static void main(String[] args) {
+        System.out.println("DYNAMIC PROGRAMMING THEORY FOR CHEAPEST FLIGHTS");
+        System.out.println("=" + "=".repeat(50));
+
+        DPTheoryExplanation.explainOptimalSubstructure();
+        DPTheoryExplanation.explainOverlappingSubproblems();
+        DPTheoryExplanation.visualizeStateSpace(4, 3);
+
+        System.out.println("\n=== Testing Basic Recursive Solution ===");
+        BasicRecursiveSolution solution = new BasicRecursiveSolution();
+
+        // Test with simple example
+        int[][] flights = {{0, 1, 100}, {1, 2, 100}, {0, 2, 500}};
+        int result = solution.findCheapestPrice(3, flights, 0, 2, 1);
+        System.out.println("Test Result: " + result + " (Expected: 200)");
+
+        System.out.println("\nNote: This basic solution will be slow due to overlapping subproblems.");
+        System.out.println("Next class will show optimized version with memoization.");
+    }
+
     /**
      * Demonstrates the theoretical foundation of DP approach
      */
@@ -95,8 +135,7 @@ public class _844_b_DynamicProgrammingTheory {
 
         /**
          * Recursive DP function
-         *
-         * @param city  current city
+         * @param city current city
          * @param steps remaining steps
          * @return minimum cost to reach city from source in steps
          */
