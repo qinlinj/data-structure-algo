@@ -89,5 +89,24 @@ public class _844_d_CompleteAnalysisAndVariations {
             }
             return memo[city][k] = (res == Integer.MAX_VALUE ? -1 : res);
         }
+
+        // Approach 3: Bottom-up DP (most efficient)
+        public int solveBottomUpDP(int n, int[][] flights, int src, int dst, int k) {
+            int[] dp = new int[n];
+            Arrays.fill(dp, Integer.MAX_VALUE);
+            dp[src] = 0;
+
+            for (int i = 0; i <= k; i++) {
+                int[] temp = dp.clone();
+                for (int[] flight : flights) {
+                    int from = flight[0], to = flight[1], price = flight[2];
+                    if (dp[from] != Integer.MAX_VALUE) {
+                        temp[to] = Math.min(temp[to], dp[from] + price);
+                    }
+                }
+                dp = temp;
+            }
+            return dp[dst] == Integer.MAX_VALUE ? -1 : dp[dst];
+        }
     }
 }
