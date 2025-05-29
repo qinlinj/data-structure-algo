@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
+
+public class _844_a_BFSAnalysis {
+}
