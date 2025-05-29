@@ -316,6 +316,42 @@ public class _844_d_CompleteAnalysisAndVariations {
             performanceAnalysis(numCities, flights, solver);
         }
 
+        private void performanceAnalysis(int n, int[][] flights, MasterSolution solver) {
+            System.out.println("\n=== Performance Analysis ===");
+
+            int src = 0, dst = n - 1, k = 2;
+
+            long[] times = new long[4];
+            int[] results = new int[4];
+
+            // Test Dijkstra
+            long start = System.nanoTime();
+            results[0] = solver.solveDijkstra(n, flights, src, dst, k);
+            times[0] = System.nanoTime() - start;
+
+            // Test Top-down DP
+            start = System.nanoTime();
+            results[1] = solver.solveTopDownDP(n, flights, src, dst, k);
+            times[1] = System.nanoTime() - start;
+
+            // Test Bottom-up DP
+            start = System.nanoTime();
+            results[2] = solver.solveBottomUpDP(n, flights, src, dst, k);
+            times[2] = System.nanoTime() - start;
+
+            // Test Bellman-Ford
+            start = System.nanoTime();
+            results[3] = solver.solveBellmanFord(n, flights, src, dst, k);
+            times[3] = System.nanoTime() - start;
+
+            String[] methods = {"Dijkstra", "Top-down DP", "Bottom-up DP", "Bellman-Ford"};
+
+            for (int i = 0; i < 4; i++) {
+                System.out.printf("%-15s: Result = %4d, Time = %6d μs%n",
+                        methods[i], results[i], times[i] / 1000);
+            }
+        }
     }
+    
 }
 
