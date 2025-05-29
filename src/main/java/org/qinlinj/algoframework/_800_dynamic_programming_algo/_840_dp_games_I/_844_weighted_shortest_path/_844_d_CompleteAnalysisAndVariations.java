@@ -23,6 +23,20 @@ import java.util.*;
  */
 
 public class _844_d_CompleteAnalysisAndVariations {
+    private static void testBasicCases() {
+        System.out.println("\n--- Basic Test Cases ---");
+        MasterSolution solver = new MasterSolution();
+
+        // Test 1: Simple path
+        int[][] flights1 = {{0, 1, 100}, {1, 2, 100}, {0, 2, 500}};
+        assert solver.solveBottomUpDP(3, flights1, 0, 2, 1) == 200;
+        System.out.println("✓ Basic path test passed");
+
+        // Test 2: Direct path only
+        assert solver.solveBottomUpDP(3, flights1, 0, 2, 0) == 500;
+        System.out.println("✓ Direct path test passed");
+    }
+
     /**
      * Master solution class with all approaches
      */
