@@ -30,5 +30,22 @@ public class _844_c_CompleteDPImplementation {
 
             return dp(dst, k);
         }
+
+
+        /**
+         * Builds indegree representation of the graph
+         * For each city, stores all cities that can reach it and the cost
+         */
+        private void buildIndegreeGraph(int[][] flights) {
+            indegree = new HashMap<>();
+            for (int[] flight : flights) {
+                int from = flight[0];
+                int to = flight[1];
+                int price = flight[2];
+
+                indegree.computeIfAbsent(to, key -> new ArrayList<>())
+                        .add(new int[]{from, price});
+            }
+        }
     }
 }
