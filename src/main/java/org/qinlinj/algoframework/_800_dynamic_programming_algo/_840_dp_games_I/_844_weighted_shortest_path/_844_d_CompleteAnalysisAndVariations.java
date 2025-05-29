@@ -415,6 +415,23 @@ public class _844_d_CompleteAnalysisAndVariations {
         }
     }
 
+    private static void testProblemVariations() {
+        System.out.println("\n--- Problem Variation Tests ---");
+        ProblemVariations variations = new ProblemVariations();
+
+        int[][] flights = {{0,1,100}, {1,2,100}, {0,2,500}, {1,3,200}};
+
+        // Test exact K stops
+        int exactResult = variations.findCheapestPriceExactlyKStops(4, flights, 0, 2, 2);
+        System.out.println("✓ Exact K stops test: " + exactResult);
+
+        // Test multiple destinations
+        Set<Integer> dests = Set.of(2, 3);
+        Map<Integer, Integer> multiResults = variations.findCheapestToMultipleDestinations(4, flights, 0, dests, 2);
+        System.out.println("✓ Multiple destinations test: " + multiResults);
+    }
+}
+
 
 }
 
