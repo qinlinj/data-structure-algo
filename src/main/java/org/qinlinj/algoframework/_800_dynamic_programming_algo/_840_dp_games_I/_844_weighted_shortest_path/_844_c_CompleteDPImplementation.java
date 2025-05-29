@@ -47,5 +47,52 @@ public class _844_c_CompleteDPImplementation {
                         .add(new int[]{from, price});
             }
         }
+
+        /**
+         * DP function with memoization
+         *
+         * @param city  target city to reach
+         * @param steps maximum steps allowed
+         * @return minimum cost to reach city from source in steps, or -1 if impossible
+         */
+        private int dp(int city, int steps) {
+            // Base case: reached source city
+            if (city == source) {
+                return 0;
+            }
+
+            // Base case: no steps remaining
+            if (steps == 0) {
+                return -1;
+            }
+
+            // Check memoization table
+            if (memo[city][steps] != UNCOMPUTED) {
+                return memo[city][steps];
+            }
+
+            int minCost = Integer.MAX_VALUE;
+
+            // Try all possible previous cities (incoming edges)
+            if (indegree.containsKey(city)) {
+                for (int[] incomingEdge : indegree.get(city)) {
+                    int fromCity = incomingEdge[0];
+                    int edgePrice = incomingEdge[1];
+
+                    // Recursive call for subproblem
+                    int subproblemCost = dp(fromCity, steps - 1);
+
+                    // Update minimum cost if valid path found
+                    if (subproblemCost != -1) {
+                        minCost = Math.min(minCost, subproblemCost + edgePrice);
+                    }
+                }
+            }
+
+            // Store result in memo table
+            memo[city][steps] = (minCost == Integer.MAX_VALUE) ? -1 : minCost;
+            return memo[city][steps];
+        }
+        
     }
 }
