@@ -352,6 +352,21 @@ public class _844_d_CompleteAnalysisAndVariations {
             }
         }
     }
-    
+
+    /**
+     * Comprehensive test suite
+     */
+    public static class TestSuite {
+
+        public static void runAllTests() {
+            System.out.println("COMPREHENSIVE TEST SUITE");
+            System.out.println("=" + "=".repeat(40));
+
+            testBasicCases();
+            testEdgeCases();
+            testLargeInputs();
+            testProblemVariations();
+        }
+    }
 }
 
