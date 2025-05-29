@@ -155,6 +155,32 @@ public class _844_d_CompleteAnalysisAndVariations {
             }
             return dp[dst] == Integer.MAX_VALUE ? -1 : dp[dst];
         }
+
+        // Variation 2: Find cheapest to any of multiple destinations
+        public Map<Integer, Integer> findCheapestToMultipleDestinations(
+                int n, int[][] flights, int src, Set<Integer> destinations, int k) {
+
+            int[] dp = new int[n];
+            Arrays.fill(dp, Integer.MAX_VALUE);
+            dp[src] = 0;
+
+            for (int i = 0; i <= k; i++) {
+                int[] temp = dp.clone();
+                for (int[] flight : flights) {
+                    int from = flight[0], to = flight[1], price = flight[2];
+                    if (dp[from] != Integer.MAX_VALUE) {
+                        temp[to] = Math.min(temp[to], dp[from] + price);
+                    }
+                }
+                dp = temp;
+            }
+
+            Map<Integer, Integer> results = new HashMap<>();
+            for (int dest : destinations) {
+                results.put(dest, dp[dest] == Integer.MAX_VALUE ? -1 : dp[dest]);
+            }
+            return results;
+        }
     }
 }
 
