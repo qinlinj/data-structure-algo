@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path; /**
  * Complete Analysis and Variations of Cheapest Flights Problem
  * <p>
  * Comprehensive Coverage:
@@ -22,51 +18,29 @@ import java.util.*;
  * and real-world scenario simulation for the cheapest flights problem.
  */
 
+import java.util.*;
+
 public class _844_d_CompleteAnalysisAndVariations {
-    private static void testBasicCases() {
-        System.out.println("\n--- Basic Test Cases ---");
-        MasterSolution solver = new MasterSolution();
 
-        // Test 1: Simple path
-        int[][] flights1 = {{0, 1, 100}, {1, 2, 100}, {0, 2, 500}};
-        assert solver.solveBottomUpDP(3, flights1, 0, 2, 1) == 200;
-        System.out.println("✓ Basic path test passed");
+    public static void main(String[] args) {
+        System.out.println("CHEAPEST FLIGHTS PROBLEM - COMPLETE ANALYSIS");
+        System.out.println("=" + "=".repeat(60));
 
-        // Test 2: Direct path only
-        assert solver.solveBottomUpDP(3, flights1, 0, 2, 0) == 500;
-        System.out.println("✓ Direct path test passed");
-    }
+        // Run comprehensive tests
+        TestSuite.runAllTests();
 
-    private static void testEdgeCases() {
-        System.out.println("\n--- Edge Case Tests ---");
-        MasterSolution solver = new MasterSolution();
+        // Run real-world simulation
+        FlightBookingSimulator simulator = new FlightBookingSimulator();
+        simulator.simulateBookingScenarios();
 
-        // Test: No path exists
-        int[][] noPath = {{0, 1, 100}, {2, 3, 100}};
-        assert solver.solveBottomUpDP(4, noPath, 0, 3, 5) == -1;
-        System.out.println("✓ No path test passed");
-
-        // Test: Self-loop (src == dst)
-        int[][] selfLoop = {{0, 1, 100}};
-        assert solver.solveBottomUpDP(2, selfLoop, 0, 0, 0) == 0;
-        System.out.println("✓ Self-loop test passed");
-    }
-
-    private static void testLargeInputs() {
-        System.out.println("\n--- Large Input Tests ---");
-
-        // Generate large test case
-        List<int[]> flights = new ArrayList<>();
-        int n = 100;
-        for (int i = 0; i < n - 1; i++) {
-            flights.add(new int[]{i, i + 1, 100});
-            if (i > 0) flights.add(new int[]{i, i - 1, 100});
-        }
-
-        MasterSolution solver = new MasterSolution();
-        int result = solver.solveBottomUpDP(n, flights.toArray(new int[0][]), 0, n - 1, n);
-        assert result > 0;
-        System.out.println("✓ Large input test passed (result: " + result + ")");
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("SUMMARY OF KEY INSIGHTS:");
+        System.out.println("1. Bottom-up DP is most efficient for this problem");
+        System.out.println("2. Dijkstra works well for sparse graphs with few constraints");
+        System.out.println("3. Top-down DP is most intuitive but has function call overhead");
+        System.out.println("4. Bellman-Ford is robust and handles negative weights");
+        System.out.println("5. Problem can be extended to many real-world scenarios");
+        System.out.println("6. Always consider the trade-off between time and space complexity");
     }
 
     /**
@@ -302,7 +276,8 @@ public class _844_d_CompleteAnalysisAndVariations {
 
             // Connect each city to nearest hub (cheaper)
             for (int city = 0; city < numCities; city++) {
-                if (Arrays.stream(hubs).anyMatch(h -> h == city)) continue;
+                int finalCity = city;
+                if (Arrays.stream(hubs).anyMatch(h -> h == finalCity)) continue;
 
                 int nearestHub = hubs[0];
                 for (int hub : hubs) {
@@ -413,25 +388,67 @@ public class _844_d_CompleteAnalysisAndVariations {
             testLargeInputs();
             testProblemVariations();
         }
-    }
 
-    private static void testProblemVariations() {
-        System.out.println("\n--- Problem Variation Tests ---");
-        ProblemVariations variations = new ProblemVariations();
+        private static void testBasicCases() {
+            System.out.println("\n--- Basic Test Cases ---");
+            MasterSolution solver = new MasterSolution();
 
-        int[][] flights = {{0,1,100}, {1,2,100}, {0,2,500}, {1,3,200}};
+            // Test 1: Simple path
+            int[][] flights1 = {{0, 1, 100}, {1, 2, 100}, {0, 2, 500}};
+            assert solver.solveBottomUpDP(3, flights1, 0, 2, 1) == 200;
+            System.out.println("✓ Basic path test passed");
 
-        // Test exact K stops
-        int exactResult = variations.findCheapestPriceExactlyKStops(4, flights, 0, 2, 2);
-        System.out.println("✓ Exact K stops test: " + exactResult);
+            // Test 2: Direct path only
+            assert solver.solveBottomUpDP(3, flights1, 0, 2, 0) == 500;
+            System.out.println("✓ Direct path test passed");
+        }
 
-        // Test multiple destinations
-        Set<Integer> dests = Set.of(2, 3);
-        Map<Integer, Integer> multiResults = variations.findCheapestToMultipleDestinations(4, flights, 0, dests, 2);
-        System.out.println("✓ Multiple destinations test: " + multiResults);
+        private static void testEdgeCases() {
+            System.out.println("\n--- Edge Case Tests ---");
+            MasterSolution solver = new MasterSolution();
+
+            // Test: No path exists
+            int[][] noPath = {{0, 1, 100}, {2, 3, 100}};
+            assert solver.solveBottomUpDP(4, noPath, 0, 3, 5) == -1;
+            System.out.println("✓ No path test passed");
+
+            // Test: Self-loop (src == dst)
+            int[][] selfLoop = {{0, 1, 100}};
+            assert solver.solveBottomUpDP(2, selfLoop, 0, 0, 0) == 0;
+            System.out.println("✓ Self-loop test passed");
+        }
+
+        private static void testLargeInputs() {
+            System.out.println("\n--- Large Input Tests ---");
+
+            // Generate large test case
+            List<int[]> flights = new ArrayList<>();
+            int n = 100;
+            for (int i = 0; i < n - 1; i++) {
+                flights.add(new int[]{i, i + 1, 100});
+                if (i > 0) flights.add(new int[]{i, i - 1, 100});
+            }
+
+            MasterSolution solver = new MasterSolution();
+            int result = solver.solveBottomUpDP(n, flights.toArray(new int[0][]), 0, n - 1, n);
+            assert result > 0;
+            System.out.println("✓ Large input test passed (result: " + result + ")");
+        }
+
+        private static void testProblemVariations() {
+            System.out.println("\n--- Problem Variation Tests ---");
+            ProblemVariations variations = new ProblemVariations();
+
+            int[][] flights = {{0, 1, 100}, {1, 2, 100}, {0, 2, 500}, {1, 3, 200}};
+
+            // Test exact K stops
+            int exactResult = variations.findCheapestPriceExactlyKStops(4, flights, 0, 2, 2);
+            System.out.println("✓ Exact K stops test: " + exactResult);
+
+            // Test multiple destinations
+            Set<Integer> dests = Set.of(2, 3);
+            Map<Integer, Integer> multiResults = variations.findCheapestToMultipleDestinations(4, flights, 0, dests, 2);
+            System.out.println("✓ Multiple destinations test: " + multiResults);
+        }
     }
 }
-
-
-}
-
