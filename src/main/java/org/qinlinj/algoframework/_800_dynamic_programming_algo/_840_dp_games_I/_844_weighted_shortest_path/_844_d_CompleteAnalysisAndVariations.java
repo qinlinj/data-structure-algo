@@ -72,5 +72,22 @@ public class _844_d_CompleteAnalysisAndVariations {
             Integer[][] memo = new Integer[n][k + 2];
             return dpHelper(dst, k + 1, src, indegree, memo);
         }
+
+        private int dpHelper(int city, int k, int src, Map<Integer, List<int[]>> indegree, Integer[][] memo) {
+            if (city == src) return 0;
+            if (k == 0) return -1;
+            if (memo[city][k] != null) return memo[city][k];
+
+            int res = Integer.MAX_VALUE;
+            if (indegree.containsKey(city)) {
+                for (int[] edge : indegree.get(city)) {
+                    int subRes = dpHelper(edge[0], k - 1, src, indegree, memo);
+                    if (subRes != -1) {
+                        res = Math.min(res, subRes + edge[1]);
+                    }
+                }
+            }
+            return memo[city][k] = (res == Integer.MAX_VALUE ? -1 : res);
+        }
     }
 }
