@@ -201,6 +201,34 @@ public class _844_d_CompleteAnalysisAndVariations {
 
             return allPaths;
         }
+
+        private void dfsAllPaths(int current, int dst, int budget, int maxStops,
+                                 int currentCost, int stops,
+                                 Map<Integer, List<int[]>> graph,
+                                 List<Integer> path, List<List<Integer>> allPaths) {
+
+            if (current == dst) {
+                allPaths.add(new ArrayList<>(path));
+                return;
+            }
+
+            if (stops >= maxStops || currentCost > budget) {
+                return;
+            }
+
+            if (graph.containsKey(current)) {
+                for (int[] next : graph.get(current)) {
+                    int nextCity = next[0], price = next[1];
+                    if (currentCost + price <= budget) {
+                        path.add(nextCity);
+                        dfsAllPaths(nextCity, dst, budget, maxStops,
+                                currentCost + price, stops + 1,
+                                graph, path, allPaths);
+                        path.remove(path.size() - 1);
+                    }
+                }
+            }
+        }
     }
 }
 
