@@ -69,4 +69,18 @@ public class _852_e_EggDropFurtherOptimizations {
 
         return dp[K];
     }
+
+    /**
+     * Mathematical approach using combinatorial analysis
+     * The answer is the smallest m such that C(m,1) + C(m,2) + ... + C(m,K) >= N
+     */
+    public int superEggDropMath(int K, int N) {
+        int m = 0;
+        while (true) {
+            m++;
+            if (maxFloorsWithTrials(K, m) >= N) {
+                return m;
+            }
+        }
+    }
 }
