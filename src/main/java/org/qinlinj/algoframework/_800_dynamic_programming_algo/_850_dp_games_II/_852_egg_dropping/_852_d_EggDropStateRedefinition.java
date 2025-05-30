@@ -59,4 +59,28 @@ public class _852_d_EggDropStateRedefinition {
 
         return m;
     }
+
+    /**
+     * Alternative implementation that shows the logic more clearly
+     */
+    public int superEggDropDetailed(int K, int N) {
+        // dp[k][m] = max floors we can determine with k eggs and m trials
+        int[][] dp = new int[K + 1][N + 1];
+
+        // For each number of trials m
+        for (int m = 1; m <= N; m++) {
+            // For each number of eggs k
+            for (int k = 1; k <= K; k++) {
+                // State transition: floors_below + floors_above + current_floor
+                dp[k][m] = dp[k - 1][m - 1] + dp[k][m - 1] + 1;
+
+                // If we can handle N floors with K eggs in m trials, return m
+                if (dp[K][m] >= N) {
+                    return m;
+                }
+            }
+        }
+
+        return N; // Fallback (shouldn't reach here for valid inputs)
+    }
 }
