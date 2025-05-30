@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._852_egg_dropping;
 
+import java.util.*;
+
 /**
  * EGG DROPPING PROBLEM - STATE REDEFINITION APPROACH
  * <p>
@@ -218,5 +220,37 @@ public class _852_d_EggDropStateRedefinition {
         System.out.println("GROWTH PATTERN:");
         System.out.println("  Notice how dp[k][m] grows much faster than m");
         System.out.println("  This is why we can handle large N with small m");
+    }
+
+
+    /**
+     * Demonstrates space optimization possibility
+     */
+    public void demonstrateSpaceOptimization(int K, int N) {
+        System.out.println("\n=== Space Optimization Demo ===");
+        System.out.println("Since dp[k][m] only depends on dp[k-1][m-1] and dp[k][m-1],");
+        System.out.println("we can optimize space from O(KN) to O(K)");
+        System.out.println();
+
+        // Space-optimized version
+        int[] prev = new int[K + 1]; // dp[*][m-1]
+        int[] curr = new int[K + 1]; // dp[*][m]
+
+        int m = 0;
+        while (curr[K] < N) {
+            m++;
+            for (int k = 1; k <= K; k++) {
+                curr[k] = prev[k - 1] + prev[k] + 1;
+            }
+
+            // Swap arrays for next iteration
+            int[] temp = prev;
+            prev = curr;
+            curr = temp;
+            Arrays.fill(curr, 0);
+        }
+
+        System.out.println("Space-optimized result for K=" + K + ", N=" + N + ": " + m);
+        System.out.println("Space complexity reduced from O(KN) to O(K)");
     }
 }
