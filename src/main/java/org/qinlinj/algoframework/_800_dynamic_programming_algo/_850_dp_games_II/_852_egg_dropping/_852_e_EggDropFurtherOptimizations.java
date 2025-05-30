@@ -137,4 +137,38 @@ public class _852_e_EggDropFurtherOptimizations {
 
         System.out.println("Final answer: " + left + " trials");
     }
+
+    /**
+     * Shows the mathematical pattern in the DP values
+     */
+    public void explainMathematicalPattern() {
+        System.out.println("\n=== Mathematical Pattern Analysis ===");
+        System.out.println("The recurrence dp[k][m] = dp[k-1][m-1] + dp[k][m-1] + 1");
+        System.out.println("has a beautiful connection to binomial coefficients!");
+        System.out.println();
+
+        System.out.println("Pattern observation:");
+        System.out.println("dp[k][m] = C(m,1) + C(m,2) + ... + C(m,k)");
+        System.out.println("where C(m,k) is the binomial coefficient 'm choose k'");
+        System.out.println();
+
+        // Demonstrate with small values
+        System.out.println("Verification for small values:");
+        for (int m = 1; m <= 6; m++) {
+            System.out.print("m=" + m + ": ");
+            for (int k = 1; k <= Math.min(4, m); k++) {
+                int dpValue = canHandleFloors(k, m);
+                long mathValue = 0;
+                long binomial = 1;
+
+                for (int i = 1; i <= k; i++) {
+                    binomial = binomial * (m - i + 1) / i;
+                    mathValue += binomial;
+                }
+
+                System.out.printf("dp[%d][%d]=%d≈%d  ", k, m, dpValue, mathValue);
+            }
+            System.out.println();
+        }
+    }
 }
