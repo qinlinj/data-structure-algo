@@ -198,4 +198,25 @@ public class _852_d_EggDropStateRedefinition {
             }
         }
     }
+
+    /**
+     * Shows the mathematical elegance of the recurrence
+     */
+    public void showMathematicalElegance() {
+        System.out.println("\n=== Mathematical Elegance ===");
+        System.out.println("RECURRENCE RELATION:");
+        System.out.println("  dp[k][m] = dp[k-1][m-1] + dp[k][m-1] + 1");
+        System.out.println();
+        System.out.println("INTERPRETATION:");
+        System.out.println("  Total floors = Floors below + Floors above + Current floor");
+        System.out.println();
+        System.out.println("BOUNDARY CONDITIONS:");
+        System.out.println("  dp[0][m] = 0  (no eggs, can't test any floors)");
+        System.out.println("  dp[k][0] = 0  (no trials, can't test any floors)");
+        System.out.println("  dp[1][m] = m  (one egg, must test linearly)");
+        System.out.println();
+        System.out.println("GROWTH PATTERN:");
+        System.out.println("  Notice how dp[k][m] grows much faster than m");
+        System.out.println("  This is why we can handle large N with small m");
+    }
 }
