@@ -103,4 +103,38 @@ public class _852_e_EggDropFurtherOptimizations {
 
         return (int) result;
     }
+
+    /**
+     * Demonstrates the binary search optimization process
+     */
+    public void demonstrateBinarySearchOptimization(int K, int N) {
+        System.out.println("=== Binary Search on Trials Demonstration ===");
+        System.out.println("Finding minimum trials for K=" + K + ", N=" + N);
+        System.out.println();
+
+        int left = 1, right = N;
+        int iteration = 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            int maxFloors = canHandleFloors(K, mid);
+
+            System.out.printf("Iteration %d: left=%d, right=%d, mid=%d%n",
+                    iteration, left, right, mid);
+            System.out.printf("  With %d trials, can handle %d floors%n", mid, maxFloors);
+
+            if (maxFloors >= N) {
+                System.out.printf("  %d >= %d, search left half%n", maxFloors, N);
+                right = mid;
+            } else {
+                System.out.printf("  %d < %d, search right half%n", maxFloors, N);
+                left = mid + 1;
+            }
+
+            iteration++;
+            System.out.println();
+        }
+
+        System.out.println("Final answer: " + left + " trials");
+    }
 }
