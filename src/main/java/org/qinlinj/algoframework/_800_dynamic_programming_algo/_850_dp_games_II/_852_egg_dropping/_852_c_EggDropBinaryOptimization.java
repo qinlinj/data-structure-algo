@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._852_egg_dropping;
 
+import java.util.*;
+
 /**
  * EGG DROPPING PROBLEM - BINARY SEARCH OPTIMIZATION
  * <p>
@@ -29,4 +31,17 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * 3. Binary search finds valley in max(f1(i), f2(i))
  */
 public class _852_c_EggDropBinaryOptimization {
+    private int[][] memo;
+
+    /**
+     * Optimized solution using binary search
+     */
+    public int superEggDrop(int K, int N) {
+        memo = new int[K + 1][N + 1];
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+        return dp(K, N);
+    }
+
 }
