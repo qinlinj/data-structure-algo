@@ -84,4 +84,74 @@ public class _852_c_EggDropBinaryOptimization {
         memo[K][N] = result;
         return result;
     }
+
+
+    /**
+     * Demonstrates the monotonicity that enables binary search
+     */
+    public void demonstrateMonotonicity(int K, int N) {
+        System.out.println("=== Monotonicity Demonstration ===");
+        System.out.println("K=" + K + ", N=" + N);
+        System.out.println();
+
+        // Reset memo for clean calculation
+        memo = new int[K + 1][N + 1];
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+
+        System.out.println("Floor\tBreaks\tSurvives\tMax\tOptimal?");
+        System.out.println("-----\t------\t--------\t---\t--------");
+
+        int optimalFloor = -1;
+        int minMaxTrials = Integer.MAX_VALUE;
+
+        for (int i = 1; i <= N; i++) {
+            int breaks = dp(K - 1, i - 1);
+            int survives = dp(K, N - i);
+            int maxTrials = Math.max(breaks, survives);
+
+            boolean isOptimal = false;
+            if (maxTrials < minMaxTrials) {
+                minMaxTrials = maxTrials;
+                optimalFloor = i;
+                isOptimal = true;
+            }
+
+            System.out.printf("%d\t%d\t%d\t\t%d\t%s%n",
+                    i, breaks, survives, maxTrials,
+                    isOptimal ? "***" : "");
+        }
+
+        System.out.println();
+        System.out.println("Optimal floor: " + optimalFloor + " with " + (minMaxTrials + 1) + " total trials");
+        System.out.println("Notice: 'Breaks' increases, 'Survives' decreases as floor increases");
+    }
+
+    /**
+     * Compares performance of linear vs binary search approaches
+     */
+    public void comparePerformance() {
+        System.out.println("\n=== Performance Comparison ===");
+
+        int[] testK = {2, 3, 4};
+        int[] testN = {10, 50, 100};
+
+        System.out.println("Test Case\t\tLinear Search\tBinary Search");
+        System.out.println("---------\t\t-------------\t-------------");
+
+        for (int k : testK) {
+            for (int n : testN) {
+                // Both should give same result
+                int result = superEggDrop(k, n);
+
+                // Estimate operation counts (simplified)
+                long linearOps = (long) k * n * n;
+                long binaryOps = (long) k * n * (int) (Math.log(n) / Math.log(2));
+
+                System.out.printf("K=%d, N=%d (ans=%d)\t%d ops\t\t%d ops%n",
+                        k, n, result, linearOps, binaryOps);
+            }
+        }
+    }
 }
