@@ -114,4 +114,38 @@ public class _852_d_EggDropStateRedefinition {
             }
         }
     }
+
+    /**
+     * Visualizes the complete dp table for small inputs
+     */
+    public void visualizeDPTable(int maxK, int maxM) {
+        System.out.println("\n=== DP Table Visualization ===");
+        System.out.println("dp[k][m] = max floors with k eggs and m trials");
+        System.out.println();
+
+        int[][] dp = new int[maxK + 1][maxM + 1];
+
+        // Fill the table
+        for (int m = 1; m <= maxM; m++) {
+            for (int k = 1; k <= maxK; k++) {
+                dp[k][m] = dp[k - 1][m - 1] + dp[k][m - 1] + 1;
+            }
+        }
+
+        // Print header
+        System.out.print("k\\m\t");
+        for (int m = 0; m <= maxM; m++) {
+            System.out.print(m + "\t");
+        }
+        System.out.println();
+
+        // Print table
+        for (int k = 0; k <= maxK; k++) {
+            System.out.print(k + "\t");
+            for (int m = 0; m <= maxM; m++) {
+                System.out.print(dp[k][m] + "\t");
+            }
+            System.out.println();
+        }
+    }
 }
