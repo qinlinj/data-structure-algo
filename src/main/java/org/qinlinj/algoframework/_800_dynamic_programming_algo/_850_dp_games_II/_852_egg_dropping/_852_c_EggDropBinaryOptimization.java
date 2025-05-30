@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._852_egg_dropping;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._852_egg_dropping; /**
  * EGG DROPPING PROBLEM - BINARY SEARCH OPTIMIZATION
  * <p>
  * OPTIMIZATION INSIGHT:
@@ -30,8 +26,34 @@ import java.util.*;
  * 2. Optimal point is where two curves intersect
  * 3. Binary search finds valley in max(f1(i), f2(i))
  */
+
+import java.util.*;
+
 public class _852_c_EggDropBinaryOptimization {
+
     private int[][] memo;
+
+    public static void main(String[] args) {
+        _852_c_EggDropBinaryOptimization solver = new _852_c_EggDropBinaryOptimization();
+
+        // Test basic functionality
+        System.out.println("=== Test Results ===");
+        System.out.println("2 eggs, 10 floors: " + solver.superEggDrop(2, 10));
+        System.out.println("3 eggs, 14 floors: " + solver.superEggDrop(3, 14));
+        System.out.println("4 eggs, 20 floors: " + solver.superEggDrop(4, 20));
+
+        // Demonstrate monotonicity
+        solver.demonstrateMonotonicity(2, 8);
+
+        // Visualize binary search
+        solver.visualizeBinarySearch(2, 8);
+
+        // Compare performance
+        solver.comparePerformance();
+
+        // Explain intuition
+        solver.explainOptimizationIntuition();
+    }
 
     /**
      * Optimized solution using binary search
@@ -84,7 +106,6 @@ public class _852_c_EggDropBinaryOptimization {
         memo[K][N] = result;
         return result;
     }
-
 
     /**
      * Demonstrates the monotonicity that enables binary search
@@ -193,5 +214,30 @@ public class _852_c_EggDropBinaryOptimization {
             iteration++;
             System.out.println();
         }
+    }
+
+    /**
+     * Explains the mathematical intuition behind the optimization
+     */
+    public void explainOptimizationIntuition() {
+        System.out.println("\n=== Optimization Intuition ===");
+        System.out.println("1. FUNCTION BEHAVIOR:");
+        System.out.println("   f1(i) = dp(K-1, i-1) [increasing in i]");
+        System.out.println("   f2(i) = dp(K, N-i)   [decreasing in i]");
+        System.out.println();
+        System.out.println("2. GRAPHICAL INTERPRETATION:");
+        System.out.println("   When plotted, f1 and f2 intersect");
+        System.out.println("   max(f1(i), f2(i)) forms a 'V' shape");
+        System.out.println("   Minimum of this V is our optimal point");
+        System.out.println();
+        System.out.println("3. BINARY SEARCH APPLICATION:");
+        System.out.println("   If f1(mid) > f2(mid): optimum is to the left");
+        System.out.println("   If f1(mid) < f2(mid): optimum is to the right");
+        System.out.println("   Continue until convergence");
+        System.out.println();
+        System.out.println("4. COMPLEXITY BENEFIT:");
+        System.out.println("   Linear search: O(N) per subproblem");
+        System.out.println("   Binary search: O(log N) per subproblem");
+        System.out.println("   Overall improvement: O(KN²) → O(KN log N)");
     }
 }
