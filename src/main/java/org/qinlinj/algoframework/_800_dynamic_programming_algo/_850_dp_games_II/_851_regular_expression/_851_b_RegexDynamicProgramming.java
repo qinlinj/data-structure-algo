@@ -31,6 +31,36 @@ public class _851_b_RegexDynamicProgramming {
     // Memoization table: -1 = not computed, 0 = false, 1 = true
     private int[][] memo;
 
+    public static void main(String[] args) {
+        _851_b_RegexDynamicProgramming matcher = new _851_b_RegexDynamicProgramming();
+
+        // Test cases demonstrating different scenarios
+        System.out.println("=== Test Cases ===");
+
+        // Basic matching
+        matcher.demonstrateMatching("abc", "abc");
+
+        // Dot wildcard
+        matcher.demonstrateMatching("abc", "a.c");
+
+        // Star wildcard - multiple matches
+        matcher.demonstrateMatching("aaa", "a*");
+
+        // Star wildcard - zero matches
+        matcher.demonstrateMatching("aa", "a*aa");
+
+        // Complex pattern
+        matcher.demonstrateMatching("zaaab", ".a*b");
+
+        // Universal matcher
+        matcher.demonstrateMatching("anything", ".*");
+
+        // Edge case - empty string
+        matcher.demonstrateMatching("", "a*b*c*");
+
+        matcher.explainRecursiveStructure();
+    }
+
     /**
      * Main function: determines if pattern p matches text s
      */
@@ -129,5 +159,17 @@ public class _851_b_RegexDynamicProgramming {
         if (p.contains(".")) {
             System.out.println("- Contains '.' wildcard: matches any character");
         }
+    }
+
+    /**
+     * Visualizes the recursive call structure
+     */
+    public void explainRecursiveStructure() {
+        System.out.println("\n=== Recursive Call Structure ===");
+        System.out.println("dp(s, i, p, j) can make these calls:");
+        System.out.println("1. dp(s, i, p, j+2)     - Skip pattern char with '*' (0 matches)");
+        System.out.println("2. dp(s, i+1, p, j)     - Consume text char, keep pattern (1+ matches)");
+        System.out.println("3. dp(s, i+1, p, j+1)   - Regular 1-to-1 matching");
+        System.out.println("Multiple paths to same state create overlapping subproblems!");
     }
 }
