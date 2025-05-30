@@ -83,4 +83,35 @@ public class _852_d_EggDropStateRedefinition {
 
         return N; // Fallback (shouldn't reach here for valid inputs)
     }
+
+    /**
+     * Demonstrates the state transition logic step by step
+     */
+    public void demonstrateStateTransition(int K, int N) {
+        System.out.println("=== State Transition Demonstration ===");
+        System.out.println("Question: With " + K + " eggs and m trials, max floors we can handle?");
+        System.out.println();
+
+        int[][] dp = new int[K + 1][N + 1];
+
+        // Show step-by-step building of dp table
+        for (int m = 1; m <= Math.min(N, 8); m++) {
+            System.out.println("Trials = " + m + ":");
+
+            for (int k = 1; k <= K; k++) {
+                int floorsBelow = (k > 1) ? dp[k - 1][m - 1] : 0;
+                int floorsAbove = (m > 1) ? dp[k][m - 1] : 0;
+                dp[k][m] = floorsBelow + floorsAbove + 1;
+
+                System.out.printf("  dp[%d][%d] = dp[%d][%d] + dp[%d][%d] + 1 = %d + %d + 1 = %d%n",
+                        k, m, k - 1, m - 1, k, m - 1, floorsBelow, floorsAbove, dp[k][m]);
+            }
+            System.out.println();
+
+            if (dp[K][m] >= N) {
+                System.out.println("*** Found answer: " + m + " trials can handle " + dp[K][m] + " floors ***");
+                break;
+            }
+        }
+    }
 }
