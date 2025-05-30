@@ -26,4 +26,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _851_b_RegexDynamicProgramming {
+    // Memoization table: -1 = not computed, 0 = false, 1 = true
+    private int[][] memo;
+
 }
