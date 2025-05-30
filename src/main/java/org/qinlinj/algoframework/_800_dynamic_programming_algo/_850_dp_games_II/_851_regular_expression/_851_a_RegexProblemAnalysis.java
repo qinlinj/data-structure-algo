@@ -47,4 +47,24 @@ public class _851_a_RegexProblemAnalysis {
         // Both strings should be fully consumed for complete match
         return i == s.length() && j == p.length();
     }
+
+    /**
+     * Demonstrates the complexity introduced by '*' wildcard
+     * Shows different scenarios that need to be handled
+     */
+    public void demonstrateStarWildcardScenarios() {
+        System.out.println("=== Star Wildcard Scenarios ===");
+
+        // Scenario 1: Multiple character matches
+        System.out.println("Pattern 'a*' with text 'aaa':");
+        System.out.println("- 'a' can match 3 times through '*'");
+
+        // Scenario 2: Zero matches
+        System.out.println("Pattern 'a*aa' with text 'aa':");
+        System.out.println("- 'a*' matches 0 times, remaining 'aa' matches text");
+
+        // Scenario 3: Forced zero matches due to mismatch
+        System.out.println("Pattern 'b*aa' with text 'aa':");
+        System.out.println("- 'b*' must match 0 times since 'b' doesn't match 'a'");
+    }
 }
