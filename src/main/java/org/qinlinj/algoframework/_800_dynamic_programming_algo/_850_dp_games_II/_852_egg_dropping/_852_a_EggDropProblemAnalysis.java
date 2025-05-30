@@ -118,5 +118,21 @@ public class _852_a_EggDropProblemAnalysis {
         System.out.println("Optimal strategy: Choose floor that minimizes");
         System.out.println("the MAXIMUM of these two scenarios (worst case)");
     }
+
+
+    /**
+     * Shows why this problem requires dynamic programming
+     */
+    public void explainWhyDynamicProgramming() {
+        System.out.println("\n=== Why Dynamic Programming? ===");
+        System.out.println("1. OVERLAPPING SUBPROBLEMS:");
+        System.out.println("   Same (eggs, floors) state reached via different paths");
+        System.out.println("2. OPTIMAL SUBSTRUCTURE:");
+        System.out.println("   Optimal solution contains optimal solutions to subproblems");
+        System.out.println("3. MULTIPLE CHOICES:");
+        System.out.println("   At each step, must try all possible floors");
+        System.out.println("4. MINIMAX NATURE:");
+        System.out.println("   Minimize the maximum trials needed");
+    }
 }
 
