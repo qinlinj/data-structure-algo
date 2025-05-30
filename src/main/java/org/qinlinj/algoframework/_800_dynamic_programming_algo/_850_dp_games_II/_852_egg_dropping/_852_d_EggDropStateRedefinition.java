@@ -148,4 +148,28 @@ public class _852_d_EggDropStateRedefinition {
             System.out.println();
         }
     }
+
+    /**
+     * Explains why this redefinition works
+     */
+    public void explainRedefinitionIntuition() {
+        System.out.println("\n=== Why State Redefinition Works ===");
+        System.out.println("ORIGINAL QUESTION:");
+        System.out.println("  'Given K eggs and N floors, minimum trials needed?'");
+        System.out.println("  → Complex because we don't know the optimal strategy");
+        System.out.println();
+        System.out.println("REDEFINED QUESTION:");
+        System.out.println("  'Given K eggs and M trials, maximum floors we can handle?'");
+        System.out.println("  → Simpler because the strategy is constructive");
+        System.out.println();
+        System.out.println("KEY INSIGHT:");
+        System.out.println("  If we can construct a strategy to handle F floors with M trials,");
+        System.out.println("  then this strategy is automatically optimal for those parameters!");
+        System.out.println();
+        System.out.println("CONSTRUCTION LOGIC:");
+        System.out.println("  1. Choose any floor F to test first");
+        System.out.println("  2. If egg breaks: handle floors [1, F-1] with (K-1, M-1)");
+        System.out.println("  3. If egg survives: handle floors [F+1, ?] with (K, M-1)");
+        System.out.println("  4. Total capacity = capacity_below + capacity_above + 1");
+    }
 }
