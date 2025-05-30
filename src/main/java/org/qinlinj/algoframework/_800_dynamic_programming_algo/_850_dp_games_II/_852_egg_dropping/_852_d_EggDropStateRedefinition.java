@@ -37,4 +37,26 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _852_d_EggDropStateRedefinition {
+    /**
+     * Main solution using redefined state approach
+     */
+    public int superEggDrop(int K, int N) {
+        // dp[k][m] = max floors handleable with k eggs and m trials
+        int[][] dp = new int[K + 1][N + 1];
+
+        // Base cases are automatically handled (dp[0][m] = 0, dp[k][0] = 0)
+
+        int m = 0; // trials counter
+
+        // Increment trials until we can handle N floors with K eggs
+        while (dp[K][m] < N) {
+            m++;
+            // Fill dp table for current trial count m
+            for (int k = 1; k <= K; k++) {
+                dp[k][m] = dp[k - 1][m - 1] + dp[k][m - 1] + 1;
+            }
+        }
+
+        return m;
+    }
 }
