@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._851_regular_expression;
 
+import java.util.*;
+
 /**
  * REGULAR EXPRESSION MATCHING - DYNAMIC PROGRAMMING SOLUTION
  * <p>
@@ -29,4 +31,19 @@ public class _851_b_RegexDynamicProgramming {
     // Memoization table: -1 = not computed, 0 = false, 1 = true
     private int[][] memo;
 
+    /**
+     * Main function: determines if pattern p matches text s
+     */
+    public boolean isMatch(String s, String p) {
+        int m = s.length(), n = p.length();
+        memo = new int[m + 1][n + 1];  // +1 to handle end positions
+
+        // Initialize memo with -1 (not computed)
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+
+        // Start matching from beginning of both strings
+        return dp(s, 0, p, 0);
+    }
 }
