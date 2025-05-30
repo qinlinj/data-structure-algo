@@ -34,4 +34,18 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _852_a_EggDropProblemAnalysis {
+
+    /**
+     * Demonstrates linear search strategy (safe but slow)
+     * Used when eggs are very limited (K=1)
+     */
+    public int linearSearchStrategy(int floors) {
+        System.out.println("=== Linear Search Strategy ===");
+        System.out.println("Floors: " + floors + ", Eggs: 1");
+        System.out.println("Strategy: Try floors 1, 2, 3... until egg breaks");
+        System.out.println("Worst case: Egg doesn't break until floor " + floors);
+        System.out.println("Trials needed: " + floors);
+
+        return floors; // In worst case, try all floors
+    }
 }
