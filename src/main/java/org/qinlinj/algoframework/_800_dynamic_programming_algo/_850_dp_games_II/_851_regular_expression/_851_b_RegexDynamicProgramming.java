@@ -111,4 +111,23 @@ public class _851_b_RegexDynamicProgramming {
         }
         return true;
     }
+
+    /**
+     * Demonstrates step-by-step matching process
+     */
+    public void demonstrateMatching(String s, String p) {
+        System.out.println("\n=== Matching Process Demo ===");
+        System.out.println("Text: \"" + s + "\"");
+        System.out.println("Pattern: \"" + p + "\"");
+        System.out.println("Result: " + isMatch(s, p));
+
+        System.out.println("\nKey Decision Points:");
+        if (p.contains("*")) {
+            System.out.println("- Contains '*' wildcard: multiple paths explored");
+            System.out.println("- Each '*' creates branching: 0 matches vs 1+ matches");
+        }
+        if (p.contains(".")) {
+            System.out.println("- Contains '.' wildcard: matches any character");
+        }
+    }
 }
