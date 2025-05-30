@@ -90,4 +90,25 @@ public class _851_b_RegexDynamicProgramming {
         memo[i][j] = result ? 1 : 0;
         return result;
     }
+
+    /**
+     * Helper function: Check if pattern remainder can match empty string
+     * Only possible if pattern is in form "x*y*z*..." (pairs of char and '*')
+     */
+    private boolean canMatchEmptyString(String p, int j) {
+        int n = p.length();
+
+        // Must have even number of remaining characters
+        if ((n - j) % 2 == 1) {
+            return false;
+        }
+
+        // Check if all remaining chars are followed by '*'
+        for (; j + 1 < n; j += 2) {
+            if (p.charAt(j + 1) != '*') {
+                return false;
+            }
+        }
+        return true;
+    }
 }
