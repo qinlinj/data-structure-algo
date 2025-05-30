@@ -1,4 +1,28 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._851_regular_expression;
 
+/**
+ * REGULAR EXPRESSION MATCHING - PROBLEM ANALYSIS
+ * <p>
+ * OVERVIEW:
+ * This class demonstrates the fundamental concepts of regular expression matching,
+ * specifically focusing on two key wildcards: '.' and '*'.
+ * <p>
+ * KEY CONCEPTS:
+ * 1. '.' wildcard: Matches any single character
+ * 2. '*' wildcard: Allows the preceding character to repeat 0 or more times
+ * 3. Pattern matching requires exhaustive exploration of all possibilities
+ * 4. Dynamic programming is needed to handle overlapping subproblems
+ * <p>
+ * EXAMPLES:
+ * - Pattern ".a*b" matches "zaaab" (. matches z, a* matches aa, b matches b)
+ * - Pattern ".a*b" matches "cb" (. matches c, a* matches 0 times, b matches b)
+ * - Pattern "a..b" matches "amnb" (a matches a, .. matches mn, b matches b)
+ * - Pattern ".*" matches any text (universal matcher)
+ * <p>
+ * CHALLENGES:
+ * - '*' wildcard creates multiple matching possibilities
+ * - Need to explore all paths: 0 matches, 1 match, multiple matches
+ * - Requires systematic approach to avoid missing valid matches
+ */
 public class _851_a_RegexProblemAnalysis {
 }
