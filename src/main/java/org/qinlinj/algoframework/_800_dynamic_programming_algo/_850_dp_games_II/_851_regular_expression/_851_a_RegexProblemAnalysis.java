@@ -67,4 +67,18 @@ public class _851_a_RegexProblemAnalysis {
         System.out.println("Pattern 'b*aa' with text 'aa':");
         System.out.println("- 'b*' must match 0 times since 'b' doesn't match 'a'");
     }
+
+    /**
+     * Illustrates the decision tree for '*' wildcard handling
+     */
+    public void illustrateDecisionProcess() {
+        System.out.println("\n=== Decision Process for '*' Wildcard ===");
+        System.out.println("When encountering pattern[j] followed by '*':");
+        System.out.println("1. If text[i] matches pattern[j]:");
+        System.out.println("   - Try matching 0 times (skip pattern[j]*) ");
+        System.out.println("   - Try matching 1+ times (consume text[i], keep pattern[j]*)");
+        System.out.println("2. If text[i] doesn't match pattern[j]:");
+        System.out.println("   - Must match 0 times (skip pattern[j]*)");
+    }
+
 }
