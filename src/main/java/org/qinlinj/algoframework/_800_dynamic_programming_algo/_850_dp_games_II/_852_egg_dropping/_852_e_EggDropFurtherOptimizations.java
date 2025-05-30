@@ -30,4 +30,24 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _852_e_EggDropFurtherOptimizations {
+    /**
+     * Binary search optimization on the number of trials
+     * Time: O(K * log N), Space: O(K)
+     */
+    public int superEggDropBinarySearch(int K, int N) {
+        // Binary search on the number of trials
+        int left = 1, right = N;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (canHandleFloors(K, mid) >= N) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
+    }
 }
