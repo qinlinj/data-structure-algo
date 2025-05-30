@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._851_regular_expression;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._851_regular_expression; /**
  * REGULAR EXPRESSION MATCHING - DYNAMIC PROGRAMMING SOLUTION
  * <p>
  * CORE CONCEPTS:
@@ -27,7 +23,10 @@ import java.util.*;
  * SPACE COMPLEXITY: O(M*N) for memoization table
  */
 
+import java.util.*;
+
 public class _851_b_RegexDynamicProgramming {
+
     // Memoization table: -1 = not computed, 0 = false, 1 = true
     private int[][] memo;
 
