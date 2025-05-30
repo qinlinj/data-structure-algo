@@ -25,4 +25,26 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * - Requires systematic approach to avoid missing valid matches
  */
 public class _851_a_RegexProblemAnalysis {
+    /**
+     * Basic pattern matching without '*' wildcard
+     * This is the foundation before adding complexity
+     */
+    public boolean basicMatch(String s, String p) {
+        int i = 0, j = 0;
+
+        while (i < s.length() && j < p.length()) {
+            // '.' wildcard is universal matcher
+            if (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.') {
+                // Characters match, continue with next positions
+                i++;
+                j++;
+            } else {
+                // No match found
+                return false;
+            }
+        }
+
+        // Both strings should be fully consumed for complete match
+        return i == s.length() && j == p.length();
+    }
 }
