@@ -48,4 +48,37 @@ public class _852_a_EggDropProblemAnalysis {
 
         return floors; // In worst case, try all floors
     }
+    
+    /**
+     * Demonstrates binary search strategy (efficient but risky)
+     * Used when eggs are unlimited
+     */
+    public int binarySearchStrategy(int floors) {
+        System.out.println("\n=== Binary Search Strategy ===");
+        System.out.println("Floors: " + floors + ", Eggs: Unlimited");
+        System.out.println("Strategy: Divide search space in half each time");
+
+        int trials = 0;
+        int low = 1, high = floors;
+
+        System.out.println("Simulation of worst case:");
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            trials++;
+            System.out.println("Trial " + trials + ": Try floor " + mid);
+
+            // Simulate worst case - always go to the side that requires more trials
+            if (high - mid > mid - low) {
+                System.out.println("  Assume egg doesn't break, search upper half");
+                low = mid + 1;
+            } else {
+                System.out.println("  Assume egg breaks, search lower half");
+                high = mid - 1;
+            }
+        }
+
+        System.out.println("Worst case trials: " + trials);
+        return trials;
+    }
+
 }
