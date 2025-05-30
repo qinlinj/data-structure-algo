@@ -154,4 +154,44 @@ public class _852_c_EggDropBinaryOptimization {
             }
         }
     }
+
+    /**
+     * Visualizes the binary search process
+     */
+    public void visualizeBinarySearch(int K, int N) {
+        System.out.println("\n=== Binary Search Visualization ===");
+        System.out.println("Finding optimal floor for K=" + K + ", N=" + N);
+        System.out.println();
+
+        // Reset memo
+        memo = new int[K + 1][N + 1];
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+
+        int left = 1, right = N;
+        int iteration = 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            int eggBreaks = dp(K - 1, mid - 1);
+            int eggSurvives = dp(K, N - mid);
+
+            System.out.printf("Iteration %d: left=%d, right=%d, mid=%d%n",
+                    iteration, left, right, mid);
+            System.out.printf("  Breaks: %d, Survives: %d%n", eggBreaks, eggSurvives);
+
+            if (eggBreaks > eggSurvives) {
+                System.out.println("  Breaks > Survives, search left half");
+                right = mid - 1;
+            } else {
+                System.out.println("  Breaks <= Survives, search right half");
+                left = mid + 1;
+            }
+
+            iteration++;
+            System.out.println();
+        }
+    }
 }
