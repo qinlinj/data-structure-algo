@@ -172,4 +172,30 @@ public class _852_d_EggDropStateRedefinition {
         System.out.println("  3. If egg survives: handle floors [F+1, ?] with (K, M-1)");
         System.out.println("  4. Total capacity = capacity_below + capacity_above + 1");
     }
+
+    /**
+     * Compares this approach with previous methods
+     */
+    public void compareWithPreviousApproaches() {
+        System.out.println("\n=== Comparison with Previous Approaches ===");
+
+        int[] testK = {2, 3, 4};
+        int[] testN = {10, 20, 50};
+
+        System.out.println("Test Case\t\tComplexity Comparison");
+        System.out.println("---------\t\t--------------------");
+        System.out.println("Method\t\t\tTime\t\tSpace");
+        System.out.println("Basic DP\t\tO(KN²)\t\tO(KN)");
+        System.out.println("Binary Opt\t\tO(KN log N)\tO(KN)");
+        System.out.println("Redefinition\t\tO(KN)\t\tO(KN)");
+        System.out.println();
+
+        System.out.println("Results verification:");
+        for (int k : testK) {
+            for (int n : testN) {
+                int result = superEggDrop(k, n);
+                System.out.printf("K=%d, N=%d: %d trials%n", k, n, result);
+            }
+        }
+    }
 }
