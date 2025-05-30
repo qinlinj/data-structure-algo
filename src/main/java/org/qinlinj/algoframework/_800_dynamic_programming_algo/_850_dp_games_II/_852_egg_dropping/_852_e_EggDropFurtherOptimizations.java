@@ -83,4 +83,24 @@ public class _852_e_EggDropFurtherOptimizations {
             }
         }
     }
+
+    /**
+     * Calculates maximum floors using mathematical formula
+     * dp[k][m] corresponds to sum of binomial coefficients
+     */
+    private int maxFloorsWithTrials(int K, int M) {
+        long result = 0;
+        long binomial = 1;
+
+        for (int k = 1; k <= K && k <= M; k++) {
+            binomial = binomial * (M - k + 1) / k;
+            result += binomial;
+
+            if (result >= Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            }
+        }
+
+        return (int) result;
+    }
 }
