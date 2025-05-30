@@ -48,7 +48,7 @@ public class _852_a_EggDropProblemAnalysis {
 
         return floors; // In worst case, try all floors
     }
-    
+
     /**
      * Demonstrates binary search strategy (efficient but risky)
      * Used when eggs are unlimited
@@ -81,4 +81,26 @@ public class _852_a_EggDropProblemAnalysis {
         return trials;
     }
 
+    /**
+     * Demonstrates why hybrid strategies are needed for limited eggs
+     */
+    public void explainHybridStrategy() {
+        System.out.println("\n=== Why Hybrid Strategies Are Needed ===");
+        System.out.println("Example: 2 eggs, 100 floors");
+        System.out.println();
+
+        System.out.println("Pure binary search problem:");
+        System.out.println("- Start at floor 50");
+        System.out.println("- If egg breaks: Only 1 egg left for floors 1-49");
+        System.out.println("- Must use linear search: Up to 49 more trials");
+        System.out.println("- Total worst case: 1 + 49 = 50 trials");
+        System.out.println();
+
+        System.out.println("Better hybrid strategy:");
+        System.out.println("- First egg: Try every 10th floor (10, 20, 30...)");
+        System.out.println("- When it breaks at floor X0, use second egg linearly");
+        System.out.println("- Example: Breaks at 80, then try 71,72,73...79");
+        System.out.println("- Worst case: 10 + 9 = 19 trials");
+        System.out.println("- Optimal solution is actually 14 trials!");
+    }
 }
