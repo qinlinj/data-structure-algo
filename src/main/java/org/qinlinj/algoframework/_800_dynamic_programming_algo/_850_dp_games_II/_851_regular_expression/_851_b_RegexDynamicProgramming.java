@@ -46,4 +46,48 @@ public class _851_b_RegexDynamicProgramming {
         // Start matching from beginning of both strings
         return dp(s, 0, p, 0);
     }
+
+    /**
+     * Dynamic programming function
+     * Returns true if s[i..] can match p[j..]
+     */
+    private boolean dp(String s, int i, String p, int j) {
+        int m = s.length(), n = p.length();
+
+        // BASE CASE 1: Pattern exhausted
+        if (j == n) {
+            return i == m;  // Text must also be exhausted
+        }
+
+        // BASE CASE 2: Text exhausted but pattern remains
+        if (i == m) {
+            return canMatchEmptyString(p, j);
+        }
+
+        // Check memoization table
+        if (memo[i][j] != -1) {
+            return memo[i][j] == 1;
+        }
+
+        boolean result = false;
+
+        // Check if current characters match
+        boolean firstMatch = (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.');
+
+        // Check if next character in pattern is '*'
+        if (j + 1 < n && p.charAt(j + 1) == '*') {
+            // Two choices with '*' wildcard:
+            // 1. Match 0 times: skip current pattern char and '*'
+            // 2. Match 1+ times: if chars match, consume text char and keep pattern
+            result = dp(s, i, p, j + 2) ||  // 0 matches
+                    (firstMatch && dp(s, i + 1, p, j));  // 1+ matches
+        } else {
+            // No '*' wildcard: simple character matching
+            result = firstMatch && dp(s, i + 1, p, j + 1);
+        }
+
+        // Store result in memo table
+        memo[i][j] = result ? 1 : 0;
+        return result;
+    }
 }
