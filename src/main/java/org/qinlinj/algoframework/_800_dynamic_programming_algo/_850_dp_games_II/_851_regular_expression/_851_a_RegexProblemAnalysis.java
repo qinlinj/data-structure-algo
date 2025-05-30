@@ -25,6 +25,19 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * - Requires systematic approach to avoid missing valid matches
  */
 public class _851_a_RegexProblemAnalysis {
+    public static void main(String[] args) {
+        _851_a_RegexProblemAnalysis analyzer = new _851_a_RegexProblemAnalysis();
+
+        // Test basic matching
+        System.out.println("Basic matching tests:");
+        System.out.println("'abc' matches 'abc': " + analyzer.basicMatch("abc", "abc"));
+        System.out.println("'abc' matches 'a.c': " + analyzer.basicMatch("abc", "a.c"));
+        System.out.println("'abc' matches 'axc': " + analyzer.basicMatch("abc", "axc"));
+
+        analyzer.demonstrateStarWildcardScenarios();
+        analyzer.illustrateDecisionProcess();
+    }
+
     /**
      * Basic pattern matching without '*' wildcard
      * This is the foundation before adding complexity
@@ -80,5 +93,4 @@ public class _851_a_RegexProblemAnalysis {
         System.out.println("2. If text[i] doesn't match pattern[j]:");
         System.out.println("   - Must match 0 times (skip pattern[j]*)");
     }
-
 }
