@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._852_egg_dropping;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._852_egg_dropping; /**
  * EGG DROPPING PROBLEM - STATE REDEFINITION APPROACH
  * <p>
  * REVOLUTIONARY PERSPECTIVE:
@@ -38,7 +34,38 @@ import java.util.*;
  * 3. Optimal substructure becomes more apparent
  */
 
+import java.util.*;
+
 public class _852_d_EggDropStateRedefinition {
+
+    public static void main(String[] args) {
+        _852_d_EggDropStateRedefinition solver = new _852_d_EggDropStateRedefinition();
+
+        // Test basic functionality
+        System.out.println("=== Test Results ===");
+        System.out.println("2 eggs, 10 floors: " + solver.superEggDrop(2, 10));
+        System.out.println("3 eggs, 14 floors: " + solver.superEggDrop(3, 14));
+        System.out.println("4 eggs, 20 floors: " + solver.superEggDrop(4, 20));
+
+        // Demonstrate state transition
+        solver.demonstrateStateTransition(3, 10);
+
+        // Visualize DP table
+        solver.visualizeDPTable(4, 8);
+
+        // Explain concepts
+        solver.explainRedefinitionIntuition();
+        solver.compareWithPreviousApproaches();
+        solver.showMathematicalElegance();
+        solver.demonstrateSpaceOptimization(3, 14);
+
+        System.out.println("\n=== Key Takeaways ===");
+        System.out.println("- State redefinition can transform complex problems");
+        System.out.println("- 'Reverse' thinking often yields elegant solutions");
+        System.out.println("- Constructive approach vs exhaustive search");
+        System.out.println("- Optimal time complexity O(KN) achieved");
+    }
+
     /**
      * Main solution using redefined state approach
      */
@@ -221,7 +248,6 @@ public class _852_d_EggDropStateRedefinition {
         System.out.println("  Notice how dp[k][m] grows much faster than m");
         System.out.println("  This is why we can handle large N with small m");
     }
-
 
     /**
      * Demonstrates space optimization possibility
