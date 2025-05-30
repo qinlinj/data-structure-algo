@@ -103,4 +103,20 @@ public class _852_a_EggDropProblemAnalysis {
         System.out.println("- Worst case: 10 + 9 = 19 trials");
         System.out.println("- Optimal solution is actually 14 trials!");
     }
+
+    /**
+     * Illustrates the decision-making process at each step
+     */
+    public void explainDecisionProcess() {
+        System.out.println("\n=== Decision Process Analysis ===");
+        System.out.println("At each step, we must choose which floor to try next");
+        System.out.println("This choice affects:");
+        System.out.println("1. Remaining search space if egg breaks");
+        System.out.println("2. Remaining search space if egg doesn't break");
+        System.out.println("3. Number of eggs available for subsequent trials");
+        System.out.println();
+        System.out.println("Optimal strategy: Choose floor that minimizes");
+        System.out.println("the MAXIMUM of these two scenarios (worst case)");
+    }
 }
+
