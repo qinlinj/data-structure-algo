@@ -32,8 +32,24 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * - Floor count N affects search space
  * - Trade-off between risk (breaking eggs) and efficiency
  */
-
 public class _852_a_EggDropProblemAnalysis {
+
+    public static void main(String[] args) {
+        _852_a_EggDropProblemAnalysis analyzer = new _852_a_EggDropProblemAnalysis();
+
+        // Demonstrate different strategies
+        analyzer.linearSearchStrategy(7);
+        analyzer.binarySearchStrategy(7);
+        analyzer.explainHybridStrategy();
+        analyzer.explainDecisionProcess();
+        analyzer.explainWhyDynamicProgramming();
+
+        System.out.println("\n=== Key Takeaways ===");
+        System.out.println("- Problem complexity increases with limited eggs");
+        System.out.println("- Must balance risk (breaking eggs) vs efficiency");
+        System.out.println("- Requires exhaustive exploration of all strategies");
+        System.out.println("- Dynamic programming provides systematic solution");
+    }
 
     /**
      * Demonstrates linear search strategy (safe but slow)
@@ -119,7 +135,6 @@ public class _852_a_EggDropProblemAnalysis {
         System.out.println("the MAXIMUM of these two scenarios (worst case)");
     }
 
-
     /**
      * Shows why this problem requires dynamic programming
      */
@@ -135,4 +150,3 @@ public class _852_a_EggDropProblemAnalysis {
         System.out.println("   Minimize the maximum trials needed");
     }
 }
-
