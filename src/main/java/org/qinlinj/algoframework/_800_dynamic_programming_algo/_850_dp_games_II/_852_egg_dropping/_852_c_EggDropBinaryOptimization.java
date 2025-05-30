@@ -44,4 +44,44 @@ public class _852_c_EggDropBinaryOptimization {
         return dp(K, N);
     }
 
+    /**
+     * DP function with binary search optimization
+     */
+    private int dp(int K, int N) {
+        // Base cases
+        if (N == 0) return 0;
+        if (K == 1) return N;
+
+        // Check memo
+        if (memo[K][N] != -1) {
+            return memo[K][N];
+        }
+
+        // Binary search for optimal floor choice
+        int result = Integer.MAX_VALUE;
+        int left = 1, right = N;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            // Calculate both scenarios
+            int eggBreaks = dp(K - 1, mid - 1);    // Search floors below
+            int eggSurvives = dp(K, N - mid);      // Search floors above
+
+            // Update result with current choice
+            result = Math.min(result, Math.max(eggBreaks, eggSurvives) + 1);
+
+            // Binary search logic based on monotonicity
+            if (eggBreaks > eggSurvives) {
+                // The breaking case dominates, try lower floors
+                right = mid - 1;
+            } else {
+                // The surviving case dominates, try higher floors
+                left = mid + 1;
+            }
+        }
+
+        memo[K][N] = result;
+        return result;
+    }
 }
