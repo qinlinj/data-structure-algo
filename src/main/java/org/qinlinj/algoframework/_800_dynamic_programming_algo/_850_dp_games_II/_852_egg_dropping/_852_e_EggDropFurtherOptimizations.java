@@ -50,4 +50,23 @@ public class _852_e_EggDropFurtherOptimizations {
 
         return left;
     }
+
+    /**
+     * Helper function: calculates max floors handleable with K eggs and M trials
+     * Uses space-optimized DP
+     */
+    private int canHandleFloors(int K, int M) {
+        // Only need current and previous trial results
+        int[] dp = new int[K + 1];
+
+        for (int m = 1; m <= M; m++) {
+            int[] newDp = new int[K + 1];
+            for (int k = 1; k <= K; k++) {
+                newDp[k] = dp[k - 1] + dp[k] + 1;
+            }
+            dp = newDp;
+        }
+
+        return dp[K];
+    }
 }
