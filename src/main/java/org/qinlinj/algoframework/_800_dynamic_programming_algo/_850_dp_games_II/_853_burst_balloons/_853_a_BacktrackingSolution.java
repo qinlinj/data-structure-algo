@@ -23,5 +23,5 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * 3. The challenge is handling dependencies between adjacent balloons
  * 4. Requires clever DP state definition to avoid subproblem interference
  */
-public class _853_a_BurstBalloonIntroduction {
+public class _853_a_BacktrackingSolution {
 }
