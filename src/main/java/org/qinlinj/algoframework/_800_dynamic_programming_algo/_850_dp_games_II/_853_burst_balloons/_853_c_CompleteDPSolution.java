@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons;
 
+import java.util.*;
+
 /**
  * BURST BALLOONS PROBLEM - COMPLETE DYNAMIC PROGRAMMING SOLUTION
  * <p>
@@ -63,6 +65,59 @@ public class _853_c_CompleteDPSolution {
                 }
             }
         }
+
+        return dp[0][n + 1];
+    }
+
+    /**
+     * Enhanced version with detailed tracing for educational purposes
+     */
+    public int maxCoinsWithTrace(int[] nums) {
+        System.out.println("=== DP Solution with Detailed Trace ===");
+        System.out.println("Input: " + Arrays.toString(nums));
+
+        int n = nums.length;
+
+        // Step 1: Transform array
+        int[] points = new int[n + 2];
+        points[0] = points[n + 1] = 1;
+        for (int i = 1; i <= n; i++) {
+            points[i] = nums[i - 1];
+        }
+        System.out.println("Enhanced array: " + Arrays.toString(points));
+
+        // Step 2: Initialize DP table
+        int[][] dp = new int[n + 2][n + 2];
+
+        System.out.println("\n=== DP Table Fill Process ===");
+
+        // Step 3: Fill DP table
+        for (int i = n; i >= 0; i--) {
+            for (int j = i + 1; j < n + 2; j++) {
+                if (j <= i + 1) continue; // Skip trivial cases
+
+                System.out.println("\nComputing dp[" + i + "][" + j + "] (range (" + i + "," + j + ")):");
+
+                for (int k = i + 1; k < j; k++) {
+                    int leftPart = dp[i][k];
+                    int rightPart = dp[k][j];
+                    int burstCoin = points[i] * points[k] * points[j];
+                    int totalCoins = leftPart + rightPart + burstCoin;
+
+                    System.out.println("  Try k=" + k + " (balloon " + points[k] + "): " +
+                            leftPart + " + " + rightPart + " + " +
+                            points[i] + "*" + points[k] + "*" + points[j] +
+                            " = " + totalCoins);
+
+                    dp[i][j] = Math.max(dp[i][j], totalCoins);
+                }
+
+                System.out.println("  → dp[" + i + "][" + j + "] = " + dp[i][j]);
+            }
+        }
+
+        System.out.println("\n=== Final DP Table ===");
+        printDPTable(dp, n + 2);
 
         return dp[0][n + 1];
     }
