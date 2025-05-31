@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons;
 
+import java.util.*;
+
 /**
  * BURST BALLOONS PROBLEM - BACKTRACKING APPROACH
  * <p>
@@ -25,4 +27,21 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * Coins:   3*1*5 + 3*5*8 + 1*3*8 + 1*8*1 = 15 + 120 + 24 + 8 = 167
  */
 public class _853_a_BacktrackingSolution {
+    private int maxResult = 0;
+
+    /**
+     * Main method to find maximum coins using backtracking
+     */
+    public int maxCoins(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        List<Integer> balloons = new ArrayList<>();
+        for (int num : nums) {
+            balloons.add(num);
+        }
+
+        maxResult = 0;
+        backtrack(balloons, 0);
+        return maxResult;
+    }
 }
