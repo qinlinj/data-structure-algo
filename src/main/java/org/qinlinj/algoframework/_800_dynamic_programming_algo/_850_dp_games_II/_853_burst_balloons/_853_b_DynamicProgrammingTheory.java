@@ -1,6 +1,8 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons;
 
 
+import java.util.*;
+
 /**
  * BURST BALLOONS PROBLEM - DYNAMIC PROGRAMMING THEORY
  * <p>
@@ -36,4 +38,65 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _853_b_DynamicProgrammingTheory {
+    /**
+     * Demonstrates the problem transformation and DP concept
+     */
+    public void demonstrateTheory() {
+        System.out.println("=== Dynamic Programming Theory for Burst Balloons ===");
+
+        int[] original = {3, 1, 5, 8};
+        System.out.println("Original array: " + Arrays.toString(original));
+
+        // Step 1: Add virtual balloons
+        int[] enhanced = new int[original.length + 2];
+        enhanced[0] = enhanced[enhanced.length - 1] = 1;
+        for (int i = 0; i < original.length; i++) {
+            enhanced[i + 1] = original[i];
+        }
+        System.out.println("Enhanced array: " + Arrays.toString(enhanced));
+        System.out.println("Virtual balloons (value 1) added at positions 0 and " + (enhanced.length - 1));
+
+        System.out.println();
+
+        // Step 2: Explain DP definition
+        System.out.println("=== DP Array Definition ===");
+        System.out.println("dp[i][j] = max coins from bursting balloons between i and j (exclusive)");
+        System.out.println("Example interpretations:");
+        int n = original.length;
+        System.out.println("dp[0][" + (n + 1) + "] = max coins from bursting all original balloons");
+        System.out.println("dp[0][3] = max coins from bursting balloons between index 0 and 3");
+        System.out.println("dp[1][4] = max coins from bursting balloons between index 1 and 4");
+
+        System.out.println();
+
+        // Step 3: Demonstrate state transition logic
+        System.out.println("=== State Transition Logic ===");
+        System.out.println("For range (i,j), consider each k as the LAST balloon to burst:");
+        System.out.println("dp[i][j] = max over all k where i < k < j of:");
+        System.out.println("  dp[i][k] + dp[k][j] + enhanced[i] * enhanced[k] * enhanced[j]");
+        System.out.println();
+        System.out.println("Why this works:");
+        System.out.println("1. dp[i][k] = optimal score for range (i,k)");
+        System.out.println("2. dp[k][j] = optimal score for range (k,j)");
+        System.out.println("3. These ranges are independent when k is last to burst");
+        System.out.println("4. When k is last, only balloons i, k, j remain adjacent");
+
+        System.out.println();
+
+        // Step 4: Show why reverse thinking eliminates dependencies
+        System.out.println("=== Why Reverse Thinking Works ===");
+        System.out.println("Forward thinking problem:");
+        System.out.println("- Bursting first balloon changes neighbors of remaining balloons");
+        System.out.println("- Subproblems become dependent on each other");
+        System.out.println();
+        System.out.println("Reverse thinking solution:");
+        System.out.println("- Consider which balloon to burst LAST in a range");
+        System.out.println("- Before bursting last balloon, all others in subranges are gone");
+        System.out.println("- Subproblems become independent!");
+
+        System.out.println();
+
+        // Step 5: Visualize a small example
+        visualizeSmallExample();
+    }
 }
