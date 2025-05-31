@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems;
 
+import java.util.*;
+
 /**
  * STONE GAME PROBLEM - INTRODUCTION AND GAME THEORY ANALYSIS
  * <p>
@@ -33,4 +35,41 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _854_a_GameTheoryIntroduction {
+
+    /**
+     * Demonstrates the basic game theory concepts with simple examples
+     */
+    public void demonstrateGameTheory() {
+        System.out.println("=== Stone Game - Game Theory Introduction ===");
+        System.out.println();
+
+        // Example 1: Simple case where first player loses
+        int[] piles1 = {1, 100, 3};
+        System.out.println("Example 1: " + Arrays.toString(piles1));
+        System.out.println("Analysis:");
+        System.out.println("- First player can take 1 or 3");
+        System.out.println("- Either choice leaves 100 for second player");
+        System.out.println("- Second player takes 100, then takes remaining pile");
+        System.out.println("- Result: First player gets 4, Second player gets 100");
+        System.out.println("- Score difference: 4 - 100 = -96 (first player loses)");
+        System.out.println();
+
+        // Example 2: Case where first player can win
+        int[] piles2 = {1, 5, 233, 7};
+        System.out.println("Example 2: " + Arrays.toString(piles2));
+        System.out.println("Analysis:");
+        System.out.println("- First player takes 1, leaving [5, 233, 7]");
+        System.out.println("- Second player must choose 5 or 7");
+        System.out.println("- Either way, first player gets 233 on next turn");
+        System.out.println("- Possible outcomes:");
+        System.out.println("  * First: 1 + 233 = 234, Second: 5 + 7 = 12");
+        System.out.println("  * Score difference: 234 - 12 = 222 (first player wins)");
+        System.out.println();
+
+        // Example 3: Demonstrate the importance of optimal play
+        int[] piles3 = {3, 7, 2, 3};
+        System.out.println("Example 3: " + Arrays.toString(piles3));
+        System.out.println("Demonstrating optimal vs suboptimal play:");
+        demonstrateOptimalPlay(piles3);
+    }
 }
