@@ -98,6 +98,64 @@ public class _854_b_DPStateDefinition {
     }
 
     /**
+     * Shows how base cases work in this DP formulation
+     */
+    public void demonstrateBaseCases() {
+        System.out.println("=== Base Cases in Stone Game DP ===");
+        System.out.println();
+
+        int[] piles = {2, 8, 3, 5};
+
+        System.out.println("Base case: Single pile subgames (i == j)");
+        System.out.println();
+
+        for (int i = 0; i < piles.length; i++) {
+            System.out.println("dp[" + i + "][" + i + "] represents subarray [" + piles[i] + "]:");
+            System.out.println("  - First player takes the only pile: " + piles[i]);
+            System.out.println("  - Second player gets nothing: 0");
+            System.out.println("  - So dp[" + i + "][" + i + "] = (" + piles[i] + ", 0)");
+        }
+
+        System.out.println();
+        System.out.println("Why these are base cases:");
+        System.out.println("1. No further decisions needed - only one pile available");
+        System.out.println("2. First player must take it, second player gets nothing");
+        System.out.println("3. These serve as building blocks for larger subproblems");
+    }
+
+    /**
+     * Visualizes the dependency structure of the DP
+     */
+    public void visualizeDependencyStructure() {
+        System.out.println("=== DP Dependency Structure ===");
+        System.out.println();
+
+        System.out.println("How dp[i][j] depends on smaller subproblems:");
+        System.out.println();
+        System.out.println("To compute dp[i][j], we need:");
+        System.out.println("1. dp[i+1][j] - if we take left pile piles[i]");
+        System.out.println("2. dp[i][j-1] - if we take right pile piles[j]");
+        System.out.println();
+
+        System.out.println("Example: Computing dp[1][3] for piles[1...3] = [8, 3, 5]");
+        System.out.println("Option 1: Take left pile (8)");
+        System.out.println("  - Remaining subgame: piles[2...3] = [3, 5]");
+        System.out.println("  - Need dp[2][3] to know optimal play on [3, 5]");
+        System.out.println("Option 2: Take right pile (5)");
+        System.out.println("  - Remaining subgame: piles[1...2] = [8, 3]");
+        System.out.println("  - Need dp[1][2] to know optimal play on [8, 3]");
+        System.out.println();
+
+        System.out.println("Dependency pattern:");
+        System.out.println("- dp[i][j] depends on dp[i+1][j] and dp[i][j-1]");
+        System.out.println("- These are subproblems with smaller ranges");
+        System.out.println("- Must compute smaller ranges before larger ones");
+
+        demonstrateComputationOrder();
+    }
+
+
+    /**
      * Helper class to represent the pair of scores for both players
      */
     static class GameState {
