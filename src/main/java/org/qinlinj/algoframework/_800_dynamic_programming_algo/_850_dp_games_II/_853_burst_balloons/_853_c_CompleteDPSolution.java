@@ -29,6 +29,31 @@ import java.util.*;
  */
 
 public class _853_c_CompleteDPSolution {
+    public static void main(String[] args) {
+        _853_c_CompleteDPSolution solution = new _853_c_CompleteDPSolution();
+
+        // Demonstrate the main example with full trace
+        solution.demonstrateMainExample();
+
+        System.out.println("\n" + "=".repeat(60) + "\n");
+
+        // Validate with multiple test cases
+        solution.validateSolution();
+
+        System.out.println("\n" + "=".repeat(60) + "\n");
+
+        // Performance comparison
+        System.out.println("=== Performance Summary ===");
+        System.out.println("Backtracking: O(n!) time - impractical for n > 10");
+        System.out.println("Dynamic Programming: O(n³) time, O(n²) space - efficient for n ≤ 500");
+        System.out.println();
+        System.out.println("Key DP insights:");
+        System.out.println("1. Transform problem to eliminate dependencies");
+        System.out.println("2. Think reverse: which balloon to burst LAST");
+        System.out.println("3. Proper traversal order ensures correctness");
+        System.out.println("4. Time complexity reduced from factorial to cubic");
+    }
+
     /**
      * Main DP solution for burst balloons problem
      *
