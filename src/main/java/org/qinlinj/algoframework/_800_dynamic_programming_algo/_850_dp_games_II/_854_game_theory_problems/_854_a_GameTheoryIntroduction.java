@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems; /**
  * STONE GAME PROBLEM - INTRODUCTION AND GAME THEORY ANALYSIS
  * <p>
  * Problem Description:
@@ -34,7 +30,41 @@ import java.util.*;
  * - Consider all possible moves and their consequences
  */
 
+import java.util.*;
+
 public class _854_a_GameTheoryIntroduction {
+
+    public static void main(String[] args) {
+        _854_a_GameTheoryIntroduction intro = new _854_a_GameTheoryIntroduction();
+
+        // Demonstrate basic game theory concepts
+        intro.demonstrateGameTheory();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        // Explain why DP is necessary
+        intro.explainWhyDPIsNeeded();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        // Introduce related problems
+        intro.introduceLeetCodeProblems();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        System.out.println("=== Key Takeaways ===");
+        System.out.println("1. Game theory problems require considering opponent's optimal responses");
+        System.out.println("2. Simple greedy strategies usually fail in strategic games");
+        System.out.println("3. Dynamic programming captures the recursive nature of optimal decision-making");
+        System.out.println("4. Need to track both players' states simultaneously");
+        System.out.println("5. The solution must handle alternating turns elegantly");
+
+        System.out.println();
+        System.out.println("Next: We'll define the DP state representation...");
+    }
 
     /**
      * Demonstrates the basic game theory concepts with simple examples
@@ -152,4 +182,25 @@ public class _854_a_GameTheoryIntroduction {
         System.out.println("Solution: Track both players' optimal scores simultaneously");
     }
 
+    /**
+     * Introduces the LeetCode problems this approach solves
+     */
+    public void introduceLeetCodeProblems() {
+        System.out.println("=== Related LeetCode Problems ===");
+        System.out.println();
+        System.out.println("1. LeetCode 486 - Predict the Winner:");
+        System.out.println("   - Return true if player 1 can win or tie");
+        System.out.println("   - Constraint: 1 ≤ nums.length ≤ 20");
+        System.out.println("   - Constraint: 0 ≤ nums[i] ≤ 10^7");
+        System.out.println();
+        System.out.println("2. LeetCode 877 - Stone Game:");
+        System.out.println("   - Simplified version with guaranteed first player win");
+        System.out.println("   - Used to introduce the concept");
+        System.out.println();
+        System.out.println("Our generalized approach handles:");
+        System.out.println("- Any number of piles (odd or even)");
+        System.out.println("- Any stone counts");
+        System.out.println("- Returns exact score difference");
+        System.out.println("- Can be adapted to determine winner");
+    }
 }
