@@ -72,4 +72,19 @@ public class _854_a_GameTheoryIntroduction {
         System.out.println("Demonstrating optimal vs suboptimal play:");
         demonstrateOptimalPlay(piles3);
     }
+
+    /**
+     * Shows the difference between optimal and suboptimal play
+     */
+    private void demonstrateOptimalPlay(int[] piles) {
+        System.out.println("Suboptimal play (greedy - always take larger end):");
+        simulateGreedyPlay(piles.clone());
+
+        System.out.println();
+        System.out.println("Optimal play (considering future consequences):");
+        System.out.println("- Requires looking ahead to see opponent's best responses");
+        System.out.println("- May sacrifice immediate gain for long-term advantage");
+        System.out.println("- This is where dynamic programming comes in!");
+    }
+
 }
