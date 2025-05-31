@@ -38,6 +38,22 @@ import java.util.*;
  */
 
 public class _853_b_DynamicProgrammingTheory {
+    public static void main(String[] args) {
+        _853_b_DynamicProgrammingTheory theory = new _853_b_DynamicProgrammingTheory();
+
+        theory.demonstrateTheory();
+        System.out.println();
+        theory.explainTraversalOrder();
+
+        System.out.println();
+        System.out.println("=== Key Takeaways ===");
+        System.out.println("1. Transform problem to eliminate subproblem dependencies");
+        System.out.println("2. Add virtual boundaries to unify edge cases");
+        System.out.println("3. Use reverse thinking: consider what happens LAST");
+        System.out.println("4. Careful traversal order ensures correctness");
+        System.out.println("5. Time complexity: O(n³), Space complexity: O(n²)");
+    }
+
     /**
      * Demonstrates the problem transformation and DP concept
      */
