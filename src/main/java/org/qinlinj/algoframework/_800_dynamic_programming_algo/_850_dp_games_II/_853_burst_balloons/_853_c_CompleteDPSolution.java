@@ -27,4 +27,43 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _853_c_CompleteDPSolution {
+    /**
+     * Main DP solution for burst balloons problem
+     *
+     * @param nums Original balloon array
+     * @return Maximum coins obtainable
+     */
+    public int maxCoins(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int n = nums.length;
+
+        // Step 1: Add virtual balloons at both ends
+        int[] points = new int[n + 2];
+        points[0] = points[n + 1] = 1;
+        for (int i = 1; i <= n; i++) {
+            points[i] = nums[i - 1];
+        }
+
+        // Step 2: Initialize DP table
+        // dp[i][j] represents max coins from bursting balloons between i and j (exclusive)
+        int[][] dp = new int[n + 2][n + 2];
+        // Base cases are already 0 (no balloons to burst)
+
+        // Step 3: Fill DP table with correct traversal order
+        // i goes from bottom to top (n to 0)
+        for (int i = n; i >= 0; i--) {
+            // j goes from left to right (i+1 to n+1)
+            for (int j = i + 1; j < n + 2; j++) {
+                // Try each k as the last balloon to burst in range (i,j)
+                for (int k = i + 1; k < j; k++) {
+                    // State transition equation
+                    int coins = dp[i][k] + dp[k][j] + points[i] * points[k] * points[j];
+                    dp[i][j] = Math.max(dp[i][j], coins);
+                }
+            }
+        }
+
+        return dp[0][n + 1];
+    }
 }
