@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons; /**
  * BURST BALLOONS PROBLEM - COMPLETE DYNAMIC PROGRAMMING SOLUTION
  * <p>
  * Final Implementation Details:
@@ -28,7 +24,10 @@ import java.util.*;
  * Final answer: dp[0][5] = 167
  */
 
+import java.util.*;
+
 public class _853_c_CompleteDPSolution {
+
     public static void main(String[] args) {
         _853_c_CompleteDPSolution solution = new _853_c_CompleteDPSolution();
 
@@ -56,7 +55,6 @@ public class _853_c_CompleteDPSolution {
 
     /**
      * Main DP solution for burst balloons problem
-     *
      * @param nums Original balloon array
      * @return Maximum coins obtainable
      */
