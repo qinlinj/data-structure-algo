@@ -29,6 +29,31 @@ import java.util.*;
 public class _853_a_BacktrackingSolution {
     private int maxResult = 0;
 
+    public static void main(String[] args) {
+        _853_a_BacktrackingSolution solution = new _853_a_BacktrackingSolution();
+
+        // Test case 1
+        int[] nums1 = {3, 1, 5, 8};
+        solution.demonstrateProcess(nums1);
+
+        System.out.println();
+
+        // Test case 2
+        int[] nums2 = {1, 5};
+        System.out.println("=== Test Case 2 ===");
+        System.out.println("Input: " + Arrays.toString(nums2));
+        System.out.println("Maximum coins: " + solution.maxCoins(nums2));
+
+        System.out.println();
+
+        // Performance analysis
+        System.out.println("=== Performance Analysis ===");
+        System.out.println("Time Complexity: O(n!) - factorial");
+        System.out.println("Space Complexity: O(n) - recursion stack");
+        System.out.println("Suitable for: Small inputs only (n < 10)");
+        System.out.println("For n=500 (problem constraint): 500! operations - impractical!");
+    }
+
     /**
      * Main method to find maximum coins using backtracking
      */
