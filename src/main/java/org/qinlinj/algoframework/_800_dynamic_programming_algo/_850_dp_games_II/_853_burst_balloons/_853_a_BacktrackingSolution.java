@@ -92,4 +92,28 @@ public class _853_a_BacktrackingSolution {
         demonstrateBacktrack(balloons, 0, new ArrayList<>());
         System.out.println("Maximum coins: " + maxCoins(nums));
     }
+
+    private void demonstrateBacktrack(List<Integer> balloons, int score, List<String> steps) {
+        if (balloons.isEmpty()) {
+            System.out.println("Order: " + String.join(" → ", steps) + " | Total: " + score);
+            return;
+        }
+
+        // Only show first few combinations to avoid too much output
+        if (steps.size() < 2) {
+            for (int i = 0; i < balloons.size(); i++) {
+                int leftVal = (i - 1 >= 0) ? balloons.get(i - 1) : 1;
+                int rightVal = (i + 1 < balloons.size()) ? balloons.get(i + 1) : 1;
+                int coins = leftVal * balloons.get(i) * rightVal;
+
+                int removed = balloons.remove(i);
+                steps.add("Burst " + removed + " (+" + coins + ")");
+
+                demonstrateBacktrack(balloons, score + coins, steps);
+
+                balloons.add(i, removed);
+                steps.remove(steps.size() - 1);
+            }
+        }
+    }
 }
