@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons; /**
  * BURST BALLOONS PROBLEM - BACKTRACKING APPROACH
  * <p>
  * Problem Summary:
@@ -26,6 +22,9 @@ import java.util.*;
  * Process: [3,1,5,8] → [3,5,8] → [3,8] → [8] → []
  * Coins:   3*1*5 + 3*5*8 + 1*3*8 + 1*8*1 = 15 + 120 + 24 + 8 = 167
  */
+
+import java.util.*;
+
 public class _853_a_BacktrackingSolution {
     private int maxResult = 0;
 
@@ -72,8 +71,7 @@ public class _853_a_BacktrackingSolution {
 
     /**
      * Backtracking helper method
-     *
-     * @param balloons     Current list of remaining balloons
+     * @param balloons Current list of remaining balloons
      * @param currentScore Current accumulated score
      */
     private void backtrack(List<Integer> balloons, int currentScore) {
