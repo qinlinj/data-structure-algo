@@ -35,4 +35,21 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _854_b_DPStateDefinition {
+    /**
+     * Helper class to represent the pair of scores for both players
+     */
+    static class GameState {
+        int first;   // Score for the player who moves first in this subgame
+        int second;  // Score for the player who moves second in this subgame
+
+        GameState(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + first + "," + second + ")";
+        }
+    }
 }
