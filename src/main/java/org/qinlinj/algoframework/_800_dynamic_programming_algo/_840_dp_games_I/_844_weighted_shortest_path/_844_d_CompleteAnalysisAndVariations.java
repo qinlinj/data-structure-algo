@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
+
+/**
  * Complete Analysis and Variations of Cheapest Flights Problem
  * <p>
  * Comprehensive Coverage:

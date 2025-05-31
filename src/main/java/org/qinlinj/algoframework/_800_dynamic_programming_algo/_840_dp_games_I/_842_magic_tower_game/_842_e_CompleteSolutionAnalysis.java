@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._842_magic_tower_game; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._842_magic_tower_game;
+
+/**
  * COMPLETE DUNGEON GAME SOLUTION WITH COMPREHENSIVE ANALYSIS
  * <p>
  * Problem Summary:

@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
+
+/**
  * FREEDOM TRAIL SOLUTION VARIATIONS AND OPTIMIZATIONS
  * <p>
  * This class demonstrates different approaches to solve the Freedom Trail problem:

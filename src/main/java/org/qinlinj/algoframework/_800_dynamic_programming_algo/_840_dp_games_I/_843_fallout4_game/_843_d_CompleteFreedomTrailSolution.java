@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
+
+/**
  * COMPLETE FREEDOM TRAIL SOLUTION WITH COMPREHENSIVE ANALYSIS
  * <p>
  * Problem: Given a circular ring of characters and a key string,

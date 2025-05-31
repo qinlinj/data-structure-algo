@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._843_fallout4_game;
+
+/**
  * PIANO FINGERING OPTIMIZATION ANALOGY
  * <p>
  * Key Insights from Piano Practice:

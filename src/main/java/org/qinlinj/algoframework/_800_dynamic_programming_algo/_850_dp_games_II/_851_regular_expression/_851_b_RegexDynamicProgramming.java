@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._851_regular_expression; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._851_regular_expression;
+
+/**
  * REGULAR EXPRESSION MATCHING - DYNAMIC PROGRAMMING SOLUTION
  * <p>
  * CORE CONCEPTS:

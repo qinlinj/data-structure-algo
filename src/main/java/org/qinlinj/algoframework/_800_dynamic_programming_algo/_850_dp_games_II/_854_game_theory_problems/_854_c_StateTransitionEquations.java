@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems;
+
+/**
  * STONE GAME - STATE TRANSITION EQUATIONS
  * <p>
  * State Transition Logic:

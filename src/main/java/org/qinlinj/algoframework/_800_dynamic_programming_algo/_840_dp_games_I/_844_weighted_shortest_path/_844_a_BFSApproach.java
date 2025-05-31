@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._840_dp_games_I._844_weighted_shortest_path;
+
+/**
  * BFS Algorithm Approach for Cheapest Flights Problem
  * <p>
  * Key Concepts:
