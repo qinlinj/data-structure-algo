@@ -75,4 +75,21 @@ public class _853_a_BacktrackingSolution {
             balloons.add(i, removed);
         }
     }
+
+    /**
+     * Helper method to demonstrate the step-by-step process
+     */
+    public void demonstrateProcess(int[] nums) {
+        System.out.println("=== Backtracking Approach Demo ===");
+        System.out.println("Input: " + Arrays.toString(nums));
+        System.out.println("Trying all possible orders...");
+
+        List<Integer> balloons = new ArrayList<>();
+        for (int num : nums) {
+            balloons.add(num);
+        }
+
+        demonstrateBacktrack(balloons, 0, new ArrayList<>());
+        System.out.println("Maximum coins: " + maxCoins(nums));
+    }
 }
