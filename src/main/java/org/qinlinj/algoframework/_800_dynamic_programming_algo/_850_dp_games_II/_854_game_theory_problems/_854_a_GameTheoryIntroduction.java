@@ -87,4 +87,69 @@ public class _854_a_GameTheoryIntroduction {
         System.out.println("- This is where dynamic programming comes in!");
     }
 
+    /**
+     * Simulates a greedy strategy for comparison
+     */
+    private void simulateGreedyPlay(int[] piles) {
+        List<Integer> remaining = new ArrayList<>();
+        for (int pile : piles) {
+            remaining.add(pile);
+        }
+
+        int firstScore = 0, secondScore = 0;
+        boolean firstPlayerTurn = true;
+        int turn = 1;
+
+        while (!remaining.isEmpty()) {
+            int leftChoice = remaining.get(0);
+            int rightChoice = remaining.get(remaining.size() - 1);
+
+            boolean takeLeft = leftChoice >= rightChoice;
+            int chosen = takeLeft ? leftChoice : rightChoice;
+
+            if (takeLeft) {
+                remaining.remove(0);
+            } else {
+                remaining.remove(remaining.size() - 1);
+            }
+
+            if (firstPlayerTurn) {
+                firstScore += chosen;
+                System.out.println("Turn " + turn + ": First player takes " + chosen +
+                        " from " + (takeLeft ? "left" : "right"));
+            } else {
+                secondScore += chosen;
+                System.out.println("Turn " + turn + ": Second player takes " + chosen +
+                        " from " + (takeLeft ? "left" : "right"));
+            }
+
+            firstPlayerTurn = !firstPlayerTurn;
+            turn++;
+        }
+
+        System.out.println("Final scores - First: " + firstScore + ", Second: " + secondScore);
+        System.out.println("Difference: " + (firstScore - secondScore));
+    }
+
+    /**
+     * Explains why simple strategies fail and DP is needed
+     */
+    public void explainWhyDPIsNeeded() {
+        System.out.println("=== Why Dynamic Programming is Necessary ===");
+        System.out.println();
+        System.out.println("Why simple strategies fail:");
+        System.out.println("1. Greedy (always take larger): Doesn't consider future moves");
+        System.out.println("2. Look-ahead 1 step: Still insufficient for complex games");
+        System.out.println("3. Need to consider ALL possible game sequences");
+        System.out.println();
+        System.out.println("Dynamic Programming advantages:");
+        System.out.println("1. Explores all possible game states");
+        System.out.println("2. Stores optimal results for subproblems");
+        System.out.println("3. Guarantees truly optimal play for both players");
+        System.out.println("4. Handles the recursive nature of decision-making");
+        System.out.println();
+        System.out.println("Key challenge: Representing alternating turns in the algorithm");
+        System.out.println("Solution: Track both players' optimal scores simultaneously");
+    }
+
 }
