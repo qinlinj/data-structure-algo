@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems;
 
+import java.util.*;
+
 /**
  * STONE GAME - DYNAMIC PROGRAMMING STATE DEFINITION
  * <p>
@@ -35,6 +37,38 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _854_b_DPStateDefinition {
+    /**
+     * Demonstrates the DP array structure and meaning
+     */
+    public void demonstrateDPArrayStructure() {
+        System.out.println("=== DP Array Structure and Definition ===");
+        System.out.println();
+
+        int[] piles = {2, 8, 3, 5};
+        int n = piles.length;
+
+        System.out.println("Example piles: " + Arrays.toString(piles));
+        System.out.println("DP array will be " + n + "x" + n + " with GameState objects");
+        System.out.println();
+
+        // Create and initialize a sample DP table structure
+        GameState[][] dp = new GameState[n][n];
+
+        System.out.println("DP Array Interpretation:");
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                System.out.println("dp[" + i + "][" + j + "] represents game on subarray piles[" +
+                        i + "..." + j + "] = " + Arrays.toString(Arrays.copyOfRange(piles, i, j + 1)));
+                System.out.println("  - .first = max score for whoever moves first on this subarray");
+                System.out.println("  - .second = max score for whoever moves second on this subarray");
+            }
+        }
+
+        System.out.println();
+        System.out.println("Note: Only upper triangular part is used (i ≤ j)");
+        System.out.println("Lower triangular part represents invalid ranges");
+    }
+
     /**
      * Helper class to represent the pair of scores for both players
      */
