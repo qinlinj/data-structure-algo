@@ -99,4 +99,27 @@ public class _853_b_DynamicProgrammingTheory {
         // Step 5: Visualize a small example
         visualizeSmallExample();
     }
+
+    /**
+     * Visualize the DP process for a small example
+     */
+    private void visualizeSmallExample() {
+        System.out.println("=== Small Example Visualization ===");
+        int[] nums = {3, 1, 5};
+        int[] points = {1, 3, 1, 5, 1}; // Enhanced array
+
+        System.out.println("Enhanced array: " + Arrays.toString(points));
+        System.out.println("Indices:        [0, 1, 2, 3, 4]");
+        System.out.println();
+
+        System.out.println("Computing dp[0][4] (burst all balloons between 0 and 4):");
+        System.out.println("Try k=1 as last: dp[0][1] + dp[1][4] + points[0]*points[1]*points[4]");
+        System.out.println("                = 0 + ? + 1*3*1 = ? + 3");
+        System.out.println("Try k=2 as last: dp[0][2] + dp[2][4] + points[0]*points[2]*points[4]");
+        System.out.println("                = ? + ? + 1*1*1 = ? + 1");
+        System.out.println("Try k=3 as last: dp[0][3] + dp[3][4] + points[0]*points[3]*points[4]");
+        System.out.println("                = ? + 0 + 1*5*1 = ? + 5");
+        System.out.println();
+        System.out.println("The algorithm fills smaller ranges first, then builds up to larger ranges.");
+    }
 }
