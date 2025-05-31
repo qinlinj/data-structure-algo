@@ -70,6 +70,34 @@ public class _854_b_DPStateDefinition {
     }
 
     /**
+     * Explains the meaning of first and second in different contexts
+     */
+    public void explainFirstSecondConcept() {
+        System.out.println("=== Understanding 'First' and 'Second' Player Concept ===");
+        System.out.println();
+
+        System.out.println("Important: 'First' and 'Second' are RELATIVE to each subgame!");
+        System.out.println();
+
+        System.out.println("Example scenario:");
+        System.out.println("Original game: Player A vs Player B on [2, 8, 3, 5]");
+        System.out.println("- Player A moves first (is the 'first' player)");
+        System.out.println("- Player B moves second (is the 'second' player)");
+        System.out.println();
+
+        System.out.println("After Player A takes 2, remaining: [8, 3, 5]");
+        System.out.println("- Now Player B moves first on [8, 3, 5] (becomes the 'first' player)");
+        System.out.println("- Player A will move second on [8, 3, 5] (becomes the 'second' player)");
+        System.out.println("- Roles have SWAPPED for this subgame!");
+        System.out.println();
+
+        System.out.println("This role-swapping is why the DP approach works:");
+        System.out.println("1. We can reuse previously computed optimal strategies");
+        System.out.println("2. The optimal play is independent of which specific player is 'first'");
+        System.out.println("3. Only the turn order matters, not player identity");
+    }
+
+    /**
      * Helper class to represent the pair of scores for both players
      */
     static class GameState {
