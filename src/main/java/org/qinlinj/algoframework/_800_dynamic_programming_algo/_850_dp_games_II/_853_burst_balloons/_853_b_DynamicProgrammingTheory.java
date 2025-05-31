@@ -122,4 +122,34 @@ public class _853_b_DynamicProgrammingTheory {
         System.out.println();
         System.out.println("The algorithm fills smaller ranges first, then builds up to larger ranges.");
     }
+
+    /**
+     * Explains the traversal order requirement
+     */
+    public void explainTraversalOrder() {
+        System.out.println("=== Traversal Order Explanation ===");
+        System.out.println("Problem: dp[i][j] depends on dp[i][k] and dp[k][j] where i < k < j");
+        System.out.println("Solution: Ensure dependencies are computed before they're needed");
+        System.out.println();
+        System.out.println("Two valid traversal orders:");
+        System.out.println("1. Diagonal traversal (by increasing range length)");
+        System.out.println("2. Bottom-up, left-right traversal");
+        System.out.println();
+        System.out.println("We choose bottom-up, left-right because:");
+        System.out.println("- i goes from n down to 0 (bottom-up)");
+        System.out.println("- j goes from i+1 to n+1 (left-right)");
+        System.out.println("- This ensures smaller ranges are computed before larger ones");
+
+        // Demonstrate traversal order
+        int n = 4; // For enhanced array of size 6
+        System.out.println();
+        System.out.println("Traversal order for n=4 (array size 6):");
+        for (int i = n; i >= 0; i--) {
+            for (int j = i + 1; j < n + 2; j++) {
+                if (j > i + 1) { // Only non-trivial ranges
+                    System.out.println("Compute dp[" + i + "][" + j + "]");
+                }
+            }
+        }
+    }
 }
