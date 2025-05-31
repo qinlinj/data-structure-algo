@@ -44,4 +44,35 @@ public class _853_a_BacktrackingSolution {
         backtrack(balloons, 0);
         return maxResult;
     }
+
+    /**
+     * Backtracking helper method
+     *
+     * @param balloons     Current list of remaining balloons
+     * @param currentScore Current accumulated score
+     */
+    private void backtrack(List<Integer> balloons, int currentScore) {
+        // Base case: no balloons left
+        if (balloons.isEmpty()) {
+            maxResult = Math.max(maxResult, currentScore);
+            return;
+        }
+
+        // Try bursting each balloon
+        for (int i = 0; i < balloons.size(); i++) {
+            // Calculate coins for bursting balloon at index i
+            int leftVal = (i - 1 >= 0) ? balloons.get(i - 1) : 1;
+            int rightVal = (i + 1 < balloons.size()) ? balloons.get(i + 1) : 1;
+            int coins = leftVal * balloons.get(i) * rightVal;
+
+            // Make choice: remove balloon
+            int removed = balloons.remove(i);
+
+            // Recursively explore
+            backtrack(balloons, currentScore + coins);
+
+            // Backtrack: restore balloon
+            balloons.add(i, removed);
+        }
+    }
 }
