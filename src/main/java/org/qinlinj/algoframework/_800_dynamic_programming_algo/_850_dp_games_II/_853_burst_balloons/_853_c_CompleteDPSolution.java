@@ -144,4 +144,35 @@ public class _853_c_CompleteDPSolution {
             System.out.println();
         }
     }
+
+    /**
+     * Validate solution by comparing with expected results
+     */
+    public void validateSolution() {
+        System.out.println("=== Solution Validation ===");
+
+        // Test case 1: [3,1,5,8] → Expected: 167
+        int[] test1 = {3, 1, 5, 8};
+        int result1 = maxCoins(test1);
+        System.out.println("Test 1: " + Arrays.toString(test1) + " → " + result1 +
+                (result1 == 167 ? " ✓" : " ✗ (expected 167)"));
+
+        // Test case 2: [1,5] → Expected: 10
+        int[] test2 = {1, 5};
+        int result2 = maxCoins(test2);
+        System.out.println("Test 2: " + Arrays.toString(test2) + " → " + result2 +
+                (result2 == 10 ? " ✓" : " ✗ (expected 10)"));
+
+        // Test case 3: Single balloon
+        int[] test3 = {5};
+        int result3 = maxCoins(test3);
+        System.out.println("Test 3: " + Arrays.toString(test3) + " → " + result3 +
+                (result3 == 5 ? " ✓" : " ✗ (expected 5)"));
+
+        // Test case 4: Two identical balloons
+        int[] test4 = {3, 3};
+        int result4 = maxCoins(test4);
+        System.out.println("Test 4: " + Arrays.toString(test4) + " → " + result4 +
+                (result4 == 12 ? " ✓" : " ✗ (expected 12)"));
+    }
 }
