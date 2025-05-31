@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._854_game_theory_problems; /**
  * STONE GAME - DYNAMIC PROGRAMMING STATE DEFINITION
  * <p>
  * DP State Design Philosophy:
@@ -36,7 +32,54 @@ import java.util.*;
  * - dp[1][3].sec = 5 (facing [8,3,5], second player's best is 5)
  */
 
+import java.util.*;
+
 public class _854_b_DPStateDefinition {
+
+    public static void main(String[] args) {
+        _854_b_DPStateDefinition dpState = new _854_b_DPStateDefinition();
+
+        // Demonstrate DP array structure
+        dpState.demonstrateDPArrayStructure();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        // Explain the first/second player concept
+        dpState.explainFirstSecondConcept();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        // Show base cases
+        dpState.demonstrateBaseCases();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        // Visualize dependencies
+        dpState.visualizeDependencyStructure();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        // Demonstrate final answer
+        dpState.demonstrateFinalAnswer();
+
+        System.out.println("=".repeat(60));
+        System.out.println();
+
+        System.out.println("=== Key Insights About DP State Design ===");
+        System.out.println("1. Use pairs to track both players' optimal scores");
+        System.out.println("2. 'First' and 'second' are relative to each subgame");
+        System.out.println("3. Role-swapping enables reuse of computed results");
+        System.out.println("4. Dependencies determine computation order");
+        System.out.println("5. Base cases handle single-pile scenarios");
+
+        System.out.println();
+        System.out.println("Next: We'll derive the state transition equations...");
+    }
+
     /**
      * Demonstrates the DP array structure and meaning
      */
@@ -191,6 +234,32 @@ public class _854_b_DPStateDefinition {
                 }
             }
         }
+    }
+
+    /**
+     * Demonstrates the final answer extraction
+     */
+    public void demonstrateFinalAnswer() {
+        System.out.println("=== Final Answer Extraction ===");
+        System.out.println();
+
+        System.out.println("Goal: Find score difference between original first and second player");
+        System.out.println();
+        System.out.println("For the entire array piles[0...n-1]:");
+        System.out.println("- dp[0][n-1].first = best score for original first player");
+        System.out.println("- dp[0][n-1].second = best score for original second player");
+        System.out.println("- Answer = dp[0][n-1].first - dp[0][n-1].second");
+        System.out.println();
+
+        System.out.println("Interpretation:");
+        System.out.println("- Positive result: First player wins");
+        System.out.println("- Negative result: Second player wins");
+        System.out.println("- Zero result: Tie game");
+        System.out.println();
+
+        System.out.println("For LeetCode 486 (Predict the Winner):");
+        System.out.println("- Return dp[0][n-1].first >= dp[0][n-1].second");
+        System.out.println("- Or equivalently: dp[0][n-1].first - dp[0][n-1].second >= 0");
     }
 
     /**
