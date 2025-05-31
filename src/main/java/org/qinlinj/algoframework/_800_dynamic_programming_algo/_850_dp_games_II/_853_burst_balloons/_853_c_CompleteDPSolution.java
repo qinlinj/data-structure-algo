@@ -121,4 +121,27 @@ public class _853_c_CompleteDPSolution {
 
         return dp[0][n + 1];
     }
+
+    /**
+     * Print DP table in a readable format
+     */
+    private void printDPTable(int[][] dp, int size) {
+        System.out.print("    ");
+        for (int j = 0; j < size; j++) {
+            System.out.printf("%4d", j);
+        }
+        System.out.println();
+
+        for (int i = 0; i < size; i++) {
+            System.out.printf("%2d: ", i);
+            for (int j = 0; j < size; j++) {
+                if (j > i + 1) {
+                    System.out.printf("%4d", dp[i][j]);
+                } else {
+                    System.out.print("   -");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
