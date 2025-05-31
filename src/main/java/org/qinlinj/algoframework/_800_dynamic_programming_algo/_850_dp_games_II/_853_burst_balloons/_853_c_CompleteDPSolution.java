@@ -175,4 +175,24 @@ public class _853_c_CompleteDPSolution {
         System.out.println("Test 4: " + Arrays.toString(test4) + " → " + result4 +
                 (result4 == 12 ? " ✓" : " ✗ (expected 12)"));
     }
+
+    /**
+     * Demonstrate step-by-step execution for the main example
+     */
+    public void demonstrateMainExample() {
+        System.out.println("=== Main Example Step-by-Step ===");
+        System.out.println("Problem: Find optimal order to burst [3,1,5,8] for maximum coins");
+        System.out.println();
+
+        System.out.println("Optimal order found by DP:");
+        System.out.println("[3,1,5,8] → burst 1 → [3,5,8] (coins: 3*1*5 = 15)");
+        System.out.println("[3,5,8] → burst 5 → [3,8] (coins: 3*5*8 = 120)");
+        System.out.println("[3,8] → burst 3 → [8] (coins: 1*3*8 = 24)");
+        System.out.println("[8] → burst 8 → [] (coins: 1*8*1 = 8)");
+        System.out.println("Total: 15 + 120 + 24 + 8 = 167");
+
+        System.out.println();
+        int result = maxCoinsWithTrace(new int[]{3, 1, 5, 8});
+        System.out.println("\nFinal result: " + result);
+    }
 }
