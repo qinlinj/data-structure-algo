@@ -1,9 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons;
-
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._853_burst_balloons; /**
  * BURST BALLOONS PROBLEM - DYNAMIC PROGRAMMING THEORY
  * <p>
  * Problem Analysis:
@@ -37,7 +32,10 @@ import java.util.*;
  * - Bursting k gives exactly points[i]*points[k]*points[j]
  */
 
+import java.util.*;
+
 public class _853_b_DynamicProgrammingTheory {
+
     public static void main(String[] args) {
         _853_b_DynamicProgrammingTheory theory = new _853_b_DynamicProgrammingTheory();
 
