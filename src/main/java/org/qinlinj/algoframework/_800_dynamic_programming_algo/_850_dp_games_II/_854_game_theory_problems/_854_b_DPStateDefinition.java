@@ -154,6 +154,44 @@ public class _854_b_DPStateDefinition {
         demonstrateComputationOrder();
     }
 
+    /**
+     * Shows the correct order for computing DP values
+     */
+    private void demonstrateComputationOrder() {
+        System.out.println();
+        System.out.println("=== Computation Order ===");
+        System.out.println();
+
+        int n = 4; // For a 4-element array
+        System.out.println("For a 4x4 DP table, computation order should be:");
+        System.out.println();
+
+        // Show the order by range length
+        for (int len = 1; len <= n; len++) {
+            System.out.println("Range length " + len + ":");
+            for (int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+                if (len == 1) {
+                    System.out.println("  dp[" + i + "][" + j + "] = base case");
+                } else {
+                    System.out.println("  dp[" + i + "][" + j + "] depends on dp[" + (i + 1) + "][" + j +
+                            "] and dp[" + i + "][" + (j - 1) + "]");
+                }
+            }
+        }
+
+        System.out.println();
+        System.out.println("Alternative traversal (bottom-up, left-right):");
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i; j < n; j++) {
+                if (i == j) {
+                    System.out.println("dp[" + i + "][" + j + "] = base case");
+                } else {
+                    System.out.println("dp[" + i + "][" + j + "] = computed from previous values");
+                }
+            }
+        }
+    }
 
     /**
      * Helper class to represent the pair of scores for both players
