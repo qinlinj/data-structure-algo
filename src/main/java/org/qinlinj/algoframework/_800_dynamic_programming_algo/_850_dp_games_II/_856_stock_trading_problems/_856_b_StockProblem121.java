@@ -58,4 +58,23 @@ public class _856_b_StockProblem121 {
         return dp[n - 1][0]; // Must not be holding stock at the end for max profit
     }
 
+    /**
+     * Approach 2: Space-optimized O(1) solution
+     */
+    public int maxProfitOptimized(int[] prices) {
+        int n = prices.length;
+        if (n <= 1) return 0;
+
+        // Use variables instead of array since we only need previous state
+        int dp_i_0 = 0;              // Max profit not holding stock
+        int dp_i_1 = Integer.MIN_VALUE; // Max profit holding stock
+
+        for (int i = 0; i < n; i++) {
+            // Update in correct order to avoid using updated values
+            dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+            dp_i_1 = Math.max(dp_i_1, -prices[i]);
+        }
+
+        return dp_i_0;
+    }
 }
