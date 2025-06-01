@@ -42,4 +42,25 @@ public class _855_b_HouseRobberCircular {
 
         return Math.max(case1, case2);
     }
+
+    /**
+     * Helper function to rob houses in a given range [start, end] (inclusive)
+     * This is the same as House Robber I problem for the given range
+     */
+    private int robRange(int[] nums, int start, int end) {
+        int dp_i_1 = 0; // Previous house (not robbed in optimal solution)
+        int dp_i_2 = 0; // Two houses ago
+        int dp_i = 0;   // Current optimal solution
+
+        for (int i = end; i >= start; i--) {
+            dp_i = Math.max(
+                    dp_i_1,                    // Don't rob current house
+                    nums[i] + dp_i_2          // Rob current house + skip next
+            );
+            dp_i_2 = dp_i_1;
+            dp_i_1 = dp_i;
+        }
+
+        return dp_i;
+    }
 }
