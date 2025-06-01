@@ -51,6 +51,22 @@ public class _855_c_HouseRobberTree {
     // Approach 1: Top-down with memoization
     private Map<TreeNode, Integer> memo = new HashMap<>();
 
+    // Helper method to build test trees
+    public static TreeNode buildTree1() {
+        // Tree:     3
+        //          / \
+        //         2   3
+        //          \   \
+        //           3   1
+        // Expected: 7 (rob nodes with values 3, 3, 1)
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.right = new TreeNode(3);
+        root.right.right = new TreeNode(1);
+        return root;
+    }
+
     public int robWithMemo(TreeNode root) {
         if (root == null) return 0;
 
@@ -74,5 +90,34 @@ public class _855_c_HouseRobberTree {
         int result = Math.max(robCurrent, skipCurrent);
         memo.put(root, result);
         return result;
+    }
+
+    // Approach 2: Optimal bottom-up approach (recommended)
+    public int rob(TreeNode root) {
+        int[] result = dpOptimal(root);
+        return Math.max(result[0], result[1]);
+    }
+
+    /**
+     * Returns array of size 2:
+     * result[0] = maximum money if we DON'T rob current node
+     * result[1] = maximum money if we DO rob current node
+     */
+    private int[] dpOptimal(TreeNode root) {
+        if (root == null) {
+            return new int[]{0, 0};
+        }
+
+        // Get optimal results from left and right subtrees
+        int[] left = dpOptimal(root.left);
+        int[] right = dpOptimal(root.right);
+
+        // If we rob current node, we cannot rob children
+        int robCurrent = root.val + left[0] + right[0];
+
+        // If we don't rob current node, we take optimal from children
+        int skipCurrent = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+
+        return new int[]{skipCurrent, robCurrent};
     }
 }
