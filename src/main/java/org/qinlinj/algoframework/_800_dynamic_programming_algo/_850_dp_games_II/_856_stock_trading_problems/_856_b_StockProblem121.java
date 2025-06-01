@@ -77,4 +77,26 @@ public class _856_b_StockProblem121 {
 
         return dp_i_0;
     }
+
+    /**
+     * Approach 3: Alternative intuitive solution
+     * Track minimum price seen so far and maximum profit
+     */
+    public int maxProfitIntuitive(int[] prices) {
+        if (prices.length <= 1) return 0;
+
+        int minPrice = prices[0];
+        int maxProfit = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            // Update minimum price seen so far
+            minPrice = Math.min(minPrice, prices[i]);
+
+            // Calculate profit if we sell today
+            maxProfit = Math.max(maxProfit, prices[i] - minPrice);
+        }
+
+        return maxProfit;
+    }
+
 }
