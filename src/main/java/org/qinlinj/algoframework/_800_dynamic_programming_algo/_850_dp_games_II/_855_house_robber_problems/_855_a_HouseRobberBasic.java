@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._855_house_robber_problems;
 
+import java.util.*;
+
 /**
  * HOUSE ROBBER I - BASIC DYNAMIC PROGRAMMING SOLUTION
  * <p>
@@ -23,4 +25,33 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _855_a_HouseRobberBasic {
+    // Approach 1: Top-down recursive with memoization
+    private int[] memo;
+
+    public int robWithMemo(int[] nums) {
+        memo = new int[nums.length];
+        Arrays.fill(memo, -1);
+        return dpMemo(nums, 0);
+    }
+
+    private int dpMemo(int[] nums, int start) {
+        if (start >= nums.length) {
+            return 0;
+        }
+
+        // Check memo to avoid recalculation
+        if (memo[start] != -1) {
+            return memo[start];
+        }
+
+        int result = Math.max(
+                // Don't rob current house, move to next
+                dpMemo(nums, start + 1),
+                // Rob current house, skip next house
+                nums[start] + dpMemo(nums, start + 2)
+        );
+
+        memo[start] = result;
+        return result;
+    }
 }
