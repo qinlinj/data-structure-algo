@@ -63,4 +63,18 @@ public class _855_b_HouseRobberCircular {
 
         return dp_i;
     }
+
+    /**
+     * Alternative implementation using forward iteration
+     */
+    public int robAlternative(int[] nums) {
+        int n = nums.length;
+        if (n == 1) return nums[0];
+        if (n == 2) return Math.max(nums[0], nums[1]);
+
+        return Math.max(
+                robRangeForward(nums, 0, n - 2),  // Include first, exclude last
+                robRangeForward(nums, 1, n - 1)   // Exclude first, include last
+        );
+    }
 }
