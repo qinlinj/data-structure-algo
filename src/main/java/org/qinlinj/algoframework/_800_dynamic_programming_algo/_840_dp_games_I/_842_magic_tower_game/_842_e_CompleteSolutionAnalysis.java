@@ -53,6 +53,7 @@ public class _842_e_CompleteSolutionAnalysis {
 
         /**
          * Calculates minimum initial health needed for knight to rescue princess
+         *
          * @param dungeon m x n grid representing the dungeon
          * @return minimum initial health points required
          */
@@ -73,9 +74,10 @@ public class _842_e_CompleteSolutionAnalysis {
 
         /**
          * DP helper function with memoization
+         *
          * @param dungeon the grid
-         * @param i current row index
-         * @param j current column index
+         * @param i       current row index
+         * @param j       current column index
          * @return minimum health needed at position (i,j) to reach destination
          */
         private int dp(int[][] dungeon, int i, int j) {

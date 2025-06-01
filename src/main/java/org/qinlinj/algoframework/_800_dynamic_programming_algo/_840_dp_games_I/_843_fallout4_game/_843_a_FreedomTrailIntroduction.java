@@ -33,11 +33,11 @@ public class _843_a_FreedomTrailIntroduction {
      * Given a circular ring of characters and a key string to spell,
      * find the minimum number of operations (rotations + button presses)
      * needed to input the entire key string.
-     *
+     * <p>
      * Example:
      * ring = "godding", key = "gd"
      * - Start at 'g' (position 0), press button (1 operation)
-     * - Rotate counterclockwise 2 steps to 'd' (2 operations)  
+     * - Rotate counterclockwise 2 steps to 'd' (2 operations)
      * - Press button (1 operation)
      * Total: 4 operations
      */

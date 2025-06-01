@@ -172,6 +172,7 @@ public class _843_b_PianoFingeringAnalogy {
 
         /**
          * Find optimal fingering for a piece
+         *
          * @param state current piano state
          * @param piece the piece being played
          * @return minimum awkwardness cost

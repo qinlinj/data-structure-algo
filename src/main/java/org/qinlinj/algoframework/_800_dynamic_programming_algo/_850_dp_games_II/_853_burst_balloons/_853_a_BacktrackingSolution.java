@@ -73,7 +73,8 @@ public class _853_a_BacktrackingSolution {
 
     /**
      * Backtracking helper method
-     * @param balloons Current list of remaining balloons
+     *
+     * @param balloons     Current list of remaining balloons
      * @param currentScore Current accumulated score
      */
     private void backtrack(List<Integer> balloons, int currentScore) {

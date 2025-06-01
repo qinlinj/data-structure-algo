@@ -80,6 +80,7 @@ public class _854_d_CompleteImplementation {
 
     /**
      * Main solution: Returns score difference between first and second player
+     *
      * @param piles Array representing stone piles
      * @return Positive if first player wins, negative if second player wins, 0 for tie
      */

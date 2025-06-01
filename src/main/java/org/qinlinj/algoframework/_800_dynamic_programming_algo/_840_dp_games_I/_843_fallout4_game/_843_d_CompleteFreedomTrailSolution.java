@@ -60,8 +60,9 @@ public class _843_d_CompleteFreedomTrailSolution {
 
         /**
          * Main entry point for solving Freedom Trail problem
+         *
          * @param ring circular ring of characters
-         * @param key target string to spell
+         * @param key  target string to spell
          * @return minimum operations needed
          */
         public int findRotateSteps(String ring, String key) {
@@ -94,10 +95,11 @@ public class _843_d_CompleteFreedomTrailSolution {
 
         /**
          * DP function with memoization
+         *
          * @param ring the circular ring string
-         * @param i current position of pointer on ring
-         * @param key the target string to spell
-         * @param j current index in key string
+         * @param i    current position of pointer on ring
+         * @param key  the target string to spell
+         * @param j    current index in key string
          * @return minimum operations to spell key[j..] starting from ring[i]
          */
         private int dp(String ring, int i, String key, int j) {
@@ -136,8 +138,9 @@ public class _843_d_CompleteFreedomTrailSolution {
 
         /**
          * Calculate minimum rotation steps between two positions on circular ring
-         * @param from starting position
-         * @param to target position
+         *
+         * @param from     starting position
+         * @param to       target position
          * @param ringSize size of the ring
          * @return minimum rotation steps (clockwise or counterclockwise)
          */
