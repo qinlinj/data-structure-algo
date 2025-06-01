@@ -25,4 +25,21 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _855_b_HouseRobberCircular {
+    public int rob(int[] nums) {
+        int n = nums.length;
+
+        // Edge case: only one house
+        if (n == 1) return nums[0];
+
+        // Edge case: only two houses
+        if (n == 2) return Math.max(nums[0], nums[1]);
+
+        // Case 1: Rob houses from 0 to n-2 (first house included, last excluded)
+        int case1 = robRange(nums, 0, n - 2);
+
+        // Case 2: Rob houses from 1 to n-1 (first house excluded, last included)
+        int case2 = robRange(nums, 1, n - 1);
+
+        return Math.max(case1, case2);
+    }
 }
