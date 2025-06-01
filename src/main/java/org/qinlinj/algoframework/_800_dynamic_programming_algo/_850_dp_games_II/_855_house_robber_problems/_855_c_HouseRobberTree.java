@@ -67,6 +67,64 @@ public class _855_c_HouseRobberTree {
         return root;
     }
 
+    public static TreeNode buildTree2() {
+        // Tree:     3
+        //          / \
+        //         4   5
+        //        / \   \
+        //       1   3   1
+        // Expected: 9 (rob nodes with values 4, 5)
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(4);
+        root.right = new TreeNode(5);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right.right = new TreeNode(1);
+        return root;
+    }
+
+    public static TreeNode buildTree3() {
+        // Tree:     5
+        //          / \
+        //         1   2
+        //            / \
+        //           3   4
+        // Expected: 9 (rob nodes 5, 3, 4)
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(2);
+        root.right.left = new TreeNode(3);
+        root.right.right = new TreeNode(4);
+        return root;
+    }
+
+    // Helper method for tree visualization (level-order)
+    public static void printTree(TreeNode root) {
+        if (root == null) {
+            System.out.println("Empty tree");
+            return;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode node = queue.poll();
+                if (node != null) {
+                    System.out.print(node.val + " ");
+                    queue.offer(node.left);
+                    queue.offer(node.right);
+                } else {
+                    System.out.print("null ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
     public int robWithMemo(TreeNode root) {
         if (root == null) return 0;
 
