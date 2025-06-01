@@ -27,4 +27,35 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  */
 
 public class _856_b_StockProblem121 {
+    /**
+     * Approach 1: Basic DP array implementation
+     */
+    public int maxProfitDP(int[] prices) {
+        int n = prices.length;
+        if (n <= 1) return 0;
+
+        // dp[i][0] = max profit on day i without holding stock
+        // dp[i][1] = max profit on day i while holding stock
+        int[][] dp = new int[n][2];
+
+        for (int i = 0; i < n; i++) {
+            if (i - 1 == -1) {
+                // Base case: first day
+                dp[i][0] = 0;           // Don't buy = 0 profit
+                dp[i][1] = -prices[i];  // Buy stock = -price
+                continue;
+            }
+
+            // Not holding stock today
+            dp[i][0] = Math.max(dp[i - 1][0],           // Didn't hold yesterday, rest
+                    dp[i - 1][1] + prices[i]); // Held yesterday, sell today
+
+            // Holding stock today
+            dp[i][1] = Math.max(dp[i - 1][1],    // Held yesterday, rest
+                    -prices[i]);    // Buy today (since k=1, previous profit = 0)
+        }
+
+        return dp[n - 1][0]; // Must not be holding stock at the end for max profit
+    }
+
 }
