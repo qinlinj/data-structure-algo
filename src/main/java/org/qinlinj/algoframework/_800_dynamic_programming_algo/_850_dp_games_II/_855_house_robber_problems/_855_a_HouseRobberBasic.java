@@ -1,8 +1,4 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._855_house_robber_problems;
-
-import java.util.*;
-
-/**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._855_house_robber_problems; /**
  * HOUSE ROBBER I - BASIC DYNAMIC PROGRAMMING SOLUTION
  * <p>
  * PROBLEM SUMMARY:
@@ -24,9 +20,46 @@ import java.util.*;
  * SPACE COMPLEXITY: O(n) for memoization, O(1) for optimized version
  */
 
+import java.util.*;
+
 public class _855_a_HouseRobberBasic {
+
     // Approach 1: Top-down recursive with memoization
     private int[] memo;
+
+    public static void main(String[] args) {
+        _855_a_HouseRobberBasic solution = new _855_a_HouseRobberBasic();
+
+        // Test case 1: [2,1,7,9,3,1] -> Expected: 12 (rob houses 0,3,5: 2+9+1=12)
+        int[] test1 = {2, 1, 7, 9, 3, 1};
+        System.out.println("Test Case 1: " + Arrays.toString(test1));
+        System.out.println("Memoization result: " + solution.robWithMemo(test1));
+        System.out.println("Bottom-up result: " + solution.robBottomUp(test1));
+        System.out.println("Optimized result: " + solution.robOptimized(test1));
+        System.out.println("Expected: 12\n");
+
+        // Test case 2: [5,1,3,9] -> Expected: 14 (rob houses 0,3: 5+9=14)
+        int[] test2 = {5, 1, 3, 9};
+        System.out.println("Test Case 2: " + Arrays.toString(test2));
+        System.out.println("Memoization result: " + solution.robWithMemo(test2));
+        System.out.println("Bottom-up result: " + solution.robBottomUp(test2));
+        System.out.println("Optimized result: " + solution.robOptimized(test2));
+        System.out.println("Expected: 14\n");
+
+        // Test case 3: [1,2,3,1] -> Expected: 4 (rob houses 0,2: 1+3=4)
+        int[] test3 = {1, 2, 3, 1};
+        System.out.println("Test Case 3: " + Arrays.toString(test3));
+        System.out.println("Memoization result: " + solution.robWithMemo(test3));
+        System.out.println("Bottom-up result: " + solution.robBottomUp(test3));
+        System.out.println("Optimized result: " + solution.robOptimized(test3));
+        System.out.println("Expected: 4\n");
+
+        // Edge case: Single house
+        int[] test4 = {5};
+        System.out.println("Edge Case - Single house: " + Arrays.toString(test4));
+        System.out.println("Result: " + solution.robOptimized(test4));
+        System.out.println("Expected: 5");
+    }
 
     public int robWithMemo(int[] nums) {
         memo = new int[nums.length];
