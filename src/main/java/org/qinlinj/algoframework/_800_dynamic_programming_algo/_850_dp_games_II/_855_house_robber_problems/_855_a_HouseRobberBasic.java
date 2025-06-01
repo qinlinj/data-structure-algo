@@ -54,4 +54,21 @@ public class _855_a_HouseRobberBasic {
         memo[start] = result;
         return result;
     }
+
+    // Approach 2: Bottom-up iterative DP
+    public int robBottomUp(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+
+        // dp[i] represents max money that can be robbed from house i to end
+        int[] dp = new int[n + 2];
+
+        // Fill dp array from right to left
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i] = Math.max(dp[i + 1], nums[i] + dp[i + 2]);
+        }
+
+        return dp[0];
+    }
 }
