@@ -1,7 +1,5 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II._855_house_robber_problems;
 
-import java.util.*;
-
 /**
  * HOUSE ROBBER III - BINARY TREE DYNAMIC PROGRAMMING
  * <p>
@@ -27,6 +25,8 @@ import java.util.*;
  * SPACE COMPLEXITY: O(h) where h is height of tree (recursion stack)
  */
 
+import java.util.*;
+
 // Definition for a binary tree node
 class TreeNode {
     int val;
@@ -48,6 +48,7 @@ class TreeNode {
 }
 
 public class _855_c_HouseRobberTree {
+
     // Approach 1: Top-down with memoization
     private Map<TreeNode, Integer> memo = new HashMap<>();
 
@@ -123,6 +124,55 @@ public class _855_c_HouseRobberTree {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public static void main(String[] args) {
+        _855_c_HouseRobberTree solution = new _855_c_HouseRobberTree();
+
+        // Test Case 1
+        System.out.println("=== Test Case 1 ===");
+        TreeNode tree1 = buildTree1();
+        printTree(tree1);
+        System.out.println("Memoization result: " + solution.robWithMemo(tree1));
+        // Reset memo for fair comparison
+        solution.memo.clear();
+        System.out.println("Optimal result: " + solution.rob(tree1));
+        System.out.println("Expected: 7 (rob nodes: 3 + 3 + 1)\n");
+
+        // Test Case 2
+        System.out.println("=== Test Case 2 ===");
+        TreeNode tree2 = buildTree2();
+        printTree(tree2);
+        System.out.println("Memoization result: " + solution.robWithMemo(tree2));
+        solution.memo.clear();
+        System.out.println("Optimal result: " + solution.rob(tree2));
+        System.out.println("Expected: 9 (rob nodes: 4 + 5)\n");
+
+        // Test Case 3
+        System.out.println("=== Test Case 3 ===");
+        TreeNode tree3 = buildTree3();
+        printTree(tree3);
+        System.out.println("Memoization result: " + solution.robWithMemo(tree3));
+        solution.memo.clear();
+        System.out.println("Optimal result: " + solution.rob(tree3));
+        System.out.println("Expected: 9 (rob nodes: 5 + 3 + 4)\n");
+
+        // Edge Cases
+        System.out.println("=== Edge Cases ===");
+
+        // Single node
+        TreeNode singleNode = new TreeNode(5);
+        System.out.println("Single node (5): " + solution.rob(singleNode));
+
+        // Empty tree
+        System.out.println("Empty tree: " + solution.rob(null));
+
+        // Two level tree
+        TreeNode twoLevel = new TreeNode(1);
+        twoLevel.left = new TreeNode(2);
+        twoLevel.right = new TreeNode(3);
+        System.out.println("Two level tree [1,2,3]: " + solution.rob(twoLevel));
+        System.out.println("Expected: 5 (rob children 2 + 3)");
     }
 
     public int robWithMemo(TreeNode root) {
