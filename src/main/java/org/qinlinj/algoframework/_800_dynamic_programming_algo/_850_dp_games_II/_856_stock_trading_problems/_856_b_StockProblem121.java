@@ -26,7 +26,62 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._850_dp_games_II
  * SPACE COMPLEXITY: O(1) for optimized version, O(n) for DP array version
  */
 
+import java.util.*;
+
 public class _856_b_StockProblem121 {
+
+    public static void main(String[] args) {
+        _856_b_StockProblem121 solution = new _856_b_StockProblem121();
+
+        System.out.println("=== LEETCODE 121: BEST TIME TO BUY AND SELL STOCK ===\n");
+
+        // Test Case 1: [7,1,5,3,6,4] -> Expected: 5
+        int[] test1 = {7, 1, 5, 3, 6, 4};
+        System.out.println("Test Case 1: " + Arrays.toString(test1));
+        System.out.println("DP Array result: " + solution.maxProfitDP(test1));
+        System.out.println("Optimized result: " + solution.maxProfitOptimized(test1));
+        System.out.println("Intuitive result: " + solution.maxProfitIntuitive(test1));
+        System.out.println("Expected: 5 (buy at 1, sell at 6)");
+        solution.demonstrateStateTransitions(test1);
+
+        // Test Case 2: [7,6,4,3,1] -> Expected: 0
+        int[] test2 = {7, 6, 4, 3, 1};
+        System.out.println("Test Case 2: " + Arrays.toString(test2));
+        System.out.println("DP Array result: " + solution.maxProfitDP(test2));
+        System.out.println("Optimized result: " + solution.maxProfitOptimized(test2));
+        System.out.println("Intuitive result: " + solution.maxProfitIntuitive(test2));
+        System.out.println("Expected: 0 (prices only decrease)");
+        solution.demonstrateStateTransitions(test2);
+
+        // Test Case 3: [1,2,3,4,5] -> Expected: 4
+        int[] test3 = {1, 2, 3, 4, 5};
+        System.out.println("Test Case 3: " + Arrays.toString(test3));
+        System.out.println("DP Array result: " + solution.maxProfitDP(test3));
+        System.out.println("Optimized result: " + solution.maxProfitOptimized(test3));
+        System.out.println("Intuitive result: " + solution.maxProfitIntuitive(test3));
+        System.out.println("Expected: 4 (buy at 1, sell at 5)");
+        solution.demonstrateStateTransitions(test3);
+
+        // Edge Cases
+        System.out.println("=== EDGE CASES ===");
+
+        int[] empty = {};
+        System.out.println("Empty array: " + solution.maxProfitOptimized(empty));
+
+        int[] single = {5};
+        System.out.println("Single element [5]: " + solution.maxProfitOptimized(single));
+
+        int[] two = {1, 2};
+        System.out.println("Two elements [1,2]: " + solution.maxProfitOptimized(two));
+
+        System.out.println("\n=== KEY INSIGHTS ===");
+        System.out.println("1. This is the simplest case of the stock trading framework");
+        System.out.println("2. k=1 simplifies the transition equations significantly");
+        System.out.println("3. The 'holding' state can never have profit > 0 (since we can only buy once)");
+        System.out.println("4. Space optimization is possible due to Markov property");
+        System.out.println("5. Alternative solution: track min price and max profit simultaneously");
+    }
+
     /**
      * Approach 1: Basic DP array implementation
      */
@@ -99,4 +154,39 @@ public class _856_b_StockProblem121 {
         return maxProfit;
     }
 
+    /**
+     * Helper method to demonstrate the DP state transitions
+     */
+    public void demonstrateStateTransitions(int[] prices) {
+        int n = prices.length;
+        System.out.println("State Transition Demonstration:");
+        System.out.println("Day\tPrice\tNot Holding\tHolding\tAction");
+        System.out.println("---\t-----\t-----------\t-------\t------");
+
+        int dp_i_0 = 0;
+        int dp_i_1 = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            int old_dp_i_0 = dp_i_0;
+            int old_dp_i_1 = dp_i_1;
+
+            dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+            dp_i_1 = Math.max(dp_i_1, -prices[i]);
+
+            String action = "";
+            if (i == 0) {
+                action = dp_i_1 == -prices[i] ? "Buy" : "Rest";
+            } else {
+                if (dp_i_0 > old_dp_i_0) action += "Sell ";
+                if (dp_i_1 > old_dp_i_1) action += "Buy ";
+                if (action.isEmpty()) action = "Rest";
+            }
+
+            System.out.printf("%d\t%d\t%d\t\t%d\t%s%n",
+                    i, prices[i], dp_i_0,
+                    dp_i_1 == Integer.MIN_VALUE ? -999 : dp_i_1,
+                    action.trim());
+        }
+        System.out.println();
+    }
 }
