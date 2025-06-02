@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._860_dp_practice._862_knapsack_classic_practice;
+
+public class _862_d_KnapsackPatternSummary {
+}
