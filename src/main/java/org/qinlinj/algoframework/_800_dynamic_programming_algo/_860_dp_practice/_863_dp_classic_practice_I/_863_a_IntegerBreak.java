@@ -30,4 +30,28 @@ public class _863_a_IntegerBreak {
         memo = new int[n + 1];
         return dp(n);
     }
+
+    // Definition: dp(n) returns the maximum product when breaking n
+    private int dp(int n) {
+        // Base cases
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+
+        // Check memoization
+        if (memo[n] > 0) {
+            return memo[n];
+        }
+
+        // State transition equation
+        int res = Integer.MIN_VALUE;
+        for (int i = 1; i <= n; i++) {
+            // For each split i and (n-i), we choose:
+            // 1. i * (n-i): don't break further
+            // 2. i * dp(n-i): break (n-i) further
+            res = Math.max(res, i * Math.max(dp(n - i), n - i));
+        }
+
+        memo[n] = res;
+        return res;
+    }
 }
