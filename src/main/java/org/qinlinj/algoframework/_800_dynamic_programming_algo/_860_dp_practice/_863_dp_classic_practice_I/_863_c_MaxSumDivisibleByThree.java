@@ -58,4 +58,34 @@ public class _863_c_MaxSumDivisibleByThree {
 
         return dp[nums.length][0]; // Return maximum sum with remainder 0
     }
+
+    // Space-optimized version using only O(1) space
+    public int maxSumDivThreeOptimized(int[] nums) {
+        int[] dp = new int[3];
+        dp[0] = 0;
+        dp[1] = Integer.MIN_VALUE;
+        dp[2] = Integer.MIN_VALUE;
+
+        for (int num : nums) {
+            int[] temp = dp.clone();
+            int remainder = num % 3;
+
+            if (remainder == 0) {
+                dp[0] = temp[0] + num;
+                dp[1] = temp[1] + num;
+                dp[2] = temp[2] + num;
+            } else if (remainder == 1) {
+                dp[0] = Math.max(temp[2] + num, temp[0]);
+                dp[1] = Math.max(temp[0] + num, temp[1]);
+                dp[2] = Math.max(temp[1] + num, temp[2]);
+            } else {
+                dp[0] = Math.max(temp[1] + num, temp[0]);
+                dp[1] = Math.max(temp[2] + num, temp[1]);
+                dp[2] = Math.max(temp[0] + num, temp[2]);
+            }
+        }
+
+        return dp[0];
+    }
+
 }
