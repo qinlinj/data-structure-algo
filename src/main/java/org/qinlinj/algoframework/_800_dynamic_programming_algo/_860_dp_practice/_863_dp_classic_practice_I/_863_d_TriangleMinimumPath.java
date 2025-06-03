@@ -67,4 +67,44 @@ public class _863_d_TriangleMinimumPath {
 
         return result;
     }
+
+    // Space-optimized version using O(n) space
+    public int minimumTotalOptimized(List<List<Integer>> triangle) {
+        int n = triangle.size();
+
+        // Use only one array to store the minimum sums
+        int[] dp = new int[n];
+
+        // Initialize with the first row
+        dp[0] = triangle.get(0).get(0);
+
+        // Process each row
+        for (int i = 1; i < n; i++) {
+            List<Integer> row = triangle.get(i);
+
+            // Process from right to left to avoid overwriting needed values
+            for (int j = i; j >= 0; j--) {
+                int current = row.get(j);
+
+                if (j == i) {
+                    // Rightmost position: can only come from dp[j-1]
+                    dp[j] = dp[j-1] + current;
+                } else if (j == 0) {
+                    // Leftmost position: can only come from dp[j]
+                    dp[j] = dp[j] + current;
+                } else {
+                    // Middle positions: can come from dp[j] or dp[j-1]
+                    dp[j] = Math.min(dp[j], dp[j-1]) + current;
+                }
+            }
+        }
+
+        // Find minimum in the last processed values
+        int result = Integer.MAX_VALUE;
+        for (int j = 0; j < n; j++) {
+            result = Math.min(result, dp[j]);
+        }
+
+        return result;
+    }
 }
