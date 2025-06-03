@@ -1,5 +1,61 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._860_dp_practice._863_dp_classic_practice_I;
 
+/**
+ * DYNAMIC PROGRAMMING CLASSIC PROBLEMS SUMMARY
+ * <p>
+ * This collection demonstrates key Dynamic Programming concepts and patterns:
+ * <p>
+ * 1. INTEGER BREAK (LeetCode 343)
+ * - Pattern: Optimization DP with choice enumeration
+ * - Key: For each split, decide whether to break further or not
+ * - Technique: Memoization to handle overlapping subproblems
+ * - Time: O(n²), Space: O(n)
+ * <p>
+ * 2. UNIQUE PATHS WITH OBSTACLES (LeetCode 63)
+ * - Pattern: Path counting DP with constraints
+ * - Key: Bottom-up vs top-down approaches, space optimization
+ * - Technique: 2D→1D DP optimization using rolling arrays
+ * - Time: O(m×n), Space: O(n) after optimization
+ * <p>
+ * 3. MAXIMUM SUM DIVISIBLE BY THREE (LeetCode 1262)
+ * - Pattern: State-based DP with modular arithmetic
+ * - Key: Track maximum sums for each remainder (0,1,2)
+ * - Technique: State transition based on current number's remainder
+ * - Time: O(n), Space: O(1) after optimization
+ * <p>
+ * 4. TRIANGLE MINIMUM PATH SUM (LeetCode 120)
+ * - Pattern: Path optimization DP with structural constraints
+ * - Key: Adjacent movement constraint in triangle structure
+ * - Technique: Boundary handling for leftmost/rightmost positions
+ * - Time: O(n²), Space: O(n) with space optimization
+ * <p>
+ * 5. LARGEST DIVISIBLE SUBSET (LeetCode 368)
+ * - Pattern: Longest Increasing Subsequence (LIS) variant
+ * - Key: Sorting + divisibility transitivity property
+ * - Technique: Transform subset problem to sequence problem
+ * - Time: O(n²), Space: O(n²) for full reconstruction
+ * <p>
+ * 6. LONGEST COMMON SUBARRAY (LeetCode 718)
+ * - Pattern: 2D DP for string/array matching problems
+ * - Key: Contiguous subarray vs subsequence distinction
+ * - Technique: Common prefix/suffix analysis with space optimization
+ * - Time: O(m×n), Space: O(min(m,n)) after optimization
+ * <p>
+ * COMMON DP OPTIMIZATION TECHNIQUES:
+ * - Memoization: Cache results to avoid recomputation
+ * - Bottom-up: Iterative approach, often more space-efficient
+ * - Space optimization: Rolling arrays, 2D→1D reduction
+ * - State compression: Reduce state dimensions when possible
+ * <p>
+ * PROBLEM-SOLVING FRAMEWORK:
+ * 1. Identify overlapping subproblems
+ * 2. Define state and state transitions clearly
+ * 3. Determine base cases
+ * 4. Choose between top-down (memoization) vs bottom-up (tabulation)
+ * 5. Optimize space complexity if needed
+ * 6. Handle edge cases and constraints
+ */
+
 public class _863_g_DynamicProgrammingSummary {
     public static void main(String[] args) {
         System.out.println("=== DYNAMIC PROGRAMMING CLASSIC PROBLEMS DEMONSTRATION ===\n");
