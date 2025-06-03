@@ -67,6 +67,30 @@ public class _863_b_UniquePathsWithObstacles {
 
         return dp[m][n];
     }
+
+    // Approach 3: Space-optimized 1D DP
+    public int uniquePathsWithObstacles1D(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+
+        // Use 1D array to save space
+        int[] dp = new int[n + 1];
+        dp[1] = obstacleGrid[0][0] == 1 ? 0 : 1;
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i == 1 && j == 1) continue; // Skip base case
+
+                if (obstacleGrid[i - 1][j - 1] == 1) {
+                    dp[j] = 0; // Obstacle
+                } else {
+                    dp[j] = dp[j] + dp[j - 1]; // dp[j] (from above) + dp[j-1] (from left)
+                }
+            }
+        }
+
+        return dp[n];
+    }
 }
 
 
