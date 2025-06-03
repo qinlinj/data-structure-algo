@@ -73,4 +73,45 @@ public class _863_e_LargestDivisibleSubset {
         return result;
     }
 
+    // Space-optimized version that only tracks lengths and reconstructs the subset
+    public List<Integer> largestDivisibleSubsetOptimized(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+
+        // dp[i] = length of longest divisible subset ending at i
+        int[] dp = new int[n];
+        // parent[i] = previous index in the optimal subset ending at i
+        int[] parent = new int[n];
+
+        Arrays.fill(dp, 1);
+        Arrays.fill(parent, -1);
+
+        int maxLen = 1;
+        int maxIndex = 0;
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] % nums[j] == 0 && dp[j] + 1 > dp[i]) {
+                    dp[i] = dp[j] + 1;
+                    parent[i] = j;
+                }
+            }
+
+            if (dp[i] > maxLen) {
+                maxLen = dp[i];
+                maxIndex = i;
+            }
+        }
+
+        // Reconstruct the subset by backtracking
+        List<Integer> result = new ArrayList<>();
+        int current = maxIndex;
+        while (current != -1) {
+            result.add(nums[current]);
+            current = parent[current];
+        }
+
+        Collections.reverse(result);
+        return result;
+    }
 }
