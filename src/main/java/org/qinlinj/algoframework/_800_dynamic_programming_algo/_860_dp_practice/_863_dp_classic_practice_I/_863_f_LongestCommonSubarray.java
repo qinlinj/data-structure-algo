@@ -63,4 +63,27 @@ public class _863_f_LongestCommonSubarray {
 
         return maxLength;
     }
+
+    // Approach 3: Alternative DP definition (ending at current position)
+    public int findLengthAlternative(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+
+        // dp[i][j] = length of common subarray ending at nums1[i-1] and nums2[j-1]
+        int[][] dp = new int[m + 1][n + 1];
+        int maxLength = 0;
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (nums1[i - 1] == nums2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    maxLength = Math.max(maxLength, dp[i][j]);
+                }
+                // No else clause needed as dp array is initialized to 0
+            }
+        }
+
+        return maxLength;
+    }
+
 }
