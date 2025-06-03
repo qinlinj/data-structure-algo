@@ -15,4 +15,32 @@ public class _863_b_UniquePathsWithObstacles {
         }
         return dp(obstacleGrid, m - 1, n - 1);
     }
+
+    // Definition: dp(grid, i, j) returns number of paths from (0,0) to (i,j)
+    private int dp(int[][] grid, int i, int j) {
+        int m = grid.length, n = grid[0].length;
+
+        // Base cases
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 1) {
+            return 0; // Out of bounds or obstacle
+        }
+        if (i == 0 && j == 0) {
+            return 1; // Starting point
+        }
+
+        // Check memoization
+        if (memo[i][j] != -1) {
+            return memo[i][j];
+        }
+
+        // State transition
+        int fromLeft = dp(grid, i, j - 1);
+        int fromUp = dp(grid, i - 1, j);
+        int result = fromLeft + fromUp;
+
+        memo[i][j] = result;
+        return result;
+    }
 }
+
+
