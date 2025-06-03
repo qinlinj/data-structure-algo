@@ -41,6 +41,32 @@ public class _863_b_UniquePathsWithObstacles {
         memo[i][j] = result;
         return result;
     }
+
+    // Approach 2: Bottom-up 2D DP
+    public int uniquePathsWithObstacles2D(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+
+        // dp[i][j] represents paths to reach obstacleGrid[i-1][j-1]
+        int[][] dp = new int[m + 1][n + 1];
+
+        // Base case: if starting point has no obstacle
+        dp[1][1] = obstacleGrid[0][0] == 1 ? 0 : 1;
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i == 1 && j == 1) continue; // Skip base case
+
+                if (obstacleGrid[i - 1][j - 1] == 1) {
+                    dp[i][j] = 0; // Obstacle, no path
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
 }
 
 
