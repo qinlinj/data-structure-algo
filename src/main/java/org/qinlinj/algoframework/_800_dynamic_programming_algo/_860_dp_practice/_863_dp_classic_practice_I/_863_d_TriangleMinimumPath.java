@@ -29,6 +29,84 @@ import java.util.*; /**
  */
 
 public class _863_d_TriangleMinimumPath {
+    public static void main(String[] args) {
+        _863_d_TriangleMinimumPath solution = new _863_d_TriangleMinimumPath();
+
+        System.out.println("=== Triangle Minimum Path Sum Tests ===");
+
+        // Test case 1
+        List<List<Integer>> triangle1 = Arrays.asList(
+                Arrays.asList(2),
+                Arrays.asList(3, 4),
+                Arrays.asList(6, 5, 7),
+                Arrays.asList(4, 1, 8, 3)
+        );
+
+        System.out.println("Test Case 1:");
+        System.out.println("Triangle:");
+        printTriangle(triangle1);
+
+        int result1 = solution.minimumTotal(triangle1);
+        int result1_opt = solution.minimumTotalOptimized(triangle1);
+
+        System.out.printf("Result (2D DP): %d\n", result1);
+        System.out.printf("Result (Optimized): %d\n", result1_opt);
+        System.out.println("Explanation: Path 2→3→5→1 gives sum = 11\n");
+
+        // Test case 2
+        List<List<Integer>> triangle2 = Arrays.asList(
+                Arrays.asList(-10)
+        );
+
+        System.out.println("Test Case 2:");
+        System.out.println("Triangle:");
+        printTriangle(triangle2);
+
+        int result2 = solution.minimumTotal(triangle2);
+        System.out.printf("Result: %d\n", result2);
+        System.out.println("Explanation: Only one element, so minimum sum is -10\n");
+
+        // Test case 3 - demonstrating DP transitions
+        List<List<Integer>> triangle3 = Arrays.asList(
+                Arrays.asList(1),
+                Arrays.asList(2, 3),
+                Arrays.asList(4, 5, 6)
+        );
+
+        System.out.println("Test Case 3 (DP Visualization):");
+        System.out.println("Triangle:");
+        printTriangle(triangle3);
+
+        int result3 = solution.minimumTotal(triangle3);
+        System.out.printf("Result: %d\n", result3);
+
+        System.out.println("\n=== DP State Transition Visualization ===");
+        System.out.println("DP Table progression:");
+        System.out.println("Row 0: [1]");
+        System.out.println("Row 1: [3, 4] (1+2=3, 1+3=4)");
+        System.out.println("Row 2: [7, 8, 10] (3+4=7, min(3,4)+5=8, 4+6=10)");
+        System.out.println("Minimum path sum: 7 (path: 1→2→4)");
+    }
+
+    private static void printTriangle(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        for (int i = 0; i < n; i++) {
+            // Add spaces for triangle shape
+            for (int k = 0; k < n - i - 1; k++) {
+                System.out.print(" ");
+            }
+
+            List<Integer> row = triangle.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                System.out.print(row.get(j));
+                if (j < row.size() - 1) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public int minimumTotal(List<List<Integer>> triangle) {
         int n = triangle.size();
 
