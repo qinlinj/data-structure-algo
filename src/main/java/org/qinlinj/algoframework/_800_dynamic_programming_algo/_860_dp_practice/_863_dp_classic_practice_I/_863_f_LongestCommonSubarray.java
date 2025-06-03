@@ -37,4 +37,30 @@ public class _863_f_LongestCommonSubarray {
         return maxLength;
     }
 
+    // Approach 2: Space-optimized using 1D array
+    public int findLengthOptimized(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+
+        // Make nums1 the shorter array for space optimization
+        if (m > n) {
+            return findLengthOptimized(nums2, nums1);
+        }
+
+        int[] dp = new int[m + 1];
+        int maxLength = 0;
+
+        for (int j = 0; j < n; j++) {
+            for (int i = m - 1; i >= 0; i--) {
+                if (nums1[i] == nums2[j]) {
+                    dp[i] = dp[i + 1] + 1;
+                } else {
+                    dp[i] = 0;
+                }
+                maxLength = Math.max(maxLength, dp[i]);
+            }
+        }
+
+        return maxLength;
+    }
 }
