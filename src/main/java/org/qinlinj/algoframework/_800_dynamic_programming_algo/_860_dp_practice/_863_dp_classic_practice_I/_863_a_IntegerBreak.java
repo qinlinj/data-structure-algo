@@ -24,4 +24,10 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._860_dp_practice
  */
 
 public class _863_a_IntegerBreak {
+    private int[] memo;
+
+    public int integerBreak(int n) {
+        memo = new int[n + 1];
+        return dp(n);
+    }
 }
