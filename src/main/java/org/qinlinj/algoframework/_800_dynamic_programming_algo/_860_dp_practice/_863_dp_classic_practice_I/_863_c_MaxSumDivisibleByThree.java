@@ -24,6 +24,63 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._860_dp_practice
  */
 
 public class _863_c_MaxSumDivisibleByThree {
+
+    public static void main(String[] args) {
+        _863_c_MaxSumDivisibleByThree solution = new _863_c_MaxSumDivisibleByThree();
+
+        System.out.println("=== Maximum Sum Divisible by Three Tests ===");
+
+        // Test case 1
+        int[] nums1 = {3, 6, 5, 1, 8};
+        int result1 = solution.maxSumDivThree(nums1);
+        int result1_opt = solution.maxSumDivThreeOptimized(nums1);
+
+        System.out.println("Test Case 1:");
+        System.out.print("Input: [");
+        for (int i = 0; i < nums1.length; i++) {
+            System.out.print(nums1[i]);
+            if (i < nums1.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+        System.out.printf("Output (2D DP): %d\n", result1);
+        System.out.printf("Output (Optimized): %d\n", result1_opt);
+        System.out.println("Explanation: Select 3, 6, 1, 8. Sum = 18, 18 % 3 = 0\n");
+
+        // Test case 2
+        int[] nums2 = {4};
+        int result2 = solution.maxSumDivThree(nums2);
+
+        System.out.println("Test Case 2:");
+        System.out.println("Input: [4]");
+        System.out.printf("Output: %d\n", result2);
+        System.out.println("Explanation: 4 cannot be divided by 3, so return 0\n");
+
+        // Test case 3
+        int[] nums3 = {1, 2, 3, 4, 4};
+        int result3 = solution.maxSumDivThree(nums3);
+
+        System.out.println("Test Case 3:");
+        System.out.print("Input: [");
+        for (int i = 0; i < nums3.length; i++) {
+            System.out.print(nums3[i]);
+            if (i < nums3.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+        System.out.printf("Output: %d\n", result3);
+        System.out.println("Explanation: Select 1, 3, 4, 4. Sum = 12, 12 % 3 = 0\n");
+
+        // Demonstrate the DP state transitions
+        System.out.println("=== DP State Transition Example ===");
+        System.out.println("For nums1 = [3, 6, 5, 1, 8]:");
+        System.out.println("Initial: dp[0] = 0, dp[1] = -∞, dp[2] = -∞");
+        System.out.println("After 3: dp[0] = 3, dp[1] = -∞, dp[2] = -∞");
+        System.out.println("After 6: dp[0] = 9, dp[1] = -∞, dp[2] = -∞");
+        System.out.println("After 5: dp[0] = 9, dp[1] = 14, dp[2] = 5");
+        System.out.println("After 1: dp[0] = 15, dp[1] = 10, dp[2] = 14");
+        System.out.println("After 8: dp[0] = 18, dp[1] = 18, dp[2] = 22");
+        System.out.println("Final answer: dp[0] = 18");
+    }
+
     public int maxSumDivThree(int[] nums) {
         // dp[i][j] = maximum sum using nums[0..i] with remainder j when divided by 3
         int[][] dp = new int[nums.length + 1][3];
@@ -87,5 +144,4 @@ public class _863_c_MaxSumDivisibleByThree {
 
         return dp[0];
     }
-
 }
