@@ -1,7 +1,5 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._860_dp_practice._863_dp_classic_practice_I;
 
-import java.util.*;
-
 /**
  * LeetCode 368. Largest Divisible Subset - Dynamic Programming Solution
  * <p>
@@ -25,8 +23,75 @@ import java.util.*;
  * Output: [1,2,4,8] (each element divides the next)
  */
 
+import java.util.*;
 
 public class _863_e_LargestDivisibleSubset {
+
+    public static void main(String[] args) {
+        _863_e_LargestDivisibleSubset solution = new _863_e_LargestDivisibleSubset();
+
+        System.out.println("=== Largest Divisible Subset Tests ===");
+
+        // Test case 1
+        int[] nums1 = {1, 2, 3};
+        List<Integer> result1 = solution.largestDivisibleSubset(nums1);
+        List<Integer> result1_opt = solution.largestDivisibleSubsetOptimized(nums1);
+
+        System.out.println("Test Case 1:");
+        System.out.print("Input: ");
+        printArray(nums1);
+        System.out.println("Output (Full DP): " + result1);
+        System.out.println("Output (Optimized): " + result1_opt);
+        System.out.println("Explanation: [1,2] or [1,3] both valid (size 2)\n");
+
+        // Test case 2
+        int[] nums2 = {1, 2, 4, 8};
+        List<Integer> result2 = solution.largestDivisibleSubset(nums2);
+        List<Integer> result2_opt = solution.largestDivisibleSubsetOptimized(nums2);
+
+        System.out.println("Test Case 2:");
+        System.out.print("Input: ");
+        printArray(nums2);
+        System.out.println("Output (Full DP): " + result2);
+        System.out.println("Output (Optimized): " + result2_opt);
+        System.out.println("Explanation: [1,2,4,8] - each element divides the next\n");
+
+        // Test case 3
+        int[] nums3 = {4, 8, 10, 240};
+        List<Integer> result3 = solution.largestDivisibleSubset(nums3);
+
+        System.out.println("Test Case 3:");
+        System.out.print("Input: ");
+        printArray(nums3);
+        System.out.println("Output: " + result3);
+        System.out.println("Explanation: [4,8,240] - 8%4=0, 240%8=0\n");
+
+        // Demonstrate the algorithm steps
+        System.out.println("=== Algorithm Analysis ===");
+        System.out.println("Why sorting is crucial:");
+        System.out.println("- If we have a valid subset [a,b,c] where a<b<c");
+        System.out.println("- And all pairs are divisible, then a|b, b|c, and a|c");
+        System.out.println("- After sorting, we only need to check if current element");
+        System.out.println("  is divisible by the largest element in previous subset");
+        System.out.println();
+
+        System.out.println("DP Transition for [1,2,4,8]:");
+        System.out.println("dp[0] = [1]           (base case)");
+        System.out.println("dp[1] = [1,2]         (2 % 1 = 0, extend dp[0])");
+        System.out.println("dp[2] = [1,2,4]       (4 % 2 = 0, extend dp[1])");
+        System.out.println("dp[3] = [1,2,4,8]     (8 % 4 = 0, extend dp[2])");
+        System.out.println("Result: [1,2,4,8] with length 4");
+    }
+
+    private static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) System.out.print(",");
+        }
+        System.out.println("]");
+    }
+
     public List<Integer> largestDivisibleSubset(int[] nums) {
         int n = nums.length;
 
