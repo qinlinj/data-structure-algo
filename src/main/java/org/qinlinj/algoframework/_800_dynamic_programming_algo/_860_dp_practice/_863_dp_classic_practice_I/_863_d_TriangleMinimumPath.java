@@ -1,7 +1,9 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._860_dp_practice._863_dp_classic_practice_I;
 
 // @formatter:off
-import java.util.*; /**
+import java.util.*; 
+
+/**
  * LeetCode 120. Triangle Minimum Path Sum - Dynamic Programming Solution
  *
  * PROBLEM SUMMARY:
