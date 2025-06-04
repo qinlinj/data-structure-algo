@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._872_gas_station_algorithm;
 
+import java.util.*;
+
 /**
  * GAS STATION PROBLEM - GREEDY ALGORITHM APPROACH
  * <p>
@@ -79,4 +81,60 @@ public class _872_c_GasStationGreedyApproach {
         return start == n ? 0 : start;
     }
 
+    /**
+     * Detailed greedy simulation with step-by-step explanation
+     */
+    public static int greedyWithExplanation(int[] gas, int[] cost) {
+        int n = gas.length;
+
+        System.out.println("=== Greedy Algorithm Step-by-Step ===");
+        System.out.println("Gas:  " + Arrays.toString(gas));
+        System.out.println("Cost: " + Arrays.toString(cost));
+        System.out.println();
+
+        // Check total feasibility
+        int totalGas = 0, totalCost = 0;
+        for (int i = 0; i < n; i++) {
+            totalGas += gas[i];
+            totalCost += cost[i];
+        }
+
+        System.out.println("Total gas: " + totalGas + ", Total cost: " + totalCost);
+        if (totalGas < totalCost) {
+            System.out.println("No solution possible - insufficient total gas");
+            return -1;
+        }
+        System.out.println("Solution exists - total gas >= total cost");
+        System.out.println();
+
+        // Greedy elimination process
+        int tank = 0;
+        int start = 0;
+
+        System.out.println("Greedy Elimination Process:");
+        System.out.println("Station | Gas | Cost | Tank | Start | Action");
+        System.out.println("--------|-----|------|------|-------|--------");
+
+        for (int i = 0; i < n; i++) {
+            int prevTank = tank;
+            tank += gas[i] - cost[i];
+
+            String action;
+            if (tank < 0) {
+                action = "ELIMINATE stations " + start + " to " + i + ", new start = " + (i + 1);
+                tank = 0;
+                start = i + 1;
+            } else {
+                action = "Continue";
+            }
+
+            System.out.printf("   %2d   | %2d  |  %2d  |  %2d  |   %2d  | %s%n",
+                    i, gas[i], cost[i], Math.max(tank, 0), start, action);
+        }
+
+        int result = start == n ? 0 : start;
+        System.out.println();
+        System.out.println("Final result: Station " + result);
+        return result;
+    }
 }
