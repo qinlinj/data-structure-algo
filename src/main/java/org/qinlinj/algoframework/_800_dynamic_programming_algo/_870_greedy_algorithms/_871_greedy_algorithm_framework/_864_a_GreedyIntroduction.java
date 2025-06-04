@@ -61,4 +61,13 @@ public class _864_a_GreedyIntroduction {
         }
         return result;
     }
+
+    /**
+     * Optimization 3: Direct calculation (Greedy Algorithm)
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
+     */
+    public static int findMaxGreedy(int n) {
+        return 100 * n;
+    }
 }
