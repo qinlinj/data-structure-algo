@@ -137,4 +137,60 @@ public class _872_c_GasStationGreedyApproach {
         System.out.println("Final result: Station " + result);
         return result;
     }
+
+    /**
+     * Demonstrate the greedy insight with concrete example
+     */
+    public static void demonstrateGreedyInsight(int[] gas, int[] cost) {
+        System.out.println("\n=== Demonstrating Greedy Insight ===");
+        System.out.println();
+
+        System.out.println("GREEDY INSIGHT:");
+        System.out.println("If we start from station i and fail to reach station j,");
+        System.out.println("then ANY station between i and j-1 will also fail to reach j.");
+        System.out.println();
+
+        // Find a failure point to demonstrate
+        int n = gas.length;
+        int tank = 0;
+        int failureStart = -1, failureEnd = -1;
+
+        for (int i = 0; i < n; i++) {
+            tank += gas[i] - cost[i];
+            if (tank < 0) {
+                failureStart = 0;
+                failureEnd = i;
+                break;
+            }
+        }
+
+        if (failureStart != -1) {
+            System.out.println("EXAMPLE from current data:");
+            System.out.printf("Starting from station %d, we fail to reach station %d%n",
+                    failureStart, failureEnd + 1);
+            System.out.println();
+
+            // Show why intermediate stations also fail
+            System.out.println("Why intermediate stations also fail:");
+            tank = 0;
+            for (int i = failureStart; i <= failureEnd; i++) {
+                tank += gas[i] - cost[i];
+                System.out.printf("After station %d: tank = %d%n", i, tank);
+
+                if (i < failureEnd) {
+                    System.out.printf("If we started from station %d instead:%n", i + 1);
+                    System.out.println("- We'd have tank = 0 at station " + (i + 1));
+                    System.out.println("- But we currently have tank = " + tank + " > 0");
+                    System.out.println("- Since current path fails, starting with tank = 0 must also fail");
+                    System.out.println();
+                }
+            }
+
+            System.out.println("CONCLUSION: Stations " + failureStart + " through " + failureEnd +
+                    " can all be eliminated!");
+            System.out.println("Next candidate: Station " + (failureEnd + 1));
+        } else {
+            System.out.println("No failure found in this example, but principle still applies.");
+        }
+    }
 }
