@@ -34,4 +34,44 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _872_a_GasStationBruteForce {
+    /**
+     * Brute Force Solution - Try every possible starting point
+     * Time Complexity: O(n²)
+     * Space Complexity: O(1)
+     */
+    public static int canCompleteCircuitBruteForce(int[] gas, int[] cost) {
+        int n = gas.length;
+
+        // Try each station as starting point
+        for (int start = 0; start < n; start++) {
+            int tank = 0;
+            boolean canComplete = true;
+
+            // Simulate journey starting from 'start'
+            for (int step = 0; step < n; step++) {
+                int currentStation = (start + step) % n;
+
+                // Add gas at current station
+                tank += gas[currentStation];
+
+                // Consume gas to reach next station
+                tank -= cost[currentStation];
+
+                // Check if we have enough gas to continue
+                if (tank < 0) {
+                    canComplete = false;
+                    break;
+                }
+            }
+
+            // If we completed the circuit, return this starting point
+            if (canComplete) {
+                return start;
+            }
+        }
+
+        // No valid starting point found
+        return -1;
+    }
+
 }
