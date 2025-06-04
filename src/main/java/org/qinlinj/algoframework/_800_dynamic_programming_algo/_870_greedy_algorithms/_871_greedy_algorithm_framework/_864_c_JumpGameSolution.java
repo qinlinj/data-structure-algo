@@ -61,4 +61,50 @@ public class _864_c_JumpGameSolution {
         return false;
     }
 
+
+    /**
+     * Greedy Solution - Optimal approach
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     * <p>
+     * Key insight: We only need to track the farthest reachable position
+     */
+    public static boolean canJumpGreedy(int[] nums) {
+        int n = nums.length;
+        int farthest = 0;
+
+        // Iterate through array (except last element)
+        for (int i = 0; i < n - 1; i++) {
+            // Update farthest reachable position
+            farthest = Math.max(farthest, i + nums[i]);
+
+            // If we can't progress further, we're stuck
+            if (farthest <= i) {
+                return false;
+            }
+        }
+
+        // Check if we can reach the last index
+        return farthest >= n - 1;
+    }
+
+    /**
+     * Alternative Greedy Implementation - Bottom-up approach
+     * Tracks the leftmost "good" position that can reach the end
+     */
+    public static boolean canJumpGreedyBottomUp(int[] nums) {
+        int n = nums.length;
+        int lastGoodIndex = n - 1;
+
+        // Work backwards from the end
+        for (int i = n - 2; i >= 0; i--) {
+            // Check if current position can reach the last good position
+            if (i + nums[i] >= lastGoodIndex) {
+                lastGoodIndex = i;
+            }
+        }
+
+        return lastGoodIndex == 0;
+    }
+
 }
