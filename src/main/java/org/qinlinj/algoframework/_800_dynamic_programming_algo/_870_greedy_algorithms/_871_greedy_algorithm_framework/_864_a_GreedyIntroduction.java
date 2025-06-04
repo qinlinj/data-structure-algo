@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._871_greedy_algorithm_framework;
+
+public class _864_a_GreedyIntroduction {
+}
