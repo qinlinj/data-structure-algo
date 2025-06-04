@@ -37,4 +37,15 @@ public class _864_a_GreedyIntroduction {
         // Return maximum of two choices
         return Math.max(result1, result2);
     }
+
+    /**
+     * Optimization 1: No need to compare since 100 > 1
+     * Time Complexity: O(n)
+     * Space Complexity: O(n) due to recursion
+     */
+    public static int findMaxOptimized1(int n) {
+        if (n == 0) return 0;
+        // Always choose 100-yuan bill
+        return 100 + findMaxOptimized1(n - 1);
+    }
 }
