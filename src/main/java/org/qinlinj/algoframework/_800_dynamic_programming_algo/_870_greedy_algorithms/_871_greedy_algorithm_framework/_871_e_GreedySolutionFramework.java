@@ -39,7 +39,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
 
 import java.util.*;
 
-public class _864_e_GreedySolutionFramework {
+public class _871_e_GreedySolutionFramework {
 
     /**
      * Common Greedy Problem Patterns

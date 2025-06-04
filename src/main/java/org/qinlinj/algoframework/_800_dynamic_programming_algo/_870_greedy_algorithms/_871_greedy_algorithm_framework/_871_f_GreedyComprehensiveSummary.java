@@ -35,7 +35,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
 
 import java.util.*;
 
-public class _864_f_GreedyComprehensiveSummary {
+public class _871_f_GreedyComprehensiveSummary {
 
     public static void main(String[] args) {
         System.out.println("╔══════════════════════════════════════════════════════════════╗");

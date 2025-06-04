@@ -29,13 +29,13 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
 
 import java.util.*;
 
-public class _864_c_JumpGameSolution {
+public class _871_c_JumpGameSolution {
 
     /**
      * Brute Force Solution - Explores all possible paths
      * Time Complexity: O(k^n) where k is average jump distance
      * Space Complexity: O(n) for recursion stack
-     *
+     * <p>
      * This approach times out for large inputs but shows the exhaustive nature
      */
     public static boolean canJumpBruteForce(int[] nums) {
@@ -94,7 +94,7 @@ public class _864_c_JumpGameSolution {
      * Greedy Solution - Optimal approach
      * Time Complexity: O(n)
      * Space Complexity: O(1)
-     *
+     * <p>
      * Key insight: We only need to track the farthest reachable position
      */
     public static boolean canJumpGreedy(int[] nums) {

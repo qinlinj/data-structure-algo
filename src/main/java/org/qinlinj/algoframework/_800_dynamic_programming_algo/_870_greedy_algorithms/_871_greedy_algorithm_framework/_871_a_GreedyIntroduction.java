@@ -20,7 +20,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  * when the problem has greedy choice property.
  */
 
-public class _864_a_GreedyIntroduction {
+public class _871_a_GreedyIntroduction {
 
     /**
      * Brute force approach - explores all possible combinations

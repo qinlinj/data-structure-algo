@@ -32,7 +32,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
 
 import java.util.*;
 
-public class _864_d_JumpGameIISolution {
+public class _871_d_JumpGameIISolution {
 
     /**
      * Brute Force Solution - Explores all possible jump sequences
@@ -108,7 +108,7 @@ public class _864_d_JumpGameIISolution {
      * Greedy Solution - BFS-like approach (Optimal)
      * Time Complexity: O(n)
      * Space Complexity: O(1)
-     *
+     * <p>
      * Think of this as BFS where each level represents positions reachable in k jumps
      */
     public static int jumpGreedy(int[] nums) {

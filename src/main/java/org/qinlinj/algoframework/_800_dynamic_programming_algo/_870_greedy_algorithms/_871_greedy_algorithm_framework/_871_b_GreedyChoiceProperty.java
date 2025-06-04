@@ -28,7 +28,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
 
 import java.util.*;
 
-public class _864_b_GreedyChoiceProperty {
+public class _871_b_GreedyChoiceProperty {
 
     /**
      * Compare greedy choice property vs optimal substructure
