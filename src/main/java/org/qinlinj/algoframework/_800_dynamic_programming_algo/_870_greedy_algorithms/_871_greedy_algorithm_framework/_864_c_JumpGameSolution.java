@@ -30,5 +30,35 @@ public class _864_c_JumpGameSolution {
         return false;
     }
 
-    
+    /**
+     * Dynamic Programming Solution with Memoization
+     * Time Complexity: O(n²)
+     * Space Complexity: O(n)
+     */
+    public static boolean canJumpDP(int[] nums) {
+        Boolean[] memo = new Boolean[nums.length];
+        return canJumpDPHelper(nums, 0, memo);
+    }
+
+    private static boolean canJumpDPHelper(int[] nums, int position, Boolean[] memo) {
+        if (position >= nums.length - 1) {
+            return true;
+        }
+
+        if (memo[position] != null) {
+            return memo[position];
+        }
+
+        int maxJump = nums[position];
+        for (int jump = 1; jump <= maxJump; jump++) {
+            if (canJumpDPHelper(nums, position + jump, memo)) {
+                memo[position] = true;
+                return true;
+            }
+        }
+
+        memo[position] = false;
+        return false;
+    }
+
 }
