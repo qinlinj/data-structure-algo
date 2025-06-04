@@ -274,4 +274,80 @@ public class _872_c_GasStationGreedyApproach {
         System.out.println("   - Total time: O(n)");
         System.out.println("   - Space: O(1)");
     }
+
+    /**
+     * Compare all three approaches: brute force, graph, and greedy
+     */
+    public static void compareAllApproaches(int[] gas, int[] cost) {
+        System.out.println("\n=== Three-Way Approach Comparison ===");
+
+        long startTime, endTime;
+
+        // Brute force
+        startTime = System.nanoTime();
+        int bruteResult = bruteForceApproach(gas, cost);
+        endTime = System.nanoTime();
+        long bruteTime = endTime - startTime;
+
+        // Graph approach
+        startTime = System.nanoTime();
+        int graphResult = graphApproach(gas, cost);
+        endTime = System.nanoTime();
+        long graphTime = endTime - startTime;
+
+        // Greedy approach
+        startTime = System.nanoTime();
+        int greedyResult = canCompleteCircuitGreedy(gas, cost);
+        endTime = System.nanoTime();
+        long greedyTime = endTime - startTime;
+
+        System.out.println("Results:");
+        System.out.printf("Brute Force: %2d (Time: %8.2f μs) [O(n²) time, O(1) space]%n",
+                bruteResult, bruteTime / 1000.0);
+        System.out.printf("Graph:       %2d (Time: %8.2f μs) [O(n) time,  O(1) space]%n",
+                graphResult, graphTime / 1000.0);
+        System.out.printf("Greedy:      %2d (Time: %8.2f μs) [O(n) time,  O(1) space]%n",
+                greedyResult, greedyTime / 1000.0);
+
+        System.out.println("\nAll approaches give same result: " +
+                (bruteResult == graphResult && graphResult == greedyResult));
+
+        System.out.println("\nConceptual Differences:");
+        System.out.println("- Brute Force: Test each starting point independently");
+        System.out.println("- Graph:       Find minimum point in cumulative sum graph");
+        System.out.println("- Greedy:      Eliminate impossible starting points progressively");
+        System.out.println("\nBoth Graph and Greedy are optimal, but offer different insights!");
+    }
+
+    // Helper methods for comparison
+    private static int bruteForceApproach(int[] gas, int[] cost) {
+        int n = gas.length;
+        for (int start = 0; start < n; start++) {
+            int tank = 0;
+            boolean valid = true;
+            for (int i = 0; i < n; i++) {
+                int station = (start + i) % n;
+                tank += gas[station] - cost[station];
+                if (tank < 0) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) return start;
+        }
+        return -1;
+    }
+
+    private static int graphApproach(int[] gas, int[] cost) {
+        int n = gas.length;
+        int sum = 0, minSum = 0, start = 0;
+        for (int i = 0; i < n; i++) {
+            sum += gas[i] - cost[i];
+            if (sum < minSum) {
+                minSum = sum;
+                start = i + 1;
+            }
+        }
+        return sum < 0 ? -1 : (start == n ? 0 : start);
+    }
 }
