@@ -1,8 +1,96 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._871_greedy_algorithm_framework;
 
+/**
+ * GREEDY CHOICE PROPERTY vs OPTIMAL SUBSTRUCTURE
+ * <p>
+ * Key Concepts:
+ * 1. Greedy Choice Property: Can derive global optimal solution through local optimal choices
+ * 2. Optimal Substructure: Global optimal solution can be constructed from optimal solutions of subproblems
+ * 3. Problem Comparison:
+ * - Problem 1 (Maximum Value): Has greedy choice property → Use greedy algorithm
+ * - Problem 2 (Minimum Coins): Lacks greedy choice property → Use dynamic programming
+ * <p>
+ * Greedy Choice Property:
+ * - Make locally optimal choice at each step
+ * - Don't need to solve all subproblems
+ * - Local optimal choices lead to global optimal solution
+ * <p>
+ * Optimal Substructure:
+ * - Need to solve all subproblems first
+ * - Then construct global solution from subproblem solutions
+ * - Foundation for dynamic programming
+ * <p>
+ * Example Analysis:
+ * - Problem 1: Each choice of 100-yuan bill is locally and globally optimal
+ * - Problem 2: Choosing largest denomination isn't always globally optimal
+ * (e.g., target=3, choosing 100-yuan bills won't work, need 3×1-yuan bills)
+ */
+
 import java.util.*;
 
 public class _864_b_GreedyChoiceProperty {
+
+    /**
+     * Compare greedy choice property vs optimal substructure
+     */
+    public static void compareProperties() {
+        System.out.println("=== GREEDY CHOICE PROPERTY vs OPTIMAL SUBSTRUCTURE ===");
+        System.out.println();
+
+        System.out.println("GREEDY CHOICE PROPERTY:");
+        System.out.println("- Definition: Local optimal choices lead directly to global optimal solution");
+        System.out.println("- Characteristic: Don't need to solve all subproblems");
+        System.out.println("- Algorithm: Greedy algorithm (high efficiency)");
+        System.out.println("- Example: Maximum value problem - always choose 100-yuan bill");
+        System.out.println();
+
+        System.out.println("OPTIMAL SUBSTRUCTURE:");
+        System.out.println("- Definition: Global optimal solution constructed from optimal subproblems");
+        System.out.println("- Characteristic: Must solve all relevant subproblems first");
+        System.out.println("- Algorithm: Dynamic programming (explores all possibilities)");
+        System.out.println("- Example: Minimum coins problem - need to consider all combinations");
+        System.out.println();
+
+        System.out.println("KEY DIFFERENCE:");
+        System.out.println("- Greedy: Make choice NOW based on current local optimum");
+        System.out.println("- DP: Make choice LATER after knowing all subproblem solutions");
+        System.out.println("- Greedy is faster but only works with greedy choice property");
+    }
+
+    /**
+     * Real-world example: Coin systems
+     */
+    public static void coinSystemExample() {
+        System.out.println("\n=== REAL-WORLD COIN SYSTEM EXAMPLE ===");
+        System.out.println();
+
+        // US coin system: {1, 5, 10, 25} cents
+        System.out.println("US Coin System {1, 5, 10, 25} cents:");
+        System.out.println("- HAS greedy choice property");
+        System.out.println("- Always choosing largest possible coin gives optimal solution");
+        System.out.println("- Example: 67 cents = 2×25 + 1×10 + 1×5 + 2×1 = 6 coins");
+        System.out.println();
+
+        // Artificial coin system: {1, 3, 4} units
+        System.out.println("Artificial Coin System {1, 3, 4} units:");
+        System.out.println("- LACKS greedy choice property");
+        System.out.println("- Greedy for 6 units: 1×4 + 2×1 = 3 coins");
+        System.out.println("- Optimal for 6 units: 2×3 = 2 coins");
+        System.out.println("- Need dynamic programming for optimal solution");
+    }
+
+    public static void main(String[] args) {
+        MaxValueProblem.demonstrate();
+        MinCoinsProblem.demonstrate();
+        compareProperties();
+        coinSystemExample();
+
+        System.out.println("\n=== SUMMARY ===");
+        System.out.println("1. Greedy algorithms are efficient but only work with greedy choice property");
+        System.out.println("2. Dynamic programming works for all problems with optimal substructure");
+        System.out.println("3. Key insight: Not all optimization problems have greedy choice property");
+        System.out.println("4. Always verify greedy choice property before using greedy algorithms");
+    }
 
     /**
      * Problem 1: Maximum value with limited number of bills
@@ -20,6 +108,21 @@ public class _864_b_GreedyChoiceProperty {
             return numBills * 100;
         }
 
+        /**
+         * Demonstrate why this has greedy choice property
+         */
+        public static void demonstrate() {
+            System.out.println("=== Problem 1: Maximum Value (HAS Greedy Choice Property) ===");
+            System.out.println("Goal: Choose 10 bills to maximize total value");
+            System.out.println("Available: 1-yuan and 100-yuan bills");
+            System.out.println();
+
+            int numBills = 10;
+            System.out.println("Local optimal choice at each step: Choose 100-yuan bill (100 > 1)");
+            System.out.println("Global optimal solution: " + solve(numBills) + " yuan");
+            System.out.println("Why greedy works: Each local choice contributes to global optimum");
+            System.out.println();
+        }
     }
 
     /**
@@ -104,4 +207,3 @@ public class _864_b_GreedyChoiceProperty {
         }
     }
 }
-
