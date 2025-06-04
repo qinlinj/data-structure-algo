@@ -193,4 +193,85 @@ public class _872_c_GasStationGreedyApproach {
             System.out.println("No failure found in this example, but principle still applies.");
         }
     }
+
+    /**
+     * Compare greedy elimination vs brute force
+     */
+    public static void compareElimination(int[] gas, int[] cost) {
+        System.out.println("\n=== Elimination Comparison ===");
+
+        int n = gas.length;
+        System.out.println("Array size: " + n + " stations");
+
+        // Count eliminations in greedy approach
+        int tank = 0;
+        int totalEliminated = 0;
+        int eliminationSteps = 0;
+
+        for (int i = 0; i < n; i++) {
+            tank += gas[i] - cost[i];
+            if (tank < 0) {
+                eliminationSteps++;
+                totalEliminated += (i + 1);  // Stations 0 to i eliminated
+                tank = 0;
+            }
+        }
+
+        System.out.println("Greedy approach:");
+        System.out.println("- Elimination steps: " + eliminationSteps);
+        System.out.println("- Total stations eliminated: " + totalEliminated);
+        System.out.println("- Stations checked: " + n + " (single pass)");
+
+        System.out.println("\nBrute force approach:");
+        System.out.println("- Must test each station individually");
+        System.out.println("- Stations checked: " + n + " candidates × " + n + " steps = " + (n * n));
+        System.out.println("- No elimination optimization");
+
+        System.out.println("\nEfficiency gain:");
+        if (eliminationSteps > 0) {
+            System.out.println("- Greedy eliminates " + totalEliminated + " stations in " +
+                    eliminationSteps + " steps");
+            System.out.println("- Brute force would test these " + totalEliminated +
+                    " stations individually");
+            System.out.printf("- Reduction ratio: %.1f%%\n",
+                    100.0 * (n * n - n) / (n * n));
+        }
+    }
+
+    /**
+     * Prove correctness of greedy approach
+     */
+    public static void proveCorrectness() {
+        System.out.println("\n=== Correctness Proof ===");
+        System.out.println();
+
+        System.out.println("THEOREM: The greedy elimination approach finds the correct answer.");
+        System.out.println();
+
+        System.out.println("PROOF:");
+        System.out.println("1. ELIMINATION CORRECTNESS:");
+        System.out.println("   If starting from station i with tank=0, we reach station k with tank>0,");
+        System.out.println("   but fail to reach station j, then starting from station k with tank=0");
+        System.out.println("   will definitely fail to reach station j.");
+        System.out.println("   Reason: Less fuel at k means worse prospects for reaching j.");
+        System.out.println();
+
+        System.out.println("2. EXISTENCE GUARANTEE:");
+        System.out.println("   If total_gas >= total_cost, then a solution must exist.");
+        System.out.println("   The greedy algorithm will find it because:");
+        System.out.println("   - It eliminates all impossible starting points");
+        System.out.println("   - It continues until finding a valid starting point");
+        System.out.println("   - The valid point exists by the total gas/cost constraint");
+        System.out.println();
+
+        System.out.println("3. OPTIMALITY:");
+        System.out.println("   The greedy algorithm finds the lexicographically smallest valid");
+        System.out.println("   starting station, which matches the problem requirements.");
+        System.out.println();
+
+        System.out.println("4. COMPLEXITY:");
+        System.out.println("   - Each station is visited at most once during elimination");
+        System.out.println("   - Total time: O(n)");
+        System.out.println("   - Space: O(1)");
+    }
 }
