@@ -40,4 +40,43 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _872_c_GasStationGreedyApproach {
+    /**
+     * Greedy Algorithm Solution
+     * Eliminate impossible starting stations efficiently
+     */
+    public static int canCompleteCircuitGreedy(int[] gas, int[] cost) {
+        int n = gas.length;
+
+        // First check: if total gas < total cost, no solution exists
+        int totalGas = 0, totalCost = 0;
+        for (int i = 0; i < n; i++) {
+            totalGas += gas[i];
+            totalCost += cost[i];
+        }
+        if (totalGas < totalCost) {
+            return -1;  // Impossible to complete circuit
+        }
+
+        // Greedy search for valid starting point
+        int tank = 0;       // Current fuel in tank
+        int start = 0;      // Current candidate starting station
+
+        for (int i = 0; i < n; i++) {
+            // Add gas and consume cost at station i
+            tank += gas[i] - cost[i];
+
+            if (tank < 0) {
+                // Cannot reach station i+1 from current start
+                // By greedy insight, stations start to i are all invalid
+                // Next candidate is station i+1
+                tank = 0;
+                start = i + 1;
+            }
+        }
+
+        // If we reach here with tank >= 0, start is valid
+        // Handle circular array: if start == n, wrap to 0
+        return start == n ? 0 : start;
+    }
+
 }
