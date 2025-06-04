@@ -48,4 +48,17 @@ public class _864_a_GreedyIntroduction {
         // Always choose 100-yuan bill
         return 100 + findMaxOptimized1(n - 1);
     }
+
+    /**
+     * Optimization 2: Convert recursion to iteration
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public static int findMaxOptimized2(int n) {
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result += 100;
+        }
+        return result;
+    }
 }
