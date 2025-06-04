@@ -21,4 +21,20 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _864_a_GreedyIntroduction {
+    /**
+     * Brute force approach - explores all possible combinations
+     * Time Complexity: O(2^n)
+     * Space Complexity: O(n) due to recursion stack
+     */
+    public static int findMaxBruteForce(int n) {
+        if (n == 0) return 0;
+
+        // Choose 1-yuan bill, then solve remaining n-1 choices
+        int result1 = 1 + findMaxBruteForce(n - 1);
+        // Choose 100-yuan bill, then solve remaining n-1 choices
+        int result2 = 100 + findMaxBruteForce(n - 1);
+
+        // Return maximum of two choices
+        return Math.max(result1, result2);
+    }
 }
