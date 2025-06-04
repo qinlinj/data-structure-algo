@@ -1,7 +1,5 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._872_gas_station_algorithm;
 
-import java.util.*;
-
 /**
  * GAS STATION PROBLEM - GREEDY ALGORITHM APPROACH
  * <p>
@@ -41,7 +39,10 @@ import java.util.*;
  * - Both reveal hidden structure to avoid O(n²) brute force
  */
 
+import java.util.*;
+
 public class _872_c_GasStationGreedyApproach {
+
     /**
      * Greedy Algorithm Solution
      * Eliminate impossible starting stations efficiently
@@ -349,5 +350,57 @@ public class _872_c_GasStationGreedyApproach {
             }
         }
         return sum < 0 ? -1 : (start == n ? 0 : start);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    GAS STATION PROBLEM                      ║");
+        System.out.println("║                   GREEDY ALGORITHM APPROACH                 ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // Example from tutorial
+        int[] gas = {1, 2, 3, 4, 5};
+        int[] cost = {3, 4, 5, 1, 2};
+
+        int result = greedyWithExplanation(gas, cost);
+        demonstrateGreedyInsight(gas, cost);
+        compareElimination(gas, cost);
+        proveCorrectness();
+        compareAllApproaches(gas, cost);
+
+        // Test with no solution case
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("Testing case with no solution:");
+        int[] gas2 = {2, 3, 4};
+        int[] cost2 = {3, 4, 3};
+        greedyWithExplanation(gas2, cost2);
+
+        System.out.println("\n=== Key Insights from Greedy Approach ===");
+        System.out.println("1. ELIMINATION STRATEGY:");
+        System.out.println("   - Don't test impossible starting points individually");
+        System.out.println("   - Use failure information to eliminate multiple candidates");
+        System.out.println("   - Each failure eliminates a range of starting points");
+        System.out.println();
+
+        System.out.println("2. GREEDY CHOICE PROPERTY:");
+        System.out.println("   - Local decision (eliminate range) leads to global optimum");
+        System.out.println("   - No need to reconsider eliminated candidates");
+        System.out.println("   - Progressive elimination naturally finds the answer");
+        System.out.println();
+
+        System.out.println("3. ALGORITHM EFFICIENCY:");
+        System.out.println("   - Reduces O(n²) brute force to O(n) greedy");
+        System.out.println("   - Single pass through array with smart elimination");
+        System.out.println("   - Constant space usage");
+        System.out.println();
+
+        System.out.println("4. PROBLEM-SOLVING INSIGHT:");
+        System.out.println("   - Look for patterns that eliminate multiple possibilities");
+        System.out.println("   - Use problem structure to avoid redundant computation");
+        System.out.println("   - Mathematical reasoning can reveal algorithmic shortcuts");
+        System.out.println();
+
+        System.out.println("The greedy approach transforms complex enumeration into elegant elimination!");
     }
 }
