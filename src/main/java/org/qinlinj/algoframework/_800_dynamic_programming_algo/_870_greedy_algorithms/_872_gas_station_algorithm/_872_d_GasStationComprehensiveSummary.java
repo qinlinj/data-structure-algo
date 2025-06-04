@@ -218,4 +218,60 @@ public class _872_d_GasStationComprehensiveSummary {
                     (valid ? "VALID" : "INVALID"));
         }
     }
+
+    /**
+     * Performance analysis across different input sizes
+     */
+    public static class PerformanceAnalysis {
+
+        public static void analyzePerformance() {
+            System.out.println("=== PERFORMANCE ANALYSIS ===");
+            System.out.println();
+
+            int[] sizes = {10, 50, 100, 500, 1000};
+
+            System.out.println("Input Size | Brute Force | Graph    | Greedy   | Speedup");
+            System.out.println("-----------|-------------|----------|----------|--------");
+
+            for (int size : sizes) {
+                // Generate test data
+                int[] gas = generateRandomArray(size, 1, 10);
+                int[] cost = generateRandomArray(size, 1, 8);  // Ensure solution likely exists
+
+                // Measure performance
+                long bruteTime = measureTime(() -> AllApproaches.bruteForceSolution(gas, cost));
+                long graphTime = measureTime(() -> AllApproaches.graphSolution(gas, cost));
+                long greedyTime = measureTime(() -> AllApproaches.greedySolution(gas, cost));
+
+                double speedup = (double) bruteTime / Math.min(graphTime, greedyTime);
+
+                System.out.printf("   %4d    |   %6.1f   |  %6.1f  |  %6.1f  |  %.1fx%n",
+                        size, bruteTime / 1000.0, graphTime / 1000.0,
+                        greedyTime / 1000.0, speedup);
+            }
+
+            System.out.println();
+            System.out.println("Observations:");
+            System.out.println("- Brute force time grows quadratically O(n²)");
+            System.out.println("- Graph and greedy times grow linearly O(n)");
+            System.out.println("- Speedup increases significantly with input size");
+            System.out.println("- Both optimal approaches perform similarly");
+        }
+
+        private static int[] generateRandomArray(int size, int min, int max) {
+            Random rand = new Random(42);  // Fixed seed for reproducibility
+            int[] arr = new int[size];
+            for (int i = 0; i < size; i++) {
+                arr[i] = rand.nextInt(max - min + 1) + min;
+            }
+            return arr;
+        }
+
+        private static long measureTime(Runnable algorithm) {
+            long startTime = System.nanoTime();
+            algorithm.run();
+            return System.nanoTime() - startTime;
+        }
+    }
+
 }
