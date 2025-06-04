@@ -21,6 +21,7 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _864_a_GreedyIntroduction {
+
     /**
      * Brute force approach - explores all possible combinations
      * Time Complexity: O(2^n)
@@ -69,5 +70,75 @@ public class _864_a_GreedyIntroduction {
      */
     public static int findMaxGreedy(int n) {
         return 100 * n;
+    }
+
+    /**
+     * Demonstration of the algorithm evolution
+     */
+    public static void demonstrateEvolution() {
+        int n = 10;
+
+        System.out.println("=== Greedy Algorithm Evolution Demo ===");
+        System.out.println("Problem: Choose " + n + " bills to maximize value");
+        System.out.println("Available: 1-yuan and 100-yuan bills (unlimited quantity)");
+        System.out.println();
+
+        long startTime, endTime;
+
+        // Brute Force (only for small n due to exponential complexity)
+        if (n <= 20) {
+            startTime = System.nanoTime();
+            int result1 = findMaxBruteForce(n);
+            endTime = System.nanoTime();
+            System.out.println("1. Brute Force Result: " + result1 +
+                    " yuan (Time: " + (endTime - startTime) / 1000.0 + " microseconds)");
+        } else {
+            System.out.println("1. Brute Force: Skipped (too slow for n=" + n + ")");
+        }
+
+        // Optimized Recursion
+        startTime = System.nanoTime();
+        int result2 = findMaxOptimized1(n);
+        endTime = System.nanoTime();
+        System.out.println("2. Optimized Recursion: " + result2 +
+                " yuan (Time: " + (endTime - startTime) / 1000.0 + " microseconds)");
+
+        // Iterative
+        startTime = System.nanoTime();
+        int result3 = findMaxOptimized2(n);
+        endTime = System.nanoTime();
+        System.out.println("3. Iterative Solution: " + result3 +
+                " yuan (Time: " + (endTime - startTime) / 1000.0 + " microseconds)");
+
+        // Greedy
+        startTime = System.nanoTime();
+        int result4 = findMaxGreedy(n);
+        endTime = System.nanoTime();
+        System.out.println("4. Greedy Algorithm: " + result4 +
+                " yuan (Time: " + (endTime - startTime) / 1000.0 + " microseconds)");
+
+        System.out.println();
+        System.out.println("All methods produce the same result: " +
+                (result2 == result3 && result3 == result4));
+        System.out.println("Optimal Strategy: Always choose 100-yuan bills");
+        System.out.println("Complexity reduced from O(2^n) to O(1)!");
+    }
+
+    public static void main(String[] args) {
+        demonstrateEvolution();
+
+        System.out.println("\n=== Testing with Different Values ===");
+        int[] testCases = {1, 5, 10, 15, 20};
+
+        for (int n : testCases) {
+            int maxValue = findMaxGreedy(n);
+            System.out.println("Choosing " + n + " bills: Maximum value = " + maxValue + " yuan");
+        }
+
+        System.out.println("\n=== Key Insight ===");
+        System.out.println("This problem has GREEDY CHOICE PROPERTY:");
+        System.out.println("- Local optimal choice: Always pick 100-yuan bill (100 > 1)");
+        System.out.println("- Global optimal solution: Sum of all local optimal choices");
+        System.out.println("- No need to explore all possibilities!");
     }
 }
