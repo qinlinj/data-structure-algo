@@ -103,4 +103,34 @@ public class _864_d_JumpGameIISolution {
 
         return jumps;
     }
+
+    /**
+     * Alternative Greedy Implementation - More explicit BFS style
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public static int jumpGreedyBFS(int[] nums) {
+        int n = nums.length;
+        if (n <= 1) return 0;
+
+        int jumps = 0;
+        int left = 0, right = 0;  // Current level boundaries
+
+        while (right < n - 1) {
+            int farthest = 0;
+
+            // Explore all positions in current level
+            for (int i = left; i <= right; i++) {
+                farthest = Math.max(farthest, i + nums[i]);
+            }
+
+            // Move to next level
+            left = right + 1;
+            right = farthest;
+            jumps++;
+        }
+
+        return jumps;
+    }
+
 }
