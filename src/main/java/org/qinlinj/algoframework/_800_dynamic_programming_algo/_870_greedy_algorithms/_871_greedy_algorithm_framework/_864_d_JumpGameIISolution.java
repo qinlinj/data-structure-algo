@@ -73,4 +73,34 @@ public class _864_d_JumpGameIISolution {
         memo[position] = minJumps;
         return minJumps;
     }
+
+    /**
+     * Greedy Solution - BFS-like approach (Optimal)
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     * <p>
+     * Think of this as BFS where each level represents positions reachable in k jumps
+     */
+    public static int jumpGreedy(int[] nums) {
+        int n = nums.length;
+        if (n <= 1) return 0;
+
+        int jumps = 0;          // Number of jumps taken
+        int currentEnd = 0;     // End of current level (positions reachable in 'jumps' steps)
+        int farthest = 0;       // Farthest position reachable in next level
+
+        // Process all positions except the last one
+        for (int i = 0; i < n - 1; i++) {
+            // Update farthest reachable position from current level
+            farthest = Math.max(farthest, i + nums[i]);
+
+            // If we've reached the end of current level, we must jump
+            if (i == currentEnd) {
+                jumps++;                // Move to next level
+                currentEnd = farthest;  // Update end of new level
+            }
+        }
+
+        return jumps;
+    }
 }
