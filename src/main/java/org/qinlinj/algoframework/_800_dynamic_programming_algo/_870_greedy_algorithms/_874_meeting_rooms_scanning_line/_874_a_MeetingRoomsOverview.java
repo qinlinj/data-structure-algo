@@ -98,5 +98,50 @@ public class _874_a_MeetingRoomsOverview {
             return count;
         }
 
+
+        /**
+         * Scenario 2: Video segment coverage (Minimum segments to cover target)
+         * Greedy approach: Sort by start time, extend coverage greedily
+         */
+        public static int minVideoSegments(int[][] segments, int[] target) {
+            System.out.println("\n=== Scenario 2: Minimum Video Segments ===");
+            System.out.println("Strategy: Greedy coverage extension");
+            System.out.printf("Target: [%d, %d]%n", target[0], target[1]);
+            System.out.println("Segments: " + Arrays.deepToString(segments));
+
+            // Sort by start time
+            Arrays.sort(segments, (a, b) -> Integer.compare(a[0], b[0]));
+
+            int count = 0;
+            int currentEnd = target[0];
+            int i = 0;
+
+            while (currentEnd < target[1] && i < segments.length) {
+                if (segments[i][0] > currentEnd) {
+                    System.out.println("Gap found - no solution");
+                    return -1;
+                }
+
+                int maxEnd = currentEnd;
+                // Find segment that extends furthest from current position
+                while (i < segments.length && segments[i][0] <= currentEnd) {
+                    maxEnd = Math.max(maxEnd, segments[i][1]);
+                    i++;
+                }
+
+                if (maxEnd == currentEnd) {
+                    System.out.println("Cannot extend further - no solution");
+                    return -1;
+                }
+
+                count++;
+                currentEnd = maxEnd;
+                System.out.printf("Selected segment extending to: %d%n", currentEnd);
+            }
+
+            System.out.println("Minimum segments needed: " + count);
+            return currentEnd >= target[1] ? count : -1;
+        }
+
     }
 }
