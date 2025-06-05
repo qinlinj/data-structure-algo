@@ -77,4 +77,49 @@ public class _873_a_GreedyAlgorithmIntroduction {
             return totalValue;
         }
     }
+
+    /**
+     * Example 2: Greedy doesn't work - Card game strategy
+     * Problem: In Dou Di Zhu, opponent plays pair of 3s, what should you play?
+     */
+    public static class CardGameExample {
+
+        /**
+         * Greedy strategy: Play smallest card that beats opponent
+         */
+        public static Card playCardGreedy(List<Card> hand, Card opponentCard) {
+            System.out.println("=== Card Game - Greedy Strategy ===");
+            System.out.println("Opponent played: " + opponentCard);
+            System.out.println("Your hand: " + hand);
+
+            // Find smallest card that beats opponent
+            Card greedyChoice = null;
+            for (Card card : hand) {
+                if (card.value > opponentCard.value) {
+                    if (greedyChoice == null || card.value < greedyChoice.value) {
+                        greedyChoice = card;
+                    }
+                }
+            }
+
+            System.out.println("Greedy choice: " + greedyChoice);
+            return greedyChoice;
+        }
+
+        static class Card {
+            int value;
+            String type;
+
+            Card(int value, String type) {
+                this.value = value;
+                this.type = type;
+            }
+
+            @Override
+            public String toString() {
+                return type + "(" + value + ")";
+            }
+        }
+
+    }
 }
