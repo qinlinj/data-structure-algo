@@ -179,4 +179,87 @@ public class _874_d_MeetingRoomsExtensions {
             }
         }
     }
+
+
+    /**
+     * Extension 3: Meeting Priority and Weighted Scheduling
+     * Some meetings are more important than others
+     */
+    public static class WeightedMeetingScheduling {
+
+        /**
+         * Maximize total weight of scheduled meetings with limited rooms
+         */
+        public static List<WeightedMeeting> maximizeWeightedMeetings(
+                int[][] meetings, int[] weights, int maxRooms) {
+
+            System.out.println("\n=== Weighted Meeting Scheduling ===");
+            System.out.println("Meetings: " + Arrays.deepToString(meetings));
+            System.out.println("Weights: " + Arrays.toString(weights));
+            System.out.println("Max rooms: " + maxRooms);
+
+            // Create weighted meetings
+            List<WeightedMeeting> weightedMeetings = new ArrayList<>();
+            for (int i = 0; i < meetings.length; i++) {
+                weightedMeetings.add(new WeightedMeeting(
+                        meetings[i][0], meetings[i][1], weights[i], i));
+            }
+
+            // Sort by end time for dynamic programming
+            weightedMeetings.sort((a, b) -> Integer.compare(a.end, b.end));
+
+            // This is a simplified greedy approach
+            // For optimal solution, would need more complex DP
+            List<WeightedMeeting> scheduled = new ArrayList<>();
+            List<Integer> roomEndTimes = new ArrayList<>();
+
+            for (WeightedMeeting meeting : weightedMeetings) {
+                // Find available room
+                int availableRoom = -1;
+                for (int i = 0; i < roomEndTimes.size(); i++) {
+                    if (roomEndTimes.get(i) <= meeting.start) {
+                        availableRoom = i;
+                        break;
+                    }
+                }
+
+                if (availableRoom != -1) {
+                    // Use existing room
+                    roomEndTimes.set(availableRoom, meeting.end);
+                    scheduled.add(meeting);
+                    System.out.printf("Scheduled %s in room %d%n", meeting, availableRoom);
+                } else if (roomEndTimes.size() < maxRooms) {
+                    // Use new room
+                    roomEndTimes.add(meeting.end);
+                    scheduled.add(meeting);
+                    System.out.printf("Scheduled %s in new room %d%n", meeting, roomEndTimes.size() - 1);
+                } else {
+                    System.out.printf("Cannot schedule %s (no available rooms)%n", meeting);
+                }
+            }
+
+            int totalWeight = scheduled.stream().mapToInt(m -> m.weight).sum();
+            System.out.println("Total weight: " + totalWeight);
+            System.out.println("Scheduled meetings: " + scheduled);
+
+            return scheduled;
+        }
+
+        static class WeightedMeeting {
+            int start, end, weight, id;
+
+            WeightedMeeting(int start, int end, int weight, int id) {
+                this.start = start;
+                this.end = end;
+                this.weight = weight;
+                this.id = id;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("M%d[%d,%d,w=%d]", id, start, end, weight);
+            }
+        }
+    }
 }
+
