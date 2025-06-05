@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._875_video_editing_greedy_algorithm;
+
+public class _875_a_VideoEditingIntroduction {
+}
