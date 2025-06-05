@@ -1,7 +1,5 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling;
 
-import java.util.*;
-
 /**
  * INTERVAL SCHEDULING PROBLEM - CLASSIC GREEDY ALGORITHM
  * LeetCode 435: Non-overlapping Intervals (variant)
@@ -38,7 +36,10 @@ import java.util.*;
  * a foundation for many other interval-based optimization problems.
  */
 
+import java.util.*;
+
 public class _873_b_IntervalSchedulingProblem {
+
     /**
      * Core interval scheduling algorithm
      * Returns maximum number of non-overlapping intervals
@@ -81,6 +82,55 @@ public class _873_b_IntervalSchedulingProblem {
 
         System.out.println("Total selected intervals: " + count);
         return count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║              INTERVAL SCHEDULING PROBLEM                    ║");
+        System.out.println("║           Classic Greedy Algorithm Application              ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // Test the main algorithm
+        int[][] testIntervals = {{1, 3}, {2, 4}, {3, 6}};
+        System.out.println("Test case: " + Arrays.deepToString(testIntervals));
+        int result = intervalSchedule(testIntervals);
+        System.out.println("Expected: 2, Got: " + result);
+        System.out.println();
+
+        // Show why wrong approaches fail
+        System.out.println("=".repeat(60));
+        WrongGreedyApproaches.showCounterexamples();
+
+        // Test wrong approaches on a clear counterexample
+        int[][] counterExample = {{0, 4}, {1, 2}, {3, 5}, {4, 6}};
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("Testing approaches on: " + Arrays.deepToString(counterExample));
+
+        int optimal = intervalSchedule(counterExample.clone());
+        System.out.println();
+
+        int shortestFirst = WrongGreedyApproaches.selectShortestFirst(counterExample.clone());
+        int earliestStart = WrongGreedyApproaches.selectEarliestStart(counterExample.clone());
+
+        System.out.println("\nComparison:");
+        System.out.println("Optimal (earliest end): " + optimal);
+        System.out.println("Shortest first: " + shortestFirst);
+        System.out.println("Earliest start: " + earliestStart);
+
+        // Show correctness proof
+        CorrectnessProof.explainOptimalityProof();
+        CorrectnessProof.intuitiveExplanation();
+
+        // Visualize the algorithm
+        AlgorithmVisualization.visualizeSelection(testIntervals);
+
+        System.out.println("\n=== Key Insights ===");
+        System.out.println("1. Greedy choice: Always select interval with earliest end time");
+        System.out.println("2. Why it works: Leaves maximum room for future selections");
+        System.out.println("3. Proof technique: Exchange argument shows optimality");
+        System.out.println("4. Time complexity: O(n log n) due to sorting");
+        System.out.println("5. This forms the foundation for many interval problems");
     }
 
     /**
@@ -178,6 +228,129 @@ public class _873_b_IntervalSchedulingProblem {
             System.out.println("Example 3: " + Arrays.deepToString(example3));
             System.out.println("Shortest first might select [2,3], then skip others due to [1,15]");
             System.out.println("Optimal: Select [2,3], [4,5], [6,7], [8,9] → count = 4");
+        }
+    }
+
+    /**
+     * Mathematical proof of correctness
+     */
+    public static class CorrectnessProof {
+
+        /**
+         * Explain why earliest end time is optimal
+         */
+        public static void explainOptimalityProof() {
+            System.out.println("\n=== Proof of Optimality ===");
+            System.out.println();
+
+            System.out.println("THEOREM: Always selecting the interval with earliest end time");
+            System.out.println("among remaining intervals gives optimal solution.");
+            System.out.println();
+
+            System.out.println("PROOF SKETCH (Exchange Argument):");
+            System.out.println("1. Let OPT be any optimal solution");
+            System.out.println("2. Let GREEDY be our greedy solution");
+            System.out.println("3. Let x be the first interval where OPT ≠ GREEDY");
+            System.out.println();
+
+            System.out.println("4. OPT selects interval a = [start_a, end_a]");
+            System.out.println("5. GREEDY selects interval b = [start_b, end_b]");
+            System.out.println("6. By greedy choice: end_b ≤ end_a");
+            System.out.println();
+
+            System.out.println("7. We can replace interval a with interval b in OPT:");
+            System.out.println("   - b doesn't conflict with previous intervals (same as a)");
+            System.out.println("   - b doesn't conflict with future intervals (end_b ≤ end_a)");
+            System.out.println("   - New solution has same number of intervals");
+            System.out.println();
+
+            System.out.println("8. Continue this process until OPT = GREEDY");
+            System.out.println("9. Therefore, GREEDY is optimal. QED.");
+        }
+
+        /**
+         * Intuitive explanation of why it works
+         */
+        public static void intuitiveExplanation() {
+            System.out.println("\n=== Intuitive Explanation ===");
+            System.out.println();
+
+            System.out.println("WHY EARLIEST END TIME WORKS:");
+            System.out.println("🎯 Goal: Maximize number of intervals");
+            System.out.println("💡 Key insight: Earlier endings leave more room for future selections");
+            System.out.println();
+
+            System.out.println("ANALOGY - Party Planning:");
+            System.out.println("- You want to attend maximum parties today");
+            System.out.println("- Each party has start and end time");
+            System.out.println("- Strategy: Always pick party that ends earliest");
+            System.out.println("- Why? Leaves most time for subsequent parties");
+            System.out.println();
+
+            System.out.println("MATHEMATICAL INTUITION:");
+            System.out.println("- Each interval 'consumes' time from [start, end]");
+            System.out.println("- Goal: Minimize total time consumption");
+            System.out.println("- Earliest end time = minimal time commitment");
+            System.out.println("- Greedy minimization leads to global maximization");
+        }
+    }
+
+    /**
+     * Step-by-step visualization
+     */
+    public static class AlgorithmVisualization {
+
+        /**
+         * Visualize the selection process
+         */
+        public static void visualizeSelection(int[][] intervals) {
+            if (intervals.length == 0) return;
+
+            System.out.println("\n=== Algorithm Visualization ===");
+
+            // Sort intervals by end time for visualization
+            int[][] sorted = intervals.clone();
+            Arrays.sort(sorted, (a, b) -> Integer.compare(a[1], b[1]));
+
+            System.out.println("Timeline visualization:");
+            int maxEnd = Arrays.stream(sorted).mapToInt(interval -> interval[1]).max().orElse(0);
+
+            // Print timeline
+            System.out.print("Time: ");
+            for (int t = 0; t <= maxEnd; t++) {
+                System.out.printf("%2d ", t);
+            }
+            System.out.println();
+
+            // Print each interval
+            boolean[] selected = new boolean[sorted.length];
+            int lastEnd = -1;
+            int selectedCount = 0;
+
+            for (int i = 0; i < sorted.length; i++) {
+                int start = sorted[i][0];
+                int end = sorted[i][1];
+
+                if (start >= lastEnd) {
+                    selected[i] = true;
+                    lastEnd = end;
+                    selectedCount++;
+                }
+
+                System.out.printf("I%d:   ", i);
+                for (int t = 0; t <= maxEnd; t++) {
+                    if (t >= start && t <= end) {
+                        System.out.print(selected[i] ? " * " : " - ");
+                    } else {
+                        System.out.print("   ");
+                    }
+                }
+                System.out.printf(" [%d,%d] %s%n", start, end,
+                        selected[i] ? "SELECTED" : "skipped");
+            }
+
+            System.out.println("\nSelected intervals marked with '*', skipped with '-'");
+            System.out.println("Total selected: " + selectedCount);
         }
     }
 }
