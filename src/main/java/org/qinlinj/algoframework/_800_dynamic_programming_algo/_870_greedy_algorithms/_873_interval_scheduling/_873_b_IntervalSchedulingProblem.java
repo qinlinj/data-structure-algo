@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling;
 
+import java.util.*;
+
 /**
  * INTERVAL SCHEDULING PROBLEM - CLASSIC GREEDY ALGORITHM
  * LeetCode 435: Non-overlapping Intervals (variant)
@@ -36,6 +38,48 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  * a foundation for many other interval-based optimization problems.
  */
 
-
 public class _873_b_IntervalSchedulingProblem {
+    /**
+     * Core interval scheduling algorithm
+     * Returns maximum number of non-overlapping intervals
+     */
+    public static int intervalSchedule(int[][] intervals) {
+        if (intervals.length == 0) return 0;
+
+        // Sort by end time (key insight: earliest end time first)
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1]));
+
+        int count = 1; // At least one interval can always be selected
+        int lastEnd = intervals[0][1]; // End time of last selected interval
+
+        System.out.println("=== Interval Scheduling Algorithm ===");
+        System.out.println("Sorted intervals by end time:");
+        for (int i = 0; i < intervals.length; i++) {
+            System.out.printf("Interval %d: [%d, %d]%n", i, intervals[i][0], intervals[i][1]);
+        }
+        System.out.println();
+
+        System.out.println("Selection process:");
+        System.out.printf("Selected interval 0: [%d, %d]%n", intervals[0][0], intervals[0][1]);
+
+        for (int i = 1; i < intervals.length; i++) {
+            int start = intervals[i][0];
+            int end = intervals[i][1];
+
+            if (start >= lastEnd) {
+                // Non-overlapping interval found
+                count++;
+                lastEnd = end;
+                System.out.printf("Selected interval %d: [%d, %d] (start %d >= last_end %d)%n",
+                        i, start, end, start, intervals[i - 1][1]);
+            } else {
+                // Overlapping interval, skip it
+                System.out.printf("Skipped interval %d: [%d, %d] (overlaps with selected)%n",
+                        i, start, end);
+            }
+        }
+
+        System.out.println("Total selected intervals: " + count);
+        return count;
+    }
 }
