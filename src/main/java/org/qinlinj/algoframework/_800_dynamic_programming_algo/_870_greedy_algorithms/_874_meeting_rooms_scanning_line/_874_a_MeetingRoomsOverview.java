@@ -179,5 +179,43 @@ public class _874_a_MeetingRoomsOverview {
             return count;
         }
 
+        /**
+         * Scenario 4: Merge overlapping intervals
+         * Sort by start time, merge adjacent overlapping intervals
+         */
+        public static int[][] mergeIntervals(int[][] intervals) {
+            if (intervals.length <= 1) return intervals;
+
+            System.out.println("\n=== Scenario 4: Merge Overlapping Intervals ===");
+            System.out.println("Strategy: Sort by start time and merge");
+            System.out.println("Input: " + Arrays.deepToString(intervals));
+
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+            List<int[]> merged = new ArrayList<>();
+            merged.add(intervals[0]);
+
+            System.out.printf("Start with: [%d, %d]%n", intervals[0][0], intervals[0][1]);
+
+            for (int i = 1; i < intervals.length; i++) {
+                int[] current = intervals[i];
+                int[] last = merged.get(merged.size() - 1);
+
+                if (current[0] <= last[1]) {
+                    // Overlapping, merge them
+                    last[1] = Math.max(last[1], current[1]);
+                    System.out.printf("Merge [%d, %d] with previous -> [%d, %d]%n",
+                            current[0], current[1], last[0], last[1]);
+                } else {
+                    // Non-overlapping, add as new interval
+                    merged.add(current);
+                    System.out.printf("Add new: [%d, %d]%n", current[0], current[1]);
+                }
+            }
+
+            int[][] result = merged.toArray(new int[merged.size()][]);
+            System.out.println("Merged result: " + Arrays.deepToString(result));
+            return result;
+        }
     }
 }
