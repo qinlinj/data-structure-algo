@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling;
 
+import java.util.*;
+
 /**
  * GREEDY ALGORITHM INTRODUCTION AND CORE CONCEPTS
  * <p>
@@ -33,4 +35,46 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _873_a_GreedyAlgorithmIntroduction {
+    /**
+     * Example 1: Greedy works - Selecting maximum value bills
+     * Problem: You have 100 yuan bills and 50 yuan bills, select 10 bills for maximum value
+     */
+    public static class BillSelectionExample {
+
+        /**
+         * Greedy solution: Always pick the highest denomination
+         */
+        public static int selectBillsGreedy(int[] denominations, int numBills) {
+            // Sort denominations in descending order
+            Arrays.sort(denominations);
+            // Reverse to get descending order
+            for (int i = 0; i < denominations.length / 2; i++) {
+                int temp = denominations[i];
+                denominations[i] = denominations[denominations.length - 1 - i];
+                denominations[denominations.length - 1 - i] = temp;
+            }
+
+            int totalValue = 0;
+            int billsSelected = 0;
+
+            System.out.println("=== Greedy Bill Selection ===");
+            System.out.println("Available denominations: " + Arrays.toString(denominations));
+            System.out.println("Number of bills to select: " + numBills);
+            System.out.println();
+
+            for (int denomination : denominations) {
+                while (billsSelected < numBills) {
+                    totalValue += denomination;
+                    billsSelected++;
+                    System.out.println("Selected: " + denomination + " yuan, Total: " +
+                            totalValue + " yuan, Bills used: " + billsSelected);
+
+                    if (billsSelected >= numBills) break;
+                }
+                if (billsSelected >= numBills) break;
+            }
+
+            return totalValue;
+        }
+    }
 }
