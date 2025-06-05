@@ -128,4 +128,76 @@ public class _873_c_GreedyApplicationsIntervals {
             return removed;
         }
     }
+
+    /**
+     * Problem 2: Minimum Number of Arrows to Burst Balloons (LeetCode 452)
+     * Find minimum arrows needed to burst all balloon intervals
+     */
+    public static class MinimumArrowShots {
+
+        /**
+         * Key insight: Each arrow bursts all overlapping balloons
+         * Touching boundaries count as overlapping for arrows
+         */
+        public static int findMinArrowShots(int[][] points) {
+            if (points.length == 0) return 0;
+
+            System.out.println("\n=== Minimum Arrow Shots Problem ===");
+            System.out.println("Balloon intervals: " + Arrays.deepToString(points));
+
+            // Sort by end position
+            Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
+            System.out.println("Sorted by end position: " + Arrays.deepToString(points));
+
+            int arrows = 1;
+            int arrowPosition = points[0][1]; // Shoot at end of first balloon
+
+            System.out.printf("Arrow 1 at position %d, bursts balloon [%d, %d]%n",
+                    arrowPosition, points[0][0], points[0][1]);
+
+            for (int i = 1; i < points.length; i++) {
+                int start = points[i][0];
+                int end = points[i][1];
+
+                // Key difference: use > instead of >= (touching boundaries overlap)
+                if (start > arrowPosition) {
+                    // Need new arrow
+                    arrows++;
+                    arrowPosition = end;
+                    System.out.printf("Arrow %d at position %d, bursts balloon [%d, %d]%n",
+                            arrows, arrowPosition, start, end);
+                } else {
+                    // Current arrow can burst this balloon too
+                    System.out.printf("Arrow %d also bursts balloon [%d, %d]%n",
+                            arrows, start, end);
+                }
+            }
+
+            System.out.println("Total arrows needed: " + arrows);
+            return arrows;
+        }
+
+        /**
+         * Demonstrate the difference between interval scheduling and arrow shooting
+         */
+        public static void demonstrateDifference() {
+            System.out.println("\n=== Key Difference: Boundary Handling ===");
+
+            int[][] intervals = {{1, 2}, {2, 3}, {3, 4}, {4, 5}};
+            System.out.println("Test intervals: " + Arrays.deepToString(intervals));
+
+            // For interval scheduling: touching boundaries don't overlap
+            System.out.println("\nInterval Scheduling (boundaries don't overlap):");
+            System.out.println("Condition: start >= lastEnd");
+            System.out.println("Result: All 4 intervals can be selected");
+
+            // For arrow shooting: touching boundaries do overlap
+            System.out.println("\nArrow Shooting (boundaries do overlap):");
+            System.out.println("Condition: start > arrowPosition");
+            System.out.println("Result: Need 4 arrows (each boundary touch requires new arrow)");
+
+            int arrows = findMinArrowShots(intervals);
+            System.out.println("Arrows needed: " + arrows);
+        }
+    }
 }
