@@ -1,7 +1,5 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling;
 
-import java.util.*;
-
 /**
  * GREEDY ALGORITHM APPLICATIONS - INTERVAL PROBLEMS
  * <p>
@@ -41,7 +39,51 @@ import java.util.*;
  * - Manufacturing: Production line optimization, machine scheduling
  */
 
+import java.util.*;
+
 public class _873_c_GreedyApplicationsIntervals {
+
+    public static void main(String[] args) {
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║           GREEDY ALGORITHM APPLICATIONS                     ║");
+        System.out.println("║              Interval-Based Problems                        ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // Test Problem 1: Non-overlapping Intervals
+        int[][] intervals1 = {{1, 2}, {2, 3}, {3, 4}, {1, 3}};
+        NonOverlappingIntervals.eraseOverlapIntervalsDetailed(intervals1);
+
+        // Test Problem 2: Minimum Arrow Shots
+        int[][] balloons = {{10, 16}, {2, 8}, {1, 6}, {7, 12}};
+        MinimumArrowShots.findMinArrowShots(balloons);
+        MinimumArrowShots.demonstrateDifference();
+
+        // Test Problem 3: Meeting Rooms
+        int[][] meetings = {{0, 30}, {5, 10}, {15, 20}};
+        MeetingRoomProblems.canAttendMeetings(meetings);
+        MeetingRoomProblems.minMeetingRooms(meetings);
+        MeetingRoomProblems.maxMeetingsInOneRoom(meetings);
+
+        // Show real-world applications
+        RealWorldApplications.demonstrateApplications();
+        RealWorldApplications.algorithmExtensions();
+
+        System.out.println("\n=== Summary of Key Insights ===");
+        System.out.println("1. CORE ALGORITHM: Sort by end time, greedily select non-overlapping");
+        System.out.println("2. ADAPTATIONS: Modify overlap definition and counting mechanism");
+        System.out.println("3. APPLICATIONS: Wide variety of scheduling and resource allocation problems");
+        System.out.println("4. COMPLEXITY: All variants maintain O(n log n) time complexity");
+        System.out.println("5. EXTENSIBILITY: Basic algorithm serves as foundation for advanced problems");
+
+        System.out.println("\n🎯 MASTERY CHECKLIST:");
+        System.out.println("□ Understand core interval scheduling algorithm");
+        System.out.println("□ Can adapt algorithm for different overlap definitions");
+        System.out.println("□ Recognize interval problems in real-world scenarios");
+        System.out.println("□ Can modify algorithm for counting vs selection problems");
+        System.out.println("□ Understand when greedy choice property applies to intervals");
+    }
+
     /**
      * Problem 1: Non-overlapping Intervals (LeetCode 435)
      * Remove minimum number of intervals to make remaining intervals non-overlapping
