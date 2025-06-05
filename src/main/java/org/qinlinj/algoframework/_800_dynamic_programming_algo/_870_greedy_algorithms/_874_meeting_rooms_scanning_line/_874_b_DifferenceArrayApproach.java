@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._874_meeting_rooms_scanning_line;
 
+import java.util.*;
+
 /**
  * MEETING ROOMS PROBLEM - DIFFERENCE ARRAY APPROACH
  * <p>
@@ -46,4 +48,66 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _874_b_DifferenceArrayApproach {
+    /**
+     * Basic difference array implementation
+     * Works well for small time ranges, demonstrates the core concept
+     */
+    public static class BasicDifferenceArray {
+
+        /**
+         * Difference array solution for meeting rooms
+         */
+        public static int minMeetingRoomsDifferenceArray(int[][] meetings) {
+            if (meetings.length == 0) return 0;
+
+            System.out.println("=== Difference Array Approach ===");
+            System.out.println("Meetings: " + Arrays.deepToString(meetings));
+
+            // Find the maximum time to determine array size
+            int maxTime = 0;
+            for (int[] meeting : meetings) {
+                maxTime = Math.max(maxTime, meeting[1]);
+            }
+
+            System.out.println("Timeline length needed: " + maxTime);
+
+            // Create difference array
+            int[] diff = new int[maxTime + 1];
+
+            // Apply range updates using difference array
+            System.out.println("\nApplying difference array updates:");
+            for (int i = 0; i < meetings.length; i++) {
+                int start = meetings[i][0];
+                int end = meetings[i][1];
+
+                diff[start]++;     // Meeting starts: +1
+                if (end < diff.length) {
+                    diff[end]--;   // Meeting ends: -1
+                }
+
+                System.out.printf("Meeting %d [%d,%d]: diff[%d]++, diff[%d]--%n",
+                        i, start, end, start, end);
+            }
+
+            // Show difference array state
+            System.out.println("\nDifference array: " + Arrays.toString(diff));
+
+            // Compute prefix sum to get actual meeting counts
+            int maxRooms = 0;
+            int currentMeetings = 0;
+
+            System.out.println("\nComputing prefix sum (actual meeting counts):");
+            for (int i = 0; i < diff.length; i++) {
+                currentMeetings += diff[i];
+                maxRooms = Math.max(maxRooms, currentMeetings);
+
+                if (diff[i] != 0 || i % 5 == 0) { // Print key time points
+                    System.out.printf("Time %d: %d meetings active%n", i, currentMeetings);
+                }
+            }
+
+            System.out.println("Maximum concurrent meetings: " + maxRooms);
+            return maxRooms;
+        }
+    }
 }
