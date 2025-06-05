@@ -1,4 +1,6 @@
-package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling; /**
+package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling;
+
+/**
  * GREEDY ALGORITHM INTRODUCTION AND CORE CONCEPTS
  * <p>
  * Key Concepts:
