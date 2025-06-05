@@ -1,8 +1,116 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._874_meeting_rooms_scanning_line;
 
+/**
+ * MEETING ROOMS PROBLEM EXTENSIONS AND VARIATIONS
+ * <p>
+ * Building on the core sweep line algorithm, this class explores various
+ * extensions and related problems that demonstrate the versatility of the
+ * interval processing pattern.
+ * <p>
+ * PROBLEM VARIATIONS COVERED:
+ * <p>
+ * 1. ROOM SUFFICIENCY CHECK:
+ * - Given k rooms, can we accommodate all meetings?
+ * - Simple modification: check if max concurrent <= k
+ * <p>
+ * 2. ACTUAL ROOM ASSIGNMENTS:
+ * - Which specific meetings go in which rooms?
+ * - Use priority queue to track room availability
+ * <p>
+ * 3. ROOM UTILIZATION OPTIMIZATION:
+ * - Maximize total meeting time given limited rooms
+ * - Dynamic programming with interval constraints
+ * <p>
+ * 4. MEETING SCHEDULING WITH PRIORITIES:
+ * - Some meetings are more important than others
+ * - Weighted interval scheduling problem
+ * <p>
+ * 5. RECURRING MEETINGS:
+ * - Handle weekly/daily repeating meetings
+ * - Expand time horizon and generate instances
+ * <p>
+ * 6. MEETING ROOM BOOKING SYSTEM:
+ * - Dynamic booking with real-time availability
+ * - Online algorithm with immediate responses
+ * <p>
+ * 7. MULTI-RESOURCE SCHEDULING:
+ * - Meetings need rooms + equipment + people
+ * - Multi-dimensional resource constraints
+ * <p>
+ * ALGORITHMIC PATTERNS:
+ * - Event processing: Core pattern for time-based problems
+ * - Priority queues: For tracking resource availability
+ * - Dynamic programming: For optimization with constraints
+ * - Greedy algorithms: For approximation and heuristics
+ * - Online algorithms: For real-time systems
+ * <p>
+ * REAL-WORLD APPLICATIONS:
+ * - Corporate meeting scheduling systems
+ * - Hospital operating room allocation
+ * - Manufacturing line scheduling
+ * - Cloud resource provisioning
+ * - Airport gate assignment
+ * - Classroom scheduling in universities
+ * <p>
+ * This comprehensive exploration shows how mastering one core algorithm
+ * opens doors to solving many related problems in different domains.
+ */
+
 import java.util.*;
 
 public class _874_d_MeetingRoomsExtensions {
+
+    public static void main(String[] args) {
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║             MEETING ROOMS EXTENSIONS                        ║");
+        System.out.println("║        Advanced Variations and Real-World Applications      ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // Test data
+        int[][] meetings = {{0, 30}, {5, 10}, {15, 20}, {25, 35}};
+
+        // Extension 1: Room sufficiency
+        RoomSufficiencyCheck.canAccommodateWithKRooms(meetings, 2);
+        RoomSufficiencyCheck.additionalRoomsNeeded(meetings, 1);
+
+        // Extension 2: Room assignments
+        RoomAssignment.assignMeetingsToRooms(meetings);
+
+        // Extension 3: Weighted scheduling
+        int[] weights = {10, 20, 15, 25};
+        WeightedMeetingScheduling.maximizeWeightedMeetings(meetings, weights, 2);
+
+        // Extension 4: Online booking
+        OnlineMeetingBooking bookingSystem = new OnlineMeetingBooking(2);
+        bookingSystem.bookMeeting(0, 10, 1);
+        bookingSystem.bookMeeting(5, 15, 2);
+        bookingSystem.bookMeeting(12, 20, 3);
+        bookingSystem.printUtilization();
+
+        // Extension 5: Multi-resource scheduling
+        MultiResourceScheduling.ResourceRequirement[] requirements = {
+                new MultiResourceScheduling.ResourceRequirement(1, 1, 2),
+                new MultiResourceScheduling.ResourceRequirement(1, 0, 1),
+                new MultiResourceScheduling.ResourceRequirement(1, 1, 1),
+                new MultiResourceScheduling.ResourceRequirement(1, 0, 2)
+        };
+        MultiResourceScheduling.scheduleMultiResourceMeetings(meetings, requirements);
+
+        System.out.println("\n=== Summary of Extensions ===");
+        System.out.println("1. ✅ Room Sufficiency: Check if k rooms are enough");
+        System.out.println("2. ✅ Room Assignment: Assign meetings to specific rooms");
+        System.out.println("3. ✅ Weighted Scheduling: Prioritize important meetings");
+        System.out.println("4. ✅ Online Booking: Real-time booking system");
+        System.out.println("5. ✅ Multi-Resource: Handle multiple resource types");
+        System.out.println();
+
+        System.out.println("🌟 REAL-WORLD IMPACT:");
+        System.out.println("These extensions show how the core sweep line algorithm");
+        System.out.println("can be adapted to solve complex resource allocation problems");
+        System.out.println("across many industries and applications!");
+    }
+
     /**
      * Extension 1: Room Sufficiency Check
      * Given k rooms, determine if all meetings can be accommodated
@@ -179,7 +287,6 @@ public class _874_d_MeetingRoomsExtensions {
             }
         }
     }
-
 
     /**
      * Extension 3: Meeting Priority and Weighted Scheduling
@@ -472,4 +579,3 @@ public class _874_d_MeetingRoomsExtensions {
         }
     }
 }
-
