@@ -217,5 +217,40 @@ public class _874_a_MeetingRoomsOverview {
             System.out.println("Merged result: " + Arrays.deepToString(result));
             return result;
         }
+
+        /**
+         * Scenario 5: Interval intersection (find common time slots)
+         * Two pointer approach on sorted intervals
+         */
+        public static int[][] intervalIntersection(int[][] list1, int[][] list2) {
+            System.out.println("\n=== Scenario 5: Interval Intersection ===");
+            System.out.println("Strategy: Two pointers on sorted lists");
+            System.out.println("List 1: " + Arrays.deepToString(list1));
+            System.out.println("List 2: " + Arrays.deepToString(list2));
+
+            List<int[]> result = new ArrayList<>();
+            int i = 0, j = 0;
+
+            while (i < list1.length && j < list2.length) {
+                int start = Math.max(list1[i][0], list2[j][0]);
+                int end = Math.min(list1[i][1], list2[j][1]);
+
+                if (start <= end) {
+                    result.add(new int[]{start, end});
+                    System.out.printf("Intersection: [%d, %d]%n", start, end);
+                }
+
+                // Move pointer of interval that ends earlier
+                if (list1[i][1] < list2[j][1]) {
+                    i++;
+                } else {
+                    j++;
+                }
+            }
+
+            int[][] intersections = result.toArray(new int[result.size()][]);
+            System.out.println("All intersections: " + Arrays.deepToString(intersections));
+            return intersections;
+        }
     }
 }
