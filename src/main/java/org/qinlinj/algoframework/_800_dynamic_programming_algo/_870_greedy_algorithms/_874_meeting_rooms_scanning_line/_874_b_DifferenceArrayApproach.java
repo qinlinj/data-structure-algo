@@ -109,5 +109,56 @@ public class _874_b_DifferenceArrayApproach {
             System.out.println("Maximum concurrent meetings: " + maxRooms);
             return maxRooms;
         }
+
+        /**
+         * Demonstrate the concept with step-by-step visualization
+         */
+        public static void demonstrateStepByStep(int[][] meetings) {
+            System.out.println("\n=== Step-by-Step Demonstration ===");
+
+            int maxTime = Arrays.stream(meetings)
+                    .flatMapToInt(meeting -> Arrays.stream(meeting))
+                    .max().orElse(0);
+
+            // Create timeline visualization
+            System.out.println("Timeline visualization:");
+            System.out.print("Time:     ");
+            for (int t = 0; t <= maxTime; t++) {
+                System.out.printf("%2d ", t);
+            }
+            System.out.println();
+
+            // Show each meeting on timeline
+            for (int i = 0; i < meetings.length; i++) {
+                System.out.printf("Meeting %d: ", i);
+                for (int t = 0; t <= maxTime; t++) {
+                    if (t >= meetings[i][0] && t < meetings[i][1]) {
+                        System.out.print(" * ");
+                    } else {
+                        System.out.print("   ");
+                    }
+                }
+                System.out.printf(" [%d,%d)%n", meetings[i][0], meetings[i][1]);
+            }
+
+            // Show concurrent count at each time
+            int[] count = new int[maxTime + 1];
+            for (int[] meeting : meetings) {
+                for (int t = meeting[0]; t < meeting[1]; t++) {
+                    count[t]++;
+                }
+            }
+
+            System.out.print("Count:    ");
+            for (int t = 0; t <= maxTime; t++) {
+                System.out.printf("%2d ", count[t]);
+            }
+            System.out.println();
+
+            int maxCount = Arrays.stream(count).max().orElse(0);
+            System.out.println("Maximum concurrent meetings: " + maxCount);
+        }
     }
+    
+
 }
