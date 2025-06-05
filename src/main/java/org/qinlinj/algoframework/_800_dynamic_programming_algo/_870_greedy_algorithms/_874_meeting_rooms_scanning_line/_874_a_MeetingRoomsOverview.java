@@ -1,7 +1,5 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._874_meeting_rooms_scanning_line;
 
-import java.util.*;
-
 /**
  * MEETING ROOMS PROBLEM OVERVIEW AND INTERVAL PROBLEM CLASSIFICATIONS
  * LeetCode 253: Meeting Rooms II (Premium Problem)
@@ -58,7 +56,56 @@ import java.util.*;
  * - Dynamic Programming: When optimal substructure with overlapping subproblems
  */
 
+import java.util.*;
+
 public class _874_a_MeetingRoomsOverview {
+
+    public static void main(String[] args) {
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                MEETING ROOMS PROBLEM OVERVIEW               ║");
+        System.out.println("║            Comprehensive Interval Problem Guide             ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
+        System.out.println();
+
+        // Demonstrate different interval problem scenarios
+        int[][] meetings = {{0, 30}, {5, 10}, {15, 20}};
+
+        // Scenario 1: Maximum meetings in one room
+        IntervalProblemClassification.maxMeetingsInOneRoom(meetings.clone());
+
+        // Scenario 2: Video segments
+        int[][] segments = {{0, 5}, {3, 8}, {7, 12}, {10, 15}};
+        int[] target = {0, 15};
+        IntervalProblemClassification.minVideoSegments(segments, target);
+
+        // Scenario 3: Remove covered intervals
+        int[][] intervals = {{1, 4}, {3, 6}, {2, 8}};
+        IntervalProblemClassification.removeCoveredIntervals(intervals);
+
+        // Scenario 4: Merge intervals
+        int[][] toMerge = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+        IntervalProblemClassification.mergeIntervals(toMerge);
+
+        // Scenario 5: Interval intersection
+        int[][] list1 = {{0, 2}, {5, 10}, {13, 23}, {24, 25}};
+        int[][] list2 = {{1, 5}, {8, 12}, {15, 24}, {25, 26}};
+        IntervalProblemClassification.intervalIntersection(list1, list2);
+
+        // Problem analysis
+        ProblemAnalysis.analyzeMeetingRoomsProblem();
+        ProblemAnalysis.compareApproaches();
+        ProblemAnalysis.demonstrateSweepLineAdvantage();
+
+        System.out.println("\n=== Key Takeaways ===");
+        System.out.println("1. Interval problems have recurring patterns and solutions");
+        System.out.println("2. Sorting strategy depends on problem requirements");
+        System.out.println("3. Meeting rooms problem = maximum overlap counting");
+        System.out.println("4. Sweep line algorithm is optimal for time-based problems");
+        System.out.println("5. Understanding patterns helps solve related problems quickly");
+
+        System.out.println("\nNext: We'll dive deep into the sweep line algorithm implementation!");
+    }
+
     /**
      * Problem classification and solution approaches
      */
@@ -97,7 +144,6 @@ public class _874_a_MeetingRoomsOverview {
             System.out.println("Maximum meetings in one room: " + count);
             return count;
         }
-
 
         /**
          * Scenario 2: Video segment coverage (Minimum segments to cover target)
@@ -251,6 +297,102 @@ public class _874_a_MeetingRoomsOverview {
             int[][] intersections = result.toArray(new int[result.size()][]);
             System.out.println("All intersections: " + Arrays.deepToString(intersections));
             return intersections;
+        }
+    }
+
+    /**
+     * Problem analysis and approach comparison
+     */
+    public static class ProblemAnalysis {
+
+        /**
+         * Analyze the core meeting rooms problem
+         */
+        public static void analyzeMeetingRoomsProblem() {
+            System.out.println("\n=== Meeting Rooms Problem Analysis ===");
+            System.out.println();
+
+            System.out.println("PROBLEM ESSENCE:");
+            System.out.println("- Input: Meeting intervals [start, end]");
+            System.out.println("- Output: Minimum meeting rooms needed");
+            System.out.println("- Core question: Maximum concurrent meetings at any time?");
+            System.out.println();
+
+            System.out.println("KEY INSIGHTS:");
+            System.out.println("1. Transform 'scheduling' to 'counting overlaps'");
+            System.out.println("2. Peak concurrent meetings = minimum rooms needed");
+            System.out.println("3. Track room occupancy changes over time");
+            System.out.println("4. Maximum occupancy gives the answer");
+            System.out.println();
+
+            System.out.println("APPROACH OPTIONS:");
+            System.out.println("1. Difference Array: Simulate time array, mark occupancy");
+            System.out.println("2. Sweep Line: Track events (start/end) with counter");
+            System.out.println("3. Priority Queue: Simulate room allocation directly");
+            System.out.println("4. Event Processing: Sort all events by time");
+        }
+
+        /**
+         * Compare different algorithmic approaches
+         */
+        public static void compareApproaches() {
+            System.out.println("\n=== Approach Comparison ===");
+
+            System.out.println("1. DIFFERENCE ARRAY:");
+            System.out.println("   - Time: O(max_time) for array creation + O(n) for processing");
+            System.out.println("   - Space: O(max_time) for the array");
+            System.out.println("   - Problem: Large time ranges create huge arrays");
+            System.out.println("   - Best for: Small, dense time ranges");
+            System.out.println();
+
+            System.out.println("2. SWEEP LINE (Two Pointers):");
+            System.out.println("   - Time: O(n log n) for sorting + O(n) for scanning");
+            System.out.println("   - Space: O(n) for start/end arrays");
+            System.out.println("   - Advantage: Efficient for any time range");
+            System.out.println("   - Best for: General case, large time ranges");
+            System.out.println();
+
+            System.out.println("3. PRIORITY QUEUE:");
+            System.out.println("   - Time: O(n log n) for sorting + O(n log n) for heap operations");
+            System.out.println("   - Space: O(n) for the heap");
+            System.out.println("   - Advantage: Natural simulation of room allocation");
+            System.out.println("   - Best for: When you need actual room assignments");
+            System.out.println();
+
+            System.out.println("4. EVENT PROCESSING:");
+            System.out.println("   - Time: O(n log n) for sorting events");
+            System.out.println("   - Space: O(n) for event list");
+            System.out.println("   - Advantage: Handles complex event types");
+            System.out.println("   - Best for: Multiple event types, extensible design");
+        }
+
+        /**
+         * Demonstrate why sweep line is optimal
+         */
+        public static void demonstrateSweepLineAdvantage() {
+            System.out.println("\n=== Why Sweep Line is Optimal ===");
+            System.out.println();
+
+            System.out.println("DIFFERENCE ARRAY LIMITATIONS:");
+            System.out.println("Example: meetings = [[0,30], [5,10], [10^8, 10^9]]");
+            System.out.println("- Need array of size 10^9 (1 billion elements)");
+            System.out.println("- Memory: ~4GB just for the array");
+            System.out.println("- Time: O(10^9) to initialize and scan");
+            System.out.println();
+
+            System.out.println("SWEEP LINE ADVANTAGES:");
+            System.out.println("- Only needs O(n) space regardless of time range");
+            System.out.println("- Time complexity O(n log n) independent of time values");
+            System.out.println("- Works efficiently for any time range");
+            System.out.println("- Elegant and mathematically sound");
+            System.out.println();
+
+            System.out.println("SWEEP LINE INTUITION:");
+            System.out.println("1. Imagine a vertical line moving left to right on timeline");
+            System.out.println("2. At each meeting start: increment room counter");
+            System.out.println("3. At each meeting end: decrement room counter");
+            System.out.println("4. Maximum counter value = minimum rooms needed");
+            System.out.println("5. Two pointers simulate this sweeping process efficiently");
         }
     }
 }
