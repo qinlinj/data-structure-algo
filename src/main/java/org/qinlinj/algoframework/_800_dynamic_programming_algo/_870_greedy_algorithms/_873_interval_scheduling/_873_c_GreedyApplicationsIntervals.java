@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._873_interval_scheduling;
+
+public class _873_c_GreedyApplicationsIntervals {
+}
