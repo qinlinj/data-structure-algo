@@ -261,5 +261,100 @@ public class _874_d_MeetingRoomsExtensions {
             }
         }
     }
+
+    /**
+     * Extension 4: Online Meeting Room Booking
+     * Handle booking requests in real-time
+     */
+    public static class OnlineMeetingBooking {
+
+        private TreeMap<Integer, Integer> bookedIntervals; // start -> end
+        private int totalRooms;
+
+        public OnlineMeetingBooking(int totalRooms) {
+            this.totalRooms = totalRooms;
+            this.bookedIntervals = new TreeMap<>();
+            System.out.println("=== Online Meeting Room Booking System ===");
+            System.out.println("Total rooms available: " + totalRooms);
+        }
+
+        /**
+         * Try to book a meeting, return true if successful
+         */
+        public boolean bookMeeting(int start, int end, int meetingId) {
+            System.out.printf("\nBooking request: Meeting %d [%d,%d]%n", meetingId, start, end);
+
+            // Check how many rooms are needed at any point in [start, end)
+            int maxConcurrent = getCurrentMaxConcurrent(start, end);
+
+            if (maxConcurrent < totalRooms) {
+                // Book the meeting
+                bookedIntervals.put(start, end);
+                System.out.printf("✅ Meeting %d booked successfully%n", meetingId);
+                System.out.println("Current bookings: " + bookedIntervals);
+                return true;
+            } else {
+                System.out.printf("❌ Meeting %d rejected (no available rooms)%n", meetingId);
+                return false;
+            }
+        }
+
+        /**
+         * Calculate max concurrent meetings in time range [start, end)
+         */
+        private int getCurrentMaxConcurrent(int newStart, int newEnd) {
+            // Collect all events including the new meeting
+            List<int[]> events = new ArrayList<>();
+
+            // Add existing meetings
+            for (Map.Entry<Integer, Integer> entry : bookedIntervals.entrySet()) {
+                events.add(new int[]{entry.getKey(), 1});   // start
+                events.add(new int[]{entry.getValue(), -1}); // end
+            }
+
+            // Add the new meeting
+            events.add(new int[]{newStart, 1});
+            events.add(new int[]{newEnd, -1});
+
+            // Sort events
+            events.sort((a, b) -> {
+                if (a[0] == b[0]) return Integer.compare(a[1], b[1]);
+                return Integer.compare(a[0], b[0]);
+            });
+
+            // Find maximum concurrent
+            int maxConcurrent = 0;
+            int current = 0;
+
+            for (int[] event : events) {
+                current += event[1];
+                maxConcurrent = Math.max(maxConcurrent, current);
+            }
+
+            return maxConcurrent;
+        }
+
+        /**
+         * Cancel a meeting
+         */
+        public void cancelMeeting(int start, int end) {
+            if (bookedIntervals.containsKey(start) && bookedIntervals.get(start) == end) {
+                bookedIntervals.remove(start);
+                System.out.printf("Meeting [%d,%d] cancelled%n", start, end);
+            } else {
+                System.out.printf("Meeting [%d,%d] not found%n", start, end);
+            }
+        }
+
+        /**
+         * Get current room utilization
+         */
+        public void printUtilization() {
+            System.out.println("\nCurrent utilization:");
+            System.out.println("Total rooms: " + totalRooms);
+            System.out.println("Booked meetings: " + bookedIntervals.size());
+            System.out.println("Active bookings: " + bookedIntervals);
+        }
+    }
 }
 
