@@ -143,5 +143,41 @@ public class _874_a_MeetingRoomsOverview {
             return currentEnd >= target[1] ? count : -1;
         }
 
+        /**
+         * Scenario 3: Remove covered intervals
+         * Sort by start time, then by end time (descending)
+         */
+        public static int removeCoveredIntervals(int[][] intervals) {
+            System.out.println("\n=== Scenario 3: Remove Covered Intervals ===");
+            System.out.println("Strategy: Sort and identify covered intervals");
+            System.out.println("Input: " + Arrays.deepToString(intervals));
+
+            // Sort by start time, then by end time (descending for same start)
+            Arrays.sort(intervals, (a, b) -> {
+                if (a[0] == b[0]) {
+                    return Integer.compare(b[1], a[1]); // Longer intervals first
+                }
+                return Integer.compare(a[0], b[0]);
+            });
+
+            System.out.println("Sorted: " + Arrays.deepToString(intervals));
+
+            int count = 0;
+            int prevEnd = 0;
+
+            for (int[] interval : intervals) {
+                if (interval[1] > prevEnd) {
+                    count++;
+                    prevEnd = interval[1];
+                    System.out.printf("Keep: [%d, %d]%n", interval[0], interval[1]);
+                } else {
+                    System.out.printf("Remove: [%d, %d] (covered)%n", interval[0], interval[1]);
+                }
+            }
+
+            System.out.println("Remaining intervals: " + count);
+            return count;
+        }
+
     }
 }
