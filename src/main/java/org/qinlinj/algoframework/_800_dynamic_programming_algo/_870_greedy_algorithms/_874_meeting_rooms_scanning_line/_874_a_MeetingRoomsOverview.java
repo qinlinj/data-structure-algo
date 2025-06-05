@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algorithms._874_meeting_rooms_scanning_line;
 
+import java.util.*;
+
 /**
  * MEETING ROOMS PROBLEM OVERVIEW AND INTERVAL PROBLEM CLASSIFICATIONS
  * LeetCode 253: Meeting Rooms II (Premium Problem)
@@ -57,4 +59,44 @@ package org.qinlinj.algoframework._800_dynamic_programming_algo._870_greedy_algo
  */
 
 public class _874_a_MeetingRoomsOverview {
+    /**
+     * Problem classification and solution approaches
+     */
+    public static class IntervalProblemClassification {
+
+        /**
+         * Scenario 1: Maximum meetings in one room (Activity Selection)
+         * Greedy approach: Sort by end time, select non-overlapping
+         */
+        public static int maxMeetingsInOneRoom(int[][] meetings) {
+            if (meetings.length == 0) return 0;
+
+            System.out.println("=== Scenario 1: Maximum Meetings in One Room ===");
+            System.out.println("Strategy: Greedy selection by earliest end time");
+            System.out.println("Input: " + Arrays.deepToString(meetings));
+
+            // Sort by end time
+            Arrays.sort(meetings, (a, b) -> Integer.compare(a[1], b[1]));
+
+            int count = 1;
+            int lastEnd = meetings[0][1];
+
+            System.out.println("Sorted by end time: " + Arrays.deepToString(meetings));
+            System.out.printf("Selected: [%d, %d]%n", meetings[0][0], meetings[0][1]);
+
+            for (int i = 1; i < meetings.length; i++) {
+                if (meetings[i][0] >= lastEnd) {
+                    count++;
+                    lastEnd = meetings[i][1];
+                    System.out.printf("Selected: [%d, %d]%n", meetings[i][0], meetings[i][1]);
+                } else {
+                    System.out.printf("Skipped: [%d, %d] (overlaps)%n", meetings[i][0], meetings[i][1]);
+                }
+            }
+
+            System.out.println("Maximum meetings in one room: " + count);
+            return count;
+        }
+
+    }
 }
