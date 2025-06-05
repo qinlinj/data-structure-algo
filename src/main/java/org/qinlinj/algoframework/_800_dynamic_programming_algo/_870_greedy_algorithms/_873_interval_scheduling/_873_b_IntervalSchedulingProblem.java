@@ -82,4 +82,102 @@ public class _873_b_IntervalSchedulingProblem {
         System.out.println("Total selected intervals: " + count);
         return count;
     }
+
+    /**
+     * Demonstrate why wrong greedy choices fail
+     */
+    public static class WrongGreedyApproaches {
+
+        /**
+         * Wrong approach 1: Select shortest intervals first
+         */
+        public static int selectShortestFirst(int[][] intervals) {
+            if (intervals.length == 0) return 0;
+
+            // Sort by interval length
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[1] - a[0], b[1] - b[0]));
+
+            System.out.println("=== Wrong Approach: Shortest First ===");
+            System.out.println("Sorted by length:");
+            for (int i = 0; i < intervals.length; i++) {
+                int length = intervals[i][1] - intervals[i][0];
+                System.out.printf("Interval %d: [%d, %d] length=%d%n",
+                        i, intervals[i][0], intervals[i][1], length);
+            }
+
+            int count = 1;
+            int lastEnd = intervals[0][1];
+            System.out.printf("Selected: [%d, %d]%n", intervals[0][0], intervals[0][1]);
+
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i][0] >= lastEnd) {
+                    count++;
+                    lastEnd = intervals[i][1];
+                    System.out.printf("Selected: [%d, %d]%n", intervals[i][0], intervals[i][1]);
+                } else {
+                    System.out.printf("Skipped: [%d, %d] (overlaps)%n", intervals[i][0], intervals[i][1]);
+                }
+            }
+
+            System.out.println("Result with shortest-first: " + count);
+            return count;
+        }
+
+        /**
+         * Wrong approach 2: Select earliest start time first
+         */
+        public static int selectEarliestStart(int[][] intervals) {
+            if (intervals.length == 0) return 0;
+
+            // Sort by start time
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+            System.out.println("\n=== Wrong Approach: Earliest Start ===");
+            System.out.println("Sorted by start time:");
+            for (int i = 0; i < intervals.length; i++) {
+                System.out.printf("Interval %d: [%d, %d]%n", i, intervals[i][0], intervals[i][1]);
+            }
+
+            int count = 1;
+            int lastEnd = intervals[0][1];
+            System.out.printf("Selected: [%d, %d]%n", intervals[0][0], intervals[0][1]);
+
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i][0] >= lastEnd) {
+                    count++;
+                    lastEnd = intervals[i][1];
+                    System.out.printf("Selected: [%d, %d]%n", intervals[i][0], intervals[i][1]);
+                } else {
+                    System.out.printf("Skipped: [%d, %d] (overlaps)%n", intervals[i][0], intervals[i][1]);
+                }
+            }
+
+            System.out.println("Result with earliest-start: " + count);
+            return count;
+        }
+
+        /**
+         * Demonstrate counterexamples for wrong approaches
+         */
+        public static void showCounterexamples() {
+            System.out.println("\n=== Counterexamples for Wrong Approaches ===");
+
+            // Counterexample for shortest-first approach
+            int[][] example1 = {{1, 100}, {2, 3}, {4, 5}};
+            System.out.println("Example 1: " + Arrays.deepToString(example1));
+            System.out.println("Optimal (earliest end): Select [2,3], [4,5] → count = 2");
+            System.out.println("Shortest first: Select [2,3], [4,5], skip [1,100] → count = 2");
+            System.out.println("Actually, this example doesn't break shortest-first. Let's try another:");
+
+            int[][] example2 = {{1, 10}, {2, 3}, {4, 5}, {6, 7}, {8, 9}};
+            System.out.println("\nExample 2: " + Arrays.deepToString(example2));
+            System.out.println("Optimal: Select [2,3], [4,5], [6,7], [8,9] → count = 4");
+            System.out.println("If we had [1,15] instead of [1,10]:");
+
+            int[][] example3 = {{1, 15}, {2, 3}, {4, 5}, {6, 7}, {8, 9}};
+            System.out.println("Example 3: " + Arrays.deepToString(example3));
+            System.out.println("Shortest first might select [2,3], then skip others due to [1,15]");
+            System.out.println("Optimal: Select [2,3], [4,5], [6,7], [8,9] → count = 4");
+        }
+    }
 }
