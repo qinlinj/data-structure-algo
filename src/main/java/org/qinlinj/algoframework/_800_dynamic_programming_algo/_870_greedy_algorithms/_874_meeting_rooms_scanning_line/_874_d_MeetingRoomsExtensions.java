@@ -356,5 +356,120 @@ public class _874_d_MeetingRoomsExtensions {
             System.out.println("Active bookings: " + bookedIntervals);
         }
     }
+
+    /**
+     * Extension 5: Multi-Resource Scheduling
+     * Meetings need rooms + equipment + people
+     */
+    public static class MultiResourceScheduling {
+
+        /**
+         * Schedule meetings with multiple resource constraints
+         */
+        public static boolean scheduleMultiResourceMeetings(
+                int[][] meetings, ResourceRequirement[] requirements) {
+
+            System.out.println("\n=== Multi-Resource Scheduling ===");
+            System.out.println("Meetings: " + Arrays.deepToString(meetings));
+            System.out.print("Requirements: ");
+            for (ResourceRequirement req : requirements) {
+                System.out.print(req + " ");
+            }
+            System.out.println();
+
+            // Initial resource availability
+            ResourceAvailability available = new ResourceAvailability(3, 2, 5);
+            System.out.println("Initial resources: " + available);
+
+            // Create events with resource requirements
+            List<int[]> events = new ArrayList<>();
+            for (int i = 0; i < meetings.length; i++) {
+                events.add(new int[]{meetings[i][0], 1, i});  // start, +1, meeting_id
+                events.add(new int[]{meetings[i][1], -1, i}); // end, -1, meeting_id
+            }
+
+            // Sort events
+            events.sort((a, b) -> {
+                if (a[0] == b[0]) return Integer.compare(a[1], b[1]);
+                return Integer.compare(a[0], b[0]);
+            });
+
+            // Process events
+            System.out.println("\nEvent processing:");
+            for (int[] event : events) {
+                int time = event[0];
+                int type = event[1];
+                int meetingId = event[2];
+                ResourceRequirement req = requirements[meetingId];
+
+                if (type == 1) {
+                    // Meeting starts
+                    if (available.canSupport(req)) {
+                        available.allocate(req);
+                        System.out.printf("Time %d: Meeting %d starts %s → %s%n",
+                                time, meetingId, req, available);
+                    } else {
+                        System.out.printf("Time %d: Meeting %d REJECTED %s (insufficient resources)%n",
+                                time, meetingId, req);
+                        return false;
+                    }
+                } else {
+                    // Meeting ends
+                    available.deallocate(req);
+                    System.out.printf("Time %d: Meeting %d ends, resources freed → %s%n",
+                            time, meetingId, available);
+                }
+            }
+
+            System.out.println("All meetings successfully scheduled!");
+            return true;
+        }
+
+        static class ResourceRequirement {
+            int rooms, projectors, laptops;
+
+            ResourceRequirement(int rooms, int projectors, int laptops) {
+                this.rooms = rooms;
+                this.projectors = projectors;
+                this.laptops = laptops;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("(R:%d,P:%d,L:%d)", rooms, projectors, laptops);
+            }
+        }
+
+        static class ResourceAvailability {
+            int rooms, projectors, laptops;
+
+            ResourceAvailability(int rooms, int projectors, int laptops) {
+                this.rooms = rooms;
+                this.projectors = projectors;
+                this.laptops = laptops;
+            }
+
+            boolean canSupport(ResourceRequirement req) {
+                return rooms >= req.rooms && projectors >= req.projectors && laptops >= req.laptops;
+            }
+
+            void allocate(ResourceRequirement req) {
+                rooms -= req.rooms;
+                projectors -= req.projectors;
+                laptops -= req.laptops;
+            }
+
+            void deallocate(ResourceRequirement req) {
+                rooms += req.rooms;
+                projectors += req.projectors;
+                laptops += req.laptops;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("Available(R:%d,P:%d,L:%d)", rooms, projectors, laptops);
+            }
+        }
+    }
 }
 
