@@ -200,4 +200,159 @@ public class _873_c_GreedyApplicationsIntervals {
             System.out.println("Arrows needed: " + arrows);
         }
     }
+
+    /**
+     * Problem 3: Meeting Rooms Variations
+     * Various meeting room scheduling problems
+     */
+    public static class MeetingRoomProblems {
+
+        /**
+         * Meeting Rooms I: Can attend all meetings?
+         */
+        public static boolean canAttendMeetings(int[][] intervals) {
+            if (intervals.length <= 1) return true;
+
+            System.out.println("\n=== Meeting Rooms I: Can Attend All? ===");
+            System.out.println("Meetings: " + Arrays.deepToString(intervals));
+
+            // Sort by start time
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i][0] < intervals[i - 1][1]) {
+                    System.out.printf("Conflict: Meeting [%d, %d] overlaps with [%d, %d]%n",
+                            intervals[i][0], intervals[i][1],
+                            intervals[i - 1][0], intervals[i - 1][1]);
+                    return false;
+                }
+            }
+
+            System.out.println("No conflicts - can attend all meetings");
+            return true;
+        }
+
+        /**
+         * Meeting Rooms II: Minimum meeting rooms needed
+         */
+        public static int minMeetingRooms(int[][] intervals) {
+            if (intervals.length == 0) return 0;
+
+            System.out.println("\n=== Meeting Rooms II: Minimum Rooms Needed ===");
+            System.out.println("Meetings: " + Arrays.deepToString(intervals));
+
+            // Create events for start and end times
+            List<int[]> events = new ArrayList<>();
+            for (int[] interval : intervals) {
+                events.add(new int[]{interval[0], 1});  // start: +1 room
+                events.add(new int[]{interval[1], -1}); // end: -1 room
+            }
+
+            // Sort events by time, end events before start events at same time
+            events.sort((a, b) -> {
+                if (a[0] == b[0]) return Integer.compare(a[1], b[1]);
+                return Integer.compare(a[0], b[0]);
+            });
+
+            int currentRooms = 0;
+            int maxRooms = 0;
+
+            System.out.println("Event processing:");
+            for (int[] event : events) {
+                currentRooms += event[1];
+                maxRooms = Math.max(maxRooms, currentRooms);
+                String eventType = event[1] == 1 ? "start" : "end";
+                System.out.printf("Time %d: %s event, current rooms: %d%n",
+                        event[0], eventType, currentRooms);
+            }
+
+            System.out.println("Maximum rooms needed: " + maxRooms);
+            return maxRooms;
+        }
+
+        /**
+         * Maximum meetings in one room (back to interval scheduling)
+         */
+        public static int maxMeetingsInOneRoom(int[][] intervals) {
+            System.out.println("\n=== Maximum Meetings in One Room ===");
+            System.out.println("This is exactly the interval scheduling problem!");
+
+            if (intervals.length == 0) return 0;
+
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1]));
+
+            int count = 1;
+            int lastEnd = intervals[0][1];
+
+            System.out.printf("Selected meeting: [%d, %d]%n", intervals[0][0], intervals[0][1]);
+
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i][0] >= lastEnd) {
+                    count++;
+                    lastEnd = intervals[i][1];
+                    System.out.printf("Selected meeting: [%d, %d]%n", intervals[i][0], intervals[i][1]);
+                }
+            }
+
+            System.out.println("Maximum meetings in one room: " + count);
+            return count;
+        }
+    }
+
+    /**
+     * Real-world applications and extensions
+     */
+    public static class RealWorldApplications {
+
+        /**
+         * Demonstrate various real-world scenarios
+         */
+        public static void demonstrateApplications() {
+            System.out.println("\n=== Real-World Applications ===");
+
+            System.out.println("1. PROJECT MANAGEMENT:");
+            System.out.println("   - Task scheduling with resource constraints");
+            System.out.println("   - Critical path optimization");
+            System.out.println("   - Milestone planning");
+
+            System.out.println("\n2. ENTERTAINMENT INDUSTRY:");
+            System.out.println("   - TV program scheduling");
+            System.out.println("   - Concert venue booking");
+            System.out.println("   - Movie theater scheduling");
+
+            System.out.println("\n3. TRANSPORTATION:");
+            System.out.println("   - Flight gate assignment");
+            System.out.println("   - Train platform scheduling");
+            System.out.println("   - Delivery route optimization");
+
+            System.out.println("\n4. MANUFACTURING:");
+            System.out.println("   - Machine scheduling");
+            System.out.println("   - Production line optimization");
+            System.out.println("   - Quality control checkpoint scheduling");
+
+            System.out.println("\n5. HEALTHCARE:");
+            System.out.println("   - Operating room scheduling");
+            System.out.println("   - Equipment allocation");
+            System.out.println("   - Staff shift optimization");
+        }
+
+        /**
+         * Show how to extend the basic algorithm
+         */
+        public static void algorithmExtensions() {
+            System.out.println("\n=== Algorithm Extensions ===");
+
+            System.out.println("BASIC INTERVAL SCHEDULING VARIATIONS:");
+            System.out.println("1. Weighted intervals: Each interval has a profit/weight");
+            System.out.println("2. Multiple resources: Schedule across multiple rooms/machines");
+            System.out.println("3. Preemption allowed: Can interrupt and resume activities");
+            System.out.println("4. Setup times: Time needed between different activities");
+
+            System.out.println("\nADVANCED EXTENSIONS:");
+            System.out.println("1. Online scheduling: Activities arrive dynamically");
+            System.out.println("2. Stochastic scheduling: Uncertain start/end times");
+            System.out.println("3. Multi-objective: Optimize multiple criteria simultaneously");
+            System.out.println("4. Distributed scheduling: Coordinate across multiple locations");
+        }
+    }
 }
