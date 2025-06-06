@@ -65,4 +65,38 @@ public class _912_b_CircularArrayOptimization {
         }
         System.out.println();
     }
+
+    /**
+     * Checks if a number is power of 2
+     */
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
+    }
+
+    /**
+     * Demonstrates why bitwise AND works as modulo replacement
+     */
+    public void explainBitwiseModulo(int arrayLength) {
+        if (!isPowerOfTwo(arrayLength)) {
+            System.out.println(arrayLength + " is not a power of 2, bitwise trick won't work");
+            return;
+        }
+
+        System.out.println("=== Why (index & (length-1)) == (index % length) ===");
+        System.out.printf("Array length: %d (binary: %s)\n",
+                arrayLength, Integer.toBinaryString(arrayLength));
+        System.out.printf("Length - 1: %d (binary: %s)\n",
+                arrayLength - 1, Integer.toBinaryString(arrayLength - 1));
+
+        System.out.println("\nTesting various indices:");
+        for (int i = 0; i < arrayLength * 2; i++) {
+            int modResult = i % arrayLength;
+            int bitResult = i & (arrayLength - 1);
+            System.out.printf("index=%d: %% gives %d, & gives %d (binary: %s & %s = %s)\n",
+                    i, modResult, bitResult,
+                    String.format("%4s", Integer.toBinaryString(i)).replace(' ', '0'),
+                    Integer.toBinaryString(arrayLength - 1),
+                    String.format("%4s", Integer.toBinaryString(bitResult)).replace(' ', '0'));
+        }
+    }
 }
