@@ -37,4 +37,16 @@ public class _912_c_EliminateLastBit {
         }
         return count;
     }
+
+    /**
+     * Alternative implementation treating n as unsigned value
+     */
+    public int hammingWeightUnsigned(int n) {
+        int count = 0;
+        while (n != 0) {
+            n &= (n - 1);  // Remove rightmost 1
+            count++;
+        }
+        return count;
+    }
 }
