@@ -25,4 +25,23 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _912_b_CircularArrayOptimization {
+    /**
+     * Demonstrates circular array traversal using modulo operation
+     */
+    public void traverseWithModulo(int[] arr, int steps, boolean forward) {
+        System.out.println("=== Traversal with Modulo (%) ===");
+        System.out.println("Array: " + java.util.Arrays.toString(arr));
+
+        int index = 0;
+        for (int i = 0; i < steps; i++) {
+            System.out.print(arr[index % arr.length] + " ");
+            index = forward ? index + 1 : index - 1;
+
+            // Handle negative index for modulo
+            if (!forward && index < 0) {
+                index = arr.length - 1;
+            }
+        }
+        System.out.println();
+    }
 }
