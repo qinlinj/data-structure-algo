@@ -27,8 +27,48 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * Time Complexity: O(1)
  * Space Complexity: O(1)
  */
-
 public class _911_c_BulbSwitch {
+
+    public static void main(String[] args) {
+        _911_c_BulbSwitch bulbGame = new _911_c_BulbSwitch();
+
+        System.out.println("=== Bulb Switch Test Cases ===");
+
+        // Test various values
+        int[] testCases = {1, 3, 4, 9, 16, 25, 100};
+
+        for (int n : testCases) {
+            int mathResult = bulbGame.bulbSwitch(n);
+            int simResult = bulbGame.simulateBulbSwitch(n);
+
+            System.out.printf("n=%d: Math solution=%d, Simulation=%d ✓\n",
+                    n, mathResult, simResult);
+        }
+
+        System.out.println("\n=== Detailed Analysis ===");
+
+        // Demonstrate why certain bulbs stay on
+        int[] analyzeList = {1, 4, 9, 16, 25};
+        for (int bulb : analyzeList) {
+            bulbGame.demonstrateBulb(bulb);
+            System.out.println();
+        }
+
+        System.out.println("=== Pattern Recognition ===");
+        System.out.println("Perfect squares ≤ 100:");
+        for (int i = 1; i * i <= 100; i++) {
+            System.out.print(i * i + " ");
+        }
+        System.out.println("\nCount: " + (int) Math.sqrt(100));
+
+        System.out.println("\n=== Why This Works ===");
+        System.out.println("• Most numbers have even divisors (pairs: d and n/d)");
+        System.out.println("• Perfect squares have odd divisors (√n pairs with itself)");
+        System.out.println("• Odd toggles = ON, Even toggles = OFF");
+        System.out.println("• Therefore: Only perfect squares stay ON");
+        System.out.println("• Answer: floor(√n) = count of perfect squares ≤ n");
+    }
+
     /**
      * Calculates how many bulbs are on after n rounds of toggling
      *
