@@ -25,4 +25,16 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _912_c_EliminateLastBit {
+    /**
+     * Counts the number of 1s in binary representation (Hamming Weight)
+     * LeetCode 191: Number of 1 Bits
+     */
+    public int hammingWeight(int n) {
+        int count = 0;
+        while (n != 0) {
+            n = n & (n - 1);  // Remove rightmost 1
+            count++;
+        }
+        return count;
+    }
 }
