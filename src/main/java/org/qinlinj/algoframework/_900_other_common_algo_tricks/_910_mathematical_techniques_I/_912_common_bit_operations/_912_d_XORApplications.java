@@ -27,4 +27,35 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _912_d_XORApplications {
+
+    /**
+     * Finds the single number that appears once while others appear twice
+     * LeetCode 136: Single Number
+     */
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for (int num : nums) {
+            result ^= num;
+        }
+        return result;
+    }
+
+    /**
+     * Finds the missing number in range [0, n]
+     * LeetCode 268: Missing Number
+     */
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        int result = 0;
+
+        // XOR with the extra index n
+        result ^= n;
+
+        // XOR all indices and array elements
+        for (int i = 0; i < n; i++) {
+            result ^= i ^ nums[i];
+        }
+
+        return result;
+    }
 }
