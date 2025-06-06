@@ -78,4 +78,26 @@ public class _911_c_BulbSwitch {
         }
         System.out.println();
     }
+
+    /**
+     * Simulates the actual bulb switching process (for verification)
+     */
+    public int simulateBulbSwitch(int n) {
+        boolean[] bulbs = new boolean[n + 1]; // 1-indexed
+
+        // Perform n rounds
+        for (int round = 1; round <= n; round++) {
+            for (int bulb = round; bulb <= n; bulb += round) {
+                bulbs[bulb] = !bulbs[bulb]; // toggle
+            }
+        }
+
+        // Count bulbs that are on
+        int count = 0;
+        for (int i = 1; i <= n; i++) {
+            if (bulbs[i]) count++;
+        }
+
+        return count;
+    }
 }
