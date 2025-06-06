@@ -44,4 +44,25 @@ public class _912_b_CircularArrayOptimization {
         }
         System.out.println();
     }
+
+    /**
+     * Demonstrates circular array traversal using bitwise AND optimization
+     * ONLY works when array length is power of 2!
+     */
+    public void traverseWithBitwise(int[] arr, int steps, boolean forward) {
+        if (!isPowerOfTwo(arr.length)) {
+            System.out.println("Warning: Bitwise optimization only works for power-of-2 lengths!");
+            return;
+        }
+
+        System.out.println("=== Traversal with Bitwise (&) ===");
+        System.out.println("Array: " + java.util.Arrays.toString(arr));
+
+        int index = 0;
+        for (int i = 0; i < steps; i++) {
+            System.out.print(arr[index & (arr.length - 1)] + " ");
+            index = forward ? index + 1 : index - 1;
+        }
+        System.out.println();
+    }
 }
