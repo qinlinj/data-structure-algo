@@ -58,4 +58,20 @@ public class _912_d_XORApplications {
 
         return result;
     }
+
+    /**
+     * Alternative missing number solution using sum formula
+     */
+    public int missingNumberSum(int[] nums) {
+        int n = nums.length;
+        // Expected sum: 0 + 1 + 2 + ... + n = n*(n+1)/2
+        long expectedSum = (long) n * (n + 1) / 2;
+        long actualSum = 0;
+
+        for (int num : nums) {
+            actualSum += num;
+        }
+
+        return (int) (expectedSum - actualSum);
+    }
 }
