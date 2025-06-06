@@ -40,4 +40,42 @@ public class _911_c_BulbSwitch {
         // Count of perfect squares ≤ n is floor(√n)
         return (int) Math.sqrt(n);
     }
+
+    /**
+     * Demonstrates the divisor pattern for a specific bulb
+     */
+    public void demonstrateBulb(int bulbNum) {
+        System.out.println("Analyzing bulb " + bulbNum + ":");
+
+        // Find all divisors
+        java.util.List<Integer> divisors = new java.util.ArrayList<>();
+        for (int i = 1; i <= bulbNum; i++) {
+            if (bulbNum % i == 0) {
+                divisors.add(i);
+            }
+        }
+
+        System.out.println("Divisors: " + divisors);
+        System.out.println("Number of toggles: " + divisors.size());
+
+        boolean isPerfectSquare = (int) Math.sqrt(bulbNum) * (int) Math.sqrt(bulbNum) == bulbNum;
+        String status = (divisors.size() % 2 == 1) ? "ON" : "OFF";
+
+        System.out.println("Perfect square: " + isPerfectSquare);
+        System.out.println("Final status: " + status);
+
+        // Show factor pairs
+        System.out.print("Factor pairs: ");
+        for (int d : divisors) {
+            int pair = bulbNum / d;
+            if (d <= pair) {
+                if (d == pair) {
+                    System.out.print(d + "×" + d + " ");
+                } else {
+                    System.out.print(d + "×" + pair + " ");
+                }
+            }
+        }
+        System.out.println();
+    }
 }
