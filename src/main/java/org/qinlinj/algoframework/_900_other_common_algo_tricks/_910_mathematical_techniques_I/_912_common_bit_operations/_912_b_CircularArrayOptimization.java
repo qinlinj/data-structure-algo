@@ -23,8 +23,51 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * Time Complexity: O(1) for index calculation vs O(log n) for modulo
  * Space Complexity: O(1)
  */
-
 public class _912_b_CircularArrayOptimization {
+
+    public static void main(String[] args) {
+        _912_b_CircularArrayOptimization optimizer = new _912_b_CircularArrayOptimization();
+
+        // Test with power-of-2 array
+        int[] powerOf2Array = {1, 2, 3, 4, 5, 6, 7, 8};
+        System.out.println("=== Testing with Power-of-2 Array (length=8) ===");
+        optimizer.traverseWithModulo(powerOf2Array, 12, true);
+        optimizer.traverseWithBitwise(powerOf2Array, 12, true);
+
+        System.out.println("\n=== Backward Traversal ===");
+        optimizer.traverseWithModulo(powerOf2Array, 12, false);
+        optimizer.traverseWithBitwise(powerOf2Array, 12, false);
+
+        System.out.println();
+        optimizer.explainBitwiseModulo(8);
+
+        // Test with non-power-of-2 array
+        System.out.println("\n=== Testing with Non-Power-of-2 Array (length=6) ===");
+        int[] nonPowerOf2Array = {1, 2, 3, 4, 5, 6};
+        optimizer.traverseWithModulo(nonPowerOf2Array, 10, true);
+        optimizer.traverseWithBitwise(nonPowerOf2Array, 10, true);
+
+        // Performance test
+        System.out.println();
+        optimizer.performanceTest(powerOf2Array, 1000000);
+
+        // Power of 2 testing
+        System.out.println("\n=== Power of 2 Testing ===");
+        int[] testNumbers = {1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 32, 63, 64};
+        for (int num : testNumbers) {
+            boolean isPow2 = optimizer.isPowerOfTwo(num);
+            int nextPow2 = optimizer.nextPowerOfTwo(num);
+            System.out.printf("%d: isPowerOf2=%b, nextPowerOf2=%d\n", num, isPow2, nextPow2);
+        }
+
+        System.out.println("\n=== Key Takeaways ===");
+        System.out.println("1. (index & (length-1)) replaces (index % length) when length is power of 2");
+        System.out.println("2. Bitwise AND is much faster than modulo division");
+        System.out.println("3. Works for both forward and backward traversal");
+        System.out.println("4. Common in high-performance libraries (Java HashMap, etc.)");
+        System.out.println("5. Only applicable when array size can be a power of 2");
+    }
+
     /**
      * Demonstrates circular array traversal using modulo operation
      */
@@ -98,5 +141,53 @@ public class _912_b_CircularArrayOptimization {
                     Integer.toBinaryString(arrayLength - 1),
                     String.format("%4s", Integer.toBinaryString(bitResult)).replace(' ', '0'));
         }
+    }
+
+    /**
+     * Performance comparison between modulo and bitwise operations
+     */
+    public void performanceTest(int[] arr, int iterations) {
+        if (!isPowerOfTwo(arr.length)) {
+            System.out.println("Skipping performance test - array length must be power of 2");
+            return;
+        }
+
+        System.out.println("=== Performance Comparison ===");
+
+        // Test modulo operation
+        long startTime = System.nanoTime();
+        int sum1 = 0;
+        for (int i = 0; i < iterations; i++) {
+            sum1 += arr[i % arr.length];
+        }
+        long moduloTime = System.nanoTime() - startTime;
+
+        // Test bitwise operation
+        startTime = System.nanoTime();
+        int sum2 = 0;
+        for (int i = 0; i < iterations; i++) {
+            sum2 += arr[i & (arr.length - 1)];
+        }
+        long bitwiseTime = System.nanoTime() - startTime;
+
+        System.out.printf("Modulo operation: %d ns\n", moduloTime);
+        System.out.printf("Bitwise operation: %d ns\n", bitwiseTime);
+        System.out.printf("Speedup: %.2fx\n", (double) moduloTime / bitwiseTime);
+        System.out.printf("Results match: %b\n", sum1 == sum2);
+    }
+
+    /**
+     * Extends array length to next power of 2
+     */
+    public int nextPowerOfTwo(int n) {
+        if (n <= 0) return 1;
+        if (isPowerOfTwo(n)) return n;
+
+        // Find next power of 2
+        int power = 1;
+        while (power < n) {
+            power <<= 1;
+        }
+        return power;
     }
 }
