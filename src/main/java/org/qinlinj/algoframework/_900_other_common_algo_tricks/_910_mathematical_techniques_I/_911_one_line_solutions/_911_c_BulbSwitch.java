@@ -29,4 +29,15 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _911_c_BulbSwitch {
+    /**
+     * Calculates how many bulbs are on after n rounds of toggling
+     *
+     * @param n number of bulbs and rounds
+     * @return number of bulbs that are on
+     */
+    public int bulbSwitch(int n) {
+        // Only perfect squares will be on (odd number of divisors)
+        // Count of perfect squares ≤ n is floor(√n)
+        return (int) Math.sqrt(n);
+    }
 }
