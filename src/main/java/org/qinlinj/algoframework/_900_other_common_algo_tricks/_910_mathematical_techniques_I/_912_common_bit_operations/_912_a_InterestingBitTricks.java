@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematical_techniques_I._912_common_bit_operations;
+
+public class _912_a_InterestingBitTricks {
+}
