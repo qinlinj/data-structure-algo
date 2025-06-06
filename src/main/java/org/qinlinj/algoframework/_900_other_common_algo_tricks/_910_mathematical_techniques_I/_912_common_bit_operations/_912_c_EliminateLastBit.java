@@ -49,4 +49,13 @@ public class _912_c_EliminateLastBit {
         }
         return count;
     }
+
+    /**
+     * Checks if a number is power of 2
+     * LeetCode 231: Power of Two
+     */
+    public boolean isPowerOfTwo(int n) {
+        if (n <= 0) return false;
+        return (n & (n - 1)) == 0;
+    }
 }
