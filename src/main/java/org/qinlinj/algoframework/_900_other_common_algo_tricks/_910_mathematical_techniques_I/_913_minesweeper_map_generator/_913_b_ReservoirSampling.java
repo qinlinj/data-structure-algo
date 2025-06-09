@@ -36,6 +36,61 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _913_b_ReservoirSampling {
+    private java.util.Random random;
+
+    public _913_b_ReservoirSampling() {
+        this.random = new java.util.Random();
+    }
+
+    public _913_b_ReservoirSampling(long seed) {
+        this.random = new java.util.Random(seed);
+    }
+
+    /**
+     * Generates mine positions using Reservoir Sampling algorithm
+     *
+     * @param width     board width
+     * @param height    board height
+     * @param mineCount number of mines to place
+     * @return list of mine positions
+     */
+    public java.util.List<Position> generateMinePositions(int width, int height, int mineCount) {
+        if (mineCount > width * height) {
+            throw new IllegalArgumentException("Mine count cannot exceed total cells");
+        }
+        if (mineCount < 0) {
+            throw new IllegalArgumentException("Mine count cannot be negative");
+        }
+        if (mineCount == 0) {
+            return new java.util.ArrayList<>();
+        }
+
+        // Reservoir to store selected mine positions
+        Position[] reservoir = new Position[mineCount];
+        int totalCells = width * height;
+
+        // Process each position as a stream
+        for (int i = 0; i < totalCells; i++) {
+            // Convert 1D index to 2D coordinates
+            int x = i % width;
+            int y = i / width;
+            Position currentPos = new Position(x, y);
+
+            if (i < mineCount) {
+                // Fill reservoir with first mineCount positions
+                reservoir[i] = currentPos;
+            } else {
+                // For subsequent positions, replace with probability mineCount/(i+1)
+                int randomIndex = random.nextInt(i + 1);
+                if (randomIndex < mineCount) {
+                    reservoir[randomIndex] = currentPos;
+                }
+            }
+        }
+
+        return java.util.Arrays.asList(reservoir);
+    }
+
     /**
      * Represents a position on the minesweeper board
      */
