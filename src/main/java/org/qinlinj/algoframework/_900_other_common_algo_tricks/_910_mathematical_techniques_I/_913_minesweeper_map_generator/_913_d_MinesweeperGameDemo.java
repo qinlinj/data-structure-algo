@@ -108,6 +108,34 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Fisher-Yates mine generation (avoiding first click)
+     */
+    private java.util.List<Position> generateMinesFisherYates(Position avoid) {
+        java.util.List<Position> positions = new java.util.ArrayList<>();
+
+        // Create all positions except the first click
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Position pos = new Position(x, y);
+                if (!pos.equals(avoid)) {
+                    positions.add(pos);
+                }
+            }
+        }
+
+        // Shuffle using Fisher-Yates
+        for (int i = positions.size() - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            Position temp = positions.get(i);
+            positions.set(i, positions.get(j));
+            positions.set(j, temp);
+        }
+
+        return positions.subList(0, mineCount);
+    }
+
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
