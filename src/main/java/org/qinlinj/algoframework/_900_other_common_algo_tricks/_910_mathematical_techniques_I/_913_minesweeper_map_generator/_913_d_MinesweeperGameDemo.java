@@ -392,6 +392,15 @@ public class _913_d_MinesweeperGameDemo {
         }
     }
 
+    /**
+     * Gets current game status string
+     */
+    private String getGameStatus() {
+        if (gameWon) return "WON! 🎉";
+        if (gameLost) return "LOST 💥";
+        if (gameStarted) return "Playing...";
+        return "Ready to start";
+    }
 
     /**
      * Cell states in the game
