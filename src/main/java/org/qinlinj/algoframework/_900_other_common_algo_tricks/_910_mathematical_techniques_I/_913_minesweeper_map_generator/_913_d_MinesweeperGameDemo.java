@@ -166,6 +166,20 @@ public class _913_d_MinesweeperGameDemo {
 
 
     /**
+     * Calculates adjacent mine counts for all cells
+     */
+    private void calculateAdjacentMines() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (!board[y][x].hasMine) {
+                    board[y][x].adjacentMines = countAdjacentMines(x, y);
+                }
+            }
+        }
+    }
+
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
