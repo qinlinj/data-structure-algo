@@ -89,6 +89,27 @@ public class _913_a_FisherYatesShuffle {
     }
 
     /**
+     * Creates a visual representation of the minesweeper board
+     */
+    public char[][] createBoard(int width, int height, java.util.List<Position> minePositions) {
+        char[][] board = new char[height][width];
+
+        // Initialize with empty cells
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                board[y][x] = '.';
+            }
+        }
+
+        // Place mines
+        for (Position mine : minePositions) {
+            board[mine.y][mine.x] = '*';
+        }
+
+        return board;
+    }
+
+    /**
      * Represents a position on the minesweeper board
      */
     public static class Position {
