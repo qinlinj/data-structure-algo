@@ -39,6 +39,32 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _913_d_MinesweeperGameDemo {
+    // Game state
+    private final int width, height, mineCount;
+    private final Cell[][] board;
+    private final GenerationAlgorithm algorithm;
+    private boolean gameStarted;
+    private boolean gameWon;
+    private boolean gameLost;
+    private int revealedCells;
+    private int flaggedCells;
+    private long gameStartTime;
+    private java.util.Random random;
+    public _913_d_MinesweeperGameDemo(int width, int height, int mineCount, GenerationAlgorithm algorithm) {
+        this.width = width;
+        this.height = height;
+        this.mineCount = mineCount;
+        this.algorithm = algorithm;
+        this.board = new Cell[height][width];
+        this.gameStarted = false;
+        this.gameWon = false;
+        this.gameLost = false;
+        this.revealedCells = 0;
+        this.flaggedCells = 0;
+        this.random = new java.util.Random();
+
+        initializeBoard();
+    }
     /**
      * Cell states in the game
      */
@@ -48,7 +74,14 @@ public class _913_d_MinesweeperGameDemo {
         FLAGGED,    // Marked as suspected mine
         EXPLODED    // Mine that was clicked
     }
-    
+    /**
+     * Mine generation algorithms
+     */
+    public enum GenerationAlgorithm {
+        FISHER_YATES,
+        RESERVOIR_SAMPLING
+    }
+
     /**
      * Position class for board coordinates
      */
