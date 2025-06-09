@@ -60,7 +60,7 @@ public class _913_c_MonteCarloVerification {
             return positions.subList(0, m);
         };
 
-        MineGenerator reservoir = (w, h, m) -> {
+        MineGenerator reservoir1 = (w, h, m) -> {
             // Simplified Reservoir Sampling for testing
             java.util.Random rand = new java.util.Random();
             Position[] reservoir = new Position[m];
@@ -92,13 +92,13 @@ public class _913_c_MonteCarloVerification {
         // Algorithm comparison
         java.util.Map<String, MineGenerator> algorithms = new java.util.HashMap<>();
         algorithms.put("Fisher-Yates", fisherYates);
-        algorithms.put("Reservoir Sampling", reservoir);
+        algorithms.put("Reservoir Sampling", reservoir1);
 
         verifier.compareAlgorithms(algorithms, 6, 6, 6, 5000);
 
         // Large scale test
         System.out.println("\n=== Large Scale Test ===");
-        results = verifier.runSimulation(reservoir, 10, 10, 15, 10000);
+        results = verifier.runSimulation(reservoir1, 10, 10, 15, 10000);
         verifier.analyzeResults(results);
 
         System.out.println("\n=== Key Insights ===");
