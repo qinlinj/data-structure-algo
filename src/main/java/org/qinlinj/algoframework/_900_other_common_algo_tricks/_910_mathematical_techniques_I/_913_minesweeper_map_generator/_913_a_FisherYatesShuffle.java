@@ -30,6 +30,16 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _913_a_FisherYatesShuffle {
+    private java.util.Random random;
+
+    public _913_a_FisherYatesShuffle() {
+        this.random = new java.util.Random();
+    }
+
+    public _913_a_FisherYatesShuffle(long seed) {
+        this.random = new java.util.Random(seed);
+    }
+
     /**
      * Represents a position on the minesweeper board
      */
