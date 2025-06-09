@@ -28,8 +28,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * <p>
  * Applications: Small to medium sized minesweeper boards where memory is not a constraint
  */
-
 public class _913_a_FisherYatesShuffle {
+
     private java.util.Random random;
 
     public _913_a_FisherYatesShuffle() {
@@ -38,6 +38,70 @@ public class _913_a_FisherYatesShuffle {
 
     public _913_a_FisherYatesShuffle(long seed) {
         this.random = new java.util.Random(seed);
+    }
+
+    public static void main(String[] args) {
+        _913_a_FisherYatesShuffle generator = new _913_a_FisherYatesShuffle(42); // Fixed seed for reproducibility
+
+        // Test with small board for demonstration
+        System.out.println("=== Small Board Example ===");
+        int width = 4, height = 3, mineCount = 3;
+
+        generator.demonstrateShuffle(width, height, mineCount);
+
+        java.util.List<Position> mines = generator.generateMinePositions(width, height, mineCount);
+        char[][] board = generator.createBoard(width, height, mines);
+        generator.printBoard(board);
+
+        // Analysis
+        generator.analyzeComplexity(width, height, mineCount);
+
+        // Test with different board sizes
+        System.out.println("=== Different Board Sizes ===");
+        int[][] testCases = {
+                {5, 5, 5},      // Small board
+                {10, 10, 15},   // Medium board
+                {20, 15, 50},   // Larger board
+        };
+
+        for (int[] testCase : testCases) {
+            width = testCase[0];
+            height = testCase[1];
+            mineCount = testCase[2];
+
+            System.out.printf("Board %dx%d with %d mines:\n", width, height, mineCount);
+
+            long startTime = System.nanoTime();
+            mines = generator.generateMinePositions(width, height, mineCount);
+            long endTime = System.nanoTime();
+
+            System.out.printf("Generated in %.2f ms\n", (endTime - startTime) / 1_000_000.0);
+            System.out.printf("Memory used: %d positions\n", width * height);
+            System.out.println("First 5 mines: " + mines.subList(0, Math.min(5, mines.size())));
+            System.out.println();
+        }
+
+        // Edge cases
+        System.out.println("=== Edge Cases ===");
+
+        // Minimum mines
+        mines = generator.generateMinePositions(3, 3, 0);
+        System.out.println("No mines: " + mines);
+
+        // Maximum mines
+        mines = generator.generateMinePositions(3, 3, 9);
+        System.out.println("All mines: " + mines);
+
+        // Single mine
+        mines = generator.generateMinePositions(3, 3, 1);
+        System.out.println("Single mine: " + mines);
+
+        System.out.println("\n=== Key Takeaways ===");
+        System.out.println("1. Fisher-Yates provides perfect uniform distribution");
+        System.out.println("2. Simple to implement and understand");
+        System.out.println("3. Suitable for small to medium boards");
+        System.out.println("4. Memory usage grows with board size, not mine count");
+        System.out.println("5. Foundation for more advanced sampling algorithms");
     }
 
     /**
@@ -109,7 +173,6 @@ public class _913_a_FisherYatesShuffle {
         return board;
     }
 
-
     /**
      * Prints the board in a readable format
      */
@@ -121,6 +184,74 @@ public class _913_a_FisherYatesShuffle {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * Demonstrates the shuffle process step by step
+     */
+    public void demonstrateShuffle(int width, int height, int mineCount) {
+        System.out.println("=== Fisher-Yates Shuffle Demonstration ===");
+        System.out.printf("Board: %dx%d, Mines: %d\n", width, height, mineCount);
+
+        // Create all positions
+        java.util.List<Position> positions = new java.util.ArrayList<>();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                positions.add(new Position(x, y));
+            }
+        }
+
+        System.out.println("All positions: " + positions);
+
+        // Show shuffle process for small example
+        if (positions.size() <= 12) {
+            System.out.println("\nShuffle steps:");
+            for (int i = positions.size() - 1; i > 0; i--) {
+                int j = random.nextInt(i + 1);
+                System.out.printf("Step %d: Swap position %d with position %d (%s <-> %s)\n",
+                        positions.size() - i, i, j, positions.get(i), positions.get(j));
+
+                // Perform swap
+                Position temp = positions.get(i);
+                positions.set(i, positions.get(j));
+                positions.set(j, temp);
+            }
+        } else {
+            fisherYatesShuffle(positions);
+        }
+
+        System.out.println("After shuffle: " + positions);
+        System.out.println("Selected mines: " + positions.subList(0, mineCount));
+        System.out.println();
+    }
+
+    /**
+     * Analyzes the complexity and properties of the algorithm
+     */
+    public void analyzeComplexity(int width, int height, int mineCount) {
+        System.out.println("=== Algorithm Analysis ===");
+        System.out.printf("Board size: %d × %d = %d cells\n", width, height, width * height);
+        System.out.printf("Mine count: %d\n", mineCount);
+        System.out.printf("Mine probability per cell: %.4f\n", (double) mineCount / (width * height));
+
+        System.out.println("\nComplexity Analysis:");
+        System.out.println("Time Complexity: O(width × height)");
+        System.out.println("- Must create and shuffle all positions");
+        System.out.println("- Fisher-Yates shuffle takes O(n) time");
+
+        System.out.println("Space Complexity: O(width × height)");
+        System.out.println("- Must store all possible positions");
+        System.out.println("- Not suitable for very large boards");
+
+        System.out.println("\nAdvantages:");
+        System.out.println("- Simple and intuitive implementation");
+        System.out.println("- Guaranteed uniform random distribution");
+        System.out.println("- Well-established algorithm with proven properties");
+
+        System.out.println("Disadvantages:");
+        System.out.println("- High memory usage for large boards");
+        System.out.println("- Must process all positions even if few mines needed");
+        System.out.println();
     }
 
     /**
@@ -152,5 +283,4 @@ public class _913_a_FisherYatesShuffle {
             return java.util.Objects.hash(x, y);
         }
     }
-
 }
