@@ -178,6 +178,25 @@ public class _913_d_MinesweeperGameDemo {
         }
     }
 
+    /**
+     * Counts mines adjacent to a specific cell
+     */
+    private int countAdjacentMines(int x, int y) {
+        int count = 0;
+        for (int dy = -1; dy <= 1; dy++) {
+            for (int dx = -1; dx <= 1; dx++) {
+                if (dx == 0 && dy == 0) continue; // Skip center cell
+
+                int nx = x + dx;
+                int ny = y + dy;
+
+                if (isValidPosition(nx, ny) && board[ny][nx].hasMine) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
     /**
      * Cell states in the game
