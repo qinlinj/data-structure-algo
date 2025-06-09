@@ -49,10 +49,54 @@ public class _913_c_MonteCarloVerification {
     }
 
     /**
+     * Calculates uniformity score (0 = perfect uniform, higher = less uniform)
+     */
+    private double calculateUniformityScore(int[][] frequencies, double expected) {
+        double sumSquaredDeviations = 0.0;
+        int totalCells = frequencies.length * frequencies[0].length;
+
+        for (int y = 0; y < frequencies.length; y++) {
+            for (int x = 0; x < frequencies[0].length; x++) {
+                double deviation = frequencies[y][x] - expected;
+                sumSquaredDeviations += deviation * deviation;
+            }
+        }
+
+        return Math.sqrt(sumSquaredDeviations / totalCells) / expected;
+    }
+
+    /**
      * Interface for mine generation algorithms to test
      */
     public interface MineGenerator {
         java.util.List<Position> generateMines(int width, int height, int mineCount);
+    }
+
+    /**
+     * Results of Monte Carlo simulation
+     */
+    public static class SimulationResults {
+        public final int trials;
+        public final int width, height, mineCount;
+        public final int[][] frequencies;
+        public final double expectedFrequency;
+        public final double standardDeviation;
+        public final double chiSquareStatistic;
+        public final double uniformityScore;
+
+        public SimulationResults(int trials, int width, int height, int mineCount,
+                                 int[][] frequencies, double expectedFreq, double stdDev,
+                                 double chiSquare, double uniformity) {
+            this.trials = trials;
+            this.width = width;
+            this.height = height;
+            this.mineCount = mineCount;
+            this.frequencies = frequencies;
+            this.expectedFrequency = expectedFreq;
+            this.standardDeviation = stdDev;
+            this.chiSquareStatistic = chiSquare;
+            this.uniformityScore = uniformity;
+        }
     }
 
     /**
