@@ -249,6 +249,40 @@ public class _913_d_MinesweeperGameDemo {
         return true;
     }
 
+    /**
+     * Flood fill algorithm to reveal empty regions
+     */
+    private void floodFillReveal(int startX, int startY) {
+        java.util.Queue<Position> queue = new java.util.LinkedList<>();
+        queue.add(new Position(startX, startY));
+
+        while (!queue.isEmpty()) {
+            Position pos = queue.poll();
+
+            // Check all adjacent cells
+            for (int dy = -1; dy <= 1; dy++) {
+                for (int dx = -1; dx <= 1; dx++) {
+                    if (dx == 0 && dy == 0) continue;
+
+                    int nx = pos.x + dx;
+                    int ny = pos.y + dy;
+
+                    if (isValidPosition(nx, ny)) {
+                        Cell cell = board[ny][nx];
+                        if (cell.state == CellState.HIDDEN && !cell.hasMine) {
+                            cell.state = CellState.REVEALED;
+                            revealedCells++;
+
+                            // If also empty, add to queue for further expansion
+                            if (cell.adjacentMines == 0) {
+                                queue.add(new Position(nx, ny));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Cell states in the game
