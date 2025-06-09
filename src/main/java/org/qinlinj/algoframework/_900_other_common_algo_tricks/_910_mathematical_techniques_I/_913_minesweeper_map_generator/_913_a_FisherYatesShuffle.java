@@ -72,6 +72,23 @@ public class _913_a_FisherYatesShuffle {
     }
 
     /**
+     * Fisher-Yates shuffle implementation
+     * Randomly permutes the given list in-place
+     */
+    private void fisherYatesShuffle(java.util.List<Position> list) {
+        // Start from the last element and work backwards
+        for (int i = list.size() - 1; i > 0; i--) {
+            // Generate random index j where 0 <= j <= i
+            int j = random.nextInt(i + 1);
+
+            // Swap elements at positions i and j
+            Position temp = list.get(i);
+            list.set(i, list.get(j));
+            list.set(j, temp);
+        }
+    }
+
+    /**
      * Represents a position on the minesweeper board
      */
     public static class Position {
