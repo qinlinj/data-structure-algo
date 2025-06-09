@@ -109,6 +109,20 @@ public class _913_a_FisherYatesShuffle {
         return board;
     }
 
+
+    /**
+     * Prints the board in a readable format
+     */
+    public void printBoard(char[][] board) {
+        System.out.println("Minesweeper Board:");
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[0].length; x++) {
+                System.out.print(board[y][x] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     /**
      * Represents a position on the minesweeper board
      */
