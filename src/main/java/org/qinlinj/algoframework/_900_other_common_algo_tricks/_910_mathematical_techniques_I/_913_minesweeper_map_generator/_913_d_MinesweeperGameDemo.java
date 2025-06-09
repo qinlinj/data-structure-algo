@@ -403,6 +403,77 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Simple console-based game loop for demonstration
+     */
+    public void playConsoleGame() {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+
+        System.out.println("=== MINESWEEPER GAME ===");
+        System.out.printf("Board: %dx%d, Mines: %d, Algorithm: %s\n",
+                width, height, mineCount, algorithm);
+        System.out.println("\nCommands:");
+        System.out.println("r x y - Reveal cell at position (x,y)");
+        System.out.println("f x y - Toggle flag at position (x,y)");
+        System.out.println("q - Quit game");
+        System.out.println("h - Show this help");
+
+        while (!gameWon && !gameLost) {
+            printBoard();
+            System.out.print("\nEnter command: ");
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equals("q")) {
+                System.out.println("Game quit. Thanks for playing!");
+                break;
+            } else if (input.equals("h")) {
+                System.out.println("\nCommands: r x y (reveal), f x y (flag), q (quit), h (help)");
+                continue;
+            }
+
+            String[] parts = input.split("\\s+");
+            if (parts.length != 3) {
+                System.out.println("Invalid command. Use: r x y or f x y");
+                continue;
+            }
+
+            try {
+                String command = parts[0];
+                int x = Integer.parseInt(parts[1]);
+                int y = Integer.parseInt(parts[2]);
+
+                if (command.equals("r")) {
+                    if (!revealCell(x, y)) {
+                        if (gameLost) {
+                            System.out.println("BOOM! You hit a mine!");
+                        } else {
+                            System.out.println("Cannot reveal that cell.");
+                        }
+                    }
+                } else if (command.equals("f")) {
+                    if (!toggleFlag(x, y)) {
+                        System.out.println("Cannot flag that cell.");
+                    }
+                } else {
+                    System.out.println("Unknown command. Use 'r' to reveal or 'f' to flag.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid coordinates. Please enter numbers.");
+            }
+        }
+
+        // Final board state
+        printBoard();
+
+        if (gameWon) {
+            System.out.println("\n🎉 Congratulations! You won! 🎉");
+        } else if (gameLost) {
+            System.out.println("\n💥 Game Over! Better luck next time! 💥");
+        }
+
+        scanner.close();
+    }
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
