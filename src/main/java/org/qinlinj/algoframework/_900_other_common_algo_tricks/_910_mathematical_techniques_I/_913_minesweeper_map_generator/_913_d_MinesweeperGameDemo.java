@@ -199,6 +199,58 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Checks if position is within board bounds
+     */
+    private boolean isValidPosition(int x, int y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+
+    /**
+     * Reveals a cell (main game action)
+     */
+    public boolean revealCell(int x, int y) {
+        if (!isValidPosition(x, y) || gameLost || gameWon) {
+            return false;
+        }
+
+        Cell cell = board[y][x];
+        if (cell.state != CellState.HIDDEN) {
+            return false; // Already revealed or flagged
+        }
+
+        // Generate mines on first click
+        if (!gameStarted) {
+            generateMines(new Position(x, y));
+        }
+
+        // Check if clicked on mine
+        if (cell.hasMine) {
+            cell.state = CellState.EXPLODED;
+            gameLost = true;
+            revealAllMines();
+            return false;
+        }
+
+        // Reveal cell
+        cell.state = CellState.REVEALED;
+        revealedCells++;
+
+        // If empty cell, flood fill reveal adjacent cells
+        if (cell.adjacentMines == 0) {
+            floodFillReveal(x, y);
+        }
+
+        // Check win condition
+        if (revealedCells == width * height - mineCount) {
+            gameWon = true;
+            flagAllMines();
+        }
+
+        return true;
+    }
+
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
