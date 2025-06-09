@@ -369,6 +369,31 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Gets display symbol for a cell
+     */
+    private char getCellSymbol(Cell cell) {
+        switch (cell.state) {
+            case HIDDEN:
+                return '·';
+            case FLAGGED:
+                return 'F';
+            case EXPLODED:
+                return 'X';
+            case REVEALED:
+                if (cell.hasMine) {
+                    return '*';
+                } else if (cell.adjacentMines == 0) {
+                    return ' ';
+                } else {
+                    return (char) ('0' + cell.adjacentMines);
+                }
+            default:
+                return '?';
+        }
+    }
+
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
