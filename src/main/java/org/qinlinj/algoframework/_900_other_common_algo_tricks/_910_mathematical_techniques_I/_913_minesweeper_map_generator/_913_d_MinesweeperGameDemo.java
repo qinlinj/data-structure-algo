@@ -50,6 +50,7 @@ public class _913_d_MinesweeperGameDemo {
     private int flaggedCells;
     private long gameStartTime;
     private java.util.Random random;
+
     public _913_d_MinesweeperGameDemo(int width, int height, int mineCount, GenerationAlgorithm algorithm) {
         this.width = width;
         this.height = height;
@@ -65,6 +66,47 @@ public class _913_d_MinesweeperGameDemo {
 
         initializeBoard();
     }
+
+    /**
+     * Initializes the game board with empty cells
+     */
+    private void initializeBoard() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                board[y][x] = new Cell();
+            }
+        }
+    }
+
+    /**
+     * Generates mines using the selected algorithm
+     */
+    private void generateMines(Position firstClick) {
+        java.util.List<Position> minePositions;
+
+        switch (algorithm) {
+            case FISHER_YATES:
+                minePositions = generateMinesFisherYates(firstClick);
+                break;
+            case RESERVOIR_SAMPLING:
+                minePositions = generateMinesReservoir(firstClick);
+                break;
+            default:
+                throw new IllegalStateException("Unknown algorithm: " + algorithm);
+        }
+
+        // Place mines on board
+        for (Position pos : minePositions) {
+            board[pos.y][pos.x].hasMine = true;
+        }
+
+        // Calculate adjacent mine counts
+        calculateAdjacentMines();
+
+        gameStarted = true;
+        gameStartTime = System.currentTimeMillis();
+    }
+
     /**
      * Cell states in the game
      */
@@ -74,6 +116,7 @@ public class _913_d_MinesweeperGameDemo {
         FLAGGED,    // Marked as suspected mine
         EXPLODED    // Mine that was clicked
     }
+
     /**
      * Mine generation algorithms
      */
