@@ -34,8 +34,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * <p>
  * Applications: Large minesweeper boards where memory efficiency is critical
  */
-
 public class _913_b_ReservoirSampling {
+
     private java.util.Random random;
 
     public _913_b_ReservoirSampling() {
@@ -44,6 +44,75 @@ public class _913_b_ReservoirSampling {
 
     public _913_b_ReservoirSampling(long seed) {
         this.random = new java.util.Random(seed);
+    }
+
+    public static void main(String[] args) {
+        _913_b_ReservoirSampling generator = new _913_b_ReservoirSampling(42);
+
+        // Small example for step-by-step demonstration
+        System.out.println("=== Small Board Demonstration ===");
+        generator.demonstrateReservoirSampling(3, 3, 3);
+
+        // Mathematical explanation
+        generator.explainMathematicalProof(9, 3);
+
+        // Generate actual board
+        java.util.List<Position> mines = generator.generateMinePositions(5, 4, 6);
+        char[][] board = generator.createBoard(5, 4, mines);
+        generator.printBoard(board);
+        System.out.println();
+
+        // Space complexity comparison
+        System.out.println("=== Large Board Examples ===");
+        int[][] largeBoardTests = {
+                {100, 100, 100},        // 10K cells, 100 mines
+                {1000, 1000, 1000},     // 1M cells, 1K mines
+                {10000, 10000, 10000},  // 100M cells, 10K mines
+        };
+
+        for (int[] test : largeBoardTests) {
+            generator.compareSpaceComplexity(test[0], test[1], test[2]);
+        }
+
+        // Performance testing
+        System.out.println("=== Performance Testing ===");
+        int[] testSizes = {1000, 5000, 10000};
+        int testMines = 100;
+
+        for (int size : testSizes) {
+            long startTime = System.nanoTime();
+            mines = generator.generateMinePositions(size, size, testMines);
+            long endTime = System.nanoTime();
+
+            double timeMs = (endTime - startTime) / 1_000_000.0;
+            System.out.printf("Board %dx%d with %d mines: %.2f ms\n",
+                    size, size, testMines, timeMs);
+        }
+
+        // Edge cases
+        System.out.println("\n=== Edge Cases ===");
+
+        // Very sparse board
+        mines = generator.generateMinePositions(1000, 1000, 5);
+        System.out.printf("Sparse board (1000x1000, 5 mines): %s\n",
+                mines.subList(0, Math.min(5, mines.size())));
+
+        // Dense board
+        mines = generator.generateMinePositions(10, 10, 90);
+        System.out.printf("Dense board (10x10, 90 mines): %d mines generated\n", mines.size());
+
+        System.out.println("\n=== Key Advantages ===");
+        System.out.println("1. Space complexity O(k) instead of O(n)");
+        System.out.println("2. Works with arbitrarily large boards");
+        System.out.println("3. Maintains uniform random distribution");
+        System.out.println("4. Streaming algorithm - processes one position at a time");
+        System.out.println("5. Perfect for memory-constrained environments");
+
+        System.out.println("\n=== When to Use ===");
+        System.out.println("• Large boards where memory is limited");
+        System.out.println("• Mine count << total cells");
+        System.out.println("• Real-time applications with memory constraints");
+        System.out.println("• Educational purposes to learn probabilistic algorithms");
     }
 
     /**
@@ -91,6 +160,9 @@ public class _913_b_ReservoirSampling {
         return java.util.Arrays.asList(reservoir);
     }
 
+    /**
+     * Demonstrates the reservoir sampling process step by step
+     */
     public void demonstrateReservoirSampling(int width, int height, int mineCount) {
         System.out.println("=== Reservoir Sampling Demonstration ===");
         System.out.printf("Board: %dx%d, Mines: %d\n", width, height, mineCount);
@@ -183,6 +255,74 @@ public class _913_b_ReservoirSampling {
                 survivalProb *= (1.0 - (1.0 / (i + 1)));
             }
             return entryProb * survivalProb;
+        }
+    }
+
+    /**
+     * Compares space complexity with Fisher-Yates approach
+     */
+    public void compareSpaceComplexity(int width, int height, int mineCount) {
+        System.out.println("=== Space Complexity Comparison ===");
+
+        long totalCells = (long) width * height;
+        long fisherYatesMemory = totalCells * 8; // Assuming 8 bytes per Position object
+        long reservoirMemory = (long) mineCount * 8;
+
+        System.out.printf("Board: %d × %d = %,d cells\n", width, height, totalCells);
+        System.out.printf("Mine count: %,d\n", mineCount);
+
+        System.out.println("\nMemory Usage:");
+        System.out.printf("Fisher-Yates: %,d bytes (%.2f MB)\n",
+                fisherYatesMemory, fisherYatesMemory / (1024.0 * 1024.0));
+        System.out.printf("Reservoir Sampling: %,d bytes (%.2f MB)\n",
+                reservoirMemory, reservoirMemory / (1024.0 * 1024.0));
+
+        if (fisherYatesMemory > 0) {
+            System.out.printf("Space savings: %.2fx\n", (double) fisherYatesMemory / reservoirMemory);
+        }
+
+        System.out.println("\nComplexity Analysis:");
+        System.out.println("Reservoir Sampling:");
+        System.out.printf("- Space: O(%d) = O(mineCount)\n", mineCount);
+        System.out.printf("- Time: O(%,d) = O(width × height)\n", totalCells);
+
+        System.out.println("Fisher-Yates:");
+        System.out.printf("- Space: O(%,d) = O(width × height)\n", totalCells);
+        System.out.printf("- Time: O(%,d) = O(width × height)\n", totalCells);
+        System.out.println();
+    }
+
+    /**
+     * Creates a visual representation of the minesweeper board
+     */
+    public char[][] createBoard(int width, int height, java.util.List<Position> minePositions) {
+        char[][] board = new char[height][width];
+
+        // Initialize with empty cells
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                board[y][x] = '.';
+            }
+        }
+
+        // Place mines
+        for (Position mine : minePositions) {
+            board[mine.y][mine.x] = '*';
+        }
+
+        return board;
+    }
+
+    /**
+     * Prints the board in a readable format
+     */
+    public void printBoard(char[][] board) {
+        System.out.println("Minesweeper Board:");
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[0].length; x++) {
+                System.out.print(board[y][x] + " ");
+            }
+            System.out.println();
         }
     }
 
