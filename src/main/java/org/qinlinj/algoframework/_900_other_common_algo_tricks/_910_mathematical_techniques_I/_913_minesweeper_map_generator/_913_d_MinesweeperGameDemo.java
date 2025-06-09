@@ -40,6 +40,16 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
 
 public class _913_d_MinesweeperGameDemo {
     /**
+     * Cell states in the game
+     */
+    public enum CellState {
+        HIDDEN,     // Not yet revealed
+        REVEALED,   // Revealed (safe)
+        FLAGGED,    // Marked as suspected mine
+        EXPLODED    // Mine that was clicked
+    }
+    
+    /**
      * Position class for board coordinates
      */
     public static class Position {
@@ -68,4 +78,21 @@ public class _913_d_MinesweeperGameDemo {
             return java.util.Objects.hash(x, y);
         }
     }
+
+    /**
+     * Game cell containing mine and state information
+     */
+    public static class Cell {
+        public boolean hasMine;
+        public CellState state;
+        public int adjacentMines;
+
+        public Cell() {
+            this.hasMine = false;
+            this.state = CellState.HIDDEN;
+            this.adjacentMines = 0;
+        }
+    }
+
 }
+
