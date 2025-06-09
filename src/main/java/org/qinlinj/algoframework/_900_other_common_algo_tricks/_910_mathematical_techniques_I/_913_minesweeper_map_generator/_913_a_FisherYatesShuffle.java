@@ -41,6 +41,37 @@ public class _913_a_FisherYatesShuffle {
     }
 
     /**
+     * Generates mine positions using Fisher-Yates shuffle algorithm
+     *
+     * @param width     board width
+     * @param height    board height
+     * @param mineCount number of mines to place
+     * @return list of mine positions
+     */
+    public java.util.List<Position> generateMinePositions(int width, int height, int mineCount) {
+        if (mineCount > width * height) {
+            throw new IllegalArgumentException("Mine count cannot exceed total cells");
+        }
+        if (mineCount < 0) {
+            throw new IllegalArgumentException("Mine count cannot be negative");
+        }
+
+        // Step 1: Create all possible positions
+        java.util.List<Position> allPositions = new java.util.ArrayList<>();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                allPositions.add(new Position(x, y));
+            }
+        }
+
+        // Step 2: Apply Fisher-Yates shuffle
+        fisherYatesShuffle(allPositions);
+
+        // Step 3: Take first mineCount positions
+        return allPositions.subList(0, mineCount);
+    }
+
+    /**
      * Represents a position on the minesweeper board
      */
     public static class Position {
