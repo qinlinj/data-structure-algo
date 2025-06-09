@@ -334,6 +334,41 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Prints the current game board
+     */
+    public void printBoard() {
+        System.out.println("\n" + "=".repeat(width * 3 + 5));
+        System.out.printf("Minesweeper %dx%d | Mines: %d | Flags: %d/%d\n",
+                width, height, mineCount, flaggedCells, mineCount);
+        System.out.printf("Algorithm: %s | Status: %s\n",
+                algorithm, getGameStatus());
+        System.out.println("=".repeat(width * 3 + 5));
+
+        // Column headers
+        System.out.print("   ");
+        for (int x = 0; x < width; x++) {
+            System.out.printf("%2d ", x);
+        }
+        System.out.println();
+
+        // Board rows
+        for (int y = 0; y < height; y++) {
+            System.out.printf("%2d ", y);
+            for (int x = 0; x < width; x++) {
+                Cell cell = board[y][x];
+                char symbol = getCellSymbol(cell);
+                System.out.printf(" %c ", symbol);
+            }
+            System.out.println();
+        }
+
+        if (gameWon || gameLost) {
+            long gameTime = System.currentTimeMillis() - gameStartTime;
+            System.out.printf("\nGame completed in %.1f seconds\n", gameTime / 1000.0);
+        }
+    }
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
