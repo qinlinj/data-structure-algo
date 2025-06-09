@@ -134,6 +134,36 @@ public class _913_d_MinesweeperGameDemo {
         return positions.subList(0, mineCount);
     }
 
+    /**
+     * Reservoir sampling mine generation (avoiding first click)
+     */
+    private java.util.List<Position> generateMinesReservoir(Position avoid) {
+        Position[] reservoir = new Position[mineCount];
+        int availableCells = width * height - 1; // Exclude first click
+        int reservoirIndex = 0;
+
+        for (int i = 0; i < width * height; i++) {
+            int x = i % width;
+            int y = i / width;
+            Position pos = new Position(x, y);
+
+            // Skip the first click position
+            if (pos.equals(avoid)) continue;
+
+            if (reservoirIndex < mineCount) {
+                reservoir[reservoirIndex] = pos;
+                reservoirIndex++;
+            } else {
+                int randomIndex = random.nextInt(reservoirIndex + 1);
+                if (randomIndex < mineCount) {
+                    reservoir[randomIndex] = pos;
+                }
+            }
+        }
+
+        return java.util.Arrays.asList(reservoir);
+    }
+
 
     /**
      * Cell states in the game
