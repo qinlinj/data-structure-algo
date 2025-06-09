@@ -68,6 +68,61 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Demonstrates algorithm performance comparison
+     */
+    public static void demonstrateAlgorithmComparison() {
+        System.out.println("=== ALGORITHM PERFORMANCE COMPARISON ===");
+
+        int[][] testCases = {
+                {10, 10, 15},      // Small board
+                {50, 50, 400},     // Medium board
+                {100, 100, 1500},  // Large board
+        };
+
+        for (int[] testCase : testCases) {
+            int width = testCase[0];
+            int height = testCase[1];
+            int mines = testCase[2];
+
+            System.out.printf("\nBoard: %dx%d with %d mines\n", width, height, mines);
+            System.out.println("-".repeat(50));
+
+            // Test Fisher-Yates
+            long startTime = System.nanoTime();
+            _913_d_MinesweeperGameDemo game1 = new _913_d_MinesweeperGameDemo(
+                    width, height, mines, GenerationAlgorithm.FISHER_YATES);
+            game1.revealCell(0, 0); // Trigger mine generation
+            long fisherYatesTime = System.nanoTime() - startTime;
+
+            // Test Reservoir Sampling
+            startTime = System.nanoTime();
+            _913_d_MinesweeperGameDemo game2 = new _913_d_MinesweeperGameDemo(
+                    width, height, mines, GenerationAlgorithm.RESERVOIR_SAMPLING);
+            game2.revealCell(0, 0); // Trigger mine generation
+            long reservoirTime = System.nanoTime() - startTime;
+
+            // Calculate memory usage
+            long totalCells = (long) width * height;
+            long fisherYatesMemory = totalCells * 16; // Approximate bytes per Position
+            long reservoirMemory = (long) mines * 16;
+
+            System.out.printf("Fisher-Yates:      %.2f ms, %,d bytes (%.1f MB)\n",
+                    fisherYatesTime / 1_000_000.0, fisherYatesMemory,
+                    fisherYatesMemory / (1024.0 * 1024.0));
+            System.out.printf("Reservoir Sampling: %.2f ms, %,d bytes (%.1f MB)\n",
+                    reservoirTime / 1_000_000.0, reservoirMemory,
+                    reservoirMemory / (1024.0 * 1024.0));
+
+            if (reservoirTime > 0) {
+                System.out.printf("Speed ratio: %.2fx\n", (double) fisherYatesTime / reservoirTime);
+            }
+            if (reservoirMemory > 0) {
+                System.out.printf("Memory savings: %.2fx\n", (double) fisherYatesMemory / reservoirMemory);
+            }
+        }
+    }
+
+    /**
      * Initializes the game board with empty cells
      */
     private void initializeBoard() {
@@ -163,7 +218,6 @@ public class _913_d_MinesweeperGameDemo {
 
         return java.util.Arrays.asList(reservoir);
     }
-
 
     /**
      * Calculates adjacent mine counts for all cells
@@ -472,6 +526,7 @@ public class _913_d_MinesweeperGameDemo {
 
         scanner.close();
     }
+
 
     /**
      * Cell states in the game
