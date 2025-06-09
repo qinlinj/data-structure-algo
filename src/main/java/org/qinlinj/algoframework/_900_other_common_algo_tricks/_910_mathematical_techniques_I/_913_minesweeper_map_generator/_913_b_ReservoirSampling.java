@@ -91,6 +91,101 @@ public class _913_b_ReservoirSampling {
         return java.util.Arrays.asList(reservoir);
     }
 
+    public void demonstrateReservoirSampling(int width, int height, int mineCount) {
+        System.out.println("=== Reservoir Sampling Demonstration ===");
+        System.out.printf("Board: %dx%d, Mines: %d\n", width, height, mineCount);
+
+        if (width * height > 20) {
+            System.out.println("Board too large for step-by-step demonstration");
+            return;
+        }
+
+        Position[] reservoir = new Position[mineCount];
+        int totalCells = width * height;
+
+        System.out.println("\nReservoir sampling steps:");
+
+        for (int i = 0; i < totalCells; i++) {
+            int x = i % width;
+            int y = i / width;
+            Position currentPos = new Position(x, y);
+
+            if (i < mineCount) {
+                reservoir[i] = currentPos;
+                System.out.printf("Step %d: Fill reservoir[%d] = %s\n", i + 1, i, currentPos);
+            } else {
+                int randomIndex = random.nextInt(i + 1);
+                System.out.printf("Step %d: Process %s, random=%d/%d", i + 1, currentPos, randomIndex, i + 1);
+
+                if (randomIndex < mineCount) {
+                    Position replaced = reservoir[randomIndex];
+                    reservoir[randomIndex] = currentPos;
+                    System.out.printf(" -> Replace reservoir[%d]: %s -> %s", randomIndex, replaced, currentPos);
+                } else {
+                    System.out.print(" -> Keep current reservoir");
+                }
+                System.out.println();
+            }
+
+            System.out.printf("   Reservoir: %s\n", java.util.Arrays.toString(reservoir));
+        }
+
+        System.out.printf("Final mines: %s\n\n", java.util.Arrays.asList(reservoir));
+    }
+
+    /**
+     * Explains the mathematical foundation of reservoir sampling
+     */
+    public void explainMathematicalProof(int totalItems, int sampleSize) {
+        System.out.println("=== Mathematical Proof of Uniformity ===");
+        System.out.printf("Total items: %d, Sample size: %d\n", totalItems, sampleSize);
+
+        System.out.println("\nWhy every item has equal probability k/n:");
+        System.out.println("1. For first k items: probability = 1 (always selected)");
+        System.out.println("2. For item i (i > k):");
+        System.out.println("   - Probability of being selected = k/(i+1)");
+        System.out.println("   - Probability of staying selected = product of not being replaced");
+
+        // Demonstrate probability calculation for specific positions
+        if (totalItems <= 10 && sampleSize <= 5) {
+            System.out.println("\nProbability calculation for each item:");
+            for (int item = 0; item < totalItems; item++) {
+                double probability = calculateSelectionProbability(item, totalItems, sampleSize);
+                System.out.printf("Item %d: P = %.6f (expected: %.6f)\n",
+                        item, probability, (double) sampleSize / totalItems);
+            }
+        }
+
+        System.out.println("\nKey insight: Each replacement maintains the invariant that");
+        System.out.println("every seen item has equal probability of being in the reservoir.");
+        System.out.println();
+    }
+
+    /**
+     * Calculates the exact probability of an item being selected
+     */
+    private double calculateSelectionProbability(int itemIndex, int totalItems, int sampleSize) {
+        if (itemIndex >= totalItems || sampleSize > totalItems) return 0.0;
+
+        if (itemIndex < sampleSize) {
+            // Item is initially in reservoir, calculate survival probability
+            double survivalProb = 1.0;
+            for (int i = sampleSize; i < totalItems; i++) {
+                // Probability of not being replaced at step i
+                survivalProb *= (1.0 - (1.0 / (i + 1)));
+            }
+            return survivalProb;
+        } else {
+            // Item enters reservoir at position itemIndex, then must survive
+            double entryProb = (double) sampleSize / (itemIndex + 1);
+            double survivalProb = 1.0;
+            for (int i = itemIndex + 1; i < totalItems; i++) {
+                survivalProb *= (1.0 - (1.0 / (i + 1)));
+            }
+            return entryProb * survivalProb;
+        }
+    }
+
     /**
      * Represents a position on the minesweeper board
      */
