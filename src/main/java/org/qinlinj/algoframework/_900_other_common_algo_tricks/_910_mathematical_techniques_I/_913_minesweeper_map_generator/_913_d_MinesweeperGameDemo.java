@@ -285,6 +285,55 @@ public class _913_d_MinesweeperGameDemo {
     }
 
     /**
+     * Toggles flag on a cell
+     */
+    public boolean toggleFlag(int x, int y) {
+        if (!isValidPosition(x, y) || gameLost || gameWon) {
+            return false;
+        }
+
+        Cell cell = board[y][x];
+        if (cell.state == CellState.HIDDEN) {
+            cell.state = CellState.FLAGGED;
+            flaggedCells++;
+            return true;
+        } else if (cell.state == CellState.FLAGGED) {
+            cell.state = CellState.HIDDEN;
+            flaggedCells--;
+            return true;
+        }
+
+        return false; // Can't flag revealed cells
+    }
+
+    /**
+     * Reveals all mines (when game lost)
+     */
+    private void revealAllMines() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (board[y][x].hasMine && board[y][x].state != CellState.EXPLODED) {
+                    board[y][x].state = CellState.REVEALED;
+                }
+            }
+        }
+    }
+
+    /**
+     * Flags all mines (when game won)
+     */
+    private void flagAllMines() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (board[y][x].hasMine) {
+                    board[y][x].state = CellState.FLAGGED;
+                }
+            }
+        }
+        flaggedCells = mineCount;
+    }
+
+    /**
      * Cell states in the game
      */
     public enum CellState {
