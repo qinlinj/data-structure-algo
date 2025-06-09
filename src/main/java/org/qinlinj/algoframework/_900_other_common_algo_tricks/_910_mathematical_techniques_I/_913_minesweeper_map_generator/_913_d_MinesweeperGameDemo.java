@@ -37,8 +37,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * <p>
  * Applications: Educational tool, algorithm demonstration, recreational gaming
  */
-
 public class _913_d_MinesweeperGameDemo {
+
     // Game state
     private final int width, height, mineCount;
     private final Cell[][] board;
@@ -50,7 +50,6 @@ public class _913_d_MinesweeperGameDemo {
     private int flaggedCells;
     private long gameStartTime;
     private java.util.Random random;
-
     public _913_d_MinesweeperGameDemo(int width, int height, int mineCount, GenerationAlgorithm algorithm) {
         this.width = width;
         this.height = height;
@@ -120,6 +119,146 @@ public class _913_d_MinesweeperGameDemo {
                 System.out.printf("Memory savings: %.2fx\n", (double) fisherYatesMemory / reservoirMemory);
             }
         }
+    }
+
+    /**
+     * Creates a sample game with automated moves for demonstration
+     */
+    public static void demonstrateGameplay() {
+        System.out.println("=== AUTOMATED GAMEPLAY DEMONSTRATION ===");
+
+        _913_d_MinesweeperGameDemo game = new _913_d_MinesweeperGameDemo(
+                8, 6, 8, GenerationAlgorithm.FISHER_YATES);
+
+        System.out.println("Starting new game...");
+        game.printBoard();
+
+        // Simulate some moves
+        int[][] moves = {
+                {3, 2}, {1, 1}, {6, 4}, {0, 0}, {7, 5}
+        };
+
+        for (int i = 0; i < moves.length && !game.gameWon && !game.gameLost; i++) {
+            int x = moves[i][0];
+            int y = moves[i][1];
+
+            System.out.printf("\nMove %d: Revealing cell (%d, %d)\n", i + 1, x, y);
+            game.revealCell(x, y);
+            game.printBoard();
+
+            if (game.gameLost) {
+                System.out.println("Hit a mine! Game over.");
+                break;
+            }
+            if (game.gameWon) {
+                System.out.println("All safe cells revealed! You won!");
+                break;
+            }
+
+            // Add some strategic flags
+            if (i == 2) {
+                System.out.println("Adding some strategic flags...");
+                game.toggleFlag(2, 1);
+                game.toggleFlag(4, 3);
+            }
+        }
+    }
+
+    /**
+     * Educational demonstration of mine distribution patterns
+     */
+    public static void demonstrateMineDistribution() {
+        System.out.println("=== MINE DISTRIBUTION ANALYSIS ===");
+
+        int width = 10, height = 8, mines = 12;
+
+        System.out.println("Generating multiple boards to show distribution variety:");
+        System.out.printf("Board size: %dx%d, Mines: %d\n\n", width, height, mines);
+
+        for (int i = 0; i < 3; i++) {
+            GenerationAlgorithm algo = (i % 2 == 0) ?
+                    GenerationAlgorithm.FISHER_YATES : GenerationAlgorithm.RESERVOIR_SAMPLING;
+
+            System.out.printf("Sample %d (%s):\n", i + 1, algo);
+
+            _913_d_MinesweeperGameDemo game = new _913_d_MinesweeperGameDemo(
+                    width, height, mines, algo);
+
+            // Trigger mine generation and reveal all for demonstration
+            game.revealCell(0, 0);
+            game.gameLost = true; // Force reveal all mines
+            game.revealAllMines();
+
+            // Print board showing only mine positions
+            System.out.print("   ");
+            for (int x = 0; x < width; x++) {
+                System.out.printf("%2d", x);
+            }
+            System.out.println();
+
+            for (int y = 0; y < height; y++) {
+                System.out.printf("%2d ", y);
+                for (int x = 0; x < width; x++) {
+                    char symbol = game.board[y][x].hasMine ? '*' : '·';
+                    System.out.printf(" %c", symbol);
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("MINESWEEPER: Random Algorithm Demonstration");
+        System.out.println("==========================================");
+
+        // Quick demo of different components
+        demonstrateAlgorithmComparison();
+        demonstrateMineDistribution();
+        demonstrateGameplay();
+
+        // Interactive game option
+        System.out.println("\n=== INTERACTIVE GAME ===");
+        System.out.println("Would you like to play an interactive game?");
+        System.out.println("Uncomment the code below to enable interactive play:");
+
+        /*
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        System.out.print("Enter board width (5-20): ");
+        int width = Math.max(5, Math.min(20, scanner.nextInt()));
+        System.out.print("Enter board height (5-20): ");
+        int height = Math.max(5, Math.min(20, scanner.nextInt()));
+        System.out.print("Enter mine count: ");
+        int mines = Math.max(1, Math.min(width * height / 2, scanner.nextInt()));
+        System.out.print("Choose algorithm (1=Fisher-Yates, 2=Reservoir): ");
+        int algoChoice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        GenerationAlgorithm algorithm = (algoChoice == 2) ?
+            GenerationAlgorithm.RESERVOIR_SAMPLING : GenerationAlgorithm.FISHER_YATES;
+
+        _913_d_MinesweeperGameDemo game = new _913_d_MinesweeperGameDemo(
+            width, height, mines, algorithm);
+        game.playConsoleGame();
+
+        scanner.close();
+        */
+
+        System.out.println("\n=== EDUCATIONAL SUMMARY ===");
+        System.out.println("Key Learning Points:");
+        System.out.println("1. Fisher-Yates: Simple, uniform, memory-intensive O(n)");
+        System.out.println("2. Reservoir Sampling: Memory-efficient O(k), uniform distribution");
+        System.out.println("3. Both algorithms produce statistically equivalent results");
+        System.out.println("4. Algorithm choice depends on memory constraints vs simplicity");
+        System.out.println("5. Monte Carlo testing can verify algorithm uniformity");
+        System.out.println("6. Real applications require balancing theory with practical constraints");
+
+        System.out.println("\n=== PRACTICAL APPLICATIONS ===");
+        System.out.println("• Game Development: Fair random level generation");
+        System.out.println("• Statistics: Sampling from large populations");
+        System.out.println("• Machine Learning: Random subset selection for training");
+        System.out.println("• Quality Assurance: Statistical testing of randomness");
+        System.out.println("• Research: Monte Carlo simulations and analysis");
     }
 
     /**
@@ -527,7 +666,6 @@ public class _913_d_MinesweeperGameDemo {
         scanner.close();
     }
 
-
     /**
      * Cell states in the game
      */
@@ -590,6 +728,4 @@ public class _913_d_MinesweeperGameDemo {
             this.adjacentMines = 0;
         }
     }
-
 }
-
