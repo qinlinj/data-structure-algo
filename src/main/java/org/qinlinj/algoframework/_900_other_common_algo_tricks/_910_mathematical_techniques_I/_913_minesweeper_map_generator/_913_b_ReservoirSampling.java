@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematical_techniques_I._913_minesweeper_map_generator;
+
+public class _913_b_ReservoirSampling {
+}
