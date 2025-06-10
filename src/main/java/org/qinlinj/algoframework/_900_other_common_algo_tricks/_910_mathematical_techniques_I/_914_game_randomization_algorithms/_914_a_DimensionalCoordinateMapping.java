@@ -137,6 +137,51 @@ public class _914_a_DimensionalCoordinateMapping {
     }
 
     /**
+     * Practical game examples using coordinate mapping
+     */
+    public static void gameExamples() {
+        System.out.println("\n=== Practical Game Examples ===");
+
+        // Minesweeper example
+        System.out.println("Minesweeper Mine Placement:");
+        GameBoard minesweeper = new GameBoard(8, 8);
+        java.util.Random random = new java.util.Random(42);
+
+        // Place 10 random mines
+        int mineCount = 10;
+        java.util.Set<Integer> mineIndices = new java.util.HashSet<>();
+
+        while (mineIndices.size() < mineCount) {
+            int randomIndex = random.nextInt(minesweeper.getTotalCells());
+            mineIndices.add(randomIndex);
+        }
+
+        for (int index : mineIndices) {
+            minesweeper.setCell(index, true);
+            Position pos = minesweeper.decode(index);
+            System.out.printf("Mine placed at index %d -> position %s\n", index, pos);
+        }
+
+        System.out.println("\nMinesweeper board:");
+        minesweeper.printBoard();
+
+        // Bomberman example
+        System.out.println("\nBomberman Obstacle Placement:");
+        GameBoard bomberman = new GameBoard(6, 6);
+
+        // Place obstacles randomly but avoid corners and center
+        for (int i = 0; i < bomberman.getTotalCells(); i++) {
+            Position pos = bomberman.decode(i);
+            // Skip corners and center, place obstacles randomly elsewhere
+            if (!isCornerOrCenter(pos, 6, 6) && random.nextDouble() < 0.3) {
+                bomberman.setCell(i, true);
+            }
+        }
+
+        bomberman.printBoard();
+    }
+
+    /**
      * Represents a 2D position
      */
     public static class Position {
