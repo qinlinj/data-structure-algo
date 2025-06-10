@@ -37,6 +37,106 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
 
 public class _914_a_DimensionalCoordinateMapping {
     /**
+     * Demonstrates coordinate mapping with practical examples
+     */
+    public static void demonstrateCoordinateMapping() {
+        System.out.println("=== 2D Coordinate Mapping Demonstration ===");
+
+        GameBoard board = new GameBoard(4, 3); // 4x3 board
+        System.out.printf("Created %dx%d board with %d total cells\n",
+                board.getWidth(), board.getHeight(), board.getTotalCells());
+
+        // Show coordinate to index mapping
+        System.out.println("\n2D Coordinates to 1D Index mapping:");
+        System.out.println("Position -> Index");
+        for (int x = 0; x < board.getWidth(); x++) {
+            for (int y = 0; y < board.getHeight(); y++) {
+                int index = board.encode(x, y);
+                System.out.printf("(%d,%d) -> %d\n", x, y, index);
+            }
+        }
+
+        // Show index to coordinate mapping
+        System.out.println("\n1D Index to 2D Coordinates mapping:");
+        System.out.println("Index -> Position");
+        for (int i = 0; i < board.getTotalCells(); i++) {
+            Position pos = board.decode(i);
+            System.out.printf("%d -> %s\n", i, pos);
+        }
+
+        // Demonstrate setting values
+        System.out.println("\nSetting some cells using both methods:");
+        board.setCell(1, 2, true);  // Using 2D coordinates
+        board.setCell(7, true);     // Using 1D index (should be position (2,1))
+
+        Position pos7 = board.decode(7);
+        System.out.printf("Set cell (1,2) = true using 2D coordinates\n");
+        System.out.printf("Set cell at index 7 = true, which corresponds to position %s\n", pos7);
+
+        board.printBoard();
+    }
+
+    /**
+     * Demonstrates 3D coordinate mapping
+     */
+    public static void demonstrate3DMapping() {
+        System.out.println("\n=== 3D Coordinate Mapping Demonstration ===");
+
+        GameBoard3D board3D = new GameBoard3D(2, 3, 4); // 2x3x4 board
+        System.out.printf("Created 2x3x4 board with %d total cells\n", 2 * 3 * 4);
+
+        // Show some 3D mappings
+        System.out.println("\n3D Coordinates to 1D Index mapping (sample):");
+        int[][] testCoords = {{0, 0, 0}, {0, 0, 1}, {0, 1, 0}, {1, 0, 0}, {1, 2, 3}};
+
+        for (int[] coord : testCoords) {
+            int index = board3D.encode(coord[0], coord[1], coord[2]);
+            Position3D decoded = board3D.decode(index);
+            System.out.printf("(%d,%d,%d) -> %d -> %s\n",
+                    coord[0], coord[1], coord[2], index, decoded);
+        }
+    }
+
+    /**
+     * Performance comparison between 2D array and 1D array access
+     */
+    public static void performanceComparison() {
+        System.out.println("\n=== Performance Comparison ===");
+
+        int width = 1000, height = 1000;
+        int iterations = 1000000;
+
+        // 2D array approach
+        boolean[][] board2D = new boolean[width][height];
+        GameBoard board1D = new GameBoard(width, height);
+
+        java.util.Random random = new java.util.Random(42);
+
+        // Test 2D array access
+        long startTime = System.nanoTime();
+        for (int i = 0; i < iterations; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            board2D[x][y] = !board2D[x][y];
+        }
+        long time2D = System.nanoTime() - startTime;
+
+        // Test 1D array access
+        startTime = System.nanoTime();
+        for (int i = 0; i < iterations; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            int index = board1D.encode(x, y);
+            board1D.setCell(index, !board1D.getCell(index));
+        }
+        long time1D = System.nanoTime() - startTime;
+
+        System.out.printf("2D Array access: %.2f ms\n", time2D / 1_000_000.0);
+        System.out.printf("1D Array access: %.2f ms\n", time1D / 1_000_000.0);
+        System.out.printf("Performance ratio: %.2fx\n", (double) time2D / time1D);
+    }
+
+    /**
      * Represents a 2D position
      */
     public static class Position {
@@ -240,5 +340,4 @@ public class _914_a_DimensionalCoordinateMapping {
             return index >= 0 && index < board.length && board[index];
         }
     }
-
 }
