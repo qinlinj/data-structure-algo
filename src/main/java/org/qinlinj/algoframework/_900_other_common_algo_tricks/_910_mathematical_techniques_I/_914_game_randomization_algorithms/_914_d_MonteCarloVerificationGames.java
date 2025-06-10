@@ -372,4 +372,40 @@ public class _914_d_MonteCarloVerificationGames {
             System.out.println("⚠ Card shuffling may have bias - check algorithm");
         }
     }
+
+    /**
+     * Helper method: Fisher-Yates shuffle implementation
+     */
+    private void fisherYatesShuffle(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int randomIndex = i + random.nextInt(array.length - i);
+            // Swap
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+    }
+
+    /**
+     * Helper method: Reservoir sampling implementation
+     */
+    private int[] reservoirSample(int totalElements, int k) {
+        int[] reservoir = new int[k];
+
+        // Fill with first k elements
+        for (int i = 0; i < k; i++) {
+            reservoir[i] = i;
+        }
+
+        // Process remaining elements
+        for (int i = k; i < totalElements; i++) {
+            int randomIndex = random.nextInt(i + 1);
+            if (randomIndex < k) {
+                reservoir[randomIndex] = i;
+            }
+        }
+
+        return reservoir;
+    }
+
 }
