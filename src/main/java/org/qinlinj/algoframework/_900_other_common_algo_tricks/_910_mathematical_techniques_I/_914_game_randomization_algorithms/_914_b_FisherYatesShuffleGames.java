@@ -150,4 +150,122 @@ public class _914_b_FisherYatesShuffleGames {
             array[j] = temp;
         }
     }
+
+    /**
+     * Card deck shuffling for card games
+     */
+    public static class CardDeck {
+        private Card[] deck;
+        private _914_b_FisherYatesShuffleGames shuffler;
+
+        public CardDeck() {
+            this.shuffler = new _914_b_FisherYatesShuffleGames();
+            initializeDeck();
+        }
+
+        private void initializeDeck() {
+            deck = new Card[52];
+            int index = 0;
+
+            for (Suit suit : Suit.values()) {
+                for (Rank rank : Rank.values()) {
+                    deck[index++] = new Card(suit, rank);
+                }
+            }
+        }
+
+        public void shuffle() {
+            shuffler.shuffle(deck);
+        }
+
+        public Card[] getDeck() {
+            return deck.clone();
+        }
+
+        public Card dealCard(int index) {
+            if (index >= 0 && index < deck.length) {
+                return deck[index];
+            }
+            return null;
+        }
+
+        public enum Suit {HEARTS, DIAMONDS, CLUBS, SPADES}
+
+        public enum Rank {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING}
+
+        public static class Card {
+            public final Suit suit;
+            public final Rank rank;
+
+            public Card(Suit suit, Rank rank) {
+                this.suit = suit;
+                this.rank = rank;
+            }
+
+            @Override
+            public String toString() {
+                return rank + " of " + suit;
+            }
+        }
+    }
+
+    /**
+     * Random loot distribution for RPG games
+     */
+    public static class LootDistributor {
+        private LootItem[] availableLoot;
+        private _914_b_FisherYatesShuffleGames shuffler;
+
+        public LootDistributor() {
+            this.shuffler = new _914_b_FisherYatesShuffleGames();
+            initializeLoot();
+        }
+
+        private void initializeLoot() {
+            availableLoot = new LootItem[]{
+                    new LootItem("Iron Sword", LootRarity.COMMON, 10),
+                    new LootItem("Health Potion", LootRarity.COMMON, 5),
+                    new LootItem("Magic Ring", LootRarity.UNCOMMON, 25),
+                    new LootItem("Steel Armor", LootRarity.UNCOMMON, 40),
+                    new LootItem("Dragon Scale", LootRarity.RARE, 100),
+                    new LootItem("Enchanted Bow", LootRarity.RARE, 80),
+                    new LootItem("Phoenix Feather", LootRarity.EPIC, 200),
+                    new LootItem("Crown of Kings", LootRarity.LEGENDARY, 1000)
+            };
+        }
+
+        public LootItem[] distributeLoot(int playerCount) {
+            if (playerCount > availableLoot.length) {
+                throw new IllegalArgumentException("Not enough loot for all players");
+            }
+
+            // Shuffle loot and give first items to players
+            LootItem[] lootCopy = availableLoot.clone();
+            shuffler.shuffle(lootCopy);
+
+            LootItem[] distributedLoot = new LootItem[playerCount];
+            System.arraycopy(lootCopy, 0, distributedLoot, 0, playerCount);
+
+            return distributedLoot;
+        }
+
+        public enum LootRarity {COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
+
+        public static class LootItem {
+            public final String name;
+            public final LootRarity rarity;
+            public final int value;
+
+            public LootItem(String name, LootRarity rarity, int value) {
+                this.name = name;
+                this.rarity = rarity;
+                this.value = value;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("%s (%s, %d gold)", name, rarity, value);
+            }
+        }
+    }
 }
