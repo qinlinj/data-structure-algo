@@ -126,4 +126,74 @@ public class _914_a_DimensionalCoordinateMapping {
             int index = encode(x, y);
             board[index] = value;
         }
+
+        /**
+         * Gets a cell value using 2D coordinates
+         */
+        public boolean getCell(int x, int y) {
+            int index = encode(x, y);
+            return board[index];
+        }
+
+        /**
+         * Sets a cell value using 1D index
+         */
+        public void setCell(int index, boolean value) {
+            if (index >= 0 && index < board.length) {
+                board[index] = value;
+            }
+        }
+
+        /**
+         * Gets a cell value using 1D index
+         */
+        public boolean getCell(int index) {
+            return index >= 0 && index < board.length && board[index];
+        }
+
+        /**
+         * Checks if 2D position is valid
+         */
+        public boolean isValidPosition(int x, int y) {
+            return x >= 0 && x < width && y >= 0 && y < height;
+        }
+
+        /**
+         * Gets total number of cells
+         */
+        public int getTotalCells() {
+            return width * height;
+        }
+
+        /**
+         * Gets board dimensions
+         */
+        public int getWidth() {
+            return width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        /**
+         * Clears the entire board
+         */
+        public void clear() {
+            java.util.Arrays.fill(board, false);
+        }
+
+        /**
+         * Prints the board in 2D format
+         */
+        public void printBoard() {
+            System.out.printf("Board %dx%d:\n", width, height);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    System.out.print(getCell(x, y) ? "* " : ". ");
+                }
+                System.out.println();
+            }
+        }
+    }
 }
