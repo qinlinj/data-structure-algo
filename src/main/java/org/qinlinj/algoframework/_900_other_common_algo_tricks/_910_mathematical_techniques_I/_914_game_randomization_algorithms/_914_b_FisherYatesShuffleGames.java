@@ -56,6 +56,32 @@ public class _914_b_FisherYatesShuffleGames {
     }
 
     /**
+     * Generic Fisher-Yates shuffle for any array type
+     */
+    public <T> void shuffle(T[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int randomIndex = i + random.nextInt(array.length - i);
+            // Swap elements
+            T temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+    }
+
+    /**
+     * Fisher-Yates shuffle for integer arrays
+     */
+    public void shuffle(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            int randomIndex = i + random.nextInt(array.length - i);
+            // Swap elements
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+    }
+
+    /**
      * LeetCode 384: Shuffle an Array
      * Implements the classic Fisher-Yates shuffle algorithm
      */
