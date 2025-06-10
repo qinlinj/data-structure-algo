@@ -46,4 +46,45 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _914_d_MonteCarloVerificationGames {
+    private java.util.Random random;
+
+    public _914_d_MonteCarloVerificationGames() {
+        this.random = new java.util.Random();
+    }
+
+    public _914_d_MonteCarloVerificationGames(long seed) {
+        this.random = new java.util.Random(seed);
+    }
+
+    /**
+     * Classic Monte Carlo example: Estimate π using random points
+     */
+    public double estimatePi(int trials) {
+        System.out.printf("Estimating π using %,d random points\n", trials);
+
+        int pointsInCircle = 0;
+
+        for (int i = 0; i < trials; i++) {
+            double x = random.nextDouble() * 2 - 1; // Range [-1, 1]
+            double y = random.nextDouble() * 2 - 1; // Range [-1, 1]
+
+            // Check if point is inside unit circle
+            if (x * x + y * y <= 1.0) {
+                pointsInCircle++;
+            }
+        }
+
+        // π = 4 * (points in circle / total points)
+        double piEstimate = 4.0 * pointsInCircle / trials;
+        double actualPi = Math.PI;
+        double error = Math.abs(piEstimate - actualPi);
+
+        System.out.printf("Points in circle: %,d / %,d (%.4f%%)\n",
+                pointsInCircle, trials, 100.0 * pointsInCircle / trials);
+        System.out.printf("Estimated π: %.6f\n", piEstimate);
+        System.out.printf("Actual π: %.6f\n", actualPi);
+        System.out.printf("Error: %.6f (%.4f%%)\n", error, 100.0 * error / actualPi);
+
+        return piEstimate;
+    }
 }
