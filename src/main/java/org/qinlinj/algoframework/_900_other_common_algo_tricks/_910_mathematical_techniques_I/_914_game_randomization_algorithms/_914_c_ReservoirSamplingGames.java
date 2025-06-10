@@ -243,4 +243,54 @@ public class _914_c_ReservoirSamplingGames {
             }
         }
     }
+
+    /**
+     * Memory-efficient minesweeper for very large boards
+     */
+    public static class MegaMinesweeper {
+        private final int width, height, mineCount;
+        private int[] minePositions;
+        private _914_c_ReservoirSamplingGames sampler;
+
+        public MegaMinesweeper(int width, int height, int mineCount) {
+            this.width = width;
+            this.height = height;
+            this.mineCount = mineCount;
+            this.sampler = new _914_c_ReservoirSamplingGames();
+            generateMines();
+        }
+
+        private void generateMines() {
+            System.out.printf("Generating %d mines for %dx%d board (%d total cells)\n",
+                    mineCount, width, height, width * height);
+
+            // Use reservoir sampling to avoid creating massive array
+            minePositions = sampler.sampleRange(0, width * height, mineCount);
+            java.util.Arrays.sort(minePositions); // Sort for easier debugging
+        }
+
+        public boolean isMine(int x, int y) {
+            int position = x * height + y;
+            return java.util.Arrays.binarySearch(minePositions, position) >= 0;
+        }
+
+        public int[] getMinePositions() {
+            return minePositions.clone();
+        }
+
+        public void printMineStatistics() {
+            System.out.printf("Mine positions (first 10): %s\n",
+                    java.util.Arrays.toString(
+                            java.util.Arrays.copyOf(minePositions, Math.min(10, minePositions.length))));
+
+            // Convert some positions to 2D coordinates
+            System.out.println("Sample mine coordinates:");
+            for (int i = 0; i < Math.min(5, minePositions.length); i++) {
+                int pos = minePositions[i];
+                int x = pos / height;
+                int y = pos % height;
+                System.out.printf("  Position %d -> (%d,%d)\n", pos, x, y);
+            }
+        }
+    }
 }
