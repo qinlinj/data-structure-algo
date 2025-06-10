@@ -159,6 +159,52 @@ public class _914_c_ReservoirSamplingGames {
     }
 
     /**
+     * Mathematical proof demonstration
+     */
+    public void demonstrateMathematicalProof(int n, int k) {
+        System.out.println("=== Mathematical Proof of Uniformity ===");
+        System.out.printf("Total elements: %d, Sample size: %d\n", n, k);
+
+        System.out.println("\nProbability calculation for each element:");
+        System.out.println("Final probability = Selection probability × Survival probability");
+
+        for (int i = 0; i < Math.min(n, 8); i++) { // Show first 8 elements
+            if (i < k) {
+                // Element is initially selected
+                System.out.printf("Element %d: Initially selected (prob=1.0)\n", i);
+                double survivalProb = 1.0;
+                for (int j = k; j < n; j++) {
+                    double notReplacedProb = 1.0 - (1.0 / (j + 1));
+                    survivalProb *= notReplacedProb;
+                }
+                System.out.printf("           Survival probability: %.6f\n", survivalProb);
+                System.out.printf("           Final probability: %.6f (expected: %.6f)\n",
+                        survivalProb, (double) k / n);
+            } else {
+                // Element enters reservoir later
+                double selectionProb = (double) k / (i + 1);
+                double survivalProb = 1.0;
+                for (int j = i + 1; j < n; j++) {
+                    double notReplacedProb = 1.0 - (1.0 / (j + 1));
+                    survivalProb *= notReplacedProb;
+                }
+                double finalProb = selectionProb * survivalProb;
+                System.out.printf("Element %d: Selection prob=%.6f, Survival prob=%.6f\n",
+                        i, selectionProb, survivalProb);
+                System.out.printf("           Final probability: %.6f (expected: %.6f)\n",
+                        finalProb, (double) k / n);
+            }
+        }
+
+        if (n > 8) {
+            System.out.println("... (remaining elements follow same pattern)");
+        }
+
+        System.out.printf("\nConclusion: All elements have probability %.6f = %d/%d\n",
+                (double) k / n, k, n);
+    }
+
+    /**
      * LeetCode 382: Linked List Random Node
      * Returns a random node's value from the linked list
      */
