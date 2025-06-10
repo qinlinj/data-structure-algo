@@ -181,6 +181,35 @@ public class _914_a_DimensionalCoordinateMapping {
         bomberman.printBoard();
     }
 
+    private static boolean isCornerOrCenter(Position pos, int width, int height) {
+        // Check if position is corner or center
+        boolean isCorner = (pos.x == 0 || pos.x == width - 1) && (pos.y == 0 || pos.y == height - 1);
+        boolean isCenter = pos.x == width / 2 && pos.y == height / 2;
+        return isCorner || isCenter;
+    }
+
+    public static void main(String[] args) {
+        demonstrateCoordinateMapping();
+        demonstrate3DMapping();
+        performanceComparison();
+        gameExamples();
+
+        System.out.println("\n=== Key Takeaways ===");
+        System.out.println("1. 2D to 1D mapping: index = x * height + y");
+        System.out.println("2. 1D to 2D mapping: x = index / height, y = index % height");
+        System.out.println("3. Simplifies random selection in 2D grids");
+        System.out.println("4. Better cache performance than 2D arrays");
+        System.out.println("5. Extends naturally to higher dimensions");
+        System.out.println("6. Foundation for advanced sampling algorithms");
+
+        System.out.println("\n=== Applications ===");
+        System.out.println("• Game development: Random map generation");
+        System.out.println("• Graphics: Texture and pixel manipulation");
+        System.out.println("• Scientific computing: Matrix operations");
+        System.out.println("• Data structures: Sparse matrix representation");
+        System.out.println("• Algorithms: Graph adjacency matrix optimization");
+    }
+    
     /**
      * Represents a 2D position
      */
