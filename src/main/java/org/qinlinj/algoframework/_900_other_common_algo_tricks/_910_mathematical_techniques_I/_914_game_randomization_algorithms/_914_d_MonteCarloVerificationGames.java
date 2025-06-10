@@ -408,4 +408,55 @@ public class _914_d_MonteCarloVerificationGames {
         return reservoir;
     }
 
+    /**
+     * Demonstrates how LeetCode might verify random algorithms
+     */
+    public void simulateLeetCodeJudge() {
+        System.out.println("=== Simulating LeetCode Judge System ===");
+        System.out.println("How online judges detect randomness bugs:");
+
+        // Simulate a biased shuffle algorithm (buggy implementation)
+        System.out.println("\n1. Testing BIASED shuffle algorithm:");
+        verifyBiasedShuffle(4, 10000);
+
+        // Compare with correct algorithm
+        System.out.println("\n2. Testing CORRECT shuffle algorithm:");
+        verifyShuffleUniformity(4, 10000);
+
+        System.out.println("\nLeetCode detection methods:");
+        System.out.println("• Run algorithm 10,000+ times");
+        System.out.println("• Track frequency distributions");
+        System.out.println("• Calculate chi-square statistics");
+        System.out.println("• Flag submissions with poor uniformity");
+        System.out.println("• Use confidence intervals for pass/fail");
+    }
+
+    /**
+     * Demonstrates a biased shuffle for comparison
+     */
+    private void verifyBiasedShuffle(int arraySize, int trials) {
+        int[][] positionFrequency = new int[arraySize][arraySize];
+
+        for (int trial = 0; trial < trials; trial++) {
+            int[] array = new int[arraySize];
+            for (int i = 0; i < arraySize; i++) {
+                array[i] = i;
+            }
+
+            // BIASED shuffle - always pick from beginning of remaining range
+            for (int i = 0; i < arraySize; i++) {
+                int biasedIndex = i + random.nextInt(Math.max(1, (arraySize - i) / 2));
+                // Swap
+                int temp = array[i];
+                array[i] = array[biasedIndex];
+                array[biasedIndex] = temp;
+            }
+
+            // Record positions
+            for (int pos = 0; pos < arraySize; pos++) {
+                int element = array[pos];
+                positionFrequency[element][pos]++;
+            }
+        }
+    }
 }
