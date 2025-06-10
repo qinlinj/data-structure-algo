@@ -65,4 +65,22 @@ public class _914_a_DimensionalCoordinateMapping {
             return java.util.Objects.hash(x, y);
         }
     }
+
+    /**
+     * Represents a 3D position for extension examples
+     */
+    public static class Position3D {
+        public final int x, y, z;
+
+        public Position3D(int x, int y, int z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + x + "," + y + "," + z + ")";
+        }
+    }
 }
