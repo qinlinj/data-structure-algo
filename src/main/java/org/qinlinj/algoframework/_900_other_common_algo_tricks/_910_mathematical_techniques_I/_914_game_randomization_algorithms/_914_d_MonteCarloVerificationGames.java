@@ -87,4 +87,70 @@ public class _914_d_MonteCarloVerificationGames {
 
         return piEstimate;
     }
+
+    /**
+     * Verifies Fisher-Yates shuffle uniformity
+     */
+    public void verifyShuffleUniformity(int arraySize, int trials) {
+        System.out.printf("=== Verifying Fisher-Yates Shuffle ===\n");
+        System.out.printf("Array size: %d, Trials: %,d\n", arraySize, trials);
+
+        // Track frequency of each element at each position
+        int[][] positionFrequency = new int[arraySize][arraySize];
+
+        for (int trial = 0; trial < trials; trial++) {
+            // Create and shuffle array
+            int[] array = new int[arraySize];
+            for (int i = 0; i < arraySize; i++) {
+                array[i] = i;
+            }
+            fisherYatesShuffle(array);
+
+            // Record where each element ended up
+            for (int pos = 0; pos < arraySize; pos++) {
+                int element = array[pos];
+                positionFrequency[element][pos]++;
+            }
+        }
+
+        // Analyze results
+        double expectedFrequency = (double) trials / arraySize;
+        double chiSquare = 0.0;
+        int maxDeviation = 0;
+
+        System.out.printf("Expected frequency per position: %.1f\n", expectedFrequency);
+        System.out.println("\nFrequency matrix (Element -> Position):");
+        System.out.print("Elem\\Pos ");
+        for (int j = 0; j < arraySize; j++) {
+            System.out.printf("%8d", j);
+        }
+        System.out.println();
+
+        for (int i = 0; i < arraySize; i++) {
+            System.out.printf("%8d ", i);
+            for (int j = 0; j < arraySize; j++) {
+                int observed = positionFrequency[i][j];
+                System.out.printf("%8d", observed);
+
+                // Calculate chi-square contribution
+                double deviation = observed - expectedFrequency;
+                chiSquare += (deviation * deviation) / expectedFrequency;
+                maxDeviation = Math.max(maxDeviation, (int) Math.abs(deviation));
+            }
+            System.out.println();
+        }
+
+        System.out.printf("\nChi-square statistic: %.2f\n", chiSquare);
+        System.out.printf("Maximum deviation: %d (%.2f%%)\n",
+                maxDeviation, 100.0 * maxDeviation / expectedFrequency);
+
+        // Assess uniformity
+        if (maxDeviation < expectedFrequency * 0.1) {
+            System.out.println("✓ Excellent uniformity - algorithm appears correct!");
+        } else if (maxDeviation < expectedFrequency * 0.2) {
+            System.out.println("✓ Good uniformity - minor statistical variations");
+        } else {
+            System.out.println("⚠ Poor uniformity - check algorithm implementation");
+        }
+    }
 }
