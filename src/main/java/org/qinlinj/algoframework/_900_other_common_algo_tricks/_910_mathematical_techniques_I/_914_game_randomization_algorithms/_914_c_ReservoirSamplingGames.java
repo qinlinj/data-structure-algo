@@ -47,4 +47,64 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _914_c_ReservoirSamplingGames {
+    private java.util.Random random;
+
+    public _914_c_ReservoirSamplingGames() {
+        this.random = new java.util.Random();
+    }
+
+    public _914_c_ReservoirSamplingGames(long seed) {
+        this.random = new java.util.Random(seed);
+    }
+
+    /**
+     * LeetCode 382: Linked List Random Node
+     * Returns a random node's value from the linked list
+     */
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    public static class LinkedListRandomNode {
+        private ListNode head;
+        private java.util.Random random;
+
+        public LinkedListRandomNode(ListNode head) {
+            this.head = head;
+            this.random = new java.util.Random();
+        }
+
+        /**
+         * Returns a random node's value
+         */
+        public int getRandom() {
+            int result = 0;
+            int count = 0;
+            ListNode current = head;
+
+            while (current != null) {
+                count++;
+                // With probability 1/count, select current element
+                if (random.nextInt(count) == 0) {
+                    result = current.val;
+                }
+                current = current.next;
+            }
+
+            return result;
+        }
+    }
 }
