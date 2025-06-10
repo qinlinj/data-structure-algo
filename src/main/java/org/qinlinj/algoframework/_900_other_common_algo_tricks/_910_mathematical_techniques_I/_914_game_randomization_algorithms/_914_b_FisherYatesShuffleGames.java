@@ -42,7 +42,6 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * Time Complexity: O(n) for shuffling n elements
  * Space Complexity: O(n) for storing all elements
  */
-
 public class _914_b_FisherYatesShuffleGames {
 
     private java.util.Random random;
@@ -53,6 +52,61 @@ public class _914_b_FisherYatesShuffleGames {
 
     public _914_b_FisherYatesShuffleGames(long seed) {
         this.random = new java.util.Random(seed);
+    }
+
+    public static void main(String[] args) {
+        _914_b_FisherYatesShuffleGames shuffleDemo = new _914_b_FisherYatesShuffleGames(42);
+
+        // Basic demonstration
+        System.out.println("FISHER-YATES SHUFFLE ALGORITHM FOR GAMES");
+        System.out.println("=======================================");
+
+        // Step-by-step demonstration
+        int[] smallArray = {1, 2, 3, 4, 5};
+        shuffleDemo.demonstrateShuffleProcess(smallArray);
+
+        // LeetCode 384 example
+        System.out.println("\n=== LeetCode 384: Shuffle an Array ===");
+        int[] nums = {1, 2, 3};
+        ShuffleArray solution = new ShuffleArray(nums);
+
+        System.out.println("Original: " + java.util.Arrays.toString(nums));
+        System.out.println("Shuffle 1: " + java.util.Arrays.toString(solution.shuffle()));
+        System.out.println("Shuffle 2: " + java.util.Arrays.toString(solution.shuffle()));
+        System.out.println("Reset: " + java.util.Arrays.toString(solution.reset()));
+        System.out.println("Shuffle 3: " + java.util.Arrays.toString(solution.shuffle()));
+
+        // Game examples
+        shuffleDemo.gameExamples();
+
+        // Mathematical correctness
+        shuffleDemo.demonstrateMathematicalCorrectness();
+
+        // Algorithm verification
+        shuffleDemo.verifyShuffleCorrectness(5, 10000);
+
+        // Performance comparison
+        shuffleDemo.performanceComparison(1000, 100, 1000);
+
+        System.out.println("\n=== Key Advantages ===");
+        System.out.println("1. Guaranteed uniform distribution");
+        System.out.println("2. O(n) time complexity - linear and efficient");
+        System.out.println("3. Simple implementation with proven correctness");
+        System.out.println("4. Generates all n! permutations with equal probability");
+        System.out.println("5. No issues with duplicate handling");
+
+        System.out.println("\n=== When to Use Fisher-Yates ===");
+        System.out.println("• When you can afford O(n) space complexity");
+        System.out.println("• For complete array shuffling");
+        System.out.println("• When simplicity and correctness are priorities");
+        System.out.println("• Game development with manageable data sizes");
+        System.out.println("• Educational purposes and algorithm learning");
+
+        System.out.println("\n=== Limitations ===");
+        System.out.println("• Requires storing all elements in memory");
+        System.out.println("• Not suitable for very large datasets");
+        System.out.println("• Overkill when k << n (few selections from large set)");
+        System.out.println("• Cannot handle streaming data");
     }
 
     /**
@@ -105,6 +159,233 @@ public class _914_b_FisherYatesShuffleGames {
         System.arraycopy(positions, 0, minePositions, 0, mineCount);
 
         return minePositions;
+    }
+
+    /**
+     * Demonstrates the step-by-step Fisher-Yates process
+     */
+    public void demonstrateShuffleProcess(int[] array) {
+        System.out.println("=== Fisher-Yates Shuffle Step-by-Step ===");
+        System.out.println("Original array: " + java.util.Arrays.toString(array));
+
+        int[] working = array.clone();
+
+        for (int i = 0; i < working.length; i++) {
+            // Generate random index in range [i, n-1]
+            int randomIndex = i + random.nextInt(working.length - i);
+
+            System.out.printf("Step %d: Swap position %d with position %d (%d <-> %d)\n",
+                    i + 1, i, randomIndex, working[i], working[randomIndex]);
+
+            // Perform swap
+            int temp = working[i];
+            working[i] = working[randomIndex];
+            working[randomIndex] = temp;
+
+            System.out.println("         Result: " + java.util.Arrays.toString(working));
+        }
+
+        System.out.println("Final shuffled: " + java.util.Arrays.toString(working));
+    }
+
+    /**
+     * Verifies algorithm correctness by analyzing distribution
+     */
+    public void verifyShuffleCorrectness(int arraySize, int trials) {
+        System.out.println("=== Shuffle Correctness Verification ===");
+        System.out.printf("Testing array of size %d with %d trials\n", arraySize, trials);
+
+        // Track how often each element ends up at each position
+        int[][] positionCounts = new int[arraySize][arraySize];
+
+        for (int trial = 0; trial < trials; trial++) {
+            // Create array [0, 1, 2, ..., arraySize-1]
+            int[] array = new int[arraySize];
+            for (int i = 0; i < arraySize; i++) {
+                array[i] = i;
+            }
+
+            // Shuffle and record positions
+            shuffle(array);
+
+            for (int pos = 0; pos < arraySize; pos++) {
+                int element = array[pos];
+                positionCounts[element][pos]++;
+            }
+        }
+
+        // Analyze results
+        double expectedFrequency = (double) trials / arraySize;
+        System.out.printf("Expected frequency per position: %.1f\n", expectedFrequency);
+
+        System.out.println("\nElement -> Position frequency matrix:");
+        System.out.print("Elem\\Pos ");
+        for (int j = 0; j < arraySize; j++) {
+            System.out.printf("%6d", j);
+        }
+        System.out.println();
+
+        for (int i = 0; i < arraySize; i++) {
+            System.out.printf("%8d ", i);
+            for (int j = 0; j < arraySize; j++) {
+                System.out.printf("%6d", positionCounts[i][j]);
+            }
+            System.out.println();
+        }
+
+        // Calculate deviation from expected
+        double maxDeviation = 0;
+        for (int i = 0; i < arraySize; i++) {
+            for (int j = 0; j < arraySize; j++) {
+                double deviation = Math.abs(positionCounts[i][j] - expectedFrequency);
+                maxDeviation = Math.max(maxDeviation, deviation);
+            }
+        }
+
+        System.out.printf("Maximum deviation from expected: %.1f\n", maxDeviation);
+        System.out.printf("Relative deviation: %.2f%%\n", 100.0 * maxDeviation / expectedFrequency);
+
+        if (maxDeviation < expectedFrequency * 0.1) {
+            System.out.println("✓ Algorithm appears to be working correctly!");
+        } else {
+            System.out.println("⚠ Large deviations detected - check implementation");
+        }
+    }
+
+    /**
+     * Performance comparison with naive random selection
+     */
+    public void performanceComparison(int arraySize, int selectCount, int trials) {
+        System.out.println("=== Performance Comparison ===");
+        System.out.printf("Array size: %d, Select: %d, Trials: %d\n",
+                arraySize, selectCount, trials);
+
+        // Method 1: Fisher-Yates shuffle
+        long startTime = System.nanoTime();
+        for (int trial = 0; trial < trials; trial++) {
+            int[] positions = new int[arraySize];
+            for (int i = 0; i < arraySize; i++) {
+                positions[i] = i;
+            }
+            shuffle(positions);
+            // Take first selectCount elements
+        }
+        long fisherYatesTime = System.nanoTime() - startTime;
+
+        // Method 2: Naive random with duplicate checking
+        startTime = System.nanoTime();
+        for (int trial = 0; trial < trials; trial++) {
+            java.util.Set<Integer> selected = new java.util.HashSet<>();
+            while (selected.size() < selectCount) {
+                int randomIndex = random.nextInt(arraySize);
+                selected.add(randomIndex);
+            }
+        }
+        long naiveTime = System.nanoTime() - startTime;
+
+        System.out.printf("Fisher-Yates: %.2f ms\n", fisherYatesTime / 1_000_000.0);
+        System.out.printf("Naive method: %.2f ms\n", naiveTime / 1_000_000.0);
+
+        if (naiveTime > fisherYatesTime) {
+            System.out.printf("Fisher-Yates is %.2fx faster\n", (double) naiveTime / fisherYatesTime);
+        } else {
+            System.out.printf("Naive method is %.2fx faster\n", (double) fisherYatesTime / naiveTime);
+        }
+    }
+
+    /**
+     * Game development examples
+     */
+    public void gameExamples() {
+        System.out.println("=== Game Development Examples ===");
+
+        // Minesweeper example
+        System.out.println("1. Minesweeper Mine Placement:");
+        int[] minePositions = placeMinesweperMines(8, 8, 10);
+        System.out.printf("Placed 10 mines in 8x8 board at indices: %s\n",
+                java.util.Arrays.toString(minePositions));
+
+        // Convert to 2D coordinates for display
+        System.out.println("Mine positions (x,y):");
+        for (int index : minePositions) {
+            int x = index / 8;
+            int y = index % 8;
+            System.out.printf("  Index %d -> (%d,%d)\n", index, x, y);
+        }
+
+        // Card shuffling example
+        System.out.println("\n2. Card Deck Shuffling:");
+        CardDeck deck = new CardDeck();
+        System.out.println("Original first 5 cards:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("  " + deck.dealCard(i));
+        }
+
+        deck.shuffle();
+        System.out.println("After shuffling first 5 cards:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("  " + deck.dealCard(i));
+        }
+
+        // Loot distribution example
+        System.out.println("\n3. RPG Loot Distribution:");
+        LootDistributor lootDist = new LootDistributor();
+        LootDistributor.LootItem[] playerLoot = lootDist.distributeLoot(4);
+
+        System.out.println("Loot distributed to 4 players:");
+        for (int i = 0; i < playerLoot.length; i++) {
+            System.out.printf("  Player %d: %s\n", i + 1, playerLoot[i]);
+        }
+    }
+
+    /**
+     * Mathematical correctness demonstration
+     */
+    public void demonstrateMathematicalCorrectness() {
+        System.out.println("=== Mathematical Correctness ===");
+
+        int n = 4; // Small array for clear demonstration
+        System.out.printf("For array of size %d:\n", n);
+        System.out.printf("Total possible permutations: %d! = %d\n", n, factorial(n));
+
+        System.out.println("\nFisher-Yates algorithm analysis:");
+        System.out.println("• Position 0: Can be filled by any of n elements");
+        System.out.println("• Position 1: Can be filled by any of (n-1) remaining elements");
+        System.out.println("• Position 2: Can be filled by any of (n-2) remaining elements");
+        System.out.println("• Position 3: Can be filled by the last remaining element");
+        System.out.printf("• Total arrangements: %d × %d × %d × %d = %d\n", n, n - 1, n - 2, 1, factorial(n));
+
+        System.out.println("\nThis proves the algorithm can generate all possible permutations!");
+
+        // Demonstrate with actual small example
+        System.out.println("\nSmall example with array [0, 1, 2]:");
+        java.util.Map<String, Integer> permutationCounts = new java.util.HashMap<>();
+        int trials = 60000;
+
+        for (int trial = 0; trial < trials; trial++) {
+            int[] array = {0, 1, 2};
+            shuffle(array);
+            String permutation = java.util.Arrays.toString(array);
+            permutationCounts.put(permutation, permutationCounts.getOrDefault(permutation, 0) + 1);
+        }
+
+        System.out.printf("Results from %d trials:\n", trials);
+        double expectedCount = (double) trials / factorial(3);
+        System.out.printf("Expected count per permutation: %.1f\n", expectedCount);
+
+        for (java.util.Map.Entry<String, Integer> entry : permutationCounts.entrySet()) {
+            double percentage = 100.0 * entry.getValue() / trials;
+            System.out.printf("%s: %d times (%.1f%%)\n",
+                    entry.getKey(), entry.getValue(), percentage);
+        }
+    }
+
+    private int factorial(int n) {
+        int result = 1;
+        for (int i = 2; i <= n; i++) {
+            result *= i;
+        }
+        return result;
     }
 
     /**
