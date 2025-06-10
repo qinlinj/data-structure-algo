@@ -82,6 +82,32 @@ public class _914_b_FisherYatesShuffleGames {
     }
 
     /**
+     * Minesweeper mine placement using Fisher-Yates
+     */
+    public int[] placeMinesweperMines(int boardWidth, int boardHeight, int mineCount) {
+        if (mineCount > boardWidth * boardHeight) {
+            throw new IllegalArgumentException("Too many mines for board size");
+        }
+
+        int totalCells = boardWidth * boardHeight;
+        int[] positions = new int[totalCells];
+
+        // Initialize positions array with all possible indices
+        for (int i = 0; i < totalCells; i++) {
+            positions[i] = i;
+        }
+
+        // Shuffle the array using Fisher-Yates
+        shuffle(positions);
+
+        // Take first mineCount positions as mine locations
+        int[] minePositions = new int[mineCount];
+        System.arraycopy(positions, 0, minePositions, 0, mineCount);
+
+        return minePositions;
+    }
+
+    /**
      * LeetCode 384: Shuffle an Array
      * Implements the classic Fisher-Yates shuffle algorithm
      */
