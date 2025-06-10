@@ -44,8 +44,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * Time Complexity: O(trials × algorithm_complexity)
  * Space Complexity: O(outcomes) for frequency tracking
  */
-
 public class _914_d_MonteCarloVerificationGames {
+
     private java.util.Random random;
 
     public _914_d_MonteCarloVerificationGames() {
@@ -54,6 +54,54 @@ public class _914_d_MonteCarloVerificationGames {
 
     public _914_d_MonteCarloVerificationGames(long seed) {
         this.random = new java.util.Random(seed);
+    }
+
+    public static void main(String[] args) {
+        _914_d_MonteCarloVerificationGames verifier = new _914_d_MonteCarloVerificationGames(42);
+
+        System.out.println("MONTE CARLO VERIFICATION FOR GAME ALGORITHMS");
+        System.out.println("============================================");
+
+        // Classic π estimation
+        verifier.estimatePi(100000);
+        System.out.println();
+
+        // Algorithm verifications
+        verifier.verifyShuffleUniformity(5, 50000);
+        System.out.println();
+
+        verifier.verifyReservoirSamplingUniformity(10, 3, 30000);
+        System.out.println();
+
+        verifier.verifyMinesweeperUniformity(6, 6, 8, 10000);
+        System.out.println();
+
+        verifier.verifyCardShuffling(10000);
+        System.out.println();
+
+        // LeetCode simulation
+        verifier.simulateLeetCodeJudge();
+
+        System.out.println("\n=== Key Insights ===");
+        System.out.println("1. Monte Carlo validates algorithm correctness through repetition");
+        System.out.println("2. Statistical tests reveal subtle biases impossible to spot manually");
+        System.out.println("3. Chi-square test quantifies deviation from uniform distribution");
+        System.out.println("4. Large sample sizes provide reliable statistical confidence");
+        System.out.println("5. Visual heatmaps make distribution patterns immediately obvious");
+
+        System.out.println("\n=== Best Practices ===");
+        System.out.println("• Use at least 10,000 trials for reliable statistics");
+        System.out.println("• Track multiple metrics: mean, std dev, chi-square");
+        System.out.println("• Visualize results with heatmaps and frequency charts");
+        System.out.println("• Test edge cases and boundary conditions");
+        System.out.println("• Compare against theoretical expectations");
+
+        System.out.println("\n=== Applications ===");
+        System.out.println("• Quality assurance for game random systems");
+        System.out.println("• Online judge systems for algorithm verification");
+        System.out.println("• A/B testing validation in game analytics");
+        System.out.println("• Fair play certification for competitive games");
+        System.out.println("• Research validation in probability algorithms");
     }
 
     /**
@@ -458,5 +506,30 @@ public class _914_d_MonteCarloVerificationGames {
                 positionFrequency[element][pos]++;
             }
         }
+
+        // Show bias
+        double expectedFrequency = (double) trials / arraySize;
+        System.out.printf("Expected frequency: %.1f\n", expectedFrequency);
+        System.out.println("Biased frequency matrix:");
+        System.out.print("Elem\\Pos ");
+        for (int j = 0; j < arraySize; j++) {
+            System.out.printf("%8d", j);
+        }
+        System.out.println();
+
+        double maxDeviation = 0;
+        for (int i = 0; i < arraySize; i++) {
+            System.out.printf("%8d ", i);
+            for (int j = 0; j < arraySize; j++) {
+                int frequency = positionFrequency[i][j];
+                System.out.printf("%8d", frequency);
+                maxDeviation = Math.max(maxDeviation, Math.abs(frequency - expectedFrequency));
+            }
+            System.out.println();
+        }
+
+        System.out.printf("Maximum deviation: %.1f (%.1f%% of expected)\n",
+                maxDeviation, 100.0 * maxDeviation / expectedFrequency);
+        System.out.println("⚠ Clear bias detected - this algorithm would be rejected!");
     }
 }
