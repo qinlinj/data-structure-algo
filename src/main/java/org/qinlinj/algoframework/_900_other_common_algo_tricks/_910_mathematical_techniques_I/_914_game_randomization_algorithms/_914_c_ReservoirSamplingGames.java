@@ -45,8 +45,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * Time Complexity: O(n) to process n elements
  * Space Complexity: O(k) for reservoir storage
  */
-
 public class _914_c_ReservoirSamplingGames {
+
     private java.util.Random random;
 
     public _914_c_ReservoirSamplingGames() {
@@ -55,6 +55,74 @@ public class _914_c_ReservoirSamplingGames {
 
     public _914_c_ReservoirSamplingGames(long seed) {
         this.random = new java.util.Random(seed);
+    }
+
+    public static void main(String[] args) {
+        _914_c_ReservoirSamplingGames sampler = new _914_c_ReservoirSamplingGames(42);
+
+        System.out.println("RESERVOIR SAMPLING ALGORITHM FOR GAMES");
+        System.out.println("======================================");
+
+        // Basic demonstration
+        int[] stream = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+        sampler.demonstrateReservoirProcess(stream, 3);
+
+        // LeetCode 382 example
+        System.out.println("\n=== LeetCode 382: Linked List Random Node ===");
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+
+        LinkedListRandomNode solution = new LinkedListRandomNode(head);
+        System.out.println("Linked list: 1 -> 2 -> 3");
+        System.out.print("Random selections: ");
+        for (int i = 0; i < 10; i++) {
+            System.out.print(solution.getRandom() + " ");
+        }
+        System.out.println();
+
+        // Mathematical proof
+        sampler.demonstrateMathematicalProof(8, 3);
+
+        // Game examples
+        System.out.println("\n=== Game Development Examples ===");
+
+        // Massive world exploration
+        MassiveWorldExplorer explorer = new MassiveWorldExplorer();
+        MassiveWorldExplorer.PointOfInterest[] pois = explorer.exploreWorld(1000, 5);
+        System.out.println("Discovered POIs:");
+        for (MassiveWorldExplorer.PointOfInterest poi : pois) {
+            System.out.println("  " + poi);
+        }
+
+        // Memory-efficient minesweeper
+        System.out.println("\nMega Minesweeper:");
+        MegaMinesweeper megaGame = new MegaMinesweeper(10000, 10000, 1000);
+        megaGame.printMineStatistics();
+
+        // Performance comparison
+        sampler.performanceComparison(1000000, 100);
+
+        System.out.println("\n=== Key Advantages ===");
+        System.out.println("1. O(k) space complexity vs O(n) for Fisher-Yates");
+        System.out.println("2. Works with streaming/unknown data sizes");
+        System.out.println("3. Perfect for memory-constrained environments");
+        System.out.println("4. Maintains uniform probability distribution");
+        System.out.println("5. Real-time processing capability");
+
+        System.out.println("\n=== When to Use Reservoir Sampling ===");
+        System.out.println("• Large datasets that don't fit in memory");
+        System.out.println("• Streaming data with unknown total size");
+        System.out.println("• Mobile/embedded games with memory limits");
+        System.out.println("• When k << n (selecting few from many)");
+        System.out.println("• Online multiplayer games with dynamic content");
+
+        System.out.println("\n=== Real-World Applications ===");
+        System.out.println("• Massive multiplayer games: Random event selection");
+        System.out.println("• Procedural generation: Streaming world creation");
+        System.out.println("• Social games: Random friend/content recommendations");
+        System.out.println("• Analytics: Random sampling of player behavior");
+        System.out.println("• A/B testing: Random user group assignment");
     }
 
     /**
@@ -202,6 +270,45 @@ public class _914_c_ReservoirSamplingGames {
 
         System.out.printf("\nConclusion: All elements have probability %.6f = %d/%d\n",
                 (double) k / n, k, n);
+    }
+
+    /**
+     * Performance and memory usage comparison
+     */
+    public void performanceComparison(int totalElements, int sampleSize) {
+        System.out.println("=== Performance & Memory Comparison ===");
+        System.out.printf("Total elements: %,d, Sample size: %d\n", totalElements, sampleSize);
+
+        // Method 1: Reservoir Sampling
+        long startTime = System.nanoTime();
+        long memoryBefore = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
+        int[] reservoirResult = sampleRange(0, totalElements, sampleSize);
+
+        long reservoirTime = System.nanoTime() - startTime;
+        long memoryAfter = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long reservoirMemory = memoryAfter - memoryBefore;
+
+        // Method 2: Fisher-Yates (simulated memory usage)
+        long fisherYatesMemory = (long) totalElements * 4; // 4 bytes per int
+
+        System.out.println("\nReservoir Sampling:");
+        System.out.printf("  Time: %.2f ms\n", reservoirTime / 1_000_000.0);
+        System.out.printf("  Memory: %,d bytes (%.2f MB)\n",
+                sampleSize * 4, (sampleSize * 4) / (1024.0 * 1024.0));
+
+        System.out.println("Fisher-Yates (theoretical):");
+        System.out.printf("  Memory: %,d bytes (%.2f MB)\n",
+                fisherYatesMemory, fisherYatesMemory / (1024.0 * 1024.0));
+
+        if (fisherYatesMemory > sampleSize * 4) {
+            System.out.printf("Memory savings: %.2fx\n",
+                    (double) fisherYatesMemory / (sampleSize * 4));
+        }
+
+        System.out.printf("Sample result (first 5): %s\n",
+                java.util.Arrays.toString(
+                        java.util.Arrays.copyOf(reservoirResult, Math.min(5, reservoirResult.length))));
     }
 
     /**
