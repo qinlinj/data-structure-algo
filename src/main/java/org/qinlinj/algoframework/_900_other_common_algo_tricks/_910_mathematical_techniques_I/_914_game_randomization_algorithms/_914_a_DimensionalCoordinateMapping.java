@@ -36,4 +36,33 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _914_a_DimensionalCoordinateMapping {
+    /**
+     * Represents a 2D position
+     */
+    public static class Position {
+        public final int x, y;
+
+        public Position(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + x + "," + y + ")";
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Position position = (Position) obj;
+            return x == position.x && y == position.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(x, y);
+        }
+    }
 }
