@@ -34,8 +34,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  * Time Complexity: O(1) for coordinate transformations
  * Space Complexity: O(m*n) for board storage
  */
-
 public class _914_a_DimensionalCoordinateMapping {
+
     /**
      * Demonstrates coordinate mapping with practical examples
      */
@@ -209,7 +209,7 @@ public class _914_a_DimensionalCoordinateMapping {
         System.out.println("• Data structures: Sparse matrix representation");
         System.out.println("• Algorithms: Graph adjacency matrix optimization");
     }
-    
+
     /**
      * Represents a 2D position
      */
