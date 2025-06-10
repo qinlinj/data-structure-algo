@@ -88,6 +88,33 @@ public class _914_c_ReservoirSamplingGames {
     }
 
     /**
+     * Reservoir sampling for integer ranges (like minesweeper)
+     */
+    public int[] sampleRange(int start, int end, int k) {
+        int totalElements = end - start;
+        if (k > totalElements) {
+            throw new IllegalArgumentException("k cannot be larger than range size");
+        }
+
+        int[] reservoir = new int[k];
+
+        // Fill reservoir with first k elements
+        for (int i = 0; i < k; i++) {
+            reservoir[i] = start + i;
+        }
+
+        // Process remaining elements
+        for (int i = k; i < totalElements; i++) {
+            int randomIndex = random.nextInt(i + 1);
+            if (randomIndex < k) {
+                reservoir[randomIndex] = start + i;
+            }
+        }
+
+        return reservoir;
+    }
+
+    /**
      * LeetCode 382: Linked List Random Node
      * Returns a random node's value from the linked list
      */
@@ -137,5 +164,83 @@ public class _914_c_ReservoirSamplingGames {
             return result;
         }
     }
-    
+
+    /**
+     * Advanced game: Massive world exploration system
+     */
+    public static class MassiveWorldExplorer {
+        private _914_c_ReservoirSamplingGames sampler;
+
+        public MassiveWorldExplorer() {
+            this.sampler = new _914_c_ReservoirSamplingGames();
+        }
+
+        /**
+         * Simulates exploring a massive world and finding random POIs
+         */
+        public PointOfInterest[] exploreWorld(int worldSize, int maxPOIs) {
+            System.out.printf("Exploring world of size %dx%d, collecting up to %d POIs\n",
+                    worldSize, worldSize, maxPOIs);
+
+            java.util.List<PointOfInterest> allPOIs = new java.util.ArrayList<>();
+
+            // Simulate streaming discovery of POIs
+            for (int id = 0; id < worldSize * worldSize / 100; id++) { // 1% of world has POI
+                POIType type = POIType.values()[sampler.random.nextInt(POIType.values().length)];
+                String name = generatePOIName(type, id);
+                int x = sampler.random.nextInt(worldSize);
+                int y = sampler.random.nextInt(worldSize);
+
+                allPOIs.add(new PointOfInterest(id, type, name, x, y));
+            }
+
+            // Use reservoir sampling to select random POIs
+            PointOfInterest[] allPOIArray = allPOIs.toArray(new PointOfInterest[0]);
+            PointOfInterest[] selectedPOIs = sampler.reservoirSample(allPOIArray, maxPOIs);
+
+            return selectedPOIs;
+        }
+
+        private String generatePOIName(POIType type, int id) {
+            String[] prefixes = {"Ancient", "Mysterious", "Hidden", "Forgotten", "Sacred"};
+            String[] suffixes = {"Temple", "Ruins", "Cave", "Grove", "Tower"};
+
+            switch (type) {
+                case TREASURE:
+                    return "Treasure Chest #" + id;
+                case MONSTER:
+                    return "Monster Lair #" + id;
+                case NPC:
+                    return "Villager #" + id;
+                case LANDMARK:
+                    return prefixes[id % prefixes.length] + " " + suffixes[id % suffixes.length];
+                case RESOURCE:
+                    return "Resource Node #" + id;
+                default:
+                    return "Unknown POI #" + id;
+            }
+        }
+
+        public enum POIType {TREASURE, MONSTER, NPC, LANDMARK, RESOURCE}
+
+        public static class PointOfInterest {
+            public final int id;
+            public final POIType type;
+            public final String name;
+            public final int x, y;
+
+            public PointOfInterest(int id, POIType type, String name, int x, int y) {
+                this.id = id;
+                this.type = type;
+                this.name = name;
+                this.x = x;
+                this.y = y;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("%s:%s at (%d,%d)", type, name, x, y);
+            }
+        }
+    }
 }
