@@ -115,6 +115,50 @@ public class _914_c_ReservoirSamplingGames {
     }
 
     /**
+     * Demonstrates the reservoir sampling process step by step
+     */
+    public void demonstrateReservoirProcess(int[] stream, int k) {
+        System.out.println("=== Reservoir Sampling Step-by-Step ===");
+        System.out.printf("Stream: %s, k=%d\n", java.util.Arrays.toString(stream), k);
+
+        if (k > stream.length) {
+            System.out.println("k is larger than stream size!");
+            return;
+        }
+
+        int[] reservoir = new int[k];
+
+        // Fill reservoir with first k elements
+        System.out.println("\nInitialization phase:");
+        for (int i = 0; i < k; i++) {
+            reservoir[i] = stream[i];
+            System.out.printf("Step %d: Add element %d to reservoir[%d]\n", i + 1, stream[i], i);
+            System.out.printf("         Reservoir: %s\n", java.util.Arrays.toString(reservoir));
+        }
+
+        // Process remaining elements
+        System.out.println("\nSampling phase:");
+        for (int i = k; i < stream.length; i++) {
+            int randomIndex = random.nextInt(i + 1);
+            System.out.printf("Step %d: Element %d, random index = %d/%d",
+                    i + 1, stream[i], randomIndex, i + 1);
+
+            if (randomIndex < k) {
+                int replaced = reservoir[randomIndex];
+                reservoir[randomIndex] = stream[i];
+                System.out.printf(" -> Replace reservoir[%d]: %d -> %d",
+                        randomIndex, replaced, stream[i]);
+            } else {
+                System.out.print(" -> Keep current reservoir");
+            }
+            System.out.println();
+            System.out.printf("         Reservoir: %s\n", java.util.Arrays.toString(reservoir));
+        }
+
+        System.out.printf("\nFinal reservoir: %s\n", java.util.Arrays.toString(reservoir));
+    }
+
+    /**
      * LeetCode 382: Linked List Random Node
      * Returns a random node's value from the linked list
      */
