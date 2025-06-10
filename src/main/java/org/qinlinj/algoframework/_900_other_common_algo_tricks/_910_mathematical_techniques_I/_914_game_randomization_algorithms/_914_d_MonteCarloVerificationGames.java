@@ -228,4 +228,86 @@ public class _914_d_MonteCarloVerificationGames {
             System.out.println("⚠ Poor uniformity - algorithm may have issues");
         }
     }
+
+    /**
+     * Game-specific verification: Minesweeper mine placement
+     */
+    public void verifyMinesweeperUniformity(int width, int height, int mineCount, int trials) {
+        System.out.printf("=== Verifying Minesweeper Mine Placement ===\n");
+        System.out.printf("Board: %dx%d, Mines: %d, Trials: %,d\n", width, height, mineCount, trials);
+
+        int totalCells = width * height;
+        int[] cellMineCount = new int[totalCells];
+
+        for (int trial = 0; trial < trials; trial++) {
+            // Generate mines using reservoir sampling
+            int[] minePositions = reservoirSample(totalCells, mineCount);
+            for (int position : minePositions) {
+                cellMineCount[position]++;
+            }
+        }
+
+        // Analyze uniformity
+        double expectedFrequency = (double) trials * mineCount / totalCells;
+
+        System.out.printf("Expected mine frequency per cell: %.2f\n", expectedFrequency);
+
+        if (width <= 8 && height <= 8) {
+            // Show heatmap for small boards
+            System.out.println("\nMine frequency heatmap:");
+            System.out.print("     ");
+            for (int y = 0; y < height; y++) {
+                System.out.printf("%5d", y);
+            }
+            System.out.println();
+
+            for (int x = 0; x < width; x++) {
+                System.out.printf("%2d:  ", x);
+                for (int y = 0; y < height; y++) {
+                    int position = x * height + y;
+                    int frequency = cellMineCount[position];
+                    double ratio = frequency / expectedFrequency;
+
+                    // Color coding based on deviation
+                    String symbol;
+                    if (ratio >= 0.9 && ratio <= 1.1) {
+                        symbol = "██"; // Very close to expected
+                    } else if (ratio >= 0.8 && ratio <= 1.2) {
+                        symbol = "▓▓"; // Close to expected
+                    } else if (ratio >= 0.7 && ratio <= 1.3) {
+                        symbol = "▒▒"; // Moderate deviation
+                    } else {
+                        symbol = "░░"; // High deviation
+                    }
+
+                    System.out.printf("%s", symbol);
+                }
+                System.out.println();
+            }
+
+            System.out.println("\nLegend:");
+            System.out.println("██ = Within 10% of expected");
+            System.out.println("▓▓ = Within 20% of expected");
+            System.out.println("▒▒ = Within 30% of expected");
+            System.out.println("░░ = More than 30% deviation");
+        }
+
+        // Statistical analysis
+        double chiSquare = 0.0;
+        for (int frequency : cellMineCount) {
+            double deviation = frequency - expectedFrequency;
+            chiSquare += (deviation * deviation) / expectedFrequency;
+        }
+
+        System.out.printf("Chi-square statistic: %.2f\n", chiSquare);
+        System.out.printf("Degrees of freedom: %d\n", totalCells - 1);
+
+        // Critical value for 95% confidence (approximation)
+        double criticalValue = totalCells * 1.2; // Rough approximation
+        if (chiSquare < criticalValue) {
+            System.out.println("✓ Mine placement appears uniform and fair!");
+        } else {
+            System.out.println("⚠ Mine placement may not be uniform - investigate algorithm");
+        }
+    }
 }
