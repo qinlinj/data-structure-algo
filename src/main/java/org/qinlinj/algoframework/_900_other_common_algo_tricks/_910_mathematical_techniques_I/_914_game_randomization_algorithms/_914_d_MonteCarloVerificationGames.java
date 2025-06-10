@@ -310,4 +310,66 @@ public class _914_d_MonteCarloVerificationGames {
             System.out.println("⚠ Mine placement may not be uniform - investigate algorithm");
         }
     }
+
+    /**
+     * Card game verification: Deck shuffling fairness
+     */
+    public void verifyCardShuffling(int trials) {
+        System.out.printf("=== Verifying Card Deck Shuffling ===\n");
+        System.out.printf("Trials: %,d\n", trials);
+
+        final int DECK_SIZE = 52;
+        // Track how often each card appears at each position
+        int[][] cardPositionCount = new int[DECK_SIZE][DECK_SIZE];
+
+        for (int trial = 0; trial < trials; trial++) {
+            // Create and shuffle deck
+            int[] deck = new int[DECK_SIZE];
+            for (int i = 0; i < DECK_SIZE; i++) {
+                deck[i] = i;
+            }
+            fisherYatesShuffle(deck);
+
+            // Record positions
+            for (int pos = 0; pos < DECK_SIZE; pos++) {
+                int card = deck[pos];
+                cardPositionCount[card][pos]++;
+            }
+        }
+
+        // Analyze specific cards (Aces and Kings)
+        int[] aces = {0, 13, 26, 39}; // Ace of each suit
+        int[] kings = {12, 25, 38, 51}; // King of each suit
+
+        double expectedFrequency = (double) trials / DECK_SIZE;
+
+        System.out.printf("Expected frequency per position: %.1f\n", expectedFrequency);
+        System.out.println("\nAce position distribution (first 13 positions):");
+
+        for (int ace : aces) {
+            System.out.printf("Ace %2d: ", ace);
+            for (int pos = 0; pos < 13; pos++) {
+                System.out.printf("%4d", cardPositionCount[ace][pos]);
+            }
+            System.out.println();
+        }
+
+        // Calculate overall uniformity
+        double maxDeviation = 0.0;
+        for (int card = 0; card < DECK_SIZE; card++) {
+            for (int pos = 0; pos < DECK_SIZE; pos++) {
+                double deviation = Math.abs(cardPositionCount[card][pos] - expectedFrequency);
+                maxDeviation = Math.max(maxDeviation, deviation);
+            }
+        }
+
+        System.out.printf("Maximum deviation from expected: %.1f (%.2f%%)\n",
+                maxDeviation, 100.0 * maxDeviation / expectedFrequency);
+
+        if (maxDeviation < expectedFrequency * 0.15) {
+            System.out.println("✓ Card shuffling is fair and uniform!");
+        } else {
+            System.out.println("⚠ Card shuffling may have bias - check algorithm");
+        }
+    }
 }
