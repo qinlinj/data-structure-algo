@@ -196,4 +196,49 @@ public class _914_a_DimensionalCoordinateMapping {
             }
         }
     }
+
+    /**
+     * Extended 3D coordinate mapping for advanced games
+     */
+    public static class GameBoard3D {
+        private final int width, height, depth;
+        private final boolean[] board;
+
+        public GameBoard3D(int width, int height, int depth) {
+            this.width = width;
+            this.height = height;
+            this.depth = depth;
+            this.board = new boolean[width * height * depth];
+        }
+
+        /**
+         * Converts 3D coordinates to 1D index
+         */
+        public int encode(int x, int y, int z) {
+            return x * (height * depth) + y * depth + z;
+        }
+
+        /**
+         * Converts 1D index to 3D coordinates
+         */
+        public Position3D decode(int index) {
+            int x = index / (height * depth);
+            int y = (index % (height * depth)) / depth;
+            int z = index % depth;
+            return new Position3D(x, y, z);
+        }
+
+        public void setCell(int x, int y, int z, boolean value) {
+            int index = encode(x, y, z);
+            if (index >= 0 && index < board.length) {
+                board[index] = value;
+            }
+        }
+
+        public boolean getCell(int x, int y, int z) {
+            int index = encode(x, y, z);
+            return index >= 0 && index < board.length && board[index];
+        }
+    }
+
 }
