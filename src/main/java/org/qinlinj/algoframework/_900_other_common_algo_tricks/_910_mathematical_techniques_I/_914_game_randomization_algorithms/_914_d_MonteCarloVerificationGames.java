@@ -153,4 +153,79 @@ public class _914_d_MonteCarloVerificationGames {
             System.out.println("⚠ Poor uniformity - check algorithm implementation");
         }
     }
+
+    /**
+     * Verifies reservoir sampling uniformity
+     */
+    public void verifyReservoirSamplingUniformity(int totalElements, int sampleSize, int trials) {
+        System.out.printf("=== Verifying Reservoir Sampling ===\n");
+        System.out.printf("Total elements: %d, Sample size: %d, Trials: %,d\n",
+                totalElements, sampleSize, trials);
+
+        int[] selectionCount = new int[totalElements];
+
+        for (int trial = 0; trial < trials; trial++) {
+            int[] sample = reservoirSample(totalElements, sampleSize);
+            for (int element : sample) {
+                selectionCount[element]++;
+            }
+        }
+
+        // Analyze results
+        double expectedFrequency = (double) trials * sampleSize / totalElements;
+        double standardDeviation = Math.sqrt(expectedFrequency * (1.0 - (double) sampleSize / totalElements));
+
+        System.out.printf("Expected frequency per element: %.2f\n", expectedFrequency);
+        System.out.printf("Theoretical standard deviation: %.2f\n", standardDeviation);
+
+        // Calculate actual statistics
+        double sumSquaredDeviations = 0.0;
+        int minCount = Integer.MAX_VALUE;
+        int maxCount = Integer.MIN_VALUE;
+
+        for (int count : selectionCount) {
+            double deviation = count - expectedFrequency;
+            sumSquaredDeviations += deviation * deviation;
+            minCount = Math.min(minCount, count);
+            maxCount = Math.max(maxCount, count);
+        }
+
+        double actualStdDev = Math.sqrt(sumSquaredDeviations / totalElements);
+
+        System.out.printf("Actual standard deviation: %.2f\n", actualStdDev);
+        System.out.printf("Selection count range: [%d, %d]\n", minCount, maxCount);
+        System.out.printf("Range span: %d (%.1f%% of expected)\n",
+                maxCount - minCount, 100.0 * (maxCount - minCount) / expectedFrequency);
+
+        // Show frequency distribution for small examples
+        if (totalElements <= 20) {
+            System.out.println("\nElement selection frequencies:");
+            for (int i = 0; i < totalElements; i++) {
+                double percentage = 100.0 * selectionCount[i] / (trials * sampleSize);
+                System.out.printf("Element %2d: %4d times (%.2f%%)\n",
+                        i, selectionCount[i], percentage);
+            }
+        }
+
+        // Uniformity assessment
+        double tolerance = 2.0 * standardDeviation;
+        int elementsInRange = 0;
+        for (int count : selectionCount) {
+            if (Math.abs(count - expectedFrequency) <= tolerance) {
+                elementsInRange++;
+            }
+        }
+
+        double percentageInRange = 100.0 * elementsInRange / totalElements;
+        System.out.printf("\nElements within 2σ of expected: %d/%d (%.1f%%)\n",
+                elementsInRange, totalElements, percentageInRange);
+
+        if (percentageInRange >= 95) {
+            System.out.println("✓ Excellent uniformity - algorithm is working correctly!");
+        } else if (percentageInRange >= 85) {
+            System.out.println("✓ Good uniformity - acceptable statistical variation");
+        } else {
+            System.out.println("⚠ Poor uniformity - algorithm may have issues");
+        }
+    }
 }
