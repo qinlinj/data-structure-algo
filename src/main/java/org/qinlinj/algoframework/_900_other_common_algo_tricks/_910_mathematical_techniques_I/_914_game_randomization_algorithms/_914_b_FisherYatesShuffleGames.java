@@ -44,4 +44,58 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _914_b_FisherYatesShuffleGames {
+
+    private java.util.Random random;
+
+    public _914_b_FisherYatesShuffleGames() {
+        this.random = new java.util.Random();
+    }
+
+    public _914_b_FisherYatesShuffleGames(long seed) {
+        this.random = new java.util.Random(seed);
+    }
+
+    /**
+     * LeetCode 384: Shuffle an Array
+     * Implements the classic Fisher-Yates shuffle algorithm
+     */
+    public static class ShuffleArray {
+        private int[] original;
+        private java.util.Random random;
+
+        public ShuffleArray(int[] nums) {
+            this.original = nums.clone();
+            this.random = new java.util.Random();
+        }
+
+        /**
+         * Resets the array to its original configuration and returns it.
+         */
+        public int[] reset() {
+            return original.clone();
+        }
+
+        /**
+         * Returns a random shuffling of the array.
+         */
+        public int[] shuffle() {
+            int[] shuffled = original.clone();
+
+            // Fisher-Yates shuffle algorithm
+            for (int i = 0; i < shuffled.length; i++) {
+                // Generate random index in range [i, n-1]
+                int randomIndex = i + random.nextInt(shuffled.length - i);
+                // Swap elements at positions i and randomIndex
+                swap(shuffled, i, randomIndex);
+            }
+
+            return shuffled;
+        }
+
+        private void swap(int[] array, int i, int j) {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
 }
