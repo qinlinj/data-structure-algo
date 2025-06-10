@@ -58,6 +58,36 @@ public class _914_c_ReservoirSamplingGames {
     }
 
     /**
+     * Generic reservoir sampling for k elements from stream
+     */
+    public <T> T[] reservoirSample(T[] stream, int k) {
+        if (k <= 0 || stream.length == 0) {
+            return (T[]) new Object[0];
+        }
+
+        k = Math.min(k, stream.length);
+        T[] reservoir = (T[]) new Object[k];
+
+        // Fill reservoir with first k elements
+        for (int i = 0; i < k; i++) {
+            reservoir[i] = stream[i];
+        }
+
+        // Process remaining elements
+        for (int i = k; i < stream.length; i++) {
+            // Generate random index in range [0, i]
+            int randomIndex = random.nextInt(i + 1);
+
+            // If random index < k, replace element in reservoir
+            if (randomIndex < k) {
+                reservoir[randomIndex] = stream[i];
+            }
+        }
+
+        return reservoir;
+    }
+
+    /**
      * LeetCode 382: Linked List Random Node
      * Returns a random node's value from the linked list
      */
@@ -107,4 +137,5 @@ public class _914_c_ReservoirSamplingGames {
             return result;
         }
     }
+    
 }
