@@ -83,4 +83,47 @@ public class _914_a_DimensionalCoordinateMapping {
             return "(" + x + "," + y + "," + z + ")";
         }
     }
+
+    /**
+     * Game board using 1D array representation
+     */
+    public static class GameBoard {
+        private final int width, height;
+        private final boolean[] board; // true = mine/obstacle, false = empty
+
+        public GameBoard(int width, int height) {
+            this.width = width;
+            this.height = height;
+            this.board = new boolean[width * height];
+        }
+
+        /**
+         * Converts 2D coordinates to 1D array index
+         */
+        public int encode(int x, int y) {
+            if (!isValidPosition(x, y)) {
+                throw new IllegalArgumentException("Invalid position: (" + x + "," + y + ")");
+            }
+            return x * height + y;
+        }
+
+        /**
+         * Converts 1D array index to 2D coordinates
+         */
+        public Position decode(int index) {
+            if (index < 0 || index >= board.length) {
+                throw new IllegalArgumentException("Invalid index: " + index);
+            }
+            int x = index / height;
+            int y = index % height;
+            return new Position(x, y);
+        }
+
+        /**
+         * Sets a cell value using 2D coordinates
+         */
+        public void setCell(int x, int y, boolean value) {
+            int index = encode(x, y);
+            board[index] = value;
+        }
 }
