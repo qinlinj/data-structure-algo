@@ -27,4 +27,37 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _915_c_FactorialConcepts {
+    /**
+     * Demonstrates why factors of 5 are the limiting factor
+     */
+    public static void explainFactorDistribution(int n) {
+        System.out.println("Analyzing factor distribution in " + n + "!:");
+        System.out.println("-".repeat(40));
+
+        // Count factors of 2
+        int factors2 = 0;
+        for (int i = 1; i <= n; i++) {
+            int num = i;
+            while (num % 2 == 0) {
+                factors2++;
+                num /= 2;
+            }
+        }
+
+        // Count factors of 5
+        int factors5 = 0;
+        for (int i = 1; i <= n; i++) {
+            int num = i;
+            while (num % 5 == 0) {
+                factors5++;
+                num /= 5;
+            }
+        }
+
+        System.out.println("Total factors of 2: " + factors2);
+        System.out.println("Total factors of 5: " + factors5);
+        System.out.println("Trailing zeros (min of above): " + Math.min(factors2, factors5));
+        System.out.println("Ratio (factors of 2 : factors of 5): " +
+                String.format("%.2f", (double) factors2 / factors5));
+    }
 }
