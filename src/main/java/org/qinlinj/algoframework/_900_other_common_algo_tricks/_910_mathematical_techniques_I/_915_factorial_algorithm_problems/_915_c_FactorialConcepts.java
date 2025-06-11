@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematical_techniques_I._915_factorial_algorithm_problems;
+
+public class _915_c_FactorialConcepts {
+}
