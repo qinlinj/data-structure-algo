@@ -135,4 +135,46 @@ public class _915_c_FactorialConcepts {
         }
         return res;
     }
+
+    /**
+     * Shows interesting mathematical properties
+     */
+    public static void showMathematicalProperties() {
+        System.out.println("\n=== INTERESTING MATHEMATICAL PROPERTIES ===");
+
+        // Property 1: Growth rate
+        System.out.println("1. Growth rate comparison:");
+        for (int n = 100; n <= 1000; n += 100) {
+            long zeros = trailingZeroes(n);
+            System.out.printf("n=%d: %d zeros (ratio: %.3f)\n",
+                    n, zeros, (double) zeros / n);
+        }
+
+        // Property 2: Gaps in the function
+        System.out.println("\n2. Function gaps (values that are never achieved):");
+        int currentZeros = 0;
+        for (int n = 0; n <= 100; n++) {
+            int zeros = (int) trailingZeroes(n);
+            if (zeros > currentZeros + 1) {
+                for (int gap = currentZeros + 1; gap < zeros; gap++) {
+                    System.out.println("K = " + gap + " is never achieved");
+                }
+            }
+            currentZeros = zeros;
+        }
+
+        // Property 3: Always 0 or 5 solutions
+        System.out.println("\n3. Preimage sizes (always 0 or 5):");
+        for (int k = 0; k <= 10; k++) {
+            int count = 0;
+            for (int n = 0; n <= 1000; n++) {
+                if (trailingZeroes(n) == k) {
+                    count++;
+                } else if (trailingZeroes(n) > k) {
+                    break;
+                }
+            }
+            System.out.println("K = " + k + " has " + count + " solutions");
+        }
+    }
 }
