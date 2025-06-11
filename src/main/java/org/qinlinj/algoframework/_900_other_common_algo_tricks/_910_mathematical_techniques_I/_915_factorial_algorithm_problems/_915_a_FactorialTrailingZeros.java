@@ -53,4 +53,25 @@ public class _915_a_FactorialTrailingZeros {
         }
         return res;
     }
+
+    /**
+     * Helper method to demonstrate the factor counting logic
+     */
+    public static void demonstrateFactorCounting(int n) {
+        System.out.println("Counting factors of 5 in " + n + "!:");
+        int total = 0;
+        long divisor = 5;
+        int level = 1;
+
+        while (divisor <= n) {
+            int count = (int) (n / divisor);
+            System.out.println("Level " + level + " (÷" + divisor + "): " + count + " numbers");
+            total += count;
+            divisor *= 5;
+            level++;
+        }
+
+        System.out.println("Total factors of 5: " + total);
+        System.out.println("Therefore, trailing zeros: " + total);
+    }
 }
