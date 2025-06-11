@@ -177,4 +177,32 @@ public class _915_c_FactorialConcepts {
             System.out.println("K = " + k + " has " + count + " solutions");
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println("=== FACTORIAL TRAILING ZEROS - MATHEMATICAL ANALYSIS ===\n");
+
+        // Demonstrate factor distribution
+        explainFactorDistribution(25);
+
+        // Show multiple factor contributions
+        analyzeMultipleFactors(125);
+
+        // Mathematical formula breakdown
+        demonstrateFormula(125);
+
+        // Binary search visualization
+        visualizeBinarySearch(6);
+
+        // Show mathematical properties
+        showMathematicalProperties();
+
+        // Final summary
+        System.out.println("\n=== SUMMARY ===");
+        System.out.println("Key takeaways:");
+        System.out.println("1. Trailing zeros = min(factors of 2, factors of 5) in n!");
+        System.out.println("2. Factors of 2 >> factors of 5, so count factors of 5");
+        System.out.println("3. Use formula: Σ⌊n/5^i⌋ for i=1,2,3,...");
+        System.out.println("4. trailingZeroes is monotonic → use binary search");
+        System.out.println("5. Preimage size is always 0 or 5 (mathematical property)");
+    }
 }
