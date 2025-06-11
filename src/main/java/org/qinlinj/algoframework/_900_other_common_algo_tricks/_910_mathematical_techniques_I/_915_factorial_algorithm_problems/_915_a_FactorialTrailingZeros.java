@@ -28,4 +28,17 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _915_a_FactorialTrailingZeros {
+    /**
+     * Method 1: Using while loop with long divisor
+     * Safer approach to avoid integer overflow
+     */
+    public static int trailingZeroes(int n) {
+        int res = 0;
+        long divisor = 5;
+        while (divisor <= n) {
+            res += n / divisor;
+            divisor *= 5;
+        }
+        return res;
+    }
 }
