@@ -109,4 +109,18 @@ public class _915_b_PreimageSizeKZeros {
         }
         return count;
     }
+
+    /**
+     * Demonstration method to show the monotonic property
+     */
+    public static void demonstrateMonotonicProperty() {
+        System.out.println("Demonstrating monotonic property of trailingZeroes function:");
+        System.out.println("n\ttrailingZeroes(n!)");
+        System.out.println("-".repeat(25));
+
+        for (int n = 0; n <= 30; n++) {
+            long zeros = trailingZeroes(n);
+            System.out.printf("%d\t%d\n", n, zeros);
+        }
+    }
 }
