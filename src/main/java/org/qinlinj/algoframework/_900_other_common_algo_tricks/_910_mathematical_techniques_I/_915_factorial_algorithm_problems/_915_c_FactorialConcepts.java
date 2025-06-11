@@ -81,4 +81,27 @@ public class _915_c_FactorialConcepts {
             }
         }
     }
+
+    /**
+     * Demonstrates the mathematical formula for counting factors of 5
+     */
+    public static void demonstrateFormula(int n) {
+        System.out.println("\nMathematical formula breakdown for n = " + n + ":");
+        System.out.println("Factors of 5 = ⌊n/5⌋ + ⌊n/25⌋ + ⌊n/125⌋ + ...");
+
+        int total = 0;
+        int divisor = 5;
+        int term = 1;
+
+        while (divisor <= n) {
+            int contribution = n / divisor;
+            System.out.printf("Term %d: ⌊%d/%d⌋ = %d\n", term, n, divisor, contribution);
+            total += contribution;
+            divisor *= 5;
+            term++;
+        }
+
+        System.out.println("Total: " + total + " factors of 5");
+        System.out.println("Therefore: " + total + " trailing zeros");
+    }
 }
