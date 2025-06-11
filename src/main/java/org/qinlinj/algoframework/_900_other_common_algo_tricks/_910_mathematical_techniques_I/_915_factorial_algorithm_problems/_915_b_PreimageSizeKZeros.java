@@ -94,4 +94,19 @@ public class _915_b_PreimageSizeKZeros {
         }
         return res;
     }
+
+    /**
+     * Brute force approach for small K values (for verification)
+     */
+    public static int bruteForce(int K) {
+        int count = 0;
+        for (long n = 0; n <= 100000; n++) {
+            if (trailingZeroes(n) == K) {
+                count++;
+            } else if (trailingZeroes(n) > K) {
+                break;
+            }
+        }
+        return count;
+    }
 }
