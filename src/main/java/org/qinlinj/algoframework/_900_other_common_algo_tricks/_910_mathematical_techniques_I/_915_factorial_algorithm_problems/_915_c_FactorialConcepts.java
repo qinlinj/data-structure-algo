@@ -60,4 +60,25 @@ public class _915_c_FactorialConcepts {
         System.out.println("Ratio (factors of 2 : factors of 5): " +
                 String.format("%.2f", (double) factors2 / factors5));
     }
+
+    /**
+     * Shows which numbers contribute multiple factors of 5
+     */
+    public static void analyzeMultipleFactors(int n) {
+        System.out.println("\nNumbers contributing multiple factors of 5 up to " + n + ":");
+        System.out.println("Number\tFactors of 5\tContribution");
+        System.out.println("-".repeat(40));
+
+        for (int i = 5; i <= n; i += 5) {
+            int factors = 0;
+            int temp = i;
+            while (temp % 5 == 0) {
+                factors++;
+                temp /= 5;
+            }
+            if (factors > 1) {
+                System.out.printf("%d\t%d\t\t%d extra\n", i, factors, factors - 1);
+            }
+        }
+    }
 }
