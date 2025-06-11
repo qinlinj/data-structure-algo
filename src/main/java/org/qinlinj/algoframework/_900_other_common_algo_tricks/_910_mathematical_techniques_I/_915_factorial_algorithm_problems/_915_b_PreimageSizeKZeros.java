@@ -82,4 +82,16 @@ public class _915_b_PreimageSizeKZeros {
         }
         return lo - 1;
     }
+
+    /**
+     * Helper function to count trailing zeros in n!
+     * Uses long to avoid overflow issues
+     */
+    private static long trailingZeroes(long n) {
+        long res = 0;
+        for (long d = n; d / 5 > 0; d = d / 5) {
+            res += d / 5;
+        }
+        return res;
+    }
 }
