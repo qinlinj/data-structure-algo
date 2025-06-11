@@ -123,4 +123,33 @@ public class _915_b_PreimageSizeKZeros {
             System.out.printf("%d\t%d\n", n, zeros);
         }
     }
+
+    /**
+     * Show detailed binary search process for educational purposes
+     */
+    public static void demonstrateBinarySearch(int K) {
+        System.out.println("\nFinding boundaries for K = " + K + ":");
+
+        // Find left bound with detailed steps
+        System.out.println("Searching for left boundary...");
+        long left = leftBound(K);
+        System.out.println("Left boundary: " + left +
+                " (trailingZeroes(" + left + ") = " + trailingZeroes(left) + ")");
+
+        // Find right bound
+        System.out.println("Searching for right boundary...");
+        long right = rightBound(K);
+        System.out.println("Right boundary: " + right +
+                " (trailingZeroes(" + right + ") = " + trailingZeroes(right) + ")");
+
+        // Show the range
+        System.out.println("Range: [" + left + ", " + right + "]");
+        System.out.println("Count: " + (right - left + 1));
+
+        // Verify by showing a few values in the range
+        System.out.println("Verification - values in range:");
+        for (long n = Math.max(0, left); n <= Math.min(right, left + 10); n++) {
+            System.out.println("trailingZeroes(" + n + ") = " + trailingZeroes(n));
+        }
+    }
 }
