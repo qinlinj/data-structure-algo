@@ -62,4 +62,24 @@ public class _915_b_PreimageSizeKZeros {
         return lo;
     }
 
+    /**
+     * Binary search to find the rightmost n where trailingZeroes(n) = target
+     */
+    private static long rightBound(int target) {
+        long lo = 0, hi = Long.MAX_VALUE;
+
+        while (lo < hi) {
+            long mid = lo + (hi - lo) / 2;
+            long zeros = trailingZeroes(mid);
+
+            if (zeros < target) {
+                lo = mid + 1;          // Search right half
+            } else if (zeros > target) {
+                hi = mid;              // Search left half
+            } else {
+                lo = mid + 1;          // Found target, continue searching right
+            }
+        }
+        return lo - 1;
+    }
 }
