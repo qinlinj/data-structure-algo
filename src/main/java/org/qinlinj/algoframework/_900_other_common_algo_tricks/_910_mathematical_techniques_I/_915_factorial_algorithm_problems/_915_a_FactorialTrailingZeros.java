@@ -74,4 +74,46 @@ public class _915_a_FactorialTrailingZeros {
         System.out.println("Total factors of 5: " + total);
         System.out.println("Therefore, trailing zeros: " + total);
     }
+
+    public static void main(String[] args) {
+        // Test cases with step-by-step explanation
+        int[] testCases = {5, 10, 25, 100, 125};
+
+        System.out.println("=== FACTORIAL TRAILING ZEROS DEMO ===\n");
+
+        for (int n : testCases) {
+            System.out.println("Input: n = " + n);
+
+            // Show detailed counting
+            demonstrateFactorCounting(n);
+
+            // Verify with both methods
+            int result1 = trailingZeroes(n);
+            int result2 = trailingZeroesSimplified(n);
+
+            System.out.println("Method 1 result: " + result1);
+            System.out.println("Method 2 result: " + result2);
+            System.out.println("Results match: " + (result1 == result2));
+            System.out.println("-".repeat(50));
+        }
+
+        // Special case demonstrations
+        System.out.println("\n=== SPECIAL CASES ===");
+
+        // Edge cases
+        System.out.println("n = 0: " + trailingZeroes(0) + " zeros");
+        System.out.println("n = 1: " + trailingZeroes(1) + " zeros");
+        System.out.println("n = 4: " + trailingZeroes(4) + " zeros");
+
+        // Large number test
+        System.out.println("n = 1000: " + trailingZeroes(1000) + " zeros");
+
+        // Demonstrate why we count factors of 5, not 2
+        System.out.println("\n=== WHY COUNT FACTORS OF 5? ===");
+        int n = 10;
+        System.out.println("In " + n + "!:");
+        System.out.println("Even numbers (factors of 2): 2,4,6,8,10 = 5 numbers");
+        System.out.println("Multiples of 5: 5,10 = 2 numbers");
+        System.out.println("Factors of 2 >> Factors of 5, so 5 is the limiting factor");
+    }
 }
