@@ -104,4 +104,24 @@ public class _915_c_FactorialConcepts {
         System.out.println("Total: " + total + " factors of 5");
         System.out.println("Therefore: " + total + " trailing zeros");
     }
+
+    /**
+     * Illustrates the binary search concept with a visual representation
+     */
+    public static void visualizeBinarySearch(int target) {
+        System.out.println("\nBinary search visualization for K = " + target + ":");
+        System.out.println("Finding n where trailingZeroes(n) = " + target);
+
+        // Show some values around the target
+        long estimate = target * 5; // Rough estimate
+
+        System.out.println("n\ttrailingZeroes(n)");
+        System.out.println("-".repeat(25));
+
+        for (long n = Math.max(0, estimate - 10); n <= estimate + 10; n++) {
+            long zeros = trailingZeroes(n);
+            String marker = (zeros == target) ? " ← TARGET" : "";
+            System.out.printf("%d\t%d%s\n", n, zeros, marker);
+        }
+    }
 }
