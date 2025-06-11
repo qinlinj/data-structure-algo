@@ -124,4 +124,15 @@ public class _915_c_FactorialConcepts {
             System.out.printf("%d\t%d%s\n", n, zeros, marker);
         }
     }
+
+    /**
+     * Efficient trailing zeros calculation
+     */
+    private static long trailingZeroes(long n) {
+        long res = 0;
+        for (long d = n; d / 5 > 0; d = d / 5) {
+            res += d / 5;
+        }
+        return res;
+    }
 }
