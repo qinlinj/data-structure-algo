@@ -32,4 +32,12 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._910_mathematica
  */
 
 public class _915_b_PreimageSizeKZeros {
+    /**
+     * Main solution method
+     */
+    public static int preimageSizeFZF(int K) {
+        // Find left and right boundaries, then calculate the range
+        return (int) (rightBound(K) - leftBound(K) + 1);
+    }
+
 }
