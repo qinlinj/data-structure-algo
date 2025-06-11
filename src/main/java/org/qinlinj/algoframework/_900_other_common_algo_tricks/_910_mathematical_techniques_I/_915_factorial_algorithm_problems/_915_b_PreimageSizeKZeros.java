@@ -152,4 +152,45 @@ public class _915_b_PreimageSizeKZeros {
             System.out.println("trailingZeroes(" + n + ") = " + trailingZeroes(n));
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println("=== PREIMAGE SIZE OF FACTORIAL ZEROS DEMO ===\n");
+
+        // Show monotonic property first
+        demonstrateMonotonicProperty();
+
+        // Test cases
+        int[] testCases = {0, 1, 2, 3, 5, 10};
+
+        System.out.println("\n=== TEST CASES ===");
+        for (int K : testCases) {
+            System.out.println("\nK = " + K);
+
+            // Binary search solution
+            int result = preimageSizeFZF(K);
+            System.out.println("Binary search result: " + result);
+
+            // Brute force verification for small K
+            if (K <= 10) {
+                int bruteResult = bruteForce(K);
+                System.out.println("Brute force result: " + bruteResult);
+                System.out.println("Results match: " + (result == bruteResult));
+            }
+
+            // Show detailed search process
+            demonstrateBinarySearch(K);
+        }
+
+        // Test edge cases
+        System.out.println("\n=== EDGE CASES ===");
+        System.out.println("K = 0: " + preimageSizeFZF(0) + " values");
+        System.out.println("K = 1000000: " + preimageSizeFZF(1000000) + " values");
+
+        // Explain why the answer is always 0 or 5
+        System.out.println("\n=== MATHEMATICAL INSIGHT ===");
+        System.out.println("Interesting fact: The answer is always either 0 or 5!");
+        System.out.println("This is because trailingZeroes function has a specific pattern.");
+        System.out.println("When a value K is achievable, there are always exactly 5 consecutive");
+        System.out.println("integers n such that trailingZeroes(n) = K.");
+    }
 }
