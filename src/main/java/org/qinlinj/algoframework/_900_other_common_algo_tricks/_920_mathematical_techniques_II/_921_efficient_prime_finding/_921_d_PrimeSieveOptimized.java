@@ -78,4 +78,37 @@ public class _921_d_PrimeSieveOptimized {
         System.out.println("This is why we start from i² - avoid redundant work!");
     }
 
+    /**
+     * Compares operation counts between basic and optimized versions
+     */
+    public static void compareOperationCounts(int n) {
+        int basicOps = 0;
+        int optimizedOps = 0;
+
+        // Count operations in basic version
+        for (int i = 2; i < n; i++) {
+            if (isPrimeSimple(i)) {
+                for (int j = 2 * i; j < n; j += i) {
+                    basicOps++;
+                }
+            }
+        }
+
+        // Count operations in optimized version
+        for (int i = 2; i * i < n; i++) {
+            if (isPrimeSimple(i)) {
+                for (int j = i * i; j < n; j += i) {
+                    optimizedOps++;
+                }
+            }
+        }
+
+        System.out.printf("\nOperation count comparison for n = %d:\n", n);
+        System.out.printf("Basic sieve operations: %d\n", basicOps);
+        System.out.printf("Optimized sieve operations: %d\n", optimizedOps);
+        System.out.printf("Reduction: %.1f%%\n",
+                100.0 * (basicOps - optimizedOps) / basicOps);
+    }
+
+
 }
