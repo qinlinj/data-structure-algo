@@ -19,4 +19,18 @@ public class _921_b_PrimeOptimizedCheck {
         }
         return true;
     }
+
+    /**
+     * Count primes using optimized isPrime function
+     * Time Complexity: O(n * sqrt(n))
+     */
+    public static int countPrimesOptimized(int n) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrimeOptimized(i)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
