@@ -32,4 +32,31 @@ public class _921_d_PrimeSieveOptimized {
 
         return count;
     }
+
+    /**
+     * Returns all primes using optimized sieve
+     */
+    public static List<Integer> getAllPrimesOptimized(int n) {
+        List<Integer> primes = new ArrayList<>();
+        if (n <= 2) return primes;
+
+        boolean[] isPrime = new boolean[n];
+        Arrays.fill(isPrime, true);
+
+        for (int i = 2; i * i < n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        for (int i = 2; i < n; i++) {
+            if (isPrime[i]) {
+                primes.add(i);
+            }
+        }
+
+        return primes;
+    }
 }
