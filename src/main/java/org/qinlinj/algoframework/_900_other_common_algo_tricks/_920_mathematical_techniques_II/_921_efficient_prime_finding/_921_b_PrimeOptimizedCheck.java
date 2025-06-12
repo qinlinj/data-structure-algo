@@ -116,4 +116,12 @@ public class _921_b_PrimeOptimizedCheck {
         }
         return true;
     }
+
+    private static int countPrimesBasic(int n) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrimeBasic(i)) count++;
+        }
+        return count;
+    }
 }
