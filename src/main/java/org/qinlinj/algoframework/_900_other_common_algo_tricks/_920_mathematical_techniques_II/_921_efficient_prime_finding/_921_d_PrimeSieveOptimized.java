@@ -1,5 +1,25 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._921_efficient_prime_finding;
 
+/*
+ * Prime Numbers - Sieve of Eratosthenes (Fully Optimized)
+ *
+ * Key Optimizations Applied:
+ * 1. Outer loop optimization: Only iterate up to sqrt(n)
+ *    - Reason: If n has a factor > sqrt(n), it must also have one < sqrt(n)
+ * 2. Inner loop optimization: Start from i*i instead of 2*i
+ *    - Reason: All smaller multiples (2*i, 3*i, ..., (i-1)*i) already marked
+ *    - Example: When i=5, don't mark 5*2=10, 5*3=15 (already marked by 2,3)
+ *             Start from 5*5=25
+ *
+ * Mathematical Analysis:
+ * - Time Complexity: O(n log log n)
+ * - Space Complexity: O(n)
+ * - Operations count: n/2 + n/3 + n/5 + n/7 + ... = n × (sum of reciprocals of primes)
+ *
+ * This represents the most efficient version of the sieve algorithm
+ * with both mathematical optimizations applied for maximum performance.
+ */
+
 import java.util.*;
 
 public class _921_d_PrimeSieveOptimized {
@@ -136,6 +156,67 @@ public class _921_d_PrimeSieveOptimized {
         System.out.println("This sum grows as O(log log n), giving overall O(n log log n)");
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Sieve of Eratosthenes - Fully Optimized ===");
+
+        // Demonstrate optimizations
+        System.out.println("Understanding the optimizations:");
+        demonstrateOptimization(5);
+        demonstrateOptimization(7);
+
+        System.out.print("\nEnter a number to analyze: ");
+        int n = scanner.nextInt();
+
+        // Performance comparison
+        System.out.println("\n=== Performance Comparison ===");
+
+        long[] times = new long[3];
+        int[] counts = new int[3];
+
+        // Individual checking
+        long start = System.currentTimeMillis();
+        counts[0] = countPrimesIndividual(n);
+        times[0] = System.currentTimeMillis() - start;
+
+        // Basic sieve
+        start = System.currentTimeMillis();
+        counts[1] = countPrimesBasicSieve(n);
+        times[1] = System.currentTimeMillis() - start;
+
+        // Optimized sieve
+        start = System.currentTimeMillis();
+        counts[2] = countPrimesOptimized(n);
+        times[2] = System.currentTimeMillis() - start;
+
+        String[] methods = {"Individual Check", "Basic Sieve", "Optimized Sieve"};
+        for (int i = 0; i < 3; i++) {
+            System.out.printf("%-16s: %d primes, %d ms\n",
+                    methods[i], counts[i], times[i]);
+        }
+
+        if (times[0] > 0) {
+            System.out.printf("Final speedup: %.1fx faster than individual checking\n",
+                    (double) times[0] / times[2]);
+        }
+
+        // Operation count analysis
+        if (n <= 10000) { // Only for reasonable sizes
+            compareOperationCounts(n);
+        }
+
+        // Time complexity explanation
+        explainTimeComplexity(n);
+
+        // Show results
+        List<Integer> primes = getAllPrimesOptimized(Math.min(n, 100));
+        System.out.println("\nFirst 20 primes: " +
+                primes.subList(0, Math.min(primes.size(), 20)));
+
+        scanner.close();
+    }
+
     // Helper methods for comparison
     private static boolean isPrimeSimple(int n) {
         if (n < 2) return false;
@@ -172,6 +253,4 @@ public class _921_d_PrimeSieveOptimized {
         }
         return count;
     }
-
-
 }
