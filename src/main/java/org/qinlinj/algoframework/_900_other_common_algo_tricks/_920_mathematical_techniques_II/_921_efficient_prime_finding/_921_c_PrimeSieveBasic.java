@@ -1,8 +1,29 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._921_efficient_prime_finding;
 
+/*
+ * Prime Numbers - Sieve of Eratosthenes (Basic Version)
+ *
+ * Key Concepts:
+ * 1. Sieve Algorithm: Mark multiples of each prime as composite (not prime)
+ * 2. Reverse thinking: Instead of checking if each number is prime,
+ *    eliminate numbers that are definitely not prime
+ * 3. Process: Start with 2, mark all its multiples as non-prime,
+ *    then move to next unmarked number and repeat
+ * 4. Historical context: Invented by ancient Greek mathematician Eratosthenes
+ *
+ * Algorithm Steps:
+ * 1. Create boolean array initialized to true (assume all are prime)
+ * 2. For each number i from 2 to n:
+ *    - If i is still marked as prime, mark all multiples of i as non-prime
+ * 3. Count remaining numbers marked as prime
+ *
+ * This is the first version before optimizations are applied.
+ */
+
 import java.util.*;
 
 public class _921_c_PrimeSieveBasic {
+
     /**
      * Basic Sieve of Eratosthenes implementation
      * Time Complexity: O(n log log n)
@@ -115,5 +136,67 @@ public class _921_c_PrimeSieveBasic {
             System.out.printf("%2s", isPrime[i] ? "T" : "F");
         }
         System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Sieve of Eratosthenes - Basic Implementation ===");
+        System.out.println("Named after ancient Greek mathematician Eratosthenes");
+        System.out.println("Also known as the 'Father of Geography'\n");
+
+        // Demonstrate with small example
+        System.out.println("Step-by-step visualization:");
+        visualizeSieveProcess(20);
+
+        System.out.print("\nEnter a number to count primes up to: ");
+        int n = scanner.nextInt();
+
+        // Performance comparison
+        System.out.println("\nPerformance comparison:");
+
+        // Basic individual checking
+        long start1 = System.currentTimeMillis();
+        int count1 = countPrimesIndividual(n);
+        long end1 = System.currentTimeMillis();
+
+        // Basic sieve
+        long start2 = System.currentTimeMillis();
+        int count2 = countPrimesBasicSieve(n);
+        long end2 = System.currentTimeMillis();
+
+        System.out.printf("Individual checking: %d primes, Time: %d ms\n",
+                count1, end1 - start1);
+        System.out.printf("Basic Sieve: %d primes, Time: %d ms\n",
+                count2, end2 - start2);
+
+        if (end1 - start1 > 0) {
+            System.out.printf("Sieve speedup: %.2fx\n",
+                    (double) (end1 - start1) / (end2 - start2));
+        }
+
+        // Show first few primes
+        List<Integer> primes = getAllPrimesBasicSieve(Math.min(n, 100));
+        System.out.println("\nFirst primes found: " +
+                primes.subList(0, Math.min(primes.size(), 15)));
+
+        scanner.close();
+    }
+
+    // Helper method for comparison
+    private static int countPrimesIndividual(int n) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i)) count++;
+        }
+        return count;
+    }
+
+    private static boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
     }
 }
