@@ -96,4 +96,127 @@ public class _921_e_PrimeComprehensiveAnalysis {
             return new Solution().countPrimes(n);
         }
     }
+
+
+    /**
+     * Performance Benchmarking Suite
+     */
+    public static class PerformanceBenchmark {
+
+        public static void runComprehensiveBenchmark(int n) {
+            System.out.println("=== Comprehensive Performance Benchmark ===");
+            System.out.printf("Testing with n = %d\n\n", n);
+
+            String[] methodNames = {
+                    "Naive O(n²)",
+                    "Square Root O(n√n)",
+                    "Basic Sieve O(n log log n)",
+                    "Optimized Sieve O(n log log n)"
+            };
+
+            long[] times = new long[4];
+            int[] results = new int[4];
+
+            // Only test naive approach for small n to avoid timeout
+            if (n <= 5000) {
+                long start = System.currentTimeMillis();
+                results[0] = AlgorithmEvolution.countPrimesNaive(n);
+                times[0] = System.currentTimeMillis() - start;
+            }
+
+            // Square root optimization
+            long start = System.currentTimeMillis();
+            results[1] = AlgorithmEvolution.countPrimesSqrt(n);
+            times[1] = System.currentTimeMillis() - start;
+
+            // Basic sieve
+            start = System.currentTimeMillis();
+            results[2] = AlgorithmEvolution.countPrimesBasicSieve(n);
+            times[2] = System.currentTimeMillis() - start;
+
+            // Optimized sieve
+            start = System.currentTimeMillis();
+            results[3] = AlgorithmEvolution.countPrimesOptimal(n);
+            times[3] = System.currentTimeMillis() - start;
+
+            // Display results
+            System.out.printf("%-25s | %-8s | %-8s | %-10s\n",
+                    "Method", "Result", "Time(ms)", "Speedup");
+            System.out.println("-".repeat(60));
+
+            for (int i = 0; i < 4; i++) {
+                if (i == 0 && n > 5000) {
+                    System.out.printf("%-25s | %-8s | %-8s | %-10s\n",
+                            methodNames[i], "skipped", "skipped", "N/A");
+                    continue;
+                }
+
+                String speedup = "1.0x";
+                if (times[1] > 0) {
+                    speedup = String.format("%.1fx", (double) times[1] / times[i]);
+                }
+
+                System.out.printf("%-25s | %-8d | %-8d | %-10s\n",
+                        methodNames[i], results[i], times[i], speedup);
+            }
+        }
+
+        public static void analyzePrimeDistribution(int n) {
+            System.out.println("\n=== Prime Distribution Analysis ===");
+
+            List<Integer> primes = new ArrayList<>();
+            boolean[] isPrime = new boolean[n];
+            Arrays.fill(isPrime, true);
+
+            for (int i = 2; i * i < n; i++) {
+                if (isPrime[i]) {
+                    for (int j = i * i; j < n; j += i) {
+                        isPrime[j] = false;
+                    }
+                }
+            }
+
+            for (int i = 2; i < n; i++) {
+                if (isPrime[i]) primes.add(i);
+            }
+
+            System.out.printf("Total primes less than %d: %d\n", n, primes.size());
+            System.out.printf("Prime density: %.4f%%\n",
+                    100.0 * primes.size() / n);
+
+            // Prime Number Theorem approximation
+            double pnt = n / Math.log(n);
+            System.out.printf("Prime Number Theorem estimate: %.0f\n", pnt);
+            System.out.printf("Actual vs PNT ratio: %.4f\n",
+                    (double) primes.size() / pnt);
+
+            // Show distribution by ranges
+            System.out.println("\nPrime distribution by ranges:");
+            int[] ranges = {10, 100, 1000, 10000, 100000};
+            int lastCount = 0;
+
+            for (int range : ranges) {
+                if (range >= n) break;
+
+                int count = 0;
+                for (int prime : primes) {
+                    if (prime < range) count++;
+                    else break;
+                }
+
+                System.out.printf("[%d-%d): %d primes (%.2f%%)\n",
+                        lastCount == 0 ? 2 : ranges[getIndex(ranges, lastCount)],
+                        range, count - lastCount,
+                        100.0 * (count - lastCount) / (range - (lastCount == 0 ? 2 : ranges[getIndex(ranges, lastCount)])));
+                lastCount = count;
+            }
+        }
+
+        private static int getIndex(int[] arr, int val) {
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] >= val) return i;
+            }
+            return arr.length - 1;
+        }
+    }
 }
