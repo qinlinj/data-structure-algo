@@ -16,4 +16,20 @@ public class _921_a_PrimeBasicDefinition {
         return count;
     }
 
+    /**
+     * Basic prime checking function - checks all numbers from 2 to n-1
+     * Time Complexity: O(n)
+     */
+    public static boolean isPrime(int n) {
+        if (n < 2) return false;
+
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
+                // Found a divisor, not prime
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
