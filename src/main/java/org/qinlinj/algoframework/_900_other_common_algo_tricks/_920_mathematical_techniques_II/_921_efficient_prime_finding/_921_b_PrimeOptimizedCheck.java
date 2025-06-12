@@ -62,4 +62,49 @@ public class _921_b_PrimeOptimizedCheck {
         System.out.printf("sqrt(%d) ≈ %.2f\n", n, sqrt);
         System.out.println("Notice the symmetry around sqrt(n)!");
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Prime Numbers - Square Root Optimization Demo ===");
+
+        // Demonstrate factor symmetry
+        System.out.println("Understanding factor symmetry:");
+        demonstrateFactorSymmetry(12);
+        demonstrateFactorSymmetry(16);
+
+        System.out.print("\nEnter a number to count primes up to: ");
+        int n = scanner.nextInt();
+
+        // Compare basic vs optimized approach
+        System.out.println("\nComparing basic vs optimized prime checking:");
+
+        long startTime = System.currentTimeMillis();
+        int count1 = countPrimesBasic(n);
+        long endTime1 = System.currentTimeMillis();
+
+        long startTime2 = System.currentTimeMillis();
+        int count2 = countPrimesOptimized(n);
+        long endTime2 = System.currentTimeMillis();
+
+        System.out.printf("Basic approach: %d primes, Time: %d ms\n",
+                count1, endTime1 - startTime);
+        System.out.printf("Optimized approach: %d primes, Time: %d ms\n",
+                count2, endTime2 - startTime2);
+        System.out.printf("Speedup: %.2fx\n",
+                (double) (endTime1 - startTime) / (endTime2 - startTime2));
+
+        // Show some prime examples
+        System.out.println("\nFirst few primes found:");
+        int count = 0;
+        for (int i = 2; i < n && count < 10; i++) {
+            if (isPrimeOptimized(i)) {
+                System.out.print(i + " ");
+                count++;
+            }
+        }
+        System.out.println();
+
+        scanner.close();
+    }
 }
