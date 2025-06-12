@@ -1,8 +1,73 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._921_efficient_prime_finding;
 
+/*
+ * Prime Numbers - Comprehensive Analysis and LeetCode Problem Solution
+ *
+ * Problem: LeetCode 204 - Count Primes
+ * "Count the number of prime numbers less than a non-negative integer, n."
+ *
+ * Complete Evolution of Solutions:
+ * 1. Naive O(n²) approach - check each number individually
+ * 2. Square root optimization O(n√n) - reduce prime checking time
+ * 3. Basic Sieve O(n log log n) - eliminate multiples approach
+ * 4. Optimized Sieve O(n log log n) - with sqrt and i² optimizations
+ *
+ * Key Insights:
+ * - Factor symmetry: factors come in pairs around √n
+ * - Sieve thinking: mark composites instead of checking primes
+ * - Mathematical optimizations can dramatically improve performance
+ * - Ancient algorithms (Eratosthenes ~200 BC) still relevant today
+ *
+ * Time Complexity Analysis:
+ * The optimized sieve performs n × (1/2 + 1/3 + 1/5 + 1/7 + ...) operations
+ * where the sum is over primes ≤ √n. This sum grows as O(log log n).
+ */
+
 import java.util.*;
 
 public class _921_e_PrimeComprehensiveAnalysis {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Prime Numbers - Comprehensive Analysis ===");
+        System.out.println("Evolution from O(n²) naive to O(n log log n) optimized sieve");
+        System.out.println();
+
+        // Educational demonstration
+        EducationalExamples.demonstrateSieveVisualization(20);
+        EducationalExamples.explainOptimizations();
+
+        System.out.print("\nEnter n for comprehensive analysis: ");
+        int n = scanner.nextInt();
+
+        // LeetCode test cases
+        System.out.println("\n=== LeetCode Test Cases ===");
+        Solution solution = new Solution();
+        int[] testCases = {10, 0, 1, 2, 3};
+        for (int test : testCases) {
+            System.out.printf("countPrimes(%d) = %d\n", test, solution.countPrimes(test));
+        }
+
+        // Performance benchmark
+        PerformanceBenchmark.runComprehensiveBenchmark(n);
+
+        // Prime distribution analysis
+        if (n >= 10) {
+            PerformanceBenchmark.analyzePrimeDistribution(n);
+        }
+
+        System.out.println("\n=== Algorithm Summary ===");
+        System.out.println("Final optimized solution combines:");
+        System.out.println("✓ Sieve of Eratosthenes approach (eliminate multiples)");
+        System.out.println("✓ √n optimization (outer loop bound)");
+        System.out.println("✓ i² optimization (inner loop start)");
+        System.out.println("✓ Time: O(n log log n), Space: O(n)");
+        System.out.println("✓ Suitable for LeetCode and production use");
+
+        scanner.close();
+    }
+
     /**
      * LeetCode 204 Solution - Optimized Sieve of Eratosthenes
      * This is the final, production-ready solution
@@ -96,7 +161,6 @@ public class _921_e_PrimeComprehensiveAnalysis {
             return new Solution().countPrimes(n);
         }
     }
-
 
     /**
      * Performance Benchmarking Suite
