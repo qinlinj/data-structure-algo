@@ -59,4 +59,23 @@ public class _921_d_PrimeSieveOptimized {
 
         return primes;
     }
+
+    /**
+     * Demonstrates why starting from i*i is optimal
+     */
+    public static void demonstrateOptimization(int prime) {
+        System.out.printf("\nWhy start from %d² instead of 2×%d?\n", prime, prime);
+        System.out.printf("When processing prime %d:\n", prime);
+
+        for (int multiplier = 2; multiplier < prime; multiplier++) {
+            int product = prime * multiplier;
+            System.out.printf("  %d × %d = %d (already marked by prime %d)\n",
+                    prime, multiplier, product, multiplier);
+        }
+
+        System.out.printf("  %d × %d = %d (first new composite to mark)\n",
+                prime, prime, prime * prime);
+        System.out.println("This is why we start from i² - avoid redundant work!");
+    }
+
 }
