@@ -2,7 +2,22 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
 
 import java.util.*;
 
+/*
+ * Prime Numbers - Optimized Prime Checking with Square Root Method
+ *
+ * Key Concepts:
+ * 1. Mathematical optimization: only check divisors up to sqrt(n)
+ * 2. Factor symmetry principle: if n = a × b, then one of a or b must be ≤ sqrt(n)
+ * 3. Example: for 12 = 2×6 = 3×4 = sqrt(12)×sqrt(12) = 4×3 = 6×2
+ * 4. Time complexity improved from O(n) to O(sqrt(n)) for prime checking
+ *
+ * This optimization significantly reduces the number of iterations needed
+ * to determine if a number is prime by leveraging the mathematical property
+ * that factors come in pairs, with at least one factor ≤ sqrt(n).
+ */
+
 public class _921_b_PrimeOptimizedCheck {
+
     /**
      * Optimized prime checking using square root method
      * Time Complexity: O(sqrt(n))
