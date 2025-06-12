@@ -34,4 +34,28 @@ public class _921_c_PrimeSieveBasic {
 
         return count;
     }
+
+    /**
+     * Returns list of all primes less than n using basic sieve
+     */
+    public static List<Integer> getAllPrimesBasicSieve(int n) {
+        List<Integer> primes = new ArrayList<>();
+        if (n <= 2) return primes;
+
+        boolean[] isPrime = new boolean[n];
+        Arrays.fill(isPrime, true);
+        isPrime[0] = isPrime[1] = false;
+
+        for (int i = 2; i < n; i++) {
+            if (isPrime[i]) {
+                primes.add(i);
+                // Mark multiples as non-prime
+                for (int j = 2 * i; j < n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        return primes;
+    }
 }
