@@ -110,5 +110,48 @@ public class _921_d_PrimeSieveOptimized {
                 100.0 * (basicOps - optimizedOps) / basicOps);
     }
 
+    /**
+     * Shows the mathematical series behind time complexity
+     */
+    public static void explainTimeComplexity(int n) {
+        System.out.println("\n=== Time Complexity Analysis ===");
+        System.out.println("Operations performed: n/p₁ + n/p₂ + n/p₃ + ...");
+        System.out.println("Where p₁, p₂, p₃... are primes ≤ √n");
+        System.out.println("= n × (1/p₁ + 1/p₂ + 1/p₃ + ...)");
+
+        List<Integer> primes = getAllPrimesOptimized((int) Math.sqrt(n) + 1);
+        double sum = 0;
+
+        System.out.printf("\nFor n = %d (√n ≈ %.1f):\n", n, Math.sqrt(n));
+        System.out.print("Primes ≤ √n: ");
+        for (int prime : primes) {
+            if (prime <= Math.sqrt(n)) {
+                System.out.print(prime + " ");
+                sum += 1.0 / prime;
+            }
+        }
+
+        System.out.printf("\nSum of reciprocals: %.4f\n", sum);
+        System.out.printf("Estimated operations: %.0f\n", n * sum);
+        System.out.println("This sum grows as O(log log n), giving overall O(n log log n)");
+    }
+
+    // Helper methods for comparison
+    private static boolean isPrimeSimple(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    private static int countPrimesIndividual(int n) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrimeSimple(i)) count++;
+        }
+        return count;
+    }
+
 
 }
