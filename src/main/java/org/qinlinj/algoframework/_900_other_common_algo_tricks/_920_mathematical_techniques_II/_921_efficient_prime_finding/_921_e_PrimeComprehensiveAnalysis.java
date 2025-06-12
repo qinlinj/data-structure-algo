@@ -219,4 +219,74 @@ public class _921_e_PrimeComprehensiveAnalysis {
             return arr.length - 1;
         }
     }
+
+    /**
+     * Educational Examples and Demonstrations
+     */
+    public static class EducationalExamples {
+
+        public static void demonstrateSieveVisualization(int n) {
+            if (n > 30) n = 30; // Limit for readability
+
+            System.out.printf("\n=== Sieve Visualization (n=%d) ===\n", n);
+            boolean[] isPrime = new boolean[n];
+            Arrays.fill(isPrime, true);
+            if (n > 0) isPrime[0] = false;
+            if (n > 1) isPrime[1] = false;
+
+            printGrid(isPrime, n, "Initial state");
+
+            for (int i = 2; i * i < n; i++) {
+                if (isPrime[i]) {
+                    System.out.printf("\nProcessing prime %d:\n", i);
+
+                    for (int j = i * i; j < n; j += i) {
+                        isPrime[j] = false;
+                        System.out.printf("  Marked %d = %d × %d\n", j, i, j / i);
+                    }
+
+                    printGrid(isPrime, n, "After processing " + i);
+                }
+            }
+
+            System.out.print("\nFinal primes: ");
+            for (int i = 2; i < n; i++) {
+                if (isPrime[i]) System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+
+        private static void printGrid(boolean[] isPrime, int n, String label) {
+            System.out.println(label + ":");
+            for (int i = 0; i < n; i++) {
+                System.out.printf("%3d", i);
+            }
+            System.out.println();
+            for (int i = 0; i < n; i++) {
+                System.out.printf("%3s", isPrime[i] ? "T" : "F");
+            }
+            System.out.println();
+        }
+
+        public static void explainOptimizations() {
+            System.out.println("\n=== Understanding the Optimizations ===");
+
+            System.out.println("1. Why only check up to √n?");
+            System.out.println("   If n = a × b and a > √n, then b < √n");
+            System.out.println("   So if no factors exist ≤ √n, none exist > √n either");
+
+            System.out.println("\n2. Why start inner loop from i²?");
+            System.out.println("   When processing prime p:");
+            System.out.println("   - p×2, p×3, ..., p×(p-1) already marked by smaller primes");
+            System.out.println("   - p×p is the first unmarked multiple");
+
+            System.out.println("\n3. Example with p=7:");
+            System.out.println("   - 7×2=14 already marked when processing 2");
+            System.out.println("   - 7×3=21 already marked when processing 3");
+            System.out.println("   - 7×4=28 already marked when processing 2");
+            System.out.println("   - 7×5=35 already marked when processing 5");
+            System.out.println("   - 7×6=42 already marked when processing 2");
+            System.out.println("   - 7×7=49 is first new composite to mark");
+        }
+    }
 }
