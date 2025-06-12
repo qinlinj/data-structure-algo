@@ -58,4 +58,62 @@ public class _921_c_PrimeSieveBasic {
 
         return primes;
     }
+
+    /**
+     * Visualizes the sieve process step by step
+     */
+    public static void visualizeSieveProcess(int n) {
+        if (n > 30) {
+            System.out.println("Visualization limited to n <= 30 for readability");
+            n = Math.min(n, 30);
+        }
+
+        boolean[] isPrime = new boolean[n];
+        Arrays.fill(isPrime, true);
+        isPrime[0] = isPrime[1] = false;
+
+        System.out.printf("Sieve of Eratosthenes visualization for n = %d:\n", n);
+        System.out.println("T = potentially prime, F = marked as composite\n");
+
+        // Initial state
+        System.out.print("Initial: ");
+        printSieveState(isPrime, n);
+
+        for (int i = 2; i < n; i++) {
+            if (isPrime[i]) {
+                System.out.printf("\nProcessing prime %d:\n", i);
+
+                // Mark multiples
+                for (int j = 2 * i; j < n; j += i) {
+                    if (isPrime[j]) {
+                        isPrime[j] = false;
+                        System.out.printf("  Marking %d as composite (%d × %d)\n",
+                                j, i, j / i);
+                    }
+                }
+
+                System.out.print("Current: ");
+                printSieveState(isPrime, n);
+            }
+        }
+
+        System.out.println("\nFinal primes:");
+        for (int i = 2; i < n; i++) {
+            if (isPrime[i]) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    private static void printSieveState(boolean[] isPrime, int n) {
+        for (int i = 0; i < n; i++) {
+            System.out.printf("%2d", i);
+        }
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            System.out.printf("%2s", isPrime[i] ? "T" : "F");
+        }
+        System.out.println();
+    }
 }
