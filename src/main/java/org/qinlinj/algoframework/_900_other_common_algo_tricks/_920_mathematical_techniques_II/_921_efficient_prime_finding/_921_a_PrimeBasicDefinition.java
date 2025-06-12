@@ -3,6 +3,7 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
 import java.util.*;
 
 public class _921_a_PrimeBasicDefinition {
+
     /**
      * Counts prime numbers in range [2, n) using naive approach
      * Time Complexity: O(n²)
@@ -67,5 +68,4 @@ public class _921_a_PrimeBasicDefinition {
 
         scanner.close();
     }
-
 }
