@@ -61,6 +61,28 @@ public class _922_d_EfficientPowerAlgorithm {
 
             return result;
         }
+
+        /**
+         * Modular fast power - for use in Super Power problem
+         * Combines fast exponentiation with modular arithmetic
+         */
+        public int modularFastPower(int base, int exponent, int modulus) {
+            if (exponent == 0) return 1;
+
+            base %= modulus;
+            long result = 1;
+            long currentPower = base;
+
+            while (exponent > 0) {
+                if (exponent % 2 == 1) {
+                    result = (result * currentPower) % modulus;
+                }
+                currentPower = (currentPower * currentPower) % modulus;
+                exponent /= 2;
+            }
+
+            return (int) result;
+        }
     }
 
 }
