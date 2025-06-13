@@ -65,5 +65,30 @@ public class _922_c_ModularArithmetic {
 
             return result;
         }
+
+
+        /**
+         * Demonstrates overflow prevention
+         */
+        public void demonstrateOverflowPrevention(int a, int b) {
+            System.out.println("=== Overflow Prevention Demo ===");
+            System.out.println("Calculating (" + a + " * " + b + ") % " + modulus);
+
+            // Method 1: Direct multiplication (might overflow)
+            try {
+                long directResult = (long) a * b;
+                int directMod = (int) (directResult % modulus);
+                System.out.println("Direct: " + a + " * " + b + " = " + directResult +
+                        ", mod " + modulus + " = " + directMod);
+            } catch (Exception e) {
+                System.out.println("Direct method failed due to overflow");
+            }
+
+            // Method 2: Modular multiplication (safe)
+            int safeResult = modMultiply(a, b);
+            System.out.println("Safe: ((" + a + " % " + modulus + ") * (" +
+                    b + " % " + modulus + ")) % " + modulus + " = " + safeResult);
+            System.out.println();
+        }
     }
 }
