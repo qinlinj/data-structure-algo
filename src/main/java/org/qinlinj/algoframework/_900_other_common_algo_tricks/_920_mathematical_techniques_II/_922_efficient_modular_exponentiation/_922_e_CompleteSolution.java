@@ -24,5 +24,23 @@ public class _922_e_CompleteSolution {
 
             return superPowRecursive(a, bList);
         }
+
+        /**
+         * Recursive helper implementing the core algorithm
+         */
+        private int superPowRecursive(int a, List<Integer> b) {
+            // Base case: empty exponent means a^0 = 1
+            if (b.isEmpty()) return 1;
+
+            // Extract the last digit (rightmost, least significant)
+            int lastDigit = b.remove(b.size() - 1);
+
+            // Recursive decomposition: a^(xyz) = a^z * (a^(xy))^10
+            int part1 = modPower(a, lastDigit);
+            int part2 = modPower(superPowRecursive(a, b), 10);
+
+            // Combine results with modular arithmetic
+            return modMultiply(part1, part2);
+        }
     }
 }
