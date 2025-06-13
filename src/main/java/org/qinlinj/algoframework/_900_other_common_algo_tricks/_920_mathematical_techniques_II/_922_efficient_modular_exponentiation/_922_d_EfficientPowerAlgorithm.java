@@ -137,6 +137,27 @@ public class _922_d_EfficientPowerAlgorithm {
             System.out.println("Final result: " + result);
             return result;
         }
+
+        /**
+         * Helper method to describe binary decomposition
+         */
+        private String describeBinaryDecomposition(int number) {
+            StringBuilder sb = new StringBuilder();
+            int power = 0;
+            boolean first = true;
+
+            while (number > 0) {
+                if (number % 2 == 1) {
+                    if (!first) sb.append(" + ");
+                    sb.append("2^").append(power);
+                    first = false;
+                }
+                number /= 2;
+                power++;
+            }
+
+            return sb.toString();
+        }
     }
 
 }
