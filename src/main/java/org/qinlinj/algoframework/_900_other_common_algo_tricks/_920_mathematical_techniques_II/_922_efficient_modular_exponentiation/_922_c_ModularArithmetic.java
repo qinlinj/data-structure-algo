@@ -4,6 +4,11 @@ public class _922_c_ModularArithmetic {
     private static final int MOD = 1337;
 
     public static class ModularCalculator {
+        private final int modulus;
+
+        public ModularCalculator(int modulus) {
+            this.modulus = modulus;
+        }
 
     }
 }
