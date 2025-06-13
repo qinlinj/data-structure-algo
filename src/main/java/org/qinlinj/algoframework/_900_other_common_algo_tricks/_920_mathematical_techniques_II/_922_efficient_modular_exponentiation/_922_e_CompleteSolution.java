@@ -70,5 +70,23 @@ public class _922_e_CompleteSolution {
         private int modMultiply(int a, int b) {
             return (int) (((long) a * b) % BASE);
         }
+
+        /**
+         * Alternative iterative solution (for comparison)
+         */
+        public int superPowIterative(int a, int[] b) {
+            if (b == null || b.length == 0) return 1;
+
+            int result = 1;
+            a %= BASE;
+
+            // Process digits from left to right
+            for (int digit : b) {
+                // Multiply result by 10th power, then by a^digit
+                result = modMultiply(modPower(result, 10), modPower(a, digit));
+            }
+
+            return result;
+        }
     }
 }
