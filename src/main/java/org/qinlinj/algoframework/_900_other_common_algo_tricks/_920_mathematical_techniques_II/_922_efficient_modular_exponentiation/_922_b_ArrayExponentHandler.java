@@ -69,6 +69,20 @@ public class _922_b_ArrayExponentHandler {
         System.out.println("- But array can represent arbitrarily large numbers!");
     }
 
+    private static void demonstrateEdgeCases() {
+        System.out.println("Edge Case 1: Single digit array [5]");
+        System.out.println("  This simply means a^5");
+        System.out.println();
+        System.out.println("Edge Case 2: Array with zeros [1,0,0,0]");
+        System.out.println("  This represents a^1000");
+        System.out.println();
+        System.out.println("Edge Case 3: Empty array []");
+        System.out.println("  This represents a^0 = 1 (base case)");
+        System.out.println();
+        System.out.println("Edge Case 4: Leading zeros [0,0,1,2,3]");
+        System.out.println("  Still represents 123, leading zeros ignored");
+    }
+
     /**
      * Demonstrates different approaches to handle array-based exponents
      */
