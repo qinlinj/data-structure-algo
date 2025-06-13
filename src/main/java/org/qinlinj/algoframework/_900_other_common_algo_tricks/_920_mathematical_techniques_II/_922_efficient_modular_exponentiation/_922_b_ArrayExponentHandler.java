@@ -26,5 +26,29 @@ public class _922_b_ArrayExponentHandler {
             return part1 * part2;
         }
 
+        /**
+         * Method 2: Iterative approach
+         * Processes array from right to left, building up the result
+         */
+        public long processExponentIterative(int base, int[] exponentArray) {
+            long result = 1;
+            long currentBase = base;
+
+            // Process from right to left (least to most significant digit)
+            for (int i = exponentArray.length - 1; i >= 0; i--) {
+                int digit = exponentArray[i];
+
+                // Add contribution of current digit
+                result *= fastPower(currentBase, digit);
+
+                // Update base for next position (multiply by 10)
+                if (i > 0) { // Don't do this for the last iteration
+                    currentBase = fastPower(currentBase, 10);
+                }
+            }
+
+            return result;
+        }
+
     }
 }
