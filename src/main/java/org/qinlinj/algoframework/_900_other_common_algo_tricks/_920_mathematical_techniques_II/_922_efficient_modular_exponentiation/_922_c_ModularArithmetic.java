@@ -31,6 +31,23 @@ public class _922_c_ModularArithmetic {
         explainModulusChoice();
     }
 
+    private static void demonstrateBasicProperties(ModularCalculator calc) {
+        int a = 123, b = 456;
+
+        System.out.println("Property: (a * b) % mod = ((a % mod) * (b % mod)) % mod");
+        System.out.println("a = " + a + ", b = " + b + ", mod = " + MOD);
+
+        // Direct calculation
+        int direct = (int) ((long) a * b % MOD);
+        System.out.println("Direct: (" + a + " * " + b + ") % " + MOD + " = " + direct);
+
+        // Modular calculation
+        int modular = calc.modMultiply(a, b);
+        System.out.println("Modular: ((" + a + " % " + MOD + ") * (" + b + " % " + MOD + ")) % " + MOD + " = " + modular);
+
+        System.out.println("Results match: " + (direct == modular) + "\n");
+    }
+
     public static class ModularCalculator {
         private final int modulus;
 
