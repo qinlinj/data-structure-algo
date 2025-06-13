@@ -83,6 +83,60 @@ public class _922_d_EfficientPowerAlgorithm {
 
             return (int) result;
         }
+
+        /**
+         * Demonstrates the step-by-step process of binary exponentiation
+         */
+        public long demonstrateBinaryExponentiation(int base, int exponent) {
+            System.out.println("=== Binary Exponentiation Demo: " + base + "^" + exponent + " ===");
+
+            // Show binary representation of exponent
+            String binary = Integer.toBinaryString(exponent);
+            System.out.println("Exponent " + exponent + " in binary: " + binary);
+            System.out.println("This means: " + exponent + " = " +
+                    describeBinaryDecomposition(exponent));
+            System.out.println();
+
+            long result = 1;
+            long currentPower = base;
+            int step = 1;
+            int tempExponent = exponent;
+
+            System.out.println("Step-by-step calculation:");
+            System.out.println("Initialize: result = 1, currentPower = " + base);
+            System.out.println();
+
+            while (tempExponent > 0) {
+                boolean shouldMultiply = (tempExponent % 2 == 1);
+
+                System.out.println("Step " + step + ":");
+                System.out.println("  Current exponent: " + tempExponent +
+                        " (rightmost bit: " + (tempExponent % 2) + ")");
+                System.out.println("  Current power: " + currentPower);
+
+                if (shouldMultiply) {
+                    long oldResult = result;
+                    result *= currentPower;
+                    System.out.println("  Bit is 1, so multiply: " + oldResult +
+                            " * " + currentPower + " = " + result);
+                } else {
+                    System.out.println("  Bit is 0, so skip multiplication");
+                }
+
+                currentPower *= currentPower;
+                tempExponent /= 2;
+
+                System.out.println("  Square current power: " + (currentPower / currentPower) +
+                        "^2 = " + currentPower);
+                System.out.println("  Shift exponent right: " + tempExponent);
+                System.out.println();
+
+                step++;
+            }
+
+            System.out.println("Final result: " + result);
+            return result;
+        }
     }
 
 }
