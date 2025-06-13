@@ -1,7 +1,99 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._922_efficient_modular_exponentiation;
 
+/*
+ * Efficient Power Algorithm - Fast Exponentiation (Binary Exponentiation)
+ *
+ * Mathematical Foundation:
+ * The key insight is that we can reduce the problem size by half in each step:
+ * - If exponent is even: a^n = (a^(n/2))^2
+ * - If exponent is odd:  a^n = a * a^(n-1) = a * (a^((n-1)/2))^2
+ *
+ * Algorithm Properties:
+ * - Time Complexity: O(log n) instead of O(n)
+ * - Space Complexity: O(log n) for recursive version, O(1) for iterative
+ * - Also known as "Exponentiation by Squaring" or "Binary Exponentiation"
+ *
+ * Example: Calculate 2^10
+ * Traditional: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 (9 multiplications)
+ * Efficient:   2^10 = (2^5)^2 = (2 * (2^2)^2)^2 = (2 * 4^2)^2 = (2 * 16)^2 = 32^2 = 1024 (4 multiplications)
+ *
+ * Binary Representation Insight:
+ * Any exponent can be represented in binary. For example:
+ * 13 = 1101₂ = 8 + 4 + 1 = 2³ + 2² + 2⁰
+ * So a^13 = a^(2³ + 2² + 2⁰) = a^8 * a^4 * a^1
+ */
+
 public class _922_d_EfficientPowerAlgorithm {
     private static final int MOD = 1337;
+
+    public static void main(String[] args) {
+        System.out.println("=== Efficient Power Algorithm Demo ===\n");
+
+        PowerCalculator calc = new PowerCalculator();
+        PerformanceAnalyzer analyzer = new PerformanceAnalyzer();
+
+        // Demo 1: Basic demonstration of fast exponentiation
+        System.out.println("Demo 1: Step-by-step Binary Exponentiation");
+        calc.demonstrateBinaryExponentiation(2, 13);
+        System.out.println();
+
+        // Demo 2: Compare different approaches
+        System.out.println("Demo 2: Algorithm Comparison");
+        int base = 3, exponent = 10;
+
+        long basic = calc.basicPower(base, exponent);
+        long recursive = calc.fastPowerRecursive(base, exponent);
+        long iterative = calc.fastPowerIterative(base, exponent);
+
+        System.out.println(base + "^" + exponent + ":");
+        System.out.println("Basic method:     " + basic);
+        System.out.println("Recursive fast:   " + recursive);
+        System.out.println("Iterative fast:   " + iterative);
+        System.out.println("All methods agree: " +
+                (basic == recursive && recursive == iterative));
+        System.out.println();
+
+        // Demo 3: Modular exponentiation for Super Power
+        System.out.println("Demo 3: Modular Fast Exponentiation");
+        int modBase = 2, modExp = 1000;
+        int result = calc.modularFastPower(modBase, modExp, MOD);
+        System.out.println(modBase + "^" + modExp + " mod " + MOD + " = " + result);
+        System.out.println("This is the kind of calculation used in Super Power problem");
+        System.out.println();
+
+        // Demo 4: Performance analysis
+        System.out.println("Demo 4: Performance Analysis");
+        analyzer.compareAlgorithms(2, 1000);
+
+        // Demo 5: Bit operations breakdown
+        System.out.println("Demo 5: Understanding the Binary Approach");
+        analyzer.analyzeBitOperations(100);
+
+        // Demo 6: Why this optimization matters
+        System.out.println("Demo 6: Why Fast Exponentiation Matters");
+        demonstrateImportance();
+    }
+
+    private static void demonstrateImportance() {
+        System.out.println("Consider calculating a^1000000:");
+        System.out.println("- Traditional: ~1,000,000 multiplications");
+        System.out.println("- Fast method: ~20 operations (log₂(1000000) ≈ 20)");
+        System.out.println("- Speed improvement: ~50,000x faster!");
+        System.out.println();
+
+        System.out.println("In the Super Power problem:");
+        System.out.println("- We need to calculate powers with exponents 0-9");
+        System.out.println("- Fast exponentiation reduces each power calculation");
+        System.out.println("- Combined with modular arithmetic, prevents overflow");
+        System.out.println("- Makes handling arbitrarily large exponents feasible");
+        System.out.println();
+
+        System.out.println("Real-world applications:");
+        System.out.println("- Cryptography (RSA encryption/decryption)");
+        System.out.println("- Computer graphics (matrix transformations)");
+        System.out.println("- Scientific computing (large-scale simulations)");
+        System.out.println("- Game development (physics calculations)");
+    }
 
     public static class PowerCalculator {
 
@@ -160,7 +252,6 @@ public class _922_d_EfficientPowerAlgorithm {
         }
     }
 
-
     /**
      * Performance comparison utility
      */
@@ -218,5 +309,4 @@ public class _922_d_EfficientPowerAlgorithm {
             System.out.println();
         }
     }
-
 }
