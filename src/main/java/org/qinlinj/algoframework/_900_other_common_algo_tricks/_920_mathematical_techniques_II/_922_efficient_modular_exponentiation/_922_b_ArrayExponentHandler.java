@@ -50,5 +50,24 @@ public class _922_b_ArrayExponentHandler {
             return result;
         }
 
+        /**
+         * Simple power function for demonstration
+         * In real implementation, this would include modular arithmetic
+         */
+        private long fastPower(long base, int exponent) {
+            if (exponent == 0) return 1;
+            if (exponent == 1) return base;
+
+            long result = 1;
+            while (exponent > 0) {
+                if (exponent % 2 == 1) {
+                    result *= base;
+                }
+                base *= base;
+                exponent /= 2;
+            }
+            return result;
+        }
+
     }
 }
