@@ -42,5 +42,26 @@ public class _922_e_CompleteSolution {
             // Combine results with modular arithmetic
             return modMultiply(part1, part2);
         }
+
+        /**
+         * Efficient modular exponentiation
+         * Uses binary exponentiation for O(log k) complexity
+         */
+        private int modPower(int base, int exponent) {
+            if (exponent == 0) return 1;
+
+            base %= BASE;
+            int result = 1;
+
+            while (exponent > 0) {
+                if (exponent % 2 == 1) {
+                    result = modMultiply(result, base);
+                }
+                base = modMultiply(base, base);
+                exponent /= 2;
+            }
+
+            return result;
+        }
     }
 }
