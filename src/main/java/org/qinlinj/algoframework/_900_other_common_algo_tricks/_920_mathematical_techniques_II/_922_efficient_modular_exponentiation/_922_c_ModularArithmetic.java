@@ -10,5 +10,12 @@ public class _922_c_ModularArithmetic {
             this.modulus = modulus;
         }
 
+        /**
+         * Modular multiplication: (a * b) % mod
+         * Applies modulo to operands first to prevent overflow
+         */
+        public int modMultiply(long a, long b) {
+            return (int) (((a % modulus) * (b % modulus)) % modulus);
+        }
     }
 }
