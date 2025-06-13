@@ -1,5 +1,27 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._922_efficient_modular_exponentiation;
 
+/*
+ * Modular Arithmetic Handler - Preventing Integer Overflow in Large Calculations
+ *
+ * Key Mathematical Property:
+ * (a * b) % k = ((a % k) * (b % k)) % k
+ *
+ * Proof:
+ * Let a = A*k + B and b = C*k + D (where A,B,C,D are constants)
+ * Then: a*b = (A*k + B)(C*k + D) = AC*k² + AD*k + BC*k + BD
+ * So: (a*b) % k = BD % k
+ * Since: a % k = B and b % k = D
+ * Therefore: ((a % k) * (b % k)) % k = (B * D) % k = BD % k
+ *
+ * This property extends to power operations:
+ * a^n % k can be computed by applying modulo at each multiplication step
+ *
+ * Benefits:
+ * 1. Prevents integer overflow during intermediate calculations
+ * 2. Keeps all intermediate results bounded by the modulus
+ * 3. Final result is mathematically equivalent to computing a^n first, then taking modulo
+ */
+
 public class _922_c_ModularArithmetic {
     private static final int MOD = 1337;
 
@@ -48,6 +70,38 @@ public class _922_c_ModularArithmetic {
         System.out.println("Results match: " + (direct == modular) + "\n");
     }
 
+    private static void demonstrateEfficiency(ModularCalculator calc) {
+        int base = 2;
+        int exponent = 1000;
+
+        System.out.println("Calculating " + base + "^" + exponent + " mod " + MOD);
+
+        // Basic method
+        long startTime = System.nanoTime();
+        int basicResult = calc.modPowerBasic(base, exponent);
+        long basicTime = System.nanoTime() - startTime;
+
+        // Fast method
+        startTime = System.nanoTime();
+        int fastResult = calc.modPowerFast(base, exponent);
+        long fastTime = System.nanoTime() - startTime;
+
+        System.out.println("Basic method result: " + basicResult + " (Time: " + basicTime + " ns)");
+        System.out.println("Fast method result: " + fastResult + " (Time: " + fastTime + " ns)");
+        System.out.println("Results match: " + (basicResult == fastResult));
+        System.out.println("Speed improvement: " + (basicTime / (double) fastTime) + "x\n");
+    }
+
+    private static void explainModulusChoice() {
+        System.out.println("The choice of 1337 as modulus in LeetCode problems:");
+        System.out.println("1. Large enough to avoid trivial results");
+        System.out.println("2. Small enough to fit comfortably in 32-bit integers");
+        System.out.println("3. Not a power of 2, which makes the problem more interesting");
+        System.out.println("4. Prime factorization: 1337 = 7 × 191 (both prime)");
+        System.out.println("5. Provides good distribution of remainder values");
+        System.out.println("6. Easy to remember and type!\n");
+    }
+
     public static class ModularCalculator {
         private final int modulus;
 
@@ -62,7 +116,6 @@ public class _922_c_ModularArithmetic {
         public int modMultiply(long a, long b) {
             return (int) (((a % modulus) * (b % modulus)) % modulus);
         }
-
 
         /**
          * Modular addition: (a + b) % mod
@@ -110,7 +163,6 @@ public class _922_c_ModularArithmetic {
 
             return result;
         }
-
 
         /**
          * Demonstrates overflow prevention
