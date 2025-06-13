@@ -89,4 +89,63 @@ public class _922_e_CompleteSolution {
             return result;
         }
     }
+
+
+    /**
+     * Enhanced solution with detailed logging for educational purposes
+     */
+    public static class VerboseSuperPowerSolver extends SuperPowerSolver {
+        private int recursionDepth = 0;
+
+        @Override
+        public int superPow(int a, int[] b) {
+            System.out.println("=== Starting Super Power Calculation ===");
+            System.out.println("Base: " + a);
+            System.out.println("Exponent array: " + Arrays.toString(b));
+            System.out.println("Target: " + a + "^" + arrayToString(b) + " mod " + BASE);
+            System.out.println();
+
+            recursionDepth = 0;
+            int result = super.superPow(a, b);
+
+            System.out.println("=== Final Result: " + result + " ===");
+            return result;
+        }
+
+        @Override
+        protected int superPowRecursive(int a, List<Integer> b) {
+            String indent = "  ".repeat(recursionDepth);
+            recursionDepth++;
+
+            System.out.println(indent + "Recursion level " + (recursionDepth - 1) + ":");
+            System.out.println(indent + "Processing exponent: " + listToString(b));
+
+            if (b.isEmpty()) {
+                System.out.println(indent + "Base case reached: a^0 = 1");
+                recursionDepth--;
+                return 1;
+            }
+
+            int lastDigit = b.remove(b.size() - 1);
+            System.out.println(indent + "Extracted last digit: " + lastDigit);
+            System.out.println(indent + "Remaining exponent: " + listToString(b));
+
+            System.out.println(indent + "Computing a^" + lastDigit + ":");
+            int part1 = modPower(a, lastDigit);
+            System.out.println(indent + "  Result: " + part1);
+
+            System.out.println(indent + "Computing (a^remaining)^10:");
+            int recursiveResult = superPowRecursive(a, b);
+            int part2 = modPower(recursiveResult, 10);
+            System.out.println(indent + "  Recursive result: " + recursiveResult);
+            System.out.println(indent + "  After ^10: " + part2);
+
+            int finalResult = modMultiply(part1, part2);
+            System.out.println(indent + "Combining: " + part1 + " * " + part2 +
+                    " mod " + BASE + " = " + finalResult);
+
+            recursionDepth--;
+            return finalResult;
+        }
+    }
 }
