@@ -3,7 +3,7 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
 import java.util.*;
 
 public class _922_a_SuperPowerMain {
-    
+
     private static final int BASE = 1337;
 
     /**
@@ -18,5 +18,21 @@ public class _922_a_SuperPowerMain {
             bList.add(digit);
         }
         return superPowHelper(a, bList);
+    }
+
+    private int superPowHelper(int a, List<Integer> b) {
+        // Base case: empty array means exponent is 0, result is 1
+        if (b.isEmpty()) return 1;
+
+        // Extract the last digit
+        int lastDigit = b.remove(b.size() - 1);
+
+        // Recursive decomposition:
+        // a^(b[0]b[1]...b[n-1]) = a^(last_digit) * (a^(remaining_digits))^10
+        int part1 = myPow(a, lastDigit);
+        int part2 = myPow(superPowHelper(a, b), 10);
+
+        // Apply modular arithmetic to prevent overflow
+        return (part1 * part2) % BASE;
     }
 }
