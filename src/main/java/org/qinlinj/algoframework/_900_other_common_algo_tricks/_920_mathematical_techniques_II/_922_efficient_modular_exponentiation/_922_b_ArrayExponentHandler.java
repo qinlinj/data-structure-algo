@@ -3,6 +3,45 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
 import java.util.*;
 
 public class _922_b_ArrayExponentHandler {
+    public static void main(String[] args) {
+        System.out.println("=== Array Exponent Handler Demo ===\n");
+
+        ExponentProcessor processor = new ExponentProcessor();
+
+        // Demo 1: Small example to show the concept
+        System.out.println("Demo 1: Understanding Array Representation");
+        int[] smallArray = {1, 2, 3};
+        System.out.println("Array [1,2,3] represents the number: 123");
+        System.out.println("So 2^[1,2,3] means 2^123");
+
+        // Convert to list for recursive method
+        List<Integer> smallList = new ArrayList<>();
+        for (int digit : smallArray) {
+            smallList.add(digit);
+        }
+
+        // Note: These results will be very large, this is just for concept demonstration
+        System.out.println("Calculating 2^123 using recursive method...");
+        try {
+            // For very large results, we'd need BigInteger or modular arithmetic
+            System.out.println("(Result would be astronomically large)\n");
+        } catch (Exception e) {
+            System.out.println("Result too large for standard data types\n");
+        }
+
+        // Demo 2: Step-by-step breakdown
+        System.out.println("Demo 2: Step-by-step Recursive Breakdown");
+        demonstrateRecursiveSteps();
+
+        // Demo 3: Why we need this approach
+        System.out.println("\nDemo 3: Why Array Representation is Necessary");
+        demonstrateNeedForArrays();
+
+        // Demo 4: Handling edge cases
+        System.out.println("\nDemo 4: Edge Cases");
+        demonstrateEdgeCases();
+    }
+
     /**
      * Demonstrates different approaches to handle array-based exponents
      */
@@ -68,6 +107,5 @@ public class _922_b_ArrayExponentHandler {
             }
             return result;
         }
-
     }
 }
