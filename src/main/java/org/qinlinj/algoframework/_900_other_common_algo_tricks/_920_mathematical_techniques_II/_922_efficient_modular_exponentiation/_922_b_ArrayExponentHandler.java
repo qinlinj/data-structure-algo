@@ -59,6 +59,16 @@ public class _922_b_ArrayExponentHandler {
         System.out.println("Base case: empty array means exponent 0, result 1");
     }
 
+    private static void demonstrateNeedForArrays() {
+        System.out.println("Consider these large exponents:");
+        System.out.println("- 2^(10^100): A googol-sized exponent");
+        System.out.println("- 3^(factorial(100)): Even larger exponent");
+        System.out.println("- These cannot fit in any standard integer type");
+        System.out.println("- int max value: " + Integer.MAX_VALUE);
+        System.out.println("- long max value: " + Long.MAX_VALUE);
+        System.out.println("- But array can represent arbitrarily large numbers!");
+    }
+
     /**
      * Demonstrates different approaches to handle array-based exponents
      */
