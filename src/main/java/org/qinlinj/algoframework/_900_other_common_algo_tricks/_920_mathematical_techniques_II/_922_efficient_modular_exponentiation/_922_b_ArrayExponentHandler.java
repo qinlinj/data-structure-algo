@@ -1,8 +1,28 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._922_efficient_modular_exponentiation;
 
+/*
+ * Array Exponent Handler - How to Process Array-Based Exponents
+ *
+ * Key Concepts:
+ * 1. Array represents a large number that cannot fit in standard integer types
+ * 2. Use recursive decomposition: a^(xyz) = a^z * (a^(xy))^10
+ * 3. Process digits from right to left (least significant to most significant)
+ *
+ * Mathematical Insight:
+ * - For number 1564 represented as [1,5,6,4]:
+ *   1564 = 1*10^3 + 5*10^2 + 6*10^1 + 4*10^0
+ * - So a^1564 = a^(1*10^3 + 5*10^2 + 6*10^1 + 4*10^0)
+ *            = a^(4 + 10*(156))
+ *            = a^4 * a^(10*156)
+ *            = a^4 * (a^156)^10
+ *
+ * This recursive pattern allows us to handle arbitrarily large exponents
+ */
+
 import java.util.*;
 
 public class _922_b_ArrayExponentHandler {
+
     public static void main(String[] args) {
         System.out.println("=== Array Exponent Handler Demo ===\n");
 
@@ -87,6 +107,7 @@ public class _922_b_ArrayExponentHandler {
      * Demonstrates different approaches to handle array-based exponents
      */
     public static class ExponentProcessor {
+
         /**
          * Method 1: Recursive approach (recommended for this problem)
          * Processes the array by removing the last digit and recursing
