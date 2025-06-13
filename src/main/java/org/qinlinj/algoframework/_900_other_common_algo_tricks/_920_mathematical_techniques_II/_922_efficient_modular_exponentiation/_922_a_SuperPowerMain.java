@@ -1,9 +1,27 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._922_efficient_modular_exponentiation;
 
+/*
+ * LeetCode 372: Super Power Problem - Main Solution
+ *
+ * Problem: Calculate a^b mod 1337, where b is represented as an array of digits
+ *
+ * Key Points:
+ * 1. Handle array-based exponent representation
+ * 2. Use modular arithmetic to prevent overflow
+ * 3. Apply recursive decomposition for large exponents
+ *
+ * Mathematical Foundation:
+ * - For b = [1,5,6,4], we have a^1564 = a^4 * (a^156)^10
+ * - General form: a^(b[0]b[1]...b[n-1]) = a^(last_digit) * (a^(remaining_digits))^10
+ *
+ * Modular Arithmetic Property:
+ * - (a * b) % k = ((a % k) * (b % k)) % k
+ * - This prevents integer overflow during computation
+ */
+
 import java.util.*;
 
 public class _922_a_SuperPowerMain {
-
     private static final int BASE = 1337;
 
     public static void main(String[] args) {
