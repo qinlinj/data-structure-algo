@@ -42,6 +42,23 @@ public class _922_b_ArrayExponentHandler {
         demonstrateEdgeCases();
     }
 
+    private static void demonstrateRecursiveSteps() {
+        System.out.println("For exponent [1,5,6,4] (representing 1564):");
+        System.out.println("Step 1: Extract last digit 4, remaining [1,5,6]");
+        System.out.println("        a^1564 = a^4 * (a^156)^10");
+        System.out.println();
+        System.out.println("Step 2: Extract last digit 6, remaining [1,5]");
+        System.out.println("        a^156 = a^6 * (a^15)^10");
+        System.out.println();
+        System.out.println("Step 3: Extract last digit 5, remaining [1]");
+        System.out.println("        a^15 = a^5 * (a^1)^10");
+        System.out.println();
+        System.out.println("Step 4: Extract last digit 1, remaining []");
+        System.out.println("        a^1 = a^1 * (1)^10 = a");
+        System.out.println();
+        System.out.println("Base case: empty array means exponent 0, result 1");
+    }
+
     /**
      * Demonstrates different approaches to handle array-based exponents
      */
