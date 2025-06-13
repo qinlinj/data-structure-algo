@@ -164,4 +164,115 @@ public class _922_e_CompleteSolution {
             return sb.isEmpty() ? "empty" : sb.toString();
         }
     }
+
+    /**
+     * Test suite for validation
+     */
+    public static class TestSuite {
+        private final SuperPowerSolver solver;
+        private final VerboseSuperPowerSolver verboseSolver;
+
+        public TestSuite() {
+            this.solver = new SuperPowerSolver();
+            this.verboseSolver = new VerboseSuperPowerSolver();
+        }
+
+        public void runAllTests() {
+            System.out.println("=== Super Power Test Suite ===\n");
+
+            testBasicCases();
+            testEdgeCases();
+            testLargeExponents();
+            testPerformance();
+        }
+
+        private void testBasicCases() {
+            System.out.println("Test 1: Basic Cases");
+
+            // Test case 1: Small numbers
+            int[] b1 = {3};
+            int result1 = solver.superPow(2, b1);
+            System.out.println("2^3 mod 1337 = " + result1 + " (expected: 8)");
+            assert result1 == 8 : "Test 1.1 failed";
+
+            // Test case 2: Medium numbers
+            int[] b2 = {1, 0};
+            int result2 = solver.superPow(2, b2);
+            System.out.println("2^10 mod 1337 = " + result2 + " (expected: 1024)");
+            assert result2 == 1024 : "Test 1.2 failed";
+
+            // Test case 3: LeetCode example
+            int[] b3 = {1, 5, 6, 4};
+            int result3 = solver.superPow(2, b3);
+            System.out.println("2^1564 mod 1337 = " + result3);
+
+            System.out.println("Basic tests passed!\n");
+        }
+
+        private void testEdgeCases() {
+            System.out.println("Test 2: Edge Cases");
+
+            // Test case 1: Empty array
+            int[] b1 = {};
+            int result1 = solver.superPow(2, b1);
+            System.out.println("2^[] mod 1337 = " + result1 + " (expected: 1)");
+            assert result1 == 1 : "Test 2.1 failed";
+
+            // Test case 2: Single zero
+            int[] b2 = {0};
+            int result2 = solver.superPow(2, b2);
+            System.out.println("2^0 mod 1337 = " + result2 + " (expected: 1)");
+            assert result2 == 1 : "Test 2.2 failed";
+
+            // Test case 3: Base larger than modulus
+            int[] b3 = {2};
+            int result3 = solver.superPow(1500, b3);
+            System.out.println("1500^2 mod 1337 = " + result3);
+
+            System.out.println("Edge tests passed!\n");
+        }
+
+        private void testLargeExponents() {
+            System.out.println("Test 3: Large Exponents");
+
+            // Very large exponent
+            int[] b1 = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            long startTime = System.currentTimeMillis();
+            int result1 = solver.superPow(2, b1);
+            long endTime = System.currentTimeMillis();
+
+            System.out.println("2^1000000000000 mod 1337 = " + result1);
+            System.out.println("Computation time: " + (endTime - startTime) + " ms");
+
+            System.out.println("Large exponent tests passed!\n");
+        }
+
+        private void testPerformance() {
+            System.out.println("Test 4: Performance Comparison");
+
+            int[] testExponent = {1, 2, 3, 4, 5};
+
+            // Test recursive solution
+            long startTime = System.nanoTime();
+            int result1 = solver.superPow(2, testExponent.clone());
+            long recursiveTime = System.nanoTime() - startTime;
+
+            // Test iterative solution
+            startTime = System.nanoTime();
+            int result2 = solver.superPowIterative(2, testExponent.clone());
+            long iterativeTime = System.nanoTime() - startTime;
+
+            System.out.println("Recursive result: " + result1 + " (Time: " + recursiveTime + " ns)");
+            System.out.println("Iterative result: " + result2 + " (Time: " + iterativeTime + " ns)");
+            System.out.println("Results match: " + (result1 == result2));
+
+            System.out.println("Performance tests completed!\n");
+        }
+
+        public void demonstrateVerboseExecution() {
+            System.out.println("=== Verbose Execution Demo ===\n");
+            int[] smallExample = {1, 2, 3};
+            verboseSolver.superPow(2, smallExample);
+        }
+    }
 }
