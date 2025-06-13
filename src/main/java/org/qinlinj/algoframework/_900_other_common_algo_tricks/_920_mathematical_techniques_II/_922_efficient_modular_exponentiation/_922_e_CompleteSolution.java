@@ -63,5 +63,12 @@ public class _922_e_CompleteSolution {
 
             return result;
         }
+
+        /**
+         * Safe modular multiplication to prevent overflow
+         */
+        private int modMultiply(int a, int b) {
+            return (int) (((long) a * b) % BASE);
+        }
     }
 }
