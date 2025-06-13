@@ -147,5 +147,21 @@ public class _922_e_CompleteSolution {
             recursionDepth--;
             return finalResult;
         }
+
+        private String arrayToString(int[] arr) {
+            StringBuilder sb = new StringBuilder();
+            for (int digit : arr) {
+                sb.append(digit);
+            }
+            return sb.toString();
+        }
+
+        private String listToString(List<Integer> list) {
+            StringBuilder sb = new StringBuilder();
+            for (int digit : list) {
+                sb.append(digit);
+            }
+            return sb.isEmpty() ? "empty" : sb.toString();
+        }
     }
 }
