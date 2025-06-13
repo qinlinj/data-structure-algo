@@ -17,5 +17,30 @@ public class _922_c_ModularArithmetic {
         public int modMultiply(long a, long b) {
             return (int) (((a % modulus) * (b % modulus)) % modulus);
         }
+
+
+        /**
+         * Modular addition: (a + b) % mod
+         */
+        public int modAdd(long a, long b) {
+            return (int) (((a % modulus) + (b % modulus)) % modulus);
+        }
+
+        /**
+         * Modular power: a^b % mod (basic iterative approach)
+         * Applies modulo at each step to prevent overflow
+         */
+        public int modPowerBasic(int base, int exponent) {
+            if (exponent == 0) return 1;
+
+            base %= modulus; // Reduce base first
+            int result = 1;
+
+            for (int i = 0; i < exponent; i++) {
+                result = modMultiply(result, base);
+            }
+
+            return result;
+        }
     }
 }
