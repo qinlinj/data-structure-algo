@@ -19,6 +19,25 @@ public class _922_d_EfficientPowerAlgorithm {
             }
             return result;
         }
+
+        /**
+         * Fast O(log n) power calculation - Recursive approach
+         * More intuitive but uses O(log n) stack space
+         */
+        public long fastPowerRecursive(long base, int exponent) {
+            // Base cases
+            if (exponent == 0) return 1;
+            if (exponent == 1) return base;
+
+            if (exponent % 2 == 0) {
+                // Even exponent: a^n = (a^(n/2))^2
+                long half = fastPowerRecursive(base, exponent / 2);
+                return half * half;
+            } else {
+                // Odd exponent: a^n = a * a^(n-1)
+                return base * fastPowerRecursive(base, exponent - 1);
+            }
+        }
     }
-    
+
 }
