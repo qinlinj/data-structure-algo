@@ -160,4 +160,63 @@ public class _922_d_EfficientPowerAlgorithm {
         }
     }
 
+
+    /**
+     * Performance comparison utility
+     */
+    public static class PerformanceAnalyzer {
+
+        public void compareAlgorithms(int base, int maxExponent) {
+            System.out.println("=== Performance Comparison ===");
+            System.out.println("Base: " + base + ", Testing exponents from 1 to " + maxExponent);
+            System.out.println();
+
+            PowerCalculator calc = new PowerCalculator();
+
+            // Test different exponent sizes
+            int[] testExponents = {10, 20, 50, 100, 500, 1000};
+
+            for (int exp : testExponents) {
+                if (exp > maxExponent) continue;
+
+                System.out.println("Exponent: " + exp);
+
+                // Basic algorithm timing (only for small exponents to avoid overflow)
+                if (exp <= 20) {
+                    long startTime = System.nanoTime();
+                    long basicResult = calc.basicPower(base, exp);
+                    long basicTime = System.nanoTime() - startTime;
+                    System.out.println("  Basic O(n):     " + basicResult +
+                            " (Time: " + basicTime + " ns)");
+                }
+
+                // Fast algorithm timing
+                long startTime = System.nanoTime();
+                long fastResult = calc.fastPowerIterative(base, exp);
+                long fastTime = System.nanoTime() - startTime;
+                System.out.println("  Fast O(log n):  " + fastResult +
+                        " (Time: " + fastTime + " ns)");
+                System.out.println();
+            }
+        }
+
+        public void analyzeBitOperations(int exponent) {
+            System.out.println("=== Bit Operations Analysis for Exponent " + exponent + " ===");
+
+            String binary = Integer.toBinaryString(exponent);
+            System.out.println("Binary representation: " + binary);
+            System.out.println("Number of bits: " + binary.length());
+            System.out.println("Number of 1s: " + binary.replaceAll("0", "").length());
+            System.out.println();
+
+            System.out.println("Traditional algorithm: " + (exponent - 1) + " multiplications");
+            System.out.println("Fast algorithm: ~" + (binary.length() - 1) +
+                    " squarings + " + binary.replaceAll("0", "").length() +
+                    " multiplications");
+            System.out.println("Total operations: ~" +
+                    (binary.length() - 1 + binary.replaceAll("0", "").length()));
+            System.out.println();
+        }
+    }
+
 }
