@@ -35,4 +35,24 @@ public class _922_a_SuperPowerMain {
         // Apply modular arithmetic to prevent overflow
         return (part1 * part2) % BASE;
     }
+
+    /**
+     * Basic power calculation with modular arithmetic
+     * This is the simple O(k) approach
+     */
+    private int myPow(int a, int k) {
+        if (k == 0) return 1;
+
+        // Apply modulo to base to keep numbers manageable
+        a %= BASE;
+        int result = 1;
+
+        // Simple multiplication approach
+        for (int i = 0; i < k; i++) {
+            result = (result * a) % BASE;
+        }
+
+        return result;
+    }
+
 }
