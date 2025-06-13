@@ -3,6 +3,34 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
 public class _922_c_ModularArithmetic {
     private static final int MOD = 1337;
 
+    public static void main(String[] args) {
+        System.out.println("=== Modular Arithmetic Demo ===\n");
+
+        ModularCalculator calc = new ModularCalculator(MOD);
+        SuperPowerModular superCalc = new SuperPowerModular();
+
+        // Demo 1: Basic modular arithmetic properties
+        System.out.println("Demo 1: Basic Modular Arithmetic Properties");
+        demonstrateBasicProperties(calc);
+
+        // Demo 2: Overflow prevention
+        System.out.println("Demo 2: Overflow Prevention");
+        calc.demonstrateOverflowPrevention(Integer.MAX_VALUE / 2, Integer.MAX_VALUE / 2);
+
+        // Demo 3: Power calculations with modular arithmetic
+        System.out.println("Demo 3: Modular Power Calculations");
+        superCalc.demonstratePowerCalculation(2, 5);
+        superCalc.demonstratePowerCalculation(3, 4);
+
+        // Demo 4: Efficiency comparison
+        System.out.println("Demo 4: Efficiency Comparison (Basic vs Fast Power)");
+        demonstrateEfficiency(calc);
+
+        // Demo 5: Why 1337?
+        System.out.println("Demo 5: Why Use Modulo 1337?");
+        explainModulusChoice();
+    }
+
     public static class ModularCalculator {
         private final int modulus;
 
