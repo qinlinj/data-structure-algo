@@ -34,6 +34,21 @@ public class _922_a_SuperPowerMain {
         demonstrateRecursiveBreakdown();
     }
 
+    private static void demonstrateRecursiveBreakdown() {
+        System.out.println("For a^1564, the algorithm breaks it down as:");
+        System.out.println("1564 -> last digit: 4, remaining: 156");
+        System.out.println("a^1564 = a^4 * (a^156)^10");
+        System.out.println();
+        System.out.println("156 -> last digit: 6, remaining: 15");
+        System.out.println("a^156 = a^6 * (a^15)^10");
+        System.out.println();
+        System.out.println("15 -> last digit: 5, remaining: 1");
+        System.out.println("a^15 = a^5 * (a^1)^10");
+        System.out.println();
+        System.out.println("1 -> last digit: 1, remaining: empty");
+        System.out.println("a^1 = a^1 * (1)^10 = a");
+    }
+
     /**
      * Main solution for Super Power problem
      * Time Complexity: O(n) where n is length of array b
@@ -82,5 +97,4 @@ public class _922_a_SuperPowerMain {
 
         return result;
     }
-
 }
