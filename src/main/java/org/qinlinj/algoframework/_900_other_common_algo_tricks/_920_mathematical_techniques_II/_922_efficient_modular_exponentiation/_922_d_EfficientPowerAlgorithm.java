@@ -38,6 +38,29 @@ public class _922_d_EfficientPowerAlgorithm {
                 return base * fastPowerRecursive(base, exponent - 1);
             }
         }
+
+        /**
+         * Fast O(log n) power calculation - Iterative approach
+         * More efficient in terms of space, O(1) space complexity
+         */
+        public long fastPowerIterative(long base, int exponent) {
+            if (exponent == 0) return 1;
+
+            long result = 1;
+            long currentPower = base;
+
+            while (exponent > 0) {
+                // If current bit is 1, multiply result by current power
+                if (exponent % 2 == 1) {
+                    result *= currentPower;
+                }
+                // Square the current power and move to next bit
+                currentPower *= currentPower;
+                exponent /= 2;
+            }
+
+            return result;
+        }
     }
 
 }
