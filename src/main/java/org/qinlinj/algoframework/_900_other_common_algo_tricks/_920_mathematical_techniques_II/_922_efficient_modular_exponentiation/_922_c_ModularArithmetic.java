@@ -42,5 +42,28 @@ public class _922_c_ModularArithmetic {
 
             return result;
         }
+
+        /**
+         * Fast modular power: a^b % mod (using binary exponentiation)
+         * Much more efficient for large exponents
+         */
+        public int modPowerFast(int base, int exponent) {
+            if (exponent == 0) return 1;
+
+            base %= modulus;
+            int result = 1;
+
+            while (exponent > 0) {
+                // If exponent is odd, multiply result by current base
+                if (exponent % 2 == 1) {
+                    result = modMultiply(result, base);
+                }
+                // Square the base and halve the exponent
+                base = modMultiply(base, base);
+                exponent /= 2;
+            }
+
+            return result;
+        }
     }
 }
