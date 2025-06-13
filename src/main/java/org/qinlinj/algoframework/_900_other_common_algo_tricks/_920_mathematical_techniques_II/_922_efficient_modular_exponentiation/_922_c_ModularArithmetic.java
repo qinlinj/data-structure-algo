@@ -91,4 +91,46 @@ public class _922_c_ModularArithmetic {
             System.out.println();
         }
     }
+
+    /**
+     * Specific implementation for the Super Power problem
+     */
+    public static class SuperPowerModular {
+        private final ModularCalculator calc;
+
+        public SuperPowerModular() {
+            this.calc = new ModularCalculator(MOD);
+        }
+
+        /**
+         * Safe modular power for single digit exponents (0-9)
+         * Used in the main Super Power algorithm
+         */
+        public int safePower(int base, int exponent) {
+            return calc.modPowerBasic(base, exponent);
+        }
+
+        /**
+         * Demonstrates the step-by-step modular arithmetic process
+         */
+        public int demonstratePowerCalculation(int base, int exponent) {
+            System.out.println("Calculating " + base + "^" + exponent + " mod " + MOD + ":");
+
+            base %= MOD;
+            System.out.println("Step 1: Reduce base: " + base + " mod " + MOD + " = " + base);
+
+            int result = 1;
+            System.out.println("Step 2: Initialize result = 1");
+
+            for (int i = 0; i < exponent; i++) {
+                int oldResult = result;
+                result = calc.modMultiply(result, base);
+                System.out.println("Step " + (i + 3) + ": " + oldResult + " * " + base +
+                        " = " + (oldResult * base) + ", mod " + MOD + " = " + result);
+            }
+
+            System.out.println("Final result: " + result + "\n");
+            return result;
+        }
+    }
 }
