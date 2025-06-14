@@ -135,4 +135,28 @@ public class _923_c_OptimalSolution {
             }
         }
     }
+
+    /**
+     * Test the algorithm with multiple cases
+     */
+    public static void runTests() {
+        System.out.println("\n=== Testing Multiple Cases ===");
+
+        int[][] testCases = {
+                {1, 2, 2, 4},    // duplicate: 2, missing: 3
+                {1, 1},          // duplicate: 1, missing: 2
+                {3, 2, 2},       // duplicate: 2, missing: 1
+                {2, 2},          // duplicate: 2, missing: 1
+                {1, 2, 3, 4, 4}  // duplicate: 4, missing: 5
+        };
+
+        for (int i = 0; i < testCases.length; i++) {
+            int[] test = testCases[i].clone();  // Clone to preserve original
+            int[] result = findErrorNums(test);
+
+            System.out.println("Test " + (i + 1) + ": " + Arrays.toString(testCases[i]) +
+                    " -> [" + result[0] + ", " + result[1] + "]");
+        }
+    }
+
 }
