@@ -84,4 +84,40 @@ public class _923_d_AlternativeApproaches {
 
         return new int[]{type2, type1};  // type2 is duplicate
     }
+
+    /**
+     * Approach 3: Mathematical Sum Method
+     * Uses sum formulas to calculate the difference
+     * Time: O(N), Space: O(1)
+     */
+    public static int[] findErrorNumsMath(int[] nums) {
+        int n = nums.length;
+
+        // Calculate expected sum: 1 + 2 + ... + n = n(n+1)/2
+        long expectedSum = (long) n * (n + 1) / 2;
+
+        // Calculate expected sum of squares: 1² + 2² + ... + n²
+        long expectedSumSquares = (long) n * (n + 1) * (2 * n + 1) / 6;
+
+        // Calculate actual sums
+        long actualSum = 0;
+        long actualSumSquares = 0;
+
+        for (int num : nums) {
+            actualSum += num;
+            actualSumSquares += (long) num * num;
+        }
+
+        // Let duplicate = d, missing = m
+        // actualSum - expectedSum = d - m
+        // actualSumSquares - expectedSumSquares = d² - m² = (d-m)(d+m)
+
+        long diff = actualSum - expectedSum;          // d - m
+        long sumDM = (actualSumSquares - expectedSumSquares) / diff;  // d + m
+
+        int duplicate = (int) ((diff + sumDM) / 2);
+        int missing = (int) (sumDM - duplicate);
+
+        return new int[]{duplicate, missing};
+    }
 }
