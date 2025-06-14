@@ -159,4 +159,25 @@ public class _923_c_OptimalSolution {
         }
     }
 
+    public static void main(String[] args) {
+        // Basic test
+        int[] test = {1, 2, 2, 4};
+        int[] result = findErrorNums(test.clone());
+        System.out.println("Quick test: " + Arrays.toString(test) + " -> " + Arrays.toString(result));
+
+        // Detailed demonstration
+        int[] detailedTest = {1, 2, 2, 4};
+        findErrorNumsDetailed(detailedTest);
+
+        // Visual explanation
+        visualizeAlgorithm();
+
+        // Multiple test cases
+        runTests();
+
+        System.out.println("\n=== Algorithm Summary ===");
+        System.out.println("Time Complexity: O(N) - two passes through array");
+        System.out.println("Space Complexity: O(1) - uses input array for marking");
+        System.out.println("Key insight: Use negative values to mark visited indices");
+    }
 }
