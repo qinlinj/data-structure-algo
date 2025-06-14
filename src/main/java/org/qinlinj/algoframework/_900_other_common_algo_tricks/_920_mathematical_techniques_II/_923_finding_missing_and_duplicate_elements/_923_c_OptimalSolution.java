@@ -1,5 +1,7 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._923_finding_missing_and_duplicate_elements;
 
+import java.util.*;
+
 public class _923_c_OptimalSolution {
     /**
      * Optimal solution with O(1) space complexity
@@ -36,5 +38,40 @@ public class _923_c_OptimalSolution {
 
         return new int[]{duplicate, missing};
     }
+
+    /**
+     * Detailed step-by-step demonstration of the algorithm
+     */
+    public static int[] findErrorNumsDetailed(int[] nums) {
+        System.out.println("=== Optimal Algorithm Step-by-Step ===");
+        System.out.println("Input: " + Arrays.toString(nums));
+
+        int n = nums.length;
+        int duplicate = -1;
+
+        System.out.println("\n--- Phase 1: Finding Duplicate ---");
+
+        for (int i = 0; i < n; i++) {
+            int element = Math.abs(nums[i]);
+            int targetIndex = element - 1;
+
+            System.out.print("Step " + (i + 1) + ": Element " + element +
+                    " -> Target Index " + targetIndex);
+
+            if (nums[targetIndex] < 0) {
+                duplicate = element;
+                System.out.println(" -> Already negative! DUPLICATE = " + duplicate);
+            } else {
+                nums[targetIndex] *= -1;
+                System.out.println(" -> Marked negative");
+            }
+
+            System.out.println("     Array: " + Arrays.toString(nums));
+        }
+
+
+        return new int[]{duplicate, missing};
+    }
+
 
 }
