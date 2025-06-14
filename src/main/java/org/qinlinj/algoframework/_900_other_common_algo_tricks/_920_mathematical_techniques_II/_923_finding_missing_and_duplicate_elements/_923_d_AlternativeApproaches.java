@@ -272,5 +272,42 @@ public class _923_d_AlternativeApproaches {
             System.out.printf("   Math: %.2f ms\n", (endTime - startTime) / 1_000_000.0);
         }
     }
-    
+
+    /**
+     * Summary of all approaches with recommendations
+     */
+    public static void summarizeApproaches() {
+        System.out.println("\n=== Approach Summary and Recommendations ===");
+
+        System.out.println("┌─────────────────┬─────────────┬─────────────┬─────────────────┬─────────────────┐");
+        System.out.println("│ Approach        │ Time        │ Space       │ Pros            │ Cons            │");
+        System.out.println("├─────────────────┼─────────────┼─────────────┼─────────────────┼─────────────────┤");
+        System.out.println("│ HashMap         │ O(N)        │ O(N)        │ Simple, clear   │ Extra space     │");
+        System.out.println("│ Sorting         │ O(N log N)  │ O(1)        │ Intuitive       │ Slower          │");
+        System.out.println("│ Negative Mark   │ O(N)        │ O(1)        │ Optimal         │ Modifies input  │");
+        System.out.println("│ XOR             │ O(N)        │ O(1)        │ No modification │ Complex logic   │");
+        System.out.println("│ Mathematical    │ O(N)        │ O(1)        │ Clean math      │ Overflow risk   │");
+        System.out.println("└─────────────────┴─────────────┴─────────────┴─────────────────┴─────────────────┘");
+
+        System.out.println("\nRecommendations:");
+        System.out.println("• Use NEGATIVE MARKING for interviews (optimal time/space)");
+        System.out.println("• Use HASHMAP for clarity and when space isn't critical");
+        System.out.println("• Use XOR for immutable input requirements");
+        System.out.println("• Use MATHEMATICAL for mathematical elegance");
+        System.out.println("• Avoid SORTING unless simplicity is paramount");
+
+        System.out.println("\nKey Pattern Recognition:");
+        System.out.println("• Element-index correspondence problems often have O(1) space solutions");
+        System.out.println("• Consider using array indices as implicit hash table");
+        System.out.println("• Negative marking works when elements are positive");
+        System.out.println("• XOR useful when dealing with pairs and missing elements");
+    }
+
+    public static void main(String[] args) {
+        compareApproaches();
+        explainXORApproach();
+        explainMathApproach();
+        performanceComparison();
+        summarizeApproaches();
+    }
 }
