@@ -1,8 +1,29 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._923_finding_missing_and_duplicate_elements;
 
+/*
+ * ELEMENT-INDEX MAPPING CONCEPT
+ *
+ * This class explains the key insight for solving the duplicate and missing problem
+ * with O(1) space complexity using element-index correspondence.
+ *
+ * Key Concepts:
+ * - Each element should correspond to exactly one array index
+ * - For array [1..N], element 'i' should ideally appear at index 'i-1'
+ * - When there's a duplicate, two elements map to the same index
+ * - When there's a missing element, one index has no element mapping to it
+ *
+ * Simplified Analysis (using [0..N-1] for easier understanding):
+ * - If nums contains [0..N-1], each element perfectly maps to its index
+ * - Duplicate element causes: two elements -> same index
+ * - Missing element causes: one index <- no element
+ *
+ * The trick: Use negative numbers to mark "visited" indices
+ */
+
 import java.util.*;
 
 public class _923_b_ElementIndexMapping {
+
     /**
      * Demonstrates the element-index correspondence concept
      */
