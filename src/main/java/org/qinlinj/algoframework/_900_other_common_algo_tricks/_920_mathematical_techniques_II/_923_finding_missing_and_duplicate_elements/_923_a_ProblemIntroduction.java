@@ -73,4 +73,26 @@ public class _923_a_ProblemIntroduction {
         System.out.println("Space complexity: O(N) due to HashMap");
         System.out.println("Time complexity: O(N)");
     }
+
+    public static void main(String[] args) {
+        // Test case 1: [1,2,2,4] -> [2,3]
+        int[] test1 = {1, 2, 2, 4};
+        int[] result1 = findErrorNumsBasic(test1);
+        System.out.println("Test 1: " + Arrays.toString(test1) + " -> " + Arrays.toString(result1));
+
+        // Test case 2: [1,1] -> [1,2]
+        int[] test2 = {1, 1};
+        int[] result2 = findErrorNumsBasic(test2);
+        System.out.println("Test 2: " + Arrays.toString(test2) + " -> " + Arrays.toString(result2));
+
+        // Test case 3: [3,2,2] -> [2,1]
+        int[] test3 = {3, 2, 2};
+        int[] result3 = findErrorNumsBasic(test3);
+        System.out.println("Test 3: " + Arrays.toString(test3) + " -> " + Arrays.toString(result3));
+
+        System.out.println("\n" + "=".repeat(50));
+
+        // Detailed demonstration
+        demonstrateBasicApproach(test1);
+    }
 }
