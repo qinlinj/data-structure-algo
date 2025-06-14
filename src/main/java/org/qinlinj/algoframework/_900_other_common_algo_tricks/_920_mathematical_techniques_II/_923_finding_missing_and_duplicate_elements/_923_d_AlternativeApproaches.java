@@ -189,4 +189,48 @@ public class _923_d_AlternativeApproaches {
         System.out.println("\nResult " + xorResult + " represents (missing ^ duplicate) = (3 ^ 2) = " + (3 ^ 2));
         System.out.println("Additional bit manipulation needed to separate 3 and 2");
     }
+
+    /**
+     * Explains why mathematical approach works
+     */
+    public static void explainMathApproach() {
+        System.out.println("\n=== Mathematical Approach Explanation ===");
+
+        int[] nums = {1, 2, 2, 4};
+        int n = nums.length;
+
+        System.out.println("Array: " + Arrays.toString(nums));
+        System.out.println("Let duplicate = d, missing = m");
+
+        // Calculate sums
+        long expectedSum = (long) n * (n + 1) / 2;
+        long actualSum = Arrays.stream(nums).sum();
+
+        long expectedSumSq = (long) n * (n + 1) * (2 * n + 1) / 6;
+        long actualSumSq = Arrays.stream(nums).mapToLong(x -> (long) x * x).sum();
+
+        System.out.println("\nSum calculations:");
+        System.out.println("Expected sum (1+2+3+4): " + expectedSum);
+        System.out.println("Actual sum (1+2+2+4): " + actualSum);
+        System.out.println("Difference (d - m): " + (actualSum - expectedSum));
+
+        System.out.println("\nSum of squares:");
+        System.out.println("Expected (1²+2²+3²+4²): " + expectedSumSq);
+        System.out.println("Actual (1²+2²+2²+4²): " + actualSumSq);
+        System.out.println("Difference (d² - m²): " + (actualSumSq - expectedSumSq));
+
+        long diff = actualSum - expectedSum;
+        long sumDM = (actualSumSq - expectedSumSq) / diff;
+
+        System.out.println("\nSolving system of equations:");
+        System.out.println("d - m = " + diff);
+        System.out.println("d + m = " + sumDM + " (from (d²-m²)/(d-m))");
+
+        int duplicate = (int) ((diff + sumDM) / 2);
+        int missing = (int) (sumDM - duplicate);
+
+        System.out.println("Therefore: d = " + duplicate + ", m = " + missing);
+    }
+
+
 }
