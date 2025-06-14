@@ -69,7 +69,21 @@ public class _923_c_OptimalSolution {
             System.out.println("     Array: " + Arrays.toString(nums));
         }
 
+        System.out.println("\n--- Phase 2: Finding Missing ---");
+        int missing = -1;
 
+        for (int i = 0; i < n; i++) {
+            System.out.print("Index " + i + ": value = " + nums[i]);
+
+            if (nums[i] > 0) {
+                missing = i + 1;
+                System.out.println(" -> POSITIVE! Missing element = " + missing);
+            } else {
+                System.out.println(" -> negative (visited)");
+            }
+        }
+
+        System.out.println("\nResult: [" + duplicate + ", " + missing + "]");
         return new int[]{duplicate, missing};
     }
 
