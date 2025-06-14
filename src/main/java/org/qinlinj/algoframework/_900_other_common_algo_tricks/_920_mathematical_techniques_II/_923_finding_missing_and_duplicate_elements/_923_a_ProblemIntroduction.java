@@ -33,4 +33,44 @@ public class _923_a_ProblemIntroduction {
 
         return new int[]{duplicate, missing};
     }
+
+
+    /**
+     * Demonstrates the basic approach with detailed step-by-step output
+     */
+    public static void demonstrateBasicApproach(int[] nums) {
+        System.out.println("=== Basic HashMap Approach Demo ===");
+        System.out.println("Input array: " + Arrays.toString(nums));
+
+        Map<Integer, Integer> count = new HashMap<>();
+
+        // Step 1: Count frequencies
+        System.out.println("\nStep 1: Counting frequencies");
+        for (int num : nums) {
+            count.put(num, count.getOrDefault(num, 0) + 1);
+            System.out.println("  Number " + num + " appears " + count.get(num) + " times");
+        }
+
+        // Step 2: Find duplicate and missing
+        System.out.println("\nStep 2: Analyzing frequencies for numbers 1 to " + nums.length);
+        int duplicate = -1, missing = -1;
+
+        for (int i = 1; i <= nums.length; i++) {
+            int frequency = count.getOrDefault(i, 0);
+            System.out.print("  Number " + i + ": frequency = " + frequency);
+
+            if (frequency == 2) {
+                duplicate = i;
+                System.out.print(" -> DUPLICATE found!");
+            } else if (frequency == 0) {
+                missing = i;
+                System.out.print(" -> MISSING found!");
+            }
+            System.out.println();
+        }
+
+        System.out.println("\nResult: [" + duplicate + ", " + missing + "]");
+        System.out.println("Space complexity: O(N) due to HashMap");
+        System.out.println("Time complexity: O(N)");
+    }
 }
