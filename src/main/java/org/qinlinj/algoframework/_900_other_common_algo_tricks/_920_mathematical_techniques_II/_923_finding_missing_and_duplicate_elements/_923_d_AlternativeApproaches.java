@@ -1,8 +1,27 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._923_finding_missing_and_duplicate_elements;
 
+/*
+ * ALTERNATIVE APPROACHES FOR FINDING DUPLICATE AND MISSING ELEMENTS
+ *
+ * This class demonstrates three main approaches to solve the problem:
+ * 1. Sorting Approach - Sort array and find inconsistencies
+ * 2. XOR (Bit Manipulation) - Use XOR properties to cancel out pairs
+ * 3. Mathematical Approach - Use sum formulas to calculate differences
+ *
+ * Each approach has different trade-offs in terms of:
+ * - Time complexity
+ * - Space complexity
+ * - Modification of input array
+ * - Implementation complexity
+ *
+ * Common pattern: Element-index correspondence is key to efficient solutions
+ * for array problems where elements have natural ordering [1..N]
+ */
+
 import java.util.*;
 
 public class _923_d_AlternativeApproaches {
+
     /**
      * Approach 1: Sorting Method
      * Time: O(N log N), Space: O(1) if in-place sort allowed
