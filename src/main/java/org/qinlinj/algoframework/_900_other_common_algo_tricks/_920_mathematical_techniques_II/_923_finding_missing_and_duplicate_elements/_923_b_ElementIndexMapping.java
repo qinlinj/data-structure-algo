@@ -42,4 +42,45 @@ public class _923_b_ElementIndexMapping {
             }
         }
     }
+
+    /**
+     * Shows how negative marking works to detect visited indices
+     */
+    public static void demonstrateNegativeMarking() {
+        System.out.println("\n=== Negative Marking Technique ===");
+
+        int[] nums = {0, 1, 1, 3};  // Simplified: 0..N-1
+        int[] original = nums.clone();
+
+        System.out.println("Original array: " + Arrays.toString(original));
+        System.out.println("Processing each element to mark visited indices:");
+
+        int duplicate = -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            int element = Math.abs(nums[i]);  // Get original value (might be negative)
+            System.out.print("Step " + (i + 1) + ": Processing element " + element);
+
+            if (nums[element] < 0) {
+                // Already negative = already visited = duplicate found
+                duplicate = element;
+                System.out.println(" -> Index " + element + " already marked negative -> DUPLICATE!");
+            } else {
+                // First time visiting this index, mark it negative
+                nums[element] *= -1;
+                System.out.println(" -> Marking index " + element + " as visited (making negative)");
+            }
+
+            System.out.println("     Array state: " + Arrays.toString(nums));
+        }
+
+        System.out.println("\nFinding missing element:");
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                System.out.println("Index " + i + " is still positive -> Element " + i + " is MISSING");
+            }
+        }
+
+        System.out.println("Duplicate: " + duplicate);
+    }
 }
