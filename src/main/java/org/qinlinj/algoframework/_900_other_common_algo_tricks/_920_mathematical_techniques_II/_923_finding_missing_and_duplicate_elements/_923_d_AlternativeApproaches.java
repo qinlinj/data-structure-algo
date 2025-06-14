@@ -153,4 +153,40 @@ public class _923_d_AlternativeApproaches {
         System.out.println("   Pros: Clean mathematical approach");
         System.out.println("   Cons: Potential overflow with large numbers\n");
     }
+
+    /**
+     * Detailed explanation of XOR approach
+     */
+    public static void explainXORApproach() {
+        System.out.println("=== XOR Approach Detailed Explanation ===");
+
+        int[] nums = {1, 2, 2, 4};
+        System.out.println("Array: " + Arrays.toString(nums));
+        System.out.println("Should be: [1, 2, 3, 4]");
+
+        System.out.println("\nXOR Properties:");
+        System.out.println("- a ^ a = 0 (same numbers cancel out)");
+        System.out.println("- a ^ 0 = a (XOR with 0 gives original)");
+        System.out.println("- XOR is commutative and associative");
+
+        System.out.println("\nStep-by-step XOR process:");
+
+        int xorResult = 0;
+        System.out.print("XOR of expected [1,2,3,4]: ");
+        for (int i = 1; i <= 4; i++) {
+            xorResult ^= i;
+            System.out.print(i + (i < 4 ? " ^ " : " = " + xorResult));
+        }
+        System.out.println();
+
+        System.out.print("XOR of actual [1,2,2,4]: ");
+        for (int i = 0; i < nums.length; i++) {
+            xorResult ^= nums[i];
+            System.out.print(nums[i] + (i < nums.length - 1 ? " ^ " : " = " + xorResult));
+        }
+        System.out.println();
+
+        System.out.println("\nResult " + xorResult + " represents (missing ^ duplicate) = (3 ^ 2) = " + (3 ^ 2));
+        System.out.println("Additional bit manipulation needed to separate 3 and 2");
+    }
 }
