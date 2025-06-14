@@ -25,6 +25,14 @@ public class _923_c_OptimalSolution {
             }
         }
 
+        // Step 2: Find missing by looking for positive values
+        int missing = -1;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                missing = i + 1;  // Convert back to 1-based
+                break;
+            }
+        }
 
         return new int[]{duplicate, missing};
     }
