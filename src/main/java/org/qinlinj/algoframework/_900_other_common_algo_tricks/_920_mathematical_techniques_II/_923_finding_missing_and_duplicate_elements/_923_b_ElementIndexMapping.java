@@ -83,4 +83,32 @@ public class _923_b_ElementIndexMapping {
 
         System.out.println("Duplicate: " + duplicate);
     }
+
+    /**
+     * Converts the concept from [0..N-1] to [1..N] as required by the actual problem
+     */
+    public static void explainConversion() {
+        System.out.println("\n=== Converting from [0..N-1] to [1..N] ===");
+
+        System.out.println("Problem requirements:");
+        System.out.println("- Elements should be in range [1..N]");
+        System.out.println("- Array indices are [0..N-1]");
+        System.out.println("- Mapping: element 'x' -> index 'x-1'");
+
+        int[] nums = {1, 2, 2, 4};  // Actual problem format
+        System.out.println("\nExample: " + Arrays.toString(nums));
+
+        System.out.println("Element-to-Index mapping:");
+        for (int i = 0; i < nums.length; i++) {
+            int element = nums[i];
+            int targetIndex = element - 1;  // Convert to 0-based index
+            System.out.println("  Element " + element + " -> Index " + targetIndex);
+        }
+
+        System.out.println("\nWhy elements must start from 1 (not 0):");
+        System.out.println("- If element 0 exists, its negative is still 0");
+        System.out.println("- Cannot distinguish between 'visited' and 'unvisited' for 0");
+        System.out.println("- Elements must be non-zero for negative marking to work");
+    }
+
 }
