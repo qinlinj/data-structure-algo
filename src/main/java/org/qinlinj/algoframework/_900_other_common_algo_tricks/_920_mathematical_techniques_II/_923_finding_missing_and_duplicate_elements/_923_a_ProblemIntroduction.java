@@ -1,8 +1,29 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._923_finding_missing_and_duplicate_elements;
 
+/*
+ * FINDING DUPLICATE AND MISSING ELEMENTS - PROBLEM INTRODUCTION
+ *
+ * This class demonstrates the basic problem of finding duplicate and missing elements
+ * in an array that should contain numbers from 1 to N.
+ *
+ * Problem Description:
+ * - Given an array of length N that should contain numbers [1..N]
+ * - One number appears twice (duplicate)
+ * - One number is missing due to the duplication
+ * - Find both the duplicate and missing numbers
+ *
+ * Basic Approach:
+ * - Use HashMap to count occurrences of each number
+ * - Time Complexity: O(N)
+ * - Space Complexity: O(N) - uses extra HashMap
+ *
+ * Example: [1,2,2,4] should return [2,3] (2 is duplicate, 3 is missing)
+ */
+
 import java.util.*;
 
 public class _923_a_ProblemIntroduction {
+
     /**
      * Basic solution using HashMap to track number frequencies
      *
@@ -33,7 +54,6 @@ public class _923_a_ProblemIntroduction {
 
         return new int[]{duplicate, missing};
     }
-
 
     /**
      * Demonstrates the basic approach with detailed step-by-step output
