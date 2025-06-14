@@ -120,4 +120,37 @@ public class _923_d_AlternativeApproaches {
 
         return new int[]{duplicate, missing};
     }
+
+    /**
+     * Demonstrates all approaches with timing and comparison
+     */
+    public static void compareApproaches() {
+        System.out.println("=== Comparing Different Approaches ===");
+
+        int[] testArray = {1, 2, 2, 4};
+        System.out.println("Test array: " + Arrays.toString(testArray));
+        System.out.println("Expected result: [2, 3]\n");
+
+        // Test each approach
+        System.out.println("1. Sorting Approach:");
+        int[] result1 = findErrorNumsSorting(testArray.clone());
+        System.out.println("   Result: " + Arrays.toString(result1));
+        System.out.println("   Time: O(N log N), Space: O(1)");
+        System.out.println("   Pros: Simple, intuitive");
+        System.out.println("   Cons: Slower due to sorting\n");
+
+        System.out.println("2. XOR Bit Manipulation:");
+        int[] result2 = findErrorNumsXOR(testArray.clone());
+        System.out.println("   Result: " + Arrays.toString(result2));
+        System.out.println("   Time: O(N), Space: O(1)");
+        System.out.println("   Pros: Very efficient, doesn't modify input");
+        System.out.println("   Cons: Complex bit manipulation logic\n");
+
+        System.out.println("3. Mathematical Sum Method:");
+        int[] result3 = findErrorNumsMath(testArray.clone());
+        System.out.println("   Result: " + Arrays.toString(result3));
+        System.out.println("   Time: O(N), Space: O(1)");
+        System.out.println("   Pros: Clean mathematical approach");
+        System.out.println("   Cons: Potential overflow with large numbers\n");
+    }
 }
