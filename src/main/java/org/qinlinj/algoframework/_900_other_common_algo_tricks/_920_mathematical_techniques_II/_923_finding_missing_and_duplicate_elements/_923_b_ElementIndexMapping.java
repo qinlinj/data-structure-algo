@@ -111,4 +111,9 @@ public class _923_b_ElementIndexMapping {
         System.out.println("- Elements must be non-zero for negative marking to work");
     }
 
+    public static void main(String[] args) {
+        demonstrateMapping();
+        demonstrateNegativeMarking();
+        explainConversion();
+    }
 }
