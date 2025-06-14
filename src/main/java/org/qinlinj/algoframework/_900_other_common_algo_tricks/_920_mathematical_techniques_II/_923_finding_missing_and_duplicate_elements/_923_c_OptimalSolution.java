@@ -1,8 +1,31 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._923_finding_missing_and_duplicate_elements;
 
+/*
+ * OPTIMAL O(1) SPACE SOLUTION
+ *
+ * This class implements the space-efficient solution using negative marking
+ * to find duplicate and missing elements without extra space.
+ *
+ * Algorithm Principle:
+ * - Use the array itself as a hash table
+ * - Mark visited indices by making corresponding elements negative
+ * - If we try to mark an already negative element -> duplicate found
+ * - After processing, positive elements indicate missing numbers
+ *
+ * Time Complexity: O(N) - two passes through the array
+ * Space Complexity: O(1) - only uses the input array for marking
+ *
+ * Key Steps:
+ * 1. For each element, calculate its target index (element - 1)
+ * 2. If nums[target_index] is negative -> duplicate found
+ * 3. Otherwise, mark nums[target_index] as negative
+ * 4. Find the index with positive value -> missing element
+ */
+
 import java.util.*;
 
 public class _923_c_OptimalSolution {
+
     /**
      * Optimal solution with O(1) space complexity
      *
