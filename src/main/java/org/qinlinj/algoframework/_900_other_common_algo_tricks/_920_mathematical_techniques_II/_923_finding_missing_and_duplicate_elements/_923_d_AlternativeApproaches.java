@@ -232,5 +232,45 @@ public class _923_d_AlternativeApproaches {
         System.out.println("Therefore: d = " + duplicate + ", m = " + missing);
     }
 
+    /**
+     * Performance comparison with larger datasets
+     */
+    public static void performanceComparison() {
+        System.out.println("\n=== Performance Comparison ===");
 
+        int[] sizes = {1000, 10000, 100000};
+
+        for (int size : sizes) {
+            System.out.println("\nArray size: " + size);
+
+            // Create test array with duplicate and missing
+            int[] testArray = new int[size];
+            for (int i = 0; i < size; i++) {
+                testArray[i] = i + 1;
+            }
+            testArray[size - 1] = 1;  // Make 1 duplicate, size missing
+
+            // Timing each approach
+            long startTime, endTime;
+
+            // Sorting approach
+            startTime = System.nanoTime();
+            findErrorNumsSorting(testArray.clone());
+            endTime = System.nanoTime();
+            System.out.printf("   Sorting: %.2f ms\n", (endTime - startTime) / 1_000_000.0);
+
+            // XOR approach
+            startTime = System.nanoTime();
+            findErrorNumsXOR(testArray.clone());
+            endTime = System.nanoTime();
+            System.out.printf("   XOR: %.2f ms\n", (endTime - startTime) / 1_000_000.0);
+
+            // Math approach
+            startTime = System.nanoTime();
+            findErrorNumsMath(testArray.clone());
+            endTime = System.nanoTime();
+            System.out.printf("   Math: %.2f ms\n", (endTime - startTime) / 1_000_000.0);
+        }
+    }
+    
 }
