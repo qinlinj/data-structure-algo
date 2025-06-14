@@ -1,0 +1,4 @@
+package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._923_finding_missing_and_duplicate_elements;
+
+public class _923_b_ElementIndexMapping {
+}
