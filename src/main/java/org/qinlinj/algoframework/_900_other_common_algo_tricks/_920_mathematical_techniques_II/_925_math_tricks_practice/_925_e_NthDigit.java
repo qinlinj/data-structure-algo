@@ -1,6 +1,50 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._925_math_tricks_practice;
 
 public class _925_e_NthDigit {
+    public static void main(String[] args) {
+        _925_e_NthDigit solution = new _925_e_NthDigit();
+
+        System.out.println("=== Nth Digit Test Cases ===");
+
+        // Test cases with examples
+        int[] testCases = {3, 11, 15, 100, 189, 190, 1000};
+
+        for (int testCase : testCases) {
+            int result = solution.findNthDigit(testCase);
+            System.out.printf("The %d-th digit is: %d\n", testCase, result);
+        }
+
+        System.out.println();
+
+        // Demonstrate the pattern for educational purposes
+        solution.demonstratePattern(4);
+
+        // Show detailed step-by-step process for specific examples
+        System.out.println("=== Detailed Step-by-Step Examples ===");
+        solution.findNthDigitDetailed(11);
+        solution.findNthDigitDetailed(189);
+        solution.findNthDigitDetailed(190);
+
+        // Generate first 50 digits of the sequence for verification
+        System.out.println("=== First 50 digits of sequence ===");
+        StringBuilder sequence = new StringBuilder();
+        for (int i = 1; sequence.length() < 50; i++) {
+            sequence.append(i);
+        }
+        System.out.println("Sequence: " + sequence.toString());
+
+        // Verify our algorithm against the generated sequence
+        System.out.println("\n=== Verification ===");
+        for (int i = 1; i <= Math.min(50, sequence.length()); i++) {
+            int expected = sequence.charAt(i - 1) - '0';
+            int actual = solution.findNthDigit(i);
+            if (expected != actual) {
+                System.out.printf("Mismatch at position %d: expected %d, got %d\n", i, expected, actual);
+            }
+        }
+        System.out.println("Verification completed successfully!");
+    }
+
     /**
      * Finds the nth digit in the sequence 1,2,3,4,5,6,7,8,9,10,11,12,...
      *
