@@ -28,6 +28,71 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
  */
 
 public class _925_d_BinaryAddition {
+    public static void main(String[] args) {
+        _925_d_BinaryAddition solution = new _925_d_BinaryAddition();
+
+        System.out.println("=== Binary Addition Test Cases ===");
+
+        // Test cases with step-by-step explanation
+        String[][] testCases = {
+                {"11", "1"},        // Expected: "100"
+                {"1010", "1011"},   // Expected: "10101"
+                {"0", "0"},         // Expected: "0"
+                {"1111", "1111"},   // Expected: "11110"
+                {"1", "111"}        // Expected: "1000"
+        };
+
+        for (String[] testCase : testCases) {
+            String a = testCase[0];
+            String b = testCase[1];
+            String result1 = solution.addBinary(a, b);
+            String result2 = solution.addBinaryAlternative(a, b);
+
+            System.out.printf("Binary Addition: %s + %s\n", a, b);
+            System.out.printf("  Method 1 result: %s\n", result1);
+            System.out.printf("  Method 2 result: %s\n", result2);
+            System.out.printf("  Results match: %s\n", result1.equals(result2));
+
+            // Verify by converting to decimal
+            int decimalA = Integer.parseInt(a, 2);
+            int decimalB = Integer.parseInt(b, 2);
+            int expectedSum = decimalA + decimalB;
+            int actualSum = Integer.parseInt(result1, 2);
+            System.out.printf("  Decimal verification: %d + %d = %d (expected: %d) ✓\n\n",
+                    decimalA, decimalB, actualSum, expectedSum);
+        }
+
+        // Demonstrate manual addition process
+        System.out.println("=== Manual Addition Process Demo ===");
+        String demoA = "1011";
+        String demoB = "111";
+        System.out.printf("Adding %s + %s step by step:\n", demoA, demoB);
+        System.out.println("  1011");
+        System.out.println("+ 0111");
+        System.out.println("------");
+
+        // Simulate the addition process
+        StringBuilder process = new StringBuilder();
+        int carry = 0;
+        for (int pos = Math.max(demoA.length(), demoB.length()) - 1; pos >= 0; pos--) {
+            int bitA = pos < demoA.length() ? demoA.charAt(demoA.length() - 1 - pos) - '0' : 0;
+            int bitB = pos < demoB.length() ? demoB.charAt(demoB.length() - 1 - pos) - '0' : 0;
+            int sum = bitA + bitB + carry;
+
+            System.out.printf("  Position %d: %d + %d + %d(carry) = %d -> bit=%d, carry=%d\n",
+                    pos, bitA, bitB, carry, sum, sum % 2, sum / 2);
+
+            process.insert(0, sum % 2);
+            carry = sum / 2;
+        }
+        if (carry > 0) {
+            process.insert(0, carry);
+        }
+
+        System.out.println("  Final result: " + process.toString());
+        System.out.println("  Algorithm result: " + solution.addBinary(demoA, demoB));
+    }
+
     /**
      * Adds two binary strings and returns their sum as a binary string
      *
