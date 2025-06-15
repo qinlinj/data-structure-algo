@@ -31,4 +31,24 @@ public class _925_c_PowerFunction {
         }
     }
 
+    /**
+     * Iterative version of fast exponentiation (more memory efficient)
+     */
+    public double myPowIterative(double x, int n) {
+        if (n == 0) return 1;
+
+        long absN = Math.abs((long) n); // Use long to handle Integer.MIN_VALUE
+        double result = 1;
+        double currentPower = x;
+
+        while (absN > 0) {
+            if (absN % 2 == 1) {
+                result *= currentPower;
+            }
+            currentPower *= currentPower;
+            absN /= 2;
+        }
+
+        return n < 0 ? 1 / result : result;
+    }
 }
