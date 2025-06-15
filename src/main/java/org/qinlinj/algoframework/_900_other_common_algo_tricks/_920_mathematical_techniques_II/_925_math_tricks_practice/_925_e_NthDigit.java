@@ -1,6 +1,36 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._925_math_tricks_practice;
 
+/**
+ * 400. Nth Digit - LeetCode Problem
+ * <p>
+ * SUMMARY:
+ * This class finds the nth digit in the infinite sequence [1,2,3,4,5,6,7,8,9,10,11,12,...].
+ * It uses mathematical pattern recognition to avoid generating the entire sequence.
+ * The key insight is that digits follow a predictable pattern based on number length.
+ * <p>
+ * KEY CONCEPTS:
+ * - Mathematical pattern recognition in digit sequences
+ * - Efficient calculation without generating full sequence
+ * - Understanding digit distribution: 1-digit numbers, 2-digit numbers, etc.
+ * - String manipulation for digit extraction
+ * - Integer arithmetic and modular operations
+ * <p>
+ * DIGIT PATTERN ANALYSIS:
+ * - 1-digit numbers (1-9): 9 numbers × 1 digit = 9 digits total
+ * - 2-digit numbers (10-99): 90 numbers × 2 digits = 180 digits total
+ * - 3-digit numbers (100-999): 900 numbers × 3 digits = 2700 digits total
+ * - k-digit numbers: 9×10^(k-1) numbers × k digits each
+ * <p>
+ * ALGORITHM STRATEGY:
+ * 1. Determine which group (1-digit, 2-digit, etc.) contains the nth digit
+ * 2. Find the specific number within that group
+ * 3. Extract the exact digit from that number
+ * <p>
+ * TIME COMPLEXITY: O(log n) - at most log₁₀(n) iterations to find the group
+ * SPACE COMPLEXITY: O(1) - constant extra space
+ */
 public class _925_e_NthDigit {
+
     public static void main(String[] args) {
         _925_e_NthDigit solution = new _925_e_NthDigit();
 
