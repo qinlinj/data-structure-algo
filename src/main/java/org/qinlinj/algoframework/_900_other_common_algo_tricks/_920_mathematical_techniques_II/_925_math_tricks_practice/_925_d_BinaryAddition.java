@@ -26,8 +26,8 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
  * TIME COMPLEXITY: O(max(m, n)) where m, n are lengths of input strings
  * SPACE COMPLEXITY: O(max(m, n)) for the result string
  */
-
 public class _925_d_BinaryAddition {
+
     public static void main(String[] args) {
         _925_d_BinaryAddition solution = new _925_d_BinaryAddition();
 
