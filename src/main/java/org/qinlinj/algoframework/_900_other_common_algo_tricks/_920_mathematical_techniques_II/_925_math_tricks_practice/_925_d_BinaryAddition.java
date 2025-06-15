@@ -28,4 +28,42 @@ package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematica
  */
 
 public class _925_d_BinaryAddition {
+    /**
+     * Adds two binary strings and returns their sum as a binary string
+     *
+     * @param a first binary string
+     * @param b second binary string
+     * @return sum of a and b as binary string
+     */
+    public String addBinary(String a, String b) {
+        // Reverse input strings to process from least significant bit (rightmost)
+        a = new StringBuilder(a).reverse().toString();
+        b = new StringBuilder(b).reverse().toString();
+
+        // StringBuilder to store result
+        StringBuilder sb = new StringBuilder();
+
+        int m = a.length(), n = b.length();
+        // carry records the overflow from previous position
+        int carry = 0;
+        int i = 0;
+
+        // Process similar to "Add Two Numbers" problem but for binary strings
+        while (i < Math.max(m, n) || carry > 0) {
+            int val = carry;
+            // Add bit from string a if available, otherwise add 0
+            val += i < m ? (a.charAt(i) - '0') : 0;
+            // Add bit from string b if available, otherwise add 0
+            val += i < n ? (b.charAt(i) - '0') : 0;
+
+            // In binary: val can be 0, 1, 2, or 3
+            // val % 2 gives the result bit, val / 2 gives the carry
+            sb.append(val % 2);
+            carry = val / 2;
+            i++;
+        }
+
+        // Reverse result to get correct bit order (most significant bit first)
+        return sb.reverse().toString();
+    }
 }
