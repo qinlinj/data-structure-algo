@@ -1,6 +1,30 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._925_math_tricks_practice;
 
+/**
+ * 9. Palindrome Number - LeetCode Problem
+ * <p>
+ * SUMMARY:
+ * This class determines if an integer is a palindrome without converting it to string.
+ * A palindrome number reads the same forward and backward (e.g., 121, 1331).
+ * The solution reverses the number by extracting digits and reconstructs it.
+ * <p>
+ * KEY CONCEPTS:
+ * - Mathematical digit manipulation using modulo (%) and division (/)
+ * - Number reversal technique by building from most significant digit
+ * - Handling negative numbers (always return false)
+ * - Integer comparison for palindrome validation
+ * <p>
+ * ALGORITHM APPROACH:
+ * 1. Handle edge case: negative numbers are not palindromes
+ * 2. Extract digits from right to left using num % 10
+ * 3. Build reversed number using the formula: reversed = reversed * 10 + digit
+ * 4. Compare original with reversed number
+ * <p>
+ * TIME COMPLEXITY: O(log n) where n is the input number (number of digits)
+ * SPACE COMPLEXITY: O(1) constant extra space
+ */
 public class _925_b_PalindromeNumber {
+
     public static void main(String[] args) {
         _925_b_PalindromeNumber solution = new _925_b_PalindromeNumber();
 
