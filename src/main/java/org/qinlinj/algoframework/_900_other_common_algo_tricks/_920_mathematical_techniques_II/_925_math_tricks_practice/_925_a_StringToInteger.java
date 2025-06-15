@@ -1,6 +1,27 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._925_math_tricks_practice;
 
+/**
+ * 8. String to Integer (atoi) - LeetCode Problem
+ * <p>
+ * SUMMARY:
+ * This class implements the myAtoi function that converts a string to a 32-bit signed integer.
+ * The algorithm follows these steps:
+ * 1. Skip leading whitespaces
+ * 2. Handle optional '+' or '-' sign
+ * 3. Convert digits until non-digit character or end of string
+ * 4. Handle integer overflow by clamping to [−2³¹, 2³¹ − 1]
+ * <p>
+ * KEY CONCEPTS:
+ * - String parsing and character manipulation
+ * - Integer overflow handling using long data type
+ * - Edge case handling (empty strings, only signs, etc.)
+ * - Mathematical conversion from character to integer
+ * <p>
+ * TIME COMPLEXITY: O(n) where n is the length of string
+ * SPACE COMPLEXITY: O(1) constant extra space
+ */
 public class _925_a_StringToInteger {
+
     public static void main(String[] args) {
         _925_a_StringToInteger solution = new _925_a_StringToInteger();
 
