@@ -1,6 +1,40 @@
 package org.qinlinj.algoframework._900_other_common_algo_tricks._920_mathematical_techniques_II._925_math_tricks_practice;
 
 public class _925_b_PalindromeNumber {
+    public static void main(String[] args) {
+        _925_b_PalindromeNumber solution = new _925_b_PalindromeNumber();
+
+        System.out.println("=== Palindrome Number Test Cases ===");
+
+        // Test cases with expected results
+        int[] testCases = {121, -121, 10, 0, 1221, 12321, 123, 7};
+
+        for (int testCase : testCases) {
+            boolean result1 = solution.isPalindrome(testCase);
+            boolean result2 = solution.isPalindromeOptimized(testCase);
+
+            System.out.printf("Number: %d\n", testCase);
+            System.out.printf("  Basic approach: %s\n", result1);
+            System.out.printf("  Optimized approach: %s\n", result2);
+            System.out.printf("  Results match: %s\n\n", result1 == result2);
+        }
+
+        // Demonstrate the digit extraction process for educational purposes
+        System.out.println("=== Digit Extraction Demo for 12321 ===");
+        int demo = 12321;
+        int reversed = 0;
+        int step = 1;
+
+        while (demo > 0) {
+            int digit = demo % 10;
+            demo = demo / 10;
+            reversed = reversed * 10 + digit;
+            System.out.printf("Step %d: Extract digit %d, remaining: %d, reversed so far: %d\n",
+                    step++, digit, demo, reversed);
+        }
+        System.out.println("Final reversed number: " + reversed);
+    }
+
     /**
      * Determines if an integer is a palindrome
      *
