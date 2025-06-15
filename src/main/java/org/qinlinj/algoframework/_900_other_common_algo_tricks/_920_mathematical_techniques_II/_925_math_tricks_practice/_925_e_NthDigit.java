@@ -32,4 +32,27 @@ public class _925_e_NthDigit {
         // Extract the digit at the specified position by converting to string
         return ("" + val).charAt(index) - '0';
     }
+
+    /**
+     * Helper method to demonstrate the digit counting pattern
+     */
+    public void demonstratePattern(int maxDigits) {
+        System.out.println("=== Digit Distribution Pattern ===");
+        long totalDigits = 0;
+
+        for (int digitCount = 1; digitCount <= maxDigits; digitCount++) {
+            long base = (long) Math.pow(10, digitCount - 1);
+            long numbersInGroup = 9 * base;
+            long digitsInGroup = numbersInGroup * digitCount;
+            totalDigits += digitsInGroup;
+
+            long startNum = digitCount == 1 ? 1 : base;
+            long endNum = base * 10 - 1;
+
+            System.out.printf("%d-digit numbers: %d to %d\n", digitCount, startNum, endNum);
+            System.out.printf("  Count: %d numbers\n", numbersInGroup);
+            System.out.printf("  Total digits: %d\n", digitsInGroup);
+            System.out.printf("  Cumulative digits: %d\n\n", totalDigits);
+        }
+    }
 }
