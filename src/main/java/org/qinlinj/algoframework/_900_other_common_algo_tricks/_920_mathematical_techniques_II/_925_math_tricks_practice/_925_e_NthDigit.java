@@ -55,4 +55,35 @@ public class _925_e_NthDigit {
             System.out.printf("  Cumulative digits: %d\n\n", totalDigits);
         }
     }
+
+    /**
+     * Alternative implementation with more detailed step tracking
+     */
+    public int findNthDigitDetailed(int n) {
+        System.out.printf("Finding the %d-th digit:\n", n);
+
+        int digit = 1;
+        long base = 1;
+        int originalN = n;
+
+        while (n > 9 * base * digit) {
+            long digitsUsed = 9 * base * digit;
+            System.out.printf("  %d-digit numbers use %d digits, remaining: %d\n",
+                    digit, digitsUsed, n - digitsUsed);
+            n -= digitsUsed;
+            base *= 10;
+            digit++;
+        }
+
+        long val = base + (n - 1) / digit;
+        int index = (n - 1) % digit;
+
+        System.out.printf("  Found in %d-digit numbers starting from %d\n", digit, base);
+        System.out.printf("  Target number: %d, digit position: %d\n", val, index);
+
+        int result = ("" + val).charAt(index) - '0';
+        System.out.printf("  The %d-th digit is: %d\n\n", originalN, result);
+
+        return result;
+    }
 }
